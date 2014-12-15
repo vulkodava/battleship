@@ -2,24 +2,10 @@
 return array(
     'router' => array(
         'routes' => array(
-            'battleship-results' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/',
-                    'defaults' => array(
-                        'controller' => 'Battleship\Controller\Index',
-                        'action' => 'index',
-                    ),
-                ),
-            ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /battleship/:controller/:action
-            'play' => array(
+            'battleship' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route' => '/play',
+                    'route' => '/battleship',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Battleship\Controller',
                         'controller' => 'Index',
