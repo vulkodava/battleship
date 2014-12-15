@@ -37,7 +37,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
 
         $user = new \Application\Entity\User();
         $user->setFullName('Marco Pivetta');
@@ -48,11 +48,11 @@ class IndexController extends AbstractActionController
         die(var_dump($user->getId())); // yes, I'm lazy
     }
 
-    public function persistMultiopleObjectsAction()
+    public function persistMultipleObjectsAction()
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
 
         $user1 = new \Application\Entity\User();
         $user1->setFullName('Marco Pivetta');
@@ -73,7 +73,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
         $user1 = $objectManager->find('Application\Entity\User', 1);
 
         var_dump($user1->getFullName()); // Marco Pivetta
@@ -89,10 +89,10 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
         $user = $objectManager->find('Application\Entity\User', 1);
 
-        $user->setFullName('Guilherme Blanco');
+        $user->setFullName('Guilherme Blanco2');
 
         $objectManager->flush();
     }
@@ -101,7 +101,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
         $user = $objectManager->find('Application\Entity\User', 1);
 
         $objectManager->remove($user);
@@ -113,18 +113,18 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
 
-        $user = new User();
+        $user = new \Application\Entity\User();
         $user->setFullName('Marco Pivetta');
         $objectManager->persist($user);
 
-        $address = new Address();
+        $address = new \Application\Entity\Address();
         $address->setCity('Frankfurt');
         $address->setCountry('Germany');
         $objectManager->persist($address);
 
-        $project = new Project();
+        $project = new \Application\Entity\Project();
         $project->setName('Doctrine ORM');
         $objectManager->persist($project);
 
@@ -137,7 +137,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
 
         $user = $objectManager->find('Application\Entity\User', 1);
 
@@ -147,7 +147,6 @@ class IndexController extends AbstractActionController
 
     public function paginatorAdapterAction()
     {
-
         // Create a Doctrine Collection
         $collection = new ArrayCollection(range(1, 101));
 
@@ -157,6 +156,15 @@ class IndexController extends AbstractActionController
         $paginator
             ->setCurrentPageNumber(1)
             ->setItemCountPerPage(5);
+
+        $view = new ViewModel();
+        $view->paginator = $paginator;
+
+        return $view;
+
+//        $this->paginationControl($paginator,
+//            'Sliding',
+//            'my_pagination_control.phtml');
     }
 
     public function paginatorAdapterORMAction()
@@ -180,7 +188,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
         $repository = $objectManager
             ->getRepository('Application\Entity\User');
 
@@ -214,7 +222,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
         $hydrator = new DoctrineObject(
             $objectManager,
             'Application\Entity\City'
@@ -235,7 +243,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
         $hydrator = new DoctrineObject(
             $objectManager,
             'Application\Entity\City'
@@ -256,7 +264,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
         $form->add(array(
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'name' => 'user',
@@ -280,7 +288,7 @@ class IndexController extends AbstractActionController
     {
         $objectManager = $this
             ->getServiceLocator()
-            ->get('Doctrine\Common\Persistence\ObjectManager');
+            ->get('Doctrine\ORM\EntityManager');
         $user1 = $objectManager->find('Application\Entity\User', 1);
         $user2 = $objectManager->find('Application\Entity\User', 2);
         $user3 = $objectManager->find('Application\Entity\User', 3);
