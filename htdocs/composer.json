@@ -1,0 +1,29 @@
+{
+    "name": "milev/portal",
+    "authors": [
+        {
+            "name": "Momchil Milev",
+            "email": "momchil.milev@gmail.com"
+        }
+    ],
+	"repositories": [
+    {
+        "type": "composer",
+        "url": "https://packages.zendframework.com/"
+    }
+	],
+    "minimum-stability": "dev",
+    "require": {
+		"php": ">=5.3.3",
+		"zendframework/zend-config": "2.*",
+		"zendframework/zend-http": "2.*",
+		"zendframework/zendframework": "2.3.*",
+        "doctrine/doctrine-orm-module": "0.7.*",
+        "zendframework/zend-developer-tools": "dev-master",
+        "zf-commons/zfc-user-doctrine-orm": "~1.0",
+        "zf-commons/zfc-admin": "~0.2",
+        "danielss89/zfc-user-admin": "dev-master",
+        "bjyoungblood/bjy-authorize": "1.4.*",
+        "mwillbanks/zfc-twitter-bootstrap": "@dev"
+	}
+}
