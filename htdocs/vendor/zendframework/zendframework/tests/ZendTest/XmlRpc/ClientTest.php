@@ -41,7 +41,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $this->httpAdapter = new Adapter\Test();
         $this->httpClient = new Http\Client('http://foo',
-                                    array('adapter' => $this->httpAdapter));
+            array('adapter' => $this->httpAdapter));
 
         $this->xmlrpcClient = new Client('http://foo');
         $this->xmlrpcClient->setHttpClient($this->httpClient);
@@ -70,7 +70,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testSettingHttpClientViaConstructor()
     {
         $xmlrpcClient = new Client('http://foo', $this->httpClient);
-        $httpClient   = $xmlrpcClient->getHttpClient();
+        $httpClient = $xmlrpcClient->getHttpClient();
         $this->assertSame($this->httpClient, $httpClient);
     }
 
@@ -99,7 +99,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->setServerResponseTo($expectedReturn);
         $this->assertSame($expectedReturn, $this->xmlrpcClient->call($expectedMethod));
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
@@ -119,7 +119,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $actualReturn = $this->xmlrpcClient->call($expectedMethod, $expectedParams);
         $this->assertSame($expectedReturn, $actualReturn);
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
@@ -148,7 +148,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $actualReturn = $this->xmlrpcClient->call($expectedMethod, $expectedParams);
         $this->assertSame($expectedReturn, $actualReturn);
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
 
         $params = $request->getParams();
         $this->assertSame(count($expectedParams), count($params));
@@ -173,7 +173,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $actualReturn = $this->xmlrpcClient->call($expectedMethod, $expectedParams);
         $this->assertSame($expectedReturn, $actualReturn);
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
@@ -190,7 +190,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testSuccesfulRpcMethodCallWithXmlRpcValueParameters()
     {
-        $time   = time();
+        $time = time();
         $params = array(
             new Value\Boolean(true),
             new Value\Integer(4),
@@ -203,7 +203,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $result = $this->xmlrpcClient->call('foo.bar', $params);
         $this->assertSame($expect, $result);
 
-        $request  = $this->xmlrpcClient->getLastRequest();
+        $request = $this->xmlrpcClient->getLastRequest();
         $response = $this->xmlrpcClient->getLastResponse();
 
         $this->assertSame('foo.bar', $request->getMethod());
@@ -227,10 +227,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $this->mockIntrospector();
         $this->mockedIntrospector
-             ->expects($this->exactly(2))
-             ->method('getMethodSignature')
-             ->with('test.method')
-             ->will($this->returnValue(array(array('parameters' => array('int')))));
+            ->expects($this->exactly(2))
+            ->method('getMethodSignature')
+            ->with('test.method')
+            ->will($this->returnValue(array(array('parameters' => array('int')))));
 
         $expect = 'test.method response';
         $this->setServerResponseTo($expect);
@@ -252,10 +252,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $this->mockIntrospector();
         $this->mockedIntrospector
-             ->expects($this->exactly(1))
-             ->method('getMethodSignature')
-             ->with('date.method')
-             ->will($this->returnValue(array(array('parameters' => array('dateTime.iso8601', 'string')))));
+            ->expects($this->exactly(1))
+            ->method('getMethodSignature')
+            ->with('date.method')
+            ->will($this->returnValue(array(array('parameters' => array('dateTime.iso8601', 'string')))));
 
         $expects = 'date.method response';
         $this->setServerResponseTo($expects);
@@ -271,7 +271,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testSkipsSystemCallWhenDirected()
     {
         $httpAdapter = $this->httpAdapter;
-        $response    = $this->makeHttpResponseFor('foo');
+        $response = $this->makeHttpResponseFor('foo');
         $httpAdapter->setResponse($response);
         $this->xmlrpcClient->setSkipSystemLookup(true);
         $this->assertSame('foo', $this->xmlrpcClient->call('test.method'));
@@ -283,9 +283,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRpcMethodCallThrowsOnHttpFailure()
     {
-        $status  = 404;
+        $status = 404;
         $message = 'Not Found';
-        $body    = 'oops';
+        $body = 'oops';
 
         $response = $this->makeHttpResponseFrom($body, $status, $message);
         $this->httpAdapter->setResponse($response);
@@ -425,7 +425,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->httpAdapter->addResponse($response);
 
         $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+            'bar' => $barSignatures);
 
         $i = $this->xmlrpcClient->getIntrospector();
         $this->assertEquals($expected, $i->getSignatureForEachMethodByLooping());
@@ -444,9 +444,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         // after system.listMethods(), these system.multicall() params are expected
         $multicallParams = array(array('methodName' => 'system.methodSignature',
-                                       'params'     => array('foo')),
-                                 array('methodName' => 'system.methodSignature',
-                                       'params'     => array('bar')));
+            'params' => array('foo')),
+            array('methodName' => 'system.methodSignature',
+                'params' => array('bar')));
 
         // system.multicall() will then return [fooSignatures, barSignatures]
         $fooSignatures = array(array('int'), array('int', 'string'));
@@ -458,7 +458,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $i = $this->xmlrpcClient->getIntrospector();
 
         $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+            'bar' => $barSignatures);
         $this->assertEquals($expected, $i->getSignatureForEachMethodByMulticall());
 
         $request = $this->xmlrpcClient->getLastRequest();
@@ -522,7 +522,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $i = $this->xmlrpcClient->getIntrospector();
 
         $expected = array('foo' => $fooSignatures,
-                          'bar' => $barSignatures);
+            'bar' => $barSignatures);
         $this->assertEquals($expected, $i->getSignatureForEachMethod());
 
         $request = $this->xmlrpcClient->getLastRequest();
@@ -596,7 +596,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $introspector = new Client\ServerIntrospection(
             new TestClient('http://localhost/')
-            );
+        );
 
         $this->setExpectedException('Zend\XmlRpc\Client\Exception\IntrospectException', 'Invalid signature for method "add"');
         $signature = $introspector->getMethodSignature('add');
@@ -611,29 +611,29 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->mockIntrospector();
 
         $this->mockedIntrospector
-             ->expects($this->exactly(2))
-             ->method('getMethodSignature')
-             ->with('get')
-             ->will($this->returnValue(array(
-                 array('parameters' => array('int')),
-                 array('parameters' => array('array'))
-             )));
+            ->expects($this->exactly(2))
+            ->method('getMethodSignature')
+            ->with('get')
+            ->will($this->returnValue(array(
+                array('parameters' => array('int')),
+                array('parameters' => array('array'))
+            )));
 
         $expectedResult = 'array';
         $this->setServerResponseTo($expectedResult);
 
         $this->assertSame(
-              $expectedResult,
-              $this->xmlrpcClient->call('get', array(array(1)))
-          );
+            $expectedResult,
+            $this->xmlrpcClient->call('get', array(array(1)))
+        );
 
         $expectedResult = 'integer';
         $this->setServerResponseTo($expectedResult);
 
         $this->assertSame(
-              $expectedResult,
-              $this->xmlrpcClient->call('get', array(1))
-          );
+            $expectedResult,
+            $this->xmlrpcClient->call('get', array(1))
+        );
     }
 
     /**
@@ -668,22 +668,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $xml = $response->saveXml();
 
         $response = $this->makeHttpResponseFrom($xml);
+
         return $response;
     }
 
-    public function makeHttpResponseFrom($data, $status=200, $message='OK')
+    public function makeHttpResponseFrom($data, $status = 200, $message = 'OK')
     {
         $headers = array("HTTP/1.1 $status $message",
-                         "Status: $status",
-                         'Content-Type: text/xml; charset=utf-8',
-                         'Content-Length: ' . strlen($data)
-                         );
+            "Status: $status",
+            'Content-Type: text/xml; charset=utf-8',
+            'Content-Length: ' . strlen($data)
+        );
+
         return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
     }
 
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
+
         return HttpResponse::fromString($response);
     }
 
@@ -715,6 +718,7 @@ class PythonSimpleXMLRPCServerWithUnsupportedIntrospection extends Client\Server
         if ($method == 'methodSignature') {
             return 'signatures not supported';
         }
+
         return parent::__call($method, $args);
     }
 }
@@ -727,6 +731,7 @@ class TestClient extends Client
         if (empty($this->proxyCache[$namespace])) {
             $this->proxyCache[$namespace] = new PythonSimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
         }
+
         return parent::getProxy($namespace);
     }
 }

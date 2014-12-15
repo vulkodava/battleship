@@ -41,7 +41,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testStandardRightToLeftAlignLeft()
     {
         $figlet = new Figlet\Figlet(array('justification' => Figlet\Figlet::JUSTIFICATION_LEFT,
-                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
+            'rightToLeft' => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardRightToLeftAlignLeft.figlet');
     }
@@ -49,7 +49,7 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testStandardRightToLeftAlignCenter()
     {
         $figlet = new Figlet\Figlet(array('justification' => Figlet\Figlet::JUSTIFICATION_CENTER,
-                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
+            'rightToLeft' => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'StandardRightToLeftAlignCenter.figlet');
     }
@@ -91,10 +91,10 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function testIncorrectEncoding()
     {
         $this->setExpectedException('Zend\Text\Figlet\Exception\UnexpectedValueException',
-                                    'text is not encoded with UTF-8');
+            'text is not encoded with UTF-8');
         $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
 
-        $figlet  = new Figlet\Figlet();
+        $figlet = new Figlet\Figlet();
         $figlet->render($isoText);
     }
 
@@ -126,8 +126,8 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     public function testOutputWidth()
     {
-        $figlet = new Figlet\Figlet(array('outputWidth'   => 50,
-                                             'justification' => Figlet\Figlet::JUSTIFICATION_RIGHT));
+        $figlet = new Figlet\Figlet(array('outputWidth' => 50,
+            'justification' => Figlet\Figlet::JUSTIFICATION_RIGHT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'OutputWidth50AlignRight.figlet');
     }
@@ -141,8 +141,8 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     public function testSmushModeRemovedRightToLeft()
     {
-        $figlet = new Figlet\Figlet(array('smushMode'     => -1,
-                                             'rightToLeft'   => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
+        $figlet = new Figlet\Figlet(array('smushMode' => -1,
+            'rightToLeft' => Figlet\Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'NoSmushRightToLeft.figlet');
     }

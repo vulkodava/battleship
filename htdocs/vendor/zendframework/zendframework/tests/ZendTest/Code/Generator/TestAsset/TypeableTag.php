@@ -16,7 +16,7 @@ class TypeableTag extends AbstractTypeableTag implements TagInterface
 {
     public function generate()
     {
-         return '';
+        return '';
     }
 
     /**

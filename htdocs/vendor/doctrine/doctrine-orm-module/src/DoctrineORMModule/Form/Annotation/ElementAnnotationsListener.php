@@ -152,7 +152,7 @@ class ElementAnnotationsListener implements ListenerAggregateInterface
         }
 
         $inputSpec = $e->getParam('inputSpec');
-        $inputSpec['required'] = (bool) !$annotation->nullable;
+        $inputSpec['required'] = (bool)!$annotation->nullable;
     }
 
     /**

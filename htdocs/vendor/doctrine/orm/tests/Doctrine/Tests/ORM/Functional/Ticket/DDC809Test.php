@@ -46,11 +46,11 @@ class DDC809Test extends \Doctrine\Tests\OrmFunctionalTestCase
     public function testIssue()
     {
         $result = $this->_em->createQueryBuilder()
-                        ->select('Variant, SpecificationValue')
-                        ->from('Doctrine\Tests\ORM\Functional\Ticket\DDC809Variant', 'Variant')
-                        ->leftJoin('Variant.SpecificationValues', 'SpecificationValue')
-                        ->getQuery()
-                        ->getResult();
+            ->select('Variant, SpecificationValue')
+            ->from('Doctrine\Tests\ORM\Functional\Ticket\DDC809Variant', 'Variant')
+            ->leftJoin('Variant.SpecificationValues', 'SpecificationValue')
+            ->getQuery()
+            ->getResult();
 
         $this->assertEquals(4, count($result[0]->getSpecificationValues()), "Works in test-setup.");
         $this->assertEquals(4, count($result[1]->getSpecificationValues()), "Only returns 2 in the case of the hydration bug.");

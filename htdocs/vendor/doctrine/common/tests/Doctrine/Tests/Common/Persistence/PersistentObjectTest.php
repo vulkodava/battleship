@@ -20,7 +20,7 @@ class PersistentObjectTest extends \Doctrine\Tests\DoctrineTestCase
         $this->cm = new TestObjectMetadata;
         $this->om = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
         $this->om->expects($this->any())->method('getClassMetadata')
-                 ->will($this->returnValue($this->cm));
+            ->will($this->returnValue($this->cm));
         $this->object = new TestObject;
         PersistentObject::setObjectManager($this->om);
         $this->object->injectObjectManager($this->om, $this->cm);
@@ -156,6 +156,7 @@ class TestObjectMetadata implements ClassMetadata
     public function getAssociationMappedByTargetField($assocName)
     {
         $assoc = array('children' => 'parent');
+
         return $assoc[$assocName];
     }
 
@@ -192,6 +193,7 @@ class TestObjectMetadata implements ClassMetadata
     public function getTypeOfField($fieldName)
     {
         $types = array('id' => 'integer', 'name' => 'string');
+
         return $types[$fieldName];
     }
 

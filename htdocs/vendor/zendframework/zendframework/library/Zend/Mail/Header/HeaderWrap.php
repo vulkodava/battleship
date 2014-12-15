@@ -21,7 +21,7 @@ abstract class HeaderWrap
     /**
      * Wrap a long header line
      *
-     * @param  string          $value
+     * @param  string $value
      * @param  HeaderInterface $header
      * @return string
      */
@@ -32,6 +32,7 @@ abstract class HeaderWrap
         } elseif ($header instanceof StructuredInterface) {
             return static::wrapStructuredHeader($value, $header);
         }
+
         return $value;
     }
 
@@ -40,7 +41,7 @@ abstract class HeaderWrap
      *
      * Wrap at 78 characters or before, based on whitespace.
      *
-     * @param string          $value
+     * @param string $value
      * @param HeaderInterface $header
      * @return string
      */
@@ -50,13 +51,14 @@ abstract class HeaderWrap
         if ($encoding == 'ASCII') {
             return wordwrap($value, 78, Headers::FOLDING);
         }
+
         return static::mimeEncodeValue($value, $encoding, 78);
     }
 
     /**
      * Wrap a structured header line
      *
-     * @param  string              $value
+     * @param  string $value
      * @param  StructuredInterface $header
      * @return string
      */
@@ -65,15 +67,16 @@ abstract class HeaderWrap
         $delimiter = $header->getDelimiter();
 
         $length = strlen($value);
-        $lines  = array();
-        $temp   = '';
+        $lines = array();
+        $temp = '';
         for ($i = 0; $i < $length; $i++) {
             $temp .= $value[$i];
             if ($value[$i] == $delimiter) {
                 $lines[] = $temp;
-                $temp    = '';
+                $temp = '';
             }
         }
+
         return implode(Headers::FOLDING, $lines);
     }
 
@@ -85,7 +88,7 @@ abstract class HeaderWrap
      *
      * @param  string $value
      * @param  string $encoding
-     * @param  int    $lineLength maximum line-length, by default 998
+     * @param  int $lineLength maximum line-length, by default 998
      * @return string Returns the mime encode value without the last line ending
      */
     public static function mimeEncodeValue($value, $encoding, $lineLength = 998)

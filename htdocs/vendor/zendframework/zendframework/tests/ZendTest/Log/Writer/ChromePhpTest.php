@@ -2,7 +2,7 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @link       http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -36,7 +36,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
 
     public function testSetChromePhp()
     {
-        $writer   = new ChromePhp($this->chromephp);
+        $writer = new ChromePhp($this->chromephp);
         $chromephp2 = new MockChromePhp();
 
         $writer->setChromePhp($chromephp2);
@@ -68,11 +68,11 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
     public function testConstructWithOptions()
     {
         $formatter = new \Zend\Log\Formatter\Simple();
-        $filter    = new \Zend\Log\Filter\Mock();
+        $filter = new \Zend\Log\Filter\Mock();
         $writer = new ChromePhp(array(
-            'filters'   => $filter,
+            'filters' => $filter,
             'formatter' => $formatter,
-            'instance'  => $this->chromephp,
+            'instance' => $this->chromephp,
         ));
         $this->assertTrue($writer->getChromePhp() instanceof ChromePhpInterface);
         $this->assertAttributeInstanceOf('Zend\Log\Formatter\ChromePhp', 'formatter', $writer);

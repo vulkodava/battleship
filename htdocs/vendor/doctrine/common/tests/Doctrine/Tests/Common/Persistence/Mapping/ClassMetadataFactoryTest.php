@@ -58,7 +58,7 @@ class ClassMetadataFactoryTest extends DoctrineTestCase
     {
         $metadata = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
         $cache = new ArrayCache();
-        $cache->save(__NAMESPACE__. '\ChildEntity$CLASSMETADATA', $metadata);
+        $cache->save(__NAMESPACE__ . '\ChildEntity$CLASSMETADATA', $metadata);
 
         $this->cmf->setCacheDriver($cache);
 
@@ -73,7 +73,7 @@ class ClassMetadataFactoryTest extends DoctrineTestCase
 
         $loadedMetadata = $this->cmf->getMetadataFor(__NAMESPACE__ . '\ChildEntity');
 
-        $this->assertSame($loadedMetadata, $cache->fetch(__NAMESPACE__. '\ChildEntity$CLASSMETADATA'));
+        $this->assertSame($loadedMetadata, $cache->fetch(__NAMESPACE__ . '\ChildEntity$CLASSMETADATA'));
     }
 
     public function testGetAliasedMetadata()
@@ -120,6 +120,7 @@ class TestClassMetadataFactory extends AbstractClassMetadataFactory
     {
         return $this->driver;
     }
+
     protected function wakeupReflection(ClassMetadata $class, ReflectionService $reflService)
     {
     }

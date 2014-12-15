@@ -204,6 +204,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if (!$this->isInitialized) {
             $this->initialize();
         }
+
         return $this->executeSelect($select);
     }
 
@@ -220,7 +221,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         if ($selectState['columns'] == array(Select::SQL_STAR)
-            && $this->columns !== array()) {
+            && $this->columns !== array()
+        ) {
             $select->columns($this->columns);
         }
 
@@ -254,6 +256,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
         $insert = $this->sql->insert();
         $insert->values($set);
+
         return $this->executeInsert($insert);
     }
 
@@ -266,6 +269,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if (!$this->isInitialized) {
             $this->initialize();
         }
+
         return $this->executeInsert($insert);
     }
 
@@ -314,6 +318,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if ($where !== null) {
             $update->where($where);
         }
+
         return $this->executeUpdate($update);
     }
 
@@ -326,6 +331,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if (!$this->isInitialized) {
             $this->initialize();
         }
+
         return $this->executeUpdate($update);
     }
 
@@ -372,6 +378,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         } else {
             $delete->where($where);
         }
+
         return $this->executeDelete($delete);
     }
 
@@ -382,6 +389,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     public function deleteWith(Delete $delete)
     {
         $this->initialize();
+
         return $this->executeDelete($delete);
     }
 

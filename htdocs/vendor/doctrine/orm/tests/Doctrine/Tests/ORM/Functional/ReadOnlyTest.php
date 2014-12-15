@@ -19,7 +19,7 @@ class ReadOnlyTest extends \Doctrine\Tests\OrmFunctionalTestCase
             $this->_schemaTool->createSchema(array(
                 $this->_em->getClassMetadata('Doctrine\Tests\ORM\Functional\ReadOnlyEntity'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 

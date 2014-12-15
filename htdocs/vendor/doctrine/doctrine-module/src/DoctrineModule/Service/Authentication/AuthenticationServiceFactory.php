@@ -46,5 +46,6 @@ class AuthenticationServiceFactory extends AbstractFactory
     }
 
     public function getOptionsClass()
-    {}
+    {
+    }
 }

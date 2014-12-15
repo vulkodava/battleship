@@ -36,7 +36,7 @@ class Literal extends Node
     public $value;
 
     /**
-     * @param int   $type
+     * @param int $type
      * @param mixed $value
      */
     public function __construct($type, $value)

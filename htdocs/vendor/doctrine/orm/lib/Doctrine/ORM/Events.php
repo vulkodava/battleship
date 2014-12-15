@@ -25,7 +25,7 @@ namespace Doctrine\ORM;
  * This class cannot be instantiated.
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.0
+ * @since  2.0
  */
 final class Events
 {

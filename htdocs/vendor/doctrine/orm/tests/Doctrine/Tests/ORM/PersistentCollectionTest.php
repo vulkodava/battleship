@@ -11,6 +11,7 @@ use Doctrine\Tests\OrmTestCase;
 
 /**
  * Tests the lazy-loading capabilities of the PersistentCollection and the initialization of collections.
+ *
  * @author Giorgio Sironi <piccoloprincipeazzurro@gmail.com>
  * @author Austin Morris <austin.morris@gmail.com>
  */

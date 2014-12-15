@@ -20,8 +20,8 @@ class Well extends AbstractHelper
     /**
      * Invoke Well
      *
-     * @param  string      $content
-     * @param  string      $class
+     * @param  string $content
+     * @param  string $class
      * @return string|self
      */
     public function __invoke($content = '', $class = '')

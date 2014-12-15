@@ -42,6 +42,7 @@ class GeneratorTest extends TestCase
     public function getTmpFile()
     {
         $this->tmpFile = tempnam(sys_get_temp_dir(), 'zdi');
+
         return $this->tmpFile;
     }
 
@@ -51,8 +52,8 @@ class GeneratorTest extends TestCase
         $inspect->setName('ZendTest\Di\TestAsset\InspectedClass');
         $inspectCtor = new Builder\InjectionMethod();
         $inspectCtor->setName('__construct')
-                    ->addParameter('foo', 'composed')
-                    ->addParameter('baz', null);
+            ->addParameter('foo', 'composed')
+            ->addParameter('baz', null);
         $inspect->addInjectionMethod($inspectCtor);
 
         $composed = new Builder\PhpClass();
@@ -62,31 +63,31 @@ class GeneratorTest extends TestCase
         $struct->setName('ZendTest\Di\TestAsset\Struct');
         $structCtor = new Builder\InjectionMethod();
         $structCtor->setName('__construct')
-                   ->addParameter('param1', null)
-                   ->addParameter('param2', 'inspect');
+            ->addParameter('param1', null)
+            ->addParameter('param2', 'inspect');
 
         $definition = new Definition();
         $definition->addClass($inspect)
-                   ->addClass($composed)
-                   ->addClass($struct);
+            ->addClass($composed)
+            ->addClass($struct);
         $this->di->definitions()->unshift($definition);
 
         $data = array(
             'instance' => array(
                 'alias' => array(
                     'composed' => 'ZendTest\Di\TestAsset\ComposedClass',
-                    'inspect'  => 'ZendTest\Di\TestAsset\InspectedClass',
-                    'struct'   => 'ZendTest\Di\TestAsset\Struct',
+                    'inspect' => 'ZendTest\Di\TestAsset\InspectedClass',
+                    'struct' => 'ZendTest\Di\TestAsset\Struct',
                 ),
                 'preferences' => array(
                     'composed' => array('composed'),
-                    'inspect'  => array('inspect'),
-                    'struct'   => array('struct'),
+                    'inspect' => array('inspect'),
+                    'struct' => array('struct'),
                 ),
-                'ZendTest\Di\TestAsset\InspectedClass' => array( 'parameters' => array(
+                'ZendTest\Di\TestAsset\InspectedClass' => array('parameters' => array(
                     'baz' => 'BAZ',
                 )),
-                'ZendTest\Di\TestAsset\Struct' => array( 'parameters' => array(
+                'ZendTest\Di\TestAsset\Struct' => array('parameters' => array(
                     'param1' => 'foo',
                 )),
             ),
@@ -112,9 +113,9 @@ class GeneratorTest extends TestCase
         $this->buildContainerClass();
 
         $tokens = token_get_all(file_get_contents($this->tmpFile));
-        $count  = count($tokens);
-        $found  = false;
-        $value  = false;
+        $count = count($tokens);
+        $found = false;
+        $value = false;
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
             if (is_string($token)) {
@@ -143,8 +144,8 @@ class GeneratorTest extends TestCase
     {
         $this->buildContainerClass();
 
-        $tokens   = token_get_all(file_get_contents($this->tmpFile));
-        $count    = count($tokens);
+        $tokens = token_get_all(file_get_contents($this->tmpFile));
+        $count = count($tokens);
         $services = array();
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
@@ -186,8 +187,8 @@ class GeneratorTest extends TestCase
     public function testCreatesContainerClassWithMethodsForEachServiceAndAlias()
     {
         $this->buildContainerClass();
-        $tokens  = token_get_all(file_get_contents($this->tmpFile));
-        $count   = count($tokens);
+        $tokens = token_get_all(file_get_contents($this->tmpFile));
+        $count = count($tokens);
         $methods = array();
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
@@ -239,7 +240,7 @@ class GeneratorTest extends TestCase
         $this->createDefinitions();
         $builder = new ContainerGenerator($this->di);
         $builder->setContainerClass('Context')
-                ->setNamespace('Application');
+            ->setNamespace('Application');
         $codegen = $builder->getCodeGenerator();
         $this->assertEquals('Application', $codegen->getNamespace());
     }
@@ -254,7 +255,7 @@ class GeneratorTest extends TestCase
         $opt->setName('ZendTest\Di\TestAsset\OptionalArg');
         $optCtor = new Builder\InjectionMethod();
         $optCtor->setName('__construct')
-                ->addParameter('param', null);
+            ->addParameter('param', null);
         $opt->addInjectionMethod($optCtor);
         $def = new Definition();
         $def->addClass($opt);
@@ -287,20 +288,20 @@ class GeneratorTest extends TestCase
         $struct->setName('ZendTest\Di\TestAsset\Struct');
         $structCtor = new Builder\InjectionMethod();
         $structCtor->setName('__construct')
-                   ->addParameter('param1', null)
-                   ->addParameter('param2', null);
+            ->addParameter('param1', null)
+            ->addParameter('param2', null);
         $struct->addInjectionMethod($structCtor);
 
         $dummy = new Builder\PhpClass();
         $dummy->setName('ZendTest\Di\TestAsset\DummyParams')
-              ->setInstantiator(array('ZendTest\Di\TestAsset\StaticFactory', 'factory'));
+            ->setInstantiator(array('ZendTest\Di\TestAsset\StaticFactory', 'factory'));
 
         $staticFactory = new Builder\PhpClass();
         $staticFactory->setName('ZendTest\Di\TestAsset\StaticFactory');
         $factory = new Builder\InjectionMethod();
         $factory->setName('factory')
-                ->addParameter('struct', 'struct')
-                ->addParameter('params', null);
+            ->addParameter('struct', 'struct')
+            ->addParameter('params', null);
         $staticFactory->addInjectionMethod($factory);
 
         $def = new Definition();
@@ -313,8 +314,8 @@ class GeneratorTest extends TestCase
         $cfg = new Config(array(
             'instance' => array(
                 'alias' => array(
-                    'struct'  => 'ZendTest\Di\TestAsset\Struct',
-                    'dummy'   => 'ZendTest\Di\TestAsset\DummyParams',
+                    'struct' => 'ZendTest\Di\TestAsset\Struct',
+                    'dummy' => 'ZendTest\Di\TestAsset\DummyParams',
                     'factory' => 'ZendTest\Di\TestAsset\StaticFactory',
                 ),
                 'properties' => array(
@@ -347,11 +348,11 @@ class GeneratorTest extends TestCase
         $opt->setName('ZendTest\Di\TestAsset\OptionalArg');
         $optCtor = new Builder\InjectionMethod();
         $optCtor->setName('__construct')
-                ->addParameter('param', null);
+            ->addParameter('param', null);
         $optInject = new Builder\InjectionMethod();
         $optInject->setName('inject')
-                  ->addParameter('param1', null)
-                  ->addParameter('param2', null);
+            ->addParameter('param1', null)
+            ->addParameter('param2', null);
         $opt->addInjectionMethod($optCtor)
             ->addInjectionMethod($optInject);
 
@@ -365,7 +366,7 @@ class GeneratorTest extends TestCase
             ),
             'properties' => array(
                 'ZendTest\Di\TestAsset\OptionalArg' => array(
-                    'param'  => null,
+                    'param' => null,
                     'param1' => null,
                     'param2' => null,
                 ),
@@ -385,9 +386,9 @@ class GeneratorTest extends TestCase
         $this->createDefinitions();
         $builder = new ContainerGenerator($this->di);
         $builder->setContainerClass('Context')
-                ->setNamespace('Application');
+            ->setNamespace('Application');
         $content = $builder->getCodeGenerator()->generate();
-        $count   = substr_count($content, '\ZendTest\Di\TestAsset\\');
+        $count = substr_count($content, '\ZendTest\Di\TestAsset\\');
         $this->assertEquals(3, $count, $content);
         $this->assertNotContains('\\\\', $content);
     }

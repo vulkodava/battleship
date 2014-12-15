@@ -18,7 +18,7 @@ class ValidatorLoader extends BaseValidatorLoader
 {
     public function __construct($map = null)
     {
-        $this->plugins['mydigits']     = 'TestNamespace\MyDigits';
+        $this->plugins['mydigits'] = 'TestNamespace\MyDigits';
         $this->plugins['stringequals'] = 'TestNamespace\StringEquals';
         parent::__construct($map);
     }

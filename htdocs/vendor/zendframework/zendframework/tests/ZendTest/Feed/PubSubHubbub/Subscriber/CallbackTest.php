@@ -39,13 +39,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $this->_callback = new CallbackSubscriber;
 
-        $this->_adapter      = $this->_getCleanMock(
+        $this->_adapter = $this->_getCleanMock(
             '\Zend\Db\Adapter\Adapter'
         );
         $this->_tableGateway = $this->_getCleanMock(
             '\Zend\Db\TableGateway\TableGateway'
         );
-        $this->_rowset       = $this->_getCleanMock(
+        $this->_rowset = $this->_getCleanMock(
             '\Zend\Db\ResultSet\ResultSet'
         );
 
@@ -60,15 +60,15 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_callback->setStorage($storage);
 
         $this->_get = array(
-            'hub_mode'          => 'subscribe',
-            'hub_topic'         => 'http://www.example.com/topic',
-            'hub_challenge'     => 'abc',
-            'hub_verify_token'  => 'cba',
+            'hub_mode' => 'subscribe',
+            'hub_topic' => 'http://www.example.com/topic',
+            'hub_challenge' => 'abc',
+            'hub_verify_token' => 'cba',
             'hub_lease_seconds' => '1234567'
         );
 
         $_SERVER['REQUEST_METHOD'] = 'get';
-        $_SERVER['QUERY_STRING']   = 'xhub.subscription=verifytokenkey';
+        $_SERVER['QUERY_STRING'] = 'xhub.subscription=verifytokenkey';
     }
 
     public function testCanSetHttpResponseObject()
@@ -140,9 +140,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $mockReturnValue->expects($this->any())
             ->method('getArrayCopy')
             ->will($this->returnValue(array(
-                                           'verify_token' => hash('sha256',
-                                                                  'cba')
-                                      )));
+                'verify_token' => hash('sha256',
+                    'cba')
+            )));
 
         $this->_tableGateway->expects($this->any())
             ->method('select')
@@ -194,9 +194,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $mockReturnValue->expects($this->any())
             ->method('getArrayCopy')
             ->will($this->returnValue(array(
-                                           'verify_token' => hash('sha256',
-                                                                  'cba')
-                                      )));
+                'verify_token' => hash('sha256',
+                    'cba')
+            )));
 
         $this->_get['hub_mode'] = 'unsubscribe';
         $this->_tableGateway->expects($this->any())
@@ -259,9 +259,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
         $t = clone $this->now;
         $rowdata = array(
-            'id'            => 'verifytokenkey',
-            'verify_token'  => hash('sha256', 'cba'),
-            'created_time'  => $t->getTimestamp(),
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => $t->getTimestamp(),
             'lease_seconds' => 10000
         );
 
@@ -293,9 +293,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
         $t = clone $this->now;
         $rowdata = array(
-            'id'            => 'verifytokenkey',
-            'verify_token'  => hash('sha256', 'cba'),
-            'created_time'  => $t->getTimestamp(),
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => $t->getTimestamp(),
             'lease_seconds' => 10000
         );
 
@@ -312,15 +312,15 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_tableGateway->expects($this->once())
             ->method('update')
             ->with(
-            $this->equalTo(array('id'                => 'verifytokenkey',
-                                 'verify_token'      => hash('sha256', 'cba'),
-                                 'created_time'      => $t->getTimestamp(),
-                                 'lease_seconds'     => 1234567,
-                                 'subscription_state'=> 'verified',
-                                 'expiration_time'   => $t->add(new DateInterval('PT1234567S'))
-                                     ->format('Y-m-d H:i:s'))),
-            $this->equalTo(array('id' => 'verifytokenkey'))
-        );
+                $this->equalTo(array('id' => 'verifytokenkey',
+                    'verify_token' => hash('sha256', 'cba'),
+                    'created_time' => $t->getTimestamp(),
+                    'lease_seconds' => 1234567,
+                    'subscription_state' => 'verified',
+                    'expiration_time' => $t->add(new DateInterval('PT1234567S'))
+                        ->format('Y-m-d H:i:s'))),
+                $this->equalTo(array('id' => 'verifytokenkey'))
+            );
 
         $this->_callback->handle($this->_get);
         $this->assertTrue($this->_callback->getHttpResponse()->getContent() == 'abc');
@@ -328,10 +328,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testRespondsToValidFeedUpdateRequestWith200Response()
     {
-        $_SERVER['REQUEST_METHOD']     = 'POST';
-        $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
-        $_SERVER['CONTENT_TYPE']       = 'application/atom+xml';
-        $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['REQUEST_URI'] = '/some/path/callback/verifytokenkey';
+        $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
+        $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml; // dirty  alternative to php://input
 
         $this->_tableGateway->expects($this->any())
@@ -340,7 +340,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->_rowset));
 
         $rowdata = array(
-            'id'           => 'verifytokenkey',
+            'id' => 'verifytokenkey',
             'verify_token' => hash('sha256', 'cba'),
             'created_time' => time()
         );
@@ -361,10 +361,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testRespondsToInvalidFeedUpdateNotPostWith404Response()
     { // yes, this example makes no sense for GET - I know!!!
-        $_SERVER['REQUEST_METHOD']     = 'GET';
-        $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
-        $_SERVER['CONTENT_TYPE']       = 'application/atom+xml';
-        $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/some/path/callback/verifytokenkey';
+        $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
+        $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
 
         $this->_callback->handle(array());
@@ -373,10 +373,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testRespondsToInvalidFeedUpdateWrongMimeWith404Response()
     {
-        $_SERVER['REQUEST_METHOD']     = 'POST';
-        $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
-        $_SERVER['CONTENT_TYPE']       = 'application/kml+xml';
-        $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['REQUEST_URI'] = '/some/path/callback/verifytokenkey';
+        $_SERVER['CONTENT_TYPE'] = 'application/kml+xml';
+        $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getStatusCode() == 404);
@@ -390,10 +390,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testRespondsToInvalidFeedUpdateWrongFeedTypeForMimeWith200Response()
     {
-        $_SERVER['REQUEST_METHOD']     = 'POST';
-        $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
-        $_SERVER['CONTENT_TYPE']       = 'application/rss+xml';
-        $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['REQUEST_URI'] = '/some/path/callback/verifytokenkey';
+        $_SERVER['CONTENT_TYPE'] = 'application/rss+xml';
+        $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
 
         $this->_tableGateway->expects($this->any())
@@ -402,9 +402,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->_rowset));
 
         $rowdata = array(
-            'id'            => 'verifytokenkey',
-            'verify_token'  => hash('sha256', 'cba'),
-            'created_time'  => time(),
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => time(),
             'lease_seconds' => 10000
         );
 
@@ -425,10 +425,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testRespondsToValidFeedUpdateWithXHubOnBehalfOfHeader()
     {
-        $_SERVER['REQUEST_METHOD']     = 'POST';
-        $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
-        $_SERVER['CONTENT_TYPE']       = 'application/atom+xml';
-        $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['REQUEST_URI'] = '/some/path/callback/verifytokenkey';
+        $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
+        $feedXml = file_get_contents(__DIR__ . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
 
         $this->_tableGateway->expects($this->any())
@@ -437,9 +437,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->_rowset));
 
         $rowdata = array(
-            'id'            => 'verifytokenkey',
-            'verify_token'  => hash('sha256', 'cba'),
-            'created_time'  => time(),
+            'id' => 'verifytokenkey',
+            'verify_token' => hash('sha256', 'cba'),
+            'created_time' => time(),
             'lease_seconds' => 10000
         );
 
@@ -460,12 +460,12 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     protected function _getCleanMock($className)
     {
-        $class       = new \ReflectionClass($className);
-        $methods     = $class->getMethods();
+        $class = new \ReflectionClass($className);
+        $methods = $class->getMethods();
         $stubMethods = array();
         foreach ($methods as $method) {
             if ($method->isPublic() || ($method->isProtected()
-                                        && $method->isAbstract())
+                    && $method->isAbstract())
             ) {
                 $stubMethods[] = $method->getName();
             }
@@ -477,6 +477,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
             false
         );
+
         return $mocked;
     }
 }

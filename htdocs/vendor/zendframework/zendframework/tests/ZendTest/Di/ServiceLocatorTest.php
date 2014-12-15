@@ -58,6 +58,7 @@ class ServiceLocatorTest extends TestCase
         $this->services->set('foo', function () {
             $object = new \stdClass();
             $object->foo = 'FOO';
+
             return $object;
         });
         $test = $this->services->get('foo');
@@ -70,6 +71,7 @@ class ServiceLocatorTest extends TestCase
         $this->services->set('foo', function () {
             $object = new \stdClass();
             $object->foo = 'FOO';
+
             return $object;
         });
         $test1 = $this->services->get('foo');
@@ -83,6 +85,7 @@ class ServiceLocatorTest extends TestCase
         $this->services->set('foo', function () {
             $object = new \stdClass();
             $object->params = func_get_args();
+
             return $object;
         });
 

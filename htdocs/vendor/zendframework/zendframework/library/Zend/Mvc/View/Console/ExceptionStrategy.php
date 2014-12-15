@@ -20,12 +20,14 @@ class ExceptionStrategy extends AbstractListenerAggregate
 {
     /**
      * Display exceptions?
+     *
      * @var bool
      */
     protected $displayExceptions = true;
 
     /**
      * A template for message to show in console when an exception has occurred.
+     *
      * @var string|callable
      */
     protected $message = <<<EOT
@@ -45,6 +47,7 @@ EOT;
 
     /**
      * A template for message to show in console when an exception has previous exceptions.
+     *
      * @var string
      */
     protected $previousMessage = <<<EOT
@@ -74,7 +77,8 @@ EOT;
      */
     public function setDisplayExceptions($displayExceptions)
     {
-        $this->displayExceptions = (bool) $displayExceptions;
+        $this->displayExceptions = (bool)$displayExceptions;
+
         return $this;
     }
 
@@ -115,12 +119,13 @@ EOT;
      *   :line        - the line where the exception has been thrown
      *   :stack       - full exception stack
      *
-     * @param string|callable  $message
+     * @param string|callable $message
      * @return ExceptionStrategy
      */
     public function setMessage($message)
     {
         $this->message = $message;
+
         return $this;
     }
 
@@ -133,6 +138,7 @@ EOT;
     public function setPreviousMessage($previousMessage)
     {
         $this->previousMessage = $previousMessage;
+
         return $this;
     }
 
@@ -183,7 +189,7 @@ EOT;
 
                 if (is_callable($this->message)) {
                     $callback = $this->message;
-                    $message = (string) $callback($exception, $this->displayExceptions);
+                    $message = (string)$callback($exception, $this->displayExceptions);
                 } elseif ($this->displayExceptions && $exception instanceof \Exception) {
                     $previous = '';
                     $previousException = $exception->getPrevious();
@@ -196,7 +202,7 @@ EOT;
                                 ':file',
                                 ':line',
                                 ':stack',
-                            ),array(
+                            ), array(
                                 get_class($previousException),
                                 $previousException->getMessage(),
                                 $previousException->getCode(),
@@ -219,7 +225,7 @@ EOT;
                             ':line',
                             ':stack',
                             ':previous',
-                        ),array(
+                        ), array(
                             get_class($exception),
                             $exception->getMessage(),
                             $exception->getCode(),
@@ -240,7 +246,7 @@ EOT;
                             ':line',
                             ':stack',
                             ':previous',
-                        ),array(
+                        ), array(
                             '',
                             '',
                             '',

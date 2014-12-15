@@ -37,6 +37,7 @@ class SlidingTest extends \PHPUnit_Framework_TestCase
         $this->paginator->setItemCountPerPage(10);
         $this->paginator->setPageRange(5);
     }
+
     /**
      * Cleans up the environment after running a test.
      */

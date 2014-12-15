@@ -50,9 +50,9 @@ class LikeExpression extends Node
     public $escapeChar;
 
     /**
-     * @param Node           $stringExpression
+     * @param Node $stringExpression
      * @param InputParameter $stringPattern
-     * @param Literal|null   $escapeChar
+     * @param Literal|null $escapeChar
      */
     public function __construct($stringExpression, $stringPattern, $escapeChar = null)
     {

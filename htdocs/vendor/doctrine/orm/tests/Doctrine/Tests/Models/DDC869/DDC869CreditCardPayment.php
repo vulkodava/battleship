@@ -32,8 +32,8 @@ class DDC869CreditCardPayment extends DDC869Payment
     public static function loadMetadata(\Doctrine\ORM\Mapping\ClassMetadataInfo $metadata)
     {
         $metadata->mapField(array(
-           'fieldName'  => 'creditCardNumber',
-           'type'       => 'string',
+            'fieldName' => 'creditCardNumber',
+            'type' => 'string',
         ));
     }
 

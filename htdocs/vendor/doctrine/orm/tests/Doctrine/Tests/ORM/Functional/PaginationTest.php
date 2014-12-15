@@ -151,7 +151,7 @@ class PaginationTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertCount(1, $paginator->getIterator());
         $this->assertEquals(1, $paginator->count());
     }
-    
+
     public function testCountQueryStripsParametersInSelect()
     {
         $query = $this->_em->createQuery(
@@ -191,7 +191,8 @@ class PaginationTest extends \Doctrine\Tests\OrmFunctionalTestCase
             $user->status = "active";
             $this->_em->persist($user);
 
-            for ($j = 0; $j < 3; $j++) {;
+            for ($j = 0; $j < 3; $j++) {
+                ;
                 $group = new CmsGroup();
                 $group->name = "group$j";
                 $user->addGroup($group);

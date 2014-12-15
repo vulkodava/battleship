@@ -26,7 +26,7 @@ class Navigation extends ZendNavigation
      */
     protected $defaultPluginManagerHelpers = array(
         'ztbbreadcrumbs' => 'ZfcTwitterBootstrap\View\Helper\Navigation\Breadcrumbs',
-        'ztbmenu'        => 'ZfcTwitterBootstrap\View\Helper\Navigation\Menu',
+        'ztbmenu' => 'ZfcTwitterBootstrap\View\Helper\Navigation\Menu',
     );
 
     /**
@@ -43,6 +43,7 @@ class Navigation extends ZendNavigation
         foreach ($this->defaultPluginManagerHelpers as $name => $invokableClass) {
             $pm->setInvokableClass($name, $invokableClass);
         }
+
         return $pm;
     }
 }

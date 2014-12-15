@@ -36,7 +36,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         $cloud->setCloudDecorator(array(
             'decorator' => 'CloudDummy',
-            'options'   => array('foo' => 'bar'),
+            'options' => array('foo' => 'bar'),
         ));
         $this->assertInstanceOf('ZendTest\Tag\Cloud\TestAsset\CloudDummy', $cloud->getCloudDecorator());
         $this->assertEquals('bar', $cloud->getCloudDecorator()->getFoo());
@@ -65,7 +65,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
         $cloud->setTagDecorator(array(
             'decorator' => 'TagDummy',
-            'options'   => array('foo' => 'bar'),
+            'options' => array('foo' => 'bar'),
         ));
         $this->assertInstanceOf('ZendTest\Tag\Cloud\TestAsset\TagDummy', $cloud->getTagDecorator());
         $this->assertEquals('bar', $cloud->getTagDecorator()->getFoo());
@@ -91,7 +91,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testSetDecoratorPluginManager()
     {
         $decorators = new DecoratorPluginManager();
-        $cloud      = $this->_getCloud(array(), null);
+        $cloud = $this->_getCloud(array(), null);
         $cloud->setDecoratorPluginManager($decorators);
         $this->assertSame($decorators, $cloud->getDecoratorPluginManager());
     }
@@ -99,7 +99,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testSetDecoratorPluginManagerViaOptions()
     {
         $decorators = new DecoratorPluginManager();
-        $cloud      = $this->_getCloud(
+        $cloud = $this->_getCloud(
             array('decoratorPluginManager' => $decorators),
             null
         );
@@ -109,10 +109,10 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testAppendTagAsArray()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
         $cloud->appendTag(array(
-            'title'  => 'foo',
+            'title' => 'foo',
             'weight' => 1,
         ));
 
@@ -122,10 +122,10 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testAppendTagAsItem()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
         $cloud->appendTag(new Tag\Item(array(
-            'title'  => 'foo',
+            'title' => 'foo',
             'weight' => 1,
         )));
 
@@ -143,15 +143,15 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testSetTagsAsArray()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
         $cloud->setTags(array(
             array(
-                'title'  => 'foo',
+                'title' => 'foo',
                 'weight' => 1,
             ),
             array(
-                'title'  => 'bar',
+                'title' => 'bar',
                 'weight' => 2,
             )
         ));
@@ -163,15 +163,15 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testSetTagsAsItem()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
         $cloud->setTags(array(
-            new Tag\Item( array(
-                'title'  => 'foo',
+            new Tag\Item(array(
+                'title' => 'foo',
                 'weight' => 1,
             )),
-            new Tag\Item( array(
-                'title'  => 'bar',
+            new Tag\Item(array(
+                'title' => 'bar',
                 'weight' => 2,
             )),
         ));
@@ -183,15 +183,15 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     public function testSetTagsMixed()
     {
         $cloud = $this->_getCloud();
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
         $cloud->setTags(array(
             array(
-                'title'  => 'foo',
+                'title' => 'foo',
                 'weight' => 1,
             ),
             new Tag\Item(array(
-                'title'  => 'bar',
+                'title' => 'bar',
                 'weight' => 2,
             )),
         ));
@@ -213,27 +213,27 @@ class CloudTest extends \PHPUnit_Framework_TestCase
         $cloud = $this->_getCloud(array(
             'tags' => array(
                 array(
-                    'title'  => 'foo',
+                    'title' => 'foo',
                     'weight' => 1,
                 ),
             ),
         ));
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
         $this->assertEquals('foo', $list[0]->getTitle());
     }
 
     public function testConstructorWithConfig()
     {
-        $cloud = $this->_getCloud( new \Zend\Config\Config(array(
+        $cloud = $this->_getCloud(new \Zend\Config\Config(array(
             'tags' => array(
                 array(
-                    'title'  => 'foo',
+                    'title' => 'foo',
                     'weight' => 1,
                 ),
             ),
         )));
-        $list  = $cloud->getItemList();
+        $list = $cloud->getItemList();
 
         $this->assertEquals('foo', $list[0]->getTitle());
     }
@@ -244,7 +244,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
         $cloud->setOptions(array(
             'tags' => array(
                 array(
-                    'title'  => 'foo',
+                    'title' => 'foo',
                     'weight' => 1,
                 ),
             ),
@@ -265,11 +265,11 @@ class CloudTest extends \PHPUnit_Framework_TestCase
         $cloud = $this->_getCloud(array(
             'tags' => array(
                 array(
-                    'title'  => 'foo',
+                    'title' => 'foo',
                     'weight' => 1,
                 ),
                 array(
-                    'title'  => 'bar',
+                    'title' => 'bar',
                     'weight' => 3,
                 ),
             ),
@@ -289,14 +289,14 @@ class CloudTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderViaToString()
     {
-        $cloud    = $this->_getCloud(array(
+        $cloud = $this->_getCloud(array(
             'tags' => array(
                 array(
-                    'title'  => 'foo',
+                    'title' => 'foo',
                     'weight' => 1,
                 ),
                 array(
-                    'title'  => 'bar',
+                    'title' => 'bar',
                     'weight' => 3,
                 ),
             ),
@@ -311,7 +311,8 @@ class CloudTest extends \PHPUnit_Framework_TestCase
     protected function _getCloud(
         $options = null,
         $setDecoratorPluginManager = true
-    ) {
+    )
+    {
         $cloud = new Tag\Cloud($options);
 
         if ($setDecoratorPluginManager) {

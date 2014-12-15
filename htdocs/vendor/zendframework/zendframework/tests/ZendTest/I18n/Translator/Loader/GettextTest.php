@@ -53,7 +53,7 @@ class GettextTest extends TestCase
     {
         $loader = new GettextLoader();
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
-                                    'is not a valid gettext file');
+            'is not a valid gettext file');
         $loader->load('en_EN', $this->testFilesDir . '/failed.mo');
     }
 
@@ -82,7 +82,7 @@ class GettextTest extends TestCase
 
     public function testLoaderLoadsPluralRules()
     {
-        $loader     = new GettextLoader();
+        $loader = new GettextLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
 
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));

@@ -24,10 +24,11 @@ class FormCheckboxTest extends CommonTestCase
     {
         $element = new Element\Checkbox('foo');
         $options = array(
-            'checked_value'   => 'checked',
+            'checked_value' => 'checked',
             'unchecked_value' => 'unchecked',
         );
         $element->setOptions($options);
+
         return $element;
     }
 
@@ -41,7 +42,7 @@ class FormCheckboxTest extends CommonTestCase
     public function testUsesOptionsAttributeToGenerateCheckedAndUnCheckedValues()
     {
         $element = $this->getElement();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertContains('type="checkbox"', $markup);
         $this->assertContains('value="checked"', $markup);
@@ -53,7 +54,7 @@ class FormCheckboxTest extends CommonTestCase
     {
         $element = $this->getElement();
         $element->setValue('checked');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertRegexp('#value="checked"\s+checked="checked"#', $markup);
         $this->assertNotRegexp('#value="unchecked"\s+checked="checked"#', $markup);
@@ -62,7 +63,7 @@ class FormCheckboxTest extends CommonTestCase
     public function testNoOptionsAttributeCreatesDefaultCheckedAndUncheckedValues()
     {
         $element = new Element\Checkbox('foo');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertRegexp('#type="checkbox".*?(value="1")#', $markup);
         $this->assertRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
@@ -71,7 +72,7 @@ class FormCheckboxTest extends CommonTestCase
     {
         $element = new Element\Checkbox('foo');
         $element->setUseHiddenElement(false);
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertRegexp('#type="checkbox".*?(value="1")#', $markup);
         $this->assertNotRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }

@@ -173,7 +173,7 @@ methods along the lines of the ``getName()`` method shown below:
             return parent::getName();
         }
         // .. other public methods of User
-    }
+}
 
 .. warning::
 
@@ -738,7 +738,7 @@ interface. That means you can build ``Doctrine\Common\Collections\Criteria``
 and pass them to the ``matching($criteria)`` method.
 
 See the :ref:`Working with Associations: Filtering collections
-<filtering-collections>`.
+    <filtering-collections>`.
 
 By Eager Loading
 ~~~~~~~~~~~~~~~~

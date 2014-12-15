@@ -171,11 +171,11 @@ class SQLFilterTest extends \Doctrine\Tests\OrmFunctionalTestCase
         // Check for a disabled filter
         $em->getFilters()->disable("locale");
         $this->assertFalse($em->getFilters()->isEnabled("locale"));
-        
+
         // Check a non-existing filter
-        $this->assertFalse($em->getFilters()->isEnabled("foo_filter"));        
+        $this->assertFalse($em->getFilters()->isEnabled("foo_filter"));
     }
-    
+
     protected function configureFilters($em)
     {
         // Add filters to the configuration of the EM
@@ -306,8 +306,8 @@ class SQLFilterTest extends \Doctrine\Tests\OrmFunctionalTestCase
             'locale' => array('value' => 'en', 'type' => DBALType::STRING),
         );
 
-        $this->assertEquals(serialize($parameters), ''.$filter);
-        $this->assertEquals(''.$filter, ''.$filter2);
+        $this->assertEquals(serialize($parameters), '' . $filter);
+        $this->assertEquals('' . $filter, '' . $filter2);
     }
 
     public function testQueryCache_DependsOnFilters()
@@ -538,11 +538,11 @@ class SQLFilterTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $user = $this->_em->find('Doctrine\Tests\Models\CMS\CmsUser', $this->userId);
 
         $this->assertFalse($user->articles->isInitialized());
-        $this->assertEquals(2, count($user->articles->slice(0,10)));
+        $this->assertEquals(2, count($user->articles->slice(0, 10)));
 
         $this->useCMSArticleTopicFilter();
 
-        $this->assertEquals(1, count($user->articles->slice(0,10)));
+        $this->assertEquals(1, count($user->articles->slice(0, 10)));
     }
 
     private function useCMSGroupPrefixFilter()
@@ -586,11 +586,11 @@ class SQLFilterTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $user = $this->_em->find('Doctrine\Tests\Models\CMS\CmsUser', $this->userId2);
 
         $this->assertFalse($user->groups->isInitialized());
-        $this->assertEquals(2, count($user->groups->slice(0,10)));
+        $this->assertEquals(2, count($user->groups->slice(0, 10)));
 
         $this->useCMSGroupPrefixFilter();
 
-        $this->assertEquals(1, count($user->groups->slice(0,10)));
+        $this->assertEquals(1, count($user->groups->slice(0, 10)));
     }
 
     private function loadFixtureData()
@@ -973,6 +973,7 @@ class SQLFilterTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertFalse($manager->soldContracts->isInitialized());
         $this->assertEquals(1, count($manager->soldContracts->slice(0, 10)));
     }
+
     private function loadCompanyOrganizationEventJoinedSubclassFixtureData()
     {
         $organization = new CompanyOrganization;
@@ -1068,7 +1069,7 @@ class MySoftDeleteFilter extends SQLFilter
             return "";
         }
 
-        return $targetTableAlias.'.deleted = 0';
+        return $targetTableAlias . '.deleted = 0';
     }
 }
 
@@ -1080,7 +1081,7 @@ class MyLocaleFilter extends SQLFilter
             return "";
         }
 
-        return $targetTableAlias.'.locale = ' . $this->getParameter('locale'); // getParam uses connection to quote the value.
+        return $targetTableAlias . '.locale = ' . $this->getParameter('locale'); // getParam uses connection to quote the value.
     }
 }
 
@@ -1092,7 +1093,7 @@ class CMSCountryFilter extends SQLFilter
             return "";
         }
 
-        return $targetTableAlias.'.country = ' . $this->getParameter('country'); // getParam uses connection to quote the value.
+        return $targetTableAlias . '.country = ' . $this->getParameter('country'); // getParam uses connection to quote the value.
     }
 }
 
@@ -1104,7 +1105,7 @@ class CMSGroupPrefixFilter extends SQLFilter
             return "";
         }
 
-        return $targetTableAlias.'.name LIKE ' . $this->getParameter('prefix'); // getParam uses connection to quote the value.
+        return $targetTableAlias . '.name LIKE ' . $this->getParameter('prefix'); // getParam uses connection to quote the value.
     }
 }
 
@@ -1116,7 +1117,7 @@ class CMSArticleTopicFilter extends SQLFilter
             return "";
         }
 
-        return $targetTableAlias.'.topic = ' . $this->getParameter('topic'); // getParam uses connection to quote the value.
+        return $targetTableAlias . '.topic = ' . $this->getParameter('topic'); // getParam uses connection to quote the value.
     }
 }
 
@@ -1128,7 +1129,7 @@ class CompanyPersonNameFilter extends SQLFilter
             return "";
         }
 
-        return $targetTableAlias.'.name LIKE ' . $this->getParameter('name');
+        return $targetTableAlias . '.name LIKE ' . $this->getParameter('name');
     }
 }
 
@@ -1140,7 +1141,7 @@ class CompletedContractFilter extends SQLFilter
             return "";
         }
 
-        return $targetTableAlias.'.completed = ' . $this->getParameter('completed');
+        return $targetTableAlias . '.completed = ' . $this->getParameter('completed');
     }
 }
 
@@ -1152,6 +1153,6 @@ class CompanyEventFilter extends SQLFilter
             return "";
         }
 
-        return $targetTableAlias.'.id = ' . $this->getParameter('id');
+        return $targetTableAlias . '.id = ' . $this->getParameter('id');
     }
 }

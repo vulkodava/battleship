@@ -32,15 +32,15 @@ class ReservedWordsCommand extends Command
      * @var array
      */
     private $keywordListClasses = array(
-        'mysql'         => 'Doctrine\DBAL\Platforms\Keywords\MySQLKeywords',
-        'sqlserver'     => 'Doctrine\DBAL\Platforms\Keywords\SQLServerKeywords',
+        'mysql' => 'Doctrine\DBAL\Platforms\Keywords\MySQLKeywords',
+        'sqlserver' => 'Doctrine\DBAL\Platforms\Keywords\SQLServerKeywords',
         'sqlserver2005' => 'Doctrine\DBAL\Platforms\Keywords\SQLServer2005Keywords',
         'sqlserver2008' => 'Doctrine\DBAL\Platforms\Keywords\SQLServer2008Keywords',
         'sqlserver2012' => 'Doctrine\DBAL\Platforms\Keywords\SQLServer2012Keywords',
-        'sqlite'        => 'Doctrine\DBAL\Platforms\Keywords\SQLiteKeywords',
-        'pgsql'         => 'Doctrine\DBAL\Platforms\Keywords\PostgreSQLKeywords',
-        'oracle'        => 'Doctrine\DBAL\Platforms\Keywords\OracleKeywords',
-        'db2'           => 'Doctrine\DBAL\Platforms\Keywords\DB2Keywords',
+        'sqlite' => 'Doctrine\DBAL\Platforms\Keywords\SQLiteKeywords',
+        'pgsql' => 'Doctrine\DBAL\Platforms\Keywords\PostgreSQLKeywords',
+        'oracle' => 'Doctrine\DBAL\Platforms\Keywords\OracleKeywords',
+        'db2' => 'Doctrine\DBAL\Platforms\Keywords\DB2Keywords',
     );
 
     /**
@@ -62,14 +62,14 @@ class ReservedWordsCommand extends Command
     protected function configure()
     {
         $this
-        ->setName('dbal:reserved-words')
-        ->setDescription('Checks if the current database contains identifiers that are reserved.')
-        ->setDefinition(array(
-            new InputOption(
-                'list', 'l', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Keyword-List name.'
-            )
-        ))
-        ->setHelp(<<<EOT
+            ->setName('dbal:reserved-words')
+            ->setDescription('Checks if the current database contains identifiers that are reserved.')
+            ->setDefinition(array(
+                new InputOption(
+                    'list', 'l', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Keyword-List name.'
+                )
+            ))
+            ->setHelp(<<<EOT
 Checks if the current database contains tables and columns
 with names that are identifiers in this dialect or in other SQL dialects.
 
@@ -95,7 +95,7 @@ The following keyword lists are currently shipped with Doctrine:
     * sqlserver2012
     * db2 (Not checked by default)
 EOT
-        );
+            );
     }
 
     /**
@@ -107,7 +107,7 @@ EOT
         $conn = $this->getHelper('db')->getConnection();
 
         $keywordLists = (array)$input->getOption('list');
-        if ( ! $keywordLists) {
+        if (!$keywordLists) {
             $keywordLists = array(
                 'mysql',
                 'pgsql',
@@ -124,7 +124,7 @@ EOT
         foreach ($keywordLists as $keywordList) {
             if (!isset($this->keywordListClasses[$keywordList])) {
                 throw new \InvalidArgumentException(
-                    "There exists no keyword list with name '" . $keywordList . "'. ".
+                    "There exists no keyword list with name '" . $keywordList . "'. " .
                     "Known lists: " . implode(", ", array_keys($this->keywordListClasses))
                 );
             }

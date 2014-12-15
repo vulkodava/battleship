@@ -33,7 +33,7 @@ class CompanySchemaTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     /**
-     * @group DDC-966
+     * @group   DDC-966
      * @depends testGeneratedSchema
      */
     public function testSingleTableInheritance(Schema $schema)

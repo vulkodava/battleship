@@ -85,7 +85,8 @@ function Zend_Soap_AutoDiscover_TestFunc7()
  */
 function Zend_Soap_AutoDiscover_TestFunc8()
 {
-    $return = (object) array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
+    $return = (object)array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
+
     return $return;
 }
 
@@ -111,7 +112,7 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
      * @param integer $d
      * @return integer
      */
-    public function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a = 100, $b = 200, $d = 300)
     {
 
     }
@@ -144,7 +145,7 @@ class Zend_Soap_AutoDiscover_Test
      * Test Function 3
      *
      * @param string $who Some Arg
-     * @param int $when Some
+     * @param int $when   Some
      * @return string
      */
     public function testFunc3($who, $when)
@@ -200,7 +201,7 @@ class Zend_Soap_AutoDiscoverTestClass2
     }
 
     /**
-     * @param Zend_Soap_AutoDiscoverTestClass1[]
+     * @param Zend_Soap_AutoDiscoverTestClass1 []
      */
     public function addMultiple($test)
     {
@@ -270,23 +271,24 @@ class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
 class Zend_Soap_AutoDiscover_MyService
 {
     /**
-     *    @param string $foo
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
+     * @param string $foo
+     * @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function foo($foo)
     {
     }
+
     /**
-     *    @param string $bar
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
+     * @param string $bar
+     * @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function bar($bar)
     {
     }
 
     /**
-     *    @param string $baz
-     *    @return Zend_Soap_AutoDiscover_MyResponse[]
+     * @param string $baz
+     * @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function baz($baz)
     {
@@ -296,31 +298,32 @@ class Zend_Soap_AutoDiscover_MyService
 class Zend_Soap_AutoDiscover_MyServiceSequence
 {
     /**
-     *    @param string $foo
-     *    @return string[]
+     * @param string $foo
+     * @return string[]
      */
     public function foo($foo)
     {
     }
+
     /**
-     *    @param string $bar
-     *    @return string[]
+     * @param string $bar
+     * @return string[]
      */
     public function bar($bar)
     {
     }
 
     /**
-     *    @param string $baz
-     *    @return string[]
+     * @param string $baz
+     * @return string[]
      */
     public function baz($baz)
     {
     }
 
     /**
-     *    @param string $baz
-     *    @return string[][][]
+     * @param string $baz
+     * @return string[][][]
      */
     public function bazNested($baz)
     {
@@ -345,7 +348,9 @@ class Zend_Soap_AutoDiscover_Recursion
     /**
      * @return Zend_Soap_AutoDiscover_Recursion
      */
-    public function create() {}
+    public function create()
+    {
+    }
 }
 
 /**

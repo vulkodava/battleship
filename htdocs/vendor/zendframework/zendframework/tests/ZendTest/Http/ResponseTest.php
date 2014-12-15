@@ -67,7 +67,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $response = new Response;
         $response->setCustomStatusCode(998);
-        $this->assertSame('HTTP/1.1 998' . "\r\n\r\n", (string) $response);
+        $this->assertSame('HTTP/1.1 998' . "\r\n\r\n", (string)$response);
     }
 
     public function testResponseCanSetCustomStatusCode()
@@ -227,9 +227,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function test302LocationHeaderMatches()
     {
-        $headerName  = 'Location';
+        $headerName = 'Location';
         $headerValue = 'http://www.google.com/ig?hl=en';
-        $response    = Response::fromString($this->readResponse('response_302'));
+        $response = Response::fromString($this->readResponse('response_302'));
         $responseIis = Response::fromString($this->readResponse('response_302_iis'));
 
         $this->assertEquals($headerValue, $response->getHeaders()->get($headerName)->getFieldValue());

@@ -107,6 +107,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         $this->data['categories'] = $categoryCollection;
+
         return $this->data['categories'];
     }
 
@@ -208,7 +209,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data['date'];
         }
 
-        $d    = null;
+        $d = null;
         $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:date)');
 
         if (!$date) {

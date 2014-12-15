@@ -48,7 +48,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
 
         // check instantiating with arbitrary boundary string
         $myBoundary = 'mySpecificBoundary';
-        $m3         = new Mime\Mime($myBoundary);
+        $m3 = new Mime\Mime($myBoundary);
         $this->assertEquals($m3->boundary(), $myBoundary);
     }
 
@@ -65,11 +65,11 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     public function testQP()
     {
         $text = "This is a cool Test Text with special chars: ����\n"
-              . "and with multiple lines���� some of the Lines are long, long"
-              . ", long, long, long, long, long, long, long, long, long, long"
-              . ", long, long, long, long, long, long, long, long, long, long"
-              . ", long, long, long, long, long, long, long, long, long, long"
-              . ", long, long, long, long and with ����";
+            . "and with multiple lines���� some of the Lines are long, long"
+            . ", long, long, long, long, long, long, long, long, long, long"
+            . ", long, long, long, long, long, long, long, long, long, long"
+            . ", long, long, long, long, long, long, long, long, long, long"
+            . ", long, long, long, long and with ����";
 
         $qp = Mime\Mime::encodeQuotedPrintable($text);
         $this->assertEquals(quoted_printable_decode($qp), $text);
@@ -84,7 +84,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
 
     public function testZf1058WhitespaceAtEndOfBodyCausesInfiniteLoop()
     {
-        $text   = "my body\r\n\r\n...after two newlines\r\n ";
+        $text = "my body\r\n\r\n...after two newlines\r\n ";
         $result = quoted_printable_decode(Mime\Mime::encodeQuotedPrintable($text));
         $this->assertContains("my body\r\n\r\n...after two newlines", $result, $result);
     }
@@ -133,28 +133,28 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     public function testFromMessageMultiPart()
     {
         $message = Mime\Message::createFromMessage(
-            '--089e0141a1902f83ee04e0a07b7a'."\r\n"
-            .'Content-Type: multipart/alternative; boundary=089e0141a1902f83e904e0a07b78'."\r\n"
-            ."\r\n"
-            .'--089e0141a1902f83e904e0a07b78'."\r\n"
-            .'Content-Type: text/plain; charset=UTF-8'."\r\n"
-            ."\r\n"
-            .'Foo'."\r\n"
-            ."\r\n"
-            .'--089e0141a1902f83e904e0a07b78'."\r\n"
-            .'Content-Type: text/html; charset=UTF-8'."\r\n"
-            ."\r\n"
-            .'<p>Foo</p>'."\r\n"
-            ."\r\n"
-            .'--089e0141a1902f83e904e0a07b78--'."\r\n"
-            .'--089e0141a1902f83ee04e0a07b7a'."\r\n"
-            .'Content-Type: image/png; name="1.png"'."\r\n"
-            .'Content-Disposition: attachment; filename="1.png"'."\r\n"
-            .'Content-Transfer-Encoding: base64'."\r\n"
-            .'X-Attachment-Id: barquux'."\r\n"
-            ."\r\n"
-            .'Zm9vCg=='."\r\n"
-            .'--089e0141a1902f83ee04e0a07b7a--',
+            '--089e0141a1902f83ee04e0a07b7a' . "\r\n"
+            . 'Content-Type: multipart/alternative; boundary=089e0141a1902f83e904e0a07b78' . "\r\n"
+            . "\r\n"
+            . '--089e0141a1902f83e904e0a07b78' . "\r\n"
+            . 'Content-Type: text/plain; charset=UTF-8' . "\r\n"
+            . "\r\n"
+            . 'Foo' . "\r\n"
+            . "\r\n"
+            . '--089e0141a1902f83e904e0a07b78' . "\r\n"
+            . 'Content-Type: text/html; charset=UTF-8' . "\r\n"
+            . "\r\n"
+            . '<p>Foo</p>' . "\r\n"
+            . "\r\n"
+            . '--089e0141a1902f83e904e0a07b78--' . "\r\n"
+            . '--089e0141a1902f83ee04e0a07b7a' . "\r\n"
+            . 'Content-Type: image/png; name="1.png"' . "\r\n"
+            . 'Content-Disposition: attachment; filename="1.png"' . "\r\n"
+            . 'Content-Transfer-Encoding: base64' . "\r\n"
+            . 'X-Attachment-Id: barquux' . "\r\n"
+            . "\r\n"
+            . 'Zm9vCg==' . "\r\n"
+            . '--089e0141a1902f83ee04e0a07b7a--',
             '089e0141a1902f83ee04e0a07b7a'
         );
         $this->assertSame(2, count($message->getParts()));
@@ -176,15 +176,15 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'),
     public function testFromMessageDecode($input, $encoding, $result)
     {
         $parts = Mime\Message::createFromMessage(
-            '--089e0141a1902f83ee04e0a07b7a'."\r\n"
-            .'Content-Type: text/plain; charset=UTF-8'."\r\n"
-            .'Content-Transfer-Encoding: '.$encoding."\r\n"
-            ."\r\n"
-            .$result."\r\n"
-            .'--089e0141a1902f83ee04e0a07b7a--',
+            '--089e0141a1902f83ee04e0a07b7a' . "\r\n"
+            . 'Content-Type: text/plain; charset=UTF-8' . "\r\n"
+            . 'Content-Transfer-Encoding: ' . $encoding . "\r\n"
+            . "\r\n"
+            . $result . "\r\n"
+            . '--089e0141a1902f83ee04e0a07b7a--',
             '089e0141a1902f83ee04e0a07b7a'
         )->getParts();
-        $this->assertSame($input."\n", $parts[0]->getRawContent());
+        $this->assertSame($input . "\n", $parts[0]->getRawContent());
     }
 
     /**

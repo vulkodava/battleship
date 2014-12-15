@@ -20,8 +20,8 @@ class DashToUnderscoreTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesCamelCasedWordsWithDashes()
     {
-        $string   = 'dash-separated-words';
-        $filter   = new DashToUnderscoreFilter();
+        $string = 'dash-separated-words';
+        $filter = new DashToUnderscoreFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

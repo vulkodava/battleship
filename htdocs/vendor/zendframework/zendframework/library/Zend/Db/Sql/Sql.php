@@ -53,6 +53,7 @@ class Sql
         } else {
             throw new Exception\InvalidArgumentException('Table must be a string, array or instance of TableIdentifier.');
         }
+
         return $this;
     }
 
@@ -74,6 +75,7 @@ class Sql
                 $this->table
             ));
         }
+
         return new Select(($table) ?: $this->table);
     }
 
@@ -85,6 +87,7 @@ class Sql
                 $this->table
             ));
         }
+
         return new Insert(($table) ?: $this->table);
     }
 
@@ -96,6 +99,7 @@ class Sql
                 $this->table
             ));
         }
+
         return new Update(($table) ?: $this->table);
     }
 
@@ -107,6 +111,7 @@ class Sql
                 $this->table
             ));
         }
+
         return new Delete(($table) ?: $this->table);
     }
 
@@ -132,7 +137,7 @@ class Sql
     /**
      * Get sql string using platform or sql object
      *
-     * @param SqlInterface      $sqlObject
+     * @param SqlInterface $sqlObject
      * @param PlatformInterface $platform
      *
      * @return string
@@ -143,6 +148,7 @@ class Sql
 
         if ($this->sqlPlatform) {
             $this->sqlPlatform->setSubject($sqlObject);
+
             return $this->sqlPlatform->getSqlString($platform);
         }
 

@@ -27,7 +27,7 @@ class ExceptionHandlerTest extends CommonPluginTest
     {
         $this->_adapter = new MockAdapter();
         $this->_options = new Cache\Storage\Plugin\PluginOptions();
-        $this->_plugin  = new Cache\Storage\Plugin\ExceptionHandler();
+        $this->_plugin = new Cache\Storage\Plugin\ExceptionHandler();
         $this->_plugin->setOptions($this->_options);
 
         parent::setUp();
@@ -39,36 +39,36 @@ class ExceptionHandlerTest extends CommonPluginTest
 
         // check attached callbacks
         $expectedListeners = array(
-            'getItem.exception'  => 'onException',
+            'getItem.exception' => 'onException',
             'getItems.exception' => 'onException',
 
-            'hasItem.exception'  => 'onException',
+            'hasItem.exception' => 'onException',
             'hasItems.exception' => 'onException',
 
-            'getMetadata.exception'  => 'onException',
+            'getMetadata.exception' => 'onException',
             'getMetadatas.exception' => 'onException',
 
-            'setItem.exception'  => 'onException',
+            'setItem.exception' => 'onException',
             'setItems.exception' => 'onException',
 
-            'addItem.exception'  => 'onException',
+            'addItem.exception' => 'onException',
             'addItems.exception' => 'onException',
 
-            'replaceItem.exception'  => 'onException',
+            'replaceItem.exception' => 'onException',
             'replaceItems.exception' => 'onException',
 
-            'touchItem.exception'  => 'onException',
+            'touchItem.exception' => 'onException',
             'touchItems.exception' => 'onException',
 
-            'removeItem.exception'  => 'onException',
+            'removeItem.exception' => 'onException',
             'removeItems.exception' => 'onException',
 
             'checkAndSetItem.exception' => 'onException',
 
-            'incrementItem.exception'  => 'onException',
+            'incrementItem.exception' => 'onException',
             'incrementItems.exception' => 'onException',
 
-            'decrementItem.exception'  => 'onException',
+            'decrementItem.exception' => 'onException',
             'decrementItems.exception' => 'onException',
 
             'clearExpired.exception' => 'onException',
@@ -100,7 +100,7 @@ class ExceptionHandlerTest extends CommonPluginTest
     public function testOnExceptionCallCallback()
     {
         $expectedException = new \Exception();
-        $callbackCalled    = false;
+        $callbackCalled = false;
 
         $this->_options->setExceptionCallback(function ($exception) use ($expectedException, &$callbackCalled) {
             $callbackCalled = ($exception === $expectedException);
@@ -109,7 +109,7 @@ class ExceptionHandlerTest extends CommonPluginTest
         // run onException
         $result = null;
         $event = new ExceptionEvent('getItem.exception', $this->_adapter, new ArrayObject(array(
-            'key'     => 'key',
+            'key' => 'key',
             'options' => array()
         )), $result, $expectedException);
         $this->_plugin->onException($event);
@@ -127,7 +127,7 @@ class ExceptionHandlerTest extends CommonPluginTest
         // run onException
         $result = 'test';
         $event = new ExceptionEvent('getItem.exception', $this->_adapter, new ArrayObject(array(
-            'key'     => 'key',
+            'key' => 'key',
             'options' => array()
         )), $result, new \Exception());
         $this->_plugin->onException($event);

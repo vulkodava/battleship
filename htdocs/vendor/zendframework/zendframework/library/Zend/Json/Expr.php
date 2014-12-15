@@ -28,7 +28,8 @@ namespace Zend\Json;
  *
  * Zend\Json\Json::encode($foo, false, array('enableJsonExprFinder' => true));
  * // it will returns json encoded string:
- * // {"integer":9,"string":"test string","function":function () {window.alert("javascript function encoded by Zend\Json\Json")}}
+ * // {"integer":9,"string":"test string","function":function () {window.alert("javascript function encoded by
+ * Zend\Json\Json")}}
  * </code>
  */
 class Expr
@@ -47,7 +48,7 @@ class Expr
      */
     public function __construct($expression)
     {
-        $this->expression = (string) $expression;
+        $this->expression = (string)$expression;
     }
 
     /**

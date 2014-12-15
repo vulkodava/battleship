@@ -25,8 +25,9 @@ class ClassLoaderTest extends \Doctrine\Tests\DoctrineTestCase
     public function testClassExists()
     {
         $this->assertFalse(ClassLoader::classExists('ClassLoaderTest\ClassD'));
-        $badLoader = function($className) {
+        $badLoader = function ($className) {
             require __DIR__ . '/ClassLoaderTest/ClassD.php';
+
             return true;
         };
         spl_autoload_register($badLoader);

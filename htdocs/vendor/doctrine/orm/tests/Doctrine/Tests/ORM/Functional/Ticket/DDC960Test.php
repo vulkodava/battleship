@@ -16,7 +16,7 @@ class DDC960Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC960Root'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC960Child')
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

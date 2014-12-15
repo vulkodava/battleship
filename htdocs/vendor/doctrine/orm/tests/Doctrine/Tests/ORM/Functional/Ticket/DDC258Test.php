@@ -47,7 +47,7 @@ class DDC258Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertEquals('Bar', $e2->description);
         $this->assertEquals('Bar', $e2->text);
 
-        $all = $this->_em->getRepository(__NAMESPACE__.'\DDC258Super')->findAll();
+        $all = $this->_em->getRepository(__NAMESPACE__ . '\DDC258Super')->findAll();
 
         foreach ($all as $obj) {
             if ($obj instanceof DDC258Class1) {
@@ -80,7 +80,7 @@ abstract class DDC258Super
     /**
      * @Id @Column(name="id", type="integer")
      * @GeneratedValue(strategy="AUTO")
-    */
+     */
     public $id;
 }
 

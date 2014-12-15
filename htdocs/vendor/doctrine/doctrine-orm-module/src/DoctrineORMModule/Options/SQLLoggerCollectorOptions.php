@@ -50,7 +50,7 @@ class SQLLoggerCollectorOptions extends AbstractOptions
      */
     public function setName($name)
     {
-        $this->name = (string) $name;
+        $this->name = (string)$name;
     }
 
     /**
@@ -68,7 +68,7 @@ class SQLLoggerCollectorOptions extends AbstractOptions
      */
     public function setConfiguration($configuration)
     {
-        $this->configuration = $configuration ? (string) $configuration : null;
+        $this->configuration = $configuration ? (string)$configuration : null;
     }
 
     /**
@@ -86,7 +86,7 @@ class SQLLoggerCollectorOptions extends AbstractOptions
      */
     public function setSqlLogger($sqlLogger)
     {
-        $this->sqlLogger = $sqlLogger ? (string) $sqlLogger : null;
+        $this->sqlLogger = $sqlLogger ? (string)$sqlLogger : null;
     }
 
     /**

@@ -51,7 +51,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
         foreach ($accessors as $accessor) {
             $accessor .= $field;
 
-            if ( ! method_exists($object, $accessor)) {
+            if (!method_exists($object, $accessor)) {
                 continue;
             }
 
@@ -75,16 +75,16 @@ class ClosureExpressionVisitor extends ExpressionVisitor
     /**
      * Helper for sorting arrays of objects based on multiple fields + orientations.
      *
-     * @param string   $name
-     * @param int      $orientation
+     * @param string $name
+     * @param int $orientation
      * @param \Closure $next
      *
      * @return \Closure
      */
     public static function sortByField($name, $orientation = 1, \Closure $next = null)
     {
-        if ( ! $next) {
-            $next = function() {
+        if (!$next) {
+            $next = function () {
                 return 0;
             };
         }
@@ -147,7 +147,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
 
             case Comparison::NIN:
                 return function ($object) use ($field, $value) {
-                    return ! in_array(ClosureExpressionVisitor::getObjectFieldValue($object, $field), $value);
+                    return !in_array(ClosureExpressionVisitor::getObjectFieldValue($object, $field), $value);
                 };
 
             case Comparison::CONTAINS:
@@ -179,7 +179,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
             $expressionList[] = $this->dispatch($child);
         }
 
-        switch($expr->getType()) {
+        switch ($expr->getType()) {
             case CompositeExpression::TYPE_AND:
                 return $this->andExpressions($expressionList);
 
@@ -200,10 +200,11 @@ class ClosureExpressionVisitor extends ExpressionVisitor
     {
         return function ($object) use ($expressions) {
             foreach ($expressions as $expression) {
-                if ( ! $expression($object)) {
+                if (!$expression($object)) {
                     return false;
                 }
             }
+
             return true;
         };
     }
@@ -221,6 +222,7 @@ class ClosureExpressionVisitor extends ExpressionVisitor
                     return true;
                 }
             }
+
             return false;
         };
     }

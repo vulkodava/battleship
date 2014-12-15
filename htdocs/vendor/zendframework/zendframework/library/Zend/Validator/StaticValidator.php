@@ -41,13 +41,14 @@ class StaticValidator
         if (null === static::$plugins) {
             static::setPluginManager(new ValidatorPluginManager());
         }
+
         return static::$plugins;
     }
 
     /**
-     * @param  mixed    $value
-     * @param  string   $classBaseName
-     * @param  array    $args          OPTIONAL
+     * @param  mixed $value
+     * @param  string $classBaseName
+     * @param  array $args OPTIONAL
      * @return bool
      */
     public static function execute($value, $classBaseName, array $args = array())
@@ -55,6 +56,7 @@ class StaticValidator
         $plugins = static::getPluginManager();
 
         $validator = $plugins->get($classBaseName, $args);
+
         return $validator->isValid($value);
     }
 }

@@ -35,7 +35,7 @@ interface ObjectManager
      * This is just a convenient shortcut for getRepository($className)->find($id).
      *
      * @param string $className The class name of the object to find.
-     * @param mixed  $id        The identity of the object to find.
+     * @param mixed $id         The identity of the object to find.
      *
      * @return object The found object.
      */

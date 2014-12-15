@@ -49,6 +49,7 @@ class Session extends AbstractAdapter implements
         if (!$this->options) {
             $this->setOptions(new SessionOptions());
         }
+
         return $this->options;
     }
 
@@ -63,6 +64,7 @@ class Session extends AbstractAdapter implements
         if (!$sessionContainer) {
             throw new Exception\RuntimeException("No session container configured");
         }
+
         return $sessionContainer;
     }
 
@@ -76,7 +78,7 @@ class Session extends AbstractAdapter implements
     public function getIterator()
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if ($cntr->offsetExists($ns)) {
             $keys = array_keys($cntr->offsetGet($ns));
@@ -97,6 +99,7 @@ class Session extends AbstractAdapter implements
     public function flush()
     {
         $this->getSessionContainer()->exchangeArray(array());
+
         return true;
     }
 
@@ -110,19 +113,19 @@ class Session extends AbstractAdapter implements
      */
     public function clearByPrefix($prefix)
     {
-        $prefix = (string) $prefix;
+        $prefix = (string)$prefix;
         if ($prefix === '') {
             throw new Exception\InvalidArgumentException('No prefix given');
         }
 
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if (!$cntr->offsetExists($ns)) {
             return true;
         }
 
-        $data    = $cntr->offsetGet($ns);
+        $data = $cntr->offsetGet($ns);
         $prefixL = strlen($prefix);
         foreach ($data as $key => & $item) {
             if (substr($key, 0, $prefixL) === $prefix) {
@@ -139,29 +142,31 @@ class Session extends AbstractAdapter implements
     /**
      * Internal method to get an item.
      *
-     * @param  string  $normalizedKey
+     * @param  string $normalizedKey
      * @param  bool $success
-     * @param  mixed   $casToken
+     * @param  mixed $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $cntr    = $this->getSessionContainer();
-        $ns      = $this->getOptions()->getNamespace();
+        $cntr = $this->getSessionContainer();
+        $ns = $this->getOptions()->getNamespace();
 
         if (!$cntr->offsetExists($ns)) {
             $success = false;
+
             return null;
         }
 
-        $data    = $cntr->offsetGet($ns);
+        $data = $cntr->offsetGet($ns);
         $success = array_key_exists($normalizedKey, $data);
         if (!$success) {
             return null;
         }
 
         $casToken = $value = $data[$normalizedKey];
+
         return $value;
     }
 
@@ -175,13 +180,13 @@ class Session extends AbstractAdapter implements
     protected function internalGetItems(array & $normalizedKeys)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if (!$cntr->offsetExists($ns)) {
             return array();
         }
 
-        $data   = $cntr->offsetGet($ns);
+        $data = $cntr->offsetGet($ns);
         $result = array();
         foreach ($normalizedKeys as $normalizedKey) {
             if (array_key_exists($normalizedKey, $data)) {
@@ -201,13 +206,14 @@ class Session extends AbstractAdapter implements
     protected function internalHasItem(& $normalizedKey)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if (!$cntr->offsetExists($ns)) {
             return false;
         }
 
         $data = $cntr->offsetGet($ns);
+
         return array_key_exists($normalizedKey, $data);
     }
 
@@ -220,13 +226,13 @@ class Session extends AbstractAdapter implements
     protected function internalHasItems(array & $normalizedKeys)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if (!$cntr->offsetExists($ns)) {
             return array();
         }
 
-        $data   = $cntr->offsetGet($ns);
+        $data = $cntr->offsetGet($ns);
         $result = array();
         foreach ($normalizedKeys as $normalizedKey) {
             if (array_key_exists($normalizedKey, $data)) {
@@ -259,17 +265,18 @@ class Session extends AbstractAdapter implements
      * Internal method to store an item.
      *
      * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
         $data = $cntr->offsetExists($ns) ? $cntr->offsetGet($ns) : array();
         $data[$normalizedKey] = $value;
         $cntr->offsetSet($ns, $data);
+
         return true;
     }
 
@@ -283,7 +290,7 @@ class Session extends AbstractAdapter implements
     protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if ($cntr->offsetExists($ns)) {
             $data = array_merge($cntr->offsetGet($ns), $normalizedKeyValuePairs);
@@ -299,14 +306,14 @@ class Session extends AbstractAdapter implements
      * Add an item.
      *
      * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if ($cntr->offsetExists($ns)) {
             $data = $cntr->offsetGet($ns);
@@ -321,6 +328,7 @@ class Session extends AbstractAdapter implements
         }
 
         $cntr->offsetSet($ns, $data);
+
         return true;
     }
 
@@ -334,7 +342,7 @@ class Session extends AbstractAdapter implements
     protected function internalAddItems(array & $normalizedKeyValuePairs)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         $result = array();
         if ($cntr->offsetExists($ns)) {
@@ -352,6 +360,7 @@ class Session extends AbstractAdapter implements
         }
 
         $cntr->offsetSet($ns, $data);
+
         return $result;
     }
 
@@ -359,14 +368,14 @@ class Session extends AbstractAdapter implements
      * Internal method to replace an existing item.
      *
      * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if (!$cntr->offsetExists($ns)) {
             return false;
@@ -392,12 +401,12 @@ class Session extends AbstractAdapter implements
     protected function internalReplaceItems(array & $normalizedKeyValuePairs)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
         if (!$cntr->offsetExists($ns)) {
             return array_keys($normalizedKeyValuePairs);
         }
 
-        $data   = $cntr->offsetGet($ns);
+        $data = $cntr->offsetGet($ns);
         $result = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
             if (!array_key_exists($normalizedKey, $data)) {
@@ -421,7 +430,7 @@ class Session extends AbstractAdapter implements
     protected function internalRemoveItem(& $normalizedKey)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if (!$cntr->offsetExists($ns)) {
             return false;
@@ -447,14 +456,14 @@ class Session extends AbstractAdapter implements
      * Internal method to increment an item.
      *
      * @param  string $normalizedKey
-     * @param  int    $value
+     * @param  int $value
      * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if ($cntr->offsetExists($ns)) {
             $data = $cntr->offsetGet($ns);
@@ -463,15 +472,16 @@ class Session extends AbstractAdapter implements
         }
 
         if (array_key_exists($normalizedKey, $data)) {
-            $data[$normalizedKey]+= $value;
+            $data[$normalizedKey] += $value;
             $newValue = $data[$normalizedKey];
         } else {
             // initial value
-            $newValue             = $value;
+            $newValue = $value;
             $data[$normalizedKey] = $newValue;
         }
 
         $cntr->offsetSet($ns, $data);
+
         return $newValue;
     }
 
@@ -479,14 +489,14 @@ class Session extends AbstractAdapter implements
      * Internal method to decrement an item.
      *
      * @param  string $normalizedKey
-     * @param  int    $value
+     * @param  int $value
      * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
     {
         $cntr = $this->getSessionContainer();
-        $ns   = $this->getOptions()->getNamespace();
+        $ns = $this->getOptions()->getNamespace();
 
         if ($cntr->offsetExists($ns)) {
             $data = $cntr->offsetGet($ns);
@@ -495,15 +505,16 @@ class Session extends AbstractAdapter implements
         }
 
         if (array_key_exists($normalizedKey, $data)) {
-            $data[$normalizedKey]-= $value;
+            $data[$normalizedKey] -= $value;
             $newValue = $data[$normalizedKey];
         } else {
             // initial value
-            $newValue             = -$value;
+            $newValue = -$value;
             $data[$normalizedKey] = $newValue;
         }
 
         $cntr->offsetSet($ns, $data);
+
         return $newValue;
     }
 
@@ -523,19 +534,19 @@ class Session extends AbstractAdapter implements
                 $this->capabilityMarker,
                 array(
                     'supportedDatatypes' => array(
-                        'NULL'     => true,
-                        'boolean'  => true,
-                        'integer'  => true,
-                        'double'   => true,
-                        'string'   => true,
-                        'array'    => 'array',
-                        'object'   => 'object',
+                        'NULL' => true,
+                        'boolean' => true,
+                        'integer' => true,
+                        'double' => true,
+                        'string' => true,
+                        'array' => 'array',
+                        'object' => 'object',
                         'resource' => false,
                     ),
-                    'supportedMetadata'  => array(),
-                    'minTtl'             => 0,
-                    'maxKeyLength'       => 0,
-                    'namespaceIsPrefix'  => false,
+                    'supportedMetadata' => array(),
+                    'minTtl' => 0,
+                    'maxKeyLength' => 0,
+                    'namespaceIsPrefix' => false,
                     'namespaceSeparator' => '',
                 )
             );

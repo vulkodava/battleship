@@ -138,6 +138,7 @@ class SvgTest extends TestCommon
         $rootElement->setAttribute('width', 500);
         $rootElement->setAttribute('height', 300);
         $svg->appendChild($rootElement);
+
         return $this->renderer->setResource($svg);
     }
 }

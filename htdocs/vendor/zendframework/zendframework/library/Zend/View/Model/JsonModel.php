@@ -46,6 +46,7 @@ class JsonModel extends ViewModel
     public function setJsonpCallback($callback)
     {
         $this->jsonpCallback = $callback;
+
         return $this;
     }
 
@@ -62,8 +63,9 @@ class JsonModel extends ViewModel
         }
 
         if (null !== $this->jsonpCallback) {
-            return $this->jsonpCallback.'('.Json::encode($variables).');';
+            return $this->jsonpCallback . '(' . Json::encode($variables) . ');';
         }
+
         return Json::encode($variables);
     }
 }

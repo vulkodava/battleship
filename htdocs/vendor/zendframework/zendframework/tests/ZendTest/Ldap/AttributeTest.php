@@ -32,28 +32,28 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     protected function assertUtcDateTimeString($localTimestamp, $value)
     {
-        $localOffset  = date('Z', $localTimestamp);
+        $localOffset = date('Z', $localTimestamp);
         $utcTimestamp = $localTimestamp - $localOffset;
         $this->assertEquals(date('YmdHis', $utcTimestamp) . 'Z', $value);
     }
 
     public function testGetAttributeValue()
     {
-        $data  = array('uid' => array('value'));
+        $data = array('uid' => array('value'));
         $value = Attribute::getAttribute($data, 'uid', 0);
         $this->assertEquals('value', $value);
     }
 
     public function testGetNonExistentAttributeValue()
     {
-        $data  = array('uid' => array('value'));
+        $data = array('uid' => array('value'));
         $value = Attribute::getAttribute($data, 'uid', 1);
         $this->assertNull($value);
     }
 
     public function testGetNonExistentAttribute()
     {
-        $data  = array('uid' => array('value'));
+        $data = array('uid' => array('value'));
         $value = Attribute::getAttribute($data, 'uid2', 0);
         $this->assertNull($value);
         $array = Attribute::getAttribute($data, 'uid2');
@@ -63,7 +63,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetAttributeWithWrongIndexType()
     {
-        $data  = array('uid' => array('value'));
+        $data = array('uid' => array('value'));
         $value = Attribute::getAttribute($data, 'uid', 'index');
         $this->assertNull($value);
         $value = Attribute::getAttribute($data, 'uid', 3.1415);
@@ -72,7 +72,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetAttributeArray()
     {
-        $data  = array('uid' => array('value'));
+        $data = array('uid' => array('value'));
         $value = Attribute::getAttribute($data, 'uid');
         $this->assertInternalType('array', $value);
         $this->assertEquals(1, count($value));
@@ -115,7 +115,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     public function testBooleanAttributeHandling()
     {
         $data = array(
-            'p1_true'  => array('TRUE'),
+            'p1_true' => array('TRUE'),
             'p1_false' => array('FALSE')
         );
         Attribute::setAttribute($data, 'p2_true', true);
@@ -203,8 +203,8 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAttributeWithObject()
     {
-        $data      = array();
-        $object    = new \stdClass();
+        $data = array();
+        $object = new \stdClass();
         $object->a = 1;
         $object->b = 1.23;
         $object->c = 'string';
@@ -214,7 +214,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAttributeWithFilestream()
     {
-        $data   = array();
+        $data = array();
         $stream = fopen(__DIR__ . '/_files/AttributeTest.input.txt', 'r');
         Attribute::setAttribute($data, 'file', $stream);
         fclose($stream);
@@ -223,7 +223,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDateTimeValueLocal()
     {
-        $ts   = mktime(12, 30, 30, 6, 25, 2008);
+        $ts = mktime(12, 30, 30, 6, 25, 2008);
         $data = array();
         Attribute::setDateTimeAttribute($data, 'ts', $ts, false);
         $this->assertLocalDateTimeString($ts, $data['ts'][0]);
@@ -231,7 +231,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDateTimeValueUtc()
     {
-        $ts   = mktime(12, 30, 30, 6, 25, 2008);
+        $ts = mktime(12, 30, 30, 6, 25, 2008);
         $data = array();
         Attribute::setDateTimeAttribute($data, 'ts', $ts, true);
         $this->assertUtcDateTimeString($ts, $data['ts'][0]);
@@ -239,7 +239,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDateTimeValueLocalArray()
     {
-        $ts   = array();
+        $ts = array();
         $ts[] = mktime(12, 30, 30, 6, 25, 2008);
         $ts[] = mktime(1, 25, 30, 1, 2, 2008);
         $data = array();
@@ -250,7 +250,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDateTimeValueIllegal()
     {
-        $ts   = 'dummy';
+        $ts = 'dummy';
         $data = array();
         Attribute::setDateTimeAttribute($data, 'ts', $ts, false);
         $this->assertEquals(0, count($data['ts']));
@@ -258,7 +258,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDateTimeValueFromLocal()
     {
-        $ts   = mktime(12, 30, 30, 6, 25, 2008);
+        $ts = mktime(12, 30, 30, 6, 25, 2008);
         $data = array();
         Attribute::setDateTimeAttribute($data, 'ts', $ts, false);
         $this->assertLocalDateTimeString($ts, $data['ts'][0]);
@@ -268,7 +268,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDateTimeValueFromUtc()
     {
-        $ts   = mktime(12, 30, 30, 6, 25, 2008);
+        $ts = mktime(12, 30, 30, 6, 25, 2008);
         $data = array();
         Attribute::setDateTimeAttribute($data, 'ts', $ts, true);
         $this->assertUtcDateTimeString($ts, $data['ts'][0]);
@@ -278,7 +278,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDateTimeValueFromArray()
     {
-        $ts   = array();
+        $ts = array();
         $ts[] = mktime(12, 30, 30, 6, 25, 2008);
         $ts[] = mktime(1, 25, 30, 1, 2, 2008);
         $data = array();
@@ -292,23 +292,23 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDateTimeValueIllegal()
     {
-        $data  = array('ts' => array('dummy'));
+        $data = array('ts' => array('dummy'));
         $retTs = Attribute::getDateTimeAttribute($data, 'ts', 0);
         $this->assertEquals('dummy', $retTs);
     }
 
     public function testGetDateTimeValueNegativeOffet()
     {
-        $data      = array('ts' => array('20080612143045-0700'));
-        $retTs     = Attribute::getDateTimeAttribute($data, 'ts', 0);
+        $data = array('ts' => array('20080612143045-0700'));
+        $retTs = Attribute::getDateTimeAttribute($data, 'ts', 0);
         $tsCompare = gmmktime(21, 30, 45, 6, 12, 2008);
         $this->assertEquals($tsCompare, $retTs);
     }
 
     public function testGetDateTimeValueNegativeOffet2()
     {
-        $data      = array('ts' => array('20080612143045-0715'));
-        $retTs     = Attribute::getDateTimeAttribute($data, 'ts', 0);
+        $data = array('ts' => array('20080612143045-0715'));
+        $retTs = Attribute::getDateTimeAttribute($data, 'ts', 0);
         $tsCompare = gmmktime(21, 45, 45, 6, 12, 2008);
         $this->assertEquals($tsCompare, $retTs);
     }
@@ -387,7 +387,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveDuplicates()
     {
-        $data     = array(
+        $data = array(
             'strings1' => array('value1', 'value2', 'value2', 'value3'),
             'strings2' => array('value1', 'value2', 'value3', 'value4'),
             'boolean1' => array('TRUE', 'TRUE', 'TRUE', 'TRUE'),
@@ -450,9 +450,9 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     public function testPasswordGenerationSSHA()
     {
         $password = 'pa$$w0rd';
-        $ssha     = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SSHA);
-        $encoded  = substr($ssha, strpos($ssha, '}'));
-        $binary   = base64_decode($encoded);
+        $ssha = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SSHA);
+        $encoded = substr($ssha, strpos($ssha, '}'));
+        $binary = base64_decode($encoded);
         $this->assertEquals(24, strlen($binary));
         $hash = substr($binary, 0, 20);
         $salt = substr($binary, 20);
@@ -463,9 +463,9 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     public function testPasswordGenerationSHA()
     {
         $password = 'pa$$w0rd';
-        $sha      = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SHA);
-        $encoded  = substr($sha, strpos($sha, '}'));
-        $binary   = base64_decode($encoded);
+        $sha = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SHA);
+        $encoded = substr($sha, strpos($sha, '}'));
+        $binary = base64_decode($encoded);
         $this->assertEquals(20, strlen($binary));
         $this->assertEquals(sha1($password, true), $binary);
     }
@@ -473,9 +473,9 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     public function testPasswordGenerationSMD5()
     {
         $password = 'pa$$w0rd';
-        $smd5     = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SMD5);
-        $encoded  = substr($smd5, strpos($smd5, '}'));
-        $binary   = base64_decode($encoded);
+        $smd5 = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SMD5);
+        $encoded = substr($smd5, strpos($smd5, '}'));
+        $binary = base64_decode($encoded);
         $this->assertEquals(20, strlen($binary));
         $hash = substr($binary, 0, 16);
         $salt = substr($binary, 16);
@@ -486,16 +486,16 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     public function testPasswordGenerationMD5()
     {
         $password = 'pa$$w0rd';
-        $md5      = Attribute::createPassword($password, Attribute::PASSWORD_HASH_MD5);
-        $encoded  = substr($md5, strpos($md5, '}'));
-        $binary   = base64_decode($encoded);
+        $md5 = Attribute::createPassword($password, Attribute::PASSWORD_HASH_MD5);
+        $encoded = substr($md5, strpos($md5, '}'));
+        $binary = base64_decode($encoded);
         $this->assertEquals(16, strlen($binary));
         $this->assertEquals(md5($password, true), $binary);
     }
 
     public function testPasswordGenerationUnicodePwd()
     {
-        $password   = 'new';
+        $password = 'new';
         $unicodePwd = Attribute::createPassword($password, Attribute::PASSWORD_UNICODEPWD);
         $this->assertEquals(10, strlen($unicodePwd));
         $this->assertEquals("\x22\x00\x6E\x00\x65\x00\x77\x00\x22\x00", $unicodePwd);

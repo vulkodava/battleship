@@ -21,8 +21,8 @@ class DiServiceFactory extends Di implements FactoryInterface
      * constants
      */
     const USE_SL_BEFORE_DI = 'before';
-    const USE_SL_AFTER_DI  = 'after';
-    const USE_SL_NONE      = 'none';
+    const USE_SL_AFTER_DI = 'after';
+    const USE_SL_NONE = 'none';
     /**@#-*/
 
     /**
@@ -81,6 +81,7 @@ class DiServiceFactory extends Di implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
+
         return $this->get($this->name, $this->parameters);
     }
 
@@ -101,6 +102,7 @@ class DiServiceFactory extends Di implements FactoryInterface
 
         try {
             $service = parent::get($name, $params);
+
             return $service;
         } catch (DiClassNotFoundException $e) {
             // allow this di service to get dependencies from the service locator AFTER trying di

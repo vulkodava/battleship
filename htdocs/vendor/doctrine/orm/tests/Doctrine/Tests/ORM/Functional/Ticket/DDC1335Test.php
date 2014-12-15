@@ -20,25 +20,25 @@ class DDC1335Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC1335Phone'),
             ));
             $this->loadFixture();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
 
     public function testDql()
     {
-        $dql      = 'SELECT u FROM ' . __NAMESPACE__ . '\DDC1335User u INDEX BY u.id';
-        $query    = $this->_em->createQuery($dql);
-        $result   = $query->getResult();
+        $dql = 'SELECT u FROM ' . __NAMESPACE__ . '\DDC1335User u INDEX BY u.id';
+        $query = $this->_em->createQuery($dql);
+        $result = $query->getResult();
 
         $this->assertEquals(sizeof($result), 3);
         $this->assertArrayHasKey(1, $result);
         $this->assertArrayHasKey(2, $result);
         $this->assertArrayHasKey(3, $result);
 
-        $dql      = 'SELECT u, p FROM '.__NAMESPACE__ . '\DDC1335User u INDEX BY u.email INNER JOIN u.phones p INDEX BY p.id';
-        $query    = $this->_em->createQuery($dql);
-        $result   = $query->getResult();
+        $dql = 'SELECT u, p FROM ' . __NAMESPACE__ . '\DDC1335User u INDEX BY u.email INNER JOIN u.phones p INDEX BY p.id';
+        $query = $this->_em->createQuery($dql);
+        $result = $query->getResult();
 
         $this->assertEquals(sizeof($result), 3);
         $this->assertArrayHasKey('foo@foo.com', $result);
@@ -71,7 +71,7 @@ class DDC1335Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $builder = $this->_em->createQueryBuilder();
         $builder->select('u')->from(__NAMESPACE__ . '\DDC1335User', 'u', 'u.id');
 
-        $dql    = $builder->getQuery()->getDQL();
+        $dql = $builder->getQuery()->getDQL();
         $result = $builder->getQuery()->getResult();
 
         $this->assertEquals(sizeof($result), 3);
@@ -86,7 +86,7 @@ class DDC1335Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $builder = $this->_em->createQueryBuilder();
         $builder->select('u')->from(__NAMESPACE__ . '\DDC1335User', 'u', 'u.email');
 
-        $dql    = $builder->getQuery()->getDQL();
+        $dql = $builder->getQuery()->getDQL();
         $result = $builder->getQuery()->getResult();
 
         $this->assertEquals(sizeof($result), 3);
@@ -99,11 +99,11 @@ class DDC1335Test extends \Doctrine\Tests\OrmFunctionalTestCase
     public function  testIndexWithJoin()
     {
         $builder = $this->_em->createQueryBuilder();
-        $builder->select('u','p')
-                ->from(__NAMESPACE__ . '\DDC1335User', 'u', 'u.email')
-                ->join('u.phones', 'p', null, null, 'p.id');
+        $builder->select('u', 'p')
+            ->from(__NAMESPACE__ . '\DDC1335User', 'u', 'u.email')
+            ->join('u.phones', 'p', null, null, 'p.id');
 
-        $dql    = $builder->getQuery()->getDQL();
+        $dql = $builder->getQuery()->getDQL();
         $result = $builder->getQuery()->getResult();
 
         $this->assertEquals(sizeof($result), 3);
@@ -127,18 +127,18 @@ class DDC1335Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertArrayHasKey(8, $result['foobar@foobar.com']->phones->toArray());
         $this->assertArrayHasKey(9, $result['foobar@foobar.com']->phones->toArray());
 
-        $this->assertEquals('SELECT u, p FROM '.__NAMESPACE__ . '\DDC1335User u INDEX BY u.email INNER JOIN u.phones p INDEX BY p.id', $dql);
+        $this->assertEquals('SELECT u, p FROM ' . __NAMESPACE__ . '\DDC1335User u INDEX BY u.email INNER JOIN u.phones p INDEX BY p.id', $dql);
     }
 
     private function loadFixture()
     {
-        $p1 = array('11 xxxx-xxxx','11 yyyy-yyyy','11 zzzz-zzzz');
-        $p2 = array('22 xxxx-xxxx','22 yyyy-yyyy','22 zzzz-zzzz');
-        $p3 = array('33 xxxx-xxxx','33 yyyy-yyyy','33 zzzz-zzzz');
+        $p1 = array('11 xxxx-xxxx', '11 yyyy-yyyy', '11 zzzz-zzzz');
+        $p2 = array('22 xxxx-xxxx', '22 yyyy-yyyy', '22 zzzz-zzzz');
+        $p3 = array('33 xxxx-xxxx', '33 yyyy-yyyy', '33 zzzz-zzzz');
 
-        $u1 = new DDC1335User("foo@foo.com", "Foo",$p1);
-        $u2 = new DDC1335User("bar@bar.com", "Bar",$p2);
-        $u3 = new DDC1335User("foobar@foobar.com", "Foo Bar",$p3);
+        $u1 = new DDC1335User("foo@foo.com", "Foo", $p1);
+        $u2 = new DDC1335User("bar@bar.com", "Bar", $p2);
+        $u3 = new DDC1335User("foobar@foobar.com", "Foo Bar", $p3);
 
         $this->_em->persist($u1);
         $this->_em->persist($u2);
@@ -177,12 +177,12 @@ class DDC1335User
 
     public function __construct($email, $name, array $numbers = array())
     {
-        $this->name   = $name;
-        $this->email  = $email;
+        $this->name = $name;
+        $this->email = $email;
         $this->phones = new \Doctrine\Common\Collections\ArrayCollection();
 
         foreach ($numbers as $number) {
-            $this->phones->add(new DDC1335Phone($this,$number));
+            $this->phones->add(new DDC1335Phone($this, $number));
         }
     }
 }
@@ -212,7 +212,7 @@ class DDC1335Phone
 
     public function __construct($user, $number)
     {
-        $this->user     = $user;
-        $this->numericalValue   = $number;
+        $this->user = $user;
+        $this->numericalValue = $number;
     }
 }

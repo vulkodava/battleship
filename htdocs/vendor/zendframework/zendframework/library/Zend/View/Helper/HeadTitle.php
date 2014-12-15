@@ -65,11 +65,11 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     {
         if (null === $setType) {
             $setType = (null === $this->getDefaultAttachOrder())
-                     ? Placeholder\Container\AbstractContainer::APPEND
-                     : $this->getDefaultAttachOrder();
+                ? Placeholder\Container\AbstractContainer::APPEND
+                : $this->getDefaultAttachOrder();
         }
 
-        $title = (string) $title;
+        $title = (string)$title;
         if ($title !== '') {
             if ($setType == Placeholder\Container\AbstractContainer::SET) {
                 $this->set($title);
@@ -92,8 +92,8 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     public function toString($indent = null)
     {
         $indent = (null !== $indent)
-                ? $this->getWhitespace($indent)
-                : $this->getIndent();
+            ? $this->getWhitespace($indent)
+            : $this->getIndent();
 
         $output = $this->renderTitle();
 
@@ -124,7 +124,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
 
         $prefix = $this->getPrefix();
         if ($prefix) {
-            $output  .= $prefix;
+            $output .= $prefix;
         }
 
         $output .= implode($separator, $items);
@@ -152,7 +152,8 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
             Placeholder\Container\AbstractContainer::APPEND,
             Placeholder\Container\AbstractContainer::SET,
             Placeholder\Container\AbstractContainer::PREPEND
-        ))) {
+        ))
+        ) {
             throw new Exception\DomainException(
                 "You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'"
             );
@@ -179,7 +180,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
      *
      * @param  Translator $translator  [optional] translator.
      *                                 Default is null, which sets no translator.
-     * @param  string     $textDomain  [optional] text domain
+     * @param  string $textDomain      [optional] text domain
      *                                 Default is null, which skips setTranslatorTextDomain
      * @return HeadTitle
      */
@@ -189,6 +190,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
         if (null !== $textDomain) {
             $this->setTranslatorTextDomain($textDomain);
         }
+
         return $this;
     }
 
@@ -199,7 +201,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
      */
     public function getTranslator()
     {
-        if (! $this->isTranslatorEnabled()) {
+        if (!$this->isTranslatorEnabled()) {
             return null;
         }
 
@@ -213,7 +215,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
      */
     public function hasTranslator()
     {
-        return (bool) $this->getTranslator();
+        return (bool)$this->getTranslator();
     }
 
     /**
@@ -225,7 +227,8 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
      */
     public function setTranslatorEnabled($enabled = true)
     {
-        $this->translatorEnabled = (bool) $enabled;
+        $this->translatorEnabled = (bool)$enabled;
+
         return $this;
     }
 
@@ -248,6 +251,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     public function setTranslatorTextDomain($textDomain = 'default')
     {
         $this->translatorTextDomain = $textDomain;
+
         return $this;
     }
 

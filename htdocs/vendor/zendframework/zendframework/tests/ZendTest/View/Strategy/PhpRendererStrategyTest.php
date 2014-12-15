@@ -22,7 +22,7 @@ class PhpRendererStrategyTest extends TestCase
     {
         $this->renderer = new PhpRenderer;
         $this->strategy = new PhpRendererStrategy($this->renderer);
-        $this->event    = new ViewEvent();
+        $this->event = new ViewEvent();
         $this->response = new HttpResponse();
     }
 
@@ -60,7 +60,7 @@ class PhpRendererStrategyTest extends TestCase
         $this->renderer->placeholder('content')->set('Content');
         $event = new ViewEvent();
         $event->setResponse($this->response)
-              ->setRenderer($this->renderer);
+            ->setRenderer($this->renderer);
 
         $this->strategy->injectResponse($event);
         $content = $this->response->getContent();
@@ -73,7 +73,7 @@ class PhpRendererStrategyTest extends TestCase
         $this->renderer->placeholder('content')->set('Content');
         $event = new ViewEvent();
         $event->setResponse($this->response)
-              ->setRenderer($this->renderer);
+            ->setRenderer($this->renderer);
 
         $this->strategy->injectResponse($event);
         $content = $this->response->getContent();
@@ -86,8 +86,8 @@ class PhpRendererStrategyTest extends TestCase
         $this->renderer->placeholder('content')->set('Content');
         $event = new ViewEvent();
         $event->setResponse($this->response)
-              ->setRenderer($this->renderer)
-              ->setResult('Result Content');
+            ->setRenderer($this->renderer)
+            ->setResult('Result Content');
 
         $this->strategy->injectResponse($event);
         $content = $this->response->getContent();
@@ -111,10 +111,10 @@ class PhpRendererStrategyTest extends TestCase
         $events->attachAggregate($this->strategy);
 
         foreach (array('renderer' => 'selectRenderer', 'response' => 'injectResponse') as $event => $method) {
-            $listeners        = $events->getListeners($event);
+            $listeners = $events->getListeners($event);
             $expectedCallback = array($this->strategy, $method);
             $expectedPriority = 1;
-            $found            = false;
+            $found = false;
             foreach ($listeners as $listener) {
                 $callback = $listener->getCallback();
                 if ($callback === $expectedCallback) {
@@ -134,10 +134,10 @@ class PhpRendererStrategyTest extends TestCase
         $events->attachAggregate($this->strategy, 100);
 
         foreach (array('renderer' => 'selectRenderer', 'response' => 'injectResponse') as $event => $method) {
-            $listeners        = $events->getListeners($event);
+            $listeners = $events->getListeners($event);
             $expectedCallback = array($this->strategy, $method);
             $expectedPriority = 100;
-            $found            = false;
+            $found = false;
             foreach ($listeners as $listener) {
                 $callback = $listener->getCallback();
                 if ($callback === $expectedCallback) {

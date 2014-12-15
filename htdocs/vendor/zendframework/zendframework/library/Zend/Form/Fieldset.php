@@ -26,12 +26,12 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * @var ElementInterface[]
      */
-    protected $byName    = array();
+    protected $byName = array();
 
     /**
      * @var array
      */
-    protected $elements  = array();
+    protected $elements = array();
 
     /**
      * @var array
@@ -41,7 +41,7 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * @var array
      */
-    protected $messages  = array();
+    protected $messages = array();
 
     /**
      * @var PriorityQueue
@@ -77,8 +77,8 @@ class Fieldset extends Element implements FieldsetInterface
     protected $allowedObjectBindingClass;
 
     /**
-     * @param  null|int|string  $name    Optional name for the element
-     * @param  array            $options Optional options for the element
+     * @param  null|int|string $name Optional name for the element
+     * @param  array $options        Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -118,6 +118,7 @@ class Fieldset extends Element implements FieldsetInterface
     public function setFormFactory(Factory $factory)
     {
         $this->factory = $factory;
+
         return $this;
     }
 
@@ -145,7 +146,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * @todo   Should we detect if the element/fieldset name conflicts?
      * @param  array|Traversable|ElementInterface $elementOrFieldset
-     * @param  array                              $flags
+     * @param  array $flags
      * @return Fieldset|FieldsetInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -193,10 +194,12 @@ class Fieldset extends Element implements FieldsetInterface
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
             $this->fieldsets[$name] = $elementOrFieldset;
+
             return $this;
         }
 
         $this->elements[$name] = $elementOrFieldset;
+
         return $this;
     }
 
@@ -225,6 +228,7 @@ class Fieldset extends Element implements FieldsetInterface
                 $elementOrFieldset
             ));
         }
+
         return $this->byName[$elementOrFieldset];
     }
 
@@ -247,10 +251,12 @@ class Fieldset extends Element implements FieldsetInterface
 
         if ($entry instanceof FieldsetInterface) {
             unset($this->fieldsets[$elementOrFieldset]);
+
             return $this;
         }
 
         unset($this->elements[$elementOrFieldset]);
+
         return $this;
     }
 
@@ -266,6 +272,7 @@ class Fieldset extends Element implements FieldsetInterface
         $element = $this->get($elementOrFieldset);
         $this->remove($elementOrFieldset);
         $this->add($element, array('priority' => $priority));
+
         return $this;
     }
 
@@ -340,11 +347,13 @@ class Fieldset extends Element implements FieldsetInterface
                 $messageSet = $element->getMessages();
                 if (!is_array($messageSet)
                     && !$messageSet instanceof Traversable
-                    || empty($messageSet)) {
+                    || empty($messageSet)
+                ) {
                     continue;
                 }
                 $messages[$name] = $messageSet;
             }
+
             return $messages;
         }
 
@@ -357,6 +366,7 @@ class Fieldset extends Element implements FieldsetInterface
         }
 
         $element = $this->get($elementName);
+
         return $element->getMessages();
     }
 
@@ -464,6 +474,7 @@ class Fieldset extends Element implements FieldsetInterface
         }
 
         $this->object = $object;
+
         return $this;
     }
 
@@ -527,6 +538,7 @@ class Fieldset extends Element implements FieldsetInterface
     public function setHydrator(HydratorInterface $hydrator)
     {
         $this->hydrator = $hydrator;
+
         return $this;
     }
 
@@ -549,6 +561,7 @@ class Fieldset extends Element implements FieldsetInterface
                 $this->setHydrator(new Hydrator\ArraySerializable());
             }
         }
+
         return $this->hydrator;
     }
 
@@ -608,7 +621,8 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function setUseAsBaseFieldset($useAsBaseFieldset)
     {
-        $this->useAsBaseFieldset = (bool) $useAsBaseFieldset;
+        $this->useAsBaseFieldset = (bool)$useAsBaseFieldset;
+
         return $this;
     }
 
@@ -671,10 +685,10 @@ class Fieldset extends Element implements FieldsetInterface
     {
         $items = $this->iterator->toArray(PriorityQueue::EXTR_BOTH);
 
-        $this->byName    = array();
-        $this->elements  = array();
+        $this->byName = array();
+        $this->elements = array();
         $this->fieldsets = array();
-        $this->iterator  = new PriorityQueue();
+        $this->iterator = new PriorityQueue();
 
         foreach ($items as $item) {
             $elementOrFieldset = clone $item['data'];

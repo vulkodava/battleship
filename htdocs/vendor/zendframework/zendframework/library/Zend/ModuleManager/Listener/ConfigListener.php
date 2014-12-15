@@ -27,7 +27,7 @@ class ConfigListener extends AbstractListener implements
     ListenerAggregateInterface
 {
     const STATIC_PATH = 'static_path';
-    const GLOB_PATH   = 'glob_path';
+    const GLOB_PATH = 'glob_path';
 
     /**
      * @var array
@@ -91,6 +91,7 @@ class ConfigListener extends AbstractListener implements
         $this->callbacks[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
         $this->callbacks[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModules'), -1000);
         $this->callbacks[] = $events->attach(ModuleEvent::EVENT_MERGE_CONFIG, array($this, 'onMergeConfig'), 1000);
+
         return $this;
     }
 
@@ -203,6 +204,7 @@ class ConfigListener extends AbstractListener implements
             if ($this->mergedConfigObject === null) {
                 $this->mergedConfigObject = new Config($this->mergedConfig);
             }
+
             return $this->mergedConfigObject;
         }
 
@@ -219,6 +221,7 @@ class ConfigListener extends AbstractListener implements
     {
         $this->mergedConfig = $config;
         $this->mergedConfigObject = null;
+
         return $this;
     }
 
@@ -231,6 +234,7 @@ class ConfigListener extends AbstractListener implements
     public function addConfigGlobPaths($globPaths)
     {
         $this->addConfigPaths($globPaths, self::GLOB_PATH);
+
         return $this;
     }
 
@@ -243,6 +247,7 @@ class ConfigListener extends AbstractListener implements
     public function addConfigGlobPath($globPath)
     {
         $this->addConfigPath($globPath, self::GLOB_PATH);
+
         return $this;
     }
 
@@ -255,6 +260,7 @@ class ConfigListener extends AbstractListener implements
     public function addConfigStaticPaths($staticPaths)
     {
         $this->addConfigPaths($staticPaths, self::STATIC_PATH);
+
         return $this;
     }
 
@@ -267,6 +273,7 @@ class ConfigListener extends AbstractListener implements
     public function addConfigStaticPath($staticPath)
     {
         $this->addConfigPath($staticPath, self::STATIC_PATH);
+
         return $this;
     }
 
@@ -323,6 +330,7 @@ class ConfigListener extends AbstractListener implements
             );
         }
         $this->paths[] = array('type' => $type, 'path' => $path);
+
         return $this;
     }
 
@@ -391,6 +399,7 @@ class ConfigListener extends AbstractListener implements
         ) {
             return true;
         }
+
         return false;
     }
 

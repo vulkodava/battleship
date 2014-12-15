@@ -105,7 +105,7 @@ class FigletTest extends CommonWordTest
     public function testWordValidates()
     {
         $this->captcha->generate();
-        $input = array('id' => $this->captcha->getId() , 'input' => $this->captcha->getWord());
+        $input = array('id' => $this->captcha->getId(), 'input' => $this->captcha->getWord());
         $this->assertTrue($this->captcha->isValid($input));
     }
 
@@ -133,12 +133,12 @@ class FigletTest extends CommonWordTest
     public function testCaptchaShouldBeConfigurableViaTraversableObject()
     {
         $options = array(
-            'name'         => 'foo',
+            'name' => 'foo',
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-            'wordLen'      => 6,
-            'timeout'      => 300,
+            'wordLen' => 6,
+            'timeout' => 300,
         );
-        $config  = new ArrayObject($options);
+        $config = new ArrayObject($options);
         $captcha = new FigletCaptcha($config);
         $test = $captcha->getOptions();
         $this->assertEquals($options, $test);
@@ -147,7 +147,7 @@ class FigletTest extends CommonWordTest
     public function testShouldAllowFigletsLargerThanFourteenCharacters()
     {
         $this->captcha->setName('foo')
-                      ->setWordLen(14);
+            ->setWordLen(14);
         $id = $this->captcha->generate();
     }
 
@@ -155,8 +155,8 @@ class FigletTest extends CommonWordTest
     {
         // Regression Test for ZF-4245
         $this->captcha->setName('foo')
-                      ->setWordLen(6)
-                      ->setTimeout(300);
+            ->setWordLen(6)
+            ->setTimeout(300);
         $id = $this->captcha->generate();
 
         // Unset the generated word
@@ -164,8 +164,8 @@ class FigletTest extends CommonWordTest
         $this->captcha->getSession()->word = null;
         $this->setUp();
         $this->captcha->setName('foo')
-                      ->setWordLen(6)
-                      ->setTimeout(300);
+            ->setWordLen(6)
+            ->setTimeout(300);
         $empty = array($this->captcha->getName() => array('id' => $id, 'input' => ''));
         $this->assertEquals(false, $this->captcha->isValid(null, $empty));
     }

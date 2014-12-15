@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -86,24 +86,24 @@ class RouteTest extends PHPUnit_Framework_TestCase
     {
         $controller = new Route(
             array(
-                 array(
-                     'route' => 'test/route',
-                     'roles' => array(
-                         'admin',
-                         'user',
-                     ),
-                 ),
-                 array(
-                     'route' => 'test2-route',
-                     'roles' => array(
-                         'admin2',
-                         'user2',
-                     ),
-                 ),
-                 array(
-                     'route' => 'test3-route',
-                     'roles' => 'admin3'
-                 ),
+                array(
+                    'route' => 'test/route',
+                    'roles' => array(
+                        'admin',
+                        'user',
+                    ),
+                ),
+                array(
+                    'route' => 'test2-route',
+                    'roles' => array(
+                        'admin2',
+                        'user2',
+                    ),
+                ),
+                array(
+                    'route' => 'test3-route',
+                    'roles' => 'admin3'
+                ),
             ),
             $this->serviceLocator
         );
@@ -193,10 +193,10 @@ class RouteTest extends PHPUnit_Framework_TestCase
     private function createMvcEvent($route = null)
     {
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
-        $application  = $this->getMock('Zend\\Mvc\\Application', array(), array(), '', false);
-        $event        = $this->getMock('Zend\\Mvc\\MvcEvent');
-        $routeMatch   = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
-        $request      = $this->getMock('Zend\\Http\\Request');
+        $application = $this->getMock('Zend\\Mvc\\Application', array(), array(), '', false);
+        $event = $this->getMock('Zend\\Mvc\\MvcEvent');
+        $routeMatch = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
+        $request = $this->getMock('Zend\\Http\\Request');
 
         $event->expects($this->any())->method('getRouteMatch')->will($this->returnValue($routeMatch));
         $event->expects($this->any())->method('getRequest')->will($this->returnValue($request));

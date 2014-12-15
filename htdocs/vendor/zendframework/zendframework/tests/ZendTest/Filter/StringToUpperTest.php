@@ -44,7 +44,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'STRING' => 'STRING',
             'ABC1@3' => 'ABC1@3',
-            'A b C'  => 'A B C'
+            'A b C' => 'A B C'
         );
 
         foreach ($valuesExpected as $input => $output) {
@@ -62,8 +62,8 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $valuesExpected = array(
-            'ü'     => 'Ü',
-            'ñ'     => 'Ñ',
+            'ü' => 'Ü',
+            'ñ' => 'Ñ',
             'üñ123' => 'ÜÑ123'
         );
 
@@ -96,8 +96,8 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
     public function testInitiationWithEncoding()
     {
         $valuesExpected = array(
-            'ü'     => 'Ü',
-            'ñ'     => 'Ñ',
+            'ü' => 'Ü',
+            'ñ' => 'Ñ',
             'üñ123' => 'ÜÑ123'
         );
 
@@ -112,14 +112,14 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @ZF-9058
+     * @ZF-9058
      */
     public function testCaseInsensitiveEncoding()
     {
         $filter = $this->_filter;
         $valuesExpected = array(
-            'ü'     => 'Ü',
-            'ñ'     => 'Ñ',
+            'ü' => 'Ü',
+            'ñ' => 'Ñ',
             'üñ123' => 'ÜÑ123'
         );
 

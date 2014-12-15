@@ -208,7 +208,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public static function setDefaultItemCountPerPage($count)
     {
-        static::$defaultItemCountPerPage = (int) $count;
+        static::$defaultItemCountPerPage = (int)$count;
     }
 
     /**
@@ -291,7 +291,7 @@ class Paginator implements Countable, IteratorAggregate
             $setupMethods = array('ItemCountPerPage', 'PageRange');
 
             foreach ($setupMethods as $setupMethod) {
-                $key   = strtolower($setupMethod);
+                $key = strtolower($setupMethod);
                 $value = isset($config[$key]) ? $config[$key] : null;
 
                 if ($value != null) {
@@ -311,6 +311,7 @@ class Paginator implements Countable, IteratorAggregate
     {
         try {
             $return = $this->render();
+
             return $return;
         } catch (\Exception $e) {
             trigger_error($e->getMessage(), E_USER_WARNING);
@@ -327,7 +328,8 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function setCacheEnabled($enable)
     {
-        $this->cacheEnabled = (bool) $enable;
+        $this->cacheEnabled = (bool)$enable;
+
         return $this;
     }
 
@@ -368,7 +370,7 @@ class Paginator implements Countable, IteratorAggregate
         }
 
         if (null === $pageNumber) {
-            $prefixLength  = strlen(self::CACHE_TAG_PREFIX);
+            $prefixLength = strlen(self::CACHE_TAG_PREFIX);
             $cacheIterator = static::$cache->getIterator();
             $cacheIterator->setMode(CacheIterator::CURRENT_AS_KEY);
             foreach ($cacheIterator as $key) {
@@ -383,6 +385,7 @@ class Paginator implements Countable, IteratorAggregate
             $cleanId = $this->_getCacheId($pageNumber);
             static::$cache->removeItem($cleanId);
         }
+
         return $this;
     }
 
@@ -390,7 +393,7 @@ class Paginator implements Countable, IteratorAggregate
      * Returns the absolute item number for the specified item.
      *
      * @param  int $relativeItemNumber Relative item number
-     * @param  int $pageNumber Page number
+     * @param  int $pageNumber         Page number
      * @return int
      */
     public function getAbsoluteItemNumber($relativeItemNumber, $pageNumber = null)
@@ -462,9 +465,9 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function setCurrentPageNumber($pageNumber)
     {
-        $this->currentPageNumber = (int) $pageNumber;
-        $this->currentItems      = null;
-        $this->currentItemCount  = null;
+        $this->currentPageNumber = (int)$pageNumber;
+        $this->currentItems = null;
+        $this->currentItemCount = null;
 
         return $this;
     }
@@ -553,12 +556,12 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function setItemCountPerPage($itemCountPerPage = -1)
     {
-        $this->itemCountPerPage = (int) $itemCountPerPage;
+        $this->itemCountPerPage = (int)$itemCountPerPage;
         if ($this->itemCountPerPage < 1) {
             $this->itemCountPerPage = $this->getTotalItemCount();
         }
-        $this->pageCount        = $this->_calculatePageCount();
-        $this->currentItems     = null;
+        $this->pageCount = $this->_calculatePageCount();
+        $this->currentItems = null;
         $this->currentItemCount = null;
 
         return $this;
@@ -656,7 +659,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function setPageRange($pageRange)
     {
-        $this->pageRange = (int) $pageRange;
+        $this->pageRange = (int)$pageRange;
 
         return $this;
     }
@@ -706,18 +709,19 @@ class Paginator implements Countable, IteratorAggregate
     {
         $data = array();
         if ($this->cacheEnabled()) {
-            $prefixLength  = strlen(self::CACHE_TAG_PREFIX);
+            $prefixLength = strlen(self::CACHE_TAG_PREFIX);
             $cacheIterator = static::$cache->getIterator();
             $cacheIterator->setMode(CacheIterator::CURRENT_AS_VALUE);
             foreach ($cacheIterator as $key => $value) {
                 $tags = static::$cache->getTags($key);
                 if ($tags && in_array($this->_getCacheInternalId(), $tags)) {
                     if (substr($key, 0, $prefixLength) == self::CACHE_TAG_PREFIX) {
-                        $data[(int) substr($key, $prefixLength)] = $value;
+                        $data[(int)substr($key, $prefixLength)] = $value;
                     }
                 }
             }
         }
+
         return $data;
     }
 
@@ -758,7 +762,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function normalizeItemNumber($itemNumber)
     {
-        $itemNumber = (int) $itemNumber;
+        $itemNumber = (int)$itemNumber;
 
         if ($itemNumber < 1) {
             $itemNumber = 1;
@@ -779,7 +783,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function normalizePageNumber($pageNumber)
     {
-        $pageNumber = (int) $pageNumber;
+        $pageNumber = (int)$pageNumber;
 
         if ($pageNumber < 1) {
             $pageNumber = 1;
@@ -823,6 +827,7 @@ class Paginator implements Countable, IteratorAggregate
         if ($currentItems instanceof AbstractResultSet) {
             return Json::encode($currentItems->toArray());
         }
+
         return Json::encode($currentItems);
     }
 
@@ -852,6 +857,7 @@ class Paginator implements Countable, IteratorAggregate
         if ($page === null) {
             $page = $this->getCurrentPageNumber();
         }
+
         return self::CACHE_TAG_PREFIX . $page . '_' . $this->_getCacheInternalId();
     }
 
@@ -878,7 +884,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     protected function _calculatePageCount()
     {
-        return (int) ceil($this->getAdapter()->count() / $this->getItemCountPerPage());
+        return (int)ceil($this->getAdapter()->count() / $this->getItemCountPerPage());
     }
 
     /**
@@ -889,15 +895,15 @@ class Paginator implements Countable, IteratorAggregate
      */
     protected function _createPages($scrollingStyle = null)
     {
-        $pageCount         = $this->count();
+        $pageCount = $this->count();
         $currentPageNumber = $this->getCurrentPageNumber();
 
         $pages = new \stdClass();
-        $pages->pageCount        = $pageCount;
+        $pages->pageCount = $pageCount;
         $pages->itemCountPerPage = $this->getItemCountPerPage();
-        $pages->first            = 1;
-        $pages->current          = $currentPageNumber;
-        $pages->last             = $pageCount;
+        $pages->first = 1;
+        $pages->current = $currentPageNumber;
+        $pages->last = $pageCount;
 
         // Previous and next
         if ($currentPageNumber - 1 > 0) {
@@ -910,17 +916,17 @@ class Paginator implements Countable, IteratorAggregate
 
         // Pages in range
         $scrollingStyle = $this->_loadScrollingStyle($scrollingStyle);
-        $pages->pagesInRange     = $scrollingStyle->getPages($this);
+        $pages->pagesInRange = $scrollingStyle->getPages($this);
         $pages->firstPageInRange = min($pages->pagesInRange);
-        $pages->lastPageInRange  = max($pages->pagesInRange);
+        $pages->lastPageInRange = max($pages->pagesInRange);
 
         // Item numbers
         if ($this->getCurrentItems() !== null) {
             $pages->currentItemCount = $this->getCurrentItemCount();
             $pages->itemCountPerPage = $this->getItemCountPerPage();
-            $pages->totalItemCount   = $this->getTotalItemCount();
-            $pages->firstItemNumber  = (($currentPageNumber - 1) * $this->getItemCountPerPage()) + 1;
-            $pages->lastItemNumber   = $pages->firstItemNumber + $pages->currentItemCount - 1;
+            $pages->totalItemCount = $this->getTotalItemCount();
+            $pages->firstItemNumber = (($currentPageNumber - 1) * $this->getItemCountPerPage()) + 1;
+            $pages->lastItemNumber = $pages->firstItemNumber + $pages->currentItemCount - 1;
         }
 
         return $pages;

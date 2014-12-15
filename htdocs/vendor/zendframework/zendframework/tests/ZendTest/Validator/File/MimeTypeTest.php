@@ -29,18 +29,19 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             'tmp_name' => $testFile, 'name' => basename($testFile),
             'size' => 200, 'error' => 0, 'type' => 'image/jpg'
         );
+
         return array(
             //    Options, isValid Param, Expected value
-            array(array('image/jpg', 'image/jpeg'),               $fileUpload, true),
-            array('image',                                        $fileUpload, true),
-            array('test/notype',                                  $fileUpload, false),
-            array('image/gif, image/jpg, image/jpeg',             $fileUpload, true),
+            array(array('image/jpg', 'image/jpeg'), $fileUpload, true),
+            array('image', $fileUpload, true),
+            array('test/notype', $fileUpload, false),
+            array('image/gif, image/jpg, image/jpeg', $fileUpload, true),
             array(array('image/vasa', 'image/jpg', 'image/jpeg'), $fileUpload, true),
-            array(array('image/jpg', 'image/jpeg', 'gif'),        $fileUpload, true),
-            array(array('image/gif', 'gif'),                      $fileUpload, false),
-            array('image/jp',                                     $fileUpload, false),
-            array('image/jpg2000',                                $fileUpload, false),
-            array('image/jpeg2000',                               $fileUpload, false),
+            array(array('image/jpg', 'image/jpeg', 'gif'), $fileUpload, true),
+            array(array('image/gif', 'gif'), $fileUpload, false),
+            array('image/jp', $fileUpload, false),
+            array('image/jpg2000', $fileUpload, false),
+            array('image/jpeg2000', $fileUpload, false),
         );
     }
 
@@ -142,9 +143,9 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         }
 
         $validator = new File\MimeType('image/gif');
-        $magic     = getenv('magic');
+        $magic = getenv('magic');
         if (!empty($magic)) {
-            $mimetype  = $validator->getMagicFile();
+            $mimetype = $validator->getMagicFile();
             $this->assertEquals($magic, $mimetype);
         }
 
@@ -190,9 +191,9 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
     public function testDisableMagicFile()
     {
         $validator = new File\MimeType('image/gif');
-        $magic     = getenv('magic');
+        $magic = getenv('magic');
         if (!empty($magic)) {
-            $mimetype  = $validator->getMagicFile();
+            $mimetype = $validator->getMagicFile();
             $this->assertEquals($magic, $mimetype);
         }
 
@@ -200,7 +201,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isMagicFileDisabled());
 
         if (!empty($magic)) {
-            $mimetype  = $validator->getMagicFile();
+            $mimetype = $validator->getMagicFile();
             $this->assertEquals($magic, $mimetype);
         }
     }
@@ -211,10 +212,10 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
     public function testDisablingMagicFileByConstructor()
     {
         $files = array(
-            'name'     => 'picture.jpg',
-            'size'     => 200,
+            'name' => 'picture.jpg',
+            'size' => 200,
             'tmp_name' => dirname(__FILE__) . '/_files/picture.jpg',
-            'error'    => 0,
+            'error' => 0,
             'magicFile' => false,
         );
 
@@ -224,7 +225,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
-        if (! extension_loaded('fileinfo')) {
+        if (!extension_loaded('fileinfo')) {
             $this->markTestSkipped('This PHP Version has no finfo installed');
         }
 
@@ -233,11 +234,11 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid(''));
 
         $filesArray = array(
-            'name'      => '',
-            'size'      => 0,
-            'tmp_name'  => '',
-            'error'     => UPLOAD_ERR_NO_FILE,
-            'type'      => '',
+            'name' => '',
+            'size' => 0,
+            'tmp_name' => '',
+            'error' => UPLOAD_ERR_NO_FILE,
+            'type' => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

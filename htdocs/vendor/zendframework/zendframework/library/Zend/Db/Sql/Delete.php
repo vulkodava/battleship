@@ -78,6 +78,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function from($table)
     {
         $this->table = $table;
+
         return $this;
     }
 
@@ -89,6 +90,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
             'set' => $this->set,
             'where' => $this->where
         );
+
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
@@ -106,6 +108,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } else {
             $this->where->addPredicates($predicate, $combination);
         }
+
         return $this;
     }
 

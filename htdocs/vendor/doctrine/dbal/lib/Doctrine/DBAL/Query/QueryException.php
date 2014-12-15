@@ -28,7 +28,7 @@ class QueryException extends DBALException
 {
     /**
      * @param string $alias
-     * @param array  $registeredAliases
+     * @param array $registeredAliases
      *
      * @return \Doctrine\DBAL\Query\QueryException
      */

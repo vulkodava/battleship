@@ -62,7 +62,7 @@ class ObjectRepositoryTest extends BaseTestCase
         $this->setExpectedException(
             'Zend\Authentication\Adapter\Exception\RuntimeException',
             'A value for the identity was not provided prior to authentication with ObjectRepository authentication '
-                . 'adapter'
+            . 'adapter'
         );
         $adapter = new ObjectRepositoryAdapter();
         $adapter->setOptions(array(
@@ -111,7 +111,7 @@ class ObjectRepositoryTest extends BaseTestCase
         $entity->setUsername('a username');
         $entity->setPassword('a password');
 
-        $objectRepository =  $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $method = $objectRepository
             ->expects($this->exactly(2))
             ->method('findOneBy')
@@ -120,9 +120,9 @@ class ObjectRepositoryTest extends BaseTestCase
 
         $objectManager = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
         $objectManager->expects($this->exactly(2))
-                      ->method('getRepository')
-                      ->with($this->equalTo('DoctrineModuleTest\Authentication\Adapter\TestAsset\IdentityObject'))
-                      ->will($this->returnValue($objectRepository));
+            ->method('getRepository')
+            ->with($this->equalTo('DoctrineModuleTest\Authentication\Adapter\TestAsset\IdentityObject'))
+            ->will($this->returnValue($objectRepository));
 
         $adapter = new ObjectRepositoryAdapter();
         $adapter->setOptions(array(
@@ -153,7 +153,7 @@ class ObjectRepositoryTest extends BaseTestCase
         $entity->username = 'a username';
         $entity->password = 'a password';
 
-        $objectRepository =  $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $method = $objectRepository
             ->expects($this->exactly(2))
             ->method('findOneBy')
@@ -185,7 +185,7 @@ class ObjectRepositoryTest extends BaseTestCase
     {
         $this->setExpectedException('Zend\Authentication\Adapter\Exception\UnexpectedValueException');
 
-        $objectRepository =  $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $objectRepository
             ->expects($this->once())
             ->method('findOneBy')
@@ -212,7 +212,7 @@ class ObjectRepositoryTest extends BaseTestCase
         // Crypt password using Blowfish
         $entity->setPassword(crypt('password', $hash));
 
-        $objectRepository =  $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $objectRepository
             ->expects($this->exactly(2))
             ->method('findOneBy')
@@ -225,7 +225,7 @@ class ObjectRepositoryTest extends BaseTestCase
             'credential_property' => 'password',
             'identity_property' => 'username',
             // enforced type hinting to verify that closure is invoked correctly
-            'credential_callable' => function(IdentityObject $identity, $credentialValue) use ($hash) {
+            'credential_callable' => function (IdentityObject $identity, $credentialValue) use ($hash) {
                 return $identity->getPassword() === crypt($credentialValue, $hash);
             }
         ));
@@ -247,7 +247,7 @@ class ObjectRepositoryTest extends BaseTestCase
     {
         $this->setExpectedException('Zend\Authentication\Adapter\Exception\UnexpectedValueException');
 
-        $objectRepository =  $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $objectRepository
             ->expects($this->once())
             ->method('findOneBy')
@@ -270,15 +270,15 @@ class ObjectRepositoryTest extends BaseTestCase
     public function testWillNotCastAuthCredentialValue()
     {
         $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $adapter          = new ObjectRepositoryAdapter();
-        $entity           = new IdentityObject();
+        $adapter = new ObjectRepositoryAdapter();
+        $entity = new IdentityObject();
 
         $entity->setPassword(0);
         $adapter->setOptions(
             array(
-                 'object_repository'   => $objectRepository,
-                 'credential_property' => 'password',
-                 'identity_property'   => 'username'
+                'object_repository' => $objectRepository,
+                'credential_property' => 'password',
+                'identity_property' => 'username'
             )
         );
         $adapter->setIdentityValue('a username');

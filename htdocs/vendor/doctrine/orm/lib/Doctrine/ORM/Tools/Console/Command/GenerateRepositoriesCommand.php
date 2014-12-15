@@ -45,22 +45,22 @@ class GenerateRepositoriesCommand extends Command
     protected function configure()
     {
         $this
-        ->setName('orm:generate-repositories')
-        ->setAliases(array('orm:generate:repositories'))
-        ->setDescription('Generate repository classes from your mapping information.')
-        ->setDefinition(array(
-            new InputOption(
-                'filter', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-                'A string pattern used to match entities that should be processed.'
-            ),
-            new InputArgument(
-                'dest-path', InputArgument::REQUIRED, 'The path to generate your repository classes.'
-            )
-        ))
-        ->setHelp(<<<EOT
+            ->setName('orm:generate-repositories')
+            ->setAliases(array('orm:generate:repositories'))
+            ->setDescription('Generate repository classes from your mapping information.')
+            ->setDefinition(array(
+                new InputOption(
+                    'filter', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                    'A string pattern used to match entities that should be processed.'
+                ),
+                new InputArgument(
+                    'dest-path', InputArgument::REQUIRED, 'The path to generate your repository classes.'
+                )
+            ))
+            ->setHelp(<<<EOT
 Generate repository classes from your mapping information.
 EOT
-        );
+            );
     }
 
     /**
@@ -76,13 +76,13 @@ EOT
         // Process destination directory
         $destPath = realpath($input->getArgument('dest-path'));
 
-        if ( ! file_exists($destPath)) {
+        if (!file_exists($destPath)) {
             throw new \InvalidArgumentException(
                 sprintf("Entities destination directory '<info>%s</info>' does not exist.", $input->getArgument('dest-path'))
             );
         }
 
-        if ( ! is_writable($destPath)) {
+        if (!is_writable($destPath)) {
             throw new \InvalidArgumentException(
                 sprintf("Entities destination directory '<info>%s</info>' does not have write permissions.", $destPath)
             );
@@ -106,12 +106,12 @@ EOT
 
             if ($numRepositories) {
                 // Outputting information message
-                $output->writeln(PHP_EOL . sprintf('Repository classes generated to "<info>%s</INFO>"', $destPath) );
+                $output->writeln(PHP_EOL . sprintf('Repository classes generated to "<info>%s</INFO>"', $destPath));
             } else {
-                $output->writeln('No Repository classes were found to be processed.' );
+                $output->writeln('No Repository classes were found to be processed.');
             }
         } else {
-            $output->writeln('No Metadata Classes to process.' );
+            $output->writeln('No Metadata Classes to process.');
         }
     }
 }

@@ -15,8 +15,8 @@ class OracleSessionInitTest extends DbalTestCase
     {
         $connectionMock = $this->getMock('Doctrine\DBAL\Connection', array(), array(), '', false);
         $connectionMock->expects($this->once())
-                       ->method('executeUpdate')
-                       ->with($this->isType('string'));
+            ->method('executeUpdate')
+            ->with($this->isType('string'));
 
         $eventArgs = new ConnectionEventArgs($connectionMock);
 

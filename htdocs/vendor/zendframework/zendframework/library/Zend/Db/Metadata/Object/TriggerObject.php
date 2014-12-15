@@ -135,6 +135,7 @@ class TriggerObject
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -157,6 +158,7 @@ class TriggerObject
     public function setEventManipulation($eventManipulation)
     {
         $this->eventManipulation = $eventManipulation;
+
         return $this;
     }
 
@@ -179,6 +181,7 @@ class TriggerObject
     public function setEventObjectCatalog($eventObjectCatalog)
     {
         $this->eventObjectCatalog = $eventObjectCatalog;
+
         return $this;
     }
 
@@ -201,6 +204,7 @@ class TriggerObject
     public function setEventObjectSchema($eventObjectSchema)
     {
         $this->eventObjectSchema = $eventObjectSchema;
+
         return $this;
     }
 
@@ -223,6 +227,7 @@ class TriggerObject
     public function setEventObjectTable($eventObjectTable)
     {
         $this->eventObjectTable = $eventObjectTable;
+
         return $this;
     }
 
@@ -245,6 +250,7 @@ class TriggerObject
     public function setActionOrder($actionOrder)
     {
         $this->actionOrder = $actionOrder;
+
         return $this;
     }
 
@@ -267,6 +273,7 @@ class TriggerObject
     public function setActionCondition($actionCondition)
     {
         $this->actionCondition = $actionCondition;
+
         return $this;
     }
 
@@ -289,6 +296,7 @@ class TriggerObject
     public function setActionStatement($actionStatement)
     {
         $this->actionStatement = $actionStatement;
+
         return $this;
     }
 
@@ -311,6 +319,7 @@ class TriggerObject
     public function setActionOrientation($actionOrientation)
     {
         $this->actionOrientation = $actionOrientation;
+
         return $this;
     }
 
@@ -333,6 +342,7 @@ class TriggerObject
     public function setActionTiming($actionTiming)
     {
         $this->actionTiming = $actionTiming;
+
         return $this;
     }
 
@@ -355,6 +365,7 @@ class TriggerObject
     public function setActionReferenceOldTable($actionReferenceOldTable)
     {
         $this->actionReferenceOldTable = $actionReferenceOldTable;
+
         return $this;
     }
 
@@ -377,6 +388,7 @@ class TriggerObject
     public function setActionReferenceNewTable($actionReferenceNewTable)
     {
         $this->actionReferenceNewTable = $actionReferenceNewTable;
+
         return $this;
     }
 
@@ -399,6 +411,7 @@ class TriggerObject
     public function setActionReferenceOldRow($actionReferenceOldRow)
     {
         $this->actionReferenceOldRow = $actionReferenceOldRow;
+
         return $this;
     }
 
@@ -421,6 +434,7 @@ class TriggerObject
     public function setActionReferenceNewRow($actionReferenceNewRow)
     {
         $this->actionReferenceNewRow = $actionReferenceNewRow;
+
         return $this;
     }
 
@@ -443,6 +457,7 @@ class TriggerObject
     public function setCreated($created)
     {
         $this->created = $created;
+
         return $this;
     }
 }

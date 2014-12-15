@@ -22,8 +22,8 @@ use DoctrineModuleTest\ServiceManagerTestCase;
 chdir(__DIR__);
 
 if (
-    ! ($loader = @include __DIR__ . '/../vendor/autoload.php')
-    && ! ($loader = @include __DIR__ . '/../vendor/autoload.php')
+    !($loader = @include __DIR__ . '/../vendor/autoload.php')
+    && !($loader = @include __DIR__ . '/../vendor/autoload.php')
 ) {
     throw new RuntimeException('vendor/autoload.php could not be found. Run composer installation');
 }

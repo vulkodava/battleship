@@ -51,23 +51,23 @@ class TimeCollector extends AbstractCollector implements EventCollectorInterface
         }
 
         $this->data['start'] = $start;
-        $this->data['end']   = microtime(true);
+        $this->data['end'] = microtime(true);
     }
 
     /**
      * Saves the current time in microseconds for a specific event.
      *
      * @param string $id
-     * @param Event  $event
+     * @param Event $event
      */
     public function collectEvent($id, Event $event)
     {
-        $contextProvider   = new EventContextProvider($event);
-        $context['time']   = microtime(true);
-        $context['name']   = $contextProvider->getEvent()->getName();
+        $contextProvider = new EventContextProvider($event);
+        $context['time'] = microtime(true);
+        $context['name'] = $contextProvider->getEvent()->getName();
         $context['target'] = $contextProvider->getEventTarget();
-        $context['file']   = $contextProvider->getEventTriggerFile();
-        $context['line']   = $contextProvider->getEventTriggerLine();
+        $context['file'] = $contextProvider->getEventTriggerFile();
+        $context['line'] = $contextProvider->getEventTriggerLine();
 
         if (!isset($this->data['event'][$id])) {
             $this->data['event'][$id] = array();

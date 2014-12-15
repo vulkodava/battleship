@@ -16,7 +16,7 @@ use Zend\Stdlib\Hydrator\Reflection;
  * Unit tests for {@see \Zend\Stdlib\Hydrator\Reflection}
  *
  * @covers \Zend\Stdlib\Hydrator\Reflection
- * @group Zend_Stdlib
+ * @group  Zend_Stdlib
  */
 class ReflectionTest extends \PHPUnit_Framework_TestCase
 {

@@ -65,7 +65,7 @@ class OutputCacheTest extends CommonPatternTest
     public function testStartEndCacheMiss()
     {
         $output = 'foobar';
-        $key    = 'testStartEndCacheMiss';
+        $key = 'testStartEndCacheMiss';
 
         ob_start();
         $this->assertFalse($this->_pattern->start($key));
@@ -80,7 +80,7 @@ class OutputCacheTest extends CommonPatternTest
     public function testStartEndCacheHit()
     {
         $output = 'foobar';
-        $key    = 'testStartEndCacheHit';
+        $key = 'testStartEndCacheHit';
 
         // fill cache
         $this->_pattern->getOptions()->getStorage()->setItem($key, $output);

@@ -2,7 +2,7 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @link       http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -121,7 +121,7 @@ return array(
     // Zend_Validator_File_Hash
     "File '%value%' does not match the given hashes" => "O arquivo '%value%' não corresponde as hashes fornecidas",
     "A hash could not be evaluated for the given file" => "Não foi possível avaliar uma hash para o arquivo fornecido",
-    "File '%value%' is not readable or does not exist"  => "O arquivo '%value%' não pode ser lido ou não existe",
+    "File '%value%' is not readable or does not exist" => "O arquivo '%value%' não pode ser lido ou não existe",
 
     // Zend_Validator_File_ImageSize
     "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "A largura máxima permitida para a imagem '%value%' deveria ser '%maxwidth%', mas '%width%' foi detectada",

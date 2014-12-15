@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -25,12 +25,12 @@ class CacheFactoryTest extends PHPUnit_Framework_TestCase
     public function testCreateService()
     {
         $serviceLocator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
-        $config         = array(
+        $config = array(
             'cache_options' => array(
-                'adapter'   => array(
+                'adapter' => array(
                     'name' => 'memory',
                 ),
-                'plugins'   => array(
+                'plugins' => array(
                     'serializer',
                 )
             )

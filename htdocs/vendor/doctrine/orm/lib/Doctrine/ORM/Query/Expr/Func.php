@@ -44,16 +44,16 @@ class Func
      * Creates a function, with the given argument.
      *
      * @param string $name
-     * @param array  $arguments
+     * @param array $arguments
      */
     public function __construct($name, $arguments)
     {
-        $this->name         = $name;
-        $this->arguments    = (array) $arguments;
+        $this->name = $name;
+        $this->arguments = (array)$arguments;
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getName()
     {

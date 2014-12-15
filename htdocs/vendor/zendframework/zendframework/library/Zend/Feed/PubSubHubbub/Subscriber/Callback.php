@@ -49,6 +49,7 @@ class Callback extends PubSubHubbub\AbstractCallback
     public function setSubscriptionKey($key)
     {
         $this->subscriptionKey = $key;
+
         return $this;
     }
 
@@ -57,7 +58,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      * unsubscription request. This should be the Hub Server confirming the
      * the request prior to taking action on it.
      *
-     * @param  array $httpGetData GET data if available and not in $_GET
+     * @param  array $httpGetData    GET data if available and not in $_GET
      * @param  bool $sendResponseNow Whether to send response now or when asked
      * @return void
      */
@@ -85,9 +86,9 @@ class Callback extends PubSubHubbub\AbstractCallback
         ) {
             $this->setFeedUpdate($this->_getRawBody());
             $this->getHttpResponse()->setHeader('X-Hub-On-Behalf-Of', $this->getSubscriberCount());
-        /**
-         * Handle any (un)subscribe confirmation requests
-         */
+            /**
+             * Handle any (un)subscribe confirmation requests
+             */
         } elseif ($this->isValidHubVerification($httpGetData)) {
             $this->getHttpResponse()->setContent($httpGetData['hub_challenge']);
 
@@ -110,9 +111,9 @@ class Callback extends PubSubHubbub\AbstractCallback
                         $httpGetData['hub_mode']
                     ));
             }
-        /**
-         * Hey, C'mon! We tried everything else!
-         */
+            /**
+             * Hey, C'mon! We tried everything else!
+             */
         } else {
             $this->getHttpResponse()->setStatusCode(404);
         }
@@ -172,6 +173,7 @@ class Callback extends PubSubHubbub\AbstractCallback
         if (!$this->_hasValidVerifyToken($httpGetData)) {
             return false;
         }
+
         return true;
     }
 
@@ -185,6 +187,7 @@ class Callback extends PubSubHubbub\AbstractCallback
     public function setFeedUpdate($feed)
     {
         $this->feedUpdate = $feed;
+
         return $this;
     }
 
@@ -198,6 +201,7 @@ class Callback extends PubSubHubbub\AbstractCallback
         if ($this->feedUpdate === null) {
             return false;
         }
+
         return true;
     }
 
@@ -237,8 +241,10 @@ class Callback extends PubSubHubbub\AbstractCallback
                 return false;
             }
             $this->currentSubscriptionData = $data;
+
             return true;
         }
+
         return true;
     }
 
@@ -288,7 +294,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      */
     protected function _parseQueryString()
     {
-        $params      = array();
+        $params = array();
         $queryString = '';
         if (isset($_SERVER['QUERY_STRING'])) {
             $queryString = $_SERVER['QUERY_STRING'];
@@ -298,8 +304,8 @@ class Callback extends PubSubHubbub\AbstractCallback
         }
         $parts = explode('&', $queryString);
         foreach ($parts as $kvpair) {
-            $pair  = explode('=', $kvpair);
-            $key   = rawurldecode($pair[0]);
+            $pair = explode('=', $kvpair);
+            $key = rawurldecode($pair[0]);
             $value = rawurldecode($pair[1]);
             if (isset($params[$key])) {
                 if (is_array($params[$key])) {
@@ -311,6 +317,7 @@ class Callback extends PubSubHubbub\AbstractCallback
                 $params[$key] = $value;
             }
         }
+
         return $params;
     }
 }

@@ -24,9 +24,9 @@ class VersionTest extends \PHPUnit_Framework_TestCase
     public function testVersionCompare()
     {
         $expect = -1;
-        for ($i=0; $i < 2; $i++) {
-            for ($j=0; $j < 12; $j++) {
-                for ($k=0; $k < 20; $k++) {
+        for ($i = 0; $i < 2; $i++) {
+            for ($j = 0; $j < 12; $j++) {
+                for ($k = 0; $k < 20; $k++) {
                     foreach (array('dev', 'pr', 'PR', 'alpha', 'a1', 'a2', 'beta', 'b1', 'b2', 'RC', 'RC1', 'RC2', 'RC3', '', 'pl1', 'PL1') as $rel) {
                         $ver = "$i.$j.$k$rel";
                         $normalizedVersion = strtolower(Version::VERSION);
@@ -149,7 +149,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/^[1-2](\.[0-9]+){2}/', $actual);
 
         $lastRequest = $httpClient->getRequest();
-        $this->assertContains('github.com', (string) $lastRequest->getUri());
+        $this->assertContains('github.com', (string)$lastRequest->getUri());
     }
 
     /**

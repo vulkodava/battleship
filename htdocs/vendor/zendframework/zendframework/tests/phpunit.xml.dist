@@ -19,7 +19,7 @@
     </groups>
 
     <listeners>
-        <listener class="ZendTest\Db\IntegrationTestListener" file="./ZendTest/Db/IntegrationTestListener.php" />
+        <listener class="ZendTest\Db\IntegrationTestListener" file="./ZendTest/Db/IntegrationTestListener.php"/>
     </listeners>
 
     <php>
@@ -53,7 +53,6 @@
 
         <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLITE_MEMORY" value="true" />-->
     </php>
-
 
 
 </phpunit>

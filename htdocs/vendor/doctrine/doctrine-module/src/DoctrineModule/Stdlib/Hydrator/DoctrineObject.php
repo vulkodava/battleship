@@ -65,16 +65,16 @@ class DoctrineObject extends AbstractHydrator
      * Constructor
      *
      * @param ObjectManager $objectManager The ObjectManager to use
-     * @param string        $targetClass   The FQCN of the hydrated/extracted object
-     * @param bool          $byValue       If set to true, hydrator will always use entity's public API
+     * @param string $targetClass          The FQCN of the hydrated/extracted object
+     * @param bool $byValue                If set to true, hydrator will always use entity's public API
      */
     public function __construct(ObjectManager $objectManager, $targetClass, $byValue = true)
     {
         parent::__construct();
 
-        $this->objectManager    = $objectManager;
-        $this->metadata         = $objectManager->getClassMetadata($targetClass);
-        $this->byValue          = (bool) $byValue;
+        $this->objectManager = $objectManager;
+        $this->metadata = $objectManager->getClassMetadata($targetClass);
+        $this->byValue = (bool)$byValue;
 
         $this->prepare();
     }
@@ -97,7 +97,7 @@ class DoctrineObject extends AbstractHydrator
     /**
      * Hydrate $object with the provided $data.
      *
-     * @param  array  $data
+     * @param  array $data
      * @param  object $object
      * @return object
      */
@@ -128,7 +128,7 @@ class DoctrineObject extends AbstractHydrator
             }
 
             $strategy->setCollectionName($name)
-                     ->setClassMetadata($this->metadata);
+                ->setClassMetadata($this->metadata);
         }
 
         return parent::addStrategy($name, $strategy);
@@ -141,7 +141,7 @@ class DoctrineObject extends AbstractHydrator
      */
     protected function prepare()
     {
-        $metadata     = $this->metadata;
+        $metadata = $this->metadata;
         $associations = $metadata->getAssociationNames();
 
         foreach ($associations as $association) {
@@ -167,7 +167,7 @@ class DoctrineObject extends AbstractHydrator
     protected function extractByValue($object)
     {
         $fieldNames = array_merge($this->metadata->getFieldNames(), $this->metadata->getAssociationNames());
-        $methods    = get_class_methods($object);
+        $methods = get_class_methods($object);
 
         $data = array();
         foreach ($fieldNames as $fieldName) {
@@ -194,7 +194,7 @@ class DoctrineObject extends AbstractHydrator
     protected function extractByReference($object)
     {
         $fieldNames = array_merge($this->metadata->getFieldNames(), $this->metadata->getAssociationNames());
-        $refl       = $this->metadata->getReflectionClass();
+        $refl = $this->metadata->getReflectionClass();
 
         $data = array();
         foreach ($fieldNames as $fieldName) {
@@ -211,18 +211,18 @@ class DoctrineObject extends AbstractHydrator
      * Hydrate the object using a by-value logic (this means that it uses the entity API, in this
      * case, setters)
      *
-     * @param  array  $data
+     * @param  array $data
      * @param  object $object
      * @throws RuntimeException
      * @return object
      */
     protected function hydrateByValue(array $data, $object)
     {
-        $object   = $this->tryConvertArrayToObject($data, $object);
+        $object = $this->tryConvertArrayToObject($data, $object);
         $metadata = $this->metadata;
 
         foreach ($data as $field => $value) {
-            $value  = $this->handleTypeConversions($value, $metadata->getTypeOfField($field));
+            $value = $this->handleTypeConversions($value, $metadata->getTypeOfField($field));
             $setter = 'set' . ucfirst($field);
 
             if ($metadata->hasAssociation($field)) {
@@ -255,15 +255,15 @@ class DoctrineObject extends AbstractHydrator
      * using the public API, in this case setters, and hence override any logic that could be done in those
      * setters)
      *
-     * @param  array  $data
+     * @param  array $data
      * @param  object $object
      * @return object
      */
     protected function hydrateByReference(array $data, $object)
     {
-        $object   = $this->tryConvertArrayToObject($data, $object);
+        $object = $this->tryConvertArrayToObject($data, $object);
         $metadata = $this->metadata;
-        $refl     = $metadata->getReflectionClass();
+        $refl = $metadata->getReflectionClass();
 
         foreach ($data as $field => $value) {
             // Ignore unknown fields
@@ -271,7 +271,7 @@ class DoctrineObject extends AbstractHydrator
                 continue;
             }
 
-            $value        = $this->handleTypeConversions($value, $metadata->getTypeOfField($field));
+            $value = $this->handleTypeConversions($value, $metadata->getTypeOfField($field));
             $reflProperty = $refl->getProperty($field);
             $reflProperty->setAccessible(true);
 
@@ -297,14 +297,14 @@ class DoctrineObject extends AbstractHydrator
      * an identifier for the object. This is useful in a context of updating existing entities, without ugly
      * tricks like setting manually the existing id directly into the entity
      *
-     * @param  array  $data   The data that may contain identifiers keys
+     * @param  array $data The data that may contain identifiers keys
      * @param  object $object
      * @return object
      */
     protected function tryConvertArrayToObject($data, $object)
     {
-        $metadata         = $this->metadata;
-        $identifierNames  = $metadata->getIdentifierFieldNames($object);
+        $metadata = $this->metadata;
+        $identifierNames = $metadata->getIdentifierFieldNames($object);
         $identifierValues = array();
 
         if (empty($identifierNames)) {
@@ -326,7 +326,7 @@ class DoctrineObject extends AbstractHydrator
      * Handle ToOne associations
      *
      * @param  string $target
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return object
      */
     protected function toOne($target, $value)
@@ -345,15 +345,15 @@ class DoctrineObject extends AbstractHydrator
      * changing the collection of the object
      *
      * @param  object $object
-     * @param  mixed  $collectionName
+     * @param  mixed $collectionName
      * @param  string $target
-     * @param  mixed  $values
+     * @param  mixed $values
      * @return void
      */
     protected function toMany($object, $collectionName, $target, $values)
     {
         if (!is_array($values) && !$values instanceof Traversable) {
-            $values = (array) $values;
+            $values = (array)$values;
         }
 
         $collection = array();
@@ -375,7 +375,7 @@ class DoctrineObject extends AbstractHydrator
         $collectionStrategy = $this->getStrategy($collectionName);
 
         // Even if this check is applied in addStrategy, subclasses may inject invalid strategies
-        if ( ! $collectionStrategy instanceof AbstractCollectionStrategy) {
+        if (!$collectionStrategy instanceof AbstractCollectionStrategy) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Strategies used for collections valued associations must inherit from '
@@ -395,13 +395,13 @@ class DoctrineObject extends AbstractHydrator
     /**
      * Handle various type conversions that should be supported natively by Doctrine (like DateTime)
      *
-     * @param  mixed  $value
+     * @param  mixed $value
      * @param  string $typeOfField
      * @return DateTime
      */
     protected function handleTypeConversions($value, $typeOfField)
     {
-        switch($typeOfField) {
+        switch ($typeOfField) {
             case 'datetime':
             case 'time':
             case 'date':
@@ -423,8 +423,8 @@ class DoctrineObject extends AbstractHydrator
     /**
      * Find an object by its identifiers
      *
-     * @param  mixed   $identifiers
-     * @param  string  $targetClass
+     * @param  mixed $identifiers
+     * @param  string $targetClass
      *
      * @return object|null
      */

@@ -32,7 +32,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view   = new View();
+        $this->view = new View();
         $this->helper = new HtmlObject();
         $this->helper->setView($this->view);
     }
@@ -58,7 +58,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
     public function testMakeHtmlObjectWithAttribsWithoutParams()
     {
         $attribs = array('attribkey1' => 'attribvalue1',
-                         'attribkey2' => 'attribvalue2');
+            'attribkey2' => 'attribvalue2');
 
         $htmlObject = $this->helper->__invoke('datastring', 'typestring', $attribs);
 
@@ -71,7 +71,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
         $this->view->plugin('doctype')->__invoke(Doctype::HTML4_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
-                        'paramname2' => 'paramvalue2');
+            'paramname2' => 'paramvalue2');
 
         $htmlObject = $this->helper->__invoke('datastring', 'typestring', array(), $params);
 
@@ -90,7 +90,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
         $this->view->plugin('doctype')->__invoke(Doctype::XHTML1_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
-                        'paramname2' => 'paramvalue2');
+            'paramname2' => 'paramvalue2');
 
         $htmlObject = $this->helper->__invoke('datastring', 'typestring', array(), $params);
 

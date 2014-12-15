@@ -27,6 +27,7 @@ class HttpResponseSender extends AbstractResponseSender
         $response = $event->getResponse();
         echo $response->getContent();
         $event->setContentSent();
+
         return $this;
     }
 
@@ -44,8 +45,9 @@ class HttpResponseSender extends AbstractResponseSender
         }
 
         $this->sendHeaders($event)
-             ->sendContent($event);
+            ->sendContent($event);
         $event->stopPropagation(true);
+
         return $this;
     }
 }

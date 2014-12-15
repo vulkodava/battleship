@@ -46,7 +46,7 @@ trait EventManagerAwareTrait
                 || (is_array($this->eventIdentifier))
                 || ($this->eventIdentifier instanceof Traversable)
             ) {
-                $identifiers = array_unique(array_merge($identifiers, (array) $this->eventIdentifier));
+                $identifiers = array_unique(array_merge($identifiers, (array)$this->eventIdentifier));
             } elseif (is_object($this->eventIdentifier)) {
                 $identifiers[] = $this->eventIdentifier;
             }
@@ -57,6 +57,7 @@ trait EventManagerAwareTrait
         if (method_exists($this, 'attachDefaultListeners')) {
             $this->attachDefaultListeners();
         }
+
         return $this;
     }
 
@@ -72,6 +73,7 @@ trait EventManagerAwareTrait
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->events;
     }
 }

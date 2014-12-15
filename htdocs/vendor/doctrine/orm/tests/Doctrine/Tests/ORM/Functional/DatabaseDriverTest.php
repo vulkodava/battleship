@@ -63,16 +63,16 @@ class DatabaseDriverTest extends DatabaseDriverTestCase
         $this->assertArrayHasKey('DbdriverFoo', $metadatas);
         $metadata = $metadatas['DbdriverFoo'];
 
-        $this->assertArrayHasKey('id',          $metadata->fieldMappings);
-        $this->assertEquals('id',               $metadata->fieldMappings['id']['fieldName']);
-        $this->assertEquals('id',               strtolower($metadata->fieldMappings['id']['columnName']));
-        $this->assertEquals('integer',          (string)$metadata->fieldMappings['id']['type']);
+        $this->assertArrayHasKey('id', $metadata->fieldMappings);
+        $this->assertEquals('id', $metadata->fieldMappings['id']['fieldName']);
+        $this->assertEquals('id', strtolower($metadata->fieldMappings['id']['columnName']));
+        $this->assertEquals('integer', (string)$metadata->fieldMappings['id']['type']);
 
-        $this->assertArrayHasKey('bar',         $metadata->fieldMappings);
-        $this->assertEquals('bar',              $metadata->fieldMappings['bar']['fieldName']);
-        $this->assertEquals('bar',              strtolower($metadata->fieldMappings['bar']['columnName']));
-        $this->assertEquals('string',           (string)$metadata->fieldMappings['bar']['type']);
-        $this->assertEquals(200,                $metadata->fieldMappings['bar']['length']);
+        $this->assertArrayHasKey('bar', $metadata->fieldMappings);
+        $this->assertEquals('bar', $metadata->fieldMappings['bar']['fieldName']);
+        $this->assertEquals('bar', strtolower($metadata->fieldMappings['bar']['columnName']));
+        $this->assertEquals('string', (string)$metadata->fieldMappings['bar']['type']);
+        $this->assertEquals(200, $metadata->fieldMappings['bar']['length']);
         $this->assertTrue($metadata->fieldMappings['bar']['nullable']);
     }
 
@@ -149,7 +149,7 @@ class DatabaseDriverTest extends DatabaseDriverTestCase
 
     public function testLoadMetadataFromDatabaseDetail()
     {
-        if ( ! $this->_em->getConnection()->getDatabasePlatform()->supportsForeignKeyConstraints()) {
+        if (!$this->_em->getConnection()->getDatabasePlatform()->supportsForeignKeyConstraints()) {
             $this->markTestSkipped('Platform does not support foreign keys.');
         }
 
@@ -164,7 +164,7 @@ class DatabaseDriverTest extends DatabaseDriverTestCase
 
         $table->addColumn('column_index1', 'string');
         $table->addColumn('column_index2', 'string');
-        $table->addIndex(array('column_index1','column_index2'), 'index1');
+        $table->addIndex(array('column_index1', 'column_index2'), 'index1');
 
         $table->addColumn('column_unique_index1', 'string');
         $table->addColumn('column_unique_index2', 'string');
@@ -181,11 +181,11 @@ class DatabaseDriverTest extends DatabaseDriverTestCase
         $this->assertArrayHasKey('id', $metadata->fieldMappings);
         $this->assertEquals('id', $metadata->fieldMappings['id']['fieldName']);
         $this->assertEquals('id', strtolower($metadata->fieldMappings['id']['columnName']));
-        $this->assertEquals('integer', (string) $metadata->fieldMappings['id']['type']);
+        $this->assertEquals('integer', (string)$metadata->fieldMappings['id']['type']);
 
         // FIXME: Condition here is fugly.
         // NOTE: PostgreSQL does not support UNSIGNED
-        if ( ! $this->_em->getConnection()->getDatabasePlatform() instanceof PostgreSqlPlatform) {
+        if (!$this->_em->getConnection()->getDatabasePlatform() instanceof PostgreSqlPlatform) {
             $this->assertArrayHasKey('columnUnsigned', $metadata->fieldMappings);
             $this->assertTrue($metadata->fieldMappings['columnUnsigned']['unsigned']);
         }
@@ -200,13 +200,13 @@ class DatabaseDriverTest extends DatabaseDriverTestCase
         $this->assertEquals(4, $metadata->fieldMappings['columnDecimal']['precision']);
         $this->assertEquals(3, $metadata->fieldMappings['columnDecimal']['scale']);
 
-        $this->assertTrue( ! empty($metadata->table['indexes']['index1']['columns']));
+        $this->assertTrue(!empty($metadata->table['indexes']['index1']['columns']));
         $this->assertEquals(
-            array('column_index1','column_index2'),
+            array('column_index1', 'column_index2'),
             $metadata->table['indexes']['index1']['columns']
         );
 
-        $this->assertTrue( ! empty($metadata->table['uniqueConstraints']['unique_index1']['columns']));
+        $this->assertTrue(!empty($metadata->table['uniqueConstraints']['unique_index1']['columns']));
         $this->assertEquals(
             array('column_unique_index1', 'column_unique_index2'),
             $metadata->table['uniqueConstraints']['unique_index1']['columns']

@@ -32,7 +32,7 @@ class DDC889SuperClass
     public static function loadMetadata(\Doctrine\ORM\Mapping\ClassMetadataInfo $metadata)
     {
         $metadata->mapField(array(
-           'fieldName'  => 'name',
+            'fieldName' => 'name',
         ));
 
         $metadata->isMappedSuperclass = true;

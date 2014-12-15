@@ -25,7 +25,7 @@ use Doctrine\ORM\EntityManagerInterface;
  * This factory is used to create default repository objects for entities at runtime.
  *
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @since 2.4
+ * @since  2.4
  */
 class DefaultRepositoryFactory implements RepositoryFactory
 {
@@ -58,17 +58,17 @@ class DefaultRepositoryFactory implements RepositoryFactory
      * Create a new repository instance for an entity class.
      *
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager The EntityManager instance.
-     * @param string                               $entityName    The name of the entity.
+     * @param string $entityName                                  The name of the entity.
      *
      * @return \Doctrine\Common\Persistence\ObjectRepository
      */
     protected function createRepository(EntityManagerInterface $entityManager, $entityName)
     {
-        $metadata            = $entityManager->getClassMetadata($entityName);
+        $metadata = $entityManager->getClassMetadata($entityName);
         $repositoryClassName = $metadata->customRepositoryClassName;
 
         if ($repositoryClassName === null) {
-            $configuration       = $entityManager->getConfiguration();
+            $configuration = $entityManager->getConfiguration();
             $repositoryClassName = $configuration->getDefaultRepositoryClassName();
         }
 

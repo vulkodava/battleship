@@ -17,7 +17,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->session = new SessionManager();
-        $this->helper  = new FlashMessenger();
+        $this->helper = new FlashMessenger();
         $this->helper->setSessionManager($this->session);
     }
 
@@ -40,7 +40,7 @@ class FlashMessengerTest extends \PHPUnit_Framework_TestCase
 
     public function testComposesSessionManagerByDefault()
     {
-        $helper  = new FlashMessenger();
+        $helper = new FlashMessenger();
         $session = $helper->getSessionManager();
         $this->assertInstanceOf('Zend\Session\SessionManager', $session);
     }

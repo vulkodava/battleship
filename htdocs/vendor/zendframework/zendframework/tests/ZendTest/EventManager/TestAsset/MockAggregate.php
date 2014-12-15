@@ -26,17 +26,17 @@ class MockAggregate implements ListenerAggregateInterface
         $this->priority = $priority;
 
         $listeners = array();
-        $listeners[] = $events->attach('foo.bar', array( $this, 'fooBar' ));
-        $listeners[] = $events->attach('foo.baz', array( $this, 'fooBaz' ));
+        $listeners[] = $events->attach('foo.bar', array($this, 'fooBar'));
+        $listeners[] = $events->attach('foo.baz', array($this, 'fooBaz'));
 
-        $this->listeners[ \spl_object_hash($events) ] = $listeners;
+        $this->listeners[\spl_object_hash($events)] = $listeners;
 
         return __METHOD__;
     }
 
     public function detach(EventManagerInterface $events)
     {
-        foreach ($this->listeners[ \spl_object_hash($events) ] as $listener) {
+        foreach ($this->listeners[\spl_object_hash($events)] as $listener) {
             $events->detach($listener);
         }
 

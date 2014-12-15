@@ -25,10 +25,10 @@ class UserHydratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ZfcUser\Mapper\UserHydrator::extract
-     * @covers ZfcUser\Mapper\UserHydrator::mapField
+     * @covers       ZfcUser\Mapper\UserHydrator::extract
+     * @covers       ZfcUser\Mapper\UserHydrator::mapField
      * @dataProvider dataProviderTestExtractWithValidUserObject
-     * @see https://github.com/ZF-Commons/ZfcUser/pull/421
+     * @see          https://github.com/ZF-Commons/ZfcUser/pull/421
      */
     public function testExtractWithValidUserObject($object, $expectArray)
     {
@@ -79,11 +79,12 @@ class UserHydratorTest extends \PHPUnit_Framework_TestCase
             $user = new \ZfcUser\Entity\User;
             foreach ($data as $key => $value) {
                 if ($key == 'user_id') {
-                    $key='id';
+                    $key = 'id';
                 }
                 $methode = 'set' . str_replace(" ", "", ucwords(str_replace("_", " ", $key)));
-                call_user_func(array($user,$methode), $value);
+                call_user_func(array($user, $methode), $value);
             }
+
             return $user;
         };
         $return = array();
@@ -98,7 +99,7 @@ class UserHydratorTest extends \PHPUnit_Framework_TestCase
             'user_id' => 1
         );
 
-        $return[]=array($createUserObject($buffer), $buffer);
+        $return[] = array($createUserObject($buffer), $buffer);
 
         /**
          * @see https://github.com/ZF-Commons/ZfcUser/pull/421
@@ -111,7 +112,7 @@ class UserHydratorTest extends \PHPUnit_Framework_TestCase
             'state' => 1
         );
 
-        $return[]=array($createUserObject($buffer), $buffer);
+        $return[] = array($createUserObject($buffer), $buffer);
 
         return $return;
     }

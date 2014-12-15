@@ -30,8 +30,8 @@ namespace Doctrine\ORM\Query;
  * <b>Users should use the public methods.</b>
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.0
- * @todo Think about whether the number of lookup maps can be reduced.
+ * @since  2.0
+ * @todo   Think about whether the number of lookup maps can be reduced.
  */
 class ResultSetMapping
 {
@@ -219,7 +219,7 @@ class ResultSetMapping
         $found = false;
 
         foreach (array_merge($this->metaMappings, $this->fieldMappings) as $columnName => $columnFieldName) {
-            if ( ! ($columnFieldName === $fieldName && $this->columnOwnerMap[$columnName] === $alias)) continue;
+            if (!($columnFieldName === $fieldName && $this->columnOwnerMap[$columnName] === $alias)) continue;
 
             $this->addIndexByColumn($alias, $columnName);
             $found = true;
@@ -304,9 +304,9 @@ class ResultSetMapping
     /**
      * Adds a field to the result that belongs to an entity or joined entity.
      *
-     * @param string      $alias          The alias of the root entity or joined entity to which the field belongs.
-     * @param string      $columnName     The name of the column in the SQL result set.
-     * @param string      $fieldName      The name of the field on the declaring class.
+     * @param string $alias               The alias of the root entity or joined entity to which the field belongs.
+     * @param string $columnName          The name of the column in the SQL result set.
+     * @param string $fieldName           The name of the field on the declaring class.
      * @param string|null $declaringClass The name of the class that declares/owns the specified field.
      *                                    When $alias refers to a superclass in a mapped hierarchy but
      *                                    the field $fieldName is defined on a subclass, specify that here.
@@ -326,7 +326,7 @@ class ResultSetMapping
         // field name => class name of declaring class
         $this->declaringClasses[$columnName] = $declaringClass ?: $this->aliasMap[$alias];
 
-        if ( ! $this->isMixed && $this->scalarMappings) {
+        if (!$this->isMixed && $this->scalarMappings) {
             $this->isMixed = true;
         }
 
@@ -348,9 +348,9 @@ class ResultSetMapping
      */
     public function addJoinedEntityResult($class, $alias, $parentAlias, $relation)
     {
-        $this->aliasMap[$alias]       = $class;
+        $this->aliasMap[$alias] = $class;
         $this->parentAliasMap[$alias] = $parentAlias;
-        $this->relationMap[$alias]    = $relation;
+        $this->relationMap[$alias] = $relation;
 
         return $this;
     }
@@ -369,9 +369,9 @@ class ResultSetMapping
     public function addScalarResult($columnName, $alias, $type = 'string')
     {
         $this->scalarMappings[$columnName] = $alias;
-        $this->typeMappings[$columnName]   = $type;
+        $this->typeMappings[$columnName] = $type;
 
-        if ( ! $this->isMixed && $this->fieldMappings) {
+        if (!$this->isMixed && $this->fieldMappings) {
             $this->isMixed = true;
         }
 
@@ -381,8 +381,8 @@ class ResultSetMapping
     /**
      * Adds a metadata parameter mappings.
      *
-     * @param mixed $parameter      The parameter name in the SQL result set.
-     * @param string $attribute     The metadata attribute.
+     * @param mixed $parameter  The parameter name in the SQL result set.
+     * @param string $attribute The metadata attribute.
      */
     public function addMetadataParameterMapping($parameter, $attribute)
     {
@@ -543,11 +543,11 @@ class ResultSetMapping
     /**
      * Adds a meta column (foreign key or discriminator column) to the result set.
      *
-     * @param string $alias                 The result alias with which the meta result should be placed in the result structure.
-     * @param string $columnName            The name of the column in the SQL result set.
-     * @param string $fieldName             The name of the field on the declaring class.
-     * @param bool   $isIdentifierColumn
-     * @param string $type                  The column type
+     * @param string $alias      The result alias with which the meta result should be placed in the result structure.
+     * @param string $columnName The name of the column in the SQL result set.
+     * @param string $fieldName  The name of the field on the declaring class.
+     * @param bool $isIdentifierColumn
+     * @param string $type       The column type
      *
      * @return ResultSetMapping This ResultSetMapping instance.
      */

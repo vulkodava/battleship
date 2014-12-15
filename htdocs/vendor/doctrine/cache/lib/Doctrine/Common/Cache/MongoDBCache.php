@@ -89,6 +89,7 @@ class MongoDBCache extends CacheProvider
 
         if ($this->isExpired($document)) {
             $this->doDelete($id);
+
             return false;
         }
 
@@ -108,6 +109,7 @@ class MongoDBCache extends CacheProvider
 
         if ($this->isExpired($document)) {
             $this->doDelete($id);
+
             return false;
         }
 
@@ -170,9 +172,9 @@ class MongoDBCache extends CacheProvider
         return array(
             Cache::STATS_HITS => null,
             Cache::STATS_MISSES => null,
-            Cache::STATS_UPTIME => (isset($serverStatus['uptime']) ? (integer) $serverStatus['uptime'] : null),
-            Cache::STATS_MEMORY_USAGE => (isset($collStats['size']) ? (integer) $collStats['size'] : null),
-            Cache::STATS_MEMORY_AVAILABLE  => null,
+            Cache::STATS_UPTIME => (isset($serverStatus['uptime']) ? (integer)$serverStatus['uptime'] : null),
+            Cache::STATS_MEMORY_USAGE => (isset($collStats['size']) ? (integer)$collStats['size'] : null),
+            Cache::STATS_MEMORY_AVAILABLE => null,
         );
     }
 
@@ -185,7 +187,7 @@ class MongoDBCache extends CacheProvider
     private function isExpired(array $document)
     {
         return isset($document[self::EXPIRATION_FIELD]) &&
-            $document[self::EXPIRATION_FIELD] instanceof MongoDate &&
-            $document[self::EXPIRATION_FIELD]->sec < time();
+        $document[self::EXPIRATION_FIELD] instanceof MongoDate &&
+        $document[self::EXPIRATION_FIELD]->sec < time();
     }
 }

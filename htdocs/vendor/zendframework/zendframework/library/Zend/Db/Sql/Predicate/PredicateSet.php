@@ -15,13 +15,13 @@ use Zend\Db\Sql\Exception;
 class PredicateSet implements PredicateInterface, Countable
 {
     const COMBINED_BY_AND = 'AND';
-    const OP_AND          = 'AND';
+    const OP_AND = 'AND';
 
-    const COMBINED_BY_OR  = 'OR';
-    const OP_OR           = 'OR';
+    const COMBINED_BY_OR = 'OR';
+    const OP_OR = 'OR';
 
     protected $defaultCombination = self::COMBINED_BY_AND;
-    protected $predicates         = array();
+    protected $predicates = array();
 
     /**
      * Constructor
@@ -54,10 +54,12 @@ class PredicateSet implements PredicateInterface, Countable
 
         if ($combination == self::OP_OR) {
             $this->orPredicate($predicate);
+
             return $this;
         }
 
         $this->andPredicate($predicate);
+
         return $this;
     }
 
@@ -68,10 +70,12 @@ class PredicateSet implements PredicateInterface, Countable
         }
         if ($predicates instanceof PredicateInterface) {
             $this->addPredicate($predicates, $combination);
+
             return $this;
         }
         if ($predicates instanceof \Closure) {
             $predicates($this);
+
             return $this;
         }
         if (is_string($predicates)) {
@@ -79,6 +83,7 @@ class PredicateSet implements PredicateInterface, Countable
             $predicates = (strpos($predicates, Expression::PLACEHOLDER) !== false)
                 ? new Expression($predicates) : new Literal($predicates);
             $this->addPredicate($predicates, $combination);
+
             return $this;
         }
         if (is_array($predicates)) {
@@ -114,6 +119,7 @@ class PredicateSet implements PredicateInterface, Countable
                 $this->addPredicate($predicates, $combination);
             }
         }
+
         return $this;
     }
 
@@ -136,6 +142,7 @@ class PredicateSet implements PredicateInterface, Countable
     public function orPredicate(PredicateInterface $predicate)
     {
         $this->predicates[] = array(self::OP_OR, $predicate);
+
         return $this;
     }
 
@@ -148,6 +155,7 @@ class PredicateSet implements PredicateInterface, Countable
     public function andPredicate(PredicateInterface $predicate)
     {
         $this->predicates[] = array(self::OP_AND, $predicate);
+
         return $this;
     }
 
@@ -173,10 +181,11 @@ class PredicateSet implements PredicateInterface, Countable
                 $parts[] = ')';
             }
 
-            if (isset($this->predicates[$i+1])) {
-                $parts[] = sprintf(' %s ', $this->predicates[$i+1][0]);
+            if (isset($this->predicates[$i + 1])) {
+                $parts[] = sprintf(' %s ', $this->predicates[$i + 1][0]);
             }
         }
+
         return $parts;
     }
 

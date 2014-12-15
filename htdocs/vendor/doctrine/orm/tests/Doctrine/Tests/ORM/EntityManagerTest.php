@@ -70,7 +70,7 @@ class EntityManagerTest extends \Doctrine\Tests\OrmTestCase
     public function testCreateQueryBuilderAliasValid()
     {
         $q = $this->_em->createQueryBuilder()
-             ->select('u')->from('Doctrine\Tests\Models\CMS\CmsUser', 'u');
+            ->select('u')->from('Doctrine\Tests\Models\CMS\CmsUser', 'u');
         $q2 = clone $q;
 
         $this->assertEquals('SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u', $q->getQuery()->getDql());
@@ -115,9 +115,10 @@ class EntityManagerTest extends \Doctrine\Tests\OrmTestCase
     /**
      * @dataProvider dataMethodsAffectedByNoObjectArguments
      */
-    public function testThrowsExceptionOnNonObjectValues($methodName) {
+    public function testThrowsExceptionOnNonObjectValues($methodName)
+    {
         $this->setExpectedException('Doctrine\ORM\ORMInvalidArgumentException',
-            'EntityManager#'.$methodName.'() expects parameter 1 to be an entity object, NULL given.');
+            'EntityManager#' . $methodName . '() expects parameter 1 to be an entity object, NULL given.');
         $this->_em->$methodName(null);
     }
 
@@ -170,6 +171,7 @@ class EntityManagerTest extends \Doctrine\Tests\OrmTestCase
     public function transactionalCallback($em)
     {
         $this->assertSame($this->_em, $em);
+
         return 'callback';
     }
 }

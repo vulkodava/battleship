@@ -38,16 +38,16 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     public function testBasic()
     {
         $valuesExpected = array(
-            'abc123'  => false,
+            'abc123' => false,
             'abc 123' => false,
-            'abcxyz'  => true,
+            'abcxyz' => true,
             'AZ@#4.3' => false,
-            'aBc123'  => false,
-            'aBcDeF'  => true,
-            ''        => false,
-            ' '       => false,
-            "\n"      => false
-            );
+            'aBc123' => false,
+            'aBcDeF' => true,
+            '' => false,
+            ' ' => false,
+            "\n" => false
+        );
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->validator->isValid($input));
         }
@@ -73,17 +73,17 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
         $this->validator->setAllowWhiteSpace(true);
 
         $valuesExpected = array(
-            'abc123'  => false,
+            'abc123' => false,
             'abc 123' => false,
-            'abcxyz'  => true,
+            'abcxyz' => true,
             'AZ@#4.3' => false,
-            'aBc123'  => false,
-            'aBcDeF'  => true,
-            ''        => false,
-            ' '       => true,
-            "\n"      => true,
-            " \t "    => true,
-            "a\tb c"  => true
+            'aBc123' => false,
+            'aBcDeF' => true,
+            '' => false,
+            ' ' => true,
+            "\n" => true,
+            " \t " => true,
+            "a\tb c" => true
         );
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(
@@ -106,6 +106,6 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 }

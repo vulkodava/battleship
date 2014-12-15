@@ -34,16 +34,16 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
     public function testExpectedResultsWithBasicInputValues()
     {
         $valuesExpected = array(
-            'abc123'  => false,
+            'abc123' => false,
             'abc 123' => false,
-            'abcxyz'  => false,
+            'abcxyz' => false,
             'AZ@#4.3' => false,
-            '1.23'    => false,
-            '0x9f'    => false,
-            '123'     => true,
-            '09'      => true,
-            ''        => false
-            );
+            '1.23' => false,
+            '0x9f' => false,
+            '123' => true,
+            '09' => true,
+            '' => false
+        );
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals($result, $this->validator->isValid($input));
         }
@@ -68,7 +68,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
         $messages = $this->validator->getMessages();
         $arrayExpected = array(
             Digits::STRING_EMPTY => 'The input is an empty string'
-            );
+        );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
 
@@ -81,7 +81,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
         $messages = $this->validator->getMessages();
         $arrayExpected = array(
             Digits::NOT_DIGITS => 'The input must contain only digits'
-            );
+        );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }
 
@@ -97,6 +97,6 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 }

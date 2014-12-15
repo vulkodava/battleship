@@ -49,8 +49,8 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     {
         $acceptHeader = new Accept();
         $acceptHeader->addMediaType('text/html', 0.8)
-                     ->addMediaType('application/json', 1)
-                     ->addMediaType('application/atom+xml', 0.9);
+            ->addMediaType('application/json', 1)
+            ->addMediaType('application/atom+xml', 0.9);
 
         // @todo set some values, then test output
         $this->assertEquals(
@@ -75,7 +75,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
     public function testPrioritizesValuesBasedOnQParameter()
     {
-        $header   = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
+        $header = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
         $expected = array(
             'text/html',
             'text/x-c',
@@ -94,22 +94,22 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     {
         $acceptHeader = new Accept();
         $acceptHeader->addMediaType('text/html', 0.8, array('level' => 1))
-                     ->addMediaType('text/html', 0.4, array('level' => 2))
-                     ->addMediaType('application/atom+xml', 0.9);
+            ->addMediaType('text/html', 0.4, array('level' => 2))
+            ->addMediaType('application/atom+xml', 0.9);
 
         $this->assertEquals(
-                        'Accept: text/html;q=0.8;level=1, '
-                           .'text/html;q=0.4;level=2, application/atom+xml;q=0.9',
-                        $acceptHeader->toString()
-                );
+            'Accept: text/html;q=0.8;level=1, '
+            . 'text/html;q=0.4;level=2, application/atom+xml;q=0.9',
+            $acceptHeader->toString()
+        );
     }
 
     public function testPrioritizedLevel()
     {
         $header = Accept::fromString('Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1,'
-                                     .'text/html;level=2;q=0.4, */*;q=0.5');
+            . 'text/html;level=2;q=0.4, */*;q=0.5');
 
-        $expected = array (
+        $expected = array(
             'text/html;level=1',
             'text/html;q=0.7',
             '*/*;q=0.5',
@@ -126,15 +126,15 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     public function testPrios()
     {
         $values = array('invalidPrio' => false,
-                        -0.0001       => false,
-                        1.0001        => false,
-                        1.000         => true,
-                        0.999         => true,
-                        0.000         => true,
-                        0.001         => true,
-                        1             => true,
-                        0             => true
-                );
+            -0.0001 => false,
+            1.0001 => false,
+            1.000 => true,
+            0.999 => true,
+            0.000 => true,
+            0.001 => true,
+            1 => true,
+            0 => true
+        );
 
         $header = new Accept();
         foreach ($values as $prio => $shouldPass) {
@@ -155,8 +155,8 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     {
         $acceptHeader = new Accept();
         $acceptHeader->addMediaType('text/*', 0.8)
-                     ->addMediaType('application/*', 1)
-                     ->addMediaType('*/*', 0.4);
+            ->addMediaType('application/*', 1)
+            ->addMediaType('*/*', 0.4);
 
         $this->assertTrue($acceptHeader->hasMediaType('text/html'));
         $this->assertTrue($acceptHeader->hasMediaType('application/atom+xml'));
@@ -189,27 +189,27 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     public function testParsingAndAssemblingQuotedStrings()
     {
         $acceptStr = 'Accept: application/vnd.foobar+html;q=1;version="2\\'
-                   . chr(22).'3\"";level="foo;, bar", text/json;level=1, text/xml;level=2;q=0.4';
+            . chr(22) . '3\"";level="foo;, bar", text/json;level=1, text/xml;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
-        $this->assertEquals($acceptStr, $acceptHeader->getFieldName().': ' . $acceptHeader->getFieldValue());
+        $this->assertEquals($acceptStr, $acceptHeader->getFieldName() . ': ' . $acceptHeader->getFieldValue());
     }
 
 
     public function testMatchReturnsMatchedAgainstObject()
     {
         $acceptStr = 'Accept: text/html;q=1; version=23; level=5, text/json;level=1,' .
-                'text/xml;level=2;q=0.4';
+            'text/xml;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
         $res = $acceptHeader->match('text/html; _randomValue=foobar');
         $this->assertInstanceOf(
-                'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
-                $res->getMatchedAgainst()
+            'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
+            $res->getMatchedAgainst()
         );
         $this->assertEquals(
-                'foobar',
-                $res->getMatchedAgainst()->getParams()->_randomValue
+            'foobar',
+            $res->getMatchedAgainst()->getParams()->_randomValue
         );
 
         $acceptStr = 'Accept: */*; ';
@@ -217,13 +217,13 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
         $res = $acceptHeader->match('text/html; _foo=bar');
         $this->assertInstanceOf(
-                'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
-                $res->getMatchedAgainst()
+            'Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart',
+            $res->getMatchedAgainst()
         );
 
         $this->assertEquals(
-                'bar',
-                $res->getMatchedAgainst()->getParams()->_foo
+            'bar',
+            $res->getMatchedAgainst()->getParams()->_foo
         );
     }
 
@@ -231,17 +231,17 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     public function testVersioning()
     {
         $acceptStr = 'Accept: text/html;q=1; version=23; level=5, text/json;level=1,' .
-                'text/xml;level=2;q=0.4';
+            'text/xml;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
         $expected = array('typeString' => 'text/html',
-                'type' => 'text',
-                'subtype' => 'html',
-                'subtypeRaw' => 'html',
-                'format' => 'html',
-                'priority' => 1,
-                'params' => array('q' => 1, 'version' => 23, 'level' => 5),
-                'raw' => 'text/html;q=1; version=23; level=5');
+            'type' => 'text',
+            'subtype' => 'html',
+            'subtypeRaw' => 'html',
+            'format' => 'html',
+            'priority' => 1,
+            'params' => array('q' => 1, 'version' => 23, 'level' => 5),
+            'raw' => 'text/html;q=1; version=23; level=5');
 
         $this->assertFalse($acceptHeader->match('text/html; version=22'));
 
@@ -283,7 +283,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group 3739
+     * @group  3739
      * @covers Zend\Http\Header\AbstractAccept::matchAcceptParams()
      */
     public function testParamRangesWithDecimals()
@@ -293,10 +293,10 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group 3740
+     * @group        3740
      * @dataProvider provideParamRanges
-     * @covers Zend\Http\Header\AbstractAccept::matchAcceptParams()
-     * @covers Zend\Http\Header\AbstractAccept::getParametersFromFieldValuePart()
+     * @covers       Zend\Http\Header\AbstractAccept::matchAcceptParams()
+     * @covers       Zend\Http\Header\AbstractAccept::getParametersFromFieldValuePart()
      */
     public function testParamRangesSupportDevStage($range, $input, $success)
     {
@@ -338,17 +338,17 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     public function testVersioningAndPriorization()
     {
         $acceptStr = 'Accept: text/html; version=23, text/json; version=15.3; q=0.9,' .
-                'text/html;level=2;q=0.4';
+            'text/html;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
         $expected = array('typeString' => 'text/json',
-                'type' => 'text',
-                'subtype' => 'json',
-                'subtypeRaw' => 'json',
-                'format' => 'json',
-                'priority' => 0.9,
-                'params' => array('q' => 0.9, 'version' => 15.3),
-                'raw' => 'text/json; version=15.3; q=0.9');
+            'type' => 'text',
+            'subtype' => 'json',
+            'subtypeRaw' => 'json',
+            'format' => 'json',
+            'priority' => 0.9,
+            'params' => array('q' => 0.9, 'version' => 15.3),
+            'raw' => 'text/json; version=15.3; q=0.9');
 
         $str = 'text/html; version=17, text/json; version=15-16';
         $res = $acceptHeader->match($str);
@@ -356,7 +356,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($value, $res->$key);
         }
 
-        $expected = (object) array(
+        $expected = (object)array(
             'typeString' => 'text/html',
             'type' => 'text',
             'subtype' => 'html',
@@ -379,17 +379,17 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     {
         // Example is copy/paste from rfc2616
         $acceptStr = 'Accept: text/*;q=0.3, */*,text/html;q=1, text/html;level=1,'
-                           . 'text/html;level=2;q=0.4, */*;q=0.5';
+            . 'text/html;level=2;q=0.4, */*;q=0.5';
         $acceptHdr = Accept::fromString($acceptStr);
 
         $expected = array('typeString' => 'text/html',
-                'type' => 'text',
-                'subtype' => 'html',
-                'subtypeRaw' => 'html',
-                'format' => 'html',
-                'priority' => 1,
-                'params' => array('level' => 1),
-                'raw' => 'text/html;level=1');
+            'type' => 'text',
+            'subtype' => 'html',
+            'subtypeRaw' => 'html',
+            'format' => 'html',
+            'priority' => 1,
+            'params' => array('level' => 1),
+            'raw' => 'text/html;level=1');
 
         $res = $acceptHdr->match('text/html');
         foreach ($expected as $key => $value) {
@@ -444,13 +444,13 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete('No wildcard defaults implemented yet');
 
         $expected = (object)array('typeString' => 'image',
-                'type' => 'image',
-                'subtype' => '*',
-                'subtypeRaw' => '',
-                'format' => 'jpeg',
-                'priority' => 1,
-                'params' => array(),
-                'raw' => 'image');
+            'type' => 'image',
+            'subtype' => '*',
+            'subtypeRaw' => '',
+            'format' => 'jpeg',
+            'priority' => 1,
+            'params' => array(),
+            'raw' => 'image');
 
         $this->assertEquals($expected, $acceptHdr->match('image'));
         //  $this->assertEquals($expected, $this->_handler->match('text'));

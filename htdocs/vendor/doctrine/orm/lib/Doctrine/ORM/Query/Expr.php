@@ -21,14 +21,14 @@ namespace Doctrine\ORM\Query;
 
 /**
  * This class is used to generate DQL expressions via a set of PHP static functions.
-
+ *
  * @link    www.doctrine-project.org
  * @since   2.0
  * @author  Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author  Jonathan Wage <jonwage@gmail.com>
  * @author  Roman Borschel <roman@code-factory.org>
  * @author  Benjamin Eberlei <kontakt@beberlei.de>
- * @todo Rename: ExpressionBuilder
+ * @todo    Rename: ExpressionBuilder
  */
 class Expr
 {
@@ -436,7 +436,7 @@ class Expr
      * Creates an IN() expression with the given arguments.
      *
      * @param string $x Field in string format to be restricted by IN() function.
-     * @param mixed  $y Argument to be used in IN() function.
+     * @param mixed $y  Argument to be used in IN() function.
      *
      * @return Expr\Func
      */
@@ -444,19 +444,20 @@ class Expr
     {
         if (is_array($y)) {
             foreach ($y as &$literal) {
-                if ( ! ($literal instanceof Expr\Literal)) {
+                if (!($literal instanceof Expr\Literal)) {
                     $literal = $this->_quoteLiteral($literal);
                 }
             }
         }
-        return new Expr\Func($x . ' IN', (array) $y);
+
+        return new Expr\Func($x . ' IN', (array)$y);
     }
 
     /**
      * Creates a NOT IN() expression with the given arguments.
      *
      * @param string $x Field in string format to be restricted by NOT IN() function.
-     * @param mixed $y Argument to be used in NOT IN() function.
+     * @param mixed $y  Argument to be used in NOT IN() function.
      *
      * @return Expr\Func
      */
@@ -464,12 +465,13 @@ class Expr
     {
         if (is_array($y)) {
             foreach ($y as &$literal) {
-                if ( ! ($literal instanceof Expr\Literal)) {
+                if (!($literal instanceof Expr\Literal)) {
                     $literal = $this->_quoteLiteral($literal);
                 }
             }
         }
-        return new Expr\Func($x . ' NOT IN', (array) $y);
+
+        return new Expr\Func($x . ' NOT IN', (array)$y);
     }
 
     /**
@@ -500,7 +502,7 @@ class Expr
      * Creates a LIKE() comparison expression with the given arguments.
      *
      * @param string $x Field in string format to be inspected by LIKE() comparison.
-     * @param mixed  $y Argument to be used in LIKE() comparison.
+     * @param mixed $y  Argument to be used in LIKE() comparison.
      *
      * @return Expr\Comparison
      */
@@ -513,7 +515,7 @@ class Expr
      * Creates a NOT LIKE() comparison expression with the given arguments.
      *
      * @param string $x Field in string format to be inspected by LIKE() comparison.
-     * @param mixed  $y Argument to be used in LIKE() comparison.
+     * @param mixed $y  Argument to be used in LIKE() comparison.
      *
      * @return Expr\Comparison
      */
@@ -538,9 +540,9 @@ class Expr
     /**
      * Creates a SUBSTRING() function expression with the given arguments.
      *
-     * @param mixed    $x    Argument to be used as string to be cropped by SUBSTRING() function.
-     * @param int      $from Initial offset to start cropping string. May accept negative values.
-     * @param int|null $len  Length of crop. May accept negative values.
+     * @param mixed $x      Argument to be used as string to be cropped by SUBSTRING() function.
+     * @param int $from     Initial offset to start cropping string. May accept negative values.
+     * @param int|null $len Length of crop. May accept negative values.
      *
      * @return Expr\Func
      */
@@ -550,6 +552,7 @@ class Expr
         if (null !== $len) {
             $args[] = $len;
         }
+
         return new Expr\Func('SUBSTRING', $args);
     }
 
@@ -611,7 +614,7 @@ class Expr
     private function _quoteLiteral($literal)
     {
         if (is_numeric($literal) && !is_string($literal)) {
-            return (string) $literal;
+            return (string)$literal;
         } else if (is_bool($literal)) {
             return $literal ? "true" : "false";
         } else {
@@ -622,9 +625,9 @@ class Expr
     /**
      * Creates an instance of BETWEEN() function, with the given argument.
      *
-     * @param mixed   $val Valued to be inspected by range values.
-     * @param integer $x   Starting range value to be used in BETWEEN() function.
-     * @param integer $y   End point value to be used in BETWEEN() function.
+     * @param mixed $val Valued to be inspected by range values.
+     * @param integer $x Starting range value to be used in BETWEEN() function.
+     * @param integer $y End point value to be used in BETWEEN() function.
      *
      * @return Expr\Func A BETWEEN expression.
      */

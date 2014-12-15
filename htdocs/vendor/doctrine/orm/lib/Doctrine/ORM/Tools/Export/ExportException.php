@@ -33,6 +33,6 @@ class ExportException extends ORMException
      */
     public static function attemptOverwriteExistingFile($file)
     {
-        return new self("Attempting to overwrite an existing file '".$file."'.");
+        return new self("Attempting to overwrite an existing file '" . $file . "'.");
     }
 }

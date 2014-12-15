@@ -41,27 +41,27 @@ class HttpTest extends TestCase
     public function validHostProvider()
     {
         return array(
-            array('',                                   false),
-            array('http',                               true),
-            array('http:',                              false),
-            array('http:/',                             false),
-            array('http://',                            false),
-            array('http:///',                           false),
-            array('http://www.example.org/',            false),
-            array('www.example.org:80',                 false),
-            array('www.example.org',                    true),
-            array('http://foo',                         false),
-            array('foo',                                true),
-            array('ftp://user:pass@example.org/',       false),
-            array('www.fi/',                            false),
-            array('http://1.1.1.1/',                    false),
-            array('1.1.1.1',                            true),
-            array('1.256.1.1',                          true), // Hostnames can be only numbers
-            array('http://[::1]/',                      false),
-            array('[::1]',                              true),
+            array('', false),
+            array('http', true),
+            array('http:', false),
+            array('http:/', false),
+            array('http://', false),
+            array('http:///', false),
+            array('http://www.example.org/', false),
+            array('www.example.org:80', false),
+            array('www.example.org', true),
+            array('http://foo', false),
+            array('foo', true),
+            array('ftp://user:pass@example.org/', false),
+            array('www.fi/', false),
+            array('http://1.1.1.1/', false),
+            array('1.1.1.1', true),
+            array('1.256.1.1', true), // Hostnames can be only numbers
+            array('http://[::1]/', false),
+            array('[::1]', true),
             array('http://[2620:0:1cfe:face:b00c::3]/', false),
-            array('[2620:0:1cfe:face:b00c::3]:80',      false),
-            array('[2620:0:1cfe:face:b00c::3]',         true),
+            array('[2620:0:1cfe:face:b00c::3]:80', false),
+            array('[2620:0:1cfe:face:b00c::3]', true),
         );
     }
 
@@ -136,7 +136,7 @@ class HttpTest extends TestCase
     /**
      * Test the validity of the hosts
      *
-     * @param string  $host
+     * @param string $host
      * @param  bool $expected
      * @return void
      * @dataProvider validHostProvider

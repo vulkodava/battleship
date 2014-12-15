@@ -49,8 +49,8 @@ interface ModelInterface extends Countable, IteratorAggregate
     /**
      * Get a single view variable
      *
-     * @param  string       $name
-     * @param  mixed|null   $default (optional) default value if the variable is not present.
+     * @param  string $name
+     * @param  mixed|null $default (optional) default value if the variable is not present.
      * @return mixed
      */
     public function getVariable($name, $default = null);
@@ -99,7 +99,7 @@ interface ModelInterface extends Countable, IteratorAggregate
      *
      * @param  ModelInterface $child
      * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
-     * @param  null|bool $append Optional; if specified, append to child  with the same capture
+     * @param  null|bool $append      Optional; if specified, append to child  with the same capture
      * @return ModelInterface
      */
     public function addChild(ModelInterface $child, $captureTo = null, $append = false);

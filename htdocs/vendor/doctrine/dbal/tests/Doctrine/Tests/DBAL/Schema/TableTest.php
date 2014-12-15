@@ -20,7 +20,7 @@ class TableTest extends \Doctrine\Tests\DbalTestCase
 
     public function testGetName()
     {
-        $table =  new Table("foo", array(), array(), array());
+        $table = new Table("foo", array(), array(), array());
         $this->assertEquals("foo", $table->getName());
     }
 
@@ -251,7 +251,7 @@ class TableTest extends \Doctrine\Tests\DbalTestCase
         $this->setExpectedException("Doctrine\DBAL\Schema\SchemaException");
 
         $table = new Table("foo");
-        $table->addColumn("bar",'integer');
+        $table->addColumn("bar", 'integer');
         $table->addIndex(array("bar"), "invalid name %&/");
     }
 

@@ -78,7 +78,7 @@ class CreateSchemaSqlCollector extends AbstractVisitor
         if ($this->platform->supportsForeignKeyConstraints()) {
             $this->createFkConstraintQueries[$namespace] = array_merge(
                 $this->createFkConstraintQueries[$namespace],
-                (array) $this->platform->getCreateForeignKeySQL(
+                (array)$this->platform->getCreateForeignKeySQL(
                     $fkConstraint, $localTable
                 )
             );
@@ -106,7 +106,7 @@ class CreateSchemaSqlCollector extends AbstractVisitor
     private function getNamespace($asset)
     {
         $namespace = $asset->getNamespaceName() ?: 'default';
-        if ( !isset($this->createTableQueries[$namespace])) {
+        if (!isset($this->createTableQueries[$namespace])) {
             $this->createTableQueries[$namespace] = array();
             $this->createSequenceQueries[$namespace] = array();
             $this->createFkConstraintQueries[$namespace] = array();

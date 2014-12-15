@@ -48,7 +48,8 @@ final class EntityResult implements Annotation
     public $fields = array();
 
     /**
-     * Specifies the column name of the column in the SELECT list that is used to determine the type of the entity instance.
+     * Specifies the column name of the column in the SELECT list that is used to determine the type of the entity
+     * instance.
      *
      * @var string
      */

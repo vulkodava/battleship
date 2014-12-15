@@ -25,9 +25,9 @@ class EntityResolverFactoryTest extends TestCase
 {
     public function testCanResolveTargetEntity()
     {
-        $em            = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $classMetadata = $em->getClassMetadata('DoctrineORMModuleTest\Assets\Entity\ResolveTarget');
-        $meta          = $classMetadata->associationMappings;
+        $meta = $classMetadata->associationMappings;
 
         $this->assertSame('DoctrineORMModuleTest\Assets\Entity\TargetEntity', $meta['target']['targetEntity']);
     }

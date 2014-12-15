@@ -26,12 +26,14 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
                 $header = new static($fieldName, $multiValue);
                 $headers[] = $header->setEncoding($encoding);
             }
+
             return $headers;
         } else {
             $header = new static($fieldName, $fieldValue);
             if ($decodedLine != $headerLine) {
                 $header->setEncoding('UTF-8');
             }
+
             return $header;
         }
     }
@@ -45,7 +47,7 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
      */
     public function toStringMultipleHeaders(array $headers)
     {
-        $name  = $this->getFieldName();
+        $name = $this->getFieldName();
         $values = array($this->getFieldValue(HeaderInterface::FORMAT_ENCODED));
         foreach ($headers as $header) {
             if (!$header instanceof static) {
@@ -55,6 +57,7 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
             }
             $values[] = $header->getFieldValue(HeaderInterface::FORMAT_ENCODED);
         }
+
         return $name . ': ' . implode(',', $values);
     }
 }

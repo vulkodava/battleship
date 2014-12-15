@@ -41,7 +41,7 @@ class TestFieldset extends Fieldset implements InputFilterProviderInterface
                     array(
                         'name' => 'filerenameupload',
                         'options' => array(
-                            'target'    => __DIR__ . '/testfile.jpg',
+                            'target' => __DIR__ . '/testfile.jpg',
                             'overwrite' => true,
                         )
                     )

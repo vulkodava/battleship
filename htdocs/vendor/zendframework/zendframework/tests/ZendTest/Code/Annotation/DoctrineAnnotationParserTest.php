@@ -30,10 +30,11 @@ class DoctrineAnnotationParserTest extends TestCase
     {
         $event = new Event();
         $event->setParams(array(
-            'class'   => __NAMESPACE__ . '\TestAsset\DoctrineAnnotation',
+            'class' => __NAMESPACE__ . '\TestAsset\DoctrineAnnotation',
             'content' => '(foo="bar")',
-            'raw'     => '@' . __NAMESPACE__ . '\TestAsset\DoctrineAnnotation(foo="bar")',
+            'raw' => '@' . __NAMESPACE__ . '\TestAsset\DoctrineAnnotation(foo="bar")',
         ));
+
         return $event;
     }
 
@@ -42,7 +43,7 @@ class DoctrineAnnotationParserTest extends TestCase
         $this->parser->registerAnnotation(__NAMESPACE__ . '\TestAsset\DoctrineAnnotation');
 
         $event = $this->getEvent();
-        $test  = $this->parser->onCreateAnnotation($event);
+        $test = $this->parser->onCreateAnnotation($event);
         $this->assertInstanceOf(__NAMESPACE__ . '\TestAsset\DoctrineAnnotation', $test);
         $this->assertEquals(array('foo' => 'bar'), $test->value);
     }

@@ -114,7 +114,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
         $method = array(
             'name' => 'foo.bar',
             'callback' => array(
-                'type'     => 'function',
+                'type' => 'function',
                 'function' => 'bar',
             ),
             'prototypes' => array(
@@ -142,7 +142,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
         $method = array(
             'name' => 'foo.bar',
             'callback' => array(
-                'type'     => 'function',
+                'type' => 'function',
                 'function' => 'bar',
             ),
             'prototypes' => array(

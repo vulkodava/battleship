@@ -21,7 +21,7 @@ namespace Doctrine\ORM\Query\AST;
 
 /**
  * SelectExpression ::= IdentificationVariable ["." "*"] | StateFieldPathExpression |
- *	                    (AggregateExpression | "(" Subselect ")") [["AS"] ["HIDDEN"] FieldAliasIdentificationVariable]
+ *                        (AggregateExpression | "(" Subselect ")") [["AS"] ["HIDDEN"] FieldAliasIdentificationVariable]
  *
  * @link    www.doctrine-project.org
  * @since   2.0
@@ -47,9 +47,9 @@ class SelectExpression extends Node
     public $hiddenAliasResultVariable;
 
     /**
-     * @param mixed       $expression
+     * @param mixed $expression
      * @param string|null $fieldIdentificationVariable
-     * @param bool        $hiddenAliasResultVariable
+     * @param bool $hiddenAliasResultVariable
      */
     public function __construct($expression, $fieldIdentificationVariable, $hiddenAliasResultVariable = false)
     {

@@ -63,7 +63,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @issue ZF2-4051
-     * @link https://github.com/zendframework/zf2/issues/4051
+     * @link  https://github.com/zendframework/zf2/issues/4051
      */
     public function testWriteLineOverflowAndWidthMatch()
     {
@@ -129,20 +129,20 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         //Console UTF8 - Text utf8
         $this->adapter->setTestUtf8(true);
         $encodedText = $this->adapter->encodeText($text);
-        $this->assertEquals($text,$encodedText);
+        $this->assertEquals($text, $encodedText);
 
         //Console UTF8 - Text not utf8
         $encodedText = $this->adapter->encodeText(utf8_decode($text));
-        $this->assertEquals($text,$encodedText);
+        $this->assertEquals($text, $encodedText);
 
         //Console not UTF8 - Text utf8
         $this->adapter->setTestUtf8(false);
         $encodedText = $this->adapter->encodeText($text);
-        $this->assertEquals(utf8_decode($text),$encodedText);
+        $this->assertEquals(utf8_decode($text), $encodedText);
 
         //Console not UTF8 - Text not utf8
         $encodedText = $this->adapter->encodeText(utf8_decode($text));
-        $this->assertEquals(utf8_decode($text),$encodedText);
+        $this->assertEquals(utf8_decode($text), $encodedText);
     }
 
     public function testWriteTextBlockSameAsWidth()
@@ -160,8 +160,8 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $text = 'thisisaverylongwordthatwontbreakproperlysothereyouhaveit and here is some more text';
         $expected = array('thisisaver', 'ylongwordt', 'hatwontbre', 'akproperly'
-           , 'sothereyou', 'haveit and', 'here is', 'some more'
-           , 'text');
+        , 'sothereyou', 'haveit and', 'here is', 'some more'
+        , 'text');
 
         ob_start();
         $this->adapter->writeTextBlock($text, 10);
@@ -170,6 +170,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         //just get rid of the data in ob
         ob_get_clean();
     }
+
     public function testTextBlockLongerThanHeight()
     {
         $text = 'thisisaverylongwordthatwontbreakproperlysothereyouhaveit and here is some more text';

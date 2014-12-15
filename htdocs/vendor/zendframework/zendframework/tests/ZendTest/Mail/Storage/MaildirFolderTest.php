@@ -28,7 +28,8 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
         if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 . 'directory before enabling the maildir tests');
+                . 'directory before enabling the maildir tests');
+
             return;
         }
 
@@ -49,6 +50,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
             closedir($dh);
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
@@ -174,9 +176,9 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         $mail = new Folder\Maildir($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume an order while iterating
-        $search_folders = array('subfolder'      => 'subfolder',
-                                'subfolder.test' => 'test',
-                                'INBOX'          => 'INBOX');
+        $search_folders = array('subfolder' => 'subfolder',
+            'subfolder.test' => 'test',
+            'INBOX' => 'INBOX');
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -197,9 +199,9 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         $mail = new Folder\Maildir($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume an order while iterating
-        $search_folders = array('subfolder'      => 'subfolder',
-                                'subfolder.test' => 'test',
-                                'INBOX'          => 'INBOX');
+        $search_folders = array('subfolder' => 'subfolder',
+            'subfolder.test' => 'test',
+            'INBOX' => 'INBOX');
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -296,6 +298,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
             chmod($this->_params['dirname'] . '.subfolder', $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
+
             return;
         }
 
@@ -323,6 +326,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
             chmod($this->_params['dirname'], $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
+
             return;
         }
 

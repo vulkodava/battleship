@@ -139,12 +139,12 @@ class MockUp extends \Zend\ProgressBar\Adapter\AbstractAdapter
 
     public function notify($current, $max, $percent, $timeTaken, $timeRemaining, $text)
     {
-        $this->_current       = $current;
-        $this->_max           = $max;
-        $this->_percent       = $percent;
-        $this->_timeTaken     = $timeTaken;
+        $this->_current = $current;
+        $this->_max = $max;
+        $this->_percent = $percent;
+        $this->_timeTaken = $timeTaken;
         $this->_timeRemaining = $timeRemaining;
-        $this->_text          = $text;
+        $this->_text = $text;
     }
 
     public function finish()

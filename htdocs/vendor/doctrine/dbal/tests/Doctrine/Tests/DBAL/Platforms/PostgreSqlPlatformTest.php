@@ -55,7 +55,7 @@ class PostgreSqlPlatformTest extends AbstractPlatformTestCase
     public function testGeneratesForeignKeySqlForNonStandardOptions()
     {
         $foreignKey = new \Doctrine\DBAL\Schema\ForeignKeyConstraint(
-                array('foreign_id'), 'my_table', array('id'), 'my_fk', array('onDelete' => 'CASCADE')
+            array('foreign_id'), 'my_table', array('id'), 'my_fk', array('onDelete' => 'CASCADE')
         );
         $this->assertEquals(
             "CONSTRAINT my_fk FOREIGN KEY (foreign_id) REFERENCES my_table (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE",
@@ -157,12 +157,12 @@ class PostgreSqlPlatformTest extends AbstractPlatformTestCase
         $this->assertEquals(
             'SERIAL',
             $this->_platform->getIntegerTypeDeclarationSQL(array('autoincrement' => true)
-        ));
+            ));
         $this->assertEquals(
             'SERIAL',
             $this->_platform->getIntegerTypeDeclarationSQL(
                 array('autoincrement' => true, 'primary' => true)
-        ));
+            ));
     }
 
     public function testGeneratesTypeDeclarationForStrings()
@@ -298,8 +298,8 @@ class PostgreSqlPlatformTest extends AbstractPlatformTestCase
      * @group        DBAL-457
      * @dataProvider pgBooleanProvider
      *
-     * @param string  $databaseValue
-     * @param string  $preparedStatementValue
+     * @param string $databaseValue
+     * @param string $preparedStatementValue
      * @param integer $integerValue
      * @param boolean $booleanValue
      */
@@ -308,7 +308,8 @@ class PostgreSqlPlatformTest extends AbstractPlatformTestCase
         $preparedStatementValue,
         $integerValue,
         $booleanValue
-    ) {
+    )
+    {
         $platform = $this->createPlatform();
 
         $this->assertEquals($preparedStatementValue, $platform->convertBooleans($databaseValue));
@@ -333,8 +334,8 @@ class PostgreSqlPlatformTest extends AbstractPlatformTestCase
      * @group        DBAL-630
      * @dataProvider pgBooleanProvider
      *
-     * @param string  $databaseValue
-     * @param string  $preparedStatementValue
+     * @param string $databaseValue
+     * @param string $preparedStatementValue
      * @param integer $integerValue
      * @param boolean $booleanValue
      */
@@ -343,7 +344,8 @@ class PostgreSqlPlatformTest extends AbstractPlatformTestCase
         $preparedStatementValue,
         $integerValue,
         $booleanValue
-    ) {
+    )
+    {
         $platform = $this->createPlatform();
 
         $this->assertSame($integerValue, $platform->convertBooleansToDatabaseValue($booleanValue));
@@ -364,8 +366,8 @@ class PostgreSqlPlatformTest extends AbstractPlatformTestCase
     /**
      * @dataProvider pgBooleanProvider
      *
-     * @param string  $databaseValue
-     * @param string  $prepareStatementValue
+     * @param string $databaseValue
+     * @param string $prepareStatementValue
      * @param integer $integerValue
      * @param boolean $booleanValue
      */
@@ -387,6 +389,7 @@ class PostgreSqlPlatformTest extends AbstractPlatformTestCase
 
     /**
      * PostgreSQL boolean strings provider
+     *
      * @return array
      */
     public function pgBooleanProvider()

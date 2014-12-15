@@ -17,9 +17,10 @@ use Zend\Db\Adapter\Platform\Oracle as OraclePlatform;
 class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select to produce properly Oracle dialect prepared sql
-     * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::prepareStatement
-     * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
+     * @testdox      integration test: Testing SelectDecorator will use Select to produce properly Oracle dialect
+     *               prepared sql
+     * @covers       Zend\Db\Sql\Platform\SqlServer\SelectDecorator::prepareStatement
+     * @covers       Zend\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
      * @dataProvider dataProvider
      */
     public function testPrepareStatement(Select $select, $expectedSql, $expectedParams, $notUsed, $expectedFormatParamCount)
@@ -51,8 +52,9 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select to produce properly Oracle dialect sql statements
-     * @covers Zend\Db\Sql\Platform\Oracle\SelectDecorator::getSqlString
+     * @testdox      integration test: Testing SelectDecorator will use Select to produce properly Oracle dialect sql
+     *               statements
+     * @covers       Zend\Db\Sql\Platform\Oracle\SelectDecorator::getSqlString
      * @dataProvider dataProvider
      */
     public function testGetSqlString(Select $select, $notUsed, $notUsed, $expectedSql)

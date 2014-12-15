@@ -69,7 +69,7 @@ class DDC214Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         try {
             $this->schemaTool->createSchema($classMetadata);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // was already created
         }
 
@@ -82,7 +82,9 @@ class DDC214Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $schemaDiff = $comparator->compare($fromSchema, $toSchema);
 
         $sql = $schemaDiff->toSql($this->_em->getConnection()->getDatabasePlatform());
-        $sql = array_filter($sql, function($sql) { return strpos($sql, 'DROP') === false; });
+        $sql = array_filter($sql, function ($sql) {
+                return strpos($sql, 'DROP') === false;
+            });
 
         $this->assertEquals(0, count($sql), "SQL: " . implode(PHP_EOL, $sql));
     }

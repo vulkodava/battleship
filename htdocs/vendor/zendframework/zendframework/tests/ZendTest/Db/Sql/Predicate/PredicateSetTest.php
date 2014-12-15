@@ -25,7 +25,7 @@ class PredicateSetTest extends TestCase
     {
         $predicateSet = new PredicateSet();
         $predicateSet->addPredicate(new IsNull('foo'))
-                  ->addPredicate(new IsNull('bar'));
+            ->addPredicate(new IsNull('bar'));
         $parts = $predicateSet->getExpressionData();
         $this->assertEquals(3, count($parts));
         $this->assertContains('AND', $parts[1]);
@@ -49,9 +49,9 @@ class PredicateSetTest extends TestCase
     {
         $predicateSet = new PredicateSet();
         $predicateSet->addPredicate(new IsNull('foo'), 'OR')
-                  ->addPredicate(new IsNull('bar'), 'AND')
-                  ->addPredicate(new IsNull('baz'), 'OR')
-                  ->addPredicate(new IsNull('bat'), 'AND');
+            ->addPredicate(new IsNull('bar'), 'AND')
+            ->addPredicate(new IsNull('baz'), 'OR')
+            ->addPredicate(new IsNull('bat'), 'AND');
         $parts = $predicateSet->getExpressionData();
         $this->assertEquals(7, count($parts));
 
@@ -69,9 +69,9 @@ class PredicateSetTest extends TestCase
     {
         $predicateSet = new PredicateSet();
         $predicateSet->orPredicate(new IsNull('foo'))
-                  ->andPredicate(new IsNull('bar'))
-                  ->orPredicate(new IsNull('baz'))
-                  ->andPredicate(new IsNull('bat'));
+            ->andPredicate(new IsNull('bar'))
+            ->orPredicate(new IsNull('baz'))
+            ->andPredicate(new IsNull('bat'));
         $parts = $predicateSet->getExpressionData();
         $this->assertEquals(7, count($parts));
 

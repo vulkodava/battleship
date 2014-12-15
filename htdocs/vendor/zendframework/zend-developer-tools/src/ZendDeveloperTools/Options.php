@@ -22,33 +22,34 @@ class Options extends AbstractOptions
      * @var array
      */
     protected $profiler = array(
-        'enabled'     => false,
-        'strict'      => true,
+        'enabled' => false,
+        'strict' => true,
         'flush_early' => false,
-        'cache_dir'   => 'data/cache',
-        'matcher'     => array(),
+        'cache_dir' => 'data/cache',
+        'matcher' => array(),
         'collectors' => array(
-            'db'        => 'ZendDeveloperTools\DbCollector',
+            'db' => 'ZendDeveloperTools\DbCollector',
             'exception' => 'ZendDeveloperTools\ExceptionCollector',
-            'request'   => 'ZendDeveloperTools\RequestCollector',
-            'config'    => 'ZendDeveloperTools\ConfigCollector',
-            'memory'    => 'ZendDeveloperTools\MemoryCollector',
-            'time'      => 'ZendDeveloperTools\TimeCollector',
+            'request' => 'ZendDeveloperTools\RequestCollector',
+            'config' => 'ZendDeveloperTools\ConfigCollector',
+            'memory' => 'ZendDeveloperTools\MemoryCollector',
+            'time' => 'ZendDeveloperTools\TimeCollector',
         ),
     );
 
     /**
      * Defaults for event-level logging
+     *
      * @var array
      */
     protected $events = array(
-        'enabled'    => false,
+        'enabled' => false,
         'collectors' => array(
             'memory' => 'ZendDeveloperTools\MemoryCollector',
-            'time'   => 'ZendDeveloperTools\TimeCollector',
+            'time' => 'ZendDeveloperTools\TimeCollector',
         ),
         'identifiers' => array(
-        	'all' => '*'
+            'all' => '*'
         )
     );
 
@@ -56,16 +57,16 @@ class Options extends AbstractOptions
      * @var array
      */
     protected $toolbar = array(
-        'enabled'       => false,
-        'auto_hide'     => false,
-        'position'      => 'bottom',
+        'enabled' => false,
+        'auto_hide' => false,
+        'position' => 'bottom',
         'version_check' => false,
-        'entries'       => array(
+        'entries' => array(
             'request' => 'zend-developer-tools/toolbar/request',
-            'time'    => 'zend-developer-tools/toolbar/time',
-            'memory'  => 'zend-developer-tools/toolbar/memory',
-            'config'  => 'zend-developer-tools/toolbar/config',
-            'db'      => 'zend-developer-tools/toolbar/db',
+            'time' => 'zend-developer-tools/toolbar/time',
+            'memory' => 'zend-developer-tools/toolbar/memory',
+            'config' => 'zend-developer-tools/toolbar/config',
+            'db' => 'zend-developer-tools/toolbar/db',
         ),
     );
 
@@ -73,7 +74,7 @@ class Options extends AbstractOptions
      * Overloading Constructor.
      *
      * @param  array|Traversable|null $options
-     * @param  ReportInterface        $report
+     * @param  ReportInterface $report
      * @throws \Zend\Stdlib\Exception\InvalidArgumentException
      */
     public function __construct($options, ReportInterface $report)
@@ -91,16 +92,16 @@ class Options extends AbstractOptions
     public function setProfiler(array $options)
     {
         if (isset($options['enabled'])) {
-            $this->profiler['enabled'] = (bool) $options['enabled'];
+            $this->profiler['enabled'] = (bool)$options['enabled'];
         }
         if (isset($options['strict'])) {
-            $this->profiler['strict'] = (bool) $options['strict'];
+            $this->profiler['strict'] = (bool)$options['strict'];
         }
         if (isset($options['flush_early'])) {
-            $this->profiler['flush_early'] = (bool) $options['flush_early'];
+            $this->profiler['flush_early'] = (bool)$options['flush_early'];
         }
         if (isset($options['cache_dir'])) {
-            $this->profiler['cache_dir'] = (string) $options['cache_dir'];
+            $this->profiler['cache_dir'] = (string)$options['cache_dir'];
         }
         if (isset($options['matcher'])) {
             $this->setMatcher($options['matcher']);
@@ -118,7 +119,7 @@ class Options extends AbstractOptions
     public function setEvents(array $options)
     {
         if (isset($options['enabled'])) {
-            $this->events['enabled'] = (bool) $options['enabled'];
+            $this->events['enabled'] = (bool)$options['enabled'];
         }
         if (isset($options['collectors'])) {
             $this->setEventCollectors($options['collectors']);
@@ -323,11 +324,11 @@ class Options extends AbstractOptions
     public function setToolbar(array $options)
     {
         if (isset($options['enabled'])) {
-            $this->toolbar['enabled'] = (bool) $options['enabled'];
+            $this->toolbar['enabled'] = (bool)$options['enabled'];
         }
 
         if (isset($options['version_check'])) {
-            $this->toolbar['version_check'] = (bool) $options['version_check'];
+            $this->toolbar['version_check'] = (bool)$options['version_check'];
         }
         if (isset($options['position'])) {
             if ($options['position'] !== 'bottom' && $options['position'] !== 'top') {

@@ -24,7 +24,7 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Validator\Bitwise::__construct()
+     * @covers       \Zend\Validator\Bitwise::__construct()
      * @dataProvider constructDataProvider
      *
      * @param array $args

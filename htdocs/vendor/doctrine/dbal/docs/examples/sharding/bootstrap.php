@@ -6,13 +6,13 @@ use Doctrine\Shards\DBAL\SQLAzure\SQLAzureShardManager;
 require_once "vendor/autoload.php";
 
 $config = array(
-    'dbname'   => 'SalesDB',
-    'host'     => 'tcp:dbname.windows.net',
-    'user'     => 'user@dbname',
+    'dbname' => 'SalesDB',
+    'host' => 'tcp:dbname.windows.net',
+    'user' => 'user@dbname',
     'password' => 'XXX',
     'sharding' => array(
-        'federationName'   => 'Orders_Federation',
-        'distributionKey'  => 'CustId',
+        'federationName' => 'Orders_Federation',
+        'distributionKey' => 'CustId',
         'distributionType' => 'integer',
     )
 );

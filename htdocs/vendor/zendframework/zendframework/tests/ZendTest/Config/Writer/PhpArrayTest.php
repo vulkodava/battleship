@@ -35,7 +35,7 @@ class PhpArrayTest extends AbstractWriterTestCase
             'test' => 'foo',
             'bar' => array(0 => 'baz', 1 => 'foo'),
             'emptyArray' => array(),
-            'object' => (object) array('foo' => 'bar'),
+            'object' => (object)array('foo' => 'bar'),
             'integer' => 123,
             'boolean' => false,
             'null' => null,

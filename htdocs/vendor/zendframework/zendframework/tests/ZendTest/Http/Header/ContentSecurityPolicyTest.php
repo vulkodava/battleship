@@ -27,9 +27,9 @@ class ContentSecurityPolicyTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $csp);
         $this->assertInstanceOf('Zend\Http\Header\ContentSecurityPolicy', $csp);
         $directives = array('default-src' => "'none'",
-                            'script-src'  => "'self'",
-                            'img-src'     => "'self'",
-                            'style-src'   => "'self'");
+            'script-src' => "'self'",
+            'img-src' => "'self'",
+            'style-src' => "'self'");
         $this->assertEquals($directives, $csp->getDirectives());
     }
 
@@ -59,7 +59,7 @@ class ContentSecurityPolicyTest extends \PHPUnit_Framework_TestCase
             ->setDirective('img-src', array("'self'"))
             ->setDirective('script-src', array('https://*.googleapis.com', 'https://*.bar.com'));
         $header = "Content-Security-Policy: default-src https://*.google.com http://foo.com; "
-                . "img-src 'self'; script-src https://*.googleapis.com https://*.bar.com;";
+            . "img-src 'self'; script-src https://*.googleapis.com https://*.bar.com;";
         $this->assertEquals($header, $csp->toString());
     }
 

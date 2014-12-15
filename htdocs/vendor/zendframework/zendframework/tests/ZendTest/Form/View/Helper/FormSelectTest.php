@@ -42,13 +42,14 @@ class FormSelectTest extends CommonTestCase
             ),
         );
         $element->setValueOptions($options);
+
         return $element;
     }
 
     public function testCreatesSelectWithOptionsFromAttribute()
     {
         $element = $this->getElement();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertEquals(1, substr_count($markup, '<select'));
         $this->assertEquals(1, substr_count($markup, '</select>'));
@@ -70,7 +71,7 @@ class FormSelectTest extends CommonTestCase
         $element = $this->getElement();
         $element->setAttribute('value', 'value2');
 
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertRegexp('#option .*?value="value2" selected="selected"#', $markup);
         $this->assertNotRegexp('#option .*?value="value1" selected="selected"#', $markup);
         $this->assertNotRegexp('#option .*?value="value3" selected="selected"#', $markup);
@@ -141,7 +142,7 @@ class FormSelectTest extends CommonTestCase
         $element = $this->getElement();
         $options = $element->getValueOptions('options');
         $options[1]['disabled'] = true;
-        $options[1]['options']  = array(
+        $options[1]['options'] = array(
             array(
                 'label' => 'foo',
                 'value' => 'bar',
@@ -190,20 +191,20 @@ class FormSelectTest extends CommonTestCase
     {
         return array(
             array(array('value' => 'string')),
-            array(array(1       => 'int')),
-            array(array(-1      => 'int-neg')),
-            array(array(0x1A    => 'hex')),
-            array(array(0123    => 'oct')),
-            array(array(2.1     => 'float')),
-            array(array(1.2e3   => 'float-e')),
-            array(array(7E-10   => 'float-E')),
-            array(array(true    => 'bool-t')),
-            array(array(false   => 'bool-f')),
+            array(array(1 => 'int')),
+            array(array(-1 => 'int-neg')),
+            array(array(0x1A => 'hex')),
+            array(array(0123 => 'oct')),
+            array(array(2.1 => 'float')),
+            array(array(1.2e3 => 'float-e')),
+            array(array(7E-10 => 'float-E')),
+            array(array(true => 'bool-t')),
+            array(array(false => 'bool-f')),
         );
     }
 
     /**
-     * @group ZF2-338
+     * @group        ZF2-338
      * @dataProvider getScalarOptionsDataProvider
      */
     public function testScalarOptionValues($options)
@@ -212,7 +213,7 @@ class FormSelectTest extends CommonTestCase
         $element->setValueOptions($options);
         $markup = $this->helper->render($element);
         list($value, $label) = each($options);
-        $this->assertRegexp(sprintf('#option .*?value="%s"#', (string) $value), $markup);
+        $this->assertRegexp(sprintf('#option .*?value="%s"#', (string)$value), $markup);
     }
 
     public function testInvokeWithNoElementChainsHelper()
@@ -234,8 +235,8 @@ class FormSelectTest extends CommonTestCase
 
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
         $mockTranslator->expects($this->exactly(1))
-        ->method('translate')
-        ->will($this->returnValue('translated content'));
+            ->method('translate')
+            ->will($this->returnValue('translated content'));
 
         $this->helper->setTranslator($mockTranslator);
         $this->assertTrue($this->helper->hasTranslator());
@@ -259,17 +260,17 @@ class FormSelectTest extends CommonTestCase
 
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
         $mockTranslator->expects($this->at(0))
-                       ->method('translate')
-                       ->with('translate me')
-                       ->will($this->returnValue('translated label'));
+            ->method('translate')
+            ->with('translate me')
+            ->will($this->returnValue('translated label'));
         $mockTranslator->expects($this->at(1))
-                       ->method('translate')
-                       ->with('foo')
-                       ->will($this->returnValue('translated foo'));
+            ->method('translate')
+            ->with('foo')
+            ->will($this->returnValue('translated foo'));
         $mockTranslator->expects($this->at(2))
-                       ->method('translate')
-                       ->with('bar')
-                       ->will($this->returnValue('translated bar'));
+            ->method('translate')
+            ->with('bar')
+            ->will($this->returnValue('translated bar'));
 
         $this->helper->setTranslator($mockTranslator);
         $this->assertTrue($this->helper->hasTranslator());

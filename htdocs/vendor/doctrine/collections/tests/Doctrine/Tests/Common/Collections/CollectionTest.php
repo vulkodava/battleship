@@ -30,7 +30,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testToString()
     {
         $this->collection->add('testing');
-        $this->assertTrue(is_string((string) $this->collection));
+        $this->assertTrue(is_string((string)$this->collection));
     }
 
     public function testRemovingNonExistentEntryReturnsNull()
@@ -42,9 +42,13 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->collection->add("one");
         $this->collection->add("two");
-        $exists = $this->collection->exists(function($k, $e) { return $e == "one"; });
+        $exists = $this->collection->exists(function ($k, $e) {
+                return $e == "one";
+            });
         $this->assertTrue($exists);
-        $exists = $this->collection->exists(function($k, $e) { return $e == "other"; });
+        $exists = $this->collection->exists(function ($k, $e) {
+                return $e == "other";
+            });
         $this->assertFalse($exists);
     }
 
@@ -52,7 +56,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->collection->add(1);
         $this->collection->add(2);
-        $res = $this->collection->map(function($e) { return $e * 2; });
+        $res = $this->collection->map(function ($e) {
+                return $e * 2;
+            });
         $this->assertEquals(array(2, 4), $res->toArray());
     }
 
@@ -61,7 +67,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->collection->add(1);
         $this->collection->add("foo");
         $this->collection->add(3);
-        $res = $this->collection->filter(function($e) { return is_numeric($e); });
+        $res = $this->collection->filter(function ($e) {
+                return is_numeric($e);
+            });
         $this->assertEquals(array(0 => 1, 2 => 3), $res->toArray());
     }
 
@@ -136,15 +144,21 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->collection[] = 'one';
         $this->collection[] = 'two';
-        $this->assertEquals($this->collection->forAll(function($k, $e) { return is_string($e); }), true);
-        $this->assertEquals($this->collection->forAll(function($k, $e) { return is_array($e); }), false);
+        $this->assertEquals($this->collection->forAll(function ($k, $e) {
+                    return is_string($e);
+                }), true);
+        $this->assertEquals($this->collection->forAll(function ($k, $e) {
+                    return is_array($e);
+                }), false);
     }
 
     public function testPartition()
     {
         $this->collection[] = true;
         $this->collection[] = false;
-        $partition = $this->collection->partition(function($k, $e) { return $e == true; });
+        $partition = $this->collection->partition(function ($k, $e) {
+                return $e == true;
+            });
         $this->assertEquals($partition[0][0], true);
         $this->assertEquals($partition[1][0], false);
     }

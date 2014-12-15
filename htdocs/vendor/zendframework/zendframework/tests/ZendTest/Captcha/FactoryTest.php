@@ -47,6 +47,7 @@ class FactoryTest extends TestCase
         if (null === $this->tmpDir) {
             $this->tmpDir = sys_get_temp_dir();
         }
+
         return $this->tmpDir;
     }
 
@@ -54,6 +55,7 @@ class FactoryTest extends TestCase
     {
         if (!extension_loaded('gd')) {
             $this->markTestSkipped('The GD extension is not available.');
+
             return;
         }
         if (!function_exists("imagepng")) {
@@ -120,8 +122,8 @@ class FactoryTest extends TestCase
             'class' => 'Zend\Captcha\Image',
             'options' => array(
                 'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-                'imgDir'       => $this->testDir,
-                'font'         => __DIR__. '/../Pdf/_fonts/Vera.ttf',
+                'imgDir' => $this->testDir,
+                'font' => __DIR__ . '/../Pdf/_fonts/Vera.ttf',
             ),
         ));
         $this->assertInstanceOf('Zend\Captcha\Image', $captcha);
@@ -134,8 +136,8 @@ class FactoryTest extends TestCase
             'class' => 'image',
             'options' => array(
                 'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-                'imgDir'       => $this->testDir,
-                'font'         => __DIR__. '/../Pdf/_fonts/Vera.ttf',
+                'imgDir' => $this->testDir,
+                'font' => __DIR__ . '/../Pdf/_fonts/Vera.ttf',
             ),
         ));
         $this->assertInstanceOf('Zend\Captcha\Image', $captcha);
@@ -174,7 +176,7 @@ class FactoryTest extends TestCase
     public function testOptionsArePassedToCaptchaAdapter()
     {
         $captcha = Captcha\Factory::factory(array(
-            'class'   => 'ZendTest\Captcha\TestAsset\MockCaptcha',
+            'class' => 'ZendTest\Captcha\TestAsset\MockCaptcha',
             'options' => array(
                 'foo' => 'bar',
             ),

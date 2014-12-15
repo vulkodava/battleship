@@ -34,6 +34,7 @@ abstract class AbstractFunction
 
     /**
      * Additional arguments to pass to method on invocation
+     *
      * @var array
      */
     protected $argv = array();
@@ -43,30 +44,35 @@ abstract class AbstractFunction
      * server class, e.g., to indicate whether or not to instantiate a class).
      * Associative array; access is as properties via {@link __get()} and
      * {@link __set()}
+     *
      * @var array
      */
     protected $config = array();
 
     /**
      * Declaring class (needed for when serialization occurs)
+     *
      * @var string
      */
     protected $class;
 
     /**
      * Function/method description
+     *
      * @var string
      */
     protected $description = '';
 
     /**
      * Namespace with which to prefix function/method name
+     *
      * @var string
      */
     protected $namespace;
 
     /**
      * Prototypes
+     *
      * @var array
      */
     protected $prototypes = array();
@@ -161,21 +167,21 @@ abstract class AbstractFunction
      * Builds method signatures using the array of return types and the array of
      * parameters types
      *
-     * @param array $return Array of return types
+     * @param array $return      Array of return types
      * @param string $returnDesc Return value description
-     * @param array $paramTypes Array of arguments (each an array of types)
-     * @param array $paramDesc Array of parameter descriptions
+     * @param array $paramTypes  Array of arguments (each an array of types)
+     * @param array $paramDesc   Array of parameter descriptions
      * @return array
      */
     protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
     {
-        $this->return         = $return;
-        $this->returnDesc     = $returnDesc;
-        $this->paramDesc      = $paramDesc;
-        $this->sigParams      = $paramTypes;
+        $this->return = $return;
+        $this->returnDesc = $returnDesc;
+        $this->paramDesc = $paramDesc;
+        $this->sigParams = $paramTypes;
         $this->sigParamsDepth = count($paramTypes);
-        $signatureTrees       = $this->buildTree();
-        $signatures           = array();
+        $signatureTrees = $this->buildTree();
+        $signatures = array();
 
         $endPoints = array();
         foreach ($signatureTrees as $root) {
@@ -205,7 +211,7 @@ abstract class AbstractFunction
         $params = $this->reflection->getParameters();
         foreach ($signatures as $signature) {
             $return = new ReflectionReturnValue(array_shift($signature), $this->returnDesc);
-            $tmp    = array();
+            $tmp = array();
             foreach ($signature as $key => $type) {
                 $param = new ReflectionParameter($params[$key], $type, (isset($this->paramDesc[$key]) ? $this->paramDesc[$key] : null));
                 $param->setPosition($key);
@@ -228,11 +234,11 @@ abstract class AbstractFunction
      */
     protected function reflect()
     {
-        $function   = $this->reflection;
+        $function = $this->reflection;
         $paramCount = $function->getNumberOfParameters();
         $parameters = $function->getParameters();
-        $scanner    = new DocBlockReflection(($function->getDocComment()) ? : '/***/');
-        $helpText   = $scanner->getLongDescription();
+        $scanner = new DocBlockReflection(($function->getDocComment()) ?: '/***/');
+        $helpText = $scanner->getLongDescription();
         /* @var \Zend\Code\Reflection\DocBlock\Tag\ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
         /* @var \Zend\Code\Reflection\DocBlock\Tag\ReturnTag $returnTag */
@@ -247,28 +253,28 @@ abstract class AbstractFunction
         $this->setDescription($helpText);
 
         if ($returnTag) {
-            $return     = array();
+            $return = array();
             $returnDesc = $returnTag->getDescription();
             foreach ($returnTag->getTypes() as $type) {
                 $return[] = $type;
             }
         } else {
-            $return     = array('void');
+            $return = array('void');
             $returnDesc = '';
         }
 
         $paramTypesTmp = array();
-        $paramDesc     = array();
+        $paramDesc = array();
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
                 $paramTypesTmp[] = array(($param->isArray()) ? 'array' : 'mixed');
-                $paramDesc[]     = '';
+                $paramDesc[] = '';
             }
         } else {
             $paramDesc = array();
             foreach ($paramTags as $paramTag) {
                 $paramTypesTmp[] = $paramTag->getTypes();
-                $paramDesc[]     = ($paramTag->getDescription()) ? : '';
+                $paramDesc[] = ($paramTag->getDescription()) ?: '';
             }
         }
 
@@ -278,7 +284,7 @@ abstract class AbstractFunction
             $start = $paramCount - $nParamTypesTmp;
             for ($i = $start; $i < $paramCount; ++$i) {
                 $paramTypesTmp[$i] = array('mixed');
-                $paramDesc[$i]     = '';
+                $paramDesc[$i] = '';
             }
         } elseif ($nParamTypesTmp != $paramCount) {
             throw new Exception\RuntimeException(
@@ -358,6 +364,7 @@ abstract class AbstractFunction
     {
         if (empty($namespace)) {
             $this->namespace = '';
+
             return;
         }
 

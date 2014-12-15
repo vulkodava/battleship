@@ -46,8 +46,8 @@ class UniqueObjectTest extends BaseTestCase
         $validator = new UniqueObject(
             array(
                 'object_repository' => $repository,
-                'object_manager'    => $objectManager,
-                'fields'            => 'matchKey',
+                'object_manager' => $objectManager,
+                'fields' => 'matchKey',
             )
         );
         $this->assertTrue($validator->isValid('matchValue'));
@@ -70,9 +70,9 @@ class UniqueObjectTest extends BaseTestCase
 
         $objectManager = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
         $objectManager->expects($this->any())
-                      ->method('getClassMetadata')
-                      ->with('stdClass')
-                      ->will($this->returnValue($classMetadata));
+            ->method('getClassMetadata')
+            ->with('stdClass')
+            ->will($this->returnValue($classMetadata));
 
         $repository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $repository
@@ -88,8 +88,8 @@ class UniqueObjectTest extends BaseTestCase
         $validator = new UniqueObject(
             array(
                 'object_repository' => $repository,
-                'object_manager'    => $objectManager,
-                'fields'            => 'matchKey'
+                'object_manager' => $objectManager,
+                'fields' => 'matchKey'
             )
         );
         $this->assertTrue($validator->isValid('matchValue', array('id' => 'identifier')));
@@ -112,9 +112,9 @@ class UniqueObjectTest extends BaseTestCase
 
         $objectManager = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
         $objectManager->expects($this->any())
-                      ->method('getClassMetadata')
-                      ->with('stdClass')
-                      ->will($this->returnValue($classMetadata));
+            ->method('getClassMetadata')
+            ->with('stdClass')
+            ->will($this->returnValue($classMetadata));
 
         $repository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $repository
@@ -130,8 +130,8 @@ class UniqueObjectTest extends BaseTestCase
         $validator = new UniqueObject(
             array(
                 'object_repository' => $repository,
-                'object_manager'    => $objectManager,
-                'fields'            => 'matchKey'
+                'object_manager' => $objectManager,
+                'fields' => 'matchKey'
             )
         );
         $this->assertFalse($validator->isValid('matchValue', array('id' => 'another identifier')));
@@ -157,8 +157,8 @@ class UniqueObjectTest extends BaseTestCase
         $validator = new UniqueObject(
             array(
                 'object_repository' => $repository,
-                'object_manager'    => $objectManager,
-                'fields'            => 'matchKey',
+                'object_manager' => $objectManager,
+                'fields' => 'matchKey',
             )
         );
         $validator->isValid('matchValue');
@@ -180,9 +180,9 @@ class UniqueObjectTest extends BaseTestCase
 
         $objectManager = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
         $objectManager->expects($this->any())
-                      ->method('getClassMetadata')
-                      ->with('stdClass')
-                      ->will($this->returnValue($classMetadata));
+            ->method('getClassMetadata')
+            ->with('stdClass')
+            ->will($this->returnValue($classMetadata));
 
         $repository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $repository
@@ -198,8 +198,8 @@ class UniqueObjectTest extends BaseTestCase
         $validator = new UniqueObject(
             array(
                 'object_repository' => $repository,
-                'object_manager'    => $objectManager,
-                'fields'            => 'matchKey'
+                'object_manager' => $objectManager,
+                'fields' => 'matchKey'
             )
         );
         $validator->isValid('matchValue', array());
@@ -217,7 +217,7 @@ class UniqueObjectTest extends BaseTestCase
         new UniqueObject(
             array(
                 'object_repository' => $repository,
-                'fields'            => 'matchKey'
+                'fields' => 'matchKey'
             )
         );
     }
@@ -236,8 +236,8 @@ class UniqueObjectTest extends BaseTestCase
         new UniqueObject(
             array(
                 'object_repository' => $repository,
-                'object_manager'    => $objectManager,
-                'fields'            => 'matchKey'
+                'object_manager' => $objectManager,
+                'fields' => 'matchKey'
             )
         );
     }

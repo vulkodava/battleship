@@ -28,8 +28,8 @@ class HydratorMockStatement implements \IteratorAggregate, \Doctrine\DBAL\Driver
     /**
      * Fetches all rows from the result set.
      *
-     * @param int|null   $fetchStyle
-     * @param int|null   $columnIndex
+     * @param int|null $fetchStyle
+     * @param int|null $columnIndex
      * @param array|null $ctorArgs
      *
      * @return array
@@ -45,8 +45,9 @@ class HydratorMockStatement implements \IteratorAggregate, \Doctrine\DBAL\Driver
     public function fetchColumn($columnNumber = 0)
     {
         $row = current($this->_resultSet);
-        if ( ! is_array($row)) return false;
+        if (!is_array($row)) return false;
         $val = array_shift($row);
+
         return $val !== null ? $val : false;
     }
 
@@ -57,6 +58,7 @@ class HydratorMockStatement implements \IteratorAggregate, \Doctrine\DBAL\Driver
     {
         $current = current($this->_resultSet);
         next($this->_resultSet);
+
         return $current;
     }
 

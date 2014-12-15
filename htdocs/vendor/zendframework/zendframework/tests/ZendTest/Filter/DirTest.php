@@ -25,10 +25,10 @@ class DirTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new DirFilter();
         $valuesExpected = array(
-            'filename'              => '.',
-            '/path/to/filename'     => '/path/to',
+            'filename' => '.',
+            '/path/to/filename' => '/path/to',
             '/path/to/filename.ext' => '/path/to'
-            );
+        );
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
         }

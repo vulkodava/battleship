@@ -23,8 +23,8 @@ class SessionTest extends CommonAdapterTest
     {
         $_SESSION = array();
         SessionContainer::setDefaultManager(null);
-        $sessionConfig    = new SessionConfig(array('storage' => 'Zend\Session\Storage\ArrayStorage'));
-        $sessionManager   = $manager = new TestSessionManager($sessionConfig);
+        $sessionConfig = new SessionConfig(array('storage' => 'Zend\Session\Storage\ArrayStorage'));
+        $sessionManager = $manager = new TestSessionManager($sessionConfig);
         $sessionContainer = new SessionContainer('Default', $manager);
 
         $this->_options = new Cache\Storage\Adapter\SessionOptions(array(

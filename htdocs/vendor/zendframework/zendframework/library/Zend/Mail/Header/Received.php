@@ -84,6 +84,7 @@ class Received implements HeaderInterface, MultipleHeadersInterface
             }
             $strings[] = $header->toString();
         }
+
         return implode(Headers::EOL, $strings);
     }
 }

@@ -50,7 +50,7 @@ class Apc extends AbstractAdapter implements
 
         $enabled = ini_get('apc.enabled');
         if (PHP_SAPI == 'cli') {
-            $enabled = $enabled && (bool) ini_get('apc.enable_cli');
+            $enabled = $enabled && (bool)ini_get('apc.enable_cli');
         }
 
         if (!$enabled) {
@@ -91,6 +91,7 @@ class Apc extends AbstractAdapter implements
         if (!$this->options) {
             $this->setOptions(new ApcOptions());
         }
+
         return $this->options;
     }
 
@@ -121,6 +122,7 @@ class Apc extends AbstractAdapter implements
     public function getAvailableSpace()
     {
         $smaInfo = apc_sma_info(true);
+
         return $smaInfo['avail_mem'];
     }
 
@@ -133,16 +135,17 @@ class Apc extends AbstractAdapter implements
      */
     public function getIterator()
     {
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = '';
-        $pattern   = null;
+        $prefix = '';
+        $pattern = null;
         if ($namespace !== '') {
-            $prefix  = $namespace . $options->getNamespaceSeparator();
+            $prefix = $namespace . $options->getNamespaceSeparator();
             $pattern = '/^' . preg_quote($prefix, '/') . '/';
         }
 
         $baseIt = new BaseApcIterator('user', $pattern, 0, 1, APC_LIST_ACTIVE);
+
         return new ApcIterator($this, $baseIt, $prefix);
     }
 
@@ -168,14 +171,15 @@ class Apc extends AbstractAdapter implements
      */
     public function clearByNamespace($namespace)
     {
-        $namespace = (string) $namespace;
+        $namespace = (string)$namespace;
         if ($namespace === '') {
             throw new Exception\InvalidArgumentException('No namespace given');
         }
 
         $options = $this->getOptions();
-        $prefix  = $namespace . $options->getNamespaceSeparator();
+        $prefix = $namespace . $options->getNamespaceSeparator();
         $pattern = '/^' . preg_quote($prefix, '/') . '/';
+
         return apc_delete(new BaseApcIterator('user', $pattern, 0, 1, APC_LIST_ACTIVE));
     }
 
@@ -189,15 +193,16 @@ class Apc extends AbstractAdapter implements
      */
     public function clearByPrefix($prefix)
     {
-        $prefix = (string) $prefix;
+        $prefix = (string)$prefix;
         if ($prefix === '') {
             throw new Exception\InvalidArgumentException('No prefix given');
         }
 
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
-        $nsPrefix  = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $nsPrefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $pattern = '/^' . preg_quote($nsPrefix . $prefix, '/') . '/';
+
         return apc_delete(new BaseApcIterator('user', $pattern, 0, 1, APC_LIST_ACTIVE));
     }
 
@@ -206,25 +211,26 @@ class Apc extends AbstractAdapter implements
     /**
      * Internal method to get an item.
      *
-     * @param  string  $normalizedKey
+     * @param  string $normalizedKey
      * @param  bool $success
-     * @param  mixed   $casToken
+     * @param  mixed $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $options     = $this->getOptions();
-        $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        $result      = apc_fetch($internalKey, $success);
+        $result = apc_fetch($internalKey, $success);
 
         if (!$success) {
             return null;
         }
 
         $casToken = $result;
+
         return $result;
     }
 
@@ -237,13 +243,13 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalGetItems(array & $normalizedKeys)
     {
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
         if ($namespace === '') {
             return apc_fetch($normalizedKeys);
         }
 
-        $prefix       = $namespace . $options->getNamespaceSeparator();
+        $prefix = $namespace . $options->getNamespaceSeparator();
         $internalKeys = array();
         foreach ($normalizedKeys as $normalizedKey) {
             $internalKeys[] = $prefix . $normalizedKey;
@@ -253,7 +259,7 @@ class Apc extends AbstractAdapter implements
 
         // remove namespace prefix
         $prefixL = strlen($prefix);
-        $result  = array();
+        $result = array();
         foreach ($fetch as $internalKey => & $value) {
             $result[substr($internalKey, $prefixL)] = $value;
         }
@@ -270,9 +276,10 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalHasItem(& $normalizedKey)
     {
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+
         return apc_exists($prefix . $normalizedKey);
     }
 
@@ -285,21 +292,21 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalHasItems(array & $normalizedKeys)
     {
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
         if ($namespace === '') {
             // array_filter with no callback will remove entries equal to FALSE
             return array_keys(array_filter(apc_exists($normalizedKeys)));
         }
 
-        $prefix       = $namespace . $options->getNamespaceSeparator();
+        $prefix = $namespace . $options->getNamespaceSeparator();
         $internalKeys = array();
         foreach ($normalizedKeys as $normalizedKey) {
             $internalKeys[] = $prefix . $normalizedKey;
         }
 
-        $exists  = apc_exists($internalKeys);
-        $result  = array();
+        $exists = apc_exists($internalKeys);
+        $result = array();
         $prefixL = strlen($prefix);
         foreach ($exists as $internalKey => $bool) {
             if ($bool === true) {
@@ -319,18 +326,18 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalGetMetadata(& $normalizedKey)
     {
-        $options     = $this->getOptions();
-        $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
 
         // @see http://pecl.php.net/bugs/bug.php?id=22564
         if (!apc_exists($internalKey)) {
             $metadata = false;
         } else {
-            $format   = APC_ITER_ALL ^ APC_ITER_VALUE ^ APC_ITER_TYPE ^ APC_ITER_REFCOUNT;
-            $regexp   = '/^' . preg_quote($internalKey, '/') . '$/';
-            $it       = new BaseApcIterator('user', $regexp, $format, 100, APC_LIST_ACTIVE);
+            $format = APC_ITER_ALL ^ APC_ITER_VALUE ^ APC_ITER_TYPE ^ APC_ITER_REFCOUNT;
+            $regexp = '/^' . preg_quote($internalKey, '/') . '$/';
+            $it = new BaseApcIterator('user', $regexp, $format, 100, APC_LIST_ACTIVE);
             $metadata = $it->current();
         }
 
@@ -339,6 +346,7 @@ class Apc extends AbstractAdapter implements
         }
 
         $this->normalizeMetadata($metadata);
+
         return $metadata;
     }
 
@@ -359,17 +367,17 @@ class Apc extends AbstractAdapter implements
             $keysRegExp[] = preg_quote($normalizedKey, '/');
         }
 
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
         if ($namespace === '') {
             $pattern = '/^(' . implode('|', $keysRegExp) . ')' . '$/';
         } else {
-            $prefix  = $namespace . $options->getNamespaceSeparator();
+            $prefix = $namespace . $options->getNamespaceSeparator();
             $pattern = '/^' . preg_quote($prefix, '/') . '(' . implode('|', $keysRegExp) . ')' . '$/';
         }
-        $format  = APC_ITER_ALL ^ APC_ITER_VALUE ^ APC_ITER_TYPE ^ APC_ITER_REFCOUNT;
-        $it      = new BaseApcIterator('user', $pattern, $format, 100, APC_LIST_ACTIVE);
-        $result  = array();
+        $format = APC_ITER_ALL ^ APC_ITER_VALUE ^ APC_ITER_TYPE ^ APC_ITER_REFCOUNT;
+        $it = new BaseApcIterator('user', $pattern, $format, 100, APC_LIST_ACTIVE);
+        $result = array();
         $prefixL = strlen($prefix);
         foreach ($it as $internalKey => $metadata) {
             // @see http://pecl.php.net/bugs/bug.php?id=22564
@@ -378,7 +386,7 @@ class Apc extends AbstractAdapter implements
             }
 
             $this->normalizeMetadata($metadata);
-            $result[substr($internalKey, $prefixL)] = & $metadata;
+            $result[substr($internalKey, $prefixL)] = &$metadata;
         }
 
         return $result;
@@ -390,17 +398,17 @@ class Apc extends AbstractAdapter implements
      * Internal method to store an item.
      *
      * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $options     = $this->getOptions();
-        $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        $ttl         = $options->getTtl();
+        $ttl = $options->getTtl();
 
         if (!apc_store($internalKey, $value, $ttl)) {
             $type = is_object($value) ? get_class($value) : gettype($value);
@@ -421,13 +429,13 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
         if ($namespace === '') {
             return array_keys(apc_store($normalizedKeyValuePairs, null, $options->getTtl()));
         }
 
-        $prefix                = $namespace . $options->getNamespaceSeparator();
+        $prefix = $namespace . $options->getNamespaceSeparator();
         $internalKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => &$value) {
             $internalKey = $prefix . $normalizedKey;
@@ -450,17 +458,17 @@ class Apc extends AbstractAdapter implements
      * Add an item.
      *
      * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value)
     {
-        $options     = $this->getOptions();
-        $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        $ttl         = $options->getTtl();
+        $ttl = $options->getTtl();
 
         if (!apc_add($internalKey, $value, $ttl)) {
             if (apc_exists($internalKey)) {
@@ -485,13 +493,13 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs)
     {
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
         if ($namespace === '') {
             return array_keys(apc_add($normalizedKeyValuePairs, null, $options->getTtl()));
         }
 
-        $prefix                = $namespace . $options->getNamespaceSeparator();
+        $prefix = $namespace . $options->getNamespaceSeparator();
         $internalKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
             $internalKey = $prefix . $normalizedKey;
@@ -514,15 +522,15 @@ class Apc extends AbstractAdapter implements
      * Internal method to replace an existing item.
      *
      * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value)
     {
-        $options     = $this->getOptions();
-        $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
 
         if (!apc_exists($internalKey)) {
@@ -549,9 +557,10 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalRemoveItem(& $normalizedKey)
     {
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
-        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+
         return apc_delete($prefix . $normalizedKey);
     }
 
@@ -564,13 +573,13 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalRemoveItems(array & $normalizedKeys)
     {
-        $options   = $this->getOptions();
+        $options = $this->getOptions();
         $namespace = $options->getNamespace();
         if ($namespace === '') {
             return apc_delete($normalizedKeys);
         }
 
-        $prefix       = $namespace . $options->getNamespaceSeparator();
+        $prefix = $namespace . $options->getNamespaceSeparator();
         $internalKeys = array();
         foreach ($normalizedKeys as $normalizedKey) {
             $internalKeys[] = $prefix . $normalizedKey;
@@ -591,22 +600,22 @@ class Apc extends AbstractAdapter implements
      * Internal method to increment an item.
      *
      * @param  string $normalizedKey
-     * @param  int    $value
+     * @param  int $value
      * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
     {
-        $options     = $this->getOptions();
-        $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        $value       = (int) $value;
-        $newValue    = apc_inc($internalKey, $value);
+        $value = (int)$value;
+        $newValue = apc_inc($internalKey, $value);
 
         // initial value
         if ($newValue === false) {
-            $ttl      = $options->getTtl();
+            $ttl = $options->getTtl();
             $newValue = $value;
             if (!apc_add($internalKey, $newValue, $ttl)) {
                 throw new Exception\RuntimeException(
@@ -622,22 +631,22 @@ class Apc extends AbstractAdapter implements
      * Internal method to decrement an item.
      *
      * @param  string $normalizedKey
-     * @param  int    $value
+     * @param  int $value
      * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
     {
-        $options     = $this->getOptions();
-        $namespace   = $options->getNamespace();
-        $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        $value       = (int) $value;
-        $newValue    = apc_dec($internalKey, $value);
+        $value = (int)$value;
+        $newValue = apc_dec($internalKey, $value);
 
         // initial value
         if ($newValue === false) {
-            $ttl      = $options->getTtl();
+            $ttl = $options->getTtl();
             $newValue = -$value;
             if (!apc_add($internalKey, $newValue, $ttl)) {
                 throw new Exception\RuntimeException(
@@ -659,19 +668,19 @@ class Apc extends AbstractAdapter implements
     protected function internalGetCapabilities()
     {
         if ($this->capabilities === null) {
-            $marker       = new stdClass();
+            $marker = new stdClass();
             $capabilities = new Capabilities(
                 $this,
                 $marker,
                 array(
                     'supportedDatatypes' => array(
-                        'NULL'     => true,
-                        'boolean'  => true,
-                        'integer'  => true,
-                        'double'   => true,
-                        'string'   => true,
-                        'array'    => true,
-                        'object'   => 'object',
+                        'NULL' => true,
+                        'boolean' => true,
+                        'integer' => true,
+                        'double' => true,
+                        'string' => true,
+                        'array' => true,
+                        'object' => 'object',
                         'resource' => false,
                     ),
                     'supportedMetadata' => array(
@@ -679,14 +688,14 @@ class Apc extends AbstractAdapter implements
                         'atime', 'ctime', 'mtime', 'rtime',
                         'size', 'hits', 'ttl',
                     ),
-                    'minTtl'             => 1,
-                    'maxTtl'             => 0,
-                    'staticTtl'          => true,
-                    'ttlPrecision'       => 1,
-                    'useRequestTime'     => (bool) ini_get('apc.use_request_time'),
-                    'expiredRead'        => false,
-                    'maxKeyLength'       => 5182,
-                    'namespaceIsPrefix'  => true,
+                    'minTtl' => 1,
+                    'maxTtl' => 0,
+                    'staticTtl' => true,
+                    'ttlPrecision' => 1,
+                    'useRequestTime' => (bool)ini_get('apc.use_request_time'),
+                    'expiredRead' => false,
+                    'maxKeyLength' => 5182,
+                    'namespaceIsPrefix' => true,
                     'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
                 )
             );
@@ -700,7 +709,7 @@ class Apc extends AbstractAdapter implements
                 }
             });
 
-            $this->capabilities     = $capabilities;
+            $this->capabilities = $capabilities;
             $this->capabilityMarker = $marker;
         }
 
@@ -718,11 +727,11 @@ class Apc extends AbstractAdapter implements
     protected function normalizeMetadata(array & $metadata)
     {
         $metadata['internal_key'] = $metadata['key'];
-        $metadata['ctime']        = $metadata['creation_time'];
-        $metadata['atime']        = $metadata['access_time'];
-        $metadata['rtime']        = $metadata['deletion_time'];
-        $metadata['size']         = $metadata['mem_size'];
-        $metadata['hits']         = $metadata['num_hits'];
+        $metadata['ctime'] = $metadata['creation_time'];
+        $metadata['atime'] = $metadata['access_time'];
+        $metadata['rtime'] = $metadata['deletion_time'];
+        $metadata['size'] = $metadata['mem_size'];
+        $metadata['hits'] = $metadata['num_hits'];
 
         unset(
             $metadata['key'],
@@ -737,9 +746,9 @@ class Apc extends AbstractAdapter implements
     /**
      * Internal method to set an item only if token matches
      *
-     * @param  mixed  $token
+     * @param  mixed $token
      * @param  string $normalizedKey
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return bool
      * @see    getItem()
      * @see    setItem()

@@ -42,7 +42,7 @@ class DateSelectTest extends TestCase
 
     public function testCanSetDateFromDateTime()
     {
-        $element  = new DateSelectElement();
+        $element = new DateSelectElement();
         $element->setValue(new DateTime('2012-09-24'));
 
         $this->assertEquals('2012', $element->getYearElement()->getValue());
@@ -52,7 +52,7 @@ class DateSelectTest extends TestCase
 
     public function testCanSetDateFromString()
     {
-        $element  = new DateSelectElement();
+        $element = new DateSelectElement();
         $element->setValue('2012-09-24');
 
         $this->assertEquals('2012', $element->getYearElement()->getValue());
@@ -62,7 +62,7 @@ class DateSelectTest extends TestCase
 
     public function testCanGetValue()
     {
-        $element  = new DateSelectElement();
+        $element = new DateSelectElement();
         $element->setValue(new DateTime('2012-09-24'));
 
         $this->assertEquals('2012-09-24', $element->getValue());
@@ -73,7 +73,7 @@ class DateSelectTest extends TestCase
      */
     public function testThrowsOnInvalidValue()
     {
-        $element  = new DateSelectElement();
+        $element = new DateSelectElement();
         $element->setValue('hello world');
     }
 

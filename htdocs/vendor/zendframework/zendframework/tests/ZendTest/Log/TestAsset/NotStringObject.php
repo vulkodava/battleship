@@ -11,5 +11,5 @@ namespace ZendTest\Log\TestAsset;
 
 class NotStringObject
 {
-   // This object has no __toString method
+    // This object has no __toString method
 }

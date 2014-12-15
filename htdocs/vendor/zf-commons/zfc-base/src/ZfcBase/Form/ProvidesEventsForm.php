@@ -22,6 +22,7 @@ class ProvidesEventsForm extends Form
     public function setEventManager(EventManagerInterface $events)
     {
         $this->events = $events;
+
         return $this;
     }
 
@@ -41,7 +42,7 @@ class ProvidesEventsForm extends Form
                     || (is_array($this->eventIdentifier))
                     || ($this->eventIdentifier instanceof Traversable)
                 ) {
-                    $identifiers = array_unique($identifiers + (array) $this->eventIdentifier);
+                    $identifiers = array_unique($identifiers + (array)$this->eventIdentifier);
                 } elseif (is_object($this->eventIdentifier)) {
                     $identifiers[] = $this->eventIdentifier;
                 }
@@ -49,6 +50,7 @@ class ProvidesEventsForm extends Form
             }
             $this->setEventManager(new EventManager($identifiers));
         }
+
         return $this->events;
     }
 }

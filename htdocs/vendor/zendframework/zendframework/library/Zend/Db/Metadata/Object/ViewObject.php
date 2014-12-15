@@ -30,6 +30,7 @@ class ViewObject extends AbstractTableObject
     public function setViewDefinition($viewDefinition)
     {
         $this->viewDefinition = $viewDefinition;
+
         return $this;
     }
 
@@ -48,6 +49,7 @@ class ViewObject extends AbstractTableObject
     public function setCheckOption($checkOption)
     {
         $this->checkOption = $checkOption;
+
         return $this;
     }
 
@@ -66,6 +68,7 @@ class ViewObject extends AbstractTableObject
     public function setIsUpdatable($isUpdatable)
     {
         $this->isUpdatable = $isUpdatable;
+
         return $this;
     }
 

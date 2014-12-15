@@ -22,35 +22,35 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $container = new \Zend\Navigation\Navigation(array(
             array(
                 'label' => 'Page 1',
-                'id'    => 'p1',
-                'uri'   => 'p1',
+                'id' => 'p1',
+                'uri' => 'p1',
             ),
             array(
                 'label' => 'Page 2',
-                'id'    => 'p2',
-                'uri'   => 'p2',
+                'id' => 'p2',
+                'uri' => 'p2',
                 'pages' => array(
                     array(
                         'label' => 'Page 2.1',
-                        'id'    => 'p2-1',
-                        'uri'   => 'p2-1',
+                        'id' => 'p2-1',
+                        'uri' => 'p2-1',
                         'pages' => array(
                             array(
                                 'label' => 'Page 2.1.1',
-                                'id'    => 'p2-1-1',
-                                'uri'   => 'p2-1-1',
+                                'id' => 'p2-1-1',
+                                'uri' => 'p2-1-1',
                             ),
                             array(
                                 'label' => 'Page 2.1.2',
-                                'id'    => 'p2-1-2',
-                                'uri'   => 'p2-1-2',
+                                'id' => 'p2-1-2',
+                                'uri' => 'p2-1-2',
                             ),
                         ),
                     ),
                     array(
                         'label' => 'Page 2.2',
-                        'id'    => 'p2-2',
-                        'uri'   => 'p2-2',
+                        'id' => 'p2-2',
+                        'uri' => 'p2-2',
                     ),
                 ),
             ),
@@ -84,36 +84,36 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $container = new \Zend\Navigation\Navigation(array(
             array(
                 'label' => 'Page 1',
-                'id'    => 'p1',
-                'uri'   => 'p1',
+                'id' => 'p1',
+                'uri' => 'p1',
             ),
             array(
                 'label' => 'Page 2',
-                'id'    => 'p2',
-                'uri'   => 'p2',
+                'id' => 'p2',
+                'uri' => 'p2',
                 'pages' => array(
                     array(
                         'label' => 'Page 2.1',
-                        'id'    => 'p2-1',
-                        'uri'   => 'p2-1',
+                        'id' => 'p2-1',
+                        'uri' => 'p2-1',
                         'pages' => array(
                             array(
                                 'label' => 'Page 2.1.1',
-                                'id'    => 'p2-1-1',
-                                'uri'   => 'p2-1-1',
+                                'id' => 'p2-1-1',
+                                'uri' => 'p2-1-1',
                                 'active' => true,
                             ),
                             array(
                                 'label' => 'Page 2.1.2',
-                                'id'    => 'p2-1-2',
-                                'uri'   => 'p2-1-2',
+                                'id' => 'p2-1-2',
+                                'uri' => 'p2-1-2',
                             ),
                         ),
                     ),
                     array(
                         'label' => 'Page 2.2',
-                        'id'    => 'p2-2',
-                        'uri'   => 'p2-2',
+                        'id' => 'p2-2',
+                        'uri' => 'p2-2',
                     ),
                 ),
             ),
@@ -142,36 +142,36 @@ class MenuTest extends \PHPUnit_Framework_TestCase
         $container = new \Zend\Navigation\Navigation(array(
             array(
                 'label' => 'Page 1',
-                'id'    => 'p1',
-                'uri'   => 'p1',
+                'id' => 'p1',
+                'uri' => 'p1',
             ),
             array(
                 'label' => 'Page 2',
-                'id'    => 'p2',
-                'uri'   => 'p2',
+                'id' => 'p2',
+                'uri' => 'p2',
                 'pages' => array(
                     array(
                         'label' => 'Page 2.1',
-                        'id'    => 'p2-1',
-                        'uri'   => 'p2-1',
+                        'id' => 'p2-1',
+                        'uri' => 'p2-1',
                         'pages' => array(
                             array(
                                 'label' => 'Page 2.1.1',
-                                'id'    => 'p2-1-1',
-                                'uri'   => 'p2-1-1',
+                                'id' => 'p2-1-1',
+                                'uri' => 'p2-1-1',
                                 'active' => true,
                             ),
                             array(
                                 'label' => 'Page 2.1.2',
-                                'id'    => 'p2-1-2',
-                                'uri'   => 'p2-1-2',
+                                'id' => 'p2-1-2',
+                                'uri' => 'p2-1-2',
                             ),
                         ),
                     ),
                     array(
                         'label' => 'Page 2.2',
-                        'id'    => 'p2-2',
-                        'uri'   => 'p2-2',
+                        'id' => 'p2-2',
+                        'uri' => 'p2-2',
                     ),
                 ),
             ),

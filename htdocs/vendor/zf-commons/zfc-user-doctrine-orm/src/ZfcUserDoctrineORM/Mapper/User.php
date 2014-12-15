@@ -21,7 +21,7 @@ class User extends ZfcUserMapper
 
     public function __construct(EntityManager $em, ModuleOptions $options)
     {
-        $this->em      = $em;
+        $this->em = $em;
         $this->options = $options;
     }
 

@@ -201,10 +201,10 @@ class Profiler implements EventManagerAwareInterface
     public function collect(MvcEvent $mvcEvent)
     {
         $this->report->setToken(uniqid('zdt'))
-                     ->setUri($mvcEvent->getRequest()->getUriString())
-                     ->setMethod($mvcEvent->getRequest()->getMethod())
-                     ->setTime(new \DateTime('now', new \DateTimeZone('UTC')))
-                     ->setIp($mvcEvent->getRequest()->getServer()->get('REMOTE_ADDR'));
+            ->setUri($mvcEvent->getRequest()->getUriString())
+            ->setMethod($mvcEvent->getRequest()->getMethod())
+            ->setTime(new \DateTime('now', new \DateTimeZone('UTC')))
+            ->setIp($mvcEvent->getRequest()->getServer()->get('REMOTE_ADDR'));
 
         if (isset($this->collectors)) {
             foreach ($this->collectors as $collector) {

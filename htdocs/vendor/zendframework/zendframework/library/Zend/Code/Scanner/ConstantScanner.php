@@ -102,6 +102,7 @@ class ConstantScanner implements ScannerInterface
     public function getName()
     {
         $this->scan();
+
         return $this->name;
     }
 
@@ -111,6 +112,7 @@ class ConstantScanner implements ScannerInterface
     public function getValue()
     {
         $this->scan();
+
         return $this->value;
     }
 
@@ -120,6 +122,7 @@ class ConstantScanner implements ScannerInterface
     public function getDocComment()
     {
         $this->scan();
+
         return $this->docComment;
     }
 
@@ -142,6 +145,7 @@ class ConstantScanner implements ScannerInterface
     public function __toString()
     {
         $this->scan();
+
         return var_export($this, true);
     }
 
@@ -180,7 +184,7 @@ class ConstantScanner implements ScannerInterface
                         $this->docComment = $tokenContent;
                     }
                     goto SCANNER_CONTINUE;
-                    // fall-through
+                // fall-through
 
                 case T_STRING:
                     $string = (is_string($token)) ? $token : $tokenContent;
@@ -202,7 +206,7 @@ class ConstantScanner implements ScannerInterface
                     }
 
                     goto SCANNER_CONTINUE;
-                    // fall-through
+                // fall-through
 
                 case T_CONSTANT_ENCAPSED_STRING:
                 case T_DNUMBER:
@@ -215,7 +219,7 @@ class ConstantScanner implements ScannerInterface
                         $this->value = $string;
                     }
                     goto SCANNER_CONTINUE;
-                    // fall-trough
+                // fall-trough
 
                 default:
                     goto SCANNER_CONTINUE;

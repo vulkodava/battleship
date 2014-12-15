@@ -270,14 +270,14 @@ class IndexController extends AbstractActionController
             'name' => 'user',
             'options' => array(
                 'object_manager' => $objectManager,
-                'target_class'   => 'Module\Entity\User',
-                'property'       => 'fullName',
-                'is_method'      => true,
-                'find_method'    => array(
-                    'name'   => 'findBy',
+                'target_class' => 'Module\Entity\User',
+                'property' => 'fullName',
+                'is_method' => true,
+                'find_method' => array(
+                    'name' => 'findBy',
                     'params' => array(
                         'criteria' => array('active' => 1),
-                        'orderBy'  => array('lastName' => 'ASC'),
+                        'orderBy' => array('lastName' => 'ASC'),
                     ),
                 ),
             ),
@@ -292,9 +292,9 @@ class IndexController extends AbstractActionController
         $user1 = $objectManager->find('Application\Entity\User', 1);
         $user2 = $objectManager->find('Application\Entity\User', 2);
         $user3 = $objectManager->find('Application\Entity\User', 3);
-        
+
         $collection = new ArrayCollection(array($user1, $user2, $user3));
-        $criteria   = new Criteria();
+        $criteria = new Criteria();
         $criteria->andWhere(
             $criteria->expr()->gt(
                 'lastLogin',

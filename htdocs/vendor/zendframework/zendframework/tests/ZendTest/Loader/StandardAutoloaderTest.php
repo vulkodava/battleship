@@ -69,7 +69,7 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         $loader = new StandardAutoloader();
 
-        $obj  = new \stdClass();
+        $obj = new \stdClass();
         foreach (array(true, 'foo', $obj) as $arg) {
             try {
                 $loader->setOptions(true);
@@ -84,10 +84,10 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         $options = array(
             'namespaces' => array(
-                'Zend\\'   => dirname(__DIR__) . DIRECTORY_SEPARATOR,
+                'Zend\\' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
             ),
-            'prefixes'   => array(
-                'Zend_'  => dirname(__DIR__) . DIRECTORY_SEPARATOR,
+            'prefixes' => array(
+                'Zend_' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
             ),
             'fallback_autoloader' => true,
         );
@@ -108,13 +108,13 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         ));
         $options = new \ArrayObject(array(
             'namespaces' => $namespaces,
-            'prefixes'   => $prefixes,
+            'prefixes' => $prefixes,
             'fallback_autoloader' => true,
         ));
         $loader = new TestAsset\StandardAutoloader();
         $loader->setOptions($options);
-        $this->assertEquals((array) $options['namespaces'], $loader->getNamespaces());
-        $this->assertEquals((array) $options['prefixes'], $loader->getPrefixes());
+        $this->assertEquals((array)$options['namespaces'], $loader->getNamespaces());
+        $this->assertEquals((array)$options['prefixes'], $loader->getPrefixes());
         $this->assertTrue($loader->isFallbackAutoloader());
     }
 
@@ -184,10 +184,10 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testCanTellAutoloaderToRegisterZendNamespaceAtInstantiation()
     {
         $loader = new StandardAutoloader(array('autoregister_zf' => true));
-        $r      = new ReflectionClass($loader);
-        $file   = $r->getFileName();
+        $r = new ReflectionClass($loader);
+        $file = $r->getFileName();
         $expected = array(
-            'Zend\\'    => dirname(dirname($file)) . DIRECTORY_SEPARATOR,
+            'Zend\\' => dirname(dirname($file)) . DIRECTORY_SEPARATOR,
             'ZendXml\\' => dirname(dirname(dirname($file))) . DIRECTORY_SEPARATOR . 'ZendXml' . DIRECTORY_SEPARATOR,
         );
         $this->assertAttributeEquals($expected, 'namespaces', $loader);

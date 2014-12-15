@@ -40,6 +40,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
 
     /**
      * Default container class
+     *
      * @var string
      */
     protected $containerClass = 'Zend\View\Helper\Placeholder\Container';
@@ -77,6 +78,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
                 // If the container is returned, we really want the current object
                 return $this;
             }
+
             return $return;
         }
 
@@ -121,6 +123,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     public function __isset($key)
     {
         $container = $this->getContainer();
+
         return isset($container[$key]);
     }
 
@@ -170,10 +173,11 @@ abstract class AbstractStandalone extends AbstractHelper implements
             && method_exists($this->getView(), 'getEncoding')
         ) {
             $escaper = $this->getView()->plugin('escapeHtml');
-            return $escaper((string) $string);
+
+            return $escaper((string)$string);
         }
 
-        return $this->getEscaper()->escapeHtml((string) $string);
+        return $this->getEscaper()->escapeHtml((string)$string);
     }
 
     /**
@@ -185,6 +189,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     public function setAutoEscape($autoEscape = true)
     {
         $this->autoEscape = ($autoEscape) ? true : false;
+
         return $this;
     }
 
@@ -207,6 +212,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     public function setContainer(AbstractContainer $container)
     {
         $this->container = $container;
+
         return $this;
     }
 
@@ -220,6 +226,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
         if (!$this->container instanceof AbstractContainer) {
             $this->container = new $this->containerClass();
         }
+
         return $this->container;
     }
 
@@ -232,6 +239,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     {
         if (null != $this->container) {
             $this->container = null;
+
             return true;
         }
 
@@ -263,6 +271,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
         }
 
         $this->containerClass = $name;
+
         return $this;
     }
 
@@ -316,6 +325,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     public function count()
     {
         $container = $this->getContainer();
+
         return count($container);
     }
 

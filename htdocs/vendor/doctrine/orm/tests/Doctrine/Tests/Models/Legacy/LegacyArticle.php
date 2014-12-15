@@ -27,7 +27,9 @@ class LegacyArticle
      * @JoinColumn(name="iUserId", referencedColumnName="iUserId")
      */
     public $_user;
-    public function setAuthor(LegacyUser $author) {
+
+    public function setAuthor(LegacyUser $author)
+    {
         $this->_user = $author;
     }
 }

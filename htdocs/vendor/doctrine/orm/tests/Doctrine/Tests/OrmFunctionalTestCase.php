@@ -240,7 +240,7 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
             $conn->executeUpdate('DELETE FROM RoutingLocation');
         }
 
-        if(isset($this->_usedModelSets['navigation'])) {
+        if (isset($this->_usedModelSets['navigation'])) {
             $conn->executeUpdate('DELETE FROM navigation_tour_pois');
             $conn->executeUpdate('DELETE FROM navigation_photos');
             $conn->executeUpdate('DELETE FROM navigation_pois');
@@ -315,7 +315,7 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
 
         $classes = array();
         foreach ($classNames as $className) {
-            if ( ! isset(static::$_entityTablesCreated[$className])) {
+            if (!isset(static::$_entityTablesCreated[$className])) {
                 static::$_entityTablesCreated[$className] = true;
                 $classes[] = $this->_em->getClassMetadata($className);
             }
@@ -336,7 +336,7 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
     {
         $forceCreateTables = false;
 
-        if ( ! isset(static::$_sharedConn)) {
+        if (!isset(static::$_sharedConn)) {
             static::$_sharedConn = TestUtil::getConnection();
 
             if (static::$_sharedConn->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
@@ -352,7 +352,7 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
             }
         }
 
-        if ( ! $this->_em) {
+        if (!$this->_em) {
             $this->_em = $this->_getEntityManager();
             $this->_schemaTool = new \Doctrine\ORM\Tools\SchemaTool($this->_em);
         }
@@ -360,7 +360,7 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
         $classes = array();
 
         foreach ($this->_usedModelSets as $setName => $bool) {
-            if ( ! isset(static::$_tablesCreated[$setName])/* || $forceCreateTables*/) {
+            if (!isset(static::$_tablesCreated[$setName])/* || $forceCreateTables*/) {
                 foreach (static::$_modelSets[$setName] as $className) {
                     $classes[] = $this->_em->getClassMetadata($className);
                 }
@@ -379,12 +379,13 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
     /**
      * Gets an EntityManager for testing purposes.
      *
-     * @param \Doctrine\ORM\Configuration   $config       The Configuration to pass to the EntityManager.
+     * @param \Doctrine\ORM\Configuration $config         The Configuration to pass to the EntityManager.
      * @param \Doctrine\Common\EventManager $eventManager The EventManager to pass to the EntityManager.
      *
      * @return \Doctrine\ORM\EntityManager
      */
-    protected function _getEntityManager($config = null, $eventManager = null) {
+    protected function _getEntityManager($config = null, $eventManager = null)
+    {
         // NOTE: Functional tests use their own shared metadata cache, because
         // the actual database platform used during execution has effect on some
         // metadata mapping behaviors (like the choice of the ID generation).
@@ -451,28 +452,30 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
             throw $e;
         }
 
-        if(isset($this->_sqlLoggerStack->queries) && count($this->_sqlLoggerStack->queries)) {
+        if (isset($this->_sqlLoggerStack->queries) && count($this->_sqlLoggerStack->queries)) {
             $queries = "";
-            for($i = count($this->_sqlLoggerStack->queries)-1; $i > max(count($this->_sqlLoggerStack->queries)-25, 0) && isset($this->_sqlLoggerStack->queries[$i]); $i--) {
+            for ($i = count($this->_sqlLoggerStack->queries) - 1; $i > max(count($this->_sqlLoggerStack->queries) - 25, 0) && isset($this->_sqlLoggerStack->queries[$i]); $i--) {
                 $query = $this->_sqlLoggerStack->queries[$i];
-                $params = array_map(function($p) { if (is_object($p)) return get_class($p); else return "'".$p."'"; }, $query['params'] ?: array());
-                $queries .= ($i+1).". SQL: '".$query['sql']."' Params: ".implode(", ", $params).PHP_EOL;
+                $params = array_map(function ($p) {
+                        if (is_object($p)) return get_class($p); else return "'" . $p . "'";
+                    }, $query['params'] ?: array());
+                $queries .= ($i + 1) . ". SQL: '" . $query['sql'] . "' Params: " . implode(", ", $params) . PHP_EOL;
             }
 
             $trace = $e->getTrace();
             $traceMsg = "";
-            foreach($trace AS $part) {
-                if(isset($part['file'])) {
-                    if(strpos($part['file'], "PHPUnit/") !== false) {
+            foreach ($trace AS $part) {
+                if (isset($part['file'])) {
+                    if (strpos($part['file'], "PHPUnit/") !== false) {
                         // Beginning with PHPUnit files we don't print the trace anymore.
                         break;
                     }
 
-                    $traceMsg .= $part['file'].":".$part['line'].PHP_EOL;
+                    $traceMsg .= $part['file'] . ":" . $part['line'] . PHP_EOL;
                 }
             }
 
-            $message = "[".get_class($e)."] ".$e->getMessage().PHP_EOL.PHP_EOL."With queries:".PHP_EOL.$queries.PHP_EOL."Trace:".PHP_EOL.$traceMsg;
+            $message = "[" . get_class($e) . "] " . $e->getMessage() . PHP_EOL . PHP_EOL . "With queries:" . PHP_EOL . $queries . PHP_EOL . "Trace:" . PHP_EOL . $traceMsg;
 
             throw new \Exception($message, (int)$e->getCode(), $e);
         }

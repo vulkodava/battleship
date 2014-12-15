@@ -146,15 +146,15 @@ collection, which means we can compute this value at runtime:
     class Account
     {
         // .. previous code
-        public function getBalance()
-        {
-            $balance = 0;
-            foreach ($this->entries AS $entry) {
-                $balance += $entry->getAmount();
-            }
-            return $balance;
-        }
-    }
+public function getBalance()
+{
+$balance = 0;
+foreach ($this->entries AS $entry) {
+$balance += $entry->getAmount();
+}
+return $balance;
+}
+}
 
 Now we can always call ``Account::getBalance()`` to access the
 current account balance.

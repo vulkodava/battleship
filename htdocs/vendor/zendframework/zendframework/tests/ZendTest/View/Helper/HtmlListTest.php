@@ -31,7 +31,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view   = new View();
+        $this->view = new View();
         $this->helper = new Helper\HtmlList();
         $this->helper->setView($this->view);
     }
@@ -110,7 +110,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('<ul>' . Helper\HtmlList::EOL, $list);
         $this->assertContains('</ul>' . Helper\HtmlList::EOL, $list);
-        $this->assertContains('one<ul>' . Helper\HtmlList::EOL.'<li>four', $list);
+        $this->assertContains('one<ul>' . Helper\HtmlList::EOL . '<li>four', $list);
         $this->assertContains('<li>six</li>' . Helper\HtmlList::EOL . '</ul>' .
             Helper\HtmlList::EOL . '</li>' . Helper\HtmlList::EOL . '<li>two', $list);
     }

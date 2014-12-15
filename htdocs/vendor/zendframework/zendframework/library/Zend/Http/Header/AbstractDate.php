@@ -30,11 +30,12 @@ abstract class AbstractDate implements HeaderInterface
 {
     /**
      * Date formats according to RFC 2616
+     *
      * @link http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3
      */
     const DATE_RFC1123 = 0;
     const DATE_RFC1036 = 1;
-    const DATE_ANSIC   = 2;
+    const DATE_ANSIC = 2;
 
     /**
      * Date instance for this header
@@ -53,6 +54,7 @@ abstract class AbstractDate implements HeaderInterface
     /**
      * Date formats defined by RFC 2616. RFC 1123 date is required
      * RFC 1036 and ANSI C formats are provided for compatibility with old servers/clients
+     *
      * @link http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3
      *
      * @var array
@@ -60,7 +62,7 @@ abstract class AbstractDate implements HeaderInterface
     protected static $dateFormats = array(
         self::DATE_RFC1123 => 'D, d M Y H:i:s \G\M\T',
         self::DATE_RFC1036 => 'D, d M y H:i:s \G\M\T',
-        self::DATE_ANSIC   => 'D M j H:i:s Y',
+        self::DATE_ANSIC => 'D M j H:i:s Y',
     );
 
     /**
@@ -129,7 +131,7 @@ abstract class AbstractDate implements HeaderInterface
                 $date = new DateTime($date, new DateTimeZone('GMT'));
             } catch (\Exception $e) {
                 throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid date passed as string (%s)', (string) $date),
+                    sprintf('Invalid date passed as string (%s)', (string)$date),
                     $e->getCode(),
                     $e
                 );
@@ -164,12 +166,14 @@ abstract class AbstractDate implements HeaderInterface
         if ($this->date === null) {
             $this->date = new DateTime(null, new DateTimeZone('GMT'));
         }
+
         return $this->date;
     }
 
     /**
      * Compare provided date to date for this header
      * Returns < 0 if date in header is less than $date; > 0 if it's greater, and 0 if they are equal.
+     *
      * @see \strcmp()
      *
      * @param string|DateTime $date
@@ -183,7 +187,7 @@ abstract class AbstractDate implements HeaderInterface
                 $date = new DateTime($date, new DateTimeZone('GMT'));
             } catch (\Exception $e) {
                 throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid Date passed as string (%s)', (string) $date),
+                    sprintf('Invalid Date passed as string (%s)', (string)$date),
                     $e->getCode(),
                     $e
                 );

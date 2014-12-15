@@ -13,7 +13,7 @@ use DOMDocument;
 use DOMElement;
 
 /**
-*/
+ */
 abstract class AbstractRenderer implements RendererInterface
 {
     /**
@@ -62,6 +62,7 @@ abstract class AbstractRenderer implements RendererInterface
     public function setDataContainer($container)
     {
         $this->container = $container;
+
         return $this;
     }
 
@@ -74,6 +75,7 @@ abstract class AbstractRenderer implements RendererInterface
     public function setEncoding($enc)
     {
         $this->encoding = $enc;
+
         return $this;
     }
 
@@ -96,8 +98,9 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function setDomDocument(DOMDocument $dom, DOMElement $base)
     {
-        $this->dom  = $dom;
+        $this->dom = $dom;
         $this->base = $base;
+
         return $this;
     }
 
@@ -120,6 +123,7 @@ abstract class AbstractRenderer implements RendererInterface
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -142,6 +146,7 @@ abstract class AbstractRenderer implements RendererInterface
     public function setRootElement(DOMElement $root)
     {
         $this->rootElement = $root;
+
         return $this;
     }
 

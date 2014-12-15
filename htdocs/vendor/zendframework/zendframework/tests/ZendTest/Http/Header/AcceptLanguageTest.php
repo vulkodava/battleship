@@ -36,7 +36,7 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
     {
         $acceptLanguageHeader = new AcceptLanguage();
         $acceptLanguageHeader->addLanguage('da', 0.8)
-                             ->addLanguage('en-gb', 1);
+            ->addLanguage('en-gb', 1);
 
         $this->assertEquals('Accept-Language: da;q=0.8, en-gb', $acceptLanguageHeader->toString());
     }
@@ -52,7 +52,7 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
 
     public function testPrioritizesValuesBasedOnQParameter()
     {
-        $header   = AcceptLanguage::fromString('Accept-Language: da;q=0.8, en-gb, *;q=0.4');
+        $header = AcceptLanguage::fromString('Accept-Language: da;q=0.8, en-gb, *;q=0.4');
         $expected = array(
             'en-gb',
             'da',
@@ -70,7 +70,7 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
     {
         $acceptHeader = new AcceptLanguage();
         $acceptHeader->addLanguage('da', 0.8)
-                     ->addLanguage('*', 0.4);
+            ->addLanguage('*', 0.4);
 
         $this->assertTrue($acceptHeader->hasLanguage('da'));
         $this->assertTrue($acceptHeader->hasLanguage('en'));

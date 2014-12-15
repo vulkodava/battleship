@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -39,11 +39,11 @@ class ZfcUserZendDb implements ProviderInterface
 
     /**
      * @param \Zend\Db\Adapter\Adapter $adapter
-     * @param \ZfcUser\Service\User    $userService
+     * @param \ZfcUser\Service\User $userService
      */
     public function __construct(Adapter $adapter, User $userService)
     {
-        $this->adapter     = $adapter;
+        $this->adapter = $adapter;
         $this->userService = $userService;
     }
 
@@ -54,19 +54,19 @@ class ZfcUserZendDb implements ProviderInterface
     {
         $authService = $this->userService->getAuthService();
 
-        if (! $authService->hasIdentity()) {
+        if (!$authService->hasIdentity()) {
             return array($this->getDefaultRole());
         }
 
         // get roles associated with the logged in user
-        $sql    = new Sql($this->adapter);
+        $sql = new Sql($this->adapter);
         $select = $sql->select()->from($this->tableName);
-        $where  = new Where();
+        $where = new Where();
 
         $where->equalTo('user_id', $authService->getIdentity()->getId());
 
         $results = $sql->prepareStatementForSqlObject($select->where($where))->execute();
-        $roles     = array();
+        $roles = array();
 
         foreach ($results as $i) {
             $roles[] = $i['role_id'];
@@ -90,7 +90,7 @@ class ZfcUserZendDb implements ProviderInterface
      */
     public function setDefaultRole($defaultRole)
     {
-        if (! ($defaultRole instanceof RoleInterface || is_string($defaultRole))) {
+        if (!($defaultRole instanceof RoleInterface || is_string($defaultRole))) {
             throw InvalidRoleException::invalidRoleInstance($defaultRole);
         }
 

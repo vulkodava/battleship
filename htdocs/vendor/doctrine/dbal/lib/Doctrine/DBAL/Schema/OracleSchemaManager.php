@@ -65,23 +65,23 @@ class OracleSchemaManager extends AbstractSchemaManager
      * {@inheritdoc}
      *
      * @license New BSD License
-     * @link http://ezcomponents.org/docs/api/trunk/DatabaseSchema/ezcDbSchemaPgsqlReader.html
+     * @link    http://ezcomponents.org/docs/api/trunk/DatabaseSchema/ezcDbSchemaPgsqlReader.html
      */
-    protected function _getPortableTableIndexesList($tableIndexes, $tableName=null)
+    protected function _getPortableTableIndexesList($tableIndexes, $tableName = null)
     {
         $indexBuffer = array();
-        foreach ( $tableIndexes as $tableIndex ) {
+        foreach ($tableIndexes as $tableIndex) {
             $tableIndex = \array_change_key_case($tableIndex, CASE_LOWER);
 
             $keyName = strtolower($tableIndex['name']);
 
-            if ( strtolower($tableIndex['is_primary']) == "p" ) {
+            if (strtolower($tableIndex['is_primary']) == "p") {
                 $keyName = 'primary';
                 $buffer['primary'] = true;
                 $buffer['non_unique'] = false;
             } else {
                 $buffer['primary'] = false;
-                $buffer['non_unique'] = ( $tableIndex['is_unique'] == 0 ) ? true : false;
+                $buffer['non_unique'] = ($tableIndex['is_unique'] == 0) ? true : false;
             }
             $buffer['key_name'] = $keyName;
             $buffer['column_name'] = $tableIndex['column_name'];
@@ -99,7 +99,7 @@ class OracleSchemaManager extends AbstractSchemaManager
         $tableColumn = \array_change_key_case($tableColumn, CASE_LOWER);
 
         $dbType = strtolower($tableColumn['data_type']);
-        if(strpos($dbType, "timestamp(") === 0) {
+        if (strpos($dbType, "timestamp(") === 0) {
             if (strpos($dbType, "WITH TIME ZONE")) {
                 $dbType = "timestamptz";
             } else {
@@ -109,7 +109,7 @@ class OracleSchemaManager extends AbstractSchemaManager
 
         $unsigned = $fixed = null;
 
-        if ( ! isset($tableColumn['column_name'])) {
+        if (!isset($tableColumn['column_name'])) {
             $tableColumn['column_name'] = '';
         }
 
@@ -192,14 +192,14 @@ class OracleSchemaManager extends AbstractSchemaManager
         }
 
         $options = array(
-            'notnull'    => (bool) ($tableColumn['nullable'] === 'N'),
-            'fixed'      => (bool) $fixed,
-            'unsigned'   => (bool) $unsigned,
-            'default'    => $tableColumn['data_default'],
-            'length'     => $length,
-            'precision'  => $precision,
-            'scale'      => $scale,
-            'comment'       => (isset($tableColumn['comments'])) ? $tableColumn['comments'] : null,
+            'notnull' => (bool)($tableColumn['nullable'] === 'N'),
+            'fixed' => (bool)$fixed,
+            'unsigned' => (bool)$unsigned,
+            'default' => $tableColumn['data_default'],
+            'length' => $length,
+            'precision' => $precision,
+            'scale' => $scale,
+            'comment' => (isset($tableColumn['comments'])) ? $tableColumn['comments'] : null,
             'platformDetails' => array(),
         );
 
@@ -232,10 +232,10 @@ class OracleSchemaManager extends AbstractSchemaManager
         }
 
         $result = array();
-        foreach($list as $constraint) {
+        foreach ($list as $constraint) {
             $result[] = new ForeignKeyConstraint(
                 array_values($constraint['local']), $constraint['foreignTable'],
-                array_values($constraint['foreign']),  $constraint['name'],
+                array_values($constraint['foreign']), $constraint['name'],
                 array('onDelete' => $constraint['onDelete'])
             );
         }
@@ -283,10 +283,10 @@ class OracleSchemaManager extends AbstractSchemaManager
         }
 
         $params = $this->_conn->getParams();
-        $username   = $database;
-        $password   = $params['password'];
+        $username = $database;
+        $password = $params['password'];
 
-        $query  = 'CREATE USER ' . $username . ' IDENTIFIED BY ' . $password;
+        $query = 'CREATE USER ' . $username . ' IDENTIFIED BY ' . $password;
         $this->_conn->executeUpdate($query);
 
         $query = 'GRANT CREATE SESSION, CREATE TABLE, UNLIMITED TABLESPACE, CREATE SEQUENCE, CREATE TRIGGER TO ' . $username;

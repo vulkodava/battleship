@@ -101,7 +101,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     public function testReadingResponseCycles()
     {
         $expected = array("HTTP/1.1 200 OK\r\n\r\n",
-                          "HTTP/1.1 302 Moved Temporarily\r\n\r\n");
+            "HTTP/1.1 302 Moved Temporarily\r\n\r\n");
 
         $this->adapter->setResponse($expected[0]);
         $this->adapter->addResponse($expected[1]);
@@ -127,7 +127,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that responses could be added as objects (ZF-7009)
      *
-     * @link http://framework.zend.com/issues/browse/ZF-7009
+     * @link         http://framework.zend.com/issues/browse/ZF-7009
      * @dataProvider validHttpResponseProvider
      */
     public function testAddResponseAsObject($testResponse)
@@ -143,7 +143,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     public function testReadingResponseCyclesWhenSetByArray()
     {
         $expected = array("HTTP/1.1 200 OK\r\n\r\n",
-                          "HTTP/1.1 302 Moved Temporarily\r\n\r\n");
+            "HTTP/1.1 302 Moved Temporarily\r\n\r\n");
 
         $this->adapter->setResponse($expected);
 
@@ -155,8 +155,8 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     public function testSettingNextResponseByIndex()
     {
         $expected = array("HTTP/1.1 200 OK\r\n\r\n",
-                          "HTTP/1.1 302 Moved Temporarily\r\n\r\n",
-                          "HTTP/1.1 404 Not Found\r\n\r\n");
+            "HTTP/1.1 302 Moved Temporarily\r\n\r\n",
+            "HTTP/1.1 404 Not Found\r\n\r\n");
 
         $this->adapter->setResponse($expected);
         $this->assertEquals($expected[0], $this->adapter->read());
@@ -193,23 +193,23 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     public static function validHttpResponseProvider()
     {
         return array(
-           array("HTTP/1.1 200 OK\r\n\r\n"),
-           array("HTTP/1.1 302 Moved Temporarily\r\nLocation: http://example.com/baz\r\n\r\n"),
-           array("HTTP/1.1 404 Not Found\r\n" .
-                 "Date: Sun, 14 Jun 2009 10:40:06 GMT\r\n" .
-                 "Server: Apache/2.2.3 (CentOS)\r\n" .
-                 "Content-length: 281\r\n" .
-                 "Connection: close\r\n" .
-                 "Content-type: text/html; charset=iso-8859-1\r\n\r\n" .
-                 "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" .
-                 "<html><head>\n" .
-                 "<title>404 Not Found</title>\n" .
-                 "</head><body>\n" .
-                 "<h1>Not Found</h1>\n" .
-                 "<p>The requested URL /foo/bar was not found on this server.</p>\n" .
-                 "<hr>\n" .
-                 "<address>Apache/2.2.3 (CentOS) Server at example.com Port 80</address>\n" .
-                 "</body></html>")
+            array("HTTP/1.1 200 OK\r\n\r\n"),
+            array("HTTP/1.1 302 Moved Temporarily\r\nLocation: http://example.com/baz\r\n\r\n"),
+            array("HTTP/1.1 404 Not Found\r\n" .
+                "Date: Sun, 14 Jun 2009 10:40:06 GMT\r\n" .
+                "Server: Apache/2.2.3 (CentOS)\r\n" .
+                "Content-length: 281\r\n" .
+                "Connection: close\r\n" .
+                "Content-type: text/html; charset=iso-8859-1\r\n\r\n" .
+                "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n" .
+                "<html><head>\n" .
+                "<title>404 Not Found</title>\n" .
+                "</head><body>\n" .
+                "<h1>Not Found</h1>\n" .
+                "<p>The requested URL /foo/bar was not found on this server.</p>\n" .
+                "<hr>\n" .
+                "<address>Apache/2.2.3 (CentOS) Server at example.com Port 80</address>\n" .
+                "</body></html>")
         );
     }
 }

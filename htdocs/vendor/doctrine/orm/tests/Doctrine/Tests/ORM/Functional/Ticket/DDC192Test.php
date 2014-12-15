@@ -52,14 +52,23 @@ class DDC192Phonenumber
     protected $User;
 
 
-    public function setPhone($value) { $this->phone = $value; }
+    public function setPhone($value)
+    {
+        $this->phone = $value;
+    }
 
-    public function getPhone() { return $this->phone; }
+    public function getPhone()
+    {
+        return $this->phone;
+    }
 
     public function setUser(User $user)
     {
         $this->User = $user;
     }
 
-    public function getUser() { return $this->User; }
+    public function getUser()
+    {
+        return $this->User;
+    }
 }

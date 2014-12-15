@@ -10,40 +10,41 @@ require_once __DIR__ . '/../../TestInit.php';
 class SingleScalarHydratorTest extends HydrationTestCase
 {
     /** Result set provider for the HYDRATE_SINGLE_SCALAR tests */
-    public static function singleScalarResultSetProvider() {
+    public static function singleScalarResultSetProvider()
+    {
         return array(
-          // valid
-          array('name' => 'result1',
+            // valid
+            array('name' => 'result1',
                 'resultSet' => array(
-                  array(
-                      'u__name' => 'romanb'
-                  )
-               )),
-          // valid
-          array('name' => 'result2',
+                    array(
+                        'u__name' => 'romanb'
+                    )
+                )),
+            // valid
+            array('name' => 'result2',
                 'resultSet' => array(
-                  array(
-                      'u__id' => '1'
-                  )
-             )),
-           // invalid
-           array('name' => 'result3',
+                    array(
+                        'u__id' => '1'
+                    )
+                )),
+            // invalid
+            array('name' => 'result3',
                 'resultSet' => array(
-                  array(
-                      'u__id' => '1',
-                      'u__name' => 'romanb'
-                  )
-             )),
-           // invalid
-           array('name' => 'result4',
+                    array(
+                        'u__id' => '1',
+                        'u__name' => 'romanb'
+                    )
+                )),
+            // invalid
+            array('name' => 'result4',
                 'resultSet' => array(
-                  array(
-                      'u__id' => '1'
-                  ),
-                  array(
-                      'u__id' => '2'
-                  )
-             )),
+                    array(
+                        'u__id' => '1'
+                    ),
+                    array(
+                        'u__id' => '2'
+                    )
+                )),
         );
     }
 
@@ -72,7 +73,8 @@ class SingleScalarHydratorTest extends HydrationTestCase
             try {
                 $result = $hydrator->hydrateAll($stmt, $rsm);
                 $this->fail();
-            } catch (\Doctrine\ORM\NonUniqueResultException $e) {}
+            } catch (\Doctrine\ORM\NonUniqueResultException $e) {
+            }
         }
     }
 }

@@ -30,9 +30,11 @@ class MockDbAdapter extends DbAdapter
         $this->driver = new MockDbDriver;
 
     }
+
     public function query($sql, $parametersOrQueryMode = DbAdapter::QUERY_MODE_PREPARE, ResultSetInterface $resultPrototype = null)
     {
         $this->calls[__FUNCTION__][] = $sql;
+
         return $this;
     }
 }

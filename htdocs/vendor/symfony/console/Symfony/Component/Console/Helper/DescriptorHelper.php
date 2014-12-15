@@ -36,11 +36,10 @@ class DescriptorHelper extends Helper
     public function __construct()
     {
         $this
-            ->register('txt',  new TextDescriptor())
-            ->register('xml',  new XmlDescriptor())
+            ->register('txt', new TextDescriptor())
+            ->register('xml', new XmlDescriptor())
             ->register('json', new JsonDescriptor())
-            ->register('md',   new MarkdownDescriptor())
-        ;
+            ->register('md', new MarkdownDescriptor());
     }
 
     /**
@@ -51,8 +50,8 @@ class DescriptorHelper extends Helper
      * * raw_text: boolean, sets output type as raw
      *
      * @param OutputInterface $output
-     * @param object          $object
-     * @param array           $options
+     * @param object $object
+     * @param array $options
      *
      * @throws \InvalidArgumentException when the given format is not supported
      */
@@ -74,7 +73,7 @@ class DescriptorHelper extends Helper
     /**
      * Registers a descriptor.
      *
-     * @param string              $format
+     * @param string $format
      * @param DescriptorInterface $descriptor
      *
      * @return DescriptorHelper

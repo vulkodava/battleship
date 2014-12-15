@@ -54,13 +54,13 @@ class HashTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('abc',
-                  strtolower('A9993E364706816ABA3E25717850C26C9CD0D89D')),
+                strtolower('A9993E364706816ABA3E25717850C26C9CD0D89D')),
             array('abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq',
-                  strtolower('84983E441C3BD26EBAAE4AA1F95129E5E54670F1')),
+                strtolower('84983E441C3BD26EBAAE4AA1F95129E5E54670F1')),
             array(str_repeat('a', 1000000),
-                  strtolower('34AA973CD4C4DAA4F61EEB2BDBAD27316534016F')),
+                strtolower('34AA973CD4C4DAA4F61EEB2BDBAD27316534016F')),
             array(str_repeat('01234567', 80),
-                  strtolower('DEA356A2CDDD90C7A7ECEDC5EBB563934F460452'))
+                strtolower('DEA356A2CDDD90C7A7ECEDC5EBB563934F460452'))
         );
     }
 
@@ -79,9 +79,9 @@ class HashTest extends \PHPUnit_Framework_TestCase
         return array(
             array('abc', '23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7'),
             array('abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq',
-                  '75388b16512776cc5dba5da1fd890150b0c6455cb4f58b1952522525'),
+                '75388b16512776cc5dba5da1fd890150b0c6455cb4f58b1952522525'),
             array(str_repeat('a', 1000000),
-                  '20794655980c91d8bbb4c1ea97618a4bf03f42581948b2ee4ee7ad67')
+                '20794655980c91d8bbb4c1ea97618a4bf03f42581948b2ee4ee7ad67')
         );
     }
 
@@ -104,7 +104,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
             array('message digest', 'f96b697d7cb7938d525a2f31aaf161d0'),
             array('abcdefghijklmnopqrstuvwxyz', 'c3fcd3d76192e4007dfb496cca67e13b'),
             array('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-                  'd174ab98d277d9f5a5611c2c9f419d9f'),
+                'd174ab98d277d9f5a5611c2c9f419d9f'),
             array(str_repeat('1234567890', 8), '57edf4a22be3c955ac49da2e2107b67a')
         );
     }
@@ -122,14 +122,14 @@ class HashTest extends \PHPUnit_Framework_TestCase
     {
         Hash::clearLastAlgorithmCache();
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-                                    'Hash algorithm provided is not supported on this PHP installation');
+            'Hash algorithm provided is not supported on this PHP installation');
         Hash::compute(null, 'test');
     }
 
     public function testWrongHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-                                    'Hash algorithm provided is not supported on this PHP installation');
+            'Hash algorithm provided is not supported on this PHP installation');
         Hash::compute('wrong', 'test');
     }
 

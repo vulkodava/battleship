@@ -30,11 +30,11 @@ namespace Doctrine\ORM\Query\Expr;
  */
 class Comparison
 {
-    const EQ  = '=';
+    const EQ = '=';
     const NEQ = '<>';
-    const LT  = '<';
+    const LT = '<';
     const LTE = '<=';
-    const GT  = '>';
+    const GT = '>';
     const GTE = '>=';
 
     /**
@@ -54,15 +54,15 @@ class Comparison
 
     /**
      * Creates a comparison expression with the given arguments.
-     * 
-     * @param mixed  $leftExpr
+     *
+     * @param mixed $leftExpr
      * @param string $operator
-     * @param mixed  $rightExpr
+     * @param mixed $rightExpr
      */
     public function __construct($leftExpr, $operator, $rightExpr)
     {
-        $this->leftExpr  = $leftExpr;
-        $this->operator  = $operator;
+        $this->leftExpr = $leftExpr;
+        $this->operator = $operator;
         $this->rightExpr = $rightExpr;
     }
 

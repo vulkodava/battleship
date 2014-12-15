@@ -23,16 +23,16 @@ namespace Doctrine\ORM\Query;
  * Interface for walkers of DQL ASTs (abstract syntax trees).
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.0
+ * @since  2.0
  */
 interface TreeWalker
 {
     /**
      * Initializes TreeWalker with important information about the ASTs to be walked.
      *
-     * @param \Doctrine\ORM\AbstractQuery      $query           The parsed Query.
-     * @param \Doctrine\ORM\Query\ParserResult $parserResult    The result of the parsing process.
-     * @param array                            $queryComponents The query components (symbol table).
+     * @param \Doctrine\ORM\AbstractQuery $query             The parsed Query.
+     * @param \Doctrine\ORM\Query\ParserResult $parserResult The result of the parsing process.
+     * @param array $queryComponents                         The query components (symbol table).
      */
     public function __construct($query, $parserResult, array $queryComponents);
 
@@ -46,8 +46,8 @@ interface TreeWalker
     /**
      * Sets or overrides a query component for a given dql alias.
      *
-     * @param string $dqlAlias       The DQL alias.
-     * @param array  $queryComponent
+     * @param string $dqlAlias The DQL alias.
+     * @param array $queryComponent
      *
      * @return void
      */

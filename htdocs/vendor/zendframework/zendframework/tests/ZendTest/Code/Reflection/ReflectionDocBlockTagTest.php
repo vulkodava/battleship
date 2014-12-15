@@ -52,7 +52,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
         $expectedString = 'DocBlock Tag [ * @descriptionTag ]' . PHP_EOL;
 
-        $this->assertEquals($expectedString, (string) $tag);
+        $this->assertEquals($expectedString, (string)$tag);
     }
 
 
@@ -82,7 +82,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($paramTag->getType(), 'int', 'Second Match Failed');
         $this->assertEquals($paramTag->getVariableName(), '$var', 'Third Match Failed');
-        $this->assertEquals($paramTag->getDescription(),'Description of $var', 'Final Match Failed');
+        $this->assertEquals($paramTag->getDescription(), 'Description of $var', 'Final Match Failed');
     }
 
 
@@ -92,7 +92,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
     public function testNamespaceInParam()
     {
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass7');
-        $paramTag        = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
+        $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 
 
         $this->assertEquals('Zend\Foo\Bar', $paramTag->getType());

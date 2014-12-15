@@ -24,7 +24,8 @@ use Doctrine\DBAL\Schema\ColumnDiff;
 use Doctrine\DBAL\Schema\TableDiff;
 
 /**
- * Event Arguments used when SQL queries for changing table columns are generated inside Doctrine\DBAL\Platform\*Platform.
+ * Event Arguments used when SQL queries for changing table columns are generated inside
+ * Doctrine\DBAL\Platform\*Platform.
  *
  * @link   www.doctrine-project.org
  * @since  2.2
@@ -53,15 +54,15 @@ class SchemaAlterTableChangeColumnEventArgs extends SchemaEventArgs
     private $_sql = array();
 
     /**
-     * @param \Doctrine\DBAL\Schema\ColumnDiff          $columnDiff
-     * @param \Doctrine\DBAL\Schema\TableDiff           $tableDiff
+     * @param \Doctrine\DBAL\Schema\ColumnDiff $columnDiff
+     * @param \Doctrine\DBAL\Schema\TableDiff $tableDiff
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      */
     public function __construct(ColumnDiff $columnDiff, TableDiff $tableDiff, AbstractPlatform $platform)
     {
         $this->_columnDiff = $columnDiff;
-        $this->_tableDiff  = $tableDiff;
-        $this->_platform   = $platform;
+        $this->_tableDiff = $tableDiff;
+        $this->_platform = $platform;
     }
 
     /**

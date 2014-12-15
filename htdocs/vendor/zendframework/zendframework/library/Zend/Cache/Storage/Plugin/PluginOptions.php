@@ -19,6 +19,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Used by:
      * - ClearByFactor
+     *
      * @var int
      */
     protected $clearingFactor = 0;
@@ -26,6 +27,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Used by:
      * - ExceptionHandler
+     *
      * @var callable
      */
     protected $exceptionCallback;
@@ -33,6 +35,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Used by:
      * - IgnoreUserAbort
+     *
      * @var bool
      */
     protected $exitOnAbort = true;
@@ -40,6 +43,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Used by:
      * - OptimizeByFactor
+     *
      * @var int
      */
     protected $optimizingFactor = 0;
@@ -47,6 +51,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Used by:
      * - Serializer
+     *
      * @var string|SerializerAdapter
      */
     protected $serializer;
@@ -54,6 +59,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Used by:
      * - Serializer
+     *
      * @var array
      */
     protected $serializerOptions = array();
@@ -61,6 +67,7 @@ class PluginOptions extends AbstractOptions
     /**
      * Used by:
      * - ExceptionHandler
+     *
      * @var bool
      */
     protected $throwExceptions = true;
@@ -77,6 +84,7 @@ class PluginOptions extends AbstractOptions
     public function setClearingFactor($clearingFactor)
     {
         $this->clearingFactor = $this->normalizeFactor($clearingFactor);
+
         return $this;
     }
 
@@ -109,6 +117,7 @@ class PluginOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException('Not a valid callback');
         }
         $this->exceptionCallback = $exceptionCallback;
+
         return $this;
     }
 
@@ -133,7 +142,8 @@ class PluginOptions extends AbstractOptions
      */
     public function setExitOnAbort($exitOnAbort)
     {
-        $this->exitOnAbort = (bool) $exitOnAbort;
+        $this->exitOnAbort = (bool)$exitOnAbort;
+
         return $this;
     }
 
@@ -159,6 +169,7 @@ class PluginOptions extends AbstractOptions
     public function setOptimizingFactor($optimizingFactor)
     {
         $this->optimizingFactor = $this->normalizeFactor($optimizingFactor);
+
         return $this;
     }
 
@@ -196,6 +207,7 @@ class PluginOptions extends AbstractOptions
             ));
         }
         $this->serializer = $serializer;
+
         return $this;
     }
 
@@ -213,12 +225,13 @@ class PluginOptions extends AbstractOptions
             // use default serializer
             if (!$this->serializer) {
                 $this->setSerializer(SerializerFactory::getDefaultAdapter());
-            // instantiate by class name + serializer_options
+                // instantiate by class name + serializer_options
             } else {
                 $options = $this->getSerializerOptions();
                 $this->setSerializer(SerializerFactory::factory($this->serializer, $options));
             }
         }
+
         return $this->serializer;
     }
 
@@ -234,6 +247,7 @@ class PluginOptions extends AbstractOptions
     public function setSerializerOptions($serializerOptions)
     {
         $this->serializerOptions = $serializerOptions;
+
         return $this;
     }
 
@@ -261,7 +275,8 @@ class PluginOptions extends AbstractOptions
      */
     public function setThrowExceptions($throwExceptions)
     {
-        $this->throwExceptions = (bool) $throwExceptions;
+        $this->throwExceptions = (bool)$throwExceptions;
+
         return $this;
     }
 
@@ -289,12 +304,13 @@ class PluginOptions extends AbstractOptions
      */
     protected function normalizeFactor($factor)
     {
-        $factor = (int) $factor;
+        $factor = (int)$factor;
         if ($factor < 0) {
             throw new Exception\InvalidArgumentException(
                 "Invalid factor '{$factor}': must be greater or equal 0"
             );
         }
+
         return $factor;
     }
 }

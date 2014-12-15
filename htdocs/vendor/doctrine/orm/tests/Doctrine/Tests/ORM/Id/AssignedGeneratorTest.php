@@ -28,13 +28,15 @@ class AssignedGeneratorTest extends \Doctrine\Tests\OrmTestCase
             $entity = new AssignedSingleIdEntity;
             $this->_assignedGen->generate($this->_em, $entity);
             $this->fail('Assigned generator did not throw exception even though ID was missing.');
-        } catch (\Doctrine\ORM\ORMException $expected) {}
+        } catch (\Doctrine\ORM\ORMException $expected) {
+        }
 
         try {
             $entity = new AssignedCompositeIdEntity;
             $this->_assignedGen->generate($this->_em, $entity);
             $this->fail('Assigned generator did not throw exception even though ID was missing.');
-        } catch (\Doctrine\ORM\ORMException $expected) {}
+        } catch (\Doctrine\ORM\ORMException $expected) {
+        }
     }
 
     public function testCorrectIdGeneration()
@@ -53,13 +55,15 @@ class AssignedGeneratorTest extends \Doctrine\Tests\OrmTestCase
 }
 
 /** @Entity */
-class AssignedSingleIdEntity {
+class AssignedSingleIdEntity
+{
     /** @Id @Column(type="integer") */
     public $myId;
 }
 
 /** @Entity */
-class AssignedCompositeIdEntity {
+class AssignedCompositeIdEntity
+{
     /** @Id @Column(type="integer") */
     public $myId1;
     /** @Id @Column(type="integer") */

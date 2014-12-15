@@ -31,7 +31,7 @@ class AdapterChainServiceFactoryTest extends \PHPUnit_Framework_TestCase
 
     protected $serviceLocatorArray;
 
-    public function helperServiceLocator ($index)
+    public function helperServiceLocator($index)
     {
         return $this->serviceLocatorArray[$index];
     }
@@ -47,13 +47,13 @@ class AdapterChainServiceFactoryTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->serviceLocatorArray = array (
-            'zfcuser_module_options'=>$this->options
+        $this->serviceLocatorArray = array(
+            'zfcuser_module_options' => $this->options
         );
 
         $this->serviceLocator->expects($this->any())
             ->method('get')
-            ->will($this->returnCallback(array($this,'helperServiceLocator')));
+            ->will($this->returnCallback(array($this, 'helperServiceLocator')));
 
         $this->eventManager = $this->getMock('Zend\EventManager\EventManager');
 
@@ -66,22 +66,22 @@ class AdapterChainServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateService()
     {
         $adapter = array(
-            'adapter1'=> $this->getMock(
+            'adapter1' => $this->getMock(
                 'ZfcUser\Authentication\Adapter\AbstractAdapter',
                 array('authenticate', 'logout')
             ),
-            'adapter2'=> $this->getMock(
+            'adapter2' => $this->getMock(
                 'ZfcUser\Authentication\Adapter\AbstractAdapter',
                 array('authenticate', 'logout')
             )
         );
-        $adapterNames = array(100=>'adapter1', 200=>'adapter2');
+        $adapterNames = array(100 => 'adapter1', 200 => 'adapter2');
 
         $this->serviceLocatorArray = array_merge($this->serviceLocatorArray, $adapter);
 
         $this->options->expects($this->once())
-                      ->method('getAuthAdapters')
-                      ->will($this->returnValue($adapterNames));
+            ->method('getAuthAdapters')
+            ->will($this->returnValue($adapterNames));
 
         $adapterChain = $this->factory->createService($this->serviceLocator);
 

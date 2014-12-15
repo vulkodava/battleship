@@ -59,17 +59,17 @@ abstract class AbstractHtmlElement extends AbstractHelper
      * @access public
      *
      * @param array $attribs From this array, each key-value pair is
-     * converted to an attribute name and value.
+     *                       converted to an attribute name and value.
      *
      * @return string The XHTML for the attributes.
      */
     protected function htmlAttribs($attribs)
     {
-        $xhtml          = '';
-        $escaper        = $this->getView()->plugin('escapehtml');
+        $xhtml = '';
+        $escaper = $this->getView()->plugin('escapehtml');
         $escapeHtmlAttr = $this->getView()->plugin('escapehtmlattr');
 
-        foreach ((array) $attribs as $key => $val) {
+        foreach ((array)$attribs as $key => $val) {
             $key = $escaper($key);
 
             if (('on' == substr($key, 0, 2)) || ('constraints' == $key)) {

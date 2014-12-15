@@ -22,6 +22,7 @@ class Local extends SOAPClient
 {
     /**
      * Server object
+     *
      * @var SOAPServer
      */
     protected $server;
@@ -50,8 +51,8 @@ class Local extends SOAPClient
      * @param  string $request
      * @param  string $location
      * @param  string $action
-     * @param  int    $version
-     * @param  int    $oneWay
+     * @param  int $version
+     * @param  int $oneWay
      * @return mixed
      */
     public function _doRequest(Common $client, $request, $location, $action, $version, $oneWay = null)

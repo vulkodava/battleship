@@ -82,20 +82,20 @@ class PoolingShardConnection extends Connection
     private $connections;
 
     /**
-     * @param array                         $params
-     * @param \Doctrine\DBAL\Driver         $driver
-     * @param \Doctrine\DBAL\Configuration  $config
+     * @param array $params
+     * @param \Doctrine\DBAL\Driver $driver
+     * @param \Doctrine\DBAL\Configuration $config
      * @param \Doctrine\Common\EventManager $eventManager
      *
      * @throws \InvalidArgumentException
      */
     public function __construct(array $params, Driver $driver, Configuration $config = null, EventManager $eventManager = null)
     {
-        if ( !isset($params['global']) || !isset($params['shards'])) {
+        if (!isset($params['global']) || !isset($params['shards'])) {
             throw new \InvalidArgumentException("Connection Parameters require 'global' and 'shards' configurations.");
         }
 
-        if ( !isset($params['shardChoser'])) {
+        if (!isset($params['shardChoser'])) {
             throw new \InvalidArgumentException("Missing Shard Choser configuration 'shardChoser'");
         }
 
@@ -103,18 +103,18 @@ class PoolingShardConnection extends Connection
             $params['shardChoser'] = new $params['shardChoser'];
         }
 
-        if ( ! ($params['shardChoser'] instanceof ShardChoser)) {
-            throw new \InvalidArgumentException("The 'shardChoser' configuration is not a valid instance of Doctrine\DBAL\Sharding\ShardChoser\ShardChoser"); 
+        if (!($params['shardChoser'] instanceof ShardChoser)) {
+            throw new \InvalidArgumentException("The 'shardChoser' configuration is not a valid instance of Doctrine\DBAL\Sharding\ShardChoser\ShardChoser");
         }
 
         $this->connections[0] = array_merge($params, $params['global']);
 
         foreach ($params['shards'] as $shard) {
-            if ( ! isset($shard['id'])) {
+            if (!isset($shard['id'])) {
                 throw new \InvalidArgumentException("Missing 'id' for one configured shard. Please specify a unique shard-id.");
             }
 
-            if ( !is_numeric($shard['id']) || $shard['id'] < 1) {
+            if (!is_numeric($shard['id']) || $shard['id'] < 1) {
                 throw new \InvalidArgumentException("Shard Id has to be a non-negative number.");
             }
 
@@ -155,6 +155,7 @@ class PoolingShardConnection extends Connection
 
         if (isset($this->activeConnections[$this->activeShardId])) {
             $this->_conn = $this->activeConnections[$this->activeShardId];
+
             return false;
         }
 
@@ -208,7 +209,7 @@ class PoolingShardConnection extends Connection
      */
     public function close()
     {
-        $this->_conn             = null;
+        $this->_conn = null;
         $this->activeConnections = null;
     }
 }

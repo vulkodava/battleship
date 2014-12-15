@@ -42,7 +42,7 @@ class SelectClause extends Node
 
     /**
      * @param array $selectExpressions
-     * @param bool  $isDistinct
+     * @param bool $isDistinct
      */
     public function __construct(array $selectExpressions, $isDistinct)
     {

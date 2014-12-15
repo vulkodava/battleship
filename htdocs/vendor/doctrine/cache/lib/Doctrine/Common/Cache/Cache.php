@@ -33,10 +33,10 @@ namespace Doctrine\Common\Cache;
  */
 interface Cache
 {
-    const STATS_HITS             = 'hits';
-    const STATS_MISSES           = 'misses';
-    const STATS_UPTIME           = 'uptime';
-    const STATS_MEMORY_USAGE     = 'memory_usage';
+    const STATS_HITS = 'hits';
+    const STATS_MISSES = 'misses';
+    const STATS_UPTIME = 'uptime';
+    const STATS_MEMORY_USAGE = 'memory_usage';
     const STATS_MEMORY_AVAILABLE = 'memory_available';
     /**
      * Only for backward compatibility (may be removed in next major release)
@@ -67,8 +67,8 @@ interface Cache
      * Puts data into the cache.
      *
      * @param string $id       The cache id.
-     * @param mixed  $data     The cache entry/data.
-     * @param int    $lifeTime The cache lifetime.
+     * @param mixed $data      The cache entry/data.
+     * @param int $lifeTime    The cache lifetime.
      *                         If != 0, sets a specific lifetime for this cache entry (0 => infinite lifeTime).
      *
      * @return boolean TRUE if the entry was successfully stored in the cache, FALSE otherwise.

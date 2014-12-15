@@ -26,7 +26,7 @@ class NumberFormatTest extends TestCase
     {
         $filter = new NumberFormatFilter(array(
             'locale' => 'en_US',
-            'style'  => NumberFormatter::DECIMAL
+            'style' => NumberFormatter::DECIMAL
         ));
 
         $this->assertEquals('en_US', $filter->getLocale());

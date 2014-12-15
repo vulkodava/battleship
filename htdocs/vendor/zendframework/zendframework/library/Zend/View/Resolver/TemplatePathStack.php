@@ -20,7 +20,7 @@ use Zend\View\Renderer\RendererInterface as Renderer;
  */
 class TemplatePathStack implements ResolverInterface
 {
-    const FAILURE_NO_PATHS  = 'TemplatePathStack_Failure_No_Paths';
+    const FAILURE_NO_PATHS = 'TemplatePathStack_Failure_No_Paths';
     const FAILURE_NOT_FOUND = 'TemplatePathStack_Failure_Not_Found';
 
     /**
@@ -46,15 +46,17 @@ class TemplatePathStack implements ResolverInterface
 
     /**
      * Flag indicating whether or not LFI protection for rendering view scripts is enabled
+     *
      * @var bool
      */
     protected $lfiProtectionOn = true;
 
     /**@+
      * Flags used to determine if a stream wrapper should be used for enabling short tags
+     *
      * @var bool
      */
-    protected $useViewStream    = false;
+    protected $useViewStream = false;
     protected $useStreamWrapper = false;
     /**@-*/
 
@@ -65,7 +67,7 @@ class TemplatePathStack implements ResolverInterface
      */
     public function __construct($options = null)
     {
-        $this->useViewStream = (bool) ini_get('short_open_tag');
+        $this->useViewStream = (bool)ini_get('short_open_tag');
         if ($this->useViewStream) {
             if (!in_array('zend.view', stream_get_wrappers())) {
                 stream_wrapper_register('zend.view', 'Zend\View\Stream');
@@ -122,8 +124,9 @@ class TemplatePathStack implements ResolverInterface
      */
     public function setDefaultSuffix($defaultSuffix)
     {
-        $this->defaultSuffix = (string) $defaultSuffix;
+        $this->defaultSuffix = (string)$defaultSuffix;
         $this->defaultSuffix = ltrim($this->defaultSuffix, '.');
+
         return $this;
     }
 
@@ -148,6 +151,7 @@ class TemplatePathStack implements ResolverInterface
         foreach ($paths as $path) {
             $this->addPath($path);
         }
+
         return $this;
     }
 
@@ -185,6 +189,7 @@ class TemplatePathStack implements ResolverInterface
         $path = rtrim($path, '/');
         $path = rtrim($path, '\\');
         $path .= DIRECTORY_SEPARATOR;
+
         return $path;
     }
 
@@ -204,6 +209,7 @@ class TemplatePathStack implements ResolverInterface
             ));
         }
         $this->paths[] = static::normalizePath($path);
+
         return $this;
     }
 
@@ -235,7 +241,8 @@ class TemplatePathStack implements ResolverInterface
      */
     public function setLfiProtection($flag)
     {
-        $this->lfiProtectionOn = (bool) $flag;
+        $this->lfiProtectionOn = (bool)$flag;
+
         return $this;
     }
 
@@ -257,7 +264,8 @@ class TemplatePathStack implements ResolverInterface
      */
     public function setUseStreamWrapper($flag)
     {
-        $this->useStreamWrapper = (bool) $flag;
+        $this->useStreamWrapper = (bool)$flag;
+
         return $this;
     }
 
@@ -294,6 +302,7 @@ class TemplatePathStack implements ResolverInterface
 
         if (!count($this->paths)) {
             $this->lastLookupFailure = static::FAILURE_NO_PATHS;
+
             return false;
         }
 
@@ -318,11 +327,13 @@ class TemplatePathStack implements ResolverInterface
                     // If using a stream wrapper, prepend the spec to the path
                     $filePath = 'zend.view://' . $filePath;
                 }
+
                 return $filePath;
             }
         }
 
         $this->lastLookupFailure = static::FAILURE_NOT_FOUND;
+
         return false;
     }
 

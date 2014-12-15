@@ -26,24 +26,28 @@ class Fault
 {
     /**
      * Fault code
+     *
      * @var int
      */
     protected $code;
 
     /**
      * Fault character encoding
+     *
      * @var string
      */
     protected $encoding = 'UTF-8';
 
     /**
      * Fault message
+     *
      * @var string
      */
     protected $message;
 
     /**
      * Internal fault codes => messages
+     *
      * @var array
      */
     protected $internal = array(
@@ -105,7 +109,8 @@ class Fault
      */
     public function setCode($code)
     {
-        $this->code = (int) $code;
+        $this->code = (int)$code;
+
         return $this;
     }
 
@@ -127,7 +132,8 @@ class Fault
      */
     public function setMessage($message)
     {
-        $this->message = (string) $message;
+        $this->message = (string)$message;
+
         return $this;
     }
 
@@ -151,6 +157,7 @@ class Fault
     {
         $this->encoding = $encoding;
         AbstractValue::setEncoding($encoding);
+
         return $this;
     }
 
@@ -184,7 +191,7 @@ class Fault
             $xml = XmlSecurity::scan($fault);
         } catch (\ZendXml\Exception\RuntimeException $e) {
             // Unsecure XML
-            throw new Exception\RuntimeException('Failed to parse XML fault: ' .  $e->getMessage(), 500, $e);
+            throw new Exception\RuntimeException('Failed to parse XML fault: ' . $e->getMessage(), 500, $e);
         }
         if (!$xml instanceof SimpleXMLElement) {
             $errors = libxml_get_errors();
@@ -192,6 +199,7 @@ class Fault
                 if (empty($result)) {
                     return $item->message;
                 }
+
                 return $result . '; ' . $item->message;
             }, '');
             libxml_use_internal_errors($xmlErrorsFlag);
@@ -211,8 +219,8 @@ class Fault
         }
 
         $structXml = $xml->fault->value->asXML();
-        $struct    = AbstractValue::getXmlRpcValue($structXml, AbstractValue::XML_STRING);
-        $struct    = $struct->getValue();
+        $struct = AbstractValue::getXmlRpcValue($structXml, AbstractValue::XML_STRING);
+        $struct = $struct->getValue();
 
         if (isset($struct['faultCode'])) {
             $code = $struct['faultCode'];
@@ -270,17 +278,17 @@ class Fault
     {
         // Create fault value
         $faultStruct = array(
-            'faultCode'   => $this->getCode(),
+            'faultCode' => $this->getCode(),
             'faultString' => $this->getMessage()
         );
         $value = AbstractValue::getXmlRpcValue($faultStruct);
 
         $generator = AbstractValue::getGenerator();
         $generator->openElement('methodResponse')
-                  ->openElement('fault');
+            ->openElement('fault');
         $value->generateXml();
         $generator->closeElement('fault')
-                  ->closeElement('methodResponse');
+            ->closeElement('methodResponse');
 
         return $generator->flush();
     }

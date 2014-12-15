@@ -40,12 +40,12 @@ use Doctrine\ORM\Repository\RepositoryFactory;
  * Configuration container for all configuration options of Doctrine.
  * It combines all configuration options from DBAL & ORM.
  *
- * @since 2.0
+ * @since    2.0
  * @internal When adding a new configuration option just write a getter/setter pair.
- * @author  Benjamin Eberlei <kontakt@beberlei.de>
- * @author  Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @author  Jonathan Wage <jonwage@gmail.com>
- * @author  Roman Borschel <roman@code-factory.org>
+ * @author   Benjamin Eberlei <kontakt@beberlei.de>
+ * @author   Guilherme Blanco <guilhermeblanco@hotmail.com>
+ * @author   Jonathan Wage <jonwage@gmail.com>
+ * @author   Roman Borschel <roman@code-factory.org>
  */
 class Configuration extends \Doctrine\DBAL\Configuration
 {
@@ -143,7 +143,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      * is true, the notation `@Entity` will work, otherwise, the notation `@ORM\Entity` will be supported.
      *
      * @param array $paths
-     * @param bool  $useSimpleAnnotationReader
+     * @param bool $useSimpleAnnotationReader
      *
      * @return AnnotationDriver
      */
@@ -157,12 +157,12 @@ class Configuration extends \Doctrine\DBAL\Configuration
             $reader->addNamespace('Doctrine\ORM\Mapping');
             $cachedReader = new CachedReader($reader, new ArrayCache());
 
-            return new AnnotationDriver($cachedReader, (array) $paths);
+            return new AnnotationDriver($cachedReader, (array)$paths);
         }
 
         return new AnnotationDriver(
             new CachedReader(new AnnotationReader(), new ArrayCache()),
-            (array) $paths
+            (array)$paths
         );
     }
 
@@ -190,7 +190,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function getEntityNamespace($entityNamespaceAlias)
     {
-        if ( ! isset($this->_attributes['entityNamespaces'][$entityNamespaceAlias])) {
+        if (!isset($this->_attributes['entityNamespaces'][$entityNamespaceAlias])) {
             throw ORMException::unknownEntityNamespace($entityNamespaceAlias);
         }
 
@@ -329,7 +329,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function getNamedQuery($name)
     {
-        if ( ! isset($this->_attributes['namedQueries'][$name])) {
+        if (!isset($this->_attributes['namedQueries'][$name])) {
             throw ORMException::namedQueryNotFound($name);
         }
 
@@ -339,9 +339,9 @@ class Configuration extends \Doctrine\DBAL\Configuration
     /**
      * Adds a named native query to the configuration.
      *
-     * @param string                 $name The name of the query.
-     * @param string                 $sql  The native SQL query string.
-     * @param Query\ResultSetMapping $rsm  The ResultSetMapping used for the results of the SQL query.
+     * @param string $name                The name of the query.
+     * @param string $sql                 The native SQL query string.
+     * @param Query\ResultSetMapping $rsm The ResultSetMapping used for the results of the SQL query.
      *
      * @return void
      */
@@ -362,7 +362,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function getNamedNativeQuery($name)
     {
-        if ( ! isset($this->_attributes['namedNativeQueries'][$name])) {
+        if (!isset($this->_attributes['namedNativeQueries'][$name])) {
             throw ORMException::namedNativeQueryNotFound($name);
         }
 
@@ -380,11 +380,11 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function ensureProductionSettings()
     {
-        if ( ! $this->getQueryCacheImpl()) {
+        if (!$this->getQueryCacheImpl()) {
             throw ORMException::queryCacheNotConfigured();
         }
 
-        if ( ! $this->getMetadataCacheImpl()) {
+        if (!$this->getMetadataCacheImpl()) {
             throw ORMException::metadataCacheNotConfigured();
         }
 
@@ -627,7 +627,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function getClassMetadataFactoryName()
     {
-        if ( ! isset($this->_attributes['classMetadataFactoryName'])) {
+        if (!isset($this->_attributes['classMetadataFactoryName'])) {
             $this->_attributes['classMetadataFactoryName'] = 'Doctrine\ORM\Mapping\ClassMetadataFactory';
         }
 
@@ -675,7 +675,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
     {
         $reflectionClass = new \ReflectionClass($className);
 
-        if ( ! $reflectionClass->implementsInterface('Doctrine\Common\Persistence\ObjectRepository')) {
+        if (!$reflectionClass->implementsInterface('Doctrine\Common\Persistence\ObjectRepository')) {
             throw ORMException::invalidEntityRepository($className);
         }
 
@@ -719,7 +719,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function getNamingStrategy()
     {
-        if ( ! isset($this->_attributes['namingStrategy'])) {
+        if (!isset($this->_attributes['namingStrategy'])) {
             $this->_attributes['namingStrategy'] = new DefaultNamingStrategy();
         }
 
@@ -749,7 +749,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function getQuoteStrategy()
     {
-        if ( ! isset($this->_attributes['quoteStrategy'])) {
+        if (!isset($this->_attributes['quoteStrategy'])) {
             $this->_attributes['quoteStrategy'] = new DefaultQuoteStrategy();
         }
 
@@ -775,7 +775,7 @@ class Configuration extends \Doctrine\DBAL\Configuration
      */
     public function getEntityListenerResolver()
     {
-        if ( ! isset($this->_attributes['entityListenerResolver'])) {
+        if (!isset($this->_attributes['entityListenerResolver'])) {
             $this->_attributes['entityListenerResolver'] = new DefaultEntityListenerResolver();
         }
 

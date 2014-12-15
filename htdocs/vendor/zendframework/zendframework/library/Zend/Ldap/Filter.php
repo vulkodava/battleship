@@ -14,12 +14,12 @@ namespace Zend\Ldap;
  */
 class Filter extends Filter\StringFilter
 {
-    const TYPE_EQUALS         = '=';
-    const TYPE_GREATER        = '>';
+    const TYPE_EQUALS = '=';
+    const TYPE_GREATER = '>';
     const TYPE_GREATEROREQUAL = '>=';
-    const TYPE_LESS           = '<';
-    const TYPE_LESSOREQUAL    = '<=';
-    const TYPE_APPROX         = '~=';
+    const TYPE_LESS = '<';
+    const TYPE_LESSOREQUAL = '<=';
+    const TYPE_APPROX = '~=';
 
     /**
      * Creates an 'equals' filter.
@@ -215,6 +215,7 @@ class Filter extends Filter\StringFilter
         if ($append !== null) {
             $str .= $append;
         }
+
         return $str;
     }
 

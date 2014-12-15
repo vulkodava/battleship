@@ -31,7 +31,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     {
         $this->renderer = $renderer = new PhpRenderer();
         $this->viewModelHelper = $renderer->plugin('view_model');
-        $this->helper          = $renderer->plugin('layout');
+        $this->helper = $renderer->plugin('layout');
 
         $this->parent = new ViewModel();
         $this->parent->setTemplate('layout');
@@ -65,9 +65,9 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
 
     public function testRaisesExceptionIfViewModelHelperHasNoRoot()
     {
-        $renderer         = new PhpRenderer();
+        $renderer = new PhpRenderer();
         $viewModelHelper = $renderer->plugin('view_model');
-        $helper          = $renderer->plugin('layout');
+        $helper = $renderer->plugin('layout');
 
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'view model');
         $helper->setTemplate('foo/bar');

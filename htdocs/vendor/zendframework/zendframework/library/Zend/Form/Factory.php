@@ -47,6 +47,7 @@ class Factory
     public function setInputFilterFactory(InputFilterFactory $inputFilterFactory)
     {
         $this->inputFilterFactory = $inputFilterFactory;
+
         return $this;
     }
 
@@ -62,6 +63,7 @@ class Factory
         if (null === $this->inputFilterFactory) {
             $this->setInputFilterFactory(new InputFilterFactory());
         }
+
         return $this->inputFilterFactory;
     }
 
@@ -74,6 +76,7 @@ class Factory
     public function setFormElementManager(FormElementManager $formElementManager)
     {
         $this->formElementManager = $formElementManager;
+
         return $this;
     }
 
@@ -186,7 +189,7 @@ class Factory
      * - attributes: an array, Traversable, or ArrayAccess object of element
      *   attributes to assign
      *
-     * @param  ElementInterface              $element
+     * @param  ElementInterface $element
      * @param  array|Traversable|ArrayAccess $spec
      * @throws Exception\DomainException
      * @return ElementInterface
@@ -195,8 +198,8 @@ class Factory
     {
         $spec = $this->validateSpecification($spec, __METHOD__);
 
-        $name       = isset($spec['name'])       ? $spec['name']       : null;
-        $options    = isset($spec['options'])    ? $spec['options']    : null;
+        $name = isset($spec['name']) ? $spec['name'] : null;
+        $options = isset($spec['options']) ? $spec['options'] : null;
         $attributes = isset($spec['attributes']) ? $spec['attributes'] : null;
 
         if ($name !== null && $name !== '') {
@@ -228,14 +231,14 @@ class Factory
      *   - flags: (optional) array of flags to pass to FieldsetInterface::add()
      *   - spec: the actual element specification, per {@link configureElement()}
      *
-     * @param  FieldsetInterface             $fieldset
+     * @param  FieldsetInterface $fieldset
      * @param  array|Traversable|ArrayAccess $spec
      * @throws Exception\DomainException
      * @return FieldsetInterface
      */
     public function configureFieldset(FieldsetInterface $fieldset, $spec)
     {
-        $spec     = $this->validateSpecification($spec, __METHOD__);
+        $spec = $this->validateSpecification($spec, __METHOD__);
         $fieldset = $this->configureElement($fieldset, $spec);
 
         if (isset($spec['object'])) {
@@ -270,8 +273,8 @@ class Factory
      *   array specification for the input filter factory
      * - hydrator: hydrator instance or named hydrator class
      *
-     * @param  FormInterface                  $form
-     * @param  array|Traversable|ArrayAccess  $spec
+     * @param  FormInterface $form
+     * @param  array|Traversable|ArrayAccess $spec
      * @return FormInterface
      */
     public function configureForm(FormInterface $form, $spec)
@@ -308,6 +311,7 @@ class Factory
 
         if ($spec instanceof Traversable) {
             $spec = ArrayUtils::iteratorToArray($spec);
+
             return $spec;
         }
 
@@ -340,7 +344,7 @@ class Factory
             }
 
             $flags = isset($elementSpecification['flags']) ? $elementSpecification['flags'] : array();
-            $spec  = isset($elementSpecification['spec'])  ? $elementSpecification['spec']  : array();
+            $spec = isset($elementSpecification['spec']) ? $elementSpecification['spec'] : array();
 
             if (!isset($spec['type'])) {
                 $spec['type'] = 'Zend\Form\Element';
@@ -365,7 +369,7 @@ class Factory
 
         foreach ($fieldsets as $fieldsetSpecification) {
             $flags = isset($fieldsetSpecification['flags']) ? $fieldsetSpecification['flags'] : array();
-            $spec  = isset($fieldsetSpecification['spec'])  ? $fieldsetSpecification['spec']  : array();
+            $spec = isset($fieldsetSpecification['spec']) ? $fieldsetSpecification['spec'] : array();
 
             $fieldset = $this->createFieldset($spec);
             $masterFieldset->add($fieldset, $flags);
@@ -378,9 +382,9 @@ class Factory
      * Takes a string indicating a class name, instantiates the class
      * by that name, and injects the class instance as the bound object.
      *
-     * @param  string           $objectName
+     * @param  string $objectName
      * @param  FieldsetInterface $fieldset
-     * @param  string           $method
+     * @param  string $method
      * @throws Exception\DomainException
      * @return void
      */
@@ -412,8 +416,8 @@ class Factory
      * by pulling it from service manager, and injects the hydrator instance into the form.
      *
      * @param  string|array|Hydrator\HydratorInterface $hydratorOrName
-     * @param  FieldsetInterface                       $fieldset
-     * @param  string                                  $method
+     * @param  FieldsetInterface $fieldset
+     * @param  string $method
      * @return void
      * @throws Exception\DomainException If $hydratorOrName is not a string, does not resolve to a known class, or
      *                                   the class does not implement Hydrator\HydratorInterface
@@ -422,6 +426,7 @@ class Factory
     {
         if ($hydratorOrName instanceof Hydrator\HydratorInterface) {
             $fieldset->setHydrator($hydratorOrName);
+
             return;
         }
 
@@ -442,7 +447,7 @@ class Factory
             $hydrator = $this->getHydratorFromName($hydratorOrName);
         }
 
-        if (! isset($hydrator) || !$hydrator instanceof Hydrator\HydratorInterface) {
+        if (!isset($hydrator) || !$hydrator instanceof Hydrator\HydratorInterface) {
             throw new Exception\DomainException(sprintf(
                 '%s expects a valid implementation of Zend\Stdlib\Hydrator\HydratorInterface; received "%s"',
                 $method,
@@ -463,9 +468,9 @@ class Factory
      * Takes a string indicating a factory class name (or a concrete instance), try first to instantiates the class
      * by pulling it from service manager, and injects the factory instance into the fieldset.
      *
-     * @param  string|array|Factory      $factoryOrName
-     * @param  FieldsetInterface         $fieldset
-     * @param  string                    $method
+     * @param  string|array|Factory $factoryOrName
+     * @param  FieldsetInterface $fieldset
+     * @param  string $method
      * @return void
      * @throws Exception\DomainException If $factoryOrName is not a string, does not resolve to a known class, or
      *                                   the class does not extend Form\Factory
@@ -517,6 +522,7 @@ class Factory
     {
         if ($spec instanceof InputFilterInterface) {
             $form->setInputFilter($spec);
+
             return;
         }
 
@@ -537,11 +543,12 @@ class Factory
                 ));
             }
             $form->setInputFilter($filter);
+
             return;
         }
 
         $factory = $this->getInputFilterFactory();
-        $filter  = $factory->createInputFilter($spec);
+        $filter = $factory->createInputFilter($spec);
         if (method_exists($filter, 'setFactory')) {
             $filter->setFactory($factory);
         }
@@ -604,6 +611,7 @@ class Factory
         }
 
         $hydrator = new $hydratorName;
+
         return $hydrator;
     }
 
@@ -630,6 +638,7 @@ class Factory
         }
 
         $factory = new $factoryName;
+
         return $factory;
     }
 }

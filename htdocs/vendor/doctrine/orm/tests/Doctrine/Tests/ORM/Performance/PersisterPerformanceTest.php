@@ -98,7 +98,7 @@ class PersisterPerformanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
             $user = new CmsUser();
             $user->name = "beberlei";
             $user->status = "active";
-            $user->username = "beberlei".$i;
+            $user->username = "beberlei" . $i;
             $this->_em->persist($user);
         }
 

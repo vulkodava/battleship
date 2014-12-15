@@ -19,8 +19,8 @@ class CreateAddressForm extends Form
         parent::__construct('create_address');
 
         $this->setAttribute('method', 'post')
-             ->setHydrator(new ClassMethodsHydrator(false))
-             ->setInputFilter(new InputFilter());
+            ->setHydrator(new ClassMethodsHydrator(false))
+            ->setInputFilter(new InputFilter());
 
         $address = new AddressFieldset();
         $address->setUseAsBaseFieldset(true);

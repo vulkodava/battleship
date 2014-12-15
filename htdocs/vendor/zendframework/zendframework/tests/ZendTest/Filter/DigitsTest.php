@@ -55,22 +55,22 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
              * The last contains only singlebyte digits.
              */
             $valuesExpected = array(
-                '1９2八3四８'     => '123',
-                'Ｃ 4.5B　6'      => '456',
+                '1９2八3四８' => '123',
+                'Ｃ 4.5B　6' => '456',
                 '9壱8＠7．6，5＃4' => '987654',
-                '789'              => '789'
-                );
+                '789' => '789'
+            );
         } else {
             // POSIX named classes are not supported, use alternative 0-9 match
             // Or filter for the value without mbstring
             $valuesExpected = array(
-                'abc123'  => '123',
+                'abc123' => '123',
                 'abc 123' => '123',
-                'abcxyz'  => '',
+                'abcxyz' => '',
                 'AZ@#4.3' => '43',
-                '1.23'    => '123',
-                '0x9f'    => '09'
-                );
+                '1.23' => '123',
+                '0x9f' => '09'
+            );
         }
 
         foreach ($valuesExpected as $input => $output) {
@@ -78,7 +78,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
                 $output,
                 $result = $filter($input),
                 "Expected '$input' to filter to '$output', but received '$result' instead"
-                );
+            );
         }
     }
 

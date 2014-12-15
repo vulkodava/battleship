@@ -36,6 +36,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
 
     /**
      * Called when user id logged out
+     *
      * @param  AuthEvent $e event passed
      */
     public function logout(AuthEvent $e)
@@ -48,12 +49,13 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         if ($this->isSatisfied()) {
             $storage = $this->getStorage()->read();
             $e->setIdentity($storage['identity'])
-              ->setCode(AuthenticationResult::SUCCESS)
-              ->setMessages(array('Authentication successful.'));
+                ->setCode(AuthenticationResult::SUCCESS)
+                ->setMessages(array('Authentication successful.'));
+
             return;
         }
 
-        $identity   = $e->getRequest()->getPost()->get('identity');
+        $identity = $e->getRequest()->getPost()->get('identity');
         $credential = $e->getRequest()->getPost()->get('credential');
         $credential = $this->preProcessCredential($credential);
         $userObject = null;
@@ -74,8 +76,9 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
 
         if (!$userObject) {
             $e->setCode(AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND)
-              ->setMessages(array('A record with the supplied identity could not be found.'));
+                ->setMessages(array('A record with the supplied identity could not be found.'));
             $this->setSatisfied(false);
+
             return false;
         }
 
@@ -83,8 +86,9 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
             // Don't allow user to login if state is not in allowed list
             if (!in_array($userObject->getState(), $this->getOptions()->getAllowedLoginStates())) {
                 $e->setCode(AuthenticationResult::FAILURE_UNCATEGORIZED)
-                  ->setMessages(array('A record with the supplied identity is not active.'));
+                    ->setMessages(array('A record with the supplied identity is not active.'));
                 $this->setSatisfied(false);
+
                 return false;
             }
         }
@@ -94,8 +98,9 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         if (!$bcrypt->verify($credential, $userObject->getPassword())) {
             // Password does not match
             $e->setCode(AuthenticationResult::FAILURE_CREDENTIAL_INVALID)
-              ->setMessages(array('Supplied credential is invalid.'));
+                ->setMessages(array('Supplied credential is invalid.'));
             $this->setSatisfied(false);
+
             return false;
         }
 
@@ -112,7 +117,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         $storage['identity'] = $e->getIdentity();
         $this->getStorage()->write($storage);
         $e->setCode(AuthenticationResult::SUCCESS)
-          ->setMessages(array('Authentication successful.'));
+            ->setMessages(array('Authentication successful.'));
     }
 
     protected function updateUserPasswordHash($userObject, $password, $bcrypt)
@@ -123,6 +128,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         }
         $userObject->setPassword($bcrypt->create($password));
         $this->getMapper()->update($userObject);
+
         return $this;
     }
 
@@ -132,6 +138,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         if (is_callable($processor)) {
             return $processor($credential);
         }
+
         return $credential;
     }
 
@@ -145,6 +152,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         if (null === $this->mapper) {
             $this->mapper = $this->getServiceManager()->get('zfcuser_user_mapper');
         }
+
         return $this->mapper;
     }
 
@@ -157,6 +165,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
     public function setMapper(UserMapperInterface $mapper)
     {
         $this->mapper = $mapper;
+
         return $this;
     }
 
@@ -178,6 +187,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
     public function setCredentialPreprocessor($credentialPreprocessor)
     {
         $this->credentialPreprocessor = $credentialPreprocessor;
+
         return $this;
     }
 
@@ -218,6 +228,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         if (!$this->options instanceof AuthenticationOptionsInterface) {
             $this->setOptions($this->getServiceManager()->get('zfcuser_module_options'));
         }
+
         return $this->options;
     }
 }

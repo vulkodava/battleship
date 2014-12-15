@@ -76,7 +76,7 @@ class StepTest extends \PHPUnit_Framework_TestCase
 
         $validator = new Validator\Step(array(
             'baseValue' => 0.1,
-            'step'      => 2
+            'step' => 2
         ));
 
         foreach ($valuesExpected as $element) {
@@ -109,7 +109,7 @@ class StepTest extends \PHPUnit_Framework_TestCase
 
         $validator = new Validator\Step(array(
             'baseValue' => 0,
-            'step'      => 2.1
+            'step' => 2.1
         ));
 
         foreach ($valuesExpected as $element) {
@@ -143,7 +143,7 @@ class StepTest extends \PHPUnit_Framework_TestCase
 
         $validator = new Validator\Step(array(
             'baseValue' => 0,
-            'step'      => 0.01
+            'step' => 0.01
         ));
 
         foreach ($valuesExpected as $element) {
@@ -184,7 +184,7 @@ class StepTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Validator\Step();
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 
     public function testSetStepFloat()
@@ -198,6 +198,6 @@ class StepTest extends \PHPUnit_Framework_TestCase
     {
         $step = '0.01';
         $this->_validator->setStep($step);
-        $this->assertAttributeSame((float) $step, 'step', $this->_validator);
+        $this->assertAttributeSame((float)$step, 'step', $this->_validator);
     }
 }

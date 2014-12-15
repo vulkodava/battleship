@@ -17,6 +17,7 @@ class Bar
     {
         $this->val = $someval;
     }
+
     /**
      * Bar
      *

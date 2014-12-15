@@ -31,11 +31,11 @@ class RbacTest extends \PHPUnit_Framework_TestCase
         $foo = new Rbac\Role('foo');
         $bar = new Rbac\Role('bar');
 
-        $true  = new TestAsset\SimpleTrueAssertion();
+        $true = new TestAsset\SimpleTrueAssertion();
         $false = new TestAsset\SimpleFalseAssertion();
 
         $roleNoMatch = new TestAsset\RoleMustMatchAssertion($bar);
-        $roleMatch   = new TestAsset\RoleMustMatchAssertion($foo);
+        $roleMatch = new TestAsset\RoleMustMatchAssertion($foo);
 
         $foo->addPermission('can.foo');
         $bar->addPermission('can.bar');

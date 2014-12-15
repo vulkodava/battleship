@@ -37,12 +37,12 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
      * Database adapter configuration
      */
     protected $dbAdapterParams = array(
-        'driver'           => 'IbmDb2',
-        'dbname'           => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_DATABASE,
-        'username'         => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_USERNAME,
-        'password'         => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_PASSWORD,
+        'driver' => 'IbmDb2',
+        'dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_DATABASE,
+        'username' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_USERNAME,
+        'password' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_PASSWORD,
         'platform_options' => array('quote_identifiers' => false),
-        'driver_options'   => array(),
+        'driver_options' => array(),
     );
 
     /**
@@ -63,7 +63,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Tests are not enabled in TestConfiguration.php');
         }
 
-        if (! extension_loaded('ibm_db2')) {
+        if (!extension_loaded('ibm_db2')) {
             $this->markTestSkipped('ibm_db2 extension is not loaded');
         }
 
@@ -331,7 +331,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldNotAuthenticateWhenFlagIsNotSet()
     {
         $sqlInsert = "INSERT INTO $this->tableName (id, username, password, real_name) "
-                   . "VALUES (2, 'my_username', 'my_otherpass', 'Test user 2')";
+            . "VALUES (2, 'my_username', 'my_otherpass', 'Test user 2')";
         $this->db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
@@ -350,7 +350,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldAuthenticateWhenFlagIsSet()
     {
         $sqlInsert = "INSERT INTO $this->tableName (id, username, password, real_name) "
-                   . "VALUES (2, 'my_username', 'my_otherpass', 'Test user 2')";
+            . "VALUES (2, 'my_username', 'my_otherpass', 'Test user 2')";
         $this->db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
@@ -380,25 +380,25 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         $this->createDbAdapter($optionalParams);
 
         $sqlInsert = "INSERT INTO $this->tableName (id, username, password, real_name) "
-                   . "VALUES (1, 'my_username', 'my_password', 'My Real Name')";
+            . "VALUES (1, 'my_username', 'my_password', 'My Real Name')";
 
         $this->db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
     }
 
     protected function createDbAdapter($optionalParams = array())
     {
-        if (! empty($optionalParams)) {
+        if (!empty($optionalParams)) {
             $this->dbAdapterParams['options'] = $optionalParams;
         }
 
         $this->db = new DbAdapter($this->dbAdapterParams);
 
         $sqlCreate = "CREATE TABLE {$this->tableName} ( "
-                   . 'id INTEGER NOT NULL, '
-                   . 'username VARCHAR(50) NOT NULL, '
-                   . 'password VARCHAR(32), '
-                   . 'real_name VARCHAR(150), '
-                   . 'PRIMARY KEY(id))';
+            . 'id INTEGER NOT NULL, '
+            . 'username VARCHAR(50) NOT NULL, '
+            . 'password VARCHAR(32), '
+            . 'real_name VARCHAR(150), '
+            . 'PRIMARY KEY(id))';
 
         $this->db->query($sqlCreate, DbAdapter::QUERY_MODE_EXECUTE);
     }

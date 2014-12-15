@@ -68,6 +68,7 @@ class ValidatorChain extends EventManager
         }
 
         $listener = parent::attach($event, $callback, $priority);
+
         return $listener;
     }
 

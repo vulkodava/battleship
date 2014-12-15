@@ -62,7 +62,9 @@ use Doctrine\Common\Util\ClassUtils;
  * @author  Jonathan Wage <jonwage@gmail.com>
  * @author  Roman Borschel <roman@code-factory.org>
  */
-/* final */class EntityManager implements EntityManagerInterface
+/* final */
+
+class EntityManager implements EntityManagerInterface
 {
     /**
      * The used Configuration.
@@ -138,15 +140,15 @@ use Doctrine\Common\Util\ClassUtils;
      * Creates a new EntityManager that operates on the given database connection
      * and uses the given Configuration and EventManager implementations.
      *
-     * @param \Doctrine\DBAL\Connection     $conn
-     * @param \Doctrine\ORM\Configuration   $config
+     * @param \Doctrine\DBAL\Connection $conn
+     * @param \Doctrine\ORM\Configuration $config
      * @param \Doctrine\Common\EventManager $eventManager
      */
     protected function __construct(Connection $conn, Configuration $config, EventManager $eventManager)
     {
-        $this->conn              = $conn;
-        $this->config            = $config;
-        $this->eventManager      = $eventManager;
+        $this->conn = $conn;
+        $this->config = $config;
+        $this->eventManager = $eventManager;
 
         $metadataFactoryClassName = $config->getClassMetadataFactoryName();
 
@@ -155,8 +157,8 @@ use Doctrine\Common\Util\ClassUtils;
         $this->metadataFactory->setCacheDriver($this->config->getMetadataCacheImpl());
 
         $this->repositoryFactory = $config->getRepositoryFactory();
-        $this->unitOfWork        = new UnitOfWork($this);
-        $this->proxyFactory      = new ProxyFactory(
+        $this->unitOfWork = new UnitOfWork($this);
+        $this->proxyFactory = new ProxyFactory(
             $this,
             $config->getProxyDir(),
             $config->getProxyNamespace(),
@@ -272,7 +274,7 @@ use Doctrine\Common\Util\ClassUtils;
     {
         $query = new Query($this);
 
-        if ( ! empty($dql)) {
+        if (!empty($dql)) {
             $query->setDql($dql);
         }
 
@@ -343,9 +345,9 @@ use Doctrine\Common\Util\ClassUtils;
     /**
      * Finds an Entity by its identifier.
      *
-     * @param string       $entityName
-     * @param mixed        $id
-     * @param integer      $lockMode
+     * @param string $entityName
+     * @param mixed $id
+     * @param integer $lockMode
      * @param integer|null $lockVersion
      *
      * @return object|null The entity instance or NULL if the entity can not be found.
@@ -367,14 +369,14 @@ use Doctrine\Common\Util\ClassUtils;
             }
         }
 
-        if ( ! is_array($id)) {
+        if (!is_array($id)) {
             $id = array($class->identifier[0] => $id);
         }
 
         $sortedId = array();
 
         foreach ($class->identifier as $identifier) {
-            if ( ! isset($id[$identifier])) {
+            if (!isset($id[$identifier])) {
                 throw ORMException::missingIdentifierField($class->name, $identifier);
             }
 
@@ -385,7 +387,7 @@ use Doctrine\Common\Util\ClassUtils;
 
         // Check identity map first
         if (($entity = $unitOfWork->tryGetById($sortedId, $class->rootEntityName)) !== false) {
-            if ( ! ($entity instanceof $class->name)) {
+            if (!($entity instanceof $class->name)) {
                 return null;
             }
 
@@ -411,7 +413,7 @@ use Doctrine\Common\Util\ClassUtils;
                 return $persister->load($sortedId);
 
             case LockMode::OPTIMISTIC:
-                if ( ! $class->isVersioned) {
+                if (!$class->isVersioned) {
                     throw OptimisticLockException::notVersioned($class->name);
                 }
 
@@ -422,7 +424,7 @@ use Doctrine\Common\Util\ClassUtils;
                 return $entity;
 
             default:
-                if ( ! $this->getConnection()->isTransactionActive()) {
+                if (!$this->getConnection()->isTransactionActive()) {
                     throw TransactionRequiredException::transactionRequired();
                 }
 
@@ -437,14 +439,14 @@ use Doctrine\Common\Util\ClassUtils;
     {
         $class = $this->metadataFactory->getMetadataFor(ltrim($entityName, '\\'));
 
-        if ( ! is_array($id)) {
+        if (!is_array($id)) {
             $id = array($class->identifier[0] => $id);
         }
 
         $sortedId = array();
 
         foreach ($class->identifier as $identifier) {
-            if ( ! isset($id[$identifier])) {
+            if (!isset($id[$identifier])) {
                 throw ORMException::missingIdentifierField($class->name, $identifier);
             }
 
@@ -460,7 +462,7 @@ use Doctrine\Common\Util\ClassUtils;
             return $this->find($entityName, $sortedId);
         }
 
-        if ( ! is_array($sortedId)) {
+        if (!is_array($sortedId)) {
             $sortedId = array($class->identifier[0] => $sortedId);
         }
 
@@ -483,7 +485,7 @@ use Doctrine\Common\Util\ClassUtils;
             return ($entity instanceof $class->name) ? $entity : null;
         }
 
-        if ( ! is_array($identifier)) {
+        if (!is_array($identifier)) {
             $identifier = array($class->identifier[0] => $identifier);
         }
 
@@ -537,8 +539,8 @@ use Doctrine\Common\Util\ClassUtils;
      */
     public function persist($entity)
     {
-        if ( ! is_object($entity)) {
-            throw ORMInvalidArgumentException::invalidObject('EntityManager#persist()' , $entity);
+        if (!is_object($entity)) {
+            throw ORMInvalidArgumentException::invalidObject('EntityManager#persist()', $entity);
         }
 
         $this->errorIfClosed();
@@ -560,8 +562,8 @@ use Doctrine\Common\Util\ClassUtils;
      */
     public function remove($entity)
     {
-        if ( ! is_object($entity)) {
-            throw ORMInvalidArgumentException::invalidObject('EntityManager#remove()' , $entity);
+        if (!is_object($entity)) {
+            throw ORMInvalidArgumentException::invalidObject('EntityManager#remove()', $entity);
         }
 
         $this->errorIfClosed();
@@ -581,8 +583,8 @@ use Doctrine\Common\Util\ClassUtils;
      */
     public function refresh($entity)
     {
-        if ( ! is_object($entity)) {
-            throw ORMInvalidArgumentException::invalidObject('EntityManager#refresh()' , $entity);
+        if (!is_object($entity)) {
+            throw ORMInvalidArgumentException::invalidObject('EntityManager#refresh()', $entity);
         }
 
         $this->errorIfClosed();
@@ -605,8 +607,8 @@ use Doctrine\Common\Util\ClassUtils;
      */
     public function detach($entity)
     {
-        if ( ! is_object($entity)) {
-            throw ORMInvalidArgumentException::invalidObject('EntityManager#detach()' , $entity);
+        if (!is_object($entity)) {
+            throw ORMInvalidArgumentException::invalidObject('EntityManager#detach()', $entity);
         }
 
         $this->unitOfWork->detach($entity);
@@ -625,8 +627,8 @@ use Doctrine\Common\Util\ClassUtils;
      */
     public function merge($entity)
     {
-        if ( ! is_object($entity)) {
-            throw ORMInvalidArgumentException::invalidObject('EntityManager#merge()' , $entity);
+        if (!is_object($entity)) {
+            throw ORMInvalidArgumentException::invalidObject('EntityManager#merge()', $entity);
         }
 
         $this->errorIfClosed();
@@ -675,8 +677,8 @@ use Doctrine\Common\Util\ClassUtils;
     public function contains($entity)
     {
         return $this->unitOfWork->isScheduledForInsert($entity)
-            || $this->unitOfWork->isInIdentityMap($entity)
-            && ! $this->unitOfWork->isScheduledForDelete($entity);
+        || $this->unitOfWork->isInIdentityMap($entity)
+        && !$this->unitOfWork->isScheduledForDelete($entity);
     }
 
     /**
@@ -782,9 +784,9 @@ use Doctrine\Common\Util\ClassUtils;
     /**
      * Factory method to create EntityManager instances.
      *
-     * @param mixed         $conn         An array with the connection parameters or an existing Connection instance.
-     * @param Configuration $config       The Configuration instance to use.
-     * @param EventManager  $eventManager The EventManager instance to use.
+     * @param mixed $conn                An array with the connection parameters or an existing Connection instance.
+     * @param Configuration $config      The Configuration instance to use.
+     * @param EventManager $eventManager The EventManager instance to use.
      *
      * @return EntityManager The created EntityManager.
      *
@@ -793,7 +795,7 @@ use Doctrine\Common\Util\ClassUtils;
      */
     public static function create($conn, Configuration $config, EventManager $eventManager = null)
     {
-        if ( ! $config->getMetadataDriverImpl()) {
+        if (!$config->getMetadataDriverImpl()) {
             throw ORMException::missingMappingDriverImpl();
         }
 
@@ -806,7 +808,7 @@ use Doctrine\Common\Util\ClassUtils;
 
             case ($conn instanceof Connection):
                 if ($eventManager !== null && $conn->getEventManager() !== $eventManager) {
-                     throw ORMException::mismatchedEventManager();
+                    throw ORMException::mismatchedEventManager();
                 }
                 break;
 

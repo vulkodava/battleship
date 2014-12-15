@@ -23,15 +23,16 @@ class DDC425Test extends \Doctrine\Tests\OrmFunctionalTestCase
     {
         //$this->_em->getConnection()->getConfiguration()->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger);
 
-        $num = $this->_em->createQuery('DELETE '.__NAMESPACE__.'\DDC425Entity e WHERE e.someDatetimeField > ?1')
-                ->setParameter(1, new DateTime, Type::DATETIME)
-                ->getResult();
+        $num = $this->_em->createQuery('DELETE ' . __NAMESPACE__ . '\DDC425Entity e WHERE e.someDatetimeField > ?1')
+            ->setParameter(1, new DateTime, Type::DATETIME)
+            ->getResult();
         $this->assertEquals(0, $num);
     }
 }
 
 /** @Entity */
-class DDC425Entity {
+class DDC425Entity
+{
     /**
      * @Id @Column(type="integer")
      * @GeneratedValue

@@ -1,6 +1,7 @@
 <?php
 
 namespace Doctrine\Tests\ORM\Functional\Ticket;
+
 use Doctrine\ORM\UnitOfWork;
 
 require_once __DIR__ . '/../../../TestInit.php';
@@ -15,7 +16,7 @@ class DDC381Test extends \Doctrine\Tests\OrmFunctionalTestCase
             $this->_schemaTool->createSchema(array(
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC381Entity'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

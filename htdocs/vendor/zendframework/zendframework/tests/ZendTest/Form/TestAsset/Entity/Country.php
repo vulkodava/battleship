@@ -29,6 +29,7 @@ class Country
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -47,6 +48,7 @@ class Country
     public function setContinent($continent)
     {
         $this->continent = $continent;
+
         return $this;
     }
 

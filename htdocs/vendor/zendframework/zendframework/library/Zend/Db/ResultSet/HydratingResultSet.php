@@ -52,6 +52,7 @@ class HydratingResultSet extends AbstractResultSet
             );
         }
         $this->objectPrototype = $objectPrototype;
+
         return $this;
     }
 
@@ -64,6 +65,7 @@ class HydratingResultSet extends AbstractResultSet
     public function setHydrator(HydratorInterface $hydrator)
     {
         $this->hydrator = $hydrator;
+
         return $this;
     }
 
@@ -111,6 +113,7 @@ class HydratingResultSet extends AbstractResultSet
         foreach ($this as $row) {
             $return[] = $this->getHydrator()->extract($row);
         }
+
         return $return;
     }
 }

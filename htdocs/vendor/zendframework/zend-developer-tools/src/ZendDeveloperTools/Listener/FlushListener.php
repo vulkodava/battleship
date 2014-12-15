@@ -64,7 +64,7 @@ class FlushListener implements ListenerAggregateInterface
             return;
         }
 
-        if(is_callable(array($response, 'send'))){
+        if (is_callable(array($response, 'send'))) {
             return $response->send();
         }
     }

@@ -51,7 +51,7 @@ class Proxy implements ObjectManagerAwareInterface
      * @var
      */
     protected $property;
-    
+
     /**
      * @var
      */
@@ -75,11 +75,11 @@ class Proxy implements ObjectManagerAwareInterface
         if (isset($options['property'])) {
             $this->setProperty($options['property']);
         }
-        
+
         if (isset($options['find_method'])) {
             $this->setFindMethod($options['find_method']);
         }
-        
+
         if (isset($options['is_method'])) {
             $this->setIsMethod($options['is_method']);
         }
@@ -90,6 +90,7 @@ class Proxy implements ObjectManagerAwareInterface
         if (empty($this->valueOptions)) {
             $this->loadValueOptions();
         }
+
         return $this->valueOptions;
     }
 
@@ -99,18 +100,20 @@ class Proxy implements ObjectManagerAwareInterface
     public function getObjects()
     {
         $this->loadObjects();
+
         return $this->objects;
     }
 
     /**
      * Set the object manager
      *
-     * @param  ObjectManager  $objectManager
+     * @param  ObjectManager $objectManager
      * @return Proxy
      */
     public function setObjectManager(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
+
         return $this;
     }
 
@@ -127,12 +130,13 @@ class Proxy implements ObjectManagerAwareInterface
     /**
      * Set the FQCN of the target object
      *
-     * @param  string         $targetClass
+     * @param  string $targetClass
      * @return Proxy
      */
     public function setTargetClass($targetClass)
     {
         $this->targetClass = $targetClass;
+
         return $this;
     }
 
@@ -149,12 +153,13 @@ class Proxy implements ObjectManagerAwareInterface
     /**
      * Set the property to use as the label in the options
      *
-     * @param  string         $property
+     * @param  string $property
      * @return Proxy
      */
     public function setProperty($property)
     {
         $this->property = $property;
+
         return $this;
     }
 
@@ -165,25 +170,26 @@ class Proxy implements ObjectManagerAwareInterface
     {
         return $this->property;
     }
-    
+
     /**
      * Set if the property is a method to use as the label in the options
      *
-     * @param  boolean         $method
+     * @param  boolean $method
      * @return Proxy
      */
     public function setIsMethod($method)
     {
-    	$this->isMethod = (bool) $method;
-    	return $this;
+        $this->isMethod = (bool)$method;
+
+        return $this;
     }
-    
+
     /**
      * @return mixed
      */
     public function getIsMethod()
     {
-    	return $this->isMethod;
+        return $this->isMethod;
     }
 
     /** Set the findMethod property to specify the method to use on repository
@@ -194,6 +200,7 @@ class Proxy implements ObjectManagerAwareInterface
     public function setFindMethod($findMethod)
     {
         $this->findMethod = $findMethod;
+
         return $this;
     }
 
@@ -226,14 +233,14 @@ class Proxy implements ObjectManagerAwareInterface
         if (is_object($value)) {
             if ($value instanceof Collection) {
                 $data = array();
-                foreach($value as $object) {
+                foreach ($value as $object) {
                     $values = $metadata->getIdentifierValues($object);
                     $data[] = array_shift($values);
                 }
 
                 $value = $data;
             } else {
-                $metadata   = $om->getClassMetadata(get_class($value));
+                $metadata = $om->getClassMetadata(get_class($value));
                 $identifier = $metadata->getIdentifierFieldNames();
 
                 // TODO: handle composite (multiple) identifiers
@@ -258,8 +265,8 @@ class Proxy implements ObjectManagerAwareInterface
         if (!empty($this->objects)) {
             return;
         }
-        
-        $findMethod = (array) $this->getFindMethod();
+
+        $findMethod = (array)$this->getFindMethod();
         if (!$findMethod) {
             $this->objects = $this->objectManager->getRepository($this->targetClass)->findAll();
         } else {
@@ -307,10 +314,10 @@ class Proxy implements ObjectManagerAwareInterface
             throw new RuntimeException('No target class was set');
         }
 
-        $metadata   = $om->getClassMetadata($targetClass);
+        $metadata = $om->getClassMetadata($targetClass);
         $identifier = $metadata->getIdentifierFieldNames();
-        $objects    = $this->getObjects();
-        $options    = array();
+        $objects = $this->getObjects();
+        $options = array();
 
         if (empty($objects)) {
             $options[''] = '';
@@ -343,7 +350,7 @@ class Proxy implements ObjectManagerAwareInterface
                         ));
                     }
 
-                    $label = (string) $object;
+                    $label = (string)$object;
                 }
 
                 if (count($identifier) > 1) {

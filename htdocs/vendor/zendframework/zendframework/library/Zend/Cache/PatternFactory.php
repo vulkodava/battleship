@@ -47,11 +47,13 @@ abstract class PatternFactory
 
         if ($patternName instanceof Pattern\PatternInterface) {
             $patternName->setOptions($options);
+
             return $patternName;
         }
 
         $pattern = static::getPluginManager()->get($patternName);
         $pattern->setOptions($options);
+
         return $pattern;
     }
 

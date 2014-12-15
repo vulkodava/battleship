@@ -84,10 +84,10 @@ class ResultCacheStatement implements \IteratorAggregate, ResultStatement
 
     /**
      * @param \Doctrine\DBAL\Driver\Statement $stmt
-     * @param \Doctrine\Common\Cache\Cache    $resultCache
-     * @param string                          $cacheKey
-     * @param string                          $realKey
-     * @param integer                         $lifetime
+     * @param \Doctrine\Common\Cache\Cache $resultCache
+     * @param string $cacheKey
+     * @param string $realKey
+     * @param integer $lifetime
      */
     public function __construct(Statement $stmt, Cache $resultCache, $cacheKey, $realKey, $lifetime)
     {
@@ -106,7 +106,7 @@ class ResultCacheStatement implements \IteratorAggregate, ResultStatement
         $this->statement->closeCursor();
         if ($this->emptied && $this->data !== null) {
             $data = $this->resultCache->fetch($this->cacheKey);
-            if ( ! $data) {
+            if (!$data) {
                 $data = array();
             }
             $data[$this->realKey] = $this->data;

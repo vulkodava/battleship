@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -45,7 +45,7 @@ class Route implements GuardInterface, RuleProviderInterface, ResourceProviderIn
     protected $listeners = array();
 
     /**
-     * @param array                   $rules
+     * @param array $rules
      * @param ServiceLocatorInterface $serviceLocator
      */
     public function __construct(array $rules, ServiceLocatorInterface $serviceLocator)
@@ -119,9 +119,9 @@ class Route implements GuardInterface, RuleProviderInterface, ResourceProviderIn
      */
     public function onRoute(MvcEvent $event)
     {
-        $service    = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
-        $match      = $event->getRouteMatch();
-        $routeName  = $match->getMatchedRouteName();
+        $service = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
+        $match = $event->getRouteMatch();
+        $routeName = $match->getMatchedRouteName();
 
         if ($service->isAllowed('route/' . $routeName)) {
             return;

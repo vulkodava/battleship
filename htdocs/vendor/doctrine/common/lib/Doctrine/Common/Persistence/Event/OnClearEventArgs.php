@@ -46,7 +46,7 @@ class OnClearEventArgs extends EventArgs
      * Constructor.
      *
      * @param ObjectManager $objectManager The object manager.
-     * @param string|null   $entityClass   The optional entity class.
+     * @param string|null $entityClass     The optional entity class.
      */
     public function __construct($objectManager, $entityClass = null)
     {

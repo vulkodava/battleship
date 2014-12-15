@@ -23,10 +23,10 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
      */
     public function basicBehaviorDataProvider()
     {
-        $testFile   = __DIR__ . '/_files/picture.jpg';
+        $testFile = __DIR__ . '/_files/picture.jpg';
         $pictureTests = array(
             //    Options, isValid Param, Expected value, Expected message
-            array('b2a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, true,  ''),
+            array('b2a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, true, ''),
             array('52a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, false, 'fileSha1DoesNotMatch'),
             array(
                 array('42a5334847b4328e7d19d9b41fd874dffa911c98', 'b2a5334847b4328e7d19d9b41fd874dffa911c98'),
@@ -38,7 +38,7 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $testFile   = __DIR__ . '/_files/nofile.mo';
+        $testFile = __DIR__ . '/_files/nofile.mo';
         $noFileTests = array(
             //    Options, isValid Param, Expected value, message
             array('b2a5334847b4328e7d19d9b41fd874dffa911c98', $testFile, false, 'fileSha1NotFound'),
@@ -53,6 +53,7 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
             );
             $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
+
         return $testData;
     }
 
@@ -195,11 +196,11 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(File\Sha1::NOT_FOUND, $validator->getMessages());
 
         $filesArray = array(
-            'name'      => '',
-            'size'      => 0,
-            'tmp_name'  => '',
-            'error'     => UPLOAD_ERR_NO_FILE,
-            'type'      => '',
+            'name' => '',
+            'size' => 0,
+            'tmp_name' => '',
+            'error' => UPLOAD_ERR_NO_FILE,
+            'type' => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

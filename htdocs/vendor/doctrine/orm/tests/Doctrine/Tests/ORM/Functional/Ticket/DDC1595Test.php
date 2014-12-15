@@ -29,10 +29,10 @@ class DDC1595Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
         $this->_em->clear();
 
-        $sqlLogger  = $this->_em->getConnection()->getConfiguration()->getSQLLogger();
+        $sqlLogger = $this->_em->getConnection()->getConfiguration()->getSQLLogger();
         $repository = $this->_em->getRepository(__NAMESPACE__ . '\\DDC1595InheritedEntity1');
 
-        $entity1  = $repository->find($e1->id);
+        $entity1 = $repository->find($e1->id);
 
         // DDC-1596
         $this->assertSQLEquals(
@@ -49,7 +49,7 @@ class DDC1595Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $this->_em->clear();
 
-        $entity1  = $repository->find($e1->id);
+        $entity1 = $repository->find($e1->id);
         $entities = $entity1->getEntities()->count();
 
         $this->assertSQLEquals(

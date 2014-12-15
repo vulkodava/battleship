@@ -33,8 +33,8 @@ abstract class AbstractPlatformTestCase extends \Doctrine\Tests\DbalTestCase
         }
 
         $c = $this->_platform->getIdentifierQuoteCharacter();
-        $this->assertEquals($c."test".$c, $this->_platform->quoteIdentifier("test"));
-        $this->assertEquals($c."test".$c.".".$c."test".$c, $this->_platform->quoteIdentifier("test.test"));
+        $this->assertEquals($c . "test" . $c, $this->_platform->quoteIdentifier("test"));
+        $this->assertEquals($c . "test" . $c . "." . $c . "test" . $c, $this->_platform->quoteIdentifier("test.test"));
         $this->assertEquals(str_repeat($c, 4), $this->_platform->quoteIdentifier($c));
     }
 
@@ -48,8 +48,8 @@ abstract class AbstractPlatformTestCase extends \Doctrine\Tests\DbalTestCase
         }
 
         $c = $this->_platform->getIdentifierQuoteCharacter();
-        $this->assertEquals($c."test".$c, $this->_platform->quoteSingleIdentifier("test"));
-        $this->assertEquals($c."test.test".$c, $this->_platform->quoteSingleIdentifier("test.test"));
+        $this->assertEquals($c . "test" . $c, $this->_platform->quoteSingleIdentifier("test"));
+        $this->assertEquals($c . "test.test" . $c, $this->_platform->quoteSingleIdentifier("test.test"));
         $this->assertEquals(str_repeat($c, 4), $this->_platform->quoteSingleIdentifier($c));
     }
 
@@ -187,7 +187,7 @@ abstract class AbstractPlatformTestCase extends \Doctrine\Tests\DbalTestCase
         $this->assertEquals($this->getBitAndComparisonExpressionSql(2, 4), $sql);
     }
 
-    protected  function getBitOrComparisonExpressionSql($value1, $value2)
+    protected function getBitOrComparisonExpressionSql($value1, $value2)
     {
         return '(' . $value1 . ' | ' . $value2 . ')';
     }
@@ -441,7 +441,9 @@ abstract class AbstractPlatformTestCase extends \Doctrine\Tests\DbalTestCase
     }
 
     abstract protected function getQuotedColumnInPrimaryKeySQL();
+
     abstract protected function getQuotedColumnInIndexSQL();
+
     abstract protected function getQuotedColumnInForeignKeySQL();
 
     /**

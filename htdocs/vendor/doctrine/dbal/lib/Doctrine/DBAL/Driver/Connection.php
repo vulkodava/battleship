@@ -48,12 +48,12 @@ interface Connection
     /**
      * Quotes a string for use in a query.
      *
-     * @param string  $input
+     * @param string $input
      * @param integer $type
      *
      * @return string
      */
-    function quote($input, $type=\PDO::PARAM_STR);
+    function quote($input, $type = \PDO::PARAM_STR);
 
     /**
      * Executes an SQL statement and return the number of affected rows.

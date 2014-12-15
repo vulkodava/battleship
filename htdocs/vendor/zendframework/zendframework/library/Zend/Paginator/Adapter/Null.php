@@ -31,7 +31,7 @@ class Null implements AdapterInterface
     /**
      * Returns an array of items for a page.
      *
-     * @param  int $offset Page offset
+     * @param  int $offset           Page offset
      * @param  int $itemCountPerPage Number of items per page
      * @return array
      */
@@ -41,7 +41,7 @@ class Null implements AdapterInterface
             return array();
         }
 
-        $remainItemCount  = $this->count() - $offset;
+        $remainItemCount = $this->count() - $offset;
         $currentItemCount = $remainItemCount > $itemCountPerPage ? $itemCountPerPage : $remainItemCount;
 
         return array_fill(0, $currentItemCount, null);

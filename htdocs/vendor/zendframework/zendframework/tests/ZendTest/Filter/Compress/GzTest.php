@@ -37,7 +37,7 @@ class GzTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter  = new GzCompression();
+        $filter = new GzCompression();
 
         $content = $filter->compress('compress me');
         $this->assertNotEquals('compress me', $content);
@@ -79,7 +79,7 @@ class GzTest extends \PHPUnit_Framework_TestCase
      */
     public function testGzGetSetOptionsInConstructor()
     {
-        $filter2= new GzCompression(array('level' => 8));
+        $filter2 = new GzCompression(array('level' => 8));
         $this->assertEquals(array('mode' => 'compress', 'level' => 8, 'archive' => null), $filter2->getOptions());
     }
 
@@ -136,14 +136,14 @@ class GzTest extends \PHPUnit_Framework_TestCase
      */
     public function testGzCompressToFile()
     {
-        $filter   = new GzCompression();
+        $filter = new GzCompression();
         $archive = __DIR__ . '/../_files/compressed.gz';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');
         $this->assertTrue($content);
 
-        $filter2  = new GzCompression();
+        $filter2 = new GzCompression();
         $content2 = $filter2->decompress($archive);
         $this->assertEquals('compress me', $content2);
 
@@ -160,7 +160,7 @@ class GzTest extends \PHPUnit_Framework_TestCase
      */
     public function testGzDeflate()
     {
-        $filter  = new GzCompression(array('mode' => 'deflate'));
+        $filter = new GzCompression(array('mode' => 'deflate'));
 
         $content = $filter->compress('compress me');
         $this->assertNotEquals('compress me', $content);

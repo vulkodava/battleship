@@ -26,8 +26,9 @@ class TestCallbackCache
         ++static::$fooCounter;
         $args = func_get_args();
 
-        echo   'foobar_output('.implode(', ', $args) . ') : ' . static::$fooCounter;
-        return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
+        echo 'foobar_output(' . implode(', ', $args) . ') : ' . static::$fooCounter;
+
+        return 'foobar_return(' . implode(', ', $args) . ') : ' . static::$fooCounter;
     }
 
     public static function emptyMethod()
@@ -45,6 +46,7 @@ class FailableCallback
 
 /**
  * Test function
+ *
  * @see ZendTest\Cache\Pattern\Foo::bar
  */
 function bar()
@@ -110,10 +112,10 @@ class CallbackCacheTest extends CommonPatternTest
     public function testGenerateKey()
     {
         $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
-        $args     = array('arg1', 2, 3.33, null);
+        $args = array('arg1', 2, 3.33, null);
 
         $generatedKey = $this->_pattern->generateKey($callback, $args);
-        $usedKey      = null;
+        $usedKey = null;
         $this->_options->getStorage()->getEventManager()->attach('setItem.pre', function ($event) use (&$usedKey) {
             $params = $event->getParams();
             $usedKey = $params['key'];
@@ -177,9 +179,9 @@ class CallbackCacheTest extends CommonPatternTest
     public function testCallCanReturnCachedNullValues()
     {
         $callback = new FailableCallback();
-        $key      = $this->_pattern->generateKey($callback, array());
+        $key = $this->_pattern->generateKey($callback, array());
         $this->_storage->setItem($key, array(null));
-        $value    = $this->_pattern->call($callback);
+        $value = $this->_pattern->call($callback);
         $this->assertNull($value);
     }
 }

@@ -17,6 +17,7 @@ class ExceptionThrowingFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         throw new FooException("A");
+
         return new Foo;
     }
 }

@@ -22,11 +22,11 @@ class ConfirmationQuestion extends Question
      * Constructor.
      *
      * @param string $question The question to ask to the user
-     * @param bool   $default  The default answer to return, true or false
+     * @param bool $default    The default answer to return, true or false
      */
     public function __construct($question, $default = true)
     {
-        parent::__construct($question, (bool) $default);
+        parent::__construct($question, (bool)$default);
 
         $this->setNormalizer($this->getDefaultNormalizer());
     }

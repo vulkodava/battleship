@@ -29,8 +29,8 @@ class Openssl implements EncryptionAlgorithmInterface
      * )
      */
     protected $keys = array(
-        'public'   => array(),
-        'private'  => array(),
+        'public' => array(),
+        'private' => array(),
         'envelope' => array(),
     );
 
@@ -120,7 +120,7 @@ class Openssl implements EncryptionAlgorithmInterface
                 fclose($file);
             } else {
                 $cert = $key;
-                $key  = count($this->keys[$type]);
+                $key = count($this->keys[$type]);
             }
 
             switch ($type) {
@@ -161,6 +161,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function getPublicKey()
     {
         $key = $this->keys['public'];
+
         return $key;
     }
 
@@ -194,6 +195,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function getPrivateKey()
     {
         $key = $this->keys['private'];
+
         return $key;
     }
 
@@ -232,6 +234,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function getEnvelopeKey()
     {
         $key = $this->keys['envelope'];
+
         return $key;
     }
 
@@ -276,6 +279,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function setPassphrase($passphrase)
     {
         $this->passphrase = $passphrase;
+
         return $this;
     }
 
@@ -302,6 +306,7 @@ class Openssl implements EncryptionAlgorithmInterface
         }
 
         $this->compression = $compression;
+
         return $this;
     }
 
@@ -323,7 +328,8 @@ class Openssl implements EncryptionAlgorithmInterface
      */
     public function setPackage($package)
     {
-        $this->package = (bool) $package;
+        $this->package = (bool)$package;
+
         return $this;
     }
 
@@ -337,16 +343,16 @@ class Openssl implements EncryptionAlgorithmInterface
      */
     public function encrypt($value)
     {
-        $encrypted     = array();
+        $encrypted = array();
         $encryptedkeys = array();
 
         if (count($this->keys['public']) == 0) {
             throw new Exception\RuntimeException('Openssl can not encrypt without public keys');
         }
 
-        $keys         = array();
+        $keys = array();
         $fingerprints = array();
-        $count        = -1;
+        $count = -1;
         foreach ($this->keys['public'] as $key => $cert) {
             $keys[$key] = openssl_pkey_get_public($cert);
             if ($this->package) {
@@ -363,10 +369,10 @@ class Openssl implements EncryptionAlgorithmInterface
         // compress prior to encryption
         if (!empty($this->compression)) {
             $compress = new Compress($this->compression);
-            $value    = $compress($value);
+            $value = $compress($value);
         }
 
-        $crypt  = openssl_seal($value, $encrypted, $encryptedkeys, $keys);
+        $crypt = openssl_seal($value, $encrypted, $encryptedkeys, $keys);
         foreach ($keys as $key) {
             openssl_free_key($key);
         }
@@ -402,7 +408,7 @@ class Openssl implements EncryptionAlgorithmInterface
     public function decrypt($value)
     {
         $decrypted = "";
-        $envelope  = current($this->getEnvelopeKey());
+        $envelope = current($this->getEnvelopeKey());
 
         if (count($this->keys['private']) !== 1) {
             throw new Exception\RuntimeException('Please give a private key for decryption with Openssl');
@@ -426,10 +432,10 @@ class Openssl implements EncryptionAlgorithmInterface
 
             $count = unpack('ncount', $value);
             $count = $count['count'];
-            $length  = 2;
+            $length = 2;
             for ($i = $count; $i > 0; --$i) {
                 $header = unpack('H32print/nsize', substr($value, $length, 18));
-                $length  += 18;
+                $length += 18;
                 if ($header['print'] == $fingerprint) {
                     $envelope = substr($value, $length, $header['size']);
                 }
@@ -441,7 +447,7 @@ class Openssl implements EncryptionAlgorithmInterface
             $value = substr($value, $length);
         }
 
-        $crypt  = openssl_open($value, $decrypted, $envelope, $keys);
+        $crypt = openssl_open($value, $decrypted, $envelope, $keys);
         openssl_free_key($keys);
 
         if ($crypt === false) {
@@ -451,7 +457,7 @@ class Openssl implements EncryptionAlgorithmInterface
         // decompress after decryption
         if (!empty($this->compression)) {
             $decompress = new Decompress($this->compression);
-            $decrypted  = $decompress($decrypted);
+            $decrypted = $decompress($decrypted);
         }
 
         return $decrypted;

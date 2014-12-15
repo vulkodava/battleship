@@ -85,7 +85,7 @@ abstract class Helper implements HelperInterface
                 return $format[1];
             }
 
-            return ceil($secs / $format[2]).' '.$format[1];
+            return ceil($secs / $format[2]) . ' ' . $format[1];
         }
     }
 

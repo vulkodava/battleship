@@ -28,7 +28,7 @@ use Doctrine\DBAL\Driver\Statement as DriverStatement;
  * for logging, DBAL mapping types, etc.
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.0
+ * @since  2.0
  */
 class Statement implements \IteratorAggregate, DriverStatement
 {
@@ -77,7 +77,7 @@ class Statement implements \IteratorAggregate, DriverStatement
     /**
      * Creates a new <tt>Statement</tt> for the given SQL and <tt>Connection</tt>.
      *
-     * @param string                    $sql  The SQL of the statement.
+     * @param string $sql                     The SQL of the statement.
      * @param \Doctrine\DBAL\Connection $conn The connection on which the statement should be executed.
      */
     public function __construct($sql, Connection $conn)
@@ -96,9 +96,9 @@ class Statement implements \IteratorAggregate, DriverStatement
      * type and the value undergoes the conversion routines of the mapping type before
      * being bound.
      *
-     * @param string $name  The name or position of the parameter.
-     * @param mixed  $value The value of the parameter.
-     * @param mixed  $type  Either a PDO binding type or a DBAL mapping type name or instance.
+     * @param string $name The name or position of the parameter.
+     * @param mixed $value The value of the parameter.
+     * @param mixed $type  Either a PDO binding type or a DBAL mapping type name or instance.
      *
      * @return boolean TRUE on success, FALSE on failure.
      */
@@ -128,9 +128,9 @@ class Statement implements \IteratorAggregate, DriverStatement
      *
      * Binding a parameter by reference does not support DBAL mapping types.
      *
-     * @param string       $name   The name or position of the parameter.
-     * @param mixed        $var    The reference to the variable to bind.
-     * @param integer      $type   The PDO binding type.
+     * @param string $name         The name or position of the parameter.
+     * @param mixed $var           The reference to the variable to bind.
+     * @param integer $type        The PDO binding type.
      * @param integer|null $length Must be specified when using an OUT bind
      *                             so that PHP allocates enough memory to hold the returned value.
      *
@@ -257,7 +257,7 @@ class Statement implements \IteratorAggregate, DriverStatement
      * Returns an array containing all of the result set rows.
      *
      * @param integer|null $fetchMode
-     * @param mixed        $fetchArgument
+     * @param mixed $fetchArgument
      *
      * @return array An array containing all of the remaining rows in the result set.
      */

@@ -9,12 +9,13 @@
 
 namespace ZendTest\Code\Generator\TestAsset;
 
-class TestClassWithHeredoc 
+class TestClassWithHeredoc
 {
 
-    function someFunction() {
+    function someFunction()
+    {
 
-$output = <<< END
+        $output = <<< END
 
         Fix it, fix it!
         Fix it, fix it!

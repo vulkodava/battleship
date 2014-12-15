@@ -84,6 +84,7 @@ class CacheControl implements HeaderInterface
     public function addDirective($key, $value = true)
     {
         $this->directives[$key] = $value;
+
         return $this;
     }
 
@@ -118,6 +119,7 @@ class CacheControl implements HeaderInterface
     public function removeDirective($key)
     {
         unset($this->directives[$key]);
+
         return $this;
     }
 
@@ -135,11 +137,12 @@ class CacheControl implements HeaderInterface
                 $parts[] = $key;
             } else {
                 if (preg_match('#[^a-zA-Z0-9._-]#', $value)) {
-                    $value = '"' . $value.'"';
+                    $value = '"' . $value . '"';
                 }
                 $parts[] = "$key=$value";
             }
         }
+
         return implode(', ', $parts);
     }
 
@@ -235,9 +238,11 @@ class CacheControl implements HeaderInterface
             if (preg_match('/^' . $token . '/', $string, $matches)) {
                 $lastMatch = $matches[0];
                 $string = substr($string, strlen($matches[0]));
+
                 return $i;
             }
         }
+
         return -1;
     }
 }

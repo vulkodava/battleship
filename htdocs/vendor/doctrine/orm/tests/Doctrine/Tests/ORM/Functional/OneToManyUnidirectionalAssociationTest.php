@@ -35,7 +35,7 @@ class OneToManyUnidirectionalAssociationTest extends \Doctrine\Tests\OrmFunction
     {
         $leg = new RoutingLeg();
         $leg->fromLocation = $this->locations['Berlin'];
-        $leg->toLocation   = $this->locations['Bonn'];
+        $leg->toLocation = $this->locations['Bonn'];
         $leg->departureDate = new \DateTime("now");
         $leg->arrivalDate = new \DateTime("now +5 hours");
 
@@ -47,7 +47,7 @@ class OneToManyUnidirectionalAssociationTest extends \Doctrine\Tests\OrmFunction
         $this->_em->clear();
 
         $routes = $this->_em->createQuery(
-            "SELECT r, l, f, t FROM Doctrine\Tests\Models\Routing\RoutingRoute r ".
+            "SELECT r, l, f, t FROM Doctrine\Tests\Models\Routing\RoutingRoute r " .
             "JOIN r.legs l JOIN l.fromLocation f JOIN l.toLocation t"
         )->getSingleResult();
 
@@ -60,7 +60,7 @@ class OneToManyUnidirectionalAssociationTest extends \Doctrine\Tests\OrmFunction
     {
         $leg = new RoutingLeg();
         $leg->fromLocation = $this->locations['Berlin'];
-        $leg->toLocation   = $this->locations['Bonn'];
+        $leg->toLocation = $this->locations['Bonn'];
         $leg->departureDate = new \DateTime("now");
         $leg->arrivalDate = new \DateTime("now +5 hours");
 
@@ -77,7 +77,7 @@ class OneToManyUnidirectionalAssociationTest extends \Doctrine\Tests\OrmFunction
         try {
             // exception depending on the underlying Database Driver
             $this->_em->flush();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $exceptionThrown = true;
         }
 

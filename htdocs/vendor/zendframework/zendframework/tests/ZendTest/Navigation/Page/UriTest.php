@@ -45,7 +45,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         try {
             $page = new Page\Uri(array('uri' => 1337));
             $this->fail('An invalid \'uri\' was given, but ' .
-                        'a Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+                'a Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
         }
     }
@@ -58,7 +58,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
             $page = new Page\Uri(array('uri' => $uri));
             $this->fail('An invalid \'uri\' was given, but ' .
-                        'a Zend\Navigation\Exception\InvalidArgumentException was not thrown');
+                'a Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
         }
     }

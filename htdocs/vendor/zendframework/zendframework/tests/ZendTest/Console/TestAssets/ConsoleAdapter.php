@@ -29,7 +29,7 @@ class ConsoleAdapter extends AbstractAdapter
     /**
      * Read a single line from the console input
      *
-     * @param int $maxLength        Maximum response length
+     * @param int $maxLength Maximum response length
      * @return string
      */
     public function readLine($maxLength = 2048)
@@ -38,13 +38,14 @@ class ConsoleAdapter extends AbstractAdapter
             rewind($this->stream);
         }
         $line = stream_get_line($this->stream, $maxLength, PHP_EOL);
-        return rtrim($line,"\n\r");
+
+        return rtrim($line, "\n\r");
     }
 
     /**
      * Read a single character from the console input
      *
-     * @param string|null   $mask   A list of allowed chars
+     * @param string|null $mask A list of allowed chars
      * @return string
      */
     public function readChar($mask = null)
@@ -55,6 +56,7 @@ class ConsoleAdapter extends AbstractAdapter
         do {
             $char = fread($this->stream, 1);
         } while ("" === $char || ($mask !== null && false === strstr($mask, $char)));
+
         return $char;
     }
 
@@ -91,6 +93,7 @@ class ConsoleAdapter extends AbstractAdapter
 
     /**
      * Tracks exactly what data has been written
+     *
      * @param string $text
      * @param null $color
      * @param null $bgColor

@@ -112,7 +112,7 @@ class DDC440Phone
         return $this->number;
     }
 
-    public function setClient(DDC440Client $value, $update_inverse=true)
+    public function setClient(DDC440Client $value, $update_inverse = true)
     {
         $this->client = $value;
         if ($update_inverse) {

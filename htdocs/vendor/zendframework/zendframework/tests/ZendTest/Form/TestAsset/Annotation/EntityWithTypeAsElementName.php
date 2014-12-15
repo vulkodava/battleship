@@ -14,9 +14,9 @@ use ZendTest\Form\Annotation;
 class EntityWithTypeAsElementName
 {
     /**
-      * @Annotation\Required(true)
-      * @Annotation\Filter({"name":"StringTrim"})
-      * @Annotation\Name("type")
-      */
+     * @Annotation\Required(true)
+     * @Annotation\Filter({"name":"StringTrim"})
+     * @Annotation\Name("type")
+     */
     public $type;
 }

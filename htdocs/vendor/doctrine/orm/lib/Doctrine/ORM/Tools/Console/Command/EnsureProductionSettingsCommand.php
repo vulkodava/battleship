@@ -43,18 +43,18 @@ class EnsureProductionSettingsCommand extends Command
     protected function configure()
     {
         $this
-        ->setName('orm:ensure-production-settings')
-        ->setDescription('Verify that Doctrine is properly configured for a production environment.')
-        ->setDefinition(array(
-            new InputOption(
-                'complete', null, InputOption::VALUE_NONE,
-                'Flag to also inspect database connection existence.'
-            )
-        ))
-        ->setHelp(<<<EOT
+            ->setName('orm:ensure-production-settings')
+            ->setDescription('Verify that Doctrine is properly configured for a production environment.')
+            ->setDefinition(array(
+                new InputOption(
+                    'complete', null, InputOption::VALUE_NONE,
+                    'Flag to also inspect database connection existence.'
+                )
+            ))
+            ->setHelp(<<<EOT
 Verify that Doctrine is properly configured for a production environment.
 EOT
-        );
+            );
     }
 
     /**

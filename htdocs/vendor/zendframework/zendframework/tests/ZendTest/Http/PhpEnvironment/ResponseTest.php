@@ -27,20 +27,20 @@ class ResponseTest extends TestCase
     public function setUp()
     {
         $this->originalEnvironment = array(
-            'post'   => $_POST,
-            'get'    => $_GET,
+            'post' => $_POST,
+            'get' => $_GET,
             'cookie' => $_COOKIE,
             'server' => $_SERVER,
-            'env'    => $_ENV,
-            'files'  => $_FILES,
+            'env' => $_ENV,
+            'files' => $_FILES,
         );
 
-        $_POST   = array();
-        $_GET    = array();
+        $_POST = array();
+        $_GET = array();
         $_COOKIE = array();
         $_SERVER = array();
-        $_ENV    = array();
-        $_FILES  = array();
+        $_ENV = array();
+        $_FILES = array();
     }
 
     /**
@@ -48,12 +48,12 @@ class ResponseTest extends TestCase
      */
     public function tearDown()
     {
-        $_POST   = $this->originalEnvironment['post'];
-        $_GET    = $this->originalEnvironment['get'];
+        $_POST = $this->originalEnvironment['post'];
+        $_GET = $this->originalEnvironment['get'];
         $_COOKIE = $this->originalEnvironment['cookie'];
         $_SERVER = $this->originalEnvironment['server'];
-        $_ENV    = $this->originalEnvironment['env'];
-        $_FILES  = $this->originalEnvironment['files'];
+        $_ENV = $this->originalEnvironment['env'];
+        $_FILES = $this->originalEnvironment['files'];
     }
 
     public function testReturnsOneOhVersionWhenDetectedInServerSuperglobal()

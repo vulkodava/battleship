@@ -29,7 +29,7 @@ class CompositeExpressionTest extends \Doctrine\Tests\DbalTestCase
     {
         $expr = new CompositeExpression($type, $parts);
 
-        $this->assertEquals($expects, (string) $expr);
+        $this->assertEquals($expects, (string)$expr);
     }
 
     public function provideDataForConvertToString()

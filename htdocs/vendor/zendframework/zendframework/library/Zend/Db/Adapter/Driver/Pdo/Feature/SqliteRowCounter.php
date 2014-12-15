@@ -41,6 +41,7 @@ class SqliteRowCounter extends AbstractFeature
         $result = $countStmt->execute();
         $countRow = $result->getResource()->fetch(\PDO::FETCH_ASSOC);
         unset($statement, $result);
+
         return $countRow['count'];
     }
 
@@ -58,6 +59,7 @@ class SqliteRowCounter extends AbstractFeature
         $pdo = $this->driver->getConnection()->getResource();
         $result = $pdo->query($countSql);
         $countRow = $result->fetch(\PDO::FETCH_ASSOC);
+
         return $countRow['count'];
     }
 
@@ -68,6 +70,7 @@ class SqliteRowCounter extends AbstractFeature
     public function getRowCountClosure($context)
     {
         $sqliteRowCounter = $this;
+
         return function () use ($sqliteRowCounter, $context) {
             /** @var $sqliteRowCounter SqliteRowCounter */
             return ($context instanceof Pdo\Statement)

@@ -30,7 +30,8 @@ class Layout extends AbstractPlugin
     public function setTemplate($template)
     {
         $viewModel = $this->getViewModel();
-        $viewModel->setTemplate((string) $template);
+        $viewModel->setTemplate((string)$template);
+
         return $this;
     }
 
@@ -48,6 +49,7 @@ class Layout extends AbstractPlugin
         if (null === $template) {
             return $this->getViewModel();
         }
+
         return $this->setTemplate($template);
     }
 
@@ -71,7 +73,7 @@ class Layout extends AbstractPlugin
         $event = $controller->getEvent();
         if (!$event instanceof MvcEvent) {
             $params = $event->getParams();
-            $event  = new MvcEvent();
+            $event = new MvcEvent();
             $event->setParams($params);
         }
         $this->event = $event;
@@ -87,11 +89,12 @@ class Layout extends AbstractPlugin
      */
     protected function getViewModel()
     {
-        $event     = $this->getEvent();
+        $event = $this->getEvent();
         $viewModel = $event->getViewModel();
         if (!$viewModel instanceof Model) {
             throw new Exception\DomainException('Layout plugin requires that event view model is populated');
         }
+
         return $viewModel;
     }
 }

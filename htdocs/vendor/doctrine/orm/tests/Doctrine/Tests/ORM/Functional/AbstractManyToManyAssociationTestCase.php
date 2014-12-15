@@ -37,6 +37,8 @@ class AbstractManyToManyAssociationTestCase extends \Doctrine\Tests\OrmFunctiona
 
     public function assertCollectionEquals(Collection $first, Collection $second)
     {
-        return $first->forAll(function($k, $e) use($second) { return $second->contains($e); });
+        return $first->forAll(function ($k, $e) use ($second) {
+                return $second->contains($e);
+            });
     }
 }

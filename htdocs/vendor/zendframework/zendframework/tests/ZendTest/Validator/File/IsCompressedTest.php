@@ -23,7 +23,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         // As of PHP >= 5.3.11 and >= 5.4.1 the magic database format has changed.
         // http://doc.php.net/downloads/pdf/split/de/File-Information.pdf (page 11)
         if (version_compare(PHP_VERSION, '5.4', '>=')
-                && version_compare(PHP_VERSION, '5.4.1', '<')
+            && version_compare(PHP_VERSION, '5.4.1', '<')
         ) {
             return __DIR__ . '/_files/magic.lte.5.3.10.mime';
         }
@@ -42,24 +42,24 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         // application/x-zip ...
         $expectedMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $testFile);
 
-        $allowed          = array('application/zip', 'application/x-zip');
-        $fileUpload       = array(
+        $allowed = array('application/zip', 'application/x-zip');
+        $fileUpload = array(
             'tmp_name' => $testFile,
-            'name'     => basename($testFile),
-            'size'     => 200,
-            'error'    => 0,
-            'type'     => in_array($expectedMimeType, $allowed) ? $expectedMimeType : 'application/zip',
+            'name' => basename($testFile),
+            'size' => 200,
+            'error' => 0,
+            'type' => in_array($expectedMimeType, $allowed) ? $expectedMimeType : 'application/zip',
         );
 
         return array(
             //    Options, isValid Param, Expected value
-            array(null,                                                               $fileUpload, true),
-            array('zip',                                                              $fileUpload, true),
-            array('test/notype',                                                      $fileUpload, false),
-            array('application/x-zip, application/zip, application/x-tar',            $fileUpload, true),
+            array(null, $fileUpload, true),
+            array('zip', $fileUpload, true),
+            array('test/notype', $fileUpload, false),
+            array('application/x-zip, application/zip, application/x-tar', $fileUpload, true),
             array(array('application/x-zip', 'application/zip', 'application/x-tar'), $fileUpload, true),
-            array(array('zip', 'tar'),                                                $fileUpload, true),
-            array(array('tar', 'arj'),                                                $fileUpload, false),
+            array(array('zip', 'tar'), $fileUpload, true),
+            array(array('tar', 'arj'), $fileUpload, false),
         );
     }
 
@@ -81,7 +81,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     protected function skipIfBuggyMimeContentType($options)
     {
         if (!is_array($options)) {
-            $options = (array) $options;
+            $options = (array)$options;
         }
 
         if (!in_array('application/zip', $options)) {
@@ -202,11 +202,11 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     public function testErrorMessages()
     {
         $files = array(
-            'name'     => 'picture.jpg',
-            'type'     => 'image/jpeg',
-            'size'     => 200,
+            'name' => 'picture.jpg',
+            'type' => 'image/jpeg',
+            'size' => 200,
             'tmp_name' => __DIR__ . '/_files/picture.jpg',
-            'error'    => 0
+            'error' => 0
         );
 
         $validator = new File\IsCompressed('test/notype');
@@ -226,7 +226,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         $validator = new File\IsCompressed(array(
             'image/gif',
             'image/jpg',
-            'magicFile'   => $magicFile,
+            'magicFile' => $magicFile,
             'enableHeaderCheck' => true));
 
         $this->assertEquals($magicFile, $validator->getMagicFile());

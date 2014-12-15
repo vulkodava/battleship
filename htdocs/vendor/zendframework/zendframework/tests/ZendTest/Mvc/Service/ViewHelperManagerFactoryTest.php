@@ -19,7 +19,7 @@ class ViewHelperManagerFactoryTest extends TestCase
     public function setUp()
     {
         $this->services = new ServiceManager();
-        $this->factory  = new ViewHelperManagerFactory();
+        $this->factory = new ViewHelperManagerFactory();
     }
 
     /**
@@ -28,9 +28,9 @@ class ViewHelperManagerFactoryTest extends TestCase
     public function emptyConfiguration()
     {
         return array(
-            'no-config'                => array(array()),
+            'no-config' => array(array()),
             'view-manager-config-only' => array(array('view_manager' => array())),
-            'empty-doctype-config'     => array(array('view_manager' => array('doctype' => null))),
+            'empty-doctype-config' => array(array('view_manager' => array('doctype' => null))),
         );
     }
 

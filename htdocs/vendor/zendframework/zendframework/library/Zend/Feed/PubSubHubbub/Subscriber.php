@@ -149,7 +149,7 @@ class Subscriber
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Array or Traversable object'
-                                . 'expected, got ' . gettype($options));
+                . 'expected, got ' . gettype($options));
         }
         if (array_key_exists('hubUrls', $options)) {
             $this->addHubUrls($options['hubUrls']);
@@ -180,6 +180,7 @@ class Subscriber
                 $options['preferredVerificationMode']
             );
         }
+
         return $this;
     }
 
@@ -195,10 +196,11 @@ class Subscriber
     {
         if (empty($url) || !is_string($url) || !Uri::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter "url"'
-                .' of "' . $url . '" must be a non-empty string and a valid'
-                .' URL');
+                . ' of "' . $url . '" must be a non-empty string and a valid'
+                . ' URL');
         }
         $this->topicUrl = $url;
+
         return $this;
     }
 
@@ -215,6 +217,7 @@ class Subscriber
             throw new Exception\RuntimeException('A valid Topic (RSS or Atom'
                 . ' feed) URL MUST be set before attempting any operation');
         }
+
         return $this->topicUrl;
     }
 
@@ -233,6 +236,7 @@ class Subscriber
                 . ' must be an integer greater than zero');
         }
         $this->leaseSeconds = $seconds;
+
         return $this;
     }
 
@@ -262,6 +266,7 @@ class Subscriber
                 . ' URL');
         }
         $this->callbackUrl = $url;
+
         return $this;
     }
 
@@ -278,6 +283,7 @@ class Subscriber
             throw new Exception\RuntimeException('A valid Callback URL MUST be'
                 . ' set before attempting any operation');
         }
+
         return $this->callbackUrl;
     }
 
@@ -304,6 +310,7 @@ class Subscriber
                 . ' Zend\Feed\Pubsubhubbub::VERIFICATION_MODE_ASYNC');
         }
         $this->preferredVerificationMode = $mode;
+
         return $this;
     }
 
@@ -332,6 +339,7 @@ class Subscriber
                 . ' URL');
         }
         $this->hubUrls[] = $url;
+
         return $this;
     }
 
@@ -346,6 +354,7 @@ class Subscriber
         foreach ($urls as $url) {
             $this->addHubUrl($url);
         }
+
         return $this;
     }
 
@@ -362,6 +371,7 @@ class Subscriber
         }
         $key = array_search($url, $this->hubUrls);
         unset($this->hubUrls[$key]);
+
         return $this;
     }
 
@@ -373,6 +383,7 @@ class Subscriber
     public function getHubUrls()
     {
         $this->hubUrls = array_unique($this->hubUrls);
+
         return $this->hubUrls;
     }
 
@@ -392,6 +403,7 @@ class Subscriber
                 . ' URL');
         }
         $this->authentications[$url] = $authentication;
+
         return $this;
     }
 
@@ -406,6 +418,7 @@ class Subscriber
         foreach ($authentications as $url => $authentication) {
             $this->addAuthentication($url, $authentication);
         }
+
         return $this;
     }
 
@@ -428,6 +441,7 @@ class Subscriber
     public function usePathParameter($bool = true)
     {
         $this->usePathParameter = $bool;
+
         return $this;
     }
 
@@ -443,6 +457,7 @@ class Subscriber
     {
         if (is_array($name)) {
             $this->setParameters($name);
+
             return $this;
         }
         if (empty($name) || !is_string($name)) {
@@ -451,6 +466,7 @@ class Subscriber
         }
         if ($value === null) {
             $this->removeParameter($name);
+
             return $this;
         }
         if (empty($value) || (!is_string($value) && $value !== null)) {
@@ -458,6 +474,7 @@ class Subscriber
                 . ' of "' . $value . '" must be a non-empty string');
         }
         $this->parameters[$name] = $value;
+
         return $this;
     }
 
@@ -472,6 +489,7 @@ class Subscriber
         foreach ($parameters as $name => $value) {
             $this->setParameter($name, $value);
         }
+
         return $this;
     }
 
@@ -491,6 +509,7 @@ class Subscriber
         if (array_key_exists($name, $this->parameters)) {
             unset($this->parameters[$name]);
         }
+
         return $this;
     }
 
@@ -514,6 +533,7 @@ class Subscriber
     public function setStorage(Model\SubscriptionPersistenceInterface $storage)
     {
         $this->storage = $storage;
+
         return $this;
     }
 
@@ -531,6 +551,7 @@ class Subscriber
             throw new Exception\RuntimeException('No storage vehicle '
                 . 'has been set.');
         }
+
         return $this->storage;
     }
 
@@ -567,6 +588,7 @@ class Subscriber
         if (count($this->errors) > 0) {
             return false;
         }
+
         return true;
     }
 
@@ -605,7 +627,7 @@ class Subscriber
     protected function _doRequest($mode)
     {
         $client = $this->_getHttpClient();
-        $hubs   = $this->getHubUrls();
+        $hubs = $this->getHubUrls();
         if (empty($hubs)) {
             throw new Exception\RuntimeException('No Hub Server URLs'
                 . ' have been set so no subscriptions can be attempted');
@@ -625,19 +647,19 @@ class Subscriber
             ) {
                 $this->errors[] = array(
                     'response' => $response,
-                    'hubUrl'   => $url,
+                    'hubUrl' => $url,
                 );
-            /**
-             * At first I thought it was needed, but the backend storage will
-             * allow tracking async without any user interference. It's left
-             * here in case the user is interested in knowing what Hubs
-             * are using async verification modes so they may update Models and
-             * move these to asynchronous processes.
-             */
+                /**
+                 * At first I thought it was needed, but the backend storage will
+                 * allow tracking async without any user interference. It's left
+                 * here in case the user is interested in knowing what Hubs
+                 * are using async verification modes so they may update Models and
+                 * move these to asynchronous processes.
+                 */
             } elseif ($response->getStatusCode() == 202) {
                 $this->asyncHubs[] = array(
                     'response' => $response,
-                    'hubUrl'   => $url,
+                    'hubUrl' => $url,
                 );
             }
         }
@@ -654,6 +676,7 @@ class Subscriber
         $client->setMethod(HttpRequest::METHOD_POST);
         $client->setOptions(array('useragent' => 'Zend_Feed_Pubsubhubbub_Subscriber/'
             . Version::VERSION));
+
         return $client;
     }
 
@@ -674,12 +697,12 @@ class Subscriber
         }
 
         $params = array(
-            'hub.mode'  => $mode,
+            'hub.mode' => $mode,
             'hub.topic' => $this->getTopicUrl(),
         );
 
         if ($this->getPreferredVerificationMode()
-                == PubSubHubbub::VERIFICATION_MODE_SYNC
+            == PubSubHubbub::VERIFICATION_MODE_SYNC
         ) {
             $vmodes = array(
                 PubSubHubbub::VERIFICATION_MODE_SYNC,
@@ -700,7 +723,7 @@ class Subscriber
          * Establish a persistent verify_token and attach key to callback
          * URL's path/query_string
          */
-        $key   = $this->_generateSubscriptionKey($params, $hubUrl);
+        $key = $this->_generateSubscriptionKey($params, $hubUrl);
         $token = $this->_generateVerifyToken();
         $params['hub.verify_token'] = $token;
 
@@ -730,15 +753,15 @@ class Subscriber
                 ->format('Y-m-d H:i:s');
         }
         $data = array(
-            'id'                 => $key,
-            'topic_url'          => $params['hub.topic'],
-            'hub_url'            => $hubUrl,
-            'created_time'       => $now->format('Y-m-d H:i:s'),
-            'lease_seconds'      => $params['hub.lease_seconds'],
-            'verify_token'       => hash('sha256', $params['hub.verify_token']),
-            'secret'             => null,
-            'expiration_time'    => $expires,
-            'subscription_state' => ($mode == 'unsubscribe')? PubSubHubbub::SUBSCRIPTION_TODELETE : PubSubHubbub::SUBSCRIPTION_NOTVERIFIED,
+            'id' => $key,
+            'topic_url' => $params['hub.topic'],
+            'hub_url' => $hubUrl,
+            'created_time' => $now->format('Y-m-d H:i:s'),
+            'lease_seconds' => $params['hub.lease_seconds'],
+            'verify_token' => hash('sha256', $params['hub.verify_token']),
+            'secret' => null,
+            'expiration_time' => $expires,
+            'subscription_state' => ($mode == 'unsubscribe') ? PubSubHubbub::SUBSCRIPTION_TODELETE : PubSubHubbub::SUBSCRIPTION_NOTVERIFIED,
         );
         $this->getStorage()->setSubscription($data);
 
@@ -759,6 +782,7 @@ class Subscriber
         if (!empty($this->testStaticToken)) {
             return $this->testStaticToken;
         }
+
         return uniqid(rand(), true) . time();
     }
 
@@ -766,14 +790,14 @@ class Subscriber
      * Simple helper to generate a verification token used in (un)subscribe
      * requests to a Hub Server.
      *
-     * @param array   $params
+     * @param array $params
      * @param string $hubUrl The Hub Server URL for which this token will apply
      * @return string
      */
     protected function _generateSubscriptionKey(array $params, $hubUrl)
     {
         $keyBase = $params['hub.topic'] . $hubUrl;
-        $key     = md5($keyBase);
+        $key = md5($keyBase);
 
         return $key;
     }
@@ -800,6 +824,7 @@ class Subscriber
                     = PubSubHubbub::urlencode($value);
             }
         }
+
         return $encoded;
     }
 
@@ -822,6 +847,7 @@ class Subscriber
                 $return[] = $key . '=' . $value;
             }
         }
+
         return implode('&', $return);
     }
 
@@ -832,6 +858,6 @@ class Subscriber
 
     final public function setTestStaticToken($token)
     {
-        $this->testStaticToken = (string) $token;
+        $this->testStaticToken = (string)$token;
     }
 }

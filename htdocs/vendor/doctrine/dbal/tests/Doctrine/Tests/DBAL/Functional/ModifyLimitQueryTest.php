@@ -94,9 +94,9 @@ class ModifyLimitQueryTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $this->_conn->insert('modify_limit_table2', array('test_int' => 2));
 
         $sql = "SELECT modify_limit_table.test_int FROM modify_limit_table " .
-               "INNER JOIN modify_limit_table2 ON modify_limit_table.test_int = modify_limit_table2.test_int ".
-               "GROUP BY modify_limit_table.test_int " .
-               "ORDER BY modify_limit_table.test_int ASC";
+            "INNER JOIN modify_limit_table2 ON modify_limit_table.test_int = modify_limit_table2.test_int " .
+            "GROUP BY modify_limit_table.test_int " .
+            "ORDER BY modify_limit_table.test_int ASC";
         $this->assertLimitResult(array(1, 2), $sql, 10, 0);
         $this->assertLimitResult(array(1), $sql, 1, 0);
         $this->assertLimitResult(array(2), $sql, 1, 1);

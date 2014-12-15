@@ -26,13 +26,13 @@ class SerializableException implements \Serializable
     public function __construct(\Exception $exception)
     {
         $this->data = array(
-            'code'     => $exception->getCode(),
-            'file'     => $exception->getFile(),
-            'line'     => $exception->getLine(),
-            'class'    => get_class($exception),
-            'message'  => $exception->getMessage(),
+            'code' => $exception->getCode(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'class' => get_class($exception),
+            'message' => $exception->getMessage(),
             'previous' => $exception->getPrevious() ? new self($exception->getPrevious()) : null,
-            'trace'    => $this->filterTrace(
+            'trace' => $this->filterTrace(
                 $exception->getTrace(),
                 $exception->getFile(),
                 $exception->getLine()
@@ -102,8 +102,8 @@ class SerializableException implements \Serializable
      * @copyright Copyright (c) Fabien Potencier <fabien@symfony.com> (http://symfony.com/)
      * @license   http://symfony.com/doc/current/contributing/code/license.html  MIT license
      *
-     * @param  array   $trace
-     * @param  string  $file
+     * @param  array $trace
+     * @param  string $file
      * @param  integer $line
      * @return array
      */
@@ -112,14 +112,14 @@ class SerializableException implements \Serializable
         $filteredTrace = array();
 
         $filteredTrace[] = array(
-            'namespace'   => '',
+            'namespace' => '',
             'short_class' => '',
-            'class'       => '',
-            'type'        => '',
-            'function'    => '',
-            'file'        => $file,
-            'line'        => $line,
-            'args'        => array(),
+            'class' => '',
+            'type' => '',
+            'function' => '',
+            'file' => $file,
+            'line' => $line,
+            'args' => array(),
         );
 
         foreach ($trace as $entry) {
@@ -133,14 +133,14 @@ class SerializableException implements \Serializable
             }
 
             $filteredTrace[] = array(
-                'namespace'   => $namespace,
+                'namespace' => $namespace,
                 'short_class' => $class,
-                'class'       => isset($entry['class']) ? $entry['class'] : '',
-                'type'        => isset($entry['type']) ? $entry['type'] : '',
-                'function'    => $entry['function'],
-                'file'        => isset($entry['file']) ? $entry['file'] : null,
-                'line'        => isset($entry['line']) ? $entry['line'] : null,
-                'args'        => isset($entry['args']) ? $this->filterArgs($entry['args']) : array(),
+                'class' => isset($entry['class']) ? $entry['class'] : '',
+                'type' => isset($entry['type']) ? $entry['type'] : '',
+                'function' => $entry['function'],
+                'file' => isset($entry['file']) ? $entry['file'] : null,
+                'line' => isset($entry['line']) ? $entry['line'] : null,
+                'args' => isset($entry['args']) ? $this->filterArgs($entry['args']) : array(),
             );
         }
 
@@ -153,7 +153,7 @@ class SerializableException implements \Serializable
      * @copyright Copyright (c) Fabien Potencier <fabien@symfony.com> (http://symfony.com/)
      * @license   http://symfony.com/doc/current/contributing/code/license.html  MIT license
      *
-     * @param  array   $args
+     * @param  array $args
      * @param  integer $level
      * @return array
      */
@@ -177,7 +177,7 @@ class SerializableException implements \Serializable
             } elseif (is_resource($value)) {
                 $result[$key] = array('resource', get_resource_type($value));
             } else {
-                $result[$key] = array('string', (string) $value);
+                $result[$key] = array('string', (string)$value);
             }
         }
 

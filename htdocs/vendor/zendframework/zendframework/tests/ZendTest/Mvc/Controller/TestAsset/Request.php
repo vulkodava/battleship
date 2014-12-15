@@ -27,6 +27,7 @@ class Request extends HttpRequest
     {
         $method = strtoupper($method);
         $this->method = $method;
+
         return $this;
     }
 }

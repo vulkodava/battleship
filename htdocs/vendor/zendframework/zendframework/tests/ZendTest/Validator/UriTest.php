@@ -67,15 +67,15 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             //    allowAbsolute allowRelative isAbsolute isRelative isValid expects
-            array(true,         true,         true,      false,     true,   true),
-            array(true,         true,         false,     true,      true,   true),
-            array(false,        true,         true,      false,     true,   false),
-            array(false,        true,         false,     true,      true,   true),
-            array(true,         false,        true,      false,     true,   true),
-            array(true,         false,        false,     true,      true,   false),
-            array(false,        false,        true,      false,     true,   false),
-            array(false,        false,        false,     true,      true,   false),
-            array(true,         true,         false,     false,     false,  false),
+            array(true, true, true, false, true, true),
+            array(true, true, false, true, true, true),
+            array(false, true, true, false, true, false),
+            array(false, true, false, true, true, true),
+            array(true, false, true, false, true, true),
+            array(true, false, false, true, true, false),
+            array(false, false, true, false, true, false),
+            array(false, false, false, true, true, false),
+            array(true, true, false, false, false, false),
         );
     }
 
@@ -84,7 +84,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testUriHandlerBehaviorWithAllowSettings(
         $allowAbsolute, $allowRelative, $isAbsolute, $isRelative, $isValid, $expects
-    ) {
+    )
+    {
         $uriMock = $this->getMock(
             'Zend\Uri\Uri',
             array('parse', 'isValid', 'isAbsolute', 'isValidRelative')

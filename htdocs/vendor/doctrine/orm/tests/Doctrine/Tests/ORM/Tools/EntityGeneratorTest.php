@@ -49,7 +49,7 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
     {
         $metadata = new ClassMetadataInfo($this->_namespace . '\EntityGeneratorBook');
         $metadata->namespace = $this->_namespace;
-        $metadata->customRepositoryClassName = $this->_namespace  . '\EntityGeneratorBookRepository';
+        $metadata->customRepositoryClassName = $this->_namespace . '\EntityGeneratorBookRepository';
 
         $metadata->table['name'] = 'book';
         $metadata->table['uniqueConstraints']['name_uniq'] = array('columns' => array('name'));
@@ -89,8 +89,8 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
         $metadata->mapField(array('fieldName' => 'id', 'type' => 'integer', 'id' => true));
         $metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_AUTO);
 
-        $name  = $field['fieldName'];
-        $type  = $field['dbType'];
+        $name = $field['fieldName'];
+        $type = $field['dbType'];
         $metadata->mapField(array('fieldName' => $name, 'type' => $type));
 
         $this->_generator->writeEntityClass($metadata, $this->_tmpDir);
@@ -104,7 +104,7 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
      */
     public function newInstance($metadata)
     {
-        $path = $this->_tmpDir . '/'. $this->_namespace . '/EntityGeneratorBook.php';
+        $path = $this->_tmpDir . '/' . $this->_namespace . '/EntityGeneratorBook.php';
         $this->assertFileExists($path);
         require_once $path;
 
@@ -173,8 +173,8 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testMethodDocBlockShouldStartWithBackSlash()
     {
-        $metadata   = $this->generateBookEntityFixture();
-        $book       = $this->newInstance($metadata);
+        $metadata = $this->generateBookEntityFixture();
+        $book = $this->newInstance($metadata);
 
         $this->assertPhpDocVarType('\Doctrine\Common\Collections\Collection', new \ReflectionProperty($book, 'comments'));
         $this->assertPhpDocReturnType('\Doctrine\Common\Collections\Collection', new \ReflectionMethod($book, 'getComments'));
@@ -272,20 +272,20 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testGenerateEntityWithSequenceGenerator()
     {
-        $metadata               = new ClassMetadataInfo($this->_namespace . '\DDC1784Entity');
-        $metadata->namespace    = $this->_namespace;
+        $metadata = new ClassMetadataInfo($this->_namespace . '\DDC1784Entity');
+        $metadata->namespace = $this->_namespace;
         $metadata->mapField(array('fieldName' => 'id', 'type' => 'integer', 'id' => true));
         $metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_SEQUENCE);
         $metadata->setSequenceGeneratorDefinition(array(
-            'sequenceName'      => 'DDC1784_ID_SEQ',
-            'allocationSize'    => 1,
-            'initialValue'      => 2
+            'sequenceName' => 'DDC1784_ID_SEQ',
+            'allocationSize' => 1,
+            'initialValue' => 2
         ));
         $this->_generator->writeEntityClass($metadata, $this->_tmpDir);
 
         $filename = $this->_tmpDir . DIRECTORY_SEPARATOR
-                  . $this->_namespace . DIRECTORY_SEPARATOR . 'DDC1784Entity.php';
-        
+            . $this->_namespace . DIRECTORY_SEPARATOR . 'DDC1784Entity.php';
+
         $this->assertFileExists($filename);
         require_once $filename;
 
@@ -304,22 +304,22 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testGenerateEntityWithMultipleInverseJoinColumns()
     {
-        $metadata               = new ClassMetadataInfo($this->_namespace . '\DDC2079Entity');
-        $metadata->namespace    = $this->_namespace;
+        $metadata = new ClassMetadataInfo($this->_namespace . '\DDC2079Entity');
+        $metadata->namespace = $this->_namespace;
         $metadata->mapField(array('fieldName' => 'id', 'type' => 'integer', 'id' => true));
         $metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_SEQUENCE);
         $metadata->mapManyToMany(array(
-            'fieldName'     => 'centroCustos',
-            'targetEntity'  => 'DDC2079CentroCusto',
-            'joinTable'     => array(
-                'name'                  => 'unidade_centro_custo',
-                'joinColumns'           => array(
-                    array('name' => 'idorcamento',      'referencedColumnName' => 'idorcamento'),
-                    array('name' => 'idunidade',        'referencedColumnName' => 'idunidade')
+            'fieldName' => 'centroCustos',
+            'targetEntity' => 'DDC2079CentroCusto',
+            'joinTable' => array(
+                'name' => 'unidade_centro_custo',
+                'joinColumns' => array(
+                    array('name' => 'idorcamento', 'referencedColumnName' => 'idorcamento'),
+                    array('name' => 'idunidade', 'referencedColumnName' => 'idunidade')
                 ),
-                'inverseJoinColumns'    => array(
-                    array('name' => 'idcentrocusto',    'referencedColumnName' => 'idcentrocusto'),
-                    array('name' => 'idpais',           'referencedColumnName' => 'idpais'),
+                'inverseJoinColumns' => array(
+                    array('name' => 'idcentrocusto', 'referencedColumnName' => 'idcentrocusto'),
+                    array('name' => 'idpais', 'referencedColumnName' => 'idpais'),
                 ),
             ),
         ));
@@ -331,9 +331,9 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
         $this->assertFileExists($filename);
         require_once $filename;
 
-        $property   = new \ReflectionProperty($metadata->name, 'centroCustos');
+        $property = new \ReflectionProperty($metadata->name, 'centroCustos');
         $docComment = $property->getDocComment();
-        
+
         //joinColumns
         $this->assertContains('@JoinColumn(name="idorcamento", referencedColumnName="idorcamento"),', $docComment);
         $this->assertContains('@JoinColumn(name="idunidade", referencedColumnName="idunidade")', $docComment);
@@ -343,25 +343,25 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
 
     }
 
-     /**
+    /**
      * @group DDC-2172
      */
     public function testGetInheritanceTypeString()
     {
         $reflection = new \ReflectionClass('\Doctrine\ORM\Mapping\ClassMetadata');
-        $method     = new \ReflectionMethod($this->_generator, 'getInheritanceTypeString');
-        $constants  = $reflection->getConstants();
-        $pattern    = '/^INHERITANCE_TYPE_/';
+        $method = new \ReflectionMethod($this->_generator, 'getInheritanceTypeString');
+        $constants = $reflection->getConstants();
+        $pattern = '/^INHERITANCE_TYPE_/';
 
         $method->setAccessible(true);
 
         foreach ($constants as $name => $value) {
-            if( ! preg_match($pattern, $name)) {
+            if (!preg_match($pattern, $name)) {
                 continue;
             }
 
             $expected = preg_replace($pattern, '', $name);
-            $actual   = $method->invoke($this->_generator, $value);
+            $actual = $method->invoke($this->_generator, $value);
 
             $this->assertEquals($expected, $actual);
         }
@@ -371,24 +371,24 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
     }
 
     /**
-    * @group DDC-2172
-    */
+     * @group DDC-2172
+     */
     public function testGetChangeTrackingPolicyString()
     {
         $reflection = new \ReflectionClass('\Doctrine\ORM\Mapping\ClassMetadata');
-        $method     = new \ReflectionMethod($this->_generator, 'getChangeTrackingPolicyString');
-        $constants  = $reflection->getConstants();
-        $pattern    = '/^CHANGETRACKING_/';
+        $method = new \ReflectionMethod($this->_generator, 'getChangeTrackingPolicyString');
+        $constants = $reflection->getConstants();
+        $pattern = '/^CHANGETRACKING_/';
 
         $method->setAccessible(true);
 
         foreach ($constants as $name => $value) {
-            if( ! preg_match($pattern, $name)) {
+            if (!preg_match($pattern, $name)) {
                 continue;
             }
 
             $expected = preg_replace($pattern, '', $name);
-            $actual   = $method->invoke($this->_generator, $value);
+            $actual = $method->invoke($this->_generator, $value);
 
             $this->assertEquals($expected, $actual);
         }
@@ -403,19 +403,19 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
     public function testGetIdGeneratorTypeString()
     {
         $reflection = new \ReflectionClass('\Doctrine\ORM\Mapping\ClassMetadata');
-        $method     = new \ReflectionMethod($this->_generator, 'getIdGeneratorTypeString');
-        $constants  = $reflection->getConstants();
-        $pattern    = '/^GENERATOR_TYPE_/';
+        $method = new \ReflectionMethod($this->_generator, 'getIdGeneratorTypeString');
+        $constants = $reflection->getConstants();
+        $pattern = '/^GENERATOR_TYPE_/';
 
         $method->setAccessible(true);
 
         foreach ($constants as $name => $value) {
-            if( ! preg_match($pattern, $name)) {
+            if (!preg_match($pattern, $name)) {
                 continue;
             }
 
             $expected = preg_replace($pattern, '', $name);
-            $actual   = $method->invoke($this->_generator, $value);
+            $actual = $method->invoke($this->_generator, $value);
 
             $this->assertEquals($expected, $actual);
         }
@@ -427,22 +427,22 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
     /**
      * @dataProvider getEntityTypeAliasDataProvider
      *
-     * @group DDC-1694
+     * @group        DDC-1694
      */
     public function testEntityTypeAlias(array $field)
     {
-        $metadata   = $this->generateEntityTypeFixture($field);
-        $path       = $this->_tmpDir . '/'. $this->_namespace . '/EntityType.php';
+        $metadata = $this->generateEntityTypeFixture($field);
+        $path = $this->_tmpDir . '/' . $this->_namespace . '/EntityType.php';
 
         $this->assertFileExists($path);
         require_once $path;
 
-        $entity     = new $metadata->name;
-        $reflClass  = new \ReflectionClass($metadata->name);
-        
-        $type   = $field['phpType'];
-        $name   = $field['fieldName'];
-        $value  = $field['value'];
+        $entity = new $metadata->name;
+        $reflClass = new \ReflectionClass($metadata->name);
+
+        $type = $field['phpType'];
+        $name = $field['fieldName'];
+        $value = $field['value'];
         $getter = "get" . ucfirst($name);
         $setter = "set" . ucfirst($name);
 
@@ -473,43 +473,43 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
                 'value' => new \DateTime
             )),
             array(array(
-                'fieldName' => 'date', 
+                'fieldName' => 'date',
                 'phpType' => '\\DateTime',
                 'dbType' => 'date',
                 'value' => new \DateTime
             )),
             array(array(
-                'fieldName' => 'time', 
+                'fieldName' => 'time',
                 'phpType' => '\DateTime',
                 'dbType' => 'time',
                 'value' => new \DateTime
             )),
             array(array(
-                'fieldName' => 'object', 
+                'fieldName' => 'object',
                 'phpType' => '\stdClass',
                 'dbType' => 'object',
                 'value' => new \stdClass()
             )),
             array(array(
-                'fieldName' => 'bigint', 
+                'fieldName' => 'bigint',
                 'phpType' => 'integer',
                 'dbType' => 'bigint',
                 'value' => 11
             )),
             array(array(
-                'fieldName' => 'smallint', 
+                'fieldName' => 'smallint',
                 'phpType' => 'integer',
                 'dbType' => 'smallint',
                 'value' => 22
             )),
             array(array(
-                'fieldName' => 'text', 
+                'fieldName' => 'text',
                 'phpType' => 'string',
                 'dbType' => 'text',
                 'value' => 'text'
             )),
             array(array(
-                'fieldName' => 'blob', 
+                'fieldName' => 'blob',
                 'phpType' => 'string',
                 'dbType' => 'blob',
                 'value' => 'blob'
@@ -520,7 +520,7 @@ class EntityGeneratorTest extends \Doctrine\Tests\OrmTestCase
                 'dbType' => 'decimal',
                 'value' => '12.34'
             ),
-        ));
+            ));
     }
 
     public function getParseTokensInEntityFileData()
@@ -561,7 +561,7 @@ class
      */
     private function assertPhpDocVarType($type, \ReflectionProperty $property)
     {
-        $this->assertEquals(1, preg_match('/@var\s+([^\s]+)/',$property->getDocComment(), $matches));
+        $this->assertEquals(1, preg_match('/@var\s+([^\s]+)/', $property->getDocComment(), $matches));
         $this->assertEquals($type, $matches[1]);
     }
 
@@ -586,5 +586,10 @@ class
     }
 }
 
-class EntityGeneratorAuthor {}
-class EntityGeneratorComment {}
+class EntityGeneratorAuthor
+{
+}
+
+class EntityGeneratorComment
+{
+}

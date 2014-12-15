@@ -23,7 +23,8 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Column;
 
 /**
- * Event Arguments used when the portable column definition is generated inside Doctrine\DBAL\Schema\AbstractSchemaManager.
+ * Event Arguments used when the portable column definition is generated inside
+ * Doctrine\DBAL\Schema\AbstractSchemaManager.
  *
  * @link   www.doctrine-project.org
  * @since  2.2
@@ -59,17 +60,17 @@ class SchemaColumnDefinitionEventArgs extends SchemaEventArgs
     private $_connection;
 
     /**
-     * @param array                     $tableColumn
-     * @param string                    $table
-     * @param string                    $database
+     * @param array $tableColumn
+     * @param string $table
+     * @param string $database
      * @param \Doctrine\DBAL\Connection $connection
      */
     public function __construct(array $tableColumn, $table, $database, Connection $connection)
     {
         $this->_tableColumn = $tableColumn;
-        $this->_table       = $table;
-        $this->_database    = $database;
-        $this->_connection  = $connection;
+        $this->_table = $table;
+        $this->_database = $database;
+        $this->_connection = $connection;
     }
 
     /**

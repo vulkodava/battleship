@@ -13,7 +13,7 @@ class TemporaryTableTest extends \Doctrine\Tests\DbalFunctionalTestCase
         parent::setUp();
         try {
             $this->_conn->exec($this->_conn->getDatabasePlatform()->getDropTableSQL("nontemporary"));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
@@ -24,7 +24,8 @@ class TemporaryTableTest extends \Doctrine\Tests\DbalFunctionalTestCase
             try {
                 $tempTable = $this->_conn->getDatabasePlatform()->getTemporaryTableName("temporary");
                 $this->_conn->exec($this->_conn->getDatabasePlatform()->getDropTemporaryTableSQL($tempTable));
-            } catch(\Exception $e) { }
+            } catch (\Exception $e) {
+            }
         }
     }
 
@@ -39,7 +40,7 @@ class TemporaryTableTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $tempTable = $platform->getTemporaryTableName("temporary");
 
         $createTempTableSQL = $platform->getCreateTemporaryTableSnippetSQL() . ' ' . $tempTable . ' ('
-                . $platform->getColumnDeclarationListSQL($columnDefinitions) . ')';
+            . $platform->getColumnDeclarationListSQL($columnDefinitions) . ')';
         $this->_conn->executeUpdate($createTempTableSQL);
 
         $table = new Table("nontemporary");
@@ -72,7 +73,7 @@ class TemporaryTableTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $tempTable = $platform->getTemporaryTableName("temporary");
 
         $createTempTableSQL = $platform->getCreateTemporaryTableSnippetSQL() . ' ' . $tempTable . ' ('
-                . $platform->getColumnDeclarationListSQL($columnDefinitions) . ')';
+            . $platform->getColumnDeclarationListSQL($columnDefinitions) . ')';
 
         $table = new Table("nontemporary");
         $table->addColumn("id", "integer");
@@ -92,7 +93,7 @@ class TemporaryTableTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
         try {
             $this->_conn->exec($platform->getDropTemporaryTableSQL($tempTable));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
 

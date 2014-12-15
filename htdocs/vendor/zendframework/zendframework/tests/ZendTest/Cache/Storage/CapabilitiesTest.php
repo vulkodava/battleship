@@ -47,11 +47,11 @@ class CapabilitiesTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_marker  = new \stdClass();
+        $this->_marker = new \stdClass();
         $this->_adapter = new MemoryAdapter();
 
         $this->_baseCapabilities = new Capabilities($this->_adapter, $this->_marker);
-        $this->_capabilities     = new Capabilities($this->_adapter, $this->_marker, array(), $this->_baseCapabilities);
+        $this->_capabilities = new Capabilities($this->_adapter, $this->_marker, array(), $this->_baseCapabilities);
     }
 
     public function testGetAdapter()
@@ -74,7 +74,7 @@ class CapabilitiesTest extends \PHPUnit_Framework_TestCase
 
     public function testTriggerCapabilityEvent()
     {
-        $em    = $this->_capabilities->getAdapter()->getEventManager();
+        $em = $this->_capabilities->getAdapter()->getEventManager();
         $event = null;
         $em->attach('capability', function ($eventArg) use (&$event) {
             $event = $eventArg;

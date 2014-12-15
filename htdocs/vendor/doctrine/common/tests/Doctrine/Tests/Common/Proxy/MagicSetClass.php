@@ -24,7 +24,7 @@ class MagicSetClass
 
     /**
      * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @throws \BadMethodCallException
      */

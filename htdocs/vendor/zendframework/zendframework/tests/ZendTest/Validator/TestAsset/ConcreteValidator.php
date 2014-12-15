@@ -26,6 +26,7 @@ class ConcreteValidator extends AbstractValidator
         $this->setValue($value);
         $this->error(self::FOO_MESSAGE);
         $this->error(self::BAR_MESSAGE);
+
         return false;
     }
 }

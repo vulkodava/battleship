@@ -60,8 +60,8 @@ class PathExpression extends Node
     public $field;
 
     /**
-     * @param int         $expectedType
-     * @param string      $identificationVariable
+     * @param int $expectedType
+     * @param string $identificationVariable
      * @param string|null $field
      */
     public function __construct($expectedType, $identificationVariable, $field = null)

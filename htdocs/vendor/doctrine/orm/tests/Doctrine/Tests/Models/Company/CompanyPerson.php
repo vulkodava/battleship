@@ -79,38 +79,46 @@ class CompanyPerson
      */
     private $friends;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->friends = new \Doctrine\Common\Collections\ArrayCollection;
     }
 
-    public function getId() {
-        return  $this->id;
+    public function getId()
+    {
+        return $this->id;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
-    public function getSpouse() {
+    public function getSpouse()
+    {
         return $this->spouse;
     }
 
-    public function getFriends() {
+    public function getFriends()
+    {
         return $this->friends;
     }
 
-    public function addFriend(CompanyPerson $friend) {
-        if ( ! $this->friends->contains($friend)) {
+    public function addFriend(CompanyPerson $friend)
+    {
+        if (!$this->friends->contains($friend)) {
             $this->friends->add($friend);
             $friend->addFriend($this);
         }
     }
 
-    public function setSpouse(CompanyPerson $spouse) {
+    public function setSpouse(CompanyPerson $spouse)
+    {
         if ($spouse !== $this->spouse) {
             $this->spouse = $spouse;
             $this->spouse->setSpouse($this);
@@ -121,38 +129,38 @@ class CompanyPerson
     {
 
         $metadata->setPrimaryTable(array(
-           'name' => 'company_person',
+            'name' => 'company_person',
         ));
 
-        $metadata->addNamedNativeQuery(array (
-            'name'              => 'fetchAllWithResultClass',
-            'query'             => 'SELECT id, name, discr FROM company_persons ORDER BY name',
-            'resultClass'       => 'Doctrine\\Tests\\Models\\Company\\CompanyPerson',
+        $metadata->addNamedNativeQuery(array(
+            'name' => 'fetchAllWithResultClass',
+            'query' => 'SELECT id, name, discr FROM company_persons ORDER BY name',
+            'resultClass' => 'Doctrine\\Tests\\Models\\Company\\CompanyPerson',
         ));
 
-        $metadata->addNamedNativeQuery(array (
-            'name'              => 'fetchAllWithSqlResultSetMapping',
-            'query'             => 'SELECT id, name, discr AS discriminator FROM company_persons ORDER BY name',
-            'resultSetMapping'  => 'mappingFetchAll',
+        $metadata->addNamedNativeQuery(array(
+            'name' => 'fetchAllWithSqlResultSetMapping',
+            'query' => 'SELECT id, name, discr AS discriminator FROM company_persons ORDER BY name',
+            'resultSetMapping' => 'mappingFetchAll',
         ));
 
-        $metadata->addSqlResultSetMapping(array (
-            'name'      => 'mappingFetchAll',
-            'columns'   => array(),
-            'entities'  => array ( array (
-                'fields' => array (
-                  array (
-                    'name'      => 'id',
-                    'column'    => 'id',
-                  ),
-                  array (
-                    'name'      => 'name',
-                    'column'    => 'name',
-                  ),
+        $metadata->addSqlResultSetMapping(array(
+            'name' => 'mappingFetchAll',
+            'columns' => array(),
+            'entities' => array(array(
+                'fields' => array(
+                    array(
+                        'name' => 'id',
+                        'column' => 'id',
+                    ),
+                    array(
+                        'name' => 'name',
+                        'column' => 'name',
+                    ),
                 ),
                 'entityClass' => 'Doctrine\Tests\Models\Company\CompanyPerson',
                 'discriminatorColumn' => 'discriminator',
-              ),
+            ),
             ),
         ));
     }

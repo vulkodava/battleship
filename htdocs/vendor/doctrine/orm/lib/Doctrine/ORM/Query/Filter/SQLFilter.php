@@ -61,8 +61,8 @@ abstract class SQLFilter
     /**
      * Sets a parameter that can be used by the filter.
      *
-     * @param string      $name  Name of the parameter.
-     * @param string      $value Value of the parameter.
+     * @param string $name       Name of the parameter.
+     * @param string $value      Value of the parameter.
      * @param string|null $type  The parameter type. If specified, the given value will be run through
      *                           the type conversion of this type. This is usually not needed for
      *                           strings and numeric types.
@@ -121,7 +121,7 @@ abstract class SQLFilter
      * Gets the SQL query part to add to a query.
      *
      * @param ClassMetaData $targetEntity
-     * @param string        $targetTableAlias
+     * @param string $targetTableAlias
      *
      * @return string The constraint SQL if there is available, empty string otherwise.
      */

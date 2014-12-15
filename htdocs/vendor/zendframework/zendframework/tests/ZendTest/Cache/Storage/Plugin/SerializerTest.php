@@ -31,7 +31,7 @@ class SerializerTest extends CommonPluginTest
     {
         $this->_adapter = $this->getMockForAbstractClass('Zend\Cache\Storage\Adapter\AbstractAdapter');
         $this->_options = new Cache\Storage\Plugin\PluginOptions();
-        $this->_plugin  = new Cache\Storage\Plugin\Serializer();
+        $this->_plugin = new Cache\Storage\Plugin\Serializer();
         $this->_plugin->setOptions($this->_options);
     }
 
@@ -41,21 +41,21 @@ class SerializerTest extends CommonPluginTest
 
         // check attached callbacks
         $expectedListeners = array(
-            'getItem.post'        => 'onReadItemPost',
-            'getItems.post'       => 'onReadItemsPost',
+            'getItem.post' => 'onReadItemPost',
+            'getItems.post' => 'onReadItemsPost',
 
-            'setItem.pre'         => 'onWriteItemPre',
-            'setItems.pre'        => 'onWriteItemsPre',
-            'addItem.pre'         => 'onWriteItemPre',
-            'addItems.pre'        => 'onWriteItemsPre',
-            'replaceItem.pre'     => 'onWriteItemPre',
-            'replaceItems.pre'    => 'onWriteItemsPre',
+            'setItem.pre' => 'onWriteItemPre',
+            'setItems.pre' => 'onWriteItemsPre',
+            'addItem.pre' => 'onWriteItemPre',
+            'addItems.pre' => 'onWriteItemsPre',
+            'replaceItem.pre' => 'onWriteItemPre',
+            'replaceItems.pre' => 'onWriteItemsPre',
             'checkAndSetItem.pre' => 'onWriteItemPre',
 
-            'incrementItem.pre'   => 'onIncrementItemPre',
-            'incrementItems.pre'  => 'onIncrementItemsPre',
-            'decrementItem.pre'   => 'onDecrementItemPre',
-            'decrementItems.pre'  => 'onDecrementItemsPre',
+            'incrementItem.pre' => 'onIncrementItemPre',
+            'incrementItems.pre' => 'onIncrementItemsPre',
+            'decrementItem.pre' => 'onDecrementItemPre',
+            'decrementItems.pre' => 'onDecrementItemsPre',
 
             'getCapabilities.post' => 'onGetCapabilitiesPost',
         );

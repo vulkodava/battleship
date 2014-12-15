@@ -210,7 +210,7 @@ which convert WKT strings to and from the internal format of MySQL.
 
 .. note::
 
-    When using DQL queries, the ``convertToPHPValueSQL`` and  
+    When using DQL queries, the ``convertToPHPValueSQL`` and
     ``convertToDatabaseValueSQL`` methods only apply to identification variables
     and path expressions in SELECT clauses. Expressions in  WHERE clauses are 
     **not** wrapped!

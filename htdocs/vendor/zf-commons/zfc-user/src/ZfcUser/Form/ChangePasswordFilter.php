@@ -10,8 +10,8 @@ class ChangePasswordFilter extends InputFilter
     public function __construct(AuthenticationOptionsInterface $options)
     {
         $identityParams = array(
-            'name'       => 'identity',
-            'required'   => true,
+            'name' => 'identity',
+            'required' => true,
             'validators' => array()
         );
 
@@ -24,43 +24,43 @@ class ChangePasswordFilter extends InputFilter
         $this->add($identityParams);
 
         $this->add(array(
-            'name'       => 'credential',
-            'required'   => true,
+            'name' => 'credential',
+            'required' => true,
             'validators' => array(
                 array(
-                    'name'    => 'StringLength',
+                    'name' => 'StringLength',
                     'options' => array(
                         'min' => 6,
                     ),
                 ),
             ),
-            'filters'   => array(
+            'filters' => array(
                 array('name' => 'StringTrim'),
             ),
         ));
 
         $this->add(array(
-            'name'       => 'newCredential',
-            'required'   => true,
+            'name' => 'newCredential',
+            'required' => true,
             'validators' => array(
                 array(
-                    'name'    => 'StringLength',
+                    'name' => 'StringLength',
                     'options' => array(
                         'min' => 6,
                     ),
                 ),
             ),
-            'filters'   => array(
+            'filters' => array(
                 array('name' => 'StringTrim'),
             ),
         ));
 
         $this->add(array(
-            'name'       => 'newCredentialVerify',
-            'required'   => true,
+            'name' => 'newCredentialVerify',
+            'required' => true,
             'validators' => array(
                 array(
-                    'name'    => 'StringLength',
+                    'name' => 'StringLength',
                     'options' => array(
                         'min' => 6,
                     ),
@@ -72,7 +72,7 @@ class ChangePasswordFilter extends InputFilter
                     )
                 ),
             ),
-            'filters'   => array(
+            'filters' => array(
                 array('name' => 'StringTrim'),
             ),
         ));

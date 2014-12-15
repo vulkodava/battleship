@@ -132,8 +132,8 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->clear();
 
         $user2 = $this->_em->createQuery('select u from \Doctrine\Tests\Models\CMS\CmsUser u where u.id=?1')
-                ->setParameter(1, $userId)
-                ->getSingleResult();
+            ->setParameter(1, $userId)
+            ->getSingleResult();
 
         // Address has been eager-loaded because it cant be lazy
         $this->assertInstanceOf('Doctrine\Tests\Models\CMS\CmsAddress', $user2->address);
@@ -181,7 +181,7 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $user->username = 'gblanco';
         $user->status = 'developer';
 
-        for ($i=0; $i<3; ++$i) {
+        for ($i = 0; $i < 3; ++$i) {
             $phone = new CmsPhonenumber;
             $phone->phonenumber = 100 + $i;
             $user->addPhonenumber($phone);
@@ -360,9 +360,9 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertEquals(2, count($user->phonenumbers));
         $dql = "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.id = ?1";
         $user = $this->_em->createQuery($dql)
-                          ->setParameter(1, $user->id)
-                          ->setHint(Query::HINT_REFRESH, true)
-                          ->getSingleResult();
+            ->setParameter(1, $user->id)
+            ->setHint(Query::HINT_REFRESH, true)
+            ->getSingleResult();
 
         $this->assertEquals(1, count($user->phonenumbers));
     }
@@ -397,8 +397,8 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $dql = "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.id = ?1";
         $user = $this->_em->createQuery($dql)
-                          ->setParameter(1, $userId)
-                          ->getSingleResult();
+            ->setParameter(1, $userId)
+            ->getSingleResult();
 
         $this->assertEquals(1, count($user->phonenumbers));
     }
@@ -410,7 +410,7 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $user->username = 'gblanco';
         $user->status = 'developer';
 
-        for ($i=0; $i<3; ++$i) {
+        for ($i = 0; $i < 3; ++$i) {
             $phone = new CmsPhonenumber;
             $phone->phonenumber = 100 + $i;
             $user->addPhonenumber($phone);
@@ -450,7 +450,7 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $user->username = 'gblanco';
         $user->status = 'developer';
 
-        for ($i=0; $i<3; ++$i) {
+        for ($i = 0; $i < 3; ++$i) {
             $phone = new CmsPhonenumber;
             $phone->phonenumber = 100 + $i;
             $user->addPhonenumber($phone);
@@ -533,7 +533,7 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $user->username = 'gblanco';
         $user->status = 'developer';
 
-        for ($i=0; $i<3; ++$i) {
+        for ($i = 0; $i < 3; ++$i) {
             $phone = new CmsPhonenumber;
             $phone->phonenumber = 100 + $i;
             $user->addPhonenumber($phone);
@@ -552,12 +552,12 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->clear();
 
         $this->assertEquals(0, $this->_em->createQuery(
-                "select count(p.phonenumber) from Doctrine\Tests\Models\CMS\CmsPhonenumber p")
-                ->getSingleScalarResult());
+            "select count(p.phonenumber) from Doctrine\Tests\Models\CMS\CmsPhonenumber p")
+            ->getSingleScalarResult());
 
         $this->assertEquals(0, $this->_em->createQuery(
-                "select count(u.id) from Doctrine\Tests\Models\CMS\CmsUser u")
-                ->getSingleScalarResult());
+            "select count(u.id) from Doctrine\Tests\Models\CMS\CmsUser u")
+            ->getSingleScalarResult());
     }
 
     public function testTextColumnSaveAndRetrieve()
@@ -678,7 +678,7 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $user->setAddress($address);
 
-        $this->_em->transactional(function($em) use($user) {
+        $this->_em->transactional(function ($em) use ($user) {
             $em->persist($user);
         });
         $this->_em->clear();
@@ -687,8 +687,8 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $userRef = $this->_em->getReference('Doctrine\Tests\Models\CMS\CmsUser', $user->getId());
         $address2 = $this->_em->createQuery('select a from Doctrine\Tests\Models\CMS\CmsAddress a where a.user = :user')
-                ->setParameter('user', $userRef)
-                ->getSingleResult();
+            ->setParameter('user', $userRef)
+            ->getSingleResult();
 
         $this->assertInstanceOf('Doctrine\ORM\Proxy\Proxy', $address2->getUser());
         $this->assertTrue($userRef === $address2->getUser());
@@ -716,12 +716,12 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->persist($user);
         $this->_em->flush();
 
-        $this->assertEquals(1, $this->_em->getConnection()->fetchColumn("select 1 from cms_addresses where user_id = ".$user->id));
+        $this->assertEquals(1, $this->_em->getConnection()->fetchColumn("select 1 from cms_addresses where user_id = " . $user->id));
 
         $address->user = null;
         $this->_em->flush();
 
-        $this->assertNotEquals(1, $this->_em->getConnection()->fetchColumn("select 1 from cms_addresses where user_id = ".$user->id));
+        $this->assertNotEquals(1, $this->_em->getConnection()->fetchColumn("select 1 from cms_addresses where user_id = " . $user->id));
     }
 
     /**
@@ -748,7 +748,8 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         try {
             $this->_em->flush(); // should raise an exception
             $this->fail();
-        } catch (\InvalidArgumentException $expected) {}
+        } catch (\InvalidArgumentException $expected) {
+        }
     }
 
     /**
@@ -783,7 +784,8 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         try {
             $this->_em->flush(); // should raise an exception
             $this->fail();
-        } catch (\InvalidArgumentException $expected) {}
+        } catch (\InvalidArgumentException $expected) {
+        }
     }
 
     /**
@@ -807,7 +809,8 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         try {
             $this->_em->flush(); // should raise an exception
             $this->fail();
-        } catch (\InvalidArgumentException $expected) {}
+        } catch (\InvalidArgumentException $expected) {
+        }
     }
 
     public function testOneToOneOrphanRemoval()
@@ -942,7 +945,8 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         try {
             $this->_em->merge($user);
             $this->fail();
-        } catch (\Doctrine\ORM\EntityNotFoundException $enfe) {}
+        } catch (\Doctrine\ORM\EntityNotFoundException $enfe) {
+        }
     }
 
     /**
@@ -998,12 +1002,12 @@ class BasicFunctionalTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $qc = $this->getCurrentQueryCount();
         $dql = "SELECT a FROM Doctrine\Tests\Models\CMS\CmsArticle a WHERE a.id = ?1";
         $article = $this->_em->createQuery($dql)
-                             ->setParameter(1, $article->id)
-                             ->setFetchMode('Doctrine\Tests\Models\CMS\CmsArticle', 'user', \Doctrine\ORM\Mapping\ClassMetadata::FETCH_EAGER)
-                             ->getSingleResult();
+            ->setParameter(1, $article->id)
+            ->setFetchMode('Doctrine\Tests\Models\CMS\CmsArticle', 'user', \Doctrine\ORM\Mapping\ClassMetadata::FETCH_EAGER)
+            ->getSingleResult();
         $this->assertInstanceOf('Doctrine\ORM\Proxy\Proxy', $article->user, "It IS a proxy, ...");
         $this->assertTrue($article->user->__isInitialized__, "...but its initialized!");
-        $this->assertEquals($qc+2, $this->getCurrentQueryCount());
+        $this->assertEquals($qc + 2, $this->getCurrentQueryCount());
     }
 
     /**

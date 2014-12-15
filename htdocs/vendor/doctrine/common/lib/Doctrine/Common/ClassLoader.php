@@ -29,7 +29,7 @@ namespace Doctrine\Common;
  * relies on the PHP <code>include_path</code>.
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.0
+ * @since  2.0
  */
 class ClassLoader
 {
@@ -173,13 +173,13 @@ class ClassLoader
      */
     public function loadClass($className)
     {
-        if ($this->namespace !== null && strpos($className, $this->namespace.$this->namespaceSeparator) !== 0) {
+        if ($this->namespace !== null && strpos($className, $this->namespace . $this->namespaceSeparator) !== 0) {
             return false;
         }
 
         require ($this->includePath !== null ? $this->includePath . DIRECTORY_SEPARATOR : '')
-               . str_replace($this->namespaceSeparator, DIRECTORY_SEPARATOR, $className)
-               . $this->fileExtension;
+            . str_replace($this->namespaceSeparator, DIRECTORY_SEPARATOR, $className)
+            . $this->fileExtension;
 
         return true;
     }
@@ -194,7 +194,7 @@ class ClassLoader
      */
     public function canLoadClass($className)
     {
-        if ($this->namespace !== null && strpos($className, $this->namespace.$this->namespaceSeparator) !== 0) {
+        if ($this->namespace !== null && strpos($className, $this->namespace . $this->namespaceSeparator) !== 0) {
             return false;
         }
 
@@ -274,7 +274,7 @@ class ClassLoader
      */
     public static function getClassLoader($className)
     {
-         foreach (spl_autoload_functions() as $loader) {
+        foreach (spl_autoload_functions() as $loader) {
             if (is_array($loader)
                 && $loader[0] instanceof ClassLoader
                 && $loader[0]->canLoadClass($className)

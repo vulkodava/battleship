@@ -43,14 +43,14 @@ class MetadataCommand extends Command
     protected function configure()
     {
         $this
-        ->setName('orm:clear-cache:metadata')
-        ->setDescription('Clear all metadata cache of the various cache drivers.')
-        ->setDefinition(array(
-            new InputOption(
-                'flush', null, InputOption::VALUE_NONE,
-                'If defined, cache entries will be flushed instead of deleted/invalidated.'
-            )
-        ));
+            ->setName('orm:clear-cache:metadata')
+            ->setDescription('Clear all metadata cache of the various cache drivers.')
+            ->setDefinition(array(
+                new InputOption(
+                    'flush', null, InputOption::VALUE_NONE,
+                    'If defined, cache entries will be flushed instead of deleted/invalidated.'
+                )
+            ));
 
         $this->setHelp(<<<EOT
 The <info>%command.name%</info> command is meant to clear the metadata cache of associated Entity Manager.
@@ -80,7 +80,7 @@ EOT
         $em = $this->getHelper('em')->getEntityManager();
         $cacheDriver = $em->getConfiguration()->getMetadataCacheImpl();
 
-        if ( ! $cacheDriver) {
+        if (!$cacheDriver) {
             throw new \InvalidArgumentException('No Metadata cache driver is configured on given EntityManager.');
         }
 
@@ -90,11 +90,11 @@ EOT
 
         $output->writeln('Clearing ALL Metadata cache entries');
 
-        $result  = $cacheDriver->deleteAll();
+        $result = $cacheDriver->deleteAll();
         $message = ($result) ? 'Successfully deleted cache entries.' : 'No cache entries were deleted.';
 
         if (true === $input->getOption('flush')) {
-            $result  = $cacheDriver->flushAll();
+            $result = $cacheDriver->flushAll();
             $message = ($result) ? 'Successfully flushed cache entries.' : $message;
         }
 

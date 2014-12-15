@@ -46,7 +46,7 @@ class StaticReflectionServiceTest extends \PHPUnit_Framework_TestCase
     public function testGetParentClasses()
     {
         $classes = $this->reflectionService->getParentClasses(__CLASS__);
-        $this->assertTrue(count($classes) == 0, "The test class ".__CLASS__." should have no parents according to static reflection.");
+        $this->assertTrue(count($classes) == 0, "The test class " . __CLASS__ . " should have no parents according to static reflection.");
     }
 
     public function testGetReflectionClass()

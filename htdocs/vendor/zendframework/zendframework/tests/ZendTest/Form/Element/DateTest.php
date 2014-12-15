@@ -60,7 +60,7 @@ class DateTest extends TestCase
                 case 'Zend\Validator\DateStep':
                     $dateInterval = new \DateInterval('P1D');
                     $this->assertEquals($dateInterval, $validator->getStep());
-                    $this->assertEquals(date('Y-m-d', 0),  $validator->getBaseValue());
+                    $this->assertEquals(date('Y-m-d', 0), $validator->getBaseValue());
                     break;
                 default:
                     break;
@@ -73,9 +73,9 @@ class DateTest extends TestCase
         $element = new DateElement('foo');
         $element->setAttributes(array(
             'inclusive' => true,
-            'min'       => '2000-01-01',
-            'max'       => '2001-01-01',
-            'step'      => '1',
+            'min' => '2000-01-01',
+            'max' => '2001-01-01',
+            'step' => '1',
         ));
 
         $inputSpec = $element->getInputSpecification();
@@ -103,7 +103,7 @@ class DateTest extends TestCase
                 case 'Zend\Validator\DateStep':
                     $dateInterval = new \DateInterval('P1D');
                     $this->assertEquals($dateInterval, $validator->getStep());
-                    $this->assertEquals('2000-01-01',  $validator->getBaseValue());
+                    $this->assertEquals('2000-01-01', $validator->getBaseValue());
                     break;
                 default:
                     break;
@@ -114,9 +114,9 @@ class DateTest extends TestCase
     public function testValueReturnedFromComposedDateTimeIsRfc3339FullDateFormat()
     {
         $element = new DateElement('foo');
-        $date    = new DateTime();
+        $date = new DateTime();
         $element->setValue($date);
-        $value   = $element->getValue();
+        $value = $element->getValue();
         $this->assertEquals($date->format('Y-m-d'), $value);
     }
 
@@ -124,8 +124,8 @@ class DateTest extends TestCase
     {
         $element = new DateElement('foo');
         $element->setAttributes(array(
-            'min'       => '2012-01-01',
-            'max'       => '2012-12-31',
+            'min' => '2012-01-01',
+            'max' => '2012-12-31',
         ));
         $element->setFormat('d-m-Y');
 
@@ -147,7 +147,7 @@ class DateTest extends TestCase
     {
         date_default_timezone_set('Europe/London');
 
-        $element   = new DateElement('foo');
+        $element = new DateElement('foo');
 
         $inputSpec = $element->getInputSpecification();
         foreach ($inputSpec['validators'] as $validator) {

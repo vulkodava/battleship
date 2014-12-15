@@ -23,9 +23,9 @@ namespace Doctrine\ORM\Internal;
  * The CommitOrderCalculator is used by the UnitOfWork to sort out the
  * correct order in which changes to entities need to be persisted.
  *
- * @since 	2.0
- * @author 	Roman Borschel <roman@code-factory.org>
- * @author	Guilherme Blanco <guilhermeblanco@hotmail.com>
+ * @since     2.0
+ * @author    Roman Borschel <roman@code-factory.org>
+ * @author    Guilherme Blanco <guilhermeblanco@hotmail.com>
  */
 class CommitOrderCalculator
 {

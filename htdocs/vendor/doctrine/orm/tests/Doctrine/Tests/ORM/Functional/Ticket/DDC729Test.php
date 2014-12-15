@@ -16,7 +16,7 @@ class DDC729Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC729A'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC729B'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

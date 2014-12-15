@@ -126,8 +126,8 @@ class TypeTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertInstanceOf('DateTime', $dateTimeDb->datetime);
         $this->assertEquals('2009-10-02 20:10:52', $dateTimeDb->datetime->format('Y-m-d H:i:s'));
 
-        $articles = $this->_em->getRepository( 'Doctrine\Tests\Models\Generic\DateTimeModel' )->findBy( array( 'datetime' => new \DateTime( "now" ) ) );
-        $this->assertEquals( 0, count( $articles ) );
+        $articles = $this->_em->getRepository('Doctrine\Tests\Models\Generic\DateTimeModel')->findBy(array('datetime' => new \DateTime("now")));
+        $this->assertEquals(0, count($articles));
     }
 
     public function testDqlQueryBindDateTimeInstance()
@@ -142,8 +142,8 @@ class TypeTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->clear();
 
         $dateTimeDb = $this->_em->createQuery('SELECT d FROM Doctrine\Tests\Models\Generic\DateTimeModel d WHERE d.datetime = ?1')
-                                ->setParameter(1, $date, DBALType::DATETIME)
-                                ->getSingleResult();
+            ->setParameter(1, $date, DBALType::DATETIME)
+            ->getSingleResult();
     }
 
     public function testDqlQueryBuilderBindDateTimeInstance()
@@ -158,11 +158,11 @@ class TypeTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->clear();
 
         $dateTimeDb = $this->_em->createQueryBuilder()
-                                 ->select('d')
-                                 ->from('Doctrine\Tests\Models\Generic\DateTimeModel', 'd')
-                                 ->where('d.datetime = ?1')
-                                 ->setParameter(1, $date, DBALType::DATETIME)
-                                 ->getQuery()->getSingleResult();
+            ->select('d')
+            ->from('Doctrine\Tests\Models\Generic\DateTimeModel', 'd')
+            ->where('d.datetime = ?1')
+            ->setParameter(1, $date, DBALType::DATETIME)
+            ->getQuery()->getSingleResult();
     }
 
     public function testTime()

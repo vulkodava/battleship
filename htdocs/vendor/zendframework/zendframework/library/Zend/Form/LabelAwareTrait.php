@@ -36,6 +36,7 @@ trait LabelAwareTrait
     public function setLabelAttributes(array $labelAttributes)
     {
         $this->labelAttributes = $labelAttributes;
+
         return $this;
     }
 
@@ -70,6 +71,7 @@ trait LabelAwareTrait
         foreach ($arrayOrTraversable as $key => $value) {
             $this->setLabelOption($key, $value);
         }
+
         return $this;
     }
 
@@ -91,6 +93,7 @@ trait LabelAwareTrait
     public function clearLabelOptions()
     {
         $this->labelOptions = array();
+
         return $this;
     }
 
@@ -113,12 +116,13 @@ trait LabelAwareTrait
      * Set a single label optionn
      *
      * @param  string $key
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return Element|ElementInterface
      */
     public function setLabelOption($key, $value)
     {
         $this->labelOptions[$key] = $value;
+
         return $this;
     }
 
@@ -133,6 +137,7 @@ trait LabelAwareTrait
         if (!array_key_exists($key, $this->labelOptions)) {
             return null;
         }
+
         return $this->labelOptions[$key];
     }
 
@@ -145,6 +150,7 @@ trait LabelAwareTrait
     public function removeLabelOption($key)
     {
         unset($this->labelOptions[$key]);
+
         return $this;
     }
 

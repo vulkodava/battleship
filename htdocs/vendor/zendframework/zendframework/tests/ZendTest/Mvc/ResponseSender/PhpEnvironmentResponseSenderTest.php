@@ -57,10 +57,13 @@ class PhpEnvironmentResponseSenderTest extends TestCase
             ->will($this->returnCallback(function () use (&$returnValue) {
                 if (false === $returnValue) {
                     $returnValue = true;
+
                     return false;
                 }
+
                 return true;
-        }));
+            }));
+
         return $mockSendResponseEvent;
     }
 }

@@ -49,6 +49,7 @@ class Translator implements
                 $method
             ));
         }
+
         return call_user_func_array(array($this->translator, $method), $args);
     }
 

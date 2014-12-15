@@ -25,7 +25,7 @@ class DDC2519Test extends \Doctrine\Tests\OrmFunctionalTestCase
      */
     public function testIssue()
     {
-        $dql    = 'SELECT PARTIAL l.{_source, _target} FROM Doctrine\Tests\Models\Legacy\LegacyUserReference l';
+        $dql = 'SELECT PARTIAL l.{_source, _target} FROM Doctrine\Tests\Models\Legacy\LegacyUserReference l';
         $result = $this->_em->createQuery($dql)->getResult();
 
         $this->assertCount(2, $result);
@@ -55,20 +55,20 @@ class DDC2519Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
     public function loadFixture()
     {
-        $user1              = new LegacyUser();
-        $user1->_username   = 'FabioBatSilva';
-        $user1->_name       = 'Fabio B. Silva';
-        $user1->_status     = 'active';
+        $user1 = new LegacyUser();
+        $user1->_username = 'FabioBatSilva';
+        $user1->_name = 'Fabio B. Silva';
+        $user1->_status = 'active';
 
-        $user2              = new LegacyUser();
-        $user2->_username   = 'doctrinebot';
-        $user2->_name       = 'Doctrine Bot';
-        $user2->_status     = 'active';
+        $user2 = new LegacyUser();
+        $user2->_username = 'doctrinebot';
+        $user2->_name = 'Doctrine Bot';
+        $user2->_status = 'active';
 
-        $user3              = new LegacyUser();
-        $user3->_username   = 'test';
-        $user3->_name       = 'Tester';
-        $user3->_status     = 'active';
+        $user3 = new LegacyUser();
+        $user3->_username = 'test';
+        $user3->_name = 'Tester';
+        $user3->_status = 'active';
 
         $this->_em->persist($user1);
         $this->_em->persist($user2);

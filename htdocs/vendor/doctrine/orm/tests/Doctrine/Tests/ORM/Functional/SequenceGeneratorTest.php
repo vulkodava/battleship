@@ -23,7 +23,7 @@ class SequenceGeneratorTest extends \Doctrine\Tests\OrmFunctionalTestCase
             $this->_schemaTool->createSchema(array(
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\SequenceEntity'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

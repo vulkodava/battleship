@@ -47,6 +47,7 @@ class RouteMatch
     public function setMatchedRouteName($name)
     {
         $this->matchedRouteName = $name;
+
         return $this;
     }
 
@@ -64,12 +65,13 @@ class RouteMatch
      * Set a parameter.
      *
      * @param  string $name
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return RouteMatch
      */
     public function setParam($name, $value)
     {
         $this->params[$name] = $value;
+
         return $this;
     }
 
@@ -87,7 +89,7 @@ class RouteMatch
      * Get a specific parameter.
      *
      * @param  string $name
-     * @param  mixed  $default
+     * @param  mixed $default
      * @return mixed
      */
     public function getParam($name, $default = null)

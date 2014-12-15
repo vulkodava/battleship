@@ -16,24 +16,24 @@ class ValueGenerator extends AbstractGenerator
     /**#@+
      * Constant values
      */
-    const TYPE_AUTO     = 'auto';
-    const TYPE_BOOLEAN  = 'boolean';
-    const TYPE_BOOL     = 'bool';
-    const TYPE_NUMBER   = 'number';
-    const TYPE_INTEGER  = 'integer';
-    const TYPE_INT      = 'int';
-    const TYPE_FLOAT    = 'float';
-    const TYPE_DOUBLE   = 'double';
-    const TYPE_STRING   = 'string';
-    const TYPE_ARRAY    = 'array';
+    const TYPE_AUTO = 'auto';
+    const TYPE_BOOLEAN = 'boolean';
+    const TYPE_BOOL = 'bool';
+    const TYPE_NUMBER = 'number';
+    const TYPE_INTEGER = 'integer';
+    const TYPE_INT = 'int';
+    const TYPE_FLOAT = 'float';
+    const TYPE_DOUBLE = 'double';
+    const TYPE_STRING = 'string';
+    const TYPE_ARRAY = 'array';
     const TYPE_CONSTANT = 'constant';
-    const TYPE_NULL     = 'null';
-    const TYPE_OBJECT   = 'object';
-    const TYPE_OTHER    = 'other';
+    const TYPE_NULL = 'null';
+    const TYPE_OBJECT = 'object';
+    const TYPE_OTHER = 'other';
     /**#@-*/
 
     const OUTPUT_MULTIPLE_LINE = 'multipleLine';
-    const OUTPUT_SINGLE_LINE   = 'singleLine';
+    const OUTPUT_SINGLE_LINE = 'singleLine';
 
     /**
      * @var mixed
@@ -61,14 +61,15 @@ class ValueGenerator extends AbstractGenerator
     protected $allowedTypes = null;
     /**
      * Autodetectable constants
+     *
      * @var ArrayObject
      */
     protected $constants = null;
 
     /**
-     * @param mixed       $value
-     * @param string      $type
-     * @param string      $outputMode
+     * @param mixed $value
+     * @param string $type
+     * @param string $outputMode
      * @param ArrayObject $constants
      */
     public function __construct($value = null, $type = self::TYPE_AUTO, $outputMode = self::OUTPUT_MULTIPLE_LINE, ArrayObject $constants = null)
@@ -94,7 +95,7 @@ class ValueGenerator extends AbstractGenerator
      */
     public function initEnvironmentConstants()
     {
-        $constants   = array(
+        $constants = array(
             '__DIR__',
             '__FILE__',
             '__LINE__',
@@ -184,6 +185,7 @@ class ValueGenerator extends AbstractGenerator
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -201,7 +203,8 @@ class ValueGenerator extends AbstractGenerator
      */
     public function setType($type)
     {
-        $this->type = (string) $type;
+        $this->type = (string)$type;
+
         return $this;
     }
 
@@ -219,7 +222,8 @@ class ValueGenerator extends AbstractGenerator
      */
     public function setArrayDepth($arrayDepth)
     {
-        $this->arrayDepth = (int) $arrayDepth;
+        $this->arrayDepth = (int)$arrayDepth;
+
         return $this;
     }
 
@@ -276,6 +280,7 @@ class ValueGenerator extends AbstractGenerator
                         return self::TYPE_CONSTANT;
                     }
                 }
+
                 return self::TYPE_STRING;
             case 'double':
             case 'float':
@@ -347,7 +352,7 @@ class ValueGenerator extends AbstractGenerator
                     $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1);
                 }
                 $outputParts = array();
-                $noKeyIndex  = 0;
+                $noKeyIndex = 0;
                 foreach ($value as $n => $v) {
                     /* @var $v ValueGenerator */
                     $v->setArrayDepth($this->arrayDepth + 1);
@@ -391,7 +396,7 @@ class ValueGenerator extends AbstractGenerator
      * Quotes value for PHP code.
      *
      * @param  string $input Raw string.
-     * @param  bool $quote Whether add surrounding quotes or not.
+     * @param  bool $quote   Whether add surrounding quotes or not.
      * @return string PHP-ready code.
      */
     public static function escape($input, $quote = true)
@@ -412,7 +417,8 @@ class ValueGenerator extends AbstractGenerator
      */
     public function setOutputMode($outputMode)
     {
-        $this->outputMode = (string) $outputMode;
+        $this->outputMode = (string)$outputMode;
+
         return $this;
     }
 

@@ -25,7 +25,7 @@ class UrlTest extends TestCase
     {
         $router = new SimpleRouteStack;
         $router->addRoute('home', LiteralRoute::factory(array(
-            'route'    => '/',
+            'route' => '/',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             ),
@@ -71,7 +71,7 @@ class UrlTest extends TestCase
     public function testPluginWithoutControllerEventRaisesDomainException()
     {
         $controller = new SampleController();
-        $plugin     = $controller->plugin('url');
+        $plugin = $controller->plugin('url');
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose a router');
         $plugin->fromRoute('home');
     }
@@ -79,7 +79,7 @@ class UrlTest extends TestCase
     public function testPluginWithoutRouterInEventRaisesDomainException()
     {
         $controller = new SampleController();
-        $event      = new MvcEvent();
+        $event = new MvcEvent();
         $controller->setEvent($event);
         $plugin = $controller->plugin('url');
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose a router');
@@ -112,7 +112,7 @@ class UrlTest extends TestCase
     public function testCanReuseMatchedParameters()
     {
         $this->router->addRoute('replace', SegmentRoute::factory(array(
-            'route'    => '/:controller/:action',
+            'route' => '/:controller/:action',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             ),
@@ -129,7 +129,7 @@ class UrlTest extends TestCase
     public function testCanPassBooleanValueForThirdArgumentToAllowReusingRouteMatches()
     {
         $this->router->addRoute('replace', SegmentRoute::factory(array(
-            'route'    => '/:controller/:action',
+            'route' => '/:controller/:action',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             ),
@@ -149,18 +149,18 @@ class UrlTest extends TestCase
         $router->addRoute('default', array(
             'type' => 'Zend\Mvc\Router\Http\Segment',
             'options' => array(
-                'route'    => '/:controller/:action',
+                'route' => '/:controller/:action',
                 'defaults' => array(
                     ModuleRouteListener::MODULE_NAMESPACE => 'ZendTest\Mvc\Controller\TestAsset',
                     'controller' => 'SampleController',
-                    'action'     => 'Dash'
+                    'action' => 'Dash'
                 )
             ),
             'child_routes' => array(
                 'wildcard' => array(
-                    'type'    => 'Zend\Mvc\Router\Http\Wildcard',
+                    'type' => 'Zend\Mvc\Router\Http\Wildcard',
                     'options' => array(
-                        'param_delimiter'     => '=',
+                        'param_delimiter' => '=',
                         'key_value_delimiter' => '%'
                     )
                 )
@@ -175,7 +175,7 @@ class UrlTest extends TestCase
 
         $event = new MvcEvent();
         $event->setRouter($router)
-              ->setRouteMatch($routeMatch);
+            ->setRouteMatch($routeMatch);
 
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($event);

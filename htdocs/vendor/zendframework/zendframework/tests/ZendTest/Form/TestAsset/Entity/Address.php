@@ -34,6 +34,7 @@ class Address
     public function setStreet($street)
     {
         $this->street = $street;
+
         return $this;
     }
 
@@ -52,6 +53,7 @@ class Address
     public function setCity(City $city)
     {
         $this->city = $city;
+
         return $this;
     }
 
@@ -70,6 +72,7 @@ class Address
     public function setPhones(array $phones)
     {
         $this->phones = $phones;
+
         return $this;
     }
 

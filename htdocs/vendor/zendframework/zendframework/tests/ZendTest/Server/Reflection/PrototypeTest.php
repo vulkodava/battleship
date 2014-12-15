@@ -20,18 +20,21 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * \Zend\Server\Reflection\Prototype object
+     *
      * @var \Zend\Server\Reflection\Prototype
      */
     protected $_r;
 
     /**
      * Array of ReflectionParameters
+     *
      * @var array
      */
     protected $_parametersRaw;
 
     /**
      * Array of \Zend\Server\Reflection\Parameters
+     *
      * @var array
      */
     protected $_parameters;

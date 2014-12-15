@@ -54,8 +54,8 @@ abstract class CacheTest extends \Doctrine\Tests\DoctrineTestCase
 
     public function testDeleteAllAndNamespaceVersioningBetweenCaches()
     {
-        if ( ! $this->isSharedStorage()) {
-            $this->markTestSkipped('The ' . __CLASS__ .' does not use shared storage');
+        if (!$this->isSharedStorage()) {
+            $this->markTestSkipped('The ' . __CLASS__ . ' does not use shared storage');
         }
 
         $cache1 = $this->_getCacheDriver();
@@ -104,8 +104,8 @@ abstract class CacheTest extends \Doctrine\Tests\DoctrineTestCase
 
     public function testFlushAllAndNamespaceVersioningBetweenCaches()
     {
-        if ( ! $this->isSharedStorage()) {
-            $this->markTestSkipped('The ' . __CLASS__ .' does not use shared storage');
+        if (!$this->isSharedStorage()) {
+            $this->markTestSkipped('The ' . __CLASS__ . ' does not use shared storage');
         }
 
         $cache1 = $this->_getCacheDriver();

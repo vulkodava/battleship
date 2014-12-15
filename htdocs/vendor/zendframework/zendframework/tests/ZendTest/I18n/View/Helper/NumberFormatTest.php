@@ -170,10 +170,10 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
     public function testSettersProvideDefaults($locale, $formatStyle, $formatType, $decimals, $number, $expected)
     {
         $this->helper
-             ->setLocale($locale)
-             ->setFormatStyle($formatStyle)
-             ->setDecimals($decimals)
-             ->setFormatType($formatType);
+            ->setLocale($locale)
+            ->setFormatStyle($formatStyle)
+            ->setDecimals($decimals)
+            ->setFormatType($formatType);
 
         $this->assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
@@ -186,7 +186,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
     public function assertMbStringEquals($expected, $test, $message = '')
     {
         $expected = str_replace(array("\xC2\xA0", ' '), '', $expected);
-        $test     = str_replace(array("\xC2\xA0", ' '), '', $test);
+        $test = str_replace(array("\xC2\xA0", ' '), '', $test);
         $this->assertEquals($expected, $test, $message);
     }
 }

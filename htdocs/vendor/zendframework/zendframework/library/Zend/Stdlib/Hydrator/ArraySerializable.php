@@ -78,6 +78,7 @@ class ArraySerializable extends AbstractHydrator
                 sprintf('%s expects the provided object to implement exchangeArray() or populate()', __METHOD__)
             );
         }
+
         return $object;
     }
 }

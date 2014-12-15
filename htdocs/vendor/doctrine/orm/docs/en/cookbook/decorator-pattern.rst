@@ -13,7 +13,7 @@ Component
 The ``Component`` class needs to be persisted, so it's going to 
 be an ``Entity``. As the top of the inheritance hierarchy, it's going 
 to have to define the persistent inheritance. For this example, we 
-will use Single Table Inheritance, but Class Table Inheritance  
+will use Single Table Inheritance, but Class Table Inheritance
 would work as well. In the discriminator map, we will define two 
 concrete subclasses, ``ConcreteComponent`` and ``ConcreteDecorator``. 
 
@@ -177,7 +177,7 @@ Decorator pattern is the ``ConcreteDecorator``. In order to further
 illustrate how the ``Decorator`` can alter data as it moves through 
 the chain of decoration, a new field, "special", has been added to 
 this class. The getName() has been overridden and appends the value 
-of the getSpecial() method to its return value.  
+of the getSpecial() method to its return value.
 
 .. code-block:: php
 

@@ -45,7 +45,7 @@ class ConditionalPrimary extends Node
      */
     public function isSimpleConditionalExpression()
     {
-        return (bool) $this->simpleConditionalExpression;
+        return (bool)$this->simpleConditionalExpression;
     }
 
     /**
@@ -53,7 +53,7 @@ class ConditionalPrimary extends Node
      */
     public function isConditionalExpression()
     {
-        return (bool) $this->conditionalExpression;
+        return (bool)$this->conditionalExpression;
     }
 
     /**

@@ -25,7 +25,7 @@ namespace Doctrine\ORM;
  *
  * @author Roman Borschel <roman@code-factory.org>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @since 2.0
+ * @since  2.0
  */
 class OptimisticLockException extends ORMException
 {
@@ -66,8 +66,8 @@ class OptimisticLockException extends ORMException
 
     /**
      * @param object $entity
-     * @param int    $expectedLockVersion
-     * @param int    $actualLockVersion
+     * @param int $expectedLockVersion
+     * @param int $actualLockVersion
      *
      * @return OptimisticLockException
      */
@@ -75,7 +75,8 @@ class OptimisticLockException extends ORMException
     {
         $expectedLockVersion = ($expectedLockVersion instanceof \DateTime) ? $expectedLockVersion->getTimestamp() : $expectedLockVersion;
         $actualLockVersion = ($actualLockVersion instanceof \DateTime) ? $actualLockVersion->getTimestamp() : $actualLockVersion;
-        return new self("The optimistic lock failed, version " . $expectedLockVersion . " was expected, but is actually ".$actualLockVersion, $entity);
+
+        return new self("The optimistic lock failed, version " . $expectedLockVersion . " was expected, but is actually " . $actualLockVersion, $entity);
     }
 
     /**

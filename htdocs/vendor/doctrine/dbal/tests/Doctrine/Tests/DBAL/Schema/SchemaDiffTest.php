@@ -45,48 +45,49 @@ class SchemaDiffTest extends \PHPUnit_Framework_TestCase
         $platform = $this->getMock('Doctrine\Tests\DBAL\Mocks\MockPlatform');
         if ($unsafe) {
             $platform->expects($this->exactly(1))
-                 ->method('getDropSequenceSql')
-                 ->with($this->isInstanceOf('Doctrine\DBAL\Schema\Sequence'))
-                 ->will($this->returnValue('drop_seq'));
+                ->method('getDropSequenceSql')
+                ->with($this->isInstanceOf('Doctrine\DBAL\Schema\Sequence'))
+                ->will($this->returnValue('drop_seq'));
         }
         $platform->expects($this->exactly(1))
-                 ->method('getAlterSequenceSql')
-                 ->with($this->isInstanceOf('Doctrine\DBAL\Schema\Sequence'))
-                 ->will($this->returnValue('alter_seq'));
+            ->method('getAlterSequenceSql')
+            ->with($this->isInstanceOf('Doctrine\DBAL\Schema\Sequence'))
+            ->will($this->returnValue('alter_seq'));
         $platform->expects($this->exactly(1))
-                 ->method('getCreateSequenceSql')
-                 ->with($this->isInstanceOf('Doctrine\DBAL\Schema\Sequence'))
-                 ->will($this->returnValue('create_seq'));
+            ->method('getCreateSequenceSql')
+            ->with($this->isInstanceOf('Doctrine\DBAL\Schema\Sequence'))
+            ->will($this->returnValue('create_seq'));
         if ($unsafe) {
             $platform->expects($this->exactly(1))
-                     ->method('getDropTableSql')
-                     ->with($this->isInstanceof('Doctrine\DBAL\Schema\Table'))
-                     ->will($this->returnValue('drop_table'));
+                ->method('getDropTableSql')
+                ->with($this->isInstanceof('Doctrine\DBAL\Schema\Table'))
+                ->will($this->returnValue('drop_table'));
         }
         $platform->expects($this->exactly(1))
-                 ->method('getCreateTableSql')
-                 ->with($this->isInstanceof('Doctrine\DBAL\Schema\Table'))
-                 ->will($this->returnValue(array('create_table')));
+            ->method('getCreateTableSql')
+            ->with($this->isInstanceof('Doctrine\DBAL\Schema\Table'))
+            ->will($this->returnValue(array('create_table')));
         $platform->expects($this->exactly(1))
-                 ->method('getCreateForeignKeySQL')
-                 ->with($this->isInstanceOf('Doctrine\DBAL\Schema\ForeignKeyConstraint'))
-                 ->will($this->returnValue('create_foreign_key'));
+            ->method('getCreateForeignKeySQL')
+            ->with($this->isInstanceOf('Doctrine\DBAL\Schema\ForeignKeyConstraint'))
+            ->will($this->returnValue('create_foreign_key'));
         $platform->expects($this->exactly(1))
-                 ->method('getAlterTableSql')
-                 ->with($this->isInstanceOf('Doctrine\DBAL\Schema\TableDiff'))
-                 ->will($this->returnValue(array('alter_table')));
+            ->method('getAlterTableSql')
+            ->with($this->isInstanceOf('Doctrine\DBAL\Schema\TableDiff'))
+            ->will($this->returnValue(array('alter_table')));
         if ($unsafe) {
             $platform->expects($this->exactly(1))
-                     ->method('getDropForeignKeySql')
-                     ->with($this->isInstanceof('Doctrine\DBAL\Schema\ForeignKeyConstraint'), $this->equalTo('local_table'))
-                     ->will($this->returnValue('drop_orphan_fk'));
+                ->method('getDropForeignKeySql')
+                ->with($this->isInstanceof('Doctrine\DBAL\Schema\ForeignKeyConstraint'), $this->equalTo('local_table'))
+                ->will($this->returnValue('drop_orphan_fk'));
         }
         $platform->expects($this->exactly(1))
-                ->method('supportsSequences')
-                ->will($this->returnValue(true));
+            ->method('supportsSequences')
+            ->will($this->returnValue(true));
         $platform->expects($this->exactly(2))
-                ->method('supportsForeignKeyConstraints')
-                ->will($this->returnValue(true));
+            ->method('supportsForeignKeyConstraints')
+            ->will($this->returnValue(true));
+
         return $platform;
     }
 
@@ -104,6 +105,7 @@ class SchemaDiffTest extends \PHPUnit_Framework_TestCase
         $fk = new \Doctrine\DBAL\Schema\ForeignKeyConstraint(array('id'), 'foreign_table', array('id'));
         $fk->setLocalTable(new Table('local_table'));
         $diff->orphanedForeignKeys[] = $fk;
+
         return $diff;
     }
 }

@@ -18,12 +18,14 @@ interface RendererInterface
 {
     /**
      * Constructor
+     *
      * @param array|\Traversable $options
      */
     public function __construct($options = null);
 
     /**
      * Set renderer state from options array
+     *
      * @param  array $options
      * @return RendererInterface
      */
@@ -46,12 +48,14 @@ interface RendererInterface
 
     /**
      * Retrieve renderer type
+     *
      * @return string
      */
     public function getType();
 
     /**
      * Manually adjust top position
+     *
      * @param int $value
      * @return RendererInterface
      */
@@ -59,12 +63,14 @@ interface RendererInterface
 
     /**
      * Retrieve vertical adjustment
+     *
      * @return int
      */
     public function getTopOffset();
 
     /**
      * Manually adjust left position
+     *
      * @param int $value
      * @return RendererInterface
      */
@@ -72,12 +78,14 @@ interface RendererInterface
 
     /**
      * Retrieve vertical adjustment
+     *
      * @return int
      */
     public function getLeftOffset();
 
     /**
      * Activate/Deactivate the automatic rendering of exception
+     *
      * @param  bool $value
      * @return self
      */
@@ -85,6 +93,7 @@ interface RendererInterface
 
     /**
      * Horizontal position of the barcode in the rendering resource
+     *
      * @param string $value
      * @return RendererInterface
      */
@@ -92,12 +101,14 @@ interface RendererInterface
 
     /**
      * Horizontal position of the barcode in the rendering resource
+     *
      * @return string
      */
     public function getHorizontalPosition();
 
     /**
      * Vertical position of the barcode in the rendering resource
+     *
      * @param string $value
      * @return RendererInterface
      */
@@ -105,12 +116,14 @@ interface RendererInterface
 
     /**
      * Vertical position of the barcode in the rendering resource
+     *
      * @return string
      */
     public function getVerticalPosition();
 
     /**
      * Set the size of a module
+     *
      * @param float $value
      * @return RendererInterface
      */
@@ -118,18 +131,21 @@ interface RendererInterface
 
     /**
      * Set the size of a module
+     *
      * @return float
      */
     public function getModuleSize();
 
     /**
      * Retrieve the automatic rendering of exception
+     *
      * @return bool
      */
     public function getAutomaticRenderError();
 
     /**
      * Set the barcode object
+     *
      * @param  ObjectInterface $barcode
      * @return RendererInterface
      */
@@ -137,24 +153,28 @@ interface RendererInterface
 
     /**
      * Retrieve the barcode object
+     *
      * @return ObjectInterface
      */
     public function getBarcode();
 
     /**
      * Checking of parameters after all settings
+     *
      * @return bool
      */
     public function checkParams();
 
     /**
      * Draw the barcode in the rendering resource
+     *
      * @return mixed
      */
     public function draw();
 
     /**
      * Render the resource by sending headers and drawed resource
+     *
      * @return mixed
      */
     public function render();

@@ -23,7 +23,7 @@ namespace Doctrine\ORM\Mapping;
 /**
  * A set of rules for determining the physical column and table names
  *
- * 
+ *
  * @link    www.doctrine-project.org
  * @since   2.3
  * @author  Fabio B. Silva <fabio.bat.silva@gmail.com>
@@ -42,8 +42,8 @@ interface NamingStrategy
     /**
      * Returns a column name for a property.
      *
-     * @param string      $propertyName A property name.
-     * @param string|null $className    The fully-qualified class name.
+     * @param string $propertyName   A property name.
+     * @param string|null $className The fully-qualified class name.
      *
      * @return string A column name.
      */
@@ -68,8 +68,8 @@ interface NamingStrategy
     /**
      * Returns a join table name.
      *
-     * @param string      $sourceEntity The source entity.
-     * @param string      $targetEntity The target entity.
+     * @param string $sourceEntity      The source entity.
+     * @param string $targetEntity      The target entity.
      * @param string|null $propertyName A property name.
      *
      * @return string A join table name.
@@ -79,7 +79,7 @@ interface NamingStrategy
     /**
      * Returns the foreign key column name for the given parameters.
      *
-     * @param string      $entityName           An entity.
+     * @param string $entityName                An entity.
      * @param string|null $referencedColumnName A property.
      *
      * @return string A join column name.

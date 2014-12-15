@@ -12,7 +12,9 @@ use Doctrine\Tests\Mocks\UnitOfWorkMock;
 use Doctrine\Tests\Mocks\DriverMock;
 
 /**
- * Test the proxy generator. Its work is generating on-the-fly subclasses of a given model, which implement the Proxy pattern.
+ * Test the proxy generator. Its work is generating on-the-fly subclasses of a given model, which implement the Proxy
+ * pattern.
+ *
  * @author Giorgio Sironi <piccoloprincipeazzurro@gmail.com>
  */
 class ProxyFactoryTest extends \Doctrine\Tests\OrmTestCase
@@ -61,9 +63,9 @@ class ProxyFactoryTest extends \Doctrine\Tests\OrmTestCase
 
         $persister
             ->expects($this->atLeastOnce())
-              ->method('load')
-              ->with($this->equalTo($identifier), $this->isInstanceOf($proxyClass))
-              ->will($this->returnValue(new \stdClass()));
+            ->method('load')
+            ->with($this->equalTo($identifier), $this->isInstanceOf($proxyClass))
+            ->will($this->returnValue(new \stdClass()));
 
         $proxy->getDescription();
     }

@@ -42,7 +42,7 @@ class SimpleSelectClause extends Node
 
     /**
      * @param SimpleSelectExpression $simpleSelectExpression
-     * @param bool                   $isDistinct
+     * @param bool $isDistinct
      */
     public function __construct($simpleSelectExpression, $isDistinct)
     {

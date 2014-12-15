@@ -46,8 +46,8 @@ class QueryCacheProfile
     private $cacheKey;
 
     /**
-     * @param integer                           $lifetime
-     * @param string|null                       $cacheKey
+     * @param integer $lifetime
+     * @param string|null $cacheKey
      * @param \Doctrine\Common\Cache\Cache|null $resultCache
      */
     public function __construct($lifetime = 0, $cacheKey = null, Cache $resultCache = null)
@@ -91,8 +91,8 @@ class QueryCacheProfile
      * Generates the real cache key from query, params and types.
      *
      * @param string $query
-     * @param array  $params
-     * @param array  $types
+     * @param array $params
+     * @param array $types
      *
      * @return array
      */

@@ -48,6 +48,7 @@ class SimpleStreamResponseSenderTest extends TestCase
     {
         $mockSendResponseEvent = $this->getMock('Zend\Mvc\ResponseSender\SendResponseEvent', array('getResponse'));
         $mockSendResponseEvent->expects($this->any())->method('getResponse')->will($this->returnValue($response));
+
         return $mockSendResponseEvent;
     }
 }

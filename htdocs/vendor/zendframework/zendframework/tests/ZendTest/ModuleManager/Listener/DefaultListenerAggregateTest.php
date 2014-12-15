@@ -33,7 +33,7 @@ class DefaultListenerAggregateTest extends TestCase
 
         $this->defaultListeners = new DefaultListenerAggregate(
             new ListenerOptions(array(
-                'module_paths'         => array(
+                'module_paths' => array(
                     realpath(__DIR__ . '/TestAsset'),
                 ),
             ))
@@ -103,7 +103,7 @@ class DefaultListenerAggregateTest extends TestCase
     public function testDefaultListenerAggregateCanDetachItself()
     {
         $listenerAggregate = new DefaultListenerAggregate;
-        $moduleManager     = new ModuleManager(array('ListenerTestModule'));
+        $moduleManager = new ModuleManager(array('ListenerTestModule'));
 
         $this->assertEquals(1, count($moduleManager->getEventManager()->getEvents()));
 

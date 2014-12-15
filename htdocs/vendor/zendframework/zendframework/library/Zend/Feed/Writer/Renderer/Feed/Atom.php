@@ -14,7 +14,7 @@ use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 
 /**
-*/
+ */
 class Atom extends AbstractAtom implements Renderer\RendererInterface
 {
     /**
@@ -91,6 +91,7 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
             $imported = $this->dom->importNode($element, true);
             $root->appendChild($imported);
         }
+
         return $this;
     }
 }

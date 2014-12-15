@@ -16,6 +16,7 @@ class Module
     public function getAutoloaderConfig()
     {
         $this->getAutoloaderConfigCalled = true;
+
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(

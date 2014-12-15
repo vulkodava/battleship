@@ -127,9 +127,9 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomOrder()
     {
-        $adapter = new ConsoleStub(array('width' => 25, 'elements' =>  array(Adapter\Console::ELEMENT_ETA,
-                                                                      Adapter\Console::ELEMENT_PERCENT,
-                                                                      Adapter\Console::ELEMENT_BAR)));
+        $adapter = new ConsoleStub(array('width' => 25, 'elements' => array(Adapter\Console::ELEMENT_ETA,
+            Adapter\Console::ELEMENT_PERCENT,
+            Adapter\Console::ELEMENT_BAR)));
         $adapter->notify(0, 100, 0, 0, null, null);
 
         $this->assertEquals('               0% [-----]', $adapter->getLastOutput());
@@ -275,7 +275,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Console();
 
-        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Character may not be empty');
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException', 'Character may not be empty');
         $adapter->setBarLeftChar(null);
     }
 
@@ -283,7 +283,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Console();
 
-        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Character may not be empty');
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException', 'Character may not be empty');
         $adapter->setBarRightChar(null);
     }
 
@@ -291,7 +291,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Console();
 
-        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Invalid finish action specified');
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException', 'Invalid finish action specified');
         $adapter->setFinishAction('CUSTOM_FINISH_ACTION');
     }
 
@@ -302,9 +302,9 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $outputWidth = 50;
         $adapter = new ConsoleStub(array('width' => $outputWidth, 'elements' => array(Adapter\Console::ELEMENT_PERCENT,
-                                                                                      Adapter\Console::ELEMENT_BAR,
-                                                                                      Adapter\Console::ELEMENT_ETA,
-                                                                                      Adapter\Console::ELEMENT_TEXT)));
+            Adapter\Console::ELEMENT_BAR,
+            Adapter\Console::ELEMENT_ETA,
+            Adapter\Console::ELEMENT_TEXT)));
         $adapter->notify(21, 100, .21, 60, 60, 'ChineseTest 這是多字節長度裁剪的測試。我們希望能有超過20名中國字符的長字符串');
         $this->assertEquals(' 21% [##-------] ETA 00:01:00 ChineseTest 這是多字節長度裁', $adapter->getLastOutput());
 
@@ -319,9 +319,9 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $outputWidth = 50;
         $adapter = new ConsoleStub(array('width' => $outputWidth, 'elements' => array(Adapter\Console::ELEMENT_PERCENT,
-                                                                                      Adapter\Console::ELEMENT_BAR,
-                                                                                      Adapter\Console::ELEMENT_ETA,
-                                                                                      Adapter\Console::ELEMENT_TEXT)));
+            Adapter\Console::ELEMENT_BAR,
+            Adapter\Console::ELEMENT_ETA,
+            Adapter\Console::ELEMENT_TEXT)));
         $adapter->notify(21, 100, .21, 60, 60, '這是');
         $this->assertEquals(' 21% [##-------] ETA 00:01:00 這是                  ', $adapter->getLastOutput());
 

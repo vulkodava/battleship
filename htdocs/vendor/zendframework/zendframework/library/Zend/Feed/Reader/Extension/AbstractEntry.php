@@ -70,6 +70,7 @@ abstract class AbstractEntry
     {
         $this->entry = $entry;
         $this->domDocument = $entry->ownerDocument;
+
         return $this;
     }
 
@@ -92,6 +93,7 @@ abstract class AbstractEntry
     public function setEntryKey($entryKey)
     {
         $this->entryKey = $entryKey;
+
         return $this;
     }
 
@@ -113,6 +115,7 @@ abstract class AbstractEntry
     public function getEncoding()
     {
         $assumed = $this->getDomDocument()->encoding;
+
         return $assumed;
     }
 
@@ -128,6 +131,7 @@ abstract class AbstractEntry
     {
         if (null === $type) {
             $this->data['type'] = null;
+
             return $this;
         }
 
@@ -136,6 +140,7 @@ abstract class AbstractEntry
             || $type === Reader\Reader::TYPE_RSS_090
         ) {
             $this->setXpathPrefix('//rss:item[' . ($this->entryKey + 1) . ']');
+
             return $this;
         }
 
@@ -143,10 +148,12 @@ abstract class AbstractEntry
             || $type === Reader\Reader::TYPE_ATOM_03
         ) {
             $this->setXpathPrefix('//atom:entry[' . ($this->entryKey + 1) . ']');
+
             return $this;
         }
 
         $this->setXpathPrefix('//item[' . ($this->entryKey + 1) . ']');
+
         return $this;
     }
 
@@ -176,6 +183,7 @@ abstract class AbstractEntry
     {
         $this->xpath = $xpath;
         $this->registerNamespaces();
+
         return $this;
     }
 
@@ -189,6 +197,7 @@ abstract class AbstractEntry
         if (!$this->xpath) {
             $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
+
         return $this->xpath;
     }
 
@@ -221,6 +230,7 @@ abstract class AbstractEntry
     public function setXpathPrefix($prefix)
     {
         $this->xpathPrefix = $prefix;
+
         return $this;
     }
 

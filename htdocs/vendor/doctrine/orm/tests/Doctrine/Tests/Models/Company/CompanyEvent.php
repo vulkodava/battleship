@@ -8,8 +8,9 @@ namespace Doctrine\Tests\Models\Company;
  * @DiscriminatorColumn(name="event_type", type="string")
  * @DiscriminatorMap({"auction"="CompanyAuction", "raffle"="CompanyRaffle"})
  */
-abstract class CompanyEvent {
-   /**
+abstract class CompanyEvent
+{
+    /**
      * @Id @Column(type="integer")
      * @GeneratedValue
      */
@@ -19,18 +20,21 @@ abstract class CompanyEvent {
      * @ManyToOne(targetEntity="CompanyOrganization", inversedBy="events", cascade={"persist"})
      * @JoinColumn(name="org_id", referencedColumnName="id")
      */
-     private $organization;
+    private $organization;
 
-     public function getId() {
-         return $this->id;
-     }
+    public function getId()
+    {
+        return $this->id;
+    }
 
-     public function getOrganization() {
-         return $this->organization;
-     }
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
 
-     public function setOrganization(CompanyOrganization $org) {
-         $this->organization = $org;
-     }
+    public function setOrganization(CompanyOrganization $org)
+    {
+        $this->organization = $org;
+    }
 
 }

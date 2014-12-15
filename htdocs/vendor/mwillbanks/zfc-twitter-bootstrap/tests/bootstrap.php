@@ -35,7 +35,7 @@ if (defined('MODULE_NAME')) {
 }
 
 // A locator will be set to this class if available
-$moduleTestCaseClassname = '\\'.$moduleName.'Test\\Framework\\TestCase';
+$moduleTestCaseClassname = '\\' . $moduleName . 'Test\\Framework\\TestCase';
 
 // This module's path plus additionally defined paths are used $modulePaths
 $modulePaths = array(dirname($rootPath));
@@ -85,7 +85,7 @@ if (method_exists($moduleTestCaseClassname, 'setLocator')) {
     );
     $routerDiConfig->configure($di);
 
-    call_user_func_array($moduleTestCaseClassname.'::setLocator', array($di));
+    call_user_func_array($moduleTestCaseClassname . '::setLocator', array($di));
 }
 
 // When this is in global scope, PHPUnit catches exception:

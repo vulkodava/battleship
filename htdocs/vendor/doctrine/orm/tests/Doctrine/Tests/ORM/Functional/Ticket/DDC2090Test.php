@@ -18,8 +18,8 @@ class DDC2090Test extends \Doctrine\Tests\OrmFunctionalTestCase
     public function testIssue()
     {
         $className = 'Doctrine\Tests\Models\Company\CompanyEmployee';
-        $date1     = new \DateTime('2011-11-11 11:11:11');
-        $date2     = new \DateTime('2012-12-12 12:12:12');
+        $date1 = new \DateTime('2011-11-11 11:11:11');
+        $date2 = new \DateTime('2012-12-12 12:12:12');
         $employee1 = new CompanyEmployee;
         $employee2 = new CompanyEmployee;
 
@@ -44,8 +44,8 @@ class DDC2090Test extends \Doctrine\Tests\OrmFunctionalTestCase
             ->set('e.salary', ':salary')
             ->where('e = :e')
             ->setParameters(array(
-                'e'      => $employee1,
-                'date'   => $date1,
+                'e' => $employee1,
+                'date' => $date1,
                 'salary' => 101,
             ))
             ->getQuery()
@@ -58,8 +58,8 @@ class DDC2090Test extends \Doctrine\Tests\OrmFunctionalTestCase
             ->set('e.salary', ':salary')
             ->where('e = :e')
             ->setParameters(array(
-                'e'      => $employee2,
-                'date'   => $date2,
+                'e' => $employee2,
+                'date' => $date2,
                 'salary' => 102,
             ))
             ->getQuery()

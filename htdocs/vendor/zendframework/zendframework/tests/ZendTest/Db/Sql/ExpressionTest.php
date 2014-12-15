@@ -28,6 +28,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression();
         $return = $expression->setExpression('Foo Bar');
         $this->assertSame($expression, $return);
+
         return $return;
     }
 
@@ -42,7 +43,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Sql\Expression::getExpression
+     * @covers  Zend\Db\Sql\Expression::getExpression
      * @depends testSetExpression
      */
     public function testGetExpression(Expression $expression)
@@ -58,6 +59,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression();
         $return = $expression->setParameters('foo');
         $this->assertSame($expression, $return);
+
         return $return;
     }
 
@@ -66,14 +68,14 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetParametersException()
     {
-        $expression = new Expression('','foo');
+        $expression = new Expression('', 'foo');
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Expression parameters must be a scalar or array.');
         $return = $expression->setParameters(null);
     }
 
     /**
-     * @covers Zend\Db\Sql\Expression::getParameters
+     * @covers  Zend\Db\Sql\Expression::getParameters
      * @depends testSetParameters
      */
     public function testGetParameters(Expression $expression)
@@ -89,11 +91,12 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression();
         $return = $expression->setTypes(array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL));
         $this->assertSame($expression, $return);
+
         return $expression;
     }
 
     /**
-     * @covers Zend\Db\Sql\Expression::getTypes
+     * @covers  Zend\Db\Sql\Expression::getTypes
      * @depends testSetTypes
      */
     public function testGetTypes(Expression $expression)

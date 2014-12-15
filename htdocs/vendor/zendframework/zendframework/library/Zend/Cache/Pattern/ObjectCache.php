@@ -34,8 +34,8 @@ class ObjectCache extends CallbackCache
     /**
      * Call and cache a class method
      *
-     * @param  string $method  Method name to call
-     * @param  array  $args    Method arguments
+     * @param  string $method Method name to call
+     * @param  array $args    Method arguments
      * @return mixed
      * @throws Exception\RuntimeException
      * @throws \Exception
@@ -43,14 +43,14 @@ class ObjectCache extends CallbackCache
     public function call($method, array $args = array())
     {
         $options = $this->getOptions();
-        $object  = $options->getObject();
-        $method  = strtolower($method);
+        $object = $options->getObject();
+        $method = strtolower($method);
 
         // handle magic methods
         switch ($method) {
             case '__set':
                 $property = array_shift($args);
-                $value    = array_shift($args);
+                $value = array_shift($args);
 
                 $object->{$property} = $value;
 
@@ -73,6 +73,7 @@ class ObjectCache extends CallbackCache
                 if ($removeKeys) {
                     $options->getStorage()->removeItems($removeKeys);
                 }
+
                 return;
 
             case '__get':
@@ -87,6 +88,7 @@ class ObjectCache extends CallbackCache
                 }
 
                 array_unshift($args, $property);
+
                 return parent::call(array($object, '__get'), $args);
 
             case '__isset':
@@ -126,6 +128,7 @@ class ObjectCache extends CallbackCache
                 if ($removeKeys) {
                     $options->getStorage()->removeItems($removeKeys);
                 }
+
                 return;
         }
 
@@ -140,6 +143,7 @@ class ObjectCache extends CallbackCache
             if ($args) {
                 return call_user_func_array(array($object, $method), $args);
             }
+
             return $object->{$method}();
         }
 
@@ -150,8 +154,8 @@ class ObjectCache extends CallbackCache
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  string     $method  The method
-     * @param  array      $args    Callback arguments
+     * @param  string $method The method
+     * @param  array $args    Callback arguments
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -167,8 +171,8 @@ class ObjectCache extends CallbackCache
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callable   $callback  A valid callback
-     * @param  array      $args      Callback arguments
+     * @param  callable $callback A valid callback
+     * @param  array $args        Callback arguments
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -176,14 +180,15 @@ class ObjectCache extends CallbackCache
     {
         $callbackKey = md5($this->getOptions()->getObjectKey() . '::' . strtolower($callback[1]));
         $argumentKey = $this->generateArgumentsKey($args);
+
         return $callbackKey . $argumentKey;
     }
 
     /**
      * Class method call handler
      *
-     * @param  string $method  Method name to call
-     * @param  array  $args    Method arguments
+     * @param  string $method Method name to call
+     * @param  array $args    Method arguments
      * @return mixed
      * @throws Exception\RuntimeException
      * @throws \Exception
@@ -202,7 +207,7 @@ class ObjectCache extends CallbackCache
      * and removes cached data of previous __get and __isset calls.
      *
      * @param  string $name
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return void
      * @see    http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
      */

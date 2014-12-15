@@ -18,6 +18,7 @@ class StringToArrayFilter extends AbstractFilter
         if (!is_array($value)) {
             return explode(',', $value);
         }
+
         return $value;
     }
 }

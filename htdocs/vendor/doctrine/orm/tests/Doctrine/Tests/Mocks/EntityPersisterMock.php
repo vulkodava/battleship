@@ -50,12 +50,15 @@ class EntityPersisterMock extends \Doctrine\ORM\Persisters\BasicEntityPersister
     public function addInsert($entity)
     {
         $this->inserts[] = $entity;
-        if ( ! is_null($this->mockIdGeneratorType) && $this->mockIdGeneratorType == \Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_IDENTITY
-                || $this->class->isIdGeneratorIdentity()) {
+        if (!is_null($this->mockIdGeneratorType) && $this->mockIdGeneratorType == \Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_IDENTITY
+            || $this->class->isIdGeneratorIdentity()
+        ) {
             $id = $this->identityColumnValueCounter++;
             $this->postInsertIds[$id] = $entity;
+
             return $id;
         }
+
         return null;
     }
 

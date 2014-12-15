@@ -43,16 +43,16 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
             'return' => 'string',
             'arguments' => array(
                 'one' => array(
-                    'type'     => 'string',
+                    'type' => 'string',
                     'required' => true,
-                    'by_ref'   => false,
-                    'default'  => null,
+                    'by_ref' => false,
+                    'default' => null,
                 ),
                 'two' => array(
-                    'type'     => 'string',
+                    'type' => 'string',
                     'required' => false,
-                    'by_ref'   => false,
-                    'default'  => 'two',
+                    'by_ref' => false,
+                    'default' => 'two',
                 ),
             ),
         );
@@ -226,7 +226,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection($function9);
         $content = $function->getContents(false);
         $this->assertEquals("function() {}", trim($content));
-        
+
         $function = new FunctionReflection($function10);
         $content = $function->getContents(false);
         $this->assertEquals("function() { return 'function10'; }", trim($content));
@@ -239,7 +239,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function3');
         $content = $function->getContents();
         $this->assertEquals("/**\n * Enter description here...\n *\n * @param string \$one\n * @param int \$two"
-                          . "\n * @return true\n */\nfunction function3(\$one, \$two = 2)\n{\n    return true;\n}", trim($content));
+            . "\n * @return true\n */\nfunction function3(\$one, \$two = 2)\n{\n    return true;\n}", trim($content));
     }
 
     public function testFunctionClosureContentsReturnWithDocBlock()

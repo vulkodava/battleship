@@ -31,7 +31,7 @@ abstract class AbstractDriverTest extends \PHPUnit_Framework_TestCase
             'MyNamespace\MySubnamespace\Entity' => $this->dir,
         ));
 
-        touch($filename = $this->dir.'/Foo'.$this->getFileExtension());
+        touch($filename = $this->dir . '/Foo' . $this->getFileExtension());
         $this->assertEquals($filename, $driver->getLocator()->findMappingFile('MyNamespace\MySubnamespace\Entity\Foo'));
     }
 
@@ -41,7 +41,7 @@ abstract class AbstractDriverTest extends \PHPUnit_Framework_TestCase
             'MyNamespace\MySubnamespace\Entity' => $this->dir,
         ));
 
-        touch($filename = $this->dir.'/Foo.Bar'.$this->getFileExtension());
+        touch($filename = $this->dir . '/Foo.Bar' . $this->getFileExtension());
         $this->assertEquals($filename, $driver->getLocator()->findMappingFile('MyNamespace\MySubnamespace\Entity\Foo\Bar'));
     }
 
@@ -49,7 +49,7 @@ abstract class AbstractDriverTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'Doctrine\Common\Persistence\Mapping\MappingException',
-            "No mapping file found named '".$this->dir."/Foo".$this->getFileExtension()."' for class 'MyNamespace\MySubnamespace\Entity\Foo'."
+            "No mapping file found named '" . $this->dir . "/Foo" . $this->getFileExtension() . "' for class 'MyNamespace\MySubnamespace\Entity\Foo'."
         );
 
         $driver = $this->getDriver(array(
@@ -63,7 +63,7 @@ abstract class AbstractDriverTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'Doctrine\Common\Persistence\Mapping\MappingException',
-            "No mapping file found named 'Foo".$this->getFileExtension()."' for class 'MyOtherNamespace\MySubnamespace\Entity\Foo'."
+            "No mapping file found named 'Foo" . $this->getFileExtension() . "' for class 'MyOtherNamespace\MySubnamespace\Entity\Foo'."
         );
 
         $driver = $this->getDriver(array(
@@ -75,7 +75,7 @@ abstract class AbstractDriverTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->dir = sys_get_temp_dir().'/abstract_driver_test';
+        $this->dir = sys_get_temp_dir() . '/abstract_driver_test';
         @mkdir($this->dir, 0777, true);
     }
 
@@ -95,6 +95,7 @@ abstract class AbstractDriverTest extends \PHPUnit_Framework_TestCase
     }
 
     abstract protected function getFileExtension();
+
     abstract protected function getDriver(array $paths = array());
 
     private function setField($obj, $field, $value)
@@ -104,7 +105,8 @@ abstract class AbstractDriverTest extends \PHPUnit_Framework_TestCase
         $ref->setValue($obj, $value);
     }
 
-    private function invoke($obj, $method, array $args = array()) {
+    private function invoke($obj, $method, array $args = array())
+    {
         $ref = new \ReflectionMethod($obj, $method);
         $ref->setAccessible(true);
 

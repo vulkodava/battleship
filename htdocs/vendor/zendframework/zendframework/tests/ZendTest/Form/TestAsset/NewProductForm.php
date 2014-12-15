@@ -19,8 +19,8 @@ class NewProductForm extends Form
         parent::__construct('create_product');
 
         $this->setAttribute('method', 'post')
-             ->setHydrator(new ClassMethodsHydrator())
-             ->setInputFilter(new InputFilter());
+            ->setHydrator(new ClassMethodsHydrator())
+            ->setInputFilter(new InputFilter());
 
         $fieldset = new ProductFieldset();
         $fieldset->setUseAsBaseFieldset(true);

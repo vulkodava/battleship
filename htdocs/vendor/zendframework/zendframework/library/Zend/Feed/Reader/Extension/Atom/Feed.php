@@ -455,8 +455,8 @@ class Feed extends Extension\AbstractFeed
         $author = array();
 
         $emailNode = $element->getElementsByTagName('email');
-        $nameNode  = $element->getElementsByTagName('name');
-        $uriNode   = $element->getElementsByTagName('uri');
+        $nameNode = $element->getElementsByTagName('name');
+        $uriNode = $element->getElementsByTagName('uri');
 
         if ($emailNode->length && strlen($emailNode->item(0)->nodeValue) > 0) {
             $author['email'] = $emailNode->item(0)->nodeValue;
@@ -473,6 +473,7 @@ class Feed extends Extension\AbstractFeed
         if (empty($author)) {
             return null;
         }
+
         return $author;
     }
 
@@ -490,6 +491,7 @@ class Feed extends Extension\AbstractFeed
                 }
             }
         }
+
         return $link;
     }
 

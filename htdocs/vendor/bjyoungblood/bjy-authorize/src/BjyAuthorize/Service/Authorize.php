@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -78,15 +78,15 @@ class Authorize
     protected $config;
 
     /**
-     * @param array                                         $config
-     * @param \Zend\ServiceManager\ServiceLocatorInterface  $serviceLocator
+     * @param array $config
+     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
      */
     public function __construct(array $config, ServiceLocatorInterface $serviceLocator)
     {
-        $this->config         = $config;
+        $this->config = $config;
         $this->serviceLocator = $serviceLocator;
-        $that                 = $this;
-        $this->loaded         = function () use ($that) {
+        $that = $this;
+        $this->loaded = function () use ($that) {
             $that->load();
         };
     }
@@ -230,7 +230,7 @@ class Authorize
 
     /**
      * @param string|ResourceInterface $resource
-     * @param string                   $privilege
+     * @param string $privilege
      *
      * @return bool
      */
@@ -261,9 +261,9 @@ class Authorize
         $this->loaded = null;
 
         /** @var $cache StorageInterface */
-        $cache      = $this->serviceLocator->get('BjyAuthorize\Cache');
-        $success    = false;
-        $this->acl  = $cache->getItem($this->config['cache_key'], $success);
+        $cache = $this->serviceLocator->get('BjyAuthorize\Cache');
+        $success = false;
+        $this->acl = $cache->getItem($this->config['cache_key'], $success);
 
         if (!($this->acl instanceof Acl) || !$success) {
             $this->loadAcl();
@@ -307,7 +307,7 @@ class Authorize
      * @deprecated this method will be removed in BjyAuthorize 2.0.x
      *
      * @param string[]|\Zend\Permissions\Acl\Resource\ResourceInterface[] $resources
-     * @param mixed|null                                                  $parent
+     * @param mixed|null $parent
      */
     protected function loadResource(array $resources, $parent = null)
     {
@@ -338,7 +338,7 @@ class Authorize
     protected function loadRule(array $rule, $type)
     {
         $privileges = $assertion = null;
-        $ruleSize   = count($rule);
+        $ruleSize = count($rule);
 
         if (4 === $ruleSize) {
             list($roles, $resources, $privileges, $assertion) = $rule;

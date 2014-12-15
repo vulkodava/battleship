@@ -99,7 +99,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     public function testShouldBeAbleToLoadResponseFromJSONString()
     {
         $options = $this->getOptions();
-        $json    = Json\Json::encode($options);
+        $json = Json\Json::encode($options);
         $this->response->loadJSON($json);
 
         $this->assertEquals('foobar', $this->response->getId());
@@ -110,7 +110,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $options = $this->getOptions();
         $options['jsonrpc'] = '2.0';
-        $json    = Json\Json::encode($options);
+        $json = Json\Json::encode($options);
         $this->response->loadJSON($json);
         $this->assertEquals('2.0', $this->response->getVersion());
     }
@@ -118,8 +118,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     public function testResponseShouldBeAbleToCastToJSON()
     {
         $this->response->setResult(true)
-                       ->setId('foo')
-                       ->setVersion('2.0');
+            ->setId('foo')
+            ->setVersion('2.0');
         $json = $this->response->toJSON();
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
@@ -138,10 +138,10 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $error = new Server\Error();
         $error->setCode(Server\Error::ERROR_INTERNAL)
-              ->setMessage('error occurred');
+            ->setMessage('error occurred');
         $this->response->setId('foo')
-                       ->setResult(true)
-                       ->setError($error);
+            ->setResult(true)
+            ->setError($error);
         $json = $this->response->toJSON();
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
@@ -159,7 +159,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     public function testCastToStringShouldCastToJSON()
     {
         $this->response->setResult(true)
-                       ->setId('foo');
+            ->setId('foo');
         $json = $this->response->__toString();
         $test = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
 
@@ -176,7 +176,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * @param string $json
      *
-     * @group 5956
+     * @group        5956
      *
      * @dataProvider provideScalarJSONResponses
      */
@@ -202,7 +202,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
                 'four',
                 true,
             ),
-            'id'  => 'foobar'
+            'id' => 'foobar'
         );
     }
 }

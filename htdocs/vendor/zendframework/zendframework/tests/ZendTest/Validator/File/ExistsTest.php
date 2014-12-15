@@ -22,19 +22,20 @@ class ExistsTest extends \PHPUnit_Framework_TestCase
     public function basicBehaviorDataProvider()
     {
         $testFile = __DIR__ . '/_files/testsize.mo';
-        $baseDir  = dirname($testFile);
+        $baseDir = dirname($testFile);
         $baseName = basename($testFile);
         $fileUpload = array(
             'tmp_name' => $testFile, 'name' => basename($testFile),
             'size' => 200, 'error' => 0, 'type' => 'text'
         );
+
         return array(
             //    Options, isValid Param, Expected value
-            array(dirname($baseDir), $baseName,   false),
-            array($baseDir,          $baseName,   true),
-            array($baseDir,          $testFile,   true),
+            array(dirname($baseDir), $baseName, false),
+            array($baseDir, $baseName, true),
+            array($baseDir, $testFile, true),
             array(dirname($baseDir), $fileUpload, false),
-            array($baseDir,          $fileUpload, true),
+            array($baseDir, $fileUpload, true),
         );
     }
 
@@ -146,11 +147,11 @@ class ExistsTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(File\Exists::DOES_NOT_EXIST, $validator->getMessages());
 
         $filesArray = array(
-            'name'      => '',
-            'size'      => 0,
-            'tmp_name'  => '',
-            'error'     => UPLOAD_ERR_NO_FILE,
-            'type'      => '',
+            'name' => '',
+            'size' => 0,
+            'tmp_name' => '',
+            'error' => UPLOAD_ERR_NO_FILE,
+            'type' => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

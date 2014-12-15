@@ -45,7 +45,6 @@ class DDC2138Test extends OrmFunctionalTestCase
 }
 
 
-
 /**
  * @Table(name="structures")
  * @Entity
@@ -116,7 +115,7 @@ class DDC2138UserFollowedStructure extends DDC2138UserFollowedObject
     /**
      * Construct a UserFollowedStructure entity
      *
-     * @param User      $user
+     * @param User $user
      * @param Structure $followedStructure
      */
     public function __construct(User $user, Structure $followedStructure)

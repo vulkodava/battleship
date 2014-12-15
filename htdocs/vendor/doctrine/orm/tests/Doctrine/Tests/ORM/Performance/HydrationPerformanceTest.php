@@ -15,7 +15,7 @@ use Doctrine\Tests\Mocks\HydratorMockStatement,
  * seriously degrade performance.
  *
  * @author robo
- * @group performance
+ * @group  performance
  */
 class HydrationPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
 {
@@ -147,10 +147,10 @@ class HydrationPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         $rsm = new ResultSetMapping;
         $rsm->addEntityResult('Doctrine\Tests\Models\CMS\CmsUser', 'u');
         $rsm->addJoinedEntityResult(
-                'Doctrine\Tests\Models\CMS\CmsPhonenumber',
-                'p',
-                'u',
-                'phonenumbers'
+            'Doctrine\Tests\Models\CMS\CmsPhonenumber',
+            'p',
+            'u',
+            'phonenumbers'
         );
         $rsm->addFieldResult('u', 'u__id', 'id');
         $rsm->addFieldResult('u', 'u__status', 'status');
@@ -279,10 +279,10 @@ class HydrationPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         $rsm->addFieldResult('u', 'u__username', 'username');
         $rsm->addFieldResult('u', 'u__name', 'name');
         $rsm->addJoinedEntityResult(
-                'Doctrine\Tests\Models\CMS\CmsAddress',
-                'a',
-                'u',
-                'address'
+            'Doctrine\Tests\Models\CMS\CmsAddress',
+            'a',
+            'u',
+            'address'
         );
         $rsm->addFieldResult('a', 'a__id', 'id');
         //$rsm->addFieldResult('a', 'a__country', 'country');
@@ -331,10 +331,10 @@ class HydrationPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         $rsm = new ResultSetMapping;
         $rsm->addEntityResult('Doctrine\Tests\Models\CMS\CmsUser', 'u');
         $rsm->addJoinedEntityResult(
-                'Doctrine\Tests\Models\CMS\CmsPhonenumber',
-                'p',
-                'u',
-                'phonenumbers'
+            'Doctrine\Tests\Models\CMS\CmsPhonenumber',
+            'p',
+            'u',
+            'phonenumbers'
         );
         $rsm->addFieldResult('u', 'u__id', 'id');
         $rsm->addFieldResult('u', 'u__status', 'status');
@@ -403,10 +403,10 @@ class HydrationPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         $rsm = new ResultSetMapping;
         $rsm->addEntityResult('Doctrine\Tests\Models\CMS\CmsUser', 'u');
         $rsm->addJoinedEntityResult(
-                'Doctrine\Tests\Models\CMS\CmsPhonenumber',
-                'p',
-                'u',
-                'phonenumbers'
+            'Doctrine\Tests\Models\CMS\CmsPhonenumber',
+            'p',
+            'u',
+            'phonenumbers'
         );
         $rsm->addFieldResult('u', 'u__id', 'id');
         $rsm->addFieldResult('u', 'u__status', 'status');
@@ -415,10 +415,10 @@ class HydrationPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         $rsm->addScalarResult('sclr0', 'nameUpper');
         $rsm->addFieldResult('p', 'p__phonenumber', 'phonenumber');
         $rsm->addJoinedEntityResult(
-                'Doctrine\Tests\Models\CMS\CmsAddress',
-                'a',
-                'u',
-                'address'
+            'Doctrine\Tests\Models\CMS\CmsAddress',
+            'a',
+            'u',
+            'address'
         );
         $rsm->addFieldResult('a', 'a__id', 'id');
 

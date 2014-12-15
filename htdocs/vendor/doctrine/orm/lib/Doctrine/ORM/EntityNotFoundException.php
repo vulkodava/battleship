@@ -23,7 +23,7 @@ namespace Doctrine\ORM;
  * Exception thrown when a Proxy fails to retrieve an Entity result.
  *
  * @author robo
- * @since 2.0
+ * @since  2.0
  */
 class EntityNotFoundException extends ORMException
 {

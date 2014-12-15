@@ -64,9 +64,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -103,9 +103,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -152,9 +152,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(4, count($result));
 
@@ -206,9 +206,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(4, count($result));
 
@@ -267,9 +267,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(4, count($result));
 
@@ -328,9 +328,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(4, count($result));
 
@@ -390,9 +390,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -454,9 +454,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -535,9 +535,9 @@ class ObjectHydratorTest extends HydrationTestCase
         );
 
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -649,9 +649,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -779,9 +779,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -892,9 +892,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -935,9 +935,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(1, count($result));
         $this->assertInstanceOf('Doctrine\Tests\Models\CMS\CmsUser', $result[0]);
@@ -968,9 +968,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -1010,9 +1010,9 @@ class ObjectHydratorTest extends HydrationTestCase
         // mocking the proxy factory
         $proxyFactory = $this->getMock('Doctrine\ORM\Proxy\ProxyFactory', array('getProxy'), array(), '', false, false, false);
         $proxyFactory->expects($this->once())
-                     ->method('getProxy')
-                     ->with($this->equalTo('Doctrine\Tests\Models\ECommerce\ECommerceShipping'), array('id' => 42))
-                     ->will($this->returnValue($proxyInstance));
+            ->method('getProxy')
+            ->with($this->equalTo('Doctrine\Tests\Models\ECommerce\ECommerceShipping'), array('id' => 42))
+            ->will($this->returnValue($proxyInstance));
 
         $this->_em->setProxyFactory($proxyFactory);
 
@@ -1020,9 +1020,9 @@ class ObjectHydratorTest extends HydrationTestCase
         $metadata = $this->_em->getClassMetadata('Doctrine\Tests\Models\ECommerce\ECommerceProduct');
         $metadata->associationMappings['shipping']['fetch'] = ClassMetadata::FETCH_LAZY;
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm);
+        $result = $hydrator->hydrateAll($stmt, $rsm);
 
         $this->assertEquals(1, count($result));
 
@@ -1055,9 +1055,9 @@ class ObjectHydratorTest extends HydrationTestCase
         // mocking the proxy factory
         $proxyFactory = $this->getMock('Doctrine\ORM\Proxy\ProxyFactory', array('getProxy'), array(), '', false, false, false);
         $proxyFactory->expects($this->once())
-                     ->method('getProxy')
-                     ->with($this->equalTo('Doctrine\Tests\Models\ECommerce\ECommerceShipping'), array('id' => 42))
-                     ->will($this->returnValue($proxyInstance));
+            ->method('getProxy')
+            ->with($this->equalTo('Doctrine\Tests\Models\ECommerce\ECommerceShipping'), array('id' => 42))
+            ->will($this->returnValue($proxyInstance));
 
         $this->_em->setProxyFactory($proxyFactory);
 
@@ -1065,9 +1065,9 @@ class ObjectHydratorTest extends HydrationTestCase
         $metadata = $this->_em->getClassMetadata('Doctrine\Tests\Models\ECommerce\ECommerceProduct');
         $metadata->associationMappings['shipping']['fetch'] = ClassMetadata::FETCH_LAZY;
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm);
+        $result = $hydrator->hydrateAll($stmt, $rsm);
 
         $this->assertEquals(1, count($result));
 
@@ -1125,9 +1125,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -1188,9 +1188,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -1210,7 +1210,7 @@ class ObjectHydratorTest extends HydrationTestCase
      *   LEFT JOIN u.articles a
      *   LEFT JOIN a.comments c
      *
-     * @group bubu
+     * @group        bubu
      * @dataProvider provideDataForUserEntityResult
      */
     /*public function testChainedJoinWithScalars($userEntityKey)
@@ -1291,10 +1291,10 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt           = new HydratorMockStatement($resultSet);
-        $hydrator       = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
+        $stmt = new HydratorMockStatement($resultSet);
+        $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
         $iterableResult = $hydrator->iterate($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
-        $rowNum         = 0;
+        $rowNum = 0;
 
         while (($row = $iterableResult->next()) !== false) {
             $this->assertEquals(1, count($row));
@@ -1335,10 +1335,10 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt           = new HydratorMockStatement($resultSet);
-        $hydrator       = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
+        $stmt = new HydratorMockStatement($resultSet);
+        $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
         $iterableResult = $hydrator->iterate($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
-        $rowNum         = 0;
+        $rowNum = 0;
 
         while (($row = $iterableResult->next()) !== false) {
             $this->assertEquals(1, count($row));
@@ -1466,9 +1466,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -1589,9 +1589,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -1611,7 +1611,7 @@ class ObjectHydratorTest extends HydrationTestCase
      * SELECT PARTIAL u.{id, status}, UPPER(u.name) as nameUpper
      *   FROM Doctrine\Tests\Models\CMS\CmsUser u
      *
-     * @group DDC-1358
+     * @group        DDC-1358
      * @dataProvider provideDataForUserEntityResult
      */
     public function testMissingIdForRootEntity($userEntityKey)
@@ -1647,9 +1647,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(4, count($result), "Should hydrate four results.");
 
@@ -1670,7 +1670,7 @@ class ObjectHydratorTest extends HydrationTestCase
      *   FROM Doctrine\Tests\Models\CMS\CmsUser u
      *   LEFT JOIN u.phonenumbers u
      *
-     * @group DDC-1358
+     * @group        DDC-1358
      * @dataProvider provideDataForUserEntityResult
      */
     public function testMissingIdForCollectionValuedChildEntity($userEntityKey)
@@ -1717,9 +1717,9 @@ class ObjectHydratorTest extends HydrationTestCase
             )
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -1732,7 +1732,7 @@ class ObjectHydratorTest extends HydrationTestCase
      *   FROM Doctrine\Tests\Models\CMS\CmsUser u
      *   JOIN u.address a
      *
-     * @group DDC-1358
+     * @group        DDC-1358
      * @dataProvider provideDataForUserEntityResult
      */
     public function testMissingIdForSingleValuedChildEntity($userEntityKey)
@@ -1771,9 +1771,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -1786,7 +1786,7 @@ class ObjectHydratorTest extends HydrationTestCase
      *   FROM Doctrine\Tests\Models\CMS\CmsUser u
      *        INDEX BY u.id
      *
-     * @group DDC-1385
+     * @group        DDC-1385
      * @dataProvider provideDataForUserEntityResult
      */
     public function testIndexByAndMixedResult($userEntityKey)
@@ -1813,9 +1813,9 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(2, count($result));
 
@@ -1830,7 +1830,7 @@ class ObjectHydratorTest extends HydrationTestCase
      * SELECT UPPER(u.name) AS nameUpper
      *   FROM Doctrine\Tests\Models\CMS\CmsUser u
      *
-     * @group DDC-1385
+     * @group        DDC-1385
      * @dataProvider provideDataForUserEntityResult
      */
     public function testIndexByScalarsOnly($userEntityKey)
@@ -1851,14 +1851,14 @@ class ObjectHydratorTest extends HydrationTestCase
             ),
         );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
-        $result   = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
+        $result = $hydrator->hydrateAll($stmt, $rsm, array(Query::HINT_FORCE_PARTIAL_LOAD => true));
 
         $this->assertEquals(
             array(
                 'ROMANB' => array('nameUpper' => 'ROMANB'),
-                'JWAGE'  => array('nameUpper' => 'JWAGE')
+                'JWAGE' => array('nameUpper' => 'JWAGE')
             ),
             $result
         );
@@ -1866,10 +1866,11 @@ class ObjectHydratorTest extends HydrationTestCase
 
 
     /**
-     * @group DDC-1470
+     * @group                    DDC-1470
      *
      * @expectedException \Doctrine\ORM\Internal\Hydration\HydrationException
-     * @expectedExceptionMessage The meta mapping for the discriminator column "c_discr" is missing for "Doctrine\Tests\Models\Company\CompanyFixContract" using the DQL alias "c".
+     * @expectedExceptionMessage The meta mapping for the discriminator column "c_discr" is missing for
+     *                           "Doctrine\Tests\Models\Company\CompanyFixContract" using the DQL alias "c".
      */
     public function testMissingMetaMappingException()
     {
@@ -1882,22 +1883,23 @@ class ObjectHydratorTest extends HydrationTestCase
         $rsm->setDiscriminatorColumn('c', 'c_discr');
 
         $resultSet = array(
-              array(
-                  'c__id'   => '1',
-                  'c_discr' => 'fix',
-              ),
-         );
+            array(
+                'c__id' => '1',
+                'c_discr' => 'fix',
+            ),
+        );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
         $hydrator->hydrateAll($stmt, $rsm);
     }
 
     /**
-     * @group DDC-1470
+     * @group                    DDC-1470
      *
      * @expectedException \Doctrine\ORM\Internal\Hydration\HydrationException
-     * @expectedExceptionMessage The discriminator column "discr" is missing for "Doctrine\Tests\Models\Company\CompanyEmployee" using the DQL alias "e".
+     * @expectedExceptionMessage The discriminator column "discr" is missing for
+     *                           "Doctrine\Tests\Models\Company\CompanyEmployee" using the DQL alias "e".
      */
     public function testMissingDiscriminatorColumnException()
     {
@@ -1916,24 +1918,25 @@ class ObjectHydratorTest extends HydrationTestCase
         $rsm->setDiscriminatorColumn('e', 'e_discr');
 
         $resultSet = array(
-              array(
-                  'c__id'   => '1',
-                  'c_discr' => 'fix',
-                  'e__id'   => '1',
-                  'e__name' => 'Fabio B. Silva'
-              ),
-         );
+            array(
+                'c__id' => '1',
+                'c_discr' => 'fix',
+                'e__id' => '1',
+                'e__name' => 'Fabio B. Silva'
+            ),
+        );
 
-        $stmt     = new HydratorMockStatement($resultSet);
+        $stmt = new HydratorMockStatement($resultSet);
         $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
         $hydrator->hydrateAll($stmt, $rsm);
     }
 
     /**
-     * @group DDC-3076
+     * @group                    DDC-3076
      *
      * @expectedException \Doctrine\ORM\Internal\Hydration\HydrationException
-     * @expectedExceptionMessage The discriminator value "subworker" is invalid. It must be one of "person", "manager", "employee".
+     * @expectedExceptionMessage The discriminator value "subworker" is invalid. It must be one of "person", "manager",
+     *                           "employee".
      */
     public function testInvalidDiscriminatorValueException()
     {
@@ -1947,15 +1950,15 @@ class ObjectHydratorTest extends HydrationTestCase
         $rsm->setDiscriminatorColumn('p', 'discr');
 
         $resultSet = array(
-              array(
-                  'p__id'   => '1',
-                  'p__name' => 'Fabio B. Silva',
-                  'discr'   => 'subworker'
-              ),
-         );
+            array(
+                'p__id' => '1',
+                'p__name' => 'Fabio B. Silva',
+                'discr' => 'subworker'
+            ),
+        );
 
-        $stmt       = new HydratorMockStatement($resultSet);
-        $hydrator   = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
+        $stmt = new HydratorMockStatement($resultSet);
+        $hydrator = new \Doctrine\ORM\Internal\Hydration\ObjectHydrator($this->_em);
         $hydrator->hydrateAll($stmt, $rsm);
     }
 }

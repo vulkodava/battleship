@@ -76,15 +76,15 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     public function testSortableSet()
     {
         $this->update->set(array(
-            'two'   => 'с_two',
+            'two' => 'с_two',
             'three' => 'с_three',
         ));
         $this->update->set(array('one' => 'с_one'), 10);
 
         $this->assertEquals(
             array(
-                'one'   => 'с_one',
-                'two'   => 'с_two',
+                'one' => 'с_one',
+                'two' => 'с_two',
                 'three' => 'с_three',
             ),
             $this->update->getRawState('set')
@@ -141,7 +141,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF2-240
+     * @group  ZF2-240
      * @covers Zend\Db\Sql\Update::where
      */
     public function testPassingMultipleKeyValueInWhereClause()
@@ -272,14 +272,14 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     {
         $update1 = clone $this->update;
         $update1->table('foo')
-                ->set(array('bar' => 'baz'))
-                ->where('x = y');
+            ->set(array('bar' => 'baz'))
+            ->where('x = y');
 
         $update2 = clone $this->update;
         $update2->table('foo')
             ->set(array('bar' => 'baz'))
             ->where(array(
-                'id = ?'=>1
+                'id = ?' => 1
             ));
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString(new TrustingSql92Platform));
     }
@@ -340,6 +340,6 @@ class UpdateIgnore extends Update
 
     protected $specifications = array(
         self::SPECIFICATION_UPDATE => 'UPDATE IGNORE %1$s SET %2$s',
-        self::SPECIFICATION_WHERE  => 'WHERE %1$s'
+        self::SPECIFICATION_WHERE => 'WHERE %1$s'
     );
 }

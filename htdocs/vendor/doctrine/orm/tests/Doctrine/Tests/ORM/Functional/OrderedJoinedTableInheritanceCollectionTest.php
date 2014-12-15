@@ -13,7 +13,8 @@ require_once __DIR__ . '/../../TestInit.php';
  */
 class OrderedJoinedTableInheritanceCollectionTest extends \Doctrine\Tests\OrmFunctionalTestCase
 {
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         try {
             $this->_schemaTool->createSchema(array(
@@ -57,7 +58,7 @@ class OrderedJoinedTableInheritanceCollectionTest extends \Doctrine\Tests\OrmFun
 
         $result = $this->_em->createQuery(
             "SELECT p, c FROM Doctrine\Tests\ORM\Functional\OJTIC_Pet p JOIN p.children c WHERE p.name = 'Poofy'")
-                ->getResult();
+            ->getResult();
 
         $this->assertEquals(1, count($result));
         $poofy = $result[0];

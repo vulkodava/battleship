@@ -144,14 +144,14 @@ class Curl implements HttpAdapter, StreamInterface
     }
 
     /**
-      * Retrieve the array of all configuration options
-      *
-      * @return array
-      */
-     public function getConfig()
-     {
-         return $this->config;
-     }
+     * Retrieve the array of all configuration options
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
 
     /**
      * Direct setter for cURL adapter related options.
@@ -166,14 +166,15 @@ class Curl implements HttpAdapter, StreamInterface
             $this->config['curloptions'] = array();
         }
         $this->config['curloptions'][$option] = $value;
+
         return $this;
     }
 
     /**
      * Initialize curl
      *
-     * @param  string  $host
-     * @param  int     $port
+     * @param  string $host
+     * @param  int $port
      * @param  bool $secure
      * @return void
      * @throws AdapterException\RuntimeException if unable to connect
@@ -189,7 +190,7 @@ class Curl implements HttpAdapter, StreamInterface
         if ($this->curl
             && is_array($this->connectedTo)
             && ($this->connectedTo[0] != $host
-            || $this->connectedTo[1] != $port)
+                || $this->connectedTo[1] != $port)
         ) {
             $this->close();
         }
@@ -242,13 +243,14 @@ class Curl implements HttpAdapter, StreamInterface
     /**
      * Send request to the remote server
      *
-     * @param  string        $method
+     * @param  string $method
      * @param  \Zend\Uri\Uri $uri
-     * @param  float         $httpVersion
-     * @param  array         $headers
-     * @param  string        $body
+     * @param  float $httpVersion
+     * @param  array $headers
+     * @param  string $body
      * @return string        $request
-     * @throws AdapterException\RuntimeException If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
+     * @throws AdapterException\RuntimeException If connection fails, connected to wrong host, no PUT file defined,
+     *                                           unsupported method, or unsupported cURL option
      * @throws AdapterException\InvalidArgumentException if $method is currently not supported
      */
     public function write($method, $uri, $httpVersion = 1.1, $headers = array(), $body = '')
@@ -292,7 +294,7 @@ class Curl implements HttpAdapter, StreamInterface
                     }
 
                     if (isset($headers['Content-Length'])) {
-                        $this->config['curloptions'][CURLOPT_INFILESIZE] = (int) $headers['Content-Length'];
+                        $this->config['curloptions'][CURLOPT_INFILESIZE] = (int)$headers['Content-Length'];
                         unset($headers['Content-Length']);
                     }
 
@@ -382,6 +384,7 @@ class Curl implements HttpAdapter, StreamInterface
 
         /**
          * Make sure POSTFIELDS is set after $curlMethod is set:
+         *
          * @link http://de2.php.net/manual/en/function.curl-setopt.php#81161
          */
         if (in_array($method, array('POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'), true)) {
@@ -398,7 +401,7 @@ class Curl implements HttpAdapter, StreamInterface
 
         // set additional curl options
         if (isset($this->config['curloptions'])) {
-            foreach ((array) $this->config['curloptions'] as $k => $v) {
+            foreach ((array)$this->config['curloptions'] as $k => $v) {
                 if (!in_array($k, $this->invalidOverwritableCurlOptions)) {
                     if (curl_setopt($this->curl, $k, $v) == false) {
                         throw new AdapterException\RuntimeException(sprintf("Unknown or erroreous cURL option '%s' set", $k));
@@ -415,7 +418,7 @@ class Curl implements HttpAdapter, StreamInterface
             $this->response = $response;
         }
 
-        $request  = curl_getinfo($this->curl, CURLINFO_HEADER_OUT);
+        $request = curl_getinfo($this->curl, CURLINFO_HEADER_OUT);
         $request .= $body;
 
         if (empty($this->response)) {
@@ -437,12 +440,12 @@ class Curl implements HttpAdapter, StreamInterface
 
         // Eliminate multiple HTTP responses.
         do {
-            $parts  = preg_split('|(?:\r?\n){2}|m', $this->response, 2);
-            $again  = false;
+            $parts = preg_split('|(?:\r?\n){2}|m', $this->response, 2);
+            $again = false;
 
             if (isset($parts[1]) && preg_match("|^HTTP/1\.[01](.*?)\r\n|mi", $parts[1])) {
-                $this->response    = $parts[1];
-                $again              = true;
+                $this->response = $parts[1];
+                $again = true;
             }
         } while ($again);
 
@@ -473,7 +476,7 @@ class Curl implements HttpAdapter, StreamInterface
         if (is_resource($this->curl)) {
             curl_close($this->curl);
         }
-        $this->curl         = null;
+        $this->curl = null;
         $this->connectedTo = array(null, null);
     }
 
@@ -496,6 +499,7 @@ class Curl implements HttpAdapter, StreamInterface
     public function setOutputStream($stream)
     {
         $this->outputStream = $stream;
+
         return $this;
     }
 
@@ -509,6 +513,7 @@ class Curl implements HttpAdapter, StreamInterface
     public function readHeader($curl, $header)
     {
         $this->response .= $header;
+
         return strlen($header);
     }
 }

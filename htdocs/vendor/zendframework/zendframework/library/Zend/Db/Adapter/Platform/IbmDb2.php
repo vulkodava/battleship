@@ -30,7 +30,7 @@ class IbmDb2 implements PlatformInterface
     {
         if (isset($options['quote_identifiers'])
             && ($options['quote_identifiers'] == false
-            || $options['quote_identifiers'] === 'false')
+                || $options['quote_identifiers'] === 'false')
         ) {
             $this->quoteIdentifiers = false;
         }
@@ -71,6 +71,7 @@ class IbmDb2 implements PlatformInterface
         if ($this->quoteIdentifiers === false) {
             return $identifier;
         }
+
         return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
     }
 
@@ -89,6 +90,7 @@ class IbmDb2 implements PlatformInterface
         if (is_array($identifierChain)) {
             $identifierChain = implode('"' . $this->identifierSeparator . '"', $identifierChain);
         }
+
         return '"' . $identifierChain . '"';
     }
 
@@ -117,6 +119,7 @@ class IbmDb2 implements PlatformInterface
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
             . 'can introduce security vulnerabilities in a production environment.'
         );
+
         return '\'' . str_replace("'", "''", $value) . '\'';
     }
 
@@ -133,6 +136,7 @@ class IbmDb2 implements PlatformInterface
         if (function_exists('db2_escape_string')) {
             return '\'' . db2_escape_string($value) . '\'';
         }
+
         return '\'' . str_replace("'", "''", $value) . '\'';
     }
 
@@ -152,6 +156,7 @@ class IbmDb2 implements PlatformInterface
         do {
             $valueList[key($valueList)] = $this->quoteValue($value);
         } while ($value = next($valueList));
+
         return implode(', ', $valueList);
     }
 

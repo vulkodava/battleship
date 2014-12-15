@@ -61,6 +61,7 @@ class Security
             if (substr_count($errstr, 'DOMDocument::loadXML()') > 0) {
                 return true;
             }
+
             return false;
         }, E_WARNING);
         $result = $dom->loadXml($xml, LIBXML_NONET);
@@ -92,8 +93,10 @@ class Security
             if (!$result instanceof SimpleXMLElement) {
                 return false;
             }
+
             return $result;
         }
+
         return $dom;
     }
 
@@ -112,6 +115,7 @@ class Security
                 "The file $file specified doesn't exist"
             );
         }
+
         return self::scan(file_get_contents($file), $dom);
     }
 
@@ -125,6 +129,7 @@ class Security
         if (substr(php_sapi_name(), 0, 3) === 'fpm') {
             return true;
         }
+
         return false;
     }
 }

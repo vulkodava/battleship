@@ -43,7 +43,9 @@ class PostgreSqlSchemaManager extends AbstractSchemaManager
     {
         $rows = $this->_conn->fetchAll("SELECT nspname as schema_name FROM pg_namespace WHERE nspname !~ '^pg_.*' and nspname != 'information_schema'");
 
-        return array_map(function($v) { return $v['schema_name']; }, $rows);
+        return array_map(function ($v) {
+                return $v['schema_name'];
+            }, $rows);
     }
 
     /**
@@ -122,8 +124,8 @@ class PostgreSqlSchemaManager extends AbstractSchemaManager
         }
 
         return new ForeignKeyConstraint(
-                $localColumns, $foreignTable, $foreignColumns, $tableForeignKey['conname'],
-                array('onUpdate' => $onUpdate, 'onDelete' => $onDelete)
+            $localColumns, $foreignTable, $foreignColumns, $tableForeignKey['conname'],
+            array('onUpdate' => $onUpdate, 'onDelete' => $onDelete)
         );
     }
 
@@ -215,9 +217,9 @@ class PostgreSqlSchemaManager extends AbstractSchemaManager
      * {@inheritdoc}
      *
      * @license New BSD License
-     * @link http://ezcomponents.org/docs/api/trunk/DatabaseSchema/ezcDbSchemaPgsqlReader.html
+     * @link    http://ezcomponents.org/docs/api/trunk/DatabaseSchema/ezcDbSchemaPgsqlReader.html
      */
-    protected function _getPortableTableIndexesList($tableIndexes, $tableName=null)
+    protected function _getPortableTableIndexesList($tableIndexes, $tableName = null)
     {
         $buffer = array();
         foreach ($tableIndexes as $row) {
@@ -305,7 +307,7 @@ class PostgreSqlSchemaManager extends AbstractSchemaManager
         if ($length == '-1' && isset($tableColumn['atttypmod'])) {
             $length = $tableColumn['atttypmod'] - 4;
         }
-        if ((int) $length <= 0) {
+        if ((int)$length <= 0) {
             $length = null;
         }
         $fixed = null;
@@ -390,16 +392,16 @@ class PostgreSqlSchemaManager extends AbstractSchemaManager
         }
 
         $options = array(
-            'length'        => $length,
-            'notnull'       => (bool) $tableColumn['isnotnull'],
-            'default'       => $tableColumn['default'],
-            'primary'       => (bool) ($tableColumn['pri'] == 't'),
-            'precision'     => $precision,
-            'scale'         => $scale,
-            'fixed'         => $fixed,
-            'unsigned'      => false,
+            'length' => $length,
+            'notnull' => (bool)$tableColumn['isnotnull'],
+            'default' => $tableColumn['default'],
+            'primary' => (bool)($tableColumn['pri'] == 't'),
+            'precision' => $precision,
+            'scale' => $scale,
+            'fixed' => $fixed,
+            'unsigned' => false,
             'autoincrement' => $autoincrement,
-            'comment'       => $tableColumn['comment'],
+            'comment' => $tableColumn['comment'],
         );
 
         return new Column($tableColumn['field'], \Doctrine\DBAL\Types\Type::getType($type), $options);

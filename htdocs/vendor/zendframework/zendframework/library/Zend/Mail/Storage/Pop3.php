@@ -17,6 +17,7 @@ class Pop3 extends AbstractStorage
 {
     /**
      * protocol handler
+     *
      * @var null|\Zend\Mail\Protocol\Pop3
      */
     protected $protocol;
@@ -30,10 +31,11 @@ class Pop3 extends AbstractStorage
      */
     public function countMessages()
     {
-        $count  = 0; // "Declare" variable before first usage.
+        $count = 0; // "Declare" variable before first usage.
         $octets = 0; // "Declare" variable since it's passed by reference
         $this->protocol->status($count, $octets);
-        return (int) $count;
+
+        return (int)$count;
     }
 
     /**
@@ -46,6 +48,7 @@ class Pop3 extends AbstractStorage
     public function getSize($id = 0)
     {
         $id = $id ? $id : null;
+
         return $this->protocol->getList($id);
     }
 
@@ -62,7 +65,7 @@ class Pop3 extends AbstractStorage
         $message = $this->protocol->top($id, $bodyLines, true);
 
         return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $message,
-                                              'noToplines' => $bodyLines < 1));
+            'noToplines' => $bodyLines < 1));
     }
 
     /*
@@ -104,8 +107,9 @@ class Pop3 extends AbstractStorage
         $content = $this->protocol->retrieve($id);
         // TODO: find a way to avoid decoding the headers
         $headers = null; // "Declare" variable since it's passed by reference
-        $body    = null; // "Declare" variable before first usage.
+        $body = null; // "Declare" variable before first usage.
         Mime\Decode::splitMessage($content, $headers, $body);
+
         return $body;
     }
 
@@ -125,15 +129,16 @@ class Pop3 extends AbstractStorage
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object) $params;
+            $params = (object)$params;
         }
 
         $this->has['fetchPart'] = false;
-        $this->has['top']       = null;
-        $this->has['uniqueid']  = null;
+        $this->has['top'] = null;
+        $this->has['uniqueid'] = null;
 
         if ($params instanceof Protocol\Pop3) {
             $this->protocol = $params;
+
             return;
         }
 
@@ -141,10 +146,10 @@ class Pop3 extends AbstractStorage
             throw new Exception\InvalidArgumentException('need at least user in params');
         }
 
-        $host     = isset($params->host)     ? $params->host     : 'localhost';
+        $host = isset($params->host) ? $params->host : 'localhost';
         $password = isset($params->password) ? $params->password : '';
-        $port     = isset($params->port)     ? $params->port     : null;
-        $ssl      = isset($params->ssl)      ? $params->ssl      : false;
+        $port = isset($params->port) ? $params->port : null;
+        $ssl = isset($params->ssl) ? $params->ssl : false;
 
         $this->protocol = new Protocol\Pop3();
         $this->protocol->connect($host, $port, $ssl);
@@ -203,6 +208,7 @@ class Pop3 extends AbstractStorage
                 return array();
             }
             $range = range(1, $count);
+
             return array_combine($range, $range);
         }
 
@@ -260,6 +266,7 @@ class Pop3 extends AbstractStorage
                 }
             }
             $this->has['top'] = $this->protocol->hasTop;
+
             return $this->protocol->hasTop;
         }
 
@@ -271,6 +278,7 @@ class Pop3 extends AbstractStorage
                 // ignoring error
             }
             $this->has['uniqueid'] = $id ? true : false;
+
             return $this->has['uniqueid'];
         }
 

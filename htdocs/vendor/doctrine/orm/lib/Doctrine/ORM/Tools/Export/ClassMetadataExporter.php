@@ -58,7 +58,7 @@ class ClassMetadataExporter
     /**
      * Gets an exporter driver instance.
      *
-     * @param string      $type The type to get (yml, xml, etc.).
+     * @param string $type      The type to get (yml, xml, etc.).
      * @param string|null $dest The directory where the exporter will export to.
      *
      * @return Driver\AbstractExporter
@@ -67,7 +67,7 @@ class ClassMetadataExporter
      */
     public function getExporter($type, $dest = null)
     {
-        if ( ! isset(self::$_exporterDrivers[$type])) {
+        if (!isset(self::$_exporterDrivers[$type])) {
             throw ExportException::invalidExporterDriverType($type);
         }
 

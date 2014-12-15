@@ -36,7 +36,7 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
     {
         $acceptEncodingHeader = new AcceptEncoding();
         $acceptEncodingHeader->addEncoding('compress', 0.5)
-                             ->addEncoding('gzip', 1);
+            ->addEncoding('gzip', 1);
 
         $this->assertEquals('Accept-Encoding: compress;q=0.5, gzip', $acceptEncodingHeader->toString());
     }
@@ -52,7 +52,7 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
 
     public function testPrioritizesValuesBasedOnQParameter()
     {
-        $header   = AcceptEncoding::fromString('Accept-Encoding: compress;q=0.8,gzip,*;q=0.4');
+        $header = AcceptEncoding::fromString('Accept-Encoding: compress;q=0.8,gzip,*;q=0.4');
         $expected = array(
             'gzip',
             'compress',
@@ -69,7 +69,7 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
     {
         $acceptHeader = new AcceptEncoding();
         $acceptHeader->addEncoding('compress', 0.8)
-                     ->addEncoding('*', 0.4);
+            ->addEncoding('*', 0.4);
 
         $this->assertTrue($acceptHeader->hasEncoding('compress'));
         $this->assertTrue($acceptHeader->hasEncoding('gzip'));

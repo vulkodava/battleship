@@ -42,6 +42,7 @@ abstract class AbstractAnnotationsListener extends AbstractListenerAggregate
             if (!$annotation instanceof Name) {
                 continue;
             }
+
             return $annotation->getName();
         }
 

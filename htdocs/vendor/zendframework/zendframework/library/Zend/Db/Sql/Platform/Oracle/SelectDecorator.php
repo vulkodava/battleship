@@ -75,6 +75,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         unset($this->specifications[self::OFFSET]);
 
         $this->specifications['LIMITOFFSET'] = null;
+
         return parent::getSqlString($platform);
     }
 
@@ -127,16 +128,16 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             }
         } else {
             if ($this->limit === null) {
-                array_push($sqls, ') b ) WHERE b_rownum > ('. (int) $this->offset. ')'
+                array_push($sqls, ') b ) WHERE b_rownum > (' . (int)$this->offset . ')'
                 );
             } else {
                 array_push($sqls, ') b WHERE rownum <= ('
-                        . (int) $this->offset
-                        . '+'
-                        . (int) $this->limit
-                        . ')) WHERE b_rownum >= ('
-                        . (int) $this->offset
-                        . ' + 1)'
+                    . (int)$this->offset
+                    . '+'
+                    . (int)$this->limit
+                    . ')) WHERE b_rownum >= ('
+                    . (int)$this->offset
+                    . ' + 1)'
                 );
             }
         }

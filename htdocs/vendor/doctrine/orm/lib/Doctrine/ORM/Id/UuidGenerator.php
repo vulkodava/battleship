@@ -24,7 +24,7 @@ use Doctrine\ORM\EntityManager;
 /**
  * Represents an ID generator that uses the database UUID expression
  *
- * @since 2.3
+ * @since  2.3
  * @author Maarten de Keizer <m.de.keizer@markei.nl>
  */
 class UuidGenerator extends AbstractIdGenerator
@@ -32,8 +32,8 @@ class UuidGenerator extends AbstractIdGenerator
     /**
      * Generates an ID for the given entity.
      *
-     * @param EntityManager $em     The EntityManager to use.
-     * @param object        $entity
+     * @param EntityManager $em The EntityManager to use.
+     * @param object $entity
      *
      * @return string The generated value.
      *
@@ -43,6 +43,7 @@ class UuidGenerator extends AbstractIdGenerator
     {
         $conn = $em->getConnection();
         $sql = 'SELECT ' . $conn->getDatabasePlatform()->getGuidExpression();
+
         return $conn->query($sql)->fetchColumn(0);
     }
 }

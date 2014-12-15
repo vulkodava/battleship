@@ -26,7 +26,7 @@ use Doctrine\DBAL\Driver\Statement;
 /**
  * The OCI8 implementation of the Statement interface.
  *
- * @since 2.0
+ * @since  2.0
  * @author Roman Borschel <roman@code-factory.org>
  */
 class OCI8Statement implements \IteratorAggregate, Statement
@@ -74,8 +74,8 @@ class OCI8Statement implements \IteratorAggregate, Statement
     /**
      * Creates a new OCI8Statement that uses the given connection handle and SQL statement.
      *
-     * @param resource                                  $dbh       The connection handle.
-     * @param string                                    $statement The SQL statement.
+     * @param resource $dbh     The connection handle.
+     * @param string $statement The SQL statement.
      * @param \Doctrine\DBAL\Driver\OCI8\OCI8Connection $conn
      */
     public function __construct($dbh, $statement, OCI8Connection $conn)
@@ -118,11 +118,11 @@ class OCI8Statement implements \IteratorAggregate, Statement
                 $paramMap[$count] = ":param$count";
                 $len = strlen($paramMap[$count]);
                 $statement = substr_replace($statement, ":param$count", $i, 1);
-                $i += $len-1; // jump ahead
+                $i += $len - 1; // jump ahead
                 $stmtLen = strlen($statement); // adjust statement length
                 ++$count;
             } else if ($statement[$i] == "'" || $statement[$i] == '"') {
-                $inLiteral = ! $inLiteral; // switch state!
+                $inLiteral = !$inLiteral; // switch state!
             }
         }
 
@@ -210,7 +210,7 @@ class OCI8Statement implements \IteratorAggregate, Statement
         }
 
         $ret = @oci_execute($this->_sth, $this->_conn->getExecuteMode());
-        if ( ! $ret) {
+        if (!$ret) {
             throw OCI8Exception::fromErrorInfo($this->errorInfo());
         }
 
@@ -243,7 +243,7 @@ class OCI8Statement implements \IteratorAggregate, Statement
     public function fetch($fetchMode = null)
     {
         $fetchMode = $fetchMode ?: $this->_defaultFetchMode;
-        if ( ! isset(self::$fetchModeMap[$fetchMode])) {
+        if (!isset(self::$fetchModeMap[$fetchMode])) {
             throw new \InvalidArgumentException("Invalid fetch style: " . $fetchMode);
         }
 
@@ -256,7 +256,7 @@ class OCI8Statement implements \IteratorAggregate, Statement
     public function fetchAll($fetchMode = null)
     {
         $fetchMode = $fetchMode ?: $this->_defaultFetchMode;
-        if ( ! isset(self::$fetchModeMap[$fetchMode])) {
+        if (!isset(self::$fetchModeMap[$fetchMode])) {
             throw new \InvalidArgumentException("Invalid fetch style: " . $fetchMode);
         }
 
@@ -272,7 +272,7 @@ class OCI8Statement implements \IteratorAggregate, Statement
             }
 
             oci_fetch_all($this->_sth, $result, 0, -1,
-                    self::$fetchModeMap[$fetchMode] | OCI_RETURN_NULLS | $fetchStructure | OCI_RETURN_LOBS);
+                self::$fetchModeMap[$fetchMode] | OCI_RETURN_NULLS | $fetchStructure | OCI_RETURN_LOBS);
 
             if ($fetchMode == PDO::FETCH_COLUMN) {
                 $result = $result[0];

@@ -71,8 +71,8 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $response = $dom->appendChild($dom->createElement('methodResponse'));
-        $fault  = $response->appendChild($dom->createElement('fault'));
-        $value  = $fault->appendChild($dom->createElement('value'));
+        $fault = $response->appendChild($dom->createElement('fault'));
+        $value = $fault->appendChild($dom->createElement('value'));
         $struct = $value->appendChild($dom->createElement('struct'));
 
         $member1 = $struct->appendChild($dom->createElement('member'));
@@ -92,8 +92,8 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $response = $dom->appendChild($dom->createElement('methodResponse'));
-        $fault  = $response->appendChild($dom->createElement('fault'));
-        $value  = $fault->appendChild($dom->createElement('value'));
+        $fault = $response->appendChild($dom->createElement('fault'));
+        $value = $fault->appendChild($dom->createElement('value'));
         $struct = $value->appendChild($dom->createElement('struct'));
 
         $member1 = $struct->appendChild($dom->createElement('member'));
@@ -124,19 +124,19 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_fault->loadXml('<wellformedButInvalid/>'));
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                . '<member><name>faultString</name><value><string>str</string></value></member>'
-                . '</struct></value></fault></methodResponse>');
+            . '<member><name>faultString</name><value><string>str</string></value></member>'
+            . '</struct></value></fault></methodResponse>');
         $this->assertSame(404, $this->_fault->getCode(), 'If no fault code is given, use 404 as a default');
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                . '<member><name>faultCode</name><value><int>610</int></value></member>'
-                . '</struct></value></fault></methodResponse>');
+            . '<member><name>faultCode</name><value><int>610</int></value></member>'
+            . '</struct></value></fault></methodResponse>');
         $this->assertSame(
             'Invalid method class', $this->_fault->getMessage(), 'If empty fault string is given, resolve the code');
 
         $this->_fault->loadXml('<methodResponse><fault><value><struct>'
-                . '<member><name>faultCode</name><value><int>1234</int></value></member>'
-                . '</struct></value></fault></methodResponse>');
+            . '<member><name>faultCode</name><value><int>1234</int></value></member>'
+            . '</struct></value></fault></methodResponse>');
         $this->assertSame(
             'Unknown Error',
             $this->_fault->getMessage(),
@@ -198,13 +198,13 @@ class FaultTest extends \PHPUnit_Framework_TestCase
             $count++;
             $this->assertTrue($member->name ? true : false, $xml);
             $this->assertTrue($member->value ? true : false, $xml);
-            if ('faultCode' == (string) $member->name) {
+            if ('faultCode' == (string)$member->name) {
                 $this->assertTrue($member->value->int ? true : false, $xml);
-                $this->assertEquals(1000, (int) $member->value->int, $xml);
+                $this->assertEquals(1000, (int)$member->value->int, $xml);
             }
-            if ('faultString' == (string) $member->name) {
+            if ('faultString' == (string)$member->name) {
                 $this->assertTrue($member->value->string ? true : false, $xml);
-                $this->assertEquals('Fault message', (string) $member->value->string, $xml);
+                $this->assertEquals('Fault message', (string)$member->value->string, $xml);
             }
         }
 

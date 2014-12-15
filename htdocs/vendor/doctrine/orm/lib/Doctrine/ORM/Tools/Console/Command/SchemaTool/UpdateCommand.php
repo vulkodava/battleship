@@ -50,25 +50,25 @@ class UpdateCommand extends AbstractCommand
     protected function configure()
     {
         $this
-        ->setName($this->name)
-        ->setDescription(
-            'Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata.'
-        )
-        ->setDefinition(array(
-            new InputOption(
-                'complete', null, InputOption::VALUE_NONE,
-                'If defined, all assets of the database which are not relevant to the current metadata will be dropped.'
-            ),
+            ->setName($this->name)
+            ->setDescription(
+                'Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata.'
+            )
+            ->setDefinition(array(
+                new InputOption(
+                    'complete', null, InputOption::VALUE_NONE,
+                    'If defined, all assets of the database which are not relevant to the current metadata will be dropped.'
+                ),
 
-            new InputOption(
-                'dump-sql', null, InputOption::VALUE_NONE,
-                'Dumps the generated SQL statements to the screen (does not execute them).'
-            ),
-            new InputOption(
-                'force', null, InputOption::VALUE_NONE,
-                'Causes the generated SQL statements to be physically executed against your database.'
-            ),
-        ));
+                new InputOption(
+                    'dump-sql', null, InputOption::VALUE_NONE,
+                    'Dumps the generated SQL statements to the screen (does not execute them).'
+                ),
+                new InputOption(
+                    'force', null, InputOption::VALUE_NONE,
+                    'Causes the generated SQL statements to be physically executed against your database.'
+                ),
+            ));
 
         $this->setHelp(<<<EOT
 The <info>%command.name%</info> command generates the SQL needed to
@@ -109,7 +109,7 @@ EOT
     protected function executeSchemaCommand(InputInterface $input, OutputInterface $output, SchemaTool $schemaTool, array $metadatas)
     {
         // Defining if update is complete or not (--complete not defined means $saveMode = true)
-        $saveMode = ! $input->getOption('complete');
+        $saveMode = !$input->getOption('complete');
 
         $sqls = $schemaTool->getUpdateSchemaSql($metadatas, $saveMode);
 
@@ -120,16 +120,16 @@ EOT
         }
 
         $dumpSql = true === $input->getOption('dump-sql');
-        $force   = true === $input->getOption('force');
+        $force = true === $input->getOption('force');
 
         if ($dumpSql) {
             $output->writeln(implode(';' . PHP_EOL, $sqls) . ';');
         }
 
         if ($force) {
-        	if ($dumpSql) {
+            if ($dumpSql) {
                 $output->writeln('');
-        	}
+            }
             $output->writeln('Updating database schema...');
             $schemaTool->updateSchema($metadatas, $saveMode);
             $output->writeln(sprintf('Database schema updated successfully! "<info>%s</info>" queries were executed', count($sqls)));

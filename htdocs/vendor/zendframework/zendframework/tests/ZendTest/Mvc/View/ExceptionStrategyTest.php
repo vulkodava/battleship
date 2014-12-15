@@ -70,9 +70,9 @@ class ExceptionStrategyTest extends TestCase
     public function testCatchesApplicationExceptions()
     {
         $exception = new \Exception;
-        $event     = new MvcEvent();
+        $event = new MvcEvent();
         $event->setParam('exception', $exception)
-              ->setError(Application::ERROR_EXCEPTION);
+            ->setError(Application::ERROR_EXCEPTION);
         $this->strategy->prepareExceptionViewModel($event);
 
         $response = $event->getResponse();
@@ -94,9 +94,9 @@ class ExceptionStrategyTest extends TestCase
     public function testCatchesUnknownErrorTypes()
     {
         $exception = new \Exception;
-        $event     = new MvcEvent();
+        $event = new MvcEvent();
         $event->setParam('exception', $exception)
-              ->setError('custom_error');
+            ->setError('custom_error');
         $this->strategy->prepareExceptionViewModel($event);
 
         $response = $event->getResponse();
@@ -140,7 +140,7 @@ class ExceptionStrategyTest extends TestCase
 
         $expectedCallback = array($this->strategy, 'prepareExceptionViewModel');
         $expectedPriority = 1;
-        $found            = false;
+        $found = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
             if ($callback === $expectedCallback) {

@@ -18,8 +18,8 @@ class NumberParse extends AbstractLocale
 {
     protected $options = array(
         'locale' => null,
-        'style'  => NumberFormatter::DEFAULT_STYLE,
-        'type'   => NumberFormatter::TYPE_DOUBLE
+        'style' => NumberFormatter::DEFAULT_STYLE,
+        'type' => NumberFormatter::TYPE_DOUBLE
     );
 
     /**
@@ -29,14 +29,15 @@ class NumberParse extends AbstractLocale
 
     /**
      * @param array|Traversable|string|null $localeOrOptions
-     * @param int  $style
-     * @param int  $type
+     * @param int $style
+     * @param int $type
      */
     public function __construct(
         $localeOrOptions = null,
         $style = NumberFormatter::DEFAULT_STYLE,
         $type = NumberFormatter::TYPE_DOUBLE
-    ) {
+    )
+    {
         parent::__construct();
         if ($localeOrOptions !== null) {
             if ($localeOrOptions instanceof Traversable) {
@@ -61,6 +62,7 @@ class NumberParse extends AbstractLocale
     {
         $this->options['locale'] = $locale;
         $this->formatter = null;
+
         return $this;
     }
 
@@ -70,8 +72,9 @@ class NumberParse extends AbstractLocale
      */
     public function setStyle($style)
     {
-        $this->options['style'] = (int) $style;
+        $this->options['style'] = (int)$style;
         $this->formatter = null;
+
         return $this;
     }
 
@@ -89,7 +92,8 @@ class NumberParse extends AbstractLocale
      */
     public function setType($type)
     {
-        $this->options['type'] = (int) $type;
+        $this->options['type'] = (int)$type;
+
         return $this;
     }
 
@@ -108,6 +112,7 @@ class NumberParse extends AbstractLocale
     public function setFormatter(NumberFormatter $formatter)
     {
         $this->formatter = $formatter;
+
         return $this;
     }
 

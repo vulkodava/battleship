@@ -75,13 +75,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Callback(array($this, 'objectCallback'));
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 
     public function testCanAcceptContextWithoutOptions()
     {
-        $value     = 'bar';
-        $context   = array('foo' => 'bar', 'bar' => 'baz');
+        $value = 'bar';
+        $context = array('foo' => 'bar', 'bar' => 'baz');
         $validator = new Callback(function ($v, $c) use ($value, $context) {
             return (($value == $v) && ($context == $c));
         });
@@ -90,9 +90,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testCanAcceptContextWithOptions()
     {
-        $value     = 'bar';
-        $context   = array('foo' => 'bar', 'bar' => 'baz');
-        $options   = array('baz' => 'bat');
+        $value = 'bar';
+        $context = array('foo' => 'bar', 'bar' => 'baz');
+        $options = array('baz' => 'bat');
         $validator = new Callback(function ($v, $c, $baz) use ($value, $context, $options) {
             return (($value == $v) && ($context == $c) && ($options['baz'] == $baz));
         });
@@ -114,6 +114,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $args = func_get_args();
         $this->assertContains('something', $args);
+
         return $args;
     }
 }

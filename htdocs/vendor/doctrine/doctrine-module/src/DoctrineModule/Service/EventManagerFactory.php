@@ -36,7 +36,7 @@ class EventManagerFactory extends AbstractFactory
     public function createService(ServiceLocatorInterface $sl)
     {
         /** @var $options \DoctrineModule\Options\EventManager */
-        $options      = $this->getOptions($sl, 'eventmanager');
+        $options = $this->getOptions($sl, 'eventmanager');
         $eventManager = new EventManager();
 
         foreach ($options->getSubscribers() as $subscriberName) {

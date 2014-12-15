@@ -11,6 +11,7 @@ use Doctrine\Tests\Models\CMS\CmsUser;
  * The test considers two possible cases:
  *  a) __initialized__ = true and no identifier set in proxy
  *  b) __initialized__ = false and identifier set in proxy and in property
+ *
  * @todo All other cases would cause lazy loading
  */
 class ProxiesLikeEntitiesTest extends \Doctrine\Tests\OrmFunctionalTestCase

@@ -21,7 +21,7 @@ class DDC1719Test extends \Doctrine\Tests\OrmFunctionalTestCase
             $this->_schemaTool->createSchema(array(
                 $this->_em->getClassMetadata(self::CLASS_NAME),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -36,12 +36,12 @@ class DDC1719Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
         $this->_em->clear();
 
-        $e1Id   = $e1->id;
-        $e2Id   = $e2->id;
+        $e1Id = $e1->id;
+        $e2Id = $e2->id;
 
         // Retrieve
-        $e1     = $this->_em->find(self::CLASS_NAME, $e1Id);
-        $e2     = $this->_em->find(self::CLASS_NAME, $e2Id);
+        $e1 = $this->_em->find(self::CLASS_NAME, $e1Id);
+        $e2 = $this->_em->find(self::CLASS_NAME, $e2Id);
 
         $this->assertInstanceOf(self::CLASS_NAME, $e1);
         $this->assertInstanceOf(self::CLASS_NAME, $e2);

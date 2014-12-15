@@ -31,6 +31,7 @@ class ClassMethodsTitleCase
     public function setFooBar($value)
     {
         $this->FooBar = $value;
+
         return $this;
     }
 
@@ -42,6 +43,7 @@ class ClassMethodsTitleCase
     public function setFooBarBaz($value)
     {
         $this->FooBarBaz = $value;
+
         return $this;
     }
 
@@ -53,6 +55,7 @@ class ClassMethodsTitleCase
     public function setIsFoo($IsFoo)
     {
         $this->IsFoo = $IsFoo;
+
         return $this;
     }
 
@@ -64,6 +67,7 @@ class ClassMethodsTitleCase
     public function setIsBar($IsBar)
     {
         $this->IsBar = $IsBar;
+
         return $this;
     }
 
@@ -80,6 +84,7 @@ class ClassMethodsTitleCase
     public function setHasFoo($HasFoo)
     {
         $this->HasFoo = $HasFoo;
+
         return $this;
     }
 

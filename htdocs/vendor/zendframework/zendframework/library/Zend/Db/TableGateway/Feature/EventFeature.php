@@ -39,10 +39,11 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
     public function __construct(
         EventManagerInterface $eventManager = null,
         EventFeature\TableGatewayEvent $tableGatewayEvent = null
-    ) {
+    )
+    {
         $this->eventManager = ($eventManager instanceof EventManagerInterface)
-                            ? $eventManager
-                            : new EventManager;
+            ? $eventManager
+            : new EventManager;
 
         $this->eventManager->addIdentifiers(array(
             'Zend\Db\TableGateway\TableGateway',

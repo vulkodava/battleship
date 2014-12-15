@@ -38,6 +38,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
         foreach (get_object_vars($this->createTable) as $name => $value) {
             $this->{$name} = $value;
         }
+
         return parent::getSqlString($platform);
     }
 
@@ -46,7 +47,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
         $sqls = array();
         foreach ($this->columns as $i => $column) {
             $stmtContainer = $this->processExpression($column, $platform);
-            $sql           = $stmtContainer->getSql();
+            $sql = $stmtContainer->getSql();
             $columnOptions = $column->getOptions();
 
             foreach ($columnOptions as $coName => $coValue) {
@@ -81,6 +82,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
             $stmtContainer->setSql($sql);
             $sqls[$i] = $stmtContainer;
         }
+
         return array($sqls);
     }
 }

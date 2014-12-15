@@ -31,10 +31,10 @@ use Doctrine\Common\EventArgs;
  */
 class ListenersInvoker
 {
-    const INVOKE_NONE       = 0;
-    const INVOKE_LISTENERS  = 1;
-    const INVOKE_CALLBACKS  = 2;
-    const INVOKE_MANAGER    = 4;
+    const INVOKE_NONE = 0;
+    const INVOKE_LISTENERS = 1;
+    const INVOKE_CALLBACKS = 2;
+    const INVOKE_MANAGER = 4;
 
     /**
      * @var \Doctrine\ORM\Mapping\EntityListenerResolver The Entity listener resolver.
@@ -56,7 +56,7 @@ class ListenersInvoker
     public function __construct(EntityManager $em)
     {
         $this->eventManager = $em->getEventManager();
-        $this->resolver     = $em->getConfiguration()->getEntityListenerResolver();
+        $this->resolver = $em->getConfiguration()->getEntityListenerResolver();
     }
 
     /**
@@ -97,23 +97,23 @@ class ListenersInvoker
      */
     public function invoke(ClassMetadata $metadata, $eventName, $entity, EventArgs $event, $invoke)
     {
-        if($invoke & self::INVOKE_CALLBACKS) {
+        if ($invoke & self::INVOKE_CALLBACKS) {
             foreach ($metadata->lifecycleCallbacks[$eventName] as $callback) {
                 $entity->$callback($event);
             }
         }
 
-        if($invoke & self::INVOKE_LISTENERS) {
+        if ($invoke & self::INVOKE_LISTENERS) {
             foreach ($metadata->entityListeners[$eventName] as $listener) {
-                $class      = $listener['class'];
-                $method     = $listener['method'];
-                $instance   = $this->resolver->resolve($class);
+                $class = $listener['class'];
+                $method = $listener['method'];
+                $instance = $this->resolver->resolve($class);
 
                 $instance->$method($entity, $event);
             }
         }
 
-        if($invoke & self::INVOKE_MANAGER) {
+        if ($invoke & self::INVOKE_MANAGER) {
             $this->eventManager->dispatchEvent($eventName, $event);
         }
     }

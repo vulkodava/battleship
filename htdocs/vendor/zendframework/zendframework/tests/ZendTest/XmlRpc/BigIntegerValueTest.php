@@ -69,7 +69,7 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-6445
+     * @group        ZF-6445
      * @dataProvider \ZendTest\XmlRpc\TestProvider::provideGenerators
      */
     public function testMarschalBigIntegerFromXmlRpc(Generator $generator)
@@ -91,7 +91,7 @@ class BigIntegerValueTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-6445
+     * @group        ZF-6445
      * @dataProvider \ZendTest\XmlRpc\TestProvider::provideGenerators
      */
     public function testMarschalBigIntegerFromApacheXmlRpc(Generator $generator)

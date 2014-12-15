@@ -43,12 +43,15 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
             constant('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') === false
         ) {
             $this->markTestSkipped('Tests are not enabled in TestConfiguration.php');
+
             return;
         } elseif (!extension_loaded('pdo')) {
             $this->markTestSkipped('PDO extension is not loaded');
+
             return;
         } elseif (!in_array('sqlite', \PDO::getAvailableDrivers())) {
             $this->markTestSkipped('SQLite PDO driver is not available');
+
             return;
         }
 
@@ -82,7 +85,9 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateSuccessWithCallback()
     {
-        $this->_adapter = new Adapter\DbTable($this->_db, 'users', 'username', 'password', null, function ($a, $b) {return $a === $b;});
+        $this->_adapter = new Adapter\DbTable($this->_db, 'users', 'username', 'password', null, function ($a, $b) {
+                return $a === $b;
+            });
         $this->_adapter->setIdentity('my_username');
         $this->_adapter->setCredential('my_password');
         $result = $this->_adapter->authenticate();
@@ -164,7 +169,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->authenticate();
         $resultRow = $this->_adapter->getResultRowObject(array('username', 'real_name'));
         $this->assertEquals('O:8:"stdClass":2:{s:8:"username";s:11:"my_username";s:9:"real_name";s:12:"My Real Name";}',
-                            serialize($resultRow));
+            serialize($resultRow));
     }
 
     /**
@@ -177,7 +182,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->authenticate();
         $resultRow = $this->_adapter->getResultRowObject(null, 'password');
         $this->assertEquals('O:8:"stdClass":3:{s:2:"id";s:1:"1";s:8:"username";s:11:"my_username";s:9:"real_name";s:12:"My Real Name";}',
-                            serialize($resultRow));
+            serialize($resultRow));
     }
 
     /**
@@ -213,10 +218,10 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->setCredential('my_password');
         $this->_adapter->authenticate();
         $selectAfterAuth = $this->_adapter->getDbSelect();
-        $whereParts      = $selectAfterAuth->where->getPredicates();
+        $whereParts = $selectAfterAuth->where->getPredicates();
         $this->assertEquals(1, count($whereParts));
 
-        $lastWherePart  = array_pop($whereParts);
+        $lastWherePart = array_pop($whereParts);
         $expressionData = $lastWherePart[1]->getExpressionData();
         $this->assertEquals('1 = 1', $expressionData[0][0]);
     }
@@ -227,7 +232,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testCatchExceptionNoTable()
     {
         $this->setExpectedException('Zend\Authentication\Adapter\Dbtable\Exception\RuntimeException',
-                                    'A table must be supplied for');
+            'A table must be supplied for');
         $adapter = new Adapter\DbTable($this->_db);
         $adapter->authenticate();
     }
@@ -238,7 +243,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testCatchExceptionNoIdentityColumn()
     {
         $this->setExpectedException('Zend\Authentication\Adapter\Dbtable\Exception\RuntimeException',
-                                    'An identity column must be supplied for the');
+            'An identity column must be supplied for the');
         $adapter = new Adapter\DbTable($this->_db, 'users');
         $adapter->authenticate();
     }
@@ -249,7 +254,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testCatchExceptionNoCredentialColumn()
     {
         $this->setExpectedException('Zend\Authentication\Adapter\Dbtable\Exception\RuntimeException',
-                                    'A credential column must be supplied');
+            'A credential column must be supplied');
         $adapter = new Adapter\DbTable($this->_db, 'users', 'username');
         $adapter->authenticate();
     }
@@ -260,7 +265,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testCatchExceptionNoIdentity()
     {
         $this->setExpectedException('Zend\Authentication\Adapter\Dbtable\Exception\RuntimeException',
-                                    'A value for the identity was not provided prior');
+            'A value for the identity was not provided prior');
         $this->_adapter->authenticate();
     }
 
@@ -270,7 +275,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testCatchExceptionNoCredential()
     {
         $this->setExpectedException('Zend\Authentication\Adapter\Dbtable\Exception\RuntimeException',
-                                    'A credential value was not provided prior');
+            'A credential value was not provided prior');
         $this->_adapter->setIdentity('my_username');
         $this->_adapter->authenticate();
     }
@@ -281,7 +286,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testCatchExceptionBadSql()
     {
         $this->setExpectedException('Zend\Authentication\Adapter\Dbtable\Exception\RuntimeException',
-                                    'The supplied parameters to');
+            'The supplied parameters to');
         $this->_adapter->setTableName('bad_table_name');
         $this->_adapter->setIdentity('value');
         $this->_adapter->setCredential('value');
@@ -298,15 +303,15 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldNotAuthenticateWhenFlagIsNotSet()
     {
         $sqlInsert = 'INSERT INTO users (username, password, real_name) '
-                   . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
+            . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
         $this->_adapter->setIdentity('my_username')
-                       ->setCredential('my_password');
+            ->setCredential('my_password');
         $result = $this->_adapter->authenticate();
         $this->assertTrue(in_array('More than one record matches the supplied identity.',
-                                   $result->getMessages()));
+            $result->getMessages()));
         $this->assertFalse($result->isValid());
     }
 
@@ -319,16 +324,16 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldAuthenticateWhenFlagIsSet()
     {
         $sqlInsert = 'INSERT INTO users (username, password, real_name) '
-                   . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
+            . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
         $this->_adapter->setIdentity('my_username')
-                       ->setCredential('my_password')
-                       ->setAmbiguityIdentity(true);
+            ->setCredential('my_password')
+            ->setAmbiguityIdentity(true);
         $result = $this->_adapter->authenticate();
         $this->assertFalse(in_array('More than one record matches the supplied identity.',
-                                    $result->getMessages()));
+            $result->getMessages()));
         $this->assertTrue($result->isValid());
         $this->assertEquals('my_username', $result->getIdentity());
 
@@ -337,11 +342,11 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
 
         // test if user 2 can authenticate
         $this->_adapter->setIdentity('my_username')
-                       ->setCredential('my_otherpass')
-                       ->setAmbiguityIdentity(true);
+            ->setCredential('my_otherpass')
+            ->setAmbiguityIdentity(true);
         $result2 = $this->_adapter->authenticate();
         $this->assertFalse(in_array('More than one record matches the supplied identity.',
-                                    $result->getMessages()));
+            $result->getMessages()));
         $this->assertTrue($result2->isValid());
         $this->assertEquals('my_username', $result2->getIdentity());
     }
@@ -350,7 +355,7 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
     protected function _setupDbAdapter($optionalParams = array())
     {
         $params = array('driver' => 'pdo_sqlite',
-                        'dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE);
+            'dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE);
 
         if (!empty($optionalParams)) {
             $params['options'] = $optionalParams;
@@ -359,17 +364,17 @@ class CallbackCheckAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_db = new DbAdapter($params);
 
         $sqlCreate = 'CREATE TABLE IF NOT EXISTS [users] ( '
-                   . '[id] INTEGER  NOT NULL PRIMARY KEY, '
-                   . '[username] VARCHAR(50) NOT NULL, '
-                   . '[password] VARCHAR(32) NULL, '
-                   . '[real_name] VARCHAR(150) NULL)';
+            . '[id] INTEGER  NOT NULL PRIMARY KEY, '
+            . '[username] VARCHAR(50) NOT NULL, '
+            . '[password] VARCHAR(32) NULL, '
+            . '[real_name] VARCHAR(150) NULL)';
         $this->_db->query($sqlCreate, DbAdapter::QUERY_MODE_EXECUTE);
 
         $sqlDelete = 'DELETE FROM users';
         $this->_db->query($sqlDelete, DbAdapter::QUERY_MODE_EXECUTE);
 
         $sqlInsert = 'INSERT INTO users (username, password, real_name) '
-                   . 'VALUES ("my_username", "my_password", "My Real Name")';
+            . 'VALUES ("my_username", "my_password", "My Real Name")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
     }
 

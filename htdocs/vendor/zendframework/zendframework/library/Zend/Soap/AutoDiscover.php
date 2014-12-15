@@ -29,12 +29,14 @@ class AutoDiscover
 
     /**
      * Service function names
+     *
      * @var array
      */
     protected $functions = array();
 
     /**
      * Service class name
+     *
      * @var string
      */
     protected $class;
@@ -46,12 +48,14 @@ class AutoDiscover
 
     /**
      * Url where the WSDL file will be available at.
+     *
      * @var WSDL Uri
      */
     protected $uri;
 
     /**
      * soap:body operation style options
+     *
      * @var array
      */
     protected $operationBodyStyle = array(
@@ -61,6 +65,7 @@ class AutoDiscover
 
     /**
      * soap:operation style
+     *
      * @var array
      */
     protected $bindingStyle = array(
@@ -70,18 +75,21 @@ class AutoDiscover
 
     /**
      * Name of the class to handle the WSDL creation.
+     *
      * @var string
      */
     protected $wsdlClass = 'Zend\Soap\Wsdl';
 
     /**
      * Class Map of PHP to WSDL types.
+     *
      * @var array
      */
     protected $classMap = array();
 
     /**
      * Discovery strategy for types and other method details.
+     *
      * @var DiscoveryStrategy
      */
     protected $discoveryStrategy;
@@ -99,7 +107,8 @@ class AutoDiscover
         $endpointUri = null,
         $wsdlClass = null,
         array $classMap = array()
-    ) {
+    )
+    {
         $this->reflection = new Reflection();
         $this->setDiscoveryStrategy(new ReflectionDiscovery());
 
@@ -124,6 +133,7 @@ class AutoDiscover
     public function setDiscoveryStrategy(DiscoveryStrategy $discoveryStrategy)
     {
         $this->discoveryStrategy = $discoveryStrategy;
+
         return $this;
     }
 
@@ -165,6 +175,7 @@ class AutoDiscover
         }
 
         $this->classMap = $classMap;
+
         return $this;
     }
 
@@ -186,6 +197,7 @@ class AutoDiscover
         }
 
         $this->serviceName = $serviceName;
+
         return $this;
     }
 
@@ -204,6 +216,7 @@ class AutoDiscover
                 throw new Exception\RuntimeException('No service name given. Call AutoDiscover::setServiceName().');
             }
         }
+
         return $this->serviceName;
     }
 
@@ -230,6 +243,7 @@ class AutoDiscover
         }
 
         $this->uri = $uri;
+
         return $this;
     }
 
@@ -249,6 +263,7 @@ class AutoDiscover
         if (is_string($this->uri)) {
             $this->uri = Uri\UriFactory::factory($this->uri);
         }
+
         return $this->uri;
     }
 
@@ -268,6 +283,7 @@ class AutoDiscover
         }
 
         $this->wsdlClass = $wsdlClass;
+
         return $this;
     }
 
@@ -297,6 +313,7 @@ class AutoDiscover
             throw new Exception\InvalidArgumentException('Key "use" is required in Operation soap:body style.');
         }
         $this->operationBodyStyle = $operationStyle;
+
         return $this;
     }
 
@@ -316,6 +333,7 @@ class AutoDiscover
         if (isset($bindingStyle['transport'])) {
             $this->bindingStyle['transport'] = $bindingStyle['transport'];
         }
+
         return $this;
     }
 
@@ -328,6 +346,7 @@ class AutoDiscover
     public function setComplexTypeStrategy(ComplexTypeStrategy $strategy)
     {
         $this->strategy = $strategy;
+
         return $this;
     }
 
@@ -340,6 +359,7 @@ class AutoDiscover
     public function setClass($class)
     {
         $this->class = $class;
+
         return $this;
     }
 
@@ -369,6 +389,7 @@ class AutoDiscover
                 'Argument to Zend\Soap\AutoDiscover::addFunction should be string or array of strings.'
             );
         }
+
         return $this;
     }
 
@@ -393,6 +414,7 @@ class AutoDiscover
         foreach (array_unique($this->functions) as $func) {
             $methods[] = $this->reflection->reflectFunction($func);
         }
+
         return $this->_generateWsdl($methods);
     }
 
@@ -475,8 +497,8 @@ class AutoDiscover
             }
 
             $element = array(
-                'name'      => $functionName,
-                'sequence'  => $sequence
+                'name' => $functionName,
+                'sequence' => $sequence
             );
 
             // Add the wrapper element part, which must be named 'parameters'
@@ -507,8 +529,8 @@ class AutoDiscover
                 }
 
                 $element = array(
-                    'name'      => $functionName . 'Response',
-                    'sequence'  => $sequence
+                    'name' => $functionName . 'Response',
+                    'sequence' => $sequence
                 );
 
                 // Add the wrapper element part, which must be named 'parameters'

@@ -32,8 +32,8 @@ class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * @param  ServiceLocatorInterface $services
-     * @param  string                  $name
-     * @param  string                  $requestedName
+     * @param  string $name
+     * @param  string $requestedName
      * @return bool
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
@@ -47,15 +47,16 @@ class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
     }
 
     /**
-     * @param  ServiceLocatorInterface              $services
-     * @param  string                               $name
-     * @param  string                               $requestedName
+     * @param  ServiceLocatorInterface $services
+     * @param  string $name
+     * @param  string $requestedName
      * @return \Zend\Cache\Storage\StorageInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
         $config = $this->getConfig($services);
         $config = $config[$requestedName];
+
         return StorageFactory::factory($config);
     }
 
@@ -73,16 +74,19 @@ class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
 
         if (!$services->has('Config')) {
             $this->config = array();
+
             return $this->config;
         }
 
         $config = $services->get('Config');
         if (!isset($config[$this->configKey])) {
             $this->config = array();
+
             return $this->config;
         }
 
         $this->config = $config[$this->configKey];
+
         return $this->config;
     }
 }

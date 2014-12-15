@@ -62,7 +62,7 @@ class SelectStatement extends Node
 
     /**
      * @param SelectClause $selectClause
-     * @param FromClause   $fromClause
+     * @param FromClause $fromClause
      */
     public function __construct($selectClause, $fromClause)
     {

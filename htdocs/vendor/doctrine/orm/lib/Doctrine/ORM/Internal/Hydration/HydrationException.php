@@ -38,7 +38,7 @@ class HydrationException extends \Doctrine\ORM\ORMException
     public static function parentObjectOfRelationNotFound($alias, $parentAlias)
     {
         return new self("The parent object of entity result with alias '$alias' was not found."
-                . " The parent alias is '$parentAlias'.");
+            . " The parent alias is '$parentAlias'.");
     }
 
     /**
@@ -48,7 +48,7 @@ class HydrationException extends \Doctrine\ORM\ORMException
      */
     public static function emptyDiscriminatorValue($dqlAlias)
     {
-        return new self("The DQL alias '" . $dqlAlias . "' contains an entity ".
+        return new self("The DQL alias '" . $dqlAlias . "' contains an entity " .
             "of an inheritance hierarchy with an empty discriminator value. This means " .
             "that the database contains inconsistent data with an empty " .
             "discriminator value in a table row."
@@ -88,10 +88,10 @@ class HydrationException extends \Doctrine\ORM\ORMException
             $discrColumnName, $entityName, $dqlAlias
         ));
     }
-    
+
     /**
      * @param string $discrValue
-     * @param array  $discrMap
+     * @param array $discrMap
      *
      * @return HydrationException
      */

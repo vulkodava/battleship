@@ -42,7 +42,7 @@ class QueryException extends \Doctrine\ORM\ORMException
     }
 
     /**
-     * @param string          $message
+     * @param string $message
      * @param \Exception|null $previous
      *
      * @return QueryException
@@ -53,7 +53,7 @@ class QueryException extends \Doctrine\ORM\ORMException
     }
 
     /**
-     * @param string          $message
+     * @param string $message
      * @param \Exception|null $previous
      *
      * @return QueryException
@@ -107,7 +107,7 @@ class QueryException extends \Doctrine\ORM\ORMException
      */
     public static function invalidParameterFormat($value)
     {
-        return new self('Invalid parameter format, '.$value.' given, but :<name> or ?<num> expected.');
+        return new self('Invalid parameter format, ' . $value . ' given, but :<name> or ?<num> expected.');
     }
 
     /**
@@ -117,7 +117,7 @@ class QueryException extends \Doctrine\ORM\ORMException
      */
     public static function unknownParameter($key)
     {
-        return new self("Invalid parameter: token ".$key." is not defined in the query.");
+        return new self("Invalid parameter: token " . $key . " is not defined in the query.");
     }
 
     /**
@@ -158,8 +158,8 @@ class QueryException extends \Doctrine\ORM\ORMException
     public static function iterateWithFetchJoinCollectionNotAllowed($assoc)
     {
         return new self(
-            "Invalid query operation: Not allowed to iterate over fetch join collections ".
-            "in class ".$assoc['sourceEntity']." association ".$assoc['fieldName']
+            "Invalid query operation: Not allowed to iterate over fetch join collections " .
+            "in class " . $assoc['sourceEntity'] . " association " . $assoc['fieldName']
         );
     }
 
@@ -183,8 +183,8 @@ class QueryException extends \Doctrine\ORM\ORMException
     public static function overwritingJoinConditionsNotYetSupported($assoc)
     {
         return new self(
-            "Unsupported query operation: It is not yet possible to overwrite the join ".
-            "conditions in class ".$assoc['sourceEntityName']." association ".$assoc['fieldName'].". ".
+            "Unsupported query operation: It is not yet possible to overwrite the join " .
+            "conditions in class " . $assoc['sourceEntityName'] . " association " . $assoc['fieldName'] . ". " .
             "Use WITH to append additional join conditions to the association."
         );
     }
@@ -195,7 +195,7 @@ class QueryException extends \Doctrine\ORM\ORMException
     public static function associationPathInverseSideNotSupported()
     {
         return new self(
-            "A single-valued association path expression to an inverse side is not supported".
+            "A single-valued association path expression to an inverse side is not supported" .
             " in DQL queries. Use an explicit join instead."
         );
     }
@@ -219,8 +219,8 @@ class QueryException extends \Doctrine\ORM\ORMException
     public static function associationPathCompositeKeyNotSupported()
     {
         return new self(
-            "A single-valued association path expression to an entity with a composite primary ".
-            "key is not supported. Explicitly name the components of the composite primary key ".
+            "A single-valued association path expression to an entity with a composite primary " .
+            "key is not supported. Explicitly name the components of the composite primary key " .
             "in the query."
         );
     }
@@ -234,7 +234,7 @@ class QueryException extends \Doctrine\ORM\ORMException
     public static function instanceOfUnrelatedClass($className, $rootClass)
     {
         return new self("Cannot check if a child of '" . $rootClass . "' is instanceof '" . $className . "', " .
-                "inheritance hierarchy exists between these two classes.");
+            "inheritance hierarchy exists between these two classes.");
     }
 
     /**
@@ -245,7 +245,7 @@ class QueryException extends \Doctrine\ORM\ORMException
     public static function invalidQueryComponent($dqlAlias)
     {
         return new self(
-            "Invalid query component given for DQL alias '" . $dqlAlias . "', ".
+            "Invalid query component given for DQL alias '" . $dqlAlias . "', " .
             "requires 'metadata', 'parent', 'relation', 'map', 'nestingLevel' and 'token' keys."
         );
     }

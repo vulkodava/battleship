@@ -136,6 +136,7 @@ class Authentication extends AbstractOptions
     public function setObjectManager($objectManager)
     {
         $this->objectManager = $objectManager;
+
         return $this;
     }
 
@@ -154,6 +155,7 @@ class Authentication extends AbstractOptions
     public function setObjectRepository(ObjectRepository $objectRepository)
     {
         $this->objectRepository = $objectRepository;
+
         return $this;
     }
 
@@ -176,6 +178,7 @@ class Authentication extends AbstractOptions
     public function setIdentityClass($identityClass)
     {
         $this->identityClass = $identityClass;
+
         return $this;
     }
 
@@ -272,7 +275,8 @@ class Authentication extends AbstractOptions
      *
      * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata
      */
-    public function getClassMetadata() {
+    public function getClassMetadata()
+    {
 
         if ($this->classMetadata) {
             return $this->classMetadata;
@@ -285,7 +289,8 @@ class Authentication extends AbstractOptions
      *
      * @param \Doctrine\Common\Persistence\Mapping\ClassMetadata $classMetadata
      */
-    public function setClassMetadata(ClassMetadata $classMetadata) {
+    public function setClassMetadata(ClassMetadata $classMetadata)
+    {
         $this->classMetadata = $classMetadata;
     }
 
@@ -293,10 +298,12 @@ class Authentication extends AbstractOptions
      *
      * @return \Zend\Authentication\Storage\StorageInterface
      */
-    public function getStorage() {
-        if ( ! $this->storage instanceof StorageInterface){
+    public function getStorage()
+    {
+        if (!$this->storage instanceof StorageInterface) {
             $this->storage = new SessionStorage();
         }
+
         return $this->storage;
     }
 
@@ -304,7 +311,8 @@ class Authentication extends AbstractOptions
      *
      * @param \Zend\Authentication\Storage\StorageInterface $storage
      */
-    public function setStorage(StorageInterface $storage) {
+    public function setStorage(StorageInterface $storage)
+    {
         $this->storage = $storage;
     }
 }

@@ -28,7 +28,8 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $this->_originalDir = __DIR__ . '/../_files/test.maildir/';
         if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 . 'directory before enabling the maildir tests');
+                . 'directory before enabling the maildir tests');
+
             return;
         }
 
@@ -50,6 +51,7 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
 
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
@@ -345,13 +347,13 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Writable\Maildir($this->_params);
         $quotaResult = array(
-            'size'  => 2129,
+            'size' => 2129,
             'count' => 5,
             'quota' => array(
-                    'count' => 10,
-                    'L'     => 1,
-                    'size'  => 3000
-                ),
+                'count' => 10,
+                'L' => 1,
+                'size' => 3000
+            ),
             'over_quota' => false
         );
         $this->assertEquals($quotaResult, $mail->checkQuota(true));
@@ -373,13 +375,13 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mail->getQuota(true), array('size' => 3000, 'L' => 1, 'count' => 10));
 
         $quotaResult = array(
-            'size'  => 2129,
+            'size' => 2129,
             'count' => 5,
             'quota' => array(
-                    'size'  => 100,
-                    'count' => 2,
-                    'X'     => 0
-                ),
+                'size' => 100,
+                'count' => 2,
+                'X' => 0
+            ),
             'over_quota' => true
         );
         $this->assertEquals($quotaResult, $mail->checkQuota(true, true));
@@ -406,13 +408,13 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $mail->setQuota(array('size' => 100, 'count' => 2, 'X' => 0));
 
         $quotaResult = array(
-            'size'  => 2129,
+            'size' => 2129,
             'count' => 5,
             'quota' => array(
-                    'size'  => 100,
-                    'count' => 2,
-                    'X'     => 0
-                ),
+                'size' => 100,
+                'count' => 2,
+                'X' => 0
+            ),
             'over_quota' => true
         );
         $this->assertEquals($mail->checkQuota(true), $quotaResult);
@@ -428,13 +430,13 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($mail->checkQuota(false, true));
         $mail->appendMessage("Subject: test\r\n\r\n");
         $quotaResult = array(
-            'size'  => 2613,
+            'size' => 2613,
             'count' => 7,
             'quota' => array(
-                    'size'  => 3000,
-                    'count' => 6,
-                    'X'     => 0
-                ),
+                'size' => 3000,
+                'count' => 6,
+                'X' => 0
+            ),
             'over_quota' => true
         );
         $this->assertEquals($mail->checkQuota(true), $quotaResult);
@@ -470,13 +472,13 @@ class MaildirWritableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($mail->checkQuota(false, true));
         $mail->copyMessage(1, 'subfolder');
         $quotaResult = array(
-            'size'  => 2993,
+            'size' => 2993,
             'count' => 7,
             'quota' => array(
-                    'size'  => 3000,
-                    'count' => 6,
-                    'X'     => 0
-                ),
+                'size' => 3000,
+                'count' => 6,
+                'X' => 0
+            ),
             'over_quota' => true
         );
         $this->assertEquals($mail->checkQuota(true), $quotaResult);

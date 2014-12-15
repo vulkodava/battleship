@@ -16,7 +16,7 @@ use ZendTest\Stdlib\TestAsset\ClassMethodsOptionalParameters;
  * Unit tests for {@see \Zend\Stdlib\Hydrator\ClassMethods}
  *
  * @covers \Zend\Stdlib\Hydrator\ClassMethods
- * @group Zend_Stdlib
+ * @group  Zend_Stdlib
  */
 class ClassMethodsTest extends \PHPUnit_Framework_TestCase
 {

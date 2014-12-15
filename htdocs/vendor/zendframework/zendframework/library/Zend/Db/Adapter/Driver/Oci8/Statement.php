@@ -69,6 +69,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setDriver($driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
@@ -79,6 +80,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -99,6 +101,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function initialize($oci8)
     {
         $this->oci8 = $oci8;
+
         return $this;
     }
 
@@ -111,6 +114,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
@@ -123,6 +127,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -153,6 +158,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
         $this->resource = $oci8Statement;
         $this->isPrepared = true;
+
         return $this;
     }
 
@@ -207,6 +213,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->isPrepared = true;
+
         return $this;
     }
 
@@ -261,6 +268,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource);
+
         return $result;
     }
 
@@ -284,7 +292,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                     case ParameterContainer::TYPE_INTEGER:
                         $type = SQLT_INT;
                         if (is_string($value)) {
-                            $value = (int) $value;
+                            $value = (int)$value;
                         }
                         break;
                     case ParameterContainer::TYPE_BINARY:

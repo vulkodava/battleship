@@ -18,7 +18,7 @@ class DDC1655Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1655Bar'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1655Baz'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

@@ -41,6 +41,7 @@ class Response extends HttpResponse
         if (!$this->version) {
             $this->version = $this->detectVersion();
         }
+
         return $this->version;
     }
 
@@ -86,7 +87,7 @@ class Response extends HttpResponse
             return $this;
         }
 
-        $status  = $this->renderStatusLine();
+        $status = $this->renderStatusLine();
         header($status);
 
         /** @var \Zend\Http\Header\HeaderInterface $header */
@@ -99,6 +100,7 @@ class Response extends HttpResponse
         }
 
         $this->headersSent = true;
+
         return $this;
     }
 
@@ -115,6 +117,7 @@ class Response extends HttpResponse
 
         echo $this->getContent();
         $this->contentSent = true;
+
         return $this;
     }
 
@@ -126,7 +129,8 @@ class Response extends HttpResponse
     public function send()
     {
         $this->sendHeaders()
-             ->sendContent();
+            ->sendContent();
+
         return $this;
     }
 }

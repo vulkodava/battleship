@@ -24,7 +24,8 @@ use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 
 /**
- * Event Arguments used when SQL queries for renaming table columns are generated inside Doctrine\DBAL\Platform\*Platform.
+ * Event Arguments used when SQL queries for renaming table columns are generated inside
+ * Doctrine\DBAL\Platform\*Platform.
  *
  * @link   www.doctrine-project.org
  * @since  2.2
@@ -58,17 +59,17 @@ class SchemaAlterTableRenameColumnEventArgs extends SchemaEventArgs
     private $_sql = array();
 
     /**
-     * @param string                                    $oldColumnName
-     * @param \Doctrine\DBAL\Schema\Column              $column
-     * @param \Doctrine\DBAL\Schema\TableDiff           $tableDiff
+     * @param string $oldColumnName
+     * @param \Doctrine\DBAL\Schema\Column $column
+     * @param \Doctrine\DBAL\Schema\TableDiff $tableDiff
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      */
     public function __construct($oldColumnName, Column $column, TableDiff $tableDiff, AbstractPlatform $platform)
     {
         $this->_oldColumnName = $oldColumnName;
-        $this->_column        = $column;
-        $this->_tableDiff     = $tableDiff;
-        $this->_platform      = $platform;
+        $this->_column = $column;
+        $this->_tableDiff = $tableDiff;
+        $this->_platform = $platform;
     }
 
     /**

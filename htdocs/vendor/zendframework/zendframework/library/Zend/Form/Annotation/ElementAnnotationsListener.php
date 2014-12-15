@@ -98,6 +98,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $elementSpec = $e->getParam('elementSpec');
         if (isset($elementSpec['spec']['attributes'])) {
             $elementSpec['spec']['attributes'] = array_merge($elementSpec['spec']['attributes'], $annotation->getAttributes());
+
             return;
         }
 
@@ -117,13 +118,13 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
             return;
         }
 
-        $class             = $annotation->getComposedObject();
+        $class = $annotation->getComposedObject();
         $annotationManager = $e->getTarget();
-        $specification     = $annotationManager->getFormSpecification($class);
+        $specification = $annotationManager->getFormSpecification($class);
 
-        $name        = $e->getParam('name');
+        $name = $e->getParam('name');
         $elementSpec = $e->getParam('elementSpec');
-        $filterSpec  = $e->getParam('filterSpec');
+        $filterSpec = $e->getParam('filterSpec');
 
         if ($annotation->isCollection()) {
             // Compose specification as a fieldset into parent form/fieldset
@@ -205,6 +206,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         if ($annotations->hasAnnotation('Zend\Form\Annotation\Exclude')) {
             return true;
         }
+
         return false;
     }
 
@@ -342,7 +344,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
             return;
         }
 
-        $required  = (bool) $annotation->getRequired();
+        $required = (bool)$annotation->getRequired();
         $inputSpec = $e->getParam('inputSpec');
         $inputSpec['required'] = $required;
 

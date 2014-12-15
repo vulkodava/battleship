@@ -25,7 +25,7 @@ namespace Doctrine\ORM\Query;
  * the AST to influence the final output produced by the last walker.
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.0
+ * @since  2.0
  */
 class TreeWalkerChain implements TreeWalker
 {

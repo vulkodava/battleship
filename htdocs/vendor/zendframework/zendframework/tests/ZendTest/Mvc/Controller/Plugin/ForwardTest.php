@@ -58,7 +58,7 @@ class ForwardTest extends TestCase
         $mockApplication = $this->getMock('Zend\Mvc\ApplicationInterface');
         $mockApplication->expects($this->any())->method('getEventManager')->will($this->returnValue($mockEventManager));
 
-        $event   = new MvcEvent();
+        $event = new MvcEvent();
         $event->setApplication($mockApplication);
         $event->setRequest(new Request());
         $event->setResponse(new Response());
@@ -67,14 +67,15 @@ class ForwardTest extends TestCase
         $routeMatch->setMatchedRouteName('some-route');
         $event->setRouteMatch($routeMatch);
 
-        $services    = new Locator();
-        $plugins     = $this->plugins = new PluginManager();
+        $services = new Locator();
+        $plugins = $this->plugins = new PluginManager();
         $plugins->setServiceLocator($services);
 
         $controllers = $this->controllers = new ControllerManager();
         $controllers->setFactory('forward', function () use ($plugins) {
             $controller = new ForwardController();
             $controller->setPluginManager($plugins);
+
             return $controller;
         });
         $controllers->setServiceLocator($services);
@@ -112,7 +113,7 @@ class ForwardTest extends TestCase
     public function testPluginWithoutEventAwareControllerRaisesDomainException()
     {
         $controller = new UneventfulController();
-        $plugin     = new ForwardPlugin($this->controllers);
+        $plugin = new ForwardPlugin($this->controllers);
         $plugin->setController($controller);
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEventInterface');
         $plugin->dispatch('forward');
@@ -122,7 +123,7 @@ class ForwardTest extends TestCase
     {
         $controller = new SampleController();
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');
-        $plugin     = $controller->plugin('forward');
+        $plugin = $controller->plugin('forward');
     }
 
     public function testDispatchRaisesDomainExceptionIfDiscoveredControllerIsNotDispatchable()
@@ -156,10 +157,11 @@ class ForwardTest extends TestCase
     public function testNonArrayListenerDoesNotRaiseErrorWhenPluginDispatchsRequestedController()
     {
         $services = $this->plugins->getServiceLocator();
-        $events   = $services->get('EventManager');
+        $events = $services->get('EventManager');
         $sharedEvents = $this->getMock('Zend\EventManager\SharedEventManagerInterface');
         $sharedEvents->expects($this->any())->method('getListeners')->will($this->returnValue(array(
-            new CallbackHandler(function ($e) {})
+            new CallbackHandler(function ($e) {
+                })
         )));
         $events = $this->getMock('Zend\EventManager\EventManagerInterface');
         $events->expects($this->any())->method('getSharedManager')->will($this->returnValue($sharedEvents));
@@ -188,15 +190,15 @@ class ForwardTest extends TestCase
 
     public function testRouteMatchObjectRemainsSameFollowingForwardDispatch()
     {
-        $routeMatch            = $this->controller->getEvent()->getRouteMatch();
-        $matchParams           = $routeMatch->getParams();
+        $routeMatch = $this->controller->getEvent()->getRouteMatch();
+        $matchParams = $routeMatch->getParams();
         $matchMatchedRouteName = $routeMatch->getMatchedRouteName();
         $result = $this->plugin->dispatch('forward', array(
             'action' => 'test-matches',
             'param1' => 'foobar',
         ));
-        $testMatch            = $this->controller->getEvent()->getRouteMatch();
-        $testParams           = $testMatch->getParams();
+        $testMatch = $this->controller->getEvent()->getRouteMatch();
+        $testParams = $testMatch->getParams();
         $testMatchedRouteName = $testMatch->getMatchedRouteName();
 
         $this->assertSame($routeMatch, $testMatch);

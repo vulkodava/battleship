@@ -53,7 +53,7 @@ class XcacheCache extends CacheProvider
      */
     protected function doSave($id, $data, $lifeTime = 0)
     {
-        return xcache_set($id, serialize($data), (int) $lifeTime);
+        return xcache_set($id, serialize($data), (int)$lifeTime);
     }
 
     /**
@@ -98,12 +98,13 @@ class XcacheCache extends CacheProvider
         $this->checkAuthorization();
 
         $info = xcache_info(XC_TYPE_VAR, 0);
+
         return array(
-            Cache::STATS_HITS   => $info['hits'],
+            Cache::STATS_HITS => $info['hits'],
             Cache::STATS_MISSES => $info['misses'],
             Cache::STATS_UPTIME => null,
-            Cache::STATS_MEMORY_USAGE      => $info['size'],
-            Cache::STATS_MEMORY_AVAILABLE  => $info['avail'],
+            Cache::STATS_MEMORY_USAGE => $info['size'],
+            Cache::STATS_MEMORY_AVAILABLE => $info['avail'],
         );
     }
 }

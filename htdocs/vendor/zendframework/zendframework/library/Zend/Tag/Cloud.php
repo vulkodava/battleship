@@ -107,6 +107,7 @@ class Cloud
         foreach ($tags as $tag) {
             $this->appendTag($tag);
         }
+
         return $this;
     }
 
@@ -123,6 +124,7 @@ class Cloud
 
         if ($tag instanceof TaggableInterface) {
             $tags[] = $tag;
+
             return $this;
         }
 
@@ -148,6 +150,7 @@ class Cloud
     public function setItemList(ItemList $itemList)
     {
         $this->tags = $itemList;
+
         return $this;
     }
 
@@ -163,6 +166,7 @@ class Cloud
         if (null === $this->tags) {
             $this->setItemList(new ItemList());
         }
+
         return $this->tags;
     }
 
@@ -210,6 +214,7 @@ class Cloud
         if (null === $this->cloudDecorator) {
             $this->setCloudDecorator('htmlCloud');
         }
+
         return $this->cloudDecorator;
     }
 
@@ -257,6 +262,7 @@ class Cloud
         if (null === $this->tagDecorator) {
             $this->setTagDecorator('htmlTag');
         }
+
         return $this->tagDecorator;
     }
 
@@ -269,6 +275,7 @@ class Cloud
     public function setDecoratorPluginManager(Cloud\DecoratorPluginManager $decorators)
     {
         $this->decorators = $decorators;
+
         return $this;
     }
 
@@ -299,7 +306,7 @@ class Cloud
             return '';
         }
 
-        $tagsResult  = $this->getTagDecorator()->render($tags);
+        $tagsResult = $this->getTagDecorator()->render($tags);
         $cloudResult = $this->getCloudDecorator()->render($tagsResult);
 
         return $cloudResult;
@@ -314,11 +321,13 @@ class Cloud
     {
         try {
             $result = $this->render();
+
             return $result;
         } catch (\Exception $e) {
             $message = "Exception caught by tag cloud: " . $e->getMessage()
-                     . "\nStack Trace:\n" . $e->getTraceAsString();
+                . "\nStack Trace:\n" . $e->getTraceAsString();
             trigger_error($message, E_USER_WARNING);
+
             return '';
         }
     }

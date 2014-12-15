@@ -20,8 +20,8 @@ class CamelCaseToDashTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesCamelCasedWordsWithDashes()
     {
-        $string   = 'CamelCasedWords';
-        $filter   = new CamelCaseToDashFilter();
+        $string = 'CamelCasedWords';
+        $filter = new CamelCaseToDashFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

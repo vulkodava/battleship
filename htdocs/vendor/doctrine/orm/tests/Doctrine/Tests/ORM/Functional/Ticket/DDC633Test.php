@@ -16,7 +16,7 @@ class DDC633Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC633Patient'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC633Appointment'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

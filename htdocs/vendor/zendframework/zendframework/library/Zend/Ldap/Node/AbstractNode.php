@@ -20,11 +20,11 @@ use Zend\Ldap\Exception;
 abstract class AbstractNode implements ArrayAccess, Countable
 {
     protected static $systemAttributes = array('createtimestamp', 'creatorsname',
-                                               'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',
-                                               'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
-                                               'distinguishedname', 'instancetype', 'name', 'objectcategory',
-                                               'objectguid',
-                                               'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
+        'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',
+        'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
+        'distinguishedname', 'instancetype', 'name', 'objectcategory',
+        'objectguid',
+        'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
 
     /**
      * Holds the node's DN.
@@ -46,8 +46,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * Constructor is protected to enforce the use of factory methods.
      *
      * @param  \Zend\Ldap\Dn $dn
-     * @param  array         $data
-     * @param  bool       $fromDataSource
+     * @param  array $data
+     * @param  bool $fromDataSource
      */
     protected function __construct(Ldap\Dn $dn, array $data, $fromDataSource)
     {
@@ -56,7 +56,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
     }
 
     /**
-     * @param array   $data
+     * @param array $data
      * @param  bool $fromDataSource
      */
     protected function loadData(array $data, $fromDataSource)
@@ -109,6 +109,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
     public function getDn()
     {
         $dn = clone $this->_getDn();
+
         return $dn;
     }
 
@@ -190,6 +191,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
         foreach ($this->getData($includeSystemAttributes) as $name => $value) {
             $data[$name] = $this->getAttribute($name, null);
         }
+
         return $data;
     }
 
@@ -222,6 +224,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
     public function toArray($includeSystemAttributes = true)
     {
         $attributes = $this->getAttributes($includeSystemAttributes);
+
         return array_merge(array('dn' => $this->getDnString()), $attributes);
     }
 
@@ -255,6 +258,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
                     $data[$key] = $value;
                 }
             }
+
             return $data;
         }
 
@@ -270,7 +274,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * true. In this case method returns false only if the attribute name is
      * missing in the key-collection.
      *
-     * @param  string  $name
+     * @param  string $name
      * @param  bool $emptyExists
      * @return bool
      */
@@ -291,7 +295,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
     /**
      * Checks if the given value(s) exist in the attribute
      *
-     * @param  string      $attribName
+     * @param  string $attribName
      * @param  mixed|array $value
      * @return bool
      */
@@ -305,7 +309,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  string  $name
+     * @param  string $name
      * @param  int $index
      * @return mixed
      * @throws \Zend\Ldap\Exception\LdapException
@@ -324,7 +328,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  string  $name
+     * @param  string $name
      * @param  int $index
      * @return array|int
      * @throws \Zend\Ldap\Exception\LdapException
@@ -340,7 +344,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * This is an offline method.
      *
      * @param  string $name
-     * @param  mixed  $value
+     * @param  mixed $value
      * @throws \Zend\Ldap\Exception\BadMethodCallException
      */
     public function __set($name, $value)
@@ -399,7 +403,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * @param  string $name
      * @param         $value
      * @throws \Zend\Ldap\Exception\BadMethodCallException
-     * @param  mixed  $value
+     * @param  mixed $value
      * @throws \Zend\Ldap\Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)

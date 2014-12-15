@@ -52,6 +52,7 @@ class Translator implements ProcessorInterface
     public function setTranslator(ZendTranslator $translator)
     {
         $this->translator = $translator;
+
         return $this;
     }
 
@@ -70,6 +71,7 @@ class Translator implements ProcessorInterface
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
         return $this;
     }
 
@@ -88,6 +90,7 @@ class Translator implements ProcessorInterface
     public function setTextDomain($textDomain)
     {
         $this->textDomain = $textDomain;
+
         return $this;
     }
 

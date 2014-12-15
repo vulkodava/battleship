@@ -75,7 +75,8 @@ use Doctrine\DBAL\Events;
  *    )
  * ));
  *
- * You can also pass 'driverOptions' and any other documented option to each of this drivers to pass additional information.
+ * You can also pass 'driverOptions' and any other documented option to each of this drivers to pass additional
+ * information.
  *
  * @author Lars Strojny <lstrojny@php.net>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
@@ -100,19 +101,19 @@ class MasterSlaveConnection extends Connection
     /**
      * Creates Master Slave Connection.
      *
-     * @param array                              $params
-     * @param \Doctrine\DBAL\Driver              $driver
-     * @param \Doctrine\DBAL\Configuration|null  $config
+     * @param array $params
+     * @param \Doctrine\DBAL\Driver $driver
+     * @param \Doctrine\DBAL\Configuration|null $config
      * @param \Doctrine\Common\EventManager|null $eventManager
      *
      * @throws \InvalidArgumentException
      */
     public function __construct(array $params, Driver $driver, Configuration $config = null, EventManager $eventManager = null)
     {
-        if ( !isset($params['slaves']) || !isset($params['master']) ) {
+        if (!isset($params['slaves']) || !isset($params['master'])) {
             throw new \InvalidArgumentException('master or slaves configuration missing');
         }
-        if ( count($params['slaves']) == 0 ) {
+        if (count($params['slaves']) == 0) {
             throw new \InvalidArgumentException('You have to configure at least one slaves.');
         }
 
@@ -142,9 +143,9 @@ class MasterSlaveConnection extends Connection
     public function connect($connectionName = null)
     {
         $requestedConnectionChange = ($connectionName !== null);
-        $connectionName            = $connectionName ?: 'slave';
+        $connectionName = $connectionName ?: 'slave';
 
-        if ( $connectionName !== 'slave' && $connectionName !== 'master' ) {
+        if ($connectionName !== 'slave' && $connectionName !== 'master') {
             throw new \InvalidArgumentException("Invalid option to connect(), only master or slave allowed.");
         }
 
@@ -158,14 +159,14 @@ class MasterSlaveConnection extends Connection
         $forceMasterAsSlave = false;
 
         if ($this->getTransactionNestingLevel() > 0) {
-            $connectionName     = 'master';
+            $connectionName = 'master';
             $forceMasterAsSlave = true;
         }
 
         if ($this->connections[$connectionName]) {
             $this->_conn = $this->connections[$connectionName];
 
-            if ($forceMasterAsSlave && ! $this->keepSlave) {
+            if ($forceMasterAsSlave && !$this->keepSlave) {
                 $this->connections['slave'] = $this->_conn;
             }
 
@@ -174,13 +175,13 @@ class MasterSlaveConnection extends Connection
 
         if ($connectionName === 'master') {
             // Set slave connection to master to avoid invalid reads
-            if ($this->connections['slave'] && ! $this->keepSlave) {
+            if ($this->connections['slave'] && !$this->keepSlave) {
                 unset($this->connections['slave']);
             }
 
             $this->connections['master'] = $this->_conn = $this->connectTo($connectionName);
 
-            if ( ! $this->keepSlave) {
+            if (!$this->keepSlave) {
                 $this->connections['slave'] = $this->connections['master'];
             }
         } else {
@@ -218,7 +219,7 @@ class MasterSlaveConnection extends Connection
 
     /**
      * @param string $connectionName
-     * @param array  $params
+     * @param array $params
      *
      * @return mixed
      */

@@ -59,7 +59,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $usernameExpected = 'someUsername';
         $usernameActual = $this->adapter->setUsername($usernameExpected)
-                                         ->getUsername();
+            ->getUsername();
         $this->assertSame($usernameExpected, $usernameActual);
     }
 
@@ -67,7 +67,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $passwordExpected = 'somePassword';
         $passwordActual = $this->adapter->setPassword($passwordExpected)
-                                         ->getPassword();
+            ->getPassword();
         $this->assertSame($passwordExpected, $passwordActual);
     }
 
@@ -75,7 +75,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $usernameExpected = 'someUsername';
         $usernameActual = $this->adapter->setIdentity($usernameExpected)
-                                         ->getUsername();
+            ->getUsername();
         $this->assertSame($usernameExpected, $usernameActual);
     }
 
@@ -83,7 +83,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $passwordExpected = 'somePassword';
         $passwordActual = $this->adapter->setCredential($passwordExpected)
-                                         ->getPassword();
+            ->getPassword();
         $this->assertSame($passwordExpected, $passwordActual);
     }
 }

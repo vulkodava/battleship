@@ -47,7 +47,7 @@ class UpdateClause extends Node
 
     /**
      * @param string $abstractSchemaName
-     * @param array  $updateItems
+     * @param array $updateItems
      */
     public function __construct($abstractSchemaName, array $updateItems)
     {

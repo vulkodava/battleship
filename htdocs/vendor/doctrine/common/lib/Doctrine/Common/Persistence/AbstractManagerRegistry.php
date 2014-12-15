@@ -66,8 +66,8 @@ abstract class AbstractManagerRegistry implements ManagerRegistry
      * Constructor.
      *
      * @param string $name
-     * @param array  $connections
-     * @param array  $managers
+     * @param array $connections
+     * @param array $managers
      * @param string $defaultConnection
      * @param string $defaultManager
      * @param string $proxyInterfaceName

@@ -36,14 +36,14 @@ class DDC2346Test extends \Doctrine\Tests\OrmFunctionalTestCase
      */
     public function testIssue()
     {
-        $foo1        = new DDC2346Foo();
-        $foo2        = new DDC2346Foo();
+        $foo1 = new DDC2346Foo();
+        $foo2 = new DDC2346Foo();
 
-        $baz1        = new DDC2346Baz();
-        $baz2        = new DDC2346Baz();
+        $baz1 = new DDC2346Baz();
+        $baz2 = new DDC2346Baz();
 
-        $baz1->foo   = $foo1;
-        $baz2->foo   = $foo2;
+        $baz1->foo = $foo1;
+        $baz2->foo = $foo2;
 
         $foo1->bars[] = $baz1;
         $foo1->bars[] = $baz2;
@@ -79,7 +79,8 @@ class DDC2346Foo
     public $bars;
 
     /** Constructor */
-    public function __construct() {
+    public function __construct()
+    {
         $this->bars = new ArrayCollection();
     }
 }

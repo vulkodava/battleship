@@ -6,32 +6,32 @@
 
     <mapped-superclass name="SocialLibrary\ReadBundle\Entity\Book">
         <id name="id" type="integer">
-            <generator strategy="AUTO" />
+            <generator strategy="AUTO"/>
         </id>
-        <field name="volume" column="volume" type="integer" nullable="true" />
-        <field name="language" column="language" type="string" length="8" nullable="true" />
-        <field name="isbn10" column="isbn10" type="string" length="11" unique="true" nullable="true" />
-        <field name="isbn13" column="isbn13" type="string" length="14" unique="true" nullable="true" />
+        <field name="volume" column="volume" type="integer" nullable="true"/>
+        <field name="language" column="language" type="string" length="8" nullable="true"/>
+        <field name="isbn10" column="isbn10" type="string" length="11" unique="true" nullable="true"/>
+        <field name="isbn13" column="isbn13" type="string" length="14" unique="true" nullable="true"/>
         <many-to-one field="serie" target-entity="SocialLibrary\ReadBundle\Entity\Serie" inversed-by="volumes">
-            <join-column name="serie_id" referenced-column-name="id" />
+            <join-column name="serie_id" referenced-column-name="id"/>
         </many-to-one>
         <many-to-many field="owners" target-entity="Application\Sonata\UserBundle\Entity\User">
             <join-table name="book__owner">
                 <join-columns>
-                    <join-column name="object_id" referenced-column-name="id" />
+                    <join-column name="object_id" referenced-column-name="id"/>
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="owner_id" referenced-column-name="id" />
+                    <join-column name="owner_id" referenced-column-name="id"/>
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
         <many-to-many field="creators" target-entity="SocialLibrary\BaseBundle\Entity\ObjectCreator">
             <join-table name="book__creator">
                 <join-columns>
-                    <join-column name="object_id" referenced-column-name="id" />
+                    <join-column name="object_id" referenced-column-name="id"/>
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="creator_id" referenced-column-name="id" />
+                    <join-column name="creator_id" referenced-column-name="id"/>
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

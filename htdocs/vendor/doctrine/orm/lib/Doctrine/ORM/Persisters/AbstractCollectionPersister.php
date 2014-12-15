@@ -25,7 +25,7 @@ use Doctrine\ORM\PersistentCollection;
 /**
  * Base class for all collection persisters.
  *
- * @since 2.0
+ * @since  2.0
  * @author Roman Borschel <roman@code-factory.org>
  */
 abstract class AbstractCollectionPersister
@@ -51,7 +51,7 @@ abstract class AbstractCollectionPersister
      * @var \Doctrine\DBAL\Platforms\AbstractPlatform
      */
     protected $platform;
-    
+
     /**
      * The quote strategy.
      *
@@ -66,11 +66,11 @@ abstract class AbstractCollectionPersister
      */
     public function __construct(EntityManager $em)
     {
-        $this->em               = $em;
-        $this->uow              = $em->getUnitOfWork();
-        $this->conn             = $em->getConnection();
-        $this->platform         = $this->conn->getDatabasePlatform();
-        $this->quoteStrategy    = $em->getConfiguration()->getQuoteStrategy();
+        $this->em = $em;
+        $this->uow = $em->getUnitOfWork();
+        $this->conn = $em->getConnection();
+        $this->platform = $this->conn->getDatabasePlatform();
+        $this->quoteStrategy = $em->getConfiguration()->getQuoteStrategy();
     }
 
     /**
@@ -84,7 +84,7 @@ abstract class AbstractCollectionPersister
     {
         $mapping = $coll->getMapping();
 
-        if ( ! $mapping['isOwningSide']) {
+        if (!$mapping['isOwningSide']) {
             return; // ignore inverse side
         }
 
@@ -124,7 +124,7 @@ abstract class AbstractCollectionPersister
     {
         $mapping = $coll->getMapping();
 
-        if ( ! $mapping['isOwningSide']) {
+        if (!$mapping['isOwningSide']) {
             return; // ignore inverse side
         }
 
@@ -141,8 +141,8 @@ abstract class AbstractCollectionPersister
      */
     public function deleteRows(PersistentCollection $coll)
     {
-        $diff   = $coll->getDeleteDiff();
-        $sql    = $this->getDeleteRowSQL($coll);
+        $diff = $coll->getDeleteDiff();
+        $sql = $this->getDeleteRowSQL($coll);
 
         foreach ($diff as $element) {
             $this->conn->executeUpdate($sql, $this->getDeleteRowSQLParameters($coll, $element));
@@ -158,8 +158,8 @@ abstract class AbstractCollectionPersister
      */
     public function insertRows(PersistentCollection $coll)
     {
-        $diff   = $coll->getInsertDiff();
-        $sql    = $this->getInsertRowSQL($coll);
+        $diff = $coll->getInsertDiff();
+        $sql = $this->getInsertRowSQL($coll);
 
         foreach ($diff as $element) {
             $this->conn->executeUpdate($sql, $this->getInsertRowSQLParameters($coll, $element));
@@ -170,7 +170,7 @@ abstract class AbstractCollectionPersister
      * Counts the size of this persistent collection.
      *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * 
+     *
      * @return integer
      *
      * @throws \BadMethodCallException
@@ -184,8 +184,8 @@ abstract class AbstractCollectionPersister
      * Slices elements.
      *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param integer                            $offset
-     * @param integer                            $length
+     * @param integer $offset
+     * @param integer $length
      *
      * @return  array
      *
@@ -200,7 +200,7 @@ abstract class AbstractCollectionPersister
      * Checks for existence of an element.
      *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param object                             $element
+     * @param object $element
      *
      * @return boolean
      *
@@ -215,7 +215,7 @@ abstract class AbstractCollectionPersister
      * Checks for existence of a key.
      *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param mixed                              $key
+     * @param mixed $key
      *
      * @return boolean
      *
@@ -230,7 +230,7 @@ abstract class AbstractCollectionPersister
      * Removes an element.
      *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param object                             $element
+     * @param object $element
      *
      * @return mixed
      *
@@ -245,7 +245,7 @@ abstract class AbstractCollectionPersister
      * Removes an element by key.
      *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param mixed                              $key
+     * @param mixed $key
      *
      * @return void
      *
@@ -258,10 +258,10 @@ abstract class AbstractCollectionPersister
 
     /**
      * Gets an element by key.
-     * 
+     *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param mixed                              $index
-     * 
+     * @param mixed $index
+     *
      * @return mixed
      *
      * @throws \BadMethodCallException
@@ -285,7 +285,7 @@ abstract class AbstractCollectionPersister
      * element from the given collection.
      *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param mixed                              $element
+     * @param mixed $element
      *
      * @return array
      */
@@ -314,7 +314,7 @@ abstract class AbstractCollectionPersister
      * element of the given collection into the database.
      *
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param mixed                              $element
+     * @param mixed $element
      *
      * @return array
      */

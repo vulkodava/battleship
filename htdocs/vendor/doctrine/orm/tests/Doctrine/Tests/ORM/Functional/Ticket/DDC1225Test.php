@@ -20,7 +20,7 @@ class DDC1225Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1225_TestEntity1'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1225_TestEntity2'),
             ));
-        } catch(\PDOException $e) {
+        } catch (\PDOException $e) {
 
         }
     }
@@ -29,9 +29,9 @@ class DDC1225Test extends \Doctrine\Tests\OrmFunctionalTestCase
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->from('Doctrine\Tests\ORM\Functional\Ticket\DDC1225_TestEntity1', 'te1')
-           ->select('te1')
-           ->where('te1.testEntity2 = ?1')
-           ->setParameter(1, 0);
+            ->select('te1')
+            ->where('te1.testEntity2 = ?1')
+            ->setParameter(1, 0);
 
         $this->assertEquals(
             strtolower('SELECT t0_.test_entity2_id AS test_entity2_id0 FROM te1 t0_ WHERE t0_.test_entity2_id = ?'),

@@ -34,7 +34,7 @@ You can map indexed associations by adding:
 The code and mappings for the Market entity looks like this:
 
 .. configuration-block::
-    .. code-block:: php
+.. code-block:: php
 
         <?php
         namespace Doctrine\Tests\Models\StockExchange;
@@ -146,7 +146,7 @@ The ``Stock`` entity doesn't contain any special instructions that are new, but 
 here are the code and mappings for it:
 
 .. configuration-block::
-    .. code-block:: php
+.. code-block:: php
 
         <?php
         namespace Doctrine\Tests\Models\StockExchange;

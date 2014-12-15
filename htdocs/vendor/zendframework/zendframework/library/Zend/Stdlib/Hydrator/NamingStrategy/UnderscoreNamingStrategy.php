@@ -51,6 +51,7 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
         $filter = new FilterChain();
         $filter->attachByName('WordUnderscoreToCamelCase');
         static::$underscoreToCamelCaseFilter = $filter;
+
         return $filter;
     }
 
@@ -67,6 +68,7 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
         $filter->attachByName('WordCamelCaseToUnderscore');
         $filter->attachByName('StringToLower');
         static::$camelCaseToUnderscoreFilter = $filter;
+
         return $filter;
     }
 }

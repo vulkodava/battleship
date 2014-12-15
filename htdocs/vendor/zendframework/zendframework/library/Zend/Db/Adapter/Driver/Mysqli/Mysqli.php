@@ -77,6 +77,7 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -188,10 +189,10 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         /**
          * @todo Resource tracking
-        if (is_resource($sqlOrResource) && !in_array($sqlOrResource, $this->resources, true)) {
-            $this->resources[] = $sqlOrResource;
-        }
-        */
+         * if (is_resource($sqlOrResource) && !in_array($sqlOrResource, $this->resources, true)) {
+         * $this->resources[] = $sqlOrResource;
+         * }
+         */
 
         $statement = clone $this->statementPrototype;
         if ($sqlOrResource instanceof mysqli_stmt) {
@@ -205,6 +206,7 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
             }
             $statement->initialize($this->connection->getResource());
         }
+
         return $statement;
     }
 
@@ -219,6 +221,7 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue(), $isBuffered);
+
         return $result;
     }
 
@@ -236,7 +239,7 @@ class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
      * Format parameter name
      *
      * @param string $name
-     * @param mixed  $type
+     * @param mixed $type
      * @return string
      */
     public function formatParameterName($name, $type = null)

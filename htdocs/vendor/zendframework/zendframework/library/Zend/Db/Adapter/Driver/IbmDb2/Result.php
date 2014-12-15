@@ -48,12 +48,14 @@ class Result implements ResultInterface
     {
         $this->resource = $resource;
         $this->generatedValue = $generatedValue;
+
         return $this;
     }
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Return the current element
+     *
      * @link http://php.net/manual/en/iterator.current.php
      * @return mixed Can return any type.
      */
@@ -64,6 +66,7 @@ class Result implements ResultInterface
         }
 
         $this->currentData = db2_fetch_assoc($this->resource);
+
         return $this->currentData;
     }
 
@@ -75,6 +78,7 @@ class Result implements ResultInterface
         $this->currentData = db2_fetch_assoc($this->resource);
         $this->currentComplete = true;
         $this->position++;
+
         return $this->currentData;
     }
 
@@ -97,6 +101,7 @@ class Result implements ResultInterface
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Rewind the Iterator to the first element
+     *
      * @link http://php.net/manual/en/iterator.rewind.php
      * @return void Any returned value is ignored.
      */

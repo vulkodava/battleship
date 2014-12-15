@@ -14,7 +14,7 @@ use ArrayObject;
 class ResultSet extends AbstractResultSet
 {
     const TYPE_ARRAYOBJECT = 'arrayobject';
-    const TYPE_ARRAY  = 'array';
+    const TYPE_ARRAY = 'array';
 
     /**
      * Allowed return types
@@ -41,7 +41,7 @@ class ResultSet extends AbstractResultSet
     /**
      * Constructor
      *
-     * @param string           $returnType
+     * @param string $returnType
      * @param null|ArrayObject $arrayObjectPrototype
      */
     public function __construct($returnType = self::TYPE_ARRAYOBJECT, $arrayObjectPrototype = null)
@@ -68,6 +68,7 @@ class ResultSet extends AbstractResultSet
             throw new Exception\InvalidArgumentException('Object must be of type ArrayObject, or at least implement exchangeArray');
         }
         $this->arrayObjectPrototype = $arrayObjectPrototype;
+
         return $this;
     }
 
@@ -104,6 +105,7 @@ class ResultSet extends AbstractResultSet
             if ($ao instanceof ArrayObject || method_exists($ao, 'exchangeArray')) {
                 $ao->exchangeArray($data);
             }
+
             return $ao;
         }
 

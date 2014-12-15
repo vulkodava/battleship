@@ -6,30 +6,30 @@ return array(
                 'consoleroute' => array(
                     'type' => 'simple',
                     'options' => array(
-                        'route'    => '--console',
+                        'route' => '--console',
                         'defaults' => array(
                             'controller' => 'baz_index',
-                            'action'     => 'console',
+                            'action' => 'console',
                         ),
                     ),
                 ),
                 'arguments' => array(
                     'type' => 'simple',
                     'options' => array(
-                        'route'    => 'filter --date= --id= --text=',
+                        'route' => 'filter --date= --id= --text=',
                         'defaults' => array(
                             'controller' => 'baz_index',
-                            'action'     => 'console',
+                            'action' => 'console',
                         ),
                     ),
                 ),
                 'arguments-mandatory' => array(
                     'type' => 'simple',
                     'options' => array(
-                        'route'    => 'foo --bar= --baz=',
+                        'route' => 'foo --bar= --baz=',
                         'defaults' => array(
                             'controller' => 'baz_index',
-                            'action'     => 'console',
+                            'action' => 'console',
                         ),
                     ),
                 )
@@ -41,50 +41,50 @@ return array(
             'myroute' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route'    => '/tests',
+                    'route' => '/tests',
                     'defaults' => array(
                         'controller' => 'baz_index',
-                        'action'     => 'unittests',
+                        'action' => 'unittests',
                     ),
                 ),
             ),
             'myroutebis' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route'    => '/tests-bis',
+                    'route' => '/tests-bis',
                     'defaults' => array(
                         'controller' => 'baz_index',
-                        'action'     => 'unittests',
+                        'action' => 'unittests',
                     ),
                 ),
             ),
             'persistence' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route'    => '/tests-persistence',
+                    'route' => '/tests-persistence',
                     'defaults' => array(
                         'controller' => 'baz_index',
-                        'action'     => 'persistencetest',
+                        'action' => 'persistencetest',
                     ),
                 ),
             ),
             'exception' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route'    => '/exception',
+                    'route' => '/exception',
                     'defaults' => array(
                         'controller' => 'baz_index',
-                        'action'     => 'exception',
+                        'action' => 'exception',
                     ),
                 ),
             ),
             'redirect' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route'    => '/redirect',
+                    'route' => '/redirect',
                     'defaults' => array(
                         'controller' => 'baz_index',
-                        'action'     => 'redirect',
+                        'action' => 'redirect',
                     ),
                 ),
             ),
@@ -97,17 +97,17 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'baz_index',
-                        'action'     => 'unittests',
+                        'action' => 'unittests',
                     ),
                 ),
             ),
             'custom-response' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route'    => '/custom-response',
+                    'route' => '/custom-response',
                     'defaults' => array(
                         'controller' => 'baz_index',
-                        'action'     => 'custom-response',
+                        'action' => 'custom-response',
                     ),
                 ),
             ),

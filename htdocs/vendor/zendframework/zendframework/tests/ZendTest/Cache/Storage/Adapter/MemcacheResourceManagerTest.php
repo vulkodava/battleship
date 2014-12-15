@@ -59,15 +59,15 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                 'testServersGivenAsString',
                 array(
                     'servers' => '127.0.0.1:1234,127.0.0.1,192.1.0.1?weight=3,localhost,127.0.0.1:11211?weight=1' .
-                                 ',10.0.0.1:11211?weight=1&status=0&persistent=0&timeout=5&retry_interval=10',
+                        ',10.0.0.1:11211?weight=1&status=0&persistent=0&timeout=5&retry_interval=10',
                 ),
                 array(
-                    array('host' => '127.0.0.1', 'port' => 1234,  'status' => true),
+                    array('host' => '127.0.0.1', 'port' => 1234, 'status' => true),
                     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => true),
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3, 'status' => true),
                     array('host' => 'localhost', 'port' => 11211, 'status' => true),
-                    array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
-                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
+                    array('host' => '10.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => false,
+                        'persistent' => false, 'timeout' => 5, 'retry_interval' => 10),
                 ),
             ),
 
@@ -85,12 +85,12 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     ),
                 ),
                 array(
-                    array('host' => '127.0.0.1', 'port' => 1234,  'status' => true),
+                    array('host' => '127.0.0.1', 'port' => 1234, 'status' => true),
                     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => true),
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3, 'status' => true),
                     array('host' => 'localhost', 'port' => 11211, 'status' => true),
-                    array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
-                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
+                    array('host' => '10.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => false,
+                        'persistent' => false, 'timeout' => 5, 'retry_interval' => 10),
                 ),
             ),
 
@@ -104,16 +104,16 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                         array('192.1.0.1', 11211, 3),
                         array('localhost'),
                         array('127.0.0.1', 11211, 1),
-                        array('10.0.0.1',  11211, 1, false, false, 5, 10),
+                        array('10.0.0.1', 11211, 1, false, false, 5, 10),
                     ),
                 ),
                 array(
-                    array('host' => '127.0.0.1', 'port' => 1234,  'status' => true),
+                    array('host' => '127.0.0.1', 'port' => 1234, 'status' => true),
                     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => true),
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3, 'status' => true),
                     array('host' => 'localhost', 'port' => 11211, 'status' => true),
-                    array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
-                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
+                    array('host' => '10.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => false,
+                        'persistent' => false, 'timeout' => 5, 'retry_interval' => 10),
                 ),
             ),
 
@@ -123,14 +123,14 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                 array(
                     'servers' => array(
                         array(
-                           'host' => '127.0.0.1',
-                           'port' => 1234,
+                            'host' => '127.0.0.1',
+                            'port' => 1234,
                         ),
                         array(
-                           'host' => '127.0.0.1',
+                            'host' => '127.0.0.1',
                         ),
                         array(
-                            'host'   => '192.1.0.1',
+                            'host' => '192.1.0.1',
                             'weight' => 3,
                         ),
                         array(
@@ -153,12 +153,12 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     ),
                 ),
                 array(
-                    array('host' => '127.0.0.1', 'port' => 1234,  'status' => true),
+                    array('host' => '127.0.0.1', 'port' => 1234, 'status' => true),
                     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => true),
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3, 'status' => true),
                     array('host' => 'localhost', 'port' => 11211, 'status' => true),
-                    array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
-                          'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
+                    array('host' => '10.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => false,
+                        'persistent' => false, 'timeout' => 5, 'retry_interval' => 10),
                 ),
             ),
         );
@@ -169,9 +169,9 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validResourceProvider
      * @param string $resourceId
-     * @param mixed  $resource
-     * @param array  $expectedServers
-     * @param array  $expectedLibOptions
+     * @param mixed $resource
+     * @param array $expectedServers
+     * @param array $expectedLibOptions
      */
     public function testValidResources($resourceId, $resource, $expectedServers)
     {
@@ -245,6 +245,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                 ),
             ),
         );
+
         return $data;
     }
 
@@ -331,49 +332,50 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
             array(
                 'testServerAllParamsNoDefaults',
                 array(
-                    'host' => '10.0.0.1',  'port' => 11211, 'weight' => 2, 'status' => false,
-                    'persistent' => false, 'timeout' => 5,  'retry_interval' => 10,
+                    'host' => '10.0.0.1', 'port' => 11211, 'weight' => 2, 'status' => false,
+                    'persistent' => false, 'timeout' => 5, 'retry_interval' => 10,
                 ),
                 array(),
                 array(
-                    'host' => '10.0.0.1',  'port' => 11211, 'weight' => 2, 'status' => false,
-                    'persistent' => false, 'timeout' => 5,  'retry_interval' => 10,
+                    'host' => '10.0.0.1', 'port' => 11211, 'weight' => 2, 'status' => false,
+                    'persistent' => false, 'timeout' => 5, 'retry_interval' => 10,
                 ),
             ),
             // Default settings
             array(
                 'testServerWithDefaults',
                 array(
-                    'host' => '10.0.0.1',  'port' => 11211,
+                    'host' => '10.0.0.1', 'port' => 11211,
                 ),
                 array(),
                 array(
-                    'host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => true,
-                    'persistent' => true, 'timeout' => 1,  'retry_interval' => 15,
+                    'host' => '10.0.0.1', 'port' => 11211, 'weight' => 1, 'status' => true,
+                    'persistent' => true, 'timeout' => 1, 'retry_interval' => 15,
                 ),
             ),
             // Custom default settings
             array(
                 'testServerWithCustomDefaults',
                 array(
-                    'host' => '10.0.0.1',  'port' => 11211, 'status' => false,
+                    'host' => '10.0.0.1', 'port' => 11211, 'status' => false,
                 ),
-                array('persistent' => false, 'timeout' => 5,  'retry_interval' => 10, 'weight' => 3),
+                array('persistent' => false, 'timeout' => 5, 'retry_interval' => 10, 'weight' => 3),
                 array(
-                    'host' => '10.0.0.1',  'port' => 11211, 'weight' => 3, 'status' => false,
-                    'persistent' => false, 'timeout' => 5,  'retry_interval' => 10,
+                    'host' => '10.0.0.1', 'port' => 11211, 'weight' => 3, 'status' => false,
+                    'persistent' => false, 'timeout' => 5, 'retry_interval' => 10,
                 ),
             ),
         );
+
         return $data;
     }
 
     /**
      * @dataProvider validServerAndServerDefaultsProvider
      * @param string $resourceId
-     * @param array  $server
-     * @param array  $serverDefaults
-     * @param array  $expectedParams
+     * @param array $server
+     * @param array $serverDefaults
+     * @param array $expectedParams
      */
     public function testAddServerOnExistingResource($resourceId, $server, $serverDefaults, $expectedParams)
     {

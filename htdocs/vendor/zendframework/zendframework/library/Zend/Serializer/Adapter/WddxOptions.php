@@ -26,7 +26,8 @@ class WddxOptions extends AdapterOptions
      */
     public function setComment($comment)
     {
-        $this->comment = (string) $comment;
+        $this->comment = (string)$comment;
+
         return $this;
     }
 

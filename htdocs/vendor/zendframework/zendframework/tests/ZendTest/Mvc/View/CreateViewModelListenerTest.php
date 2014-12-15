@@ -20,8 +20,8 @@ class CreateViewModelListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->listener   = new CreateViewModelListener();
-        $this->event      = new MvcEvent();
+        $this->listener = new CreateViewModelListener();
+        $this->event = new MvcEvent();
     }
 
     public function testReCastsAssocArrayEventResultAsViewModel()
@@ -74,10 +74,10 @@ class CreateViewModelListenerTest extends TestCase
         $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH);
 
         $expectedArrayCallback = array($this->listener, 'createViewModelFromArray');
-        $expectedNullCallback  = array($this->listener, 'createViewModelFromNull');
-        $expectedPriority      = -80;
-        $foundArray            = false;
-        $foundNull             = false;
+        $expectedNullCallback = array($this->listener, 'createViewModelFromNull');
+        $expectedPriority = -80;
+        $foundArray = false;
+        $foundNull = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
             if ($callback === $expectedArrayCallback) {
@@ -92,7 +92,7 @@ class CreateViewModelListenerTest extends TestCase
             }
         }
         $this->assertTrue($foundArray, 'Listener FromArray not found');
-        $this->assertTrue($foundNull,  'Listener FromNull not found');
+        $this->assertTrue($foundNull, 'Listener FromNull not found');
     }
 
     public function testDetachesListeners()

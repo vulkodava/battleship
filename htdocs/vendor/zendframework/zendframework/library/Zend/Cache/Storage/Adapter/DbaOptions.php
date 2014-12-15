@@ -52,9 +52,10 @@ class DbaOptions extends AdapterOptions
      */
     public function setNamespaceSeparator($namespaceSeparator)
     {
-        $namespaceSeparator = (string) $namespaceSeparator;
+        $namespaceSeparator = (string)$namespaceSeparator;
         $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
         $this->namespaceSeparator = $namespaceSeparator;
+
         return $this;
     }
 
@@ -76,8 +77,9 @@ class DbaOptions extends AdapterOptions
      */
     public function setPathname($pathname)
     {
-        $this->pathname = (string) $pathname;
+        $this->pathname = (string)$pathname;
         $this->triggerOptionEvent('pathname', $pathname);
+
         return $this;
     }
 
@@ -99,8 +101,9 @@ class DbaOptions extends AdapterOptions
      */
     public function setMode($mode)
     {
-        $this->mode = (string) $mode;
+        $this->mode = (string)$mode;
         $this->triggerOptionEvent('mode', $mode);
+
         return $this;
     }
 
@@ -111,7 +114,7 @@ class DbaOptions extends AdapterOptions
 
     public function setHandler($handler)
     {
-        $handler = (string) $handler;
+        $handler = (string)$handler;
 
         if (!function_exists('dba_handlers') || !in_array($handler, dba_handlers())) {
             throw new Exception\ExtensionNotLoadedException("DBA-Handler '{$handler}' not supported");
@@ -119,6 +122,7 @@ class DbaOptions extends AdapterOptions
 
         $this->triggerOptionEvent('handler', $handler);
         $this->handler = $handler;
+
         return $this;
     }
 

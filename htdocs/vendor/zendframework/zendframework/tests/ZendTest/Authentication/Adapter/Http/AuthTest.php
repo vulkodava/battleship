@@ -68,24 +68,24 @@ class AuthTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filesPath      = __DIR__ . '/TestAsset';
-        $this->_basicResolver  = new Http\FileResolver("{$this->_filesPath}/htbasic.1");
+        $this->_filesPath = __DIR__ . '/TestAsset';
+        $this->_basicResolver = new Http\FileResolver("{$this->_filesPath}/htbasic.1");
         $this->_digestResolver = new Http\FileResolver("{$this->_filesPath}/htdigest.3");
-        $this->_basicConfig    = array(
+        $this->_basicConfig = array(
             'accept_schemes' => 'basic',
-            'realm'          => 'Test Realm'
+            'realm' => 'Test Realm'
         );
-        $this->_digestConfig   = array(
+        $this->_digestConfig = array(
             'accept_schemes' => 'digest',
-            'realm'          => 'Test Realm',
+            'realm' => 'Test Realm',
             'digest_domains' => '/ http://localhost/',
-            'nonce_timeout'  => 300
+            'nonce_timeout' => 300
         );
-        $this->_bothConfig     = array(
+        $this->_bothConfig = array(
             'accept_schemes' => 'basic digest',
-            'realm'          => 'Test Realm',
+            'realm' => 'Test Realm',
             'digest_domains' => '/ http://localhost/',
-            'nonce_timeout'  => 300
+            'nonce_timeout' => 300
         );
     }
 
@@ -97,8 +97,8 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         // The expected Basic Www-Authenticate header value
         $basic = array(
-            'type'   => 'Basic ',
-            'realm'  => 'realm="' . $this->_bothConfig['realm'] . '"',
+            'type' => 'Basic ',
+            'realm' => 'realm="' . $this->_bothConfig['realm'] . '"',
         );
 
         $data = $this->_doAuth('', 'basic');
@@ -129,7 +129,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         extract($data); // $result, $status, $headers
 
         // The expected Www-Authenticate header values
-        $basic  = 'Basic realm="' . $this->_bothConfig['realm'] . '"';
+        $basic = 'Basic realm="' . $this->_bothConfig['realm'] . '"';
         $digest = $this->_digestChallenge();
 
         // Make sure the result is false
@@ -172,8 +172,8 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         // The expected Basic Www-Authenticate header value
         $basic = array(
-            'type'   => 'Basic ',
-            'realm'  => 'realm="' . $this->_basicConfig['realm'] . '"',
+            'type' => 'Basic ',
+            'realm' => 'realm="' . $this->_basicConfig['realm'] . '"',
         );
 
         $data = $this->_doAuth('Basic ' . base64_encode("Bad\tChars:In:Creds"), 'basic');
@@ -187,8 +187,8 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         // The expected Basic Www-Authenticate header value
         $basic = array(
-            'type'   => 'Basic ',
-            'realm'  => 'realm="' . $this->_basicConfig['realm'] . '"',
+            'type' => 'Basic ',
+            'realm' => 'realm="' . $this->_basicConfig['realm'] . '"',
         );
 
         $data = $this->_doAuth('Basic ' . base64_encode('Nobody:NotValid'), 'basic');
@@ -202,8 +202,8 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         // The expected Basic Www-Authenticate header value
         $basic = array(
-            'type'   => 'Basic ',
-            'realm'  => 'realm="' . $this->_basicConfig['realm'] . '"',
+            'type' => 'Basic ',
+            'realm' => 'realm="' . $this->_basicConfig['realm'] . '"',
         );
 
         $data = $this->_doAuth('Basic ' . base64_encode('Bryce:Invalid'), 'basic');
@@ -271,7 +271,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $tampered = $this->_digestReply('Bryce', 'ThisIsNotMyPassword');
         $tampered = preg_replace(
             '/ nonce="[a-fA-F0-9]{32}", /',
-            ' nonce="'.str_repeat('0', 32).'", ',
+            ' nonce="' . str_repeat('0', 32) . '", ',
             $tampered
         );
 
@@ -316,7 +316,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     protected function _doAuth($clientHeader, $scheme)
     {
         // Set up stub request and response objects
-        $request  = new Request;
+        $request = new Request;
         $response = new Response;
         $response->setStatusCode(200);
 
@@ -352,10 +352,11 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $result = $a->authenticate();
 
         $return = array(
-            'result'  => $result,
-            'status'  => $response->getStatusCode(),
+            'result' => $result,
+            'status' => $response->getStatusCode(),
             'headers' => $response->getHeaders(),
         );
+
         return $return;
     }
 
@@ -367,8 +368,8 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     protected function _digestChallenge()
     {
         return array(
-            'type'   => 'Digest ',
-            'realm'  => 'realm="' . $this->_digestConfig['realm'] . '"',
+            'type' => 'Digest ',
+            'realm' => 'realm="' . $this->_digestConfig['realm'] . '"',
             'domain' => 'domain="' . $this->_bothConfig['digest_domains'] . '"',
         );
     }
@@ -380,24 +381,24 @@ class AuthTest extends \PHPUnit_Framework_TestCase
      */
     protected function _digestReply($user, $pass)
     {
-        $nc       = '00000001';
-        $timeout  = ceil(time() / 300) * 300;
-        $nonce    = md5($timeout . ':PHPUnit:Zend\Authentication\Adapter\Http');
-        $opaque   = md5('Opaque Data:Zend\\Authentication\\Adapter\\Http');
-        $cnonce   = md5('cnonce');
+        $nc = '00000001';
+        $timeout = ceil(time() / 300) * 300;
+        $nonce = md5($timeout . ':PHPUnit:Zend\Authentication\Adapter\Http');
+        $opaque = md5('Opaque Data:Zend\\Authentication\\Adapter\\Http');
+        $cnonce = md5('cnonce');
         $response = md5(md5($user . ':' . $this->_digestConfig['realm'] . ':' . $pass) . ":$nonce:$nc:$cnonce:auth:"
-                  . md5('GET:/'));
+            . md5('GET:/'));
         $cauth = 'Digest '
-               . 'username="Bryce", '
-               . 'realm="' . $this->_digestConfig['realm'] . '", '
-               . 'nonce="' . $nonce . '", '
-               . 'uri="/", '
-               . 'response="' . $response . '", '
-               . 'algorithm="MD5", '
-               . 'cnonce="' . $cnonce . '", '
-               . 'opaque="' . $opaque . '", '
-               . 'qop="auth", '
-               . 'nc=' . $nc;
+            . 'username="Bryce", '
+            . 'realm="' . $this->_digestConfig['realm'] . '", '
+            . 'nonce="' . $nonce . '", '
+            . 'uri="/", '
+            . 'response="' . $response . '", '
+            . 'algorithm="MD5", '
+            . 'cnonce="' . $cnonce . '", '
+            . 'opaque="' . $opaque . '", '
+            . 'qop="auth", '
+            . 'nc=' . $nc;
 
         return $cauth;
     }
@@ -405,7 +406,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     /**
      * Checks for an expected 401 Unauthorized response
      *
-     * @param  array  $data     Authentication results
+     * @param  array $data      Authentication results
      * @param  string $expected Expected Www-Authenticate header value
      * @return void
      */
@@ -478,7 +479,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
     public function testBasicAuthValidCredsWithCustomIdentityObjectResolverReturnsAuthResult()
     {
-        $this->_basicResolver  = new TestAsset\BasicAuthObjectResolver();
+        $this->_basicResolver = new TestAsset\BasicAuthObjectResolver();
 
         $result = $this->_doAuth('Basic ' . base64_encode('Bryce:ThisIsNotMyPassword'), 'basic');
         $result = $result['result'];
@@ -489,12 +490,12 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
     public function testBasicAuthInvalidCredsWithCustomIdentityObjectResolverReturnsUnauthorizedResponse()
     {
-        $this->_basicResolver  = new TestAsset\BasicAuthObjectResolver();
+        $this->_basicResolver = new TestAsset\BasicAuthObjectResolver();
         $data = $this->_doAuth('Basic ' . base64_encode('David:ThisIsNotMyPassword'), 'basic');
 
         $expected = array(
-            'type'   => 'Basic ',
-            'realm'  => 'realm="' . $this->_bothConfig['realm'] . '"',
+            'type' => 'Basic ',
+            'realm' => 'realm="' . $this->_bothConfig['realm'] . '"',
         );
 
         $this->_checkUnauthorized($data, $expected);

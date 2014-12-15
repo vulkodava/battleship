@@ -1,6 +1,7 @@
 <?php
 
 namespace Doctrine\Tests\ORM\Functional\Ticket;
+
 use Doctrine\ORM\UnitOfWork;
 
 /**
@@ -37,9 +38,9 @@ class DDC1436Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         // step 1
         $page = $this->_em
-                ->createQuery('SELECT p, parent FROM ' . __NAMESPACE__ . '\DDC1436Page p LEFT JOIN p.parent parent WHERE p.id = :id')
-                ->setParameter('id', $id)
-                ->getOneOrNullResult();
+            ->createQuery('SELECT p, parent FROM ' . __NAMESPACE__ . '\DDC1436Page p LEFT JOIN p.parent parent WHERE p.id = :id')
+            ->setParameter('id', $id)
+            ->getOneOrNullResult();
 
         $this->assertInstanceOf(__NAMESPACE__ . '\DDC1436Page', $page);
 

@@ -17,7 +17,7 @@ class PredisCacheTest extends CacheTest
         try {
             $this->client->connect();
         } catch (ConnectionException $e) {
-            $this->markTestSkipped('The ' . __CLASS__ .' requires the use of redis');
+            $this->markTestSkipped('The ' . __CLASS__ . ' requires the use of redis');
         }
     }
 

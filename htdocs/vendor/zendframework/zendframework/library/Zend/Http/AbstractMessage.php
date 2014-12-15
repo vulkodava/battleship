@@ -51,6 +51,7 @@ abstract class AbstractMessage extends Message
             );
         }
         $this->version = $version;
+
         return $this;
     }
 
@@ -75,6 +76,7 @@ abstract class AbstractMessage extends Message
     public function setHeaders(Headers $headers)
     {
         $this->headers = $headers;
+
         return $this;
     }
 

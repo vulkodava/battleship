@@ -35,6 +35,7 @@ class ViewModel extends AbstractHelper
     public function setCurrent(Model $model)
     {
         $this->current = $model;
+
         return $this;
     }
 
@@ -67,6 +68,7 @@ class ViewModel extends AbstractHelper
     public function setRoot(Model $model)
     {
         $this->root = $model;
+
         return $this;
     }
 

@@ -1,8 +1,8 @@
 <phpunit
-    bootstrap="./Bootstrap.php"
-    colors="true"
-    backupGlobals="false"
->
+        bootstrap="./Bootstrap.php"
+        colors="true"
+        backupGlobals="false"
+        >
     <testsuites>
         <testsuite name="DoctrineModule Test Suite">
             <directory>./</directory>

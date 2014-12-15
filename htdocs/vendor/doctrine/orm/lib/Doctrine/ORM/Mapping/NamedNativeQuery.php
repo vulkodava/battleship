@@ -41,7 +41,7 @@ final class NamedNativeQuery implements Annotation
     /**
      * The SQL query string.
      *
-     * @var string 
+     * @var string
      */
     public $query;
 
@@ -54,7 +54,7 @@ final class NamedNativeQuery implements Annotation
 
     /**
      * The name of a SqlResultSetMapping, as defined in metadata.
-     * 
+     *
      * @var string
      */
     public $resultSetMapping;

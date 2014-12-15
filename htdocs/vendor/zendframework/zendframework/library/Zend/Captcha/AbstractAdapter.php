@@ -37,6 +37,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
 
     /**
      * Options to skip when processing options
+     *
      * @var array
      */
     protected $skipOptions = array(
@@ -63,6 +64,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -89,6 +91,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
             $this->$key = $value;
             $this->options[$key] = $value;
         }
+
         return $this;
     }
 
@@ -108,6 +111,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
         foreach ($options as $key => $value) {
             $this->setOption($key, $value);
         }
+
         return $this;
     }
 

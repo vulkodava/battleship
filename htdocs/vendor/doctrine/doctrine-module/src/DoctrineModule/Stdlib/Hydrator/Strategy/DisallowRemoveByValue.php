@@ -43,7 +43,7 @@ class DisallowRemoveByValue extends AbstractCollectionStrategy
     public function hydrate($value)
     {
         // AllowRemove strategy need "adder"
-        $adder   = 'add' . ucfirst($this->collectionName);
+        $adder = 'add' . ucfirst($this->collectionName);
 
         if (!method_exists($this->object, $adder)) {
             throw new LogicException(sprintf(
@@ -54,7 +54,7 @@ class DisallowRemoveByValue extends AbstractCollectionStrategy
         }
 
         $collection = $this->getCollectionFromObjectByValue()->toArray();
-        $toAdd      = new ArrayCollection(array_udiff($value, $collection, array($this, 'compareObjects')));
+        $toAdd = new ArrayCollection(array_udiff($value, $collection, array($this, 'compareObjects')));
 
         $this->object->$adder($toAdd);
 

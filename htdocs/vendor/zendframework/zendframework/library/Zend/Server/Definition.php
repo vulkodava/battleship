@@ -47,7 +47,8 @@ class Definition implements Countable, Iterator
      */
     public function setOverwriteExistingMethods($flag)
     {
-        $this->overwriteExistingMethods = (bool) $flag;
+        $this->overwriteExistingMethods = (bool)$flag;
+
         return $this;
     }
 
@@ -83,6 +84,7 @@ class Definition implements Countable, Iterator
             throw new Exception\InvalidArgumentException(sprintf('Method by name of "%s" already exists', $name));
         }
         $this->methods[$name] = $method;
+
         return $this;
     }
 
@@ -97,6 +99,7 @@ class Definition implements Countable, Iterator
         foreach ($methods as $key => $method) {
             $this->addMethod($method, $key);
         }
+
         return $this;
     }
 
@@ -110,6 +113,7 @@ class Definition implements Countable, Iterator
     {
         $this->clearMethods();
         $this->addMethods($methods);
+
         return $this;
     }
 
@@ -135,6 +139,7 @@ class Definition implements Countable, Iterator
         if ($this->hasMethod($method)) {
             return $this->methods[$method];
         }
+
         return false;
     }
 
@@ -159,6 +164,7 @@ class Definition implements Countable, Iterator
         if ($this->hasMethod($method)) {
             unset($this->methods[$method]);
         }
+
         return $this;
     }
 
@@ -170,6 +176,7 @@ class Definition implements Countable, Iterator
     public function clearMethods()
     {
         $this->methods = array();
+
         return $this;
     }
 
@@ -184,6 +191,7 @@ class Definition implements Countable, Iterator
         foreach ($this->getMethods() as $key => $method) {
             $methods[$key] = $method->toArray();
         }
+
         return $methods;
     }
 
@@ -244,6 +252,6 @@ class Definition implements Countable, Iterator
      */
     public function valid()
     {
-        return (bool) $this->current();
+        return (bool)$this->current();
     }
 }

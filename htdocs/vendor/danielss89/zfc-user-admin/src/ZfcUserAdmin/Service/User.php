@@ -66,6 +66,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         $this->getEventManager()->trigger(__FUNCTION__, $this, $argv);
         $this->getUserMapper()->insert($user);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $argv);
+
         return $user;
     }
 
@@ -110,6 +111,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         $this->getEventManager()->trigger(__FUNCTION__, $this, $argv);
         $this->getUserMapper()->update($user);
         $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, $argv);
+
         return $user;
     }
 
@@ -127,6 +129,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         array_walk($parts, function (&$val) {
             $val = ucfirst($val);
         });
+
         return (($set ? 'set' : 'get') . implode('', $parts));
     }
 
@@ -135,18 +138,21 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         if (null === $this->userMapper) {
             $this->userMapper = $this->getServiceManager()->get('zfcuser_user_mapper');
         }
+
         return $this->userMapper;
     }
 
     public function setUserMapper(UserMapperInterface $userMapper)
     {
         $this->userMapper = $userMapper;
+
         return $this;
     }
 
     public function setOptions(ModuleOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -155,12 +161,14 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         if (!$this->options instanceof ModuleOptions) {
             $this->setOptions($this->getServiceManager()->get('zfcuseradmin_module_options'));
         }
+
         return $this->options;
     }
 
     public function setZfcUserOptions(ZfcUserModuleOptions $options)
     {
         $this->zfcUserOptions = $options;
+
         return $this;
     }
 
@@ -172,6 +180,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         if (!$this->zfcUserOptions instanceof ZfcUserModuleOptions) {
             $this->setZfcUserOptions($this->getServiceManager()->get('zfcuser_module_options'));
         }
+
         return $this->zfcUserOptions;
     }
 
@@ -194,6 +203,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     public function setServiceManager(ServiceManager $serviceManager)
     {
         $this->serviceManager = $serviceManager;
+
         return $this;
     }
 }

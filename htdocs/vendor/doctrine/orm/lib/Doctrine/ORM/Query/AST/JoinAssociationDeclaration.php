@@ -45,14 +45,14 @@ class JoinAssociationDeclaration extends Node
 
     /**
      * @param JoinAssociationPathExpression $joinAssociationPathExpression
-     * @param string                        $aliasIdentificationVariable
-     * @param IndexBy|null                  $indexBy
+     * @param string $aliasIdentificationVariable
+     * @param IndexBy|null $indexBy
      */
     public function __construct($joinAssociationPathExpression, $aliasIdentificationVariable, $indexBy)
     {
         $this->joinAssociationPathExpression = $joinAssociationPathExpression;
-        $this->aliasIdentificationVariable   = $aliasIdentificationVariable;
-        $this->indexBy                       = $indexBy;
+        $this->aliasIdentificationVariable = $aliasIdentificationVariable;
+        $this->indexBy = $indexBy;
     }
 
     /**

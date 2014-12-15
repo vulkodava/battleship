@@ -9,7 +9,7 @@ class AbstractProxyFactoryTest extends DoctrineTestCase
 {
     public function testGenerateProxyClasses()
     {
-        $metadata       = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
+        $metadata = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
         $proxyGenerator = $this->getMock('Doctrine\Common\Proxy\ProxyGenerator', array(), array(), '', false);
 
         $proxyGenerator
@@ -20,7 +20,7 @@ class AbstractProxyFactoryTest extends DoctrineTestCase
             ->method('generateProxyClass');
 
         $metadataFactory = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadataFactory');
-        $proxyFactory    = $this->getMockForAbstractClass(
+        $proxyFactory = $this->getMockForAbstractClass(
             'Doctrine\Common\Proxy\AbstractProxyFactory',
             array($proxyGenerator, $metadataFactory, true)
         );
@@ -37,10 +37,10 @@ class AbstractProxyFactoryTest extends DoctrineTestCase
 
     public function testGetProxy()
     {
-        $metadata        = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
-        $proxy           = $this->getMock('Doctrine\Common\Proxy\Proxy');
-        $definition      = new ProxyDefinition(get_class($proxy), array(), array(), null, null);
-        $proxyGenerator  = $this->getMock('Doctrine\Common\Proxy\ProxyGenerator', array(), array(), '', false);
+        $metadata = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
+        $proxy = $this->getMock('Doctrine\Common\Proxy\Proxy');
+        $definition = new ProxyDefinition(get_class($proxy), array(), array(), null, null);
+        $proxyGenerator = $this->getMock('Doctrine\Common\Proxy\ProxyGenerator', array(), array(), '', false);
         $metadataFactory = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadataFactory');
 
         $metadataFactory
@@ -65,10 +65,10 @@ class AbstractProxyFactoryTest extends DoctrineTestCase
 
     public function testResetUnitializedProxy()
     {
-        $metadata        = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
-        $proxy           = $this->getMock('Doctrine\Common\Proxy\Proxy');
-        $definition      = new ProxyDefinition(get_class($proxy), array(), array(), null, null);
-        $proxyGenerator  = $this->getMock('Doctrine\Common\Proxy\ProxyGenerator', array(), array(), '', false);
+        $metadata = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
+        $proxy = $this->getMock('Doctrine\Common\Proxy\Proxy');
+        $definition = new ProxyDefinition(get_class($proxy), array(), array(), null, null);
+        $proxyGenerator = $this->getMock('Doctrine\Common\Proxy\ProxyGenerator', array(), array(), '', false);
         $metadataFactory = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadataFactory');
 
         $metadataFactory
@@ -102,8 +102,8 @@ class AbstractProxyFactoryTest extends DoctrineTestCase
 
     public function testDisallowsResettingInitializedProxy()
     {
-        $proxyFactory = $this->getMockForAbstractClass('Doctrine\Common\Proxy\AbstractProxyFactory',  array(), '', false);
-        $proxy        = $this->getMock('Doctrine\Common\Proxy\Proxy');
+        $proxyFactory = $this->getMockForAbstractClass('Doctrine\Common\Proxy\AbstractProxyFactory', array(), '', false);
+        $proxy = $this->getMock('Doctrine\Common\Proxy\Proxy');
 
         $proxy
             ->expects($this->any())
@@ -117,10 +117,10 @@ class AbstractProxyFactoryTest extends DoctrineTestCase
 
     public function testMissingPrimaryKeyValue()
     {
-        $metadata        = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
-        $proxy           = $this->getMock('Doctrine\Common\Proxy\Proxy');
-        $definition      = new ProxyDefinition(get_class($proxy), array('missingKey'), array(), null, null);
-        $proxyGenerator  = $this->getMock('Doctrine\Common\Proxy\ProxyGenerator', array(), array(), '', false);
+        $metadata = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
+        $proxy = $this->getMock('Doctrine\Common\Proxy\Proxy');
+        $definition = new ProxyDefinition(get_class($proxy), array('missingKey'), array(), null, null);
+        $proxyGenerator = $this->getMock('Doctrine\Common\Proxy\ProxyGenerator', array(), array(), '', false);
         $metadataFactory = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadataFactory');
 
         $metadataFactory

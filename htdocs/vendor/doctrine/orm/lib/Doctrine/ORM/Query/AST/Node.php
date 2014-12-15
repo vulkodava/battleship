@@ -74,7 +74,7 @@ abstract class Node
             foreach ($props as $name => $prop) {
                 $ident += 4;
                 $str .= str_repeat(' ', $ident) . '"' . $name . '": '
-                      . $this->dump($prop) . ',' . PHP_EOL;
+                    . $this->dump($prop) . ',' . PHP_EOL;
                 $ident -= 4;
             }
 
@@ -86,7 +86,7 @@ abstract class Node
 
             foreach ($obj as $k => $v) {
                 $str .= PHP_EOL . str_repeat(' ', $ident) . '"'
-                      . $k . '" => ' . $this->dump($v) . ',';
+                    . $k . '" => ' . $this->dump($v) . ',';
                 $some = true;
             }
 

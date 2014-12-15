@@ -12,9 +12,9 @@ namespace Zend\Db\Sql\Predicate;
 class Between implements PredicateInterface
 {
     protected $specification = '%1$s BETWEEN %2$s AND %3$s';
-    protected $identifier    = null;
-    protected $minValue      = null;
-    protected $maxValue      = null;
+    protected $identifier = null;
+    protected $minValue = null;
+    protected $maxValue = null;
 
     /**
      * Constructor
@@ -45,6 +45,7 @@ class Between implements PredicateInterface
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
@@ -67,6 +68,7 @@ class Between implements PredicateInterface
     public function setMinValue($minValue)
     {
         $this->minValue = $minValue;
+
         return $this;
     }
 
@@ -89,6 +91,7 @@ class Between implements PredicateInterface
     public function setMaxValue($maxValue)
     {
         $this->maxValue = $maxValue;
+
         return $this;
     }
 
@@ -111,6 +114,7 @@ class Between implements PredicateInterface
     public function setSpecification($specification)
     {
         $this->specification = $specification;
+
         return $this;
     }
 

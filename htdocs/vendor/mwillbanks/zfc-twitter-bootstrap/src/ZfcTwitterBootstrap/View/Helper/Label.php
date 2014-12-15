@@ -16,7 +16,7 @@ class Label extends AbstractHelper
     /**
      * @var string
      */
-     protected $format = <<<FORMAT
+    protected $format = <<<FORMAT
 <span class="label %s">%s</span>
 FORMAT;
 
@@ -92,8 +92,8 @@ FORMAT;
     /**
      * Invoke Label
      *
-     * @param  string      $label
-     * @param  string      $class
+     * @param  string $label
+     * @param  string $class
      * @return string|self
      */
     public function __invoke($label = null, $class = '')

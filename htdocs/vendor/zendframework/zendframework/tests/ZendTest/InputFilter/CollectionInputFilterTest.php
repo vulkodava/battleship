@@ -34,7 +34,7 @@ class CollectionInputFilterTest extends TestCase
 
         $foo = new Input();
         $foo->getFilterChain()->attachByName('stringtrim')
-                              ->attachByName('alpha');
+            ->attachByName('alpha');
         $foo->getValidatorChain()->attach(new Validator\StringLength(3, 6));
 
         $bar = new Input();
@@ -47,9 +47,9 @@ class CollectionInputFilterTest extends TestCase
         $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 
         $filter->add($foo, 'foo')
-               ->add($bar, 'bar')
-               ->add($baz, 'baz')
-               ->add($this->getChildInputFilter(), 'nest');
+            ->add($bar, 'bar')
+            ->add($baz, 'baz')
+            ->add($this->getChildInputFilter(), 'nest');
 
         return $filter;
     }
@@ -60,7 +60,7 @@ class CollectionInputFilterTest extends TestCase
 
         $foo = new Input();
         $foo->getFilterChain()->attachByName('stringtrim')
-                              ->attachByName('alpha');
+            ->attachByName('alpha');
         $foo->getValidatorChain()->attach(new Validator\StringLength(3, 6));
 
         $bar = new Input();
@@ -73,8 +73,9 @@ class CollectionInputFilterTest extends TestCase
         $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 
         $filter->add($foo, 'foo')
-               ->add($bar, 'bar')
-               ->add($baz, 'baz');
+            ->add($bar, 'bar')
+            ->add($baz, 'baz');
+
         return $filter;
     }
 
@@ -488,13 +489,13 @@ class CollectionInputFilterTest extends TestCase
     {
         $items_inputfilter = new BaseInputFilter();
         $items_inputfilter->add(new Input(), 'id')
-                          ->add(new Input(), 'type');
+            ->add(new Input(), 'type');
         $items = new CollectionInputFilter();
         $items->setInputFilter($items_inputfilter);
 
         $groups_inputfilter = new BaseInputFilter();
         $groups_inputfilter->add(new Input(), 'group_class')
-                           ->add($items, 'items');
+            ->add($items, 'items');
         $groups = new CollectionInputFilter();
         $groups->setInputFilter($groups_inputfilter);
 
@@ -580,13 +581,13 @@ class CollectionInputFilterTest extends TestCase
     {
         $items_inputfilter = new BaseInputFilter();
         $items_inputfilter->add(new Input(), 'id')
-                          ->add(new Input(), 'type');
+            ->add(new Input(), 'type');
         $items = new CollectionInputFilter();
         $items->setInputFilter($items_inputfilter);
 
         $groups_inputfilter = new BaseInputFilter();
         $groups_inputfilter->add(new Input(), 'group_class')
-                           ->add($items, 'items');
+            ->add($items, 'items');
         $groups = new CollectionInputFilter();
         $groups->setInputFilter($groups_inputfilter);
 
@@ -641,13 +642,13 @@ class CollectionInputFilterTest extends TestCase
     {
         $items_inputfilter = new BaseInputFilter();
         $items_inputfilter->add(new Input(), 'id')
-                          ->add(new Input(), 'type');
+            ->add(new Input(), 'type');
         $items = new CollectionInputFilter();
         $items->setInputFilter($items_inputfilter);
 
         $groups_inputfilter = new BaseInputFilter();
         $groups_inputfilter->add(new Input(), 'group_class')
-                           ->add($items, 'items');
+            ->add($items, 'items');
         $groups = new CollectionInputFilter();
         $groups->setInputFilter($groups_inputfilter);
 
@@ -706,7 +707,7 @@ class CollectionInputFilterTest extends TestCase
                 'count' => null,
                 'isValid' => true
             ),
-            'count = 1' =>  array(
+            'count = 1' => array(
                 'count' => 1,
                 'isValid' => true
             ),

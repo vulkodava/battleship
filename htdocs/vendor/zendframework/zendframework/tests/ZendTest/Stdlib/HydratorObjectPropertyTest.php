@@ -20,11 +20,11 @@ class HydratorObjectPropertyTest extends \PHPUnit_Framework_TestCase
 
     public function testMultipleInvocationsWithDifferentFiltersFindsAllProperties()
     {
-        $instance = (object) array();
+        $instance = (object)array();
 
-        $instance->id         = 4;
-        $instance->array      = array(4, 3, 5, 6);
-        $instance->object     = (object) array();
+        $instance->id = 4;
+        $instance->array = array(4, 3, 5, 6);
+        $instance->object = (object)array();
         $instance->object->id = 4;
 
         $this->hydrator->addFilter('values', function ($property) {

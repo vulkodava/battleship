@@ -36,8 +36,8 @@ class ControllerLoaderFactoryTest extends TestCase
 
     public function setUp()
     {
-        $loaderFactory  = new ControllerLoaderFactory();
-        $config         = new ArrayObject(array('di' => array()));
+        $loaderFactory = new ControllerLoaderFactory();
+        $config = new ArrayObject(array('di' => array()));
         $this->services = new ServiceManager();
         $this->services->setService('Zend\ServiceManager\ServiceLocatorInterface', $this->services);
         $this->services->setFactory('ControllerLoader', $loaderFactory);
@@ -97,11 +97,11 @@ class ControllerLoaderFactoryTest extends TestCase
 
     public function testWillInstantiateControllersFromDiAbstractFactoryWhenWhitelisted()
     {
-        $config         = new ArrayObject(array(
+        $config = new ArrayObject(array(
             'di' => array(
                 'instance' => array(
                     'alias' => array(
-                        'my-controller'   => 'stdClass',
+                        'my-controller' => 'stdClass',
                     ),
                 ),
                 'allowed_controllers' => array(
@@ -174,7 +174,7 @@ class ControllerLoaderFactoryTest extends TestCase
         $controllerpluginManager = $this->services->get('ControllerPluginManager');
         $controllerpluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
 
-        $controller    = new \ZendTest\Mvc\Controller\TestAsset\SampleController;
+        $controller = new \ZendTest\Mvc\Controller\TestAsset\SampleController;
         $controllerpluginManager->setController($controller);
 
         $plugin = $controllerpluginManager->get('samplePlugin');

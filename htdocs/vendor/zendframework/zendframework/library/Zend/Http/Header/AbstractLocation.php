@@ -16,6 +16,7 @@ use Zend\Uri\UriInterface;
 /**
  * Abstract Location Header
  * Supports headers that have URI as value
+ *
  * @see Zend\Http\Header\Location
  * @see Zend\Http\Header\ContentLocation
  * @see Zend\Http\Header\Referer
@@ -73,7 +74,7 @@ abstract class AbstractLocation implements HeaderInterface
                 $uri = UriFactory::factory($uri);
             } catch (UriException\InvalidUriPartException $e) {
                 throw new Exception\InvalidArgumentException(
-                    sprintf('Invalid URI passed as string (%s)', (string) $uri),
+                    sprintf('Invalid URI passed as string (%s)', (string)$uri),
                     $e->getCode(),
                     $e
                 );
@@ -96,6 +97,7 @@ abstract class AbstractLocation implements HeaderInterface
         if ($this->uri instanceof UriInterface) {
             return $this->uri->toString();
         }
+
         return $this->uri;
     }
 
@@ -109,6 +111,7 @@ abstract class AbstractLocation implements HeaderInterface
         if ($this->uri === null || is_string($this->uri)) {
             $this->uri = UriFactory::factory($this->uri);
         }
+
         return $this->uri;
     }
 

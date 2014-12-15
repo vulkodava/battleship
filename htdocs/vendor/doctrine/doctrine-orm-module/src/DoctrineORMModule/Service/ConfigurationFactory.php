@@ -30,7 +30,7 @@ class ConfigurationFactory extends DoctrineConfigurationFactory
     {
         /** @var $options \DoctrineORMModule\Options\Configuration */
         $options = $this->getOptions($serviceLocator);
-        $config  = new Configuration();
+        $config = new Configuration();
 
         $config->setAutoGenerateProxyClasses($options->getGenerateProxies());
         $config->setProxyDir($options->getProxyDir());

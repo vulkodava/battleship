@@ -23,11 +23,11 @@ class ExtractEventTest extends PHPUnit_Framework_TestCase
      */
     public function testEvent()
     {
-        $target    = new stdClass();
-        $object1   = new stdClass();
-        $event     = new ExtractEvent($target, $object1);
-        $data2     = array('maintainer' => 'Marvin');
-        $object2   = new stdClass();
+        $target = new stdClass();
+        $object1 = new stdClass();
+        $event = new ExtractEvent($target, $object1);
+        $data2 = array('maintainer' => 'Marvin');
+        $object2 = new stdClass();
 
         $this->assertSame(ExtractEvent::EVENT_EXTRACT, $event->getName());
         $this->assertSame($target, $event->getTarget());

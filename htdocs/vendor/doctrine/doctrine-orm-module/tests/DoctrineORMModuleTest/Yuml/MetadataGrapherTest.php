@@ -311,7 +311,7 @@ class MetadataGrapherTest extends PHPUnit_Framework_TestCase
     {
         $class1 = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
         $class2 = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
-        $child  = get_class($this->getMock('stdClass'));
+        $child = get_class($this->getMock('stdClass'));
         $class1->expects($this->any())->method('getName')->will($this->returnValue('stdClass'));
         $class1->expects($this->any())->method('getAssociationNames')->will($this->returnValue(array()));
         $class1->expects($this->any())->method('getFieldNames')->will($this->returnValue(array()));
@@ -332,7 +332,7 @@ class MetadataGrapherTest extends PHPUnit_Framework_TestCase
     {
         $class1 = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
         $class2 = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
-        $child  = get_class($this->getMock('stdClass'));
+        $child = get_class($this->getMock('stdClass'));
 
         $class1->expects($this->any())->method('getName')->will($this->returnValue('stdClass'));
         $class1->expects($this->any())->method('getAssociationNames')->will($this->returnValue(array()));
@@ -357,7 +357,7 @@ class MetadataGrapherTest extends PHPUnit_Framework_TestCase
         $class2 = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
         $class3 = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
         $class4 = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata');
-        $child  = get_class($this->getMock('stdClass'));
+        $child = get_class($this->getMock('stdClass'));
 
         $class1->expects($this->any())->method('getName')->will($this->returnValue('stdClass'));
         $class1->expects($this->any())->method('getAssociationNames')->will($this->returnValue(array('a')));

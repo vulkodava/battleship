@@ -22,9 +22,9 @@ class Encoder
      * @var array
      */
     protected $options = array(
-        'sort'    => true,
+        'sort' => true,
         'version' => 1,
-        'wrap'    => 78
+        'wrap' => 78
     );
 
     /**
@@ -51,6 +51,7 @@ class Encoder
     public static function decode($string)
     {
         $encoder = new static(array());
+
         return $encoder->_decode($string);
     }
 
@@ -63,11 +64,11 @@ class Encoder
     protected function _decode($string)
     {
         $items = array();
-        $item  = array();
-        $last  = null;
+        $item = array();
+        $last = null;
         $inComment = false;
         foreach (explode("\n", $string) as $line) {
-            $line    = rtrim($line, "\x09\x0A\x0D\x00\x0B");
+            $line = rtrim($line, "\x09\x0A\x0D\x00\x0B");
             $matches = array();
             if (substr($line, 0, 1) === ' ' && $last !== null && !$inComment) {
                 $last[2] .= substr($line, 1);
@@ -76,8 +77,8 @@ class Encoder
                 continue;
             } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^<]*)$/i', $line, $matches)) {
                 $inComment = false;
-                $name  = strtolower($matches[1]);
-                $type  = trim($matches[2]);
+                $name = strtolower($matches[1]);
+                $type = trim($matches[2]);
                 $value = $matches[3];
                 if ($last !== null) {
                     $this->pushAttribute($last, $item);
@@ -86,8 +87,8 @@ class Encoder
                     continue;
                 } elseif (count($item) > 0 && $name === 'dn') {
                     $items[] = $item;
-                    $item    = array();
-                    $last    = null;
+                    $item = array();
+                    $last = null;
                 }
                 $last = array($name, $type, $value);
             } elseif (trim($line) === '') {
@@ -110,8 +111,8 @@ class Encoder
      */
     protected function pushAttribute(array $attribute, array &$entry)
     {
-        $name  = $attribute[0];
-        $type  = $attribute[1];
+        $name = $attribute[0];
+        $type = $attribute[1];
         $value = $attribute[2];
         if ($type === '::') {
             $value = base64_decode($value);
@@ -164,13 +165,13 @@ class Encoder
      *
      * @link http://www.faqs.org/rfcs/rfc2849.html
      *
-     * @param  string  $string
+     * @param  string $string
      * @param  bool $base64
      * @return string
      */
     protected function encodeString($string, &$base64 = null)
     {
-        $string = (string) $string;
+        $string = (string)$string;
         if (!is_numeric($string) && empty($string)) {
             return '';
         }
@@ -222,7 +223,7 @@ class Encoder
      *
      * @link http://www.faqs.org/rfcs/rfc2849.html
      *
-     * @param  string       $name
+     * @param  string $name
      * @param  array|string $value
      * @return string
      */
@@ -239,8 +240,8 @@ class Encoder
         }
 
         foreach ($value as $v) {
-            $base64    = null;
-            $v         = $this->encodeString($v, $base64);
+            $base64 = null;
+            $v = $this->encodeString($v, $base64);
             $attribute = $name . ':';
             if ($base64 === true) {
                 $attribute .= ': ' . $v;
@@ -266,7 +267,7 @@ class Encoder
      */
     protected function encodeAttributes(array $attributes)
     {
-        $string     = '';
+        $string = '';
         $attributes = array_change_key_case($attributes, CASE_LOWER);
         if (!$this->versionWritten && array_key_exists('dn', $attributes) && isset($this->options['version'])
             && array_key_exists('objectclass', $attributes)

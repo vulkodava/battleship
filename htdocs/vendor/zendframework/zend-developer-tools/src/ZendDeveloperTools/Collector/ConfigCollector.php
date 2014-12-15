@@ -21,7 +21,7 @@ use ZendDeveloperTools\Stub\ClosureStub;
  */
 class ConfigCollector implements CollectorInterface, Serializable
 {
-    const NAME     = 'config';
+    const NAME = 'config';
     const PRIORITY = 100;
 
     /**
@@ -55,7 +55,7 @@ class ConfigCollector implements CollectorInterface, Serializable
      */
     public function collect(MvcEvent $mvcEvent)
     {
-        if (! $application = $mvcEvent->getApplication()) {
+        if (!$application = $mvcEvent->getApplication()) {
             return;
         }
 
@@ -99,8 +99,8 @@ class ConfigCollector implements CollectorInterface, Serializable
      */
     public function unserialize($serialized)
     {
-        $data                    = unserialize($serialized);
-        $this->config            = $data['config'];
+        $data = unserialize($serialized);
+        $this->config = $data['config'];
         $this->applicationConfig = $data['applicationConfig'];
     }
 
@@ -153,7 +153,8 @@ class ConfigCollector implements CollectorInterface, Serializable
             }
 
             if ($value instanceof ClosureStub) {
-                $unserialized[$key] = function () {};
+                $unserialized[$key] = function () {
+                };
 
                 continue;
             }

@@ -74,7 +74,7 @@ class MemcacheCache extends CacheProvider
      */
     protected function doContains($id)
     {
-        return (bool) $this->memcache->get($id);
+        return (bool)$this->memcache->get($id);
     }
 
     /**
@@ -85,7 +85,8 @@ class MemcacheCache extends CacheProvider
         if ($lifeTime > 30 * 24 * 3600) {
             $lifeTime = time() + $lifeTime;
         }
-        return $this->memcache->set($id, $data, 0, (int) $lifeTime);
+
+        return $this->memcache->set($id, $data, 0, (int)$lifeTime);
     }
 
     /**
@@ -110,11 +111,12 @@ class MemcacheCache extends CacheProvider
     protected function doGetStats()
     {
         $stats = $this->memcache->getStats();
+
         return array(
-            Cache::STATS_HITS   => $stats['get_hits'],
+            Cache::STATS_HITS => $stats['get_hits'],
             Cache::STATS_MISSES => $stats['get_misses'],
             Cache::STATS_UPTIME => $stats['uptime'],
-            Cache::STATS_MEMORY_USAGE     => $stats['bytes'],
+            Cache::STATS_MEMORY_USAGE => $stats['bytes'],
             Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes'],
         );
     }

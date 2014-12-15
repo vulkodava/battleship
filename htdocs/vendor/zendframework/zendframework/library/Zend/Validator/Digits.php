@@ -13,9 +13,9 @@ use Zend\Filter\Digits as DigitsFilter;
 
 class Digits extends AbstractValidator
 {
-    const NOT_DIGITS   = 'notDigits';
+    const NOT_DIGITS = 'notDigits';
     const STRING_EMPTY = 'digitsStringEmpty';
-    const INVALID      = 'digitsInvalid';
+    const INVALID = 'digitsInvalid';
 
     /**
      * Digits filter used for validation
@@ -30,9 +30,9 @@ class Digits extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::NOT_DIGITS   => "The input must contain only digits",
+        self::NOT_DIGITS => "The input must contain only digits",
         self::STRING_EMPTY => "The input is an empty string",
-        self::INVALID      => "Invalid type given. String, integer or float expected",
+        self::INVALID => "Invalid type given. String, integer or float expected",
     );
 
     /**
@@ -45,13 +45,15 @@ class Digits extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
-        $this->setValue((string) $value);
+        $this->setValue((string)$value);
 
         if ('' === $this->getValue()) {
             $this->error(self::STRING_EMPTY);
+
             return false;
         }
 
@@ -61,6 +63,7 @@ class Digits extends AbstractValidator
 
         if ($this->getValue() !== static::$filter->filter($this->getValue())) {
             $this->error(self::NOT_DIGITS);
+
             return false;
         }
 

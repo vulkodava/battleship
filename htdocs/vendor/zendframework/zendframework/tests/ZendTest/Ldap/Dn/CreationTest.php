@@ -23,26 +23,26 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
 
         $dnString1 = 'CN=Baker\\, Alice,CN=Users+OU=Lab,DC=example,DC=com';
-        $dnArray1  = array(
+        $dnArray1 = array(
             array('CN' => 'Baker, Alice'),
             array('CN' => 'Users',
-                  'OU' => 'Lab'),
+                'OU' => 'Lab'),
             array('DC' => 'example'),
             array('DC' => 'com'));
 
         $dnString2 = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
-        $dnArray2  = array(
+        $dnArray2 = array(
             array('cn' => 'Baker, Alice'),
             array('cn' => 'Users',
-                  'ou' => 'Lab'),
+                'ou' => 'Lab'),
             array('dc' => 'example'),
             array('dc' => 'com'));
 
         $dnString3 = 'Cn=Baker\\, Alice,Cn=Users+Ou=Lab,Dc=example,Dc=com';
-        $dnArray3  = array(
+        $dnArray3 = array(
             array('Cn' => 'Baker, Alice'),
             array('Cn' => 'Users',
-                  'Ou' => 'Lab'),
+                'Ou' => 'Lab'),
             array('Dc' => 'example'),
             array('Dc' => 'com'));
 
@@ -112,35 +112,35 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $dnString3 = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
 
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString1, (string) $dn);
+        $this->assertEquals($dnString1, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string) $dn);
+        $this->assertEquals($dnString2, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string) $dn);
+        $this->assertEquals($dnString3, (string)$dn);
 
         $dn = Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string) $dn);
+        $this->assertEquals($dnString2, (string)$dn);
         $dn->setCaseFold(null);
-        $this->assertEquals($dnString1, (string) $dn);
+        $this->assertEquals($dnString1, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string) $dn);
+        $this->assertEquals($dnString3, (string)$dn);
 
         $dn = Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string) $dn);
+        $this->assertEquals($dnString3, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string) $dn);
+        $this->assertEquals($dnString2, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string) $dn);
+        $this->assertEquals($dnString3, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string) $dn);
+        $this->assertEquals($dnString2, (string)$dn);
 
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString2, (string) $dn);
+        $this->assertEquals($dnString2, (string)$dn);
 
         Ldap\Dn::setDefaultCaseFold(null);
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString1, (string) $dn);
+        $this->assertEquals($dnString1, (string)$dn);
 
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
     }
@@ -150,15 +150,15 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
 
         $dnString = 'cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
-        $dn       = Ldap\Dn::fromString($dnString);
+        $dn = Ldap\Dn::fromString($dnString);
 
         $this->assertEquals(array('cn' => 'Baker, Alice'), $dn->getRdn());
         $this->assertEquals('cn=Baker\\, Alice', $dn->getRdnString());
 
         $dnString = 'Cn=Users+Ou=Lab,dc=example,dc=com';
-        $dn       = Ldap\Dn::fromString($dnString);
+        $dn = Ldap\Dn::fromString($dnString);
         $this->assertEquals(array('Cn' => 'Users',
-                                 'Ou'  => 'Lab'), $dn->getRdn()
+                'Ou' => 'Lab'), $dn->getRdn()
         );
         $this->assertEquals('Cn=Users+Ou=Lab', $dn->getRdnString());
     }
@@ -166,7 +166,7 @@ class CreationTest extends \PHPUnit_Framework_TestCase
     public function testGetParentDn()
     {
         $dnString = 'cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
-        $dn       = Ldap\Dn::fromString($dnString);
+        $dn = Ldap\Dn::fromString($dnString);
 
         $this->assertEquals('cn=Users,dc=example,dc=com', $dn->getParentDn()->toString());
         $this->assertEquals('cn=Users,dc=example,dc=com', $dn->getParentDn(1)->toString());
@@ -190,7 +190,7 @@ class CreationTest extends \PHPUnit_Framework_TestCase
     public function testEmptyStringDn()
     {
         $dnString = '';
-        $dn       = Ldap\Dn::fromString($dnString);
+        $dn = Ldap\Dn::fromString($dnString);
 
         $this->assertEquals($dnString, $dn->toString());
     }

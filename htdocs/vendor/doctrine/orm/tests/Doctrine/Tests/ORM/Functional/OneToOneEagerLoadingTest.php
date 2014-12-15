@@ -23,7 +23,8 @@ class OneToOneEagerLoadingTest extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata('Doctrine\Tests\ORM\Functional\Waggon'),
                 $this->_em->getClassMetadata('Doctrine\Tests\ORM\Functional\TrainOrder'),
             ));
-        } catch(\Exception $e) {}
+        } catch (\Exception $e) {
+        }
     }
 
     public function testEagerLoadOneToOneOwningSide()

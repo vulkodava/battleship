@@ -30,8 +30,8 @@ use Zend\Soap\Exception;
  *       * @param int $y
  *       * @return int
  *       *
- *      public function add($x, $y) {}
- *   }
+ *       public function add($x, $y) {}
+ *       }
  *
  * The document/literal wrapper pattern would lead php ext/soap to generate a
  * single "request" object that contains $x and $y properties. To solve this a
@@ -102,7 +102,8 @@ class DocumentLiteralWrapper
         $this->_assertServiceDelegateHasMethod($method);
 
         $delegateArgs = $this->_parseArguments($method, $args[0]);
-        $ret          = call_user_func_array(array($this->object, $method), $delegateArgs);
+        $ret = call_user_func_array(array($this->object, $method), $delegateArgs);
+
         return $this->_getResultMessage($method, $ret);
     }
 

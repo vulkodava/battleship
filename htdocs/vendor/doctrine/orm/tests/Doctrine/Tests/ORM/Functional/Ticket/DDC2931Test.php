@@ -26,12 +26,12 @@ class DDC2931Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
     public function testIssue()
     {
-        $first  = new DDC2931User();
+        $first = new DDC2931User();
         $second = new DDC2931User();
-        $third  = new DDC2931User();
+        $third = new DDC2931User();
 
         $second->parent = $first;
-        $third->parent  = $second;
+        $third->parent = $second;
 
         $this->_em->persist($first);
         $this->_em->persist($second);
@@ -47,16 +47,16 @@ class DDC2931Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
     public function testFetchJoinedEntitiesCanBeRefreshed()
     {
-        $first  = new DDC2931User();
+        $first = new DDC2931User();
         $second = new DDC2931User();
-        $third  = new DDC2931User();
+        $third = new DDC2931User();
 
         $second->parent = $first;
-        $third->parent  = $second;
+        $third->parent = $second;
 
-        $first->value  = 1;
+        $first->value = 1;
         $second->value = 2;
-        $third->value  = 3;
+        $third->value = 3;
 
         $this->_em->persist($first);
         $this->_em->persist($second);
@@ -64,9 +64,9 @@ class DDC2931Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $this->_em->flush();
 
-        $first->value  = 4;
+        $first->value = 4;
         $second->value = 5;
-        $third->value  = 6;
+        $third->value = 6;
 
         $refreshedSecond = $this
             ->_em
@@ -105,6 +105,7 @@ class DDC2931User
     /**
      * Return Rank recursively
      * My rank is 1 + rank of my parent
+     *
      * @return integer
      */
     public function getRank()

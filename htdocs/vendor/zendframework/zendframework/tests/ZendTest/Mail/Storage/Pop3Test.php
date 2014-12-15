@@ -26,22 +26,23 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Zend_Mail POP3 tests are not enabled');
         }
 
-        $this->_params = array('host'     => TESTS_ZEND_MAIL_POP3_HOST,
-                               'user'     => TESTS_ZEND_MAIL_POP3_USER,
-                               'password' => TESTS_ZEND_MAIL_POP3_PASSWORD);
+        $this->_params = array('host' => TESTS_ZEND_MAIL_POP3_HOST,
+            'user' => TESTS_ZEND_MAIL_POP3_USER,
+            'password' => TESTS_ZEND_MAIL_POP3_PASSWORD);
 
         if (defined('TESTS_ZEND_MAIL_SERVER_TESTDIR') && TESTS_ZEND_MAIL_SERVER_TESTDIR) {
             if (!file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'inbox')
-             && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'INBOX')) {
+                && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'INBOX')
+            ) {
                 $this->markTestSkipped('There is no file name "inbox" or "INBOX" in '
-                                       . TESTS_ZEND_MAIL_SERVER_TESTDIR . '. I won\'t use it for testing. '
-                                       . 'This is you safety net. If you think it is the right directory just '
-                                       . 'create an empty file named INBOX or remove/deactived this message.');
+                    . TESTS_ZEND_MAIL_SERVER_TESTDIR . '. I won\'t use it for testing. '
+                    . 'This is you safety net. If you think it is the right directory just '
+                    . 'create an empty file named INBOX or remove/deactived this message.');
             }
 
             $this->_cleanDir(TESTS_ZEND_MAIL_SERVER_TESTDIR);
             $this->_copyDir(__DIR__ . '/../_files/test.' . TESTS_ZEND_MAIL_SERVER_FORMAT,
-                            TESTS_ZEND_MAIL_SERVER_TESTDIR);
+                TESTS_ZEND_MAIL_SERVER_TESTDIR);
         }
     }
 
@@ -70,7 +71,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
             if ($entry == '.' || $entry == '..' || $entry == '.svn') {
                 continue;
             }
-            $fullname = $dir  . DIRECTORY_SEPARATOR . $entry;
+            $fullname = $dir . DIRECTORY_SEPARATOR . $entry;
             $destname = $dest . DIRECTORY_SEPARATOR . $entry;
             if (is_dir($fullname)) {
                 mkdir($destname);
@@ -207,15 +208,15 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Simple Message', $subject);
     }
 
-/*
-    public function testFetchTopBody()
-    {
-        $mail = new Storage\Pop3($this->_params);
+    /*
+        public function testFetchTopBody()
+        {
+            $mail = new Storage\Pop3($this->_params);
 
-        $content = $mail->getHeader(3, 1)->getContent();
-        $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
-    }
-*/
+            $content = $mail->getHeader(3, 1)->getContent();
+            $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
+        }
+    */
 
     public function testFetchMessageHeader()
     {
@@ -230,24 +231,24 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Pop3($this->_params);
 
         $content = $mail->getMessage(3)->getContent();
-        list($content, ) = explode("\n", $content, 2);
+        list($content,) = explode("\n", $content, 2);
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
 
-/*
-    public function testFailedRemove()
-    {
-        $mail = new Zend_Mail_Storage_Pop3($this->_params);
+    /*
+        public function testFailedRemove()
+        {
+            $mail = new Zend_Mail_Storage_Pop3($this->_params);
 
-        try {
-            $mail->removeMessage(1);
-        } catch (Exception $e) {
-            return; // test ok
+            try {
+                $mail->removeMessage(1);
+            } catch (Exception $e) {
+                return; // test ok
+            }
+
+            $this->fail('no exception raised while deleting message (mbox is read-only)');
         }
-
-        $this->fail('no exception raised while deleting message (mbox is read-only)');
-    }
-*/
+    */
 
     public function testWithInstanceConstruction()
     {

@@ -17,9 +17,10 @@ use Zend\Db\Adapter\Platform\SqlServer as SqlServerPlatform;
 class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare a proper limit/offset sql statement
-     * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::prepareStatement
-     * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
+     * @testdox      integration test: Testing SelectDecorator will use Select an internal state to prepare a proper
+     *               limit/offset sql statement
+     * @covers       Zend\Db\Sql\Platform\SqlServer\SelectDecorator::prepareStatement
+     * @covers       Zend\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
      * @dataProvider dataProvider
      */
     public function testPrepareStatement(Select $select, $expectedSql, $expectedParams, $notUsed, $expectedFormatParamCount)
@@ -51,9 +52,10 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare a proper limit/offset sql statement
-     * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::getSqlString
-     * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
+     * @testdox      integration test: Testing SelectDecorator will use Select an internal state to prepare a proper
+     *               limit/offset sql statement
+     * @covers       Zend\Db\Sql\Platform\SqlServer\SelectDecorator::getSqlString
+     * @covers       Zend\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
      * @dataProvider dataProvider
      */
     public function testGetSqlString(Select $select, $notUsed, $notUsed, $expectedSql)

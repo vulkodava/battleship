@@ -1,6 +1,6 @@
 <?php
 
-$em = require_once __DIR__.'/bootstrap.php';
+$em = require_once __DIR__ . '/bootstrap.php';
 
 $cli = new \Symfony\Component\Console\Application('Doctrine Command Line Interface', Doctrine\Common\Version::VERSION);
 $cli->setCatchExceptions(true);

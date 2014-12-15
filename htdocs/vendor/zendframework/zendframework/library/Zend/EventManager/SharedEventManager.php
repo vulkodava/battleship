@@ -25,6 +25,7 @@ class SharedEventManager implements
 {
     /**
      * Identifiers with event connections
+     *
      * @var array
      */
     protected $identifiers = array();
@@ -53,15 +54,15 @@ class SharedEventManager implements
      * );
      * </code>
      *
-     * @param  string|array $id Identifier(s) for event emitting component(s)
+     * @param  string|array $id   Identifier(s) for event emitting component(s)
      * @param  string $event
      * @param  callable $callback PHP Callback
-     * @param  int $priority Priority at which listener should execute
+     * @param  int $priority      Priority at which listener should execute
      * @return CallbackHandler|array Either CallbackHandler or array of CallbackHandlers
      */
     public function attach($id, $event, $callback, $priority = 1)
     {
-        $ids = (array) $id;
+        $ids = (array)$id;
         $listeners = array();
         foreach ($ids as $id) {
             if (!array_key_exists($id, $this->identifiers)) {
@@ -72,6 +73,7 @@ class SharedEventManager implements
         if (count($listeners) > 1) {
             return $listeners;
         }
+
         return $listeners[0];
     }
 
@@ -96,13 +98,15 @@ class SharedEventManager implements
      *
      * @param  string|int $id
      * @param  CallbackHandler $listener
-     * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
+     * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or
+     *              listener not found
      */
     public function detach($id, CallbackHandler $listener)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
         }
+
         return $this->identifiers[$id]->detach($listener);
     }
 
@@ -133,8 +137,10 @@ class SharedEventManager implements
             if ('*' != $id && array_key_exists('*', $this->identifiers)) {
                 return $this->identifiers['*']->getEvents();
             }
+
             return false;
         }
+
         return $this->identifiers[$id]->getEvents();
     }
 
@@ -150,6 +156,7 @@ class SharedEventManager implements
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
         }
+
         return $this->identifiers[$id]->getListeners($event);
     }
 
@@ -168,6 +175,7 @@ class SharedEventManager implements
 
         if (null === $event) {
             unset($this->identifiers[$id]);
+
             return true;
         }
 

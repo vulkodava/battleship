@@ -187,7 +187,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
     {
         $service = new Smd\Service('foo');
         $this->smd->addService($service);
-        $test    = new Smd\Service('foo');
+        $test = new Smd\Service('foo');
         try {
             $this->smd->addService($test);
             $this->fail('Adding service with existing service name should throw exception');
@@ -210,8 +210,8 @@ class SmdTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldBeAbleToAddManyServicesAtOnceWithArrayOfServiceObjects()
     {
-        $one   = new Smd\Service('one');
-        $two   = new Smd\Service('two');
+        $one = new Smd\Service('one');
+        $two = new Smd\Service('two');
         $three = new Smd\Service('three');
         $services = array($one, $two, $three);
         $this->smd->addServices($services);
@@ -321,7 +321,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $options = $this->getOptions();
         $this->smd->setOptions($options);
         $json = $this->smd->toJSON();
-        $smd  = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
+        $smd = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
         $this->validateServiceArray($smd, $options);
     }
 
@@ -330,25 +330,25 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $options = $this->getOptions();
         $this->smd->setOptions($options);
         $json = $this->smd->__toString();
-        $smd  = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
+        $smd = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
         $this->validateServiceArray($smd, $options);
     }
 
     public function getOptions()
     {
         return array(
-            'target'   => '/test/me',
-            'id'       => '/test/me',
+            'target' => '/test/me',
+            'id' => '/test/me',
             'services' => array(
                 array(
-                    'name'   => 'foo',
+                    'name' => 'foo',
                     'params' => array(
                         array('type' => 'boolean'),
                     ),
                     'return' => 'boolean',
                 ),
                 array(
-                    'name'   => 'bar',
+                    'name' => 'bar',
                     'params' => array(
                         array('type' => 'integer'),
                     ),

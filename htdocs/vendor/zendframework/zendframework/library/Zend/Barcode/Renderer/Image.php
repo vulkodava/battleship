@@ -19,44 +19,51 @@ class Image extends AbstractRenderer
 {
     /**
      * List of authorized output format
+     *
      * @var array
      */
     protected $allowedImageType = array('png',
         'jpeg',
-        'gif'  );
+        'gif');
 
     /**
      * Image format
+     *
      * @var string
      */
     protected $imageType = 'png';
 
     /**
      * Resource for the image
+     *
      * @var resource
      */
     protected $resource = null;
 
     /**
      * Resource for the font and bars color of the image
+     *
      * @var int
      */
     protected $imageForeColor = null;
 
     /**
      * Resource for the background color of the image
+     *
      * @var int
      */
     protected $imageBackgroundColor = null;
 
     /**
      * Height of the rendered image wanted by user
+     *
      * @var int
      */
     protected $userHeight = 0;
 
     /**
      * Width of the rendered image wanted by user
+     *
      * @var int
      */
     protected $userWidth = 0;
@@ -91,6 +98,7 @@ class Image extends AbstractRenderer
             );
         }
         $this->userHeight = intval($value);
+
         return $this;
     }
 
@@ -119,6 +127,7 @@ class Image extends AbstractRenderer
             );
         }
         $this->userWidth = intval($value);
+
         return $this;
     }
 
@@ -147,6 +156,7 @@ class Image extends AbstractRenderer
             );
         }
         $this->resource = $image;
+
         return $this;
     }
 
@@ -171,6 +181,7 @@ class Image extends AbstractRenderer
         }
 
         $this->imageType = $value;
+
         return $this;
     }
 
@@ -191,7 +202,7 @@ class Image extends AbstractRenderer
      */
     protected function initRenderer()
     {
-        $barcodeWidth  = $this->barcode->getWidth(true);
+        $barcodeWidth = $this->barcode->getWidth(true);
         $barcodeHeight = $this->barcode->getHeight(true);
 
         if (null === $this->resource) {
@@ -333,7 +344,7 @@ class Image extends AbstractRenderer
             $points[2][0] + $this->leftOffset,
             $points[2][1] + $this->topOffset,
             $points[3][0] + $this->leftOffset,
-            $points[3][1] + $this->topOffset,   );
+            $points[3][1] + $this->topOffset,);
 
         $allocatedColor = imagecolorallocate(
             $this->resource,

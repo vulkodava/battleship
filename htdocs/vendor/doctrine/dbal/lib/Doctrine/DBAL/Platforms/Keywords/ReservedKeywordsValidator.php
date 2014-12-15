@@ -72,18 +72,19 @@ class ReservedKeywordsValidator implements Visitor
                 $keywordLists[] = $keywordList->getName();
             }
         }
+
         return $keywordLists;
     }
 
     /**
      * @param string $asset
-     * @param array  $violatedPlatforms
+     * @param array $violatedPlatforms
      *
      * @return void
      */
     private function addViolation($asset, $violatedPlatforms)
     {
-        if ( ! $violatedPlatforms) {
+        if (!$violatedPlatforms) {
             return;
         }
 

@@ -20,29 +20,33 @@ abstract class AbstractStorage implements
 {
     /**
      * class capabilities with default values
+     *
      * @var array
      */
-    protected $has = array('uniqueid'  => true,
-                            'delete'    => false,
-                            'create'    => false,
-                            'top'       => false,
-                            'fetchPart' => true,
-                            'flags'     => false);
+    protected $has = array('uniqueid' => true,
+        'delete' => false,
+        'create' => false,
+        'top' => false,
+        'fetchPart' => true,
+        'flags' => false);
 
     /**
      * current iteration position
+     *
      * @var int
      */
     protected $iterationPos = 0;
 
     /**
      * maximum iteration position (= message count)
+     *
      * @var null|int
      */
     protected $iterationMax = null;
 
     /**
      * used message class, change it in an extended class to extend the returned message class
+     *
      * @var string
      */
     protected $messageClass = 'Zend\Mail\Storage\Message';
@@ -56,7 +60,7 @@ abstract class AbstractStorage implements
      *   - false if a feature is not supported
      *   - null is it's not yet known or it can't be know if a feature is supported
      *
-     * @param  string $var  property name
+     * @param  string $var property name
      * @throws Exception\InvalidArgumentException
      * @return bool         supported or not
      */
@@ -64,6 +68,7 @@ abstract class AbstractStorage implements
     {
         if (strpos($var, 'has') === 0) {
             $var = strtolower(substr($var, 3));
+
             return isset($this->has[$var]) ? $this->has[$var] : null;
         }
 
@@ -91,7 +96,7 @@ abstract class AbstractStorage implements
     /**
      * Get a list of messages with number and size
      *
-     * @param  int $id  number of message
+     * @param  int $id number of message
      * @return int|array size of given message of list with all messages as array(num => size)
      */
     abstract public function getSize($id = 0);
@@ -107,9 +112,9 @@ abstract class AbstractStorage implements
     /**
      * Get raw header of message or part
      *
-     * @param  int               $id       number of message
-     * @param  null|array|string $part     path to part or null for message header
-     * @param  int               $topLines include this many lines with header (after an empty line)
+     * @param  int $id                 number of message
+     * @param  null|array|string $part path to part or null for message header
+     * @param  int $topLines           include this many lines with header (after an empty line)
      * @return string raw header
      */
     abstract public function getRawHeader($id, $part = null, $topLines = 0);
@@ -117,7 +122,7 @@ abstract class AbstractStorage implements
     /**
      * Get raw content of message or part
      *
-     * @param  int               $id   number of message
+     * @param  int $id                 number of message
      * @param  null|array|string $part path to part or null for message content
      * @return string raw content
      */
@@ -195,7 +200,7 @@ abstract class AbstractStorage implements
     /**
      * ArrayAccess::offsetExists()
      *
-     * @param  int  $id
+     * @param  int $id
      * @return bool
      */
     public function offsetExists($id)
@@ -236,7 +241,7 @@ abstract class AbstractStorage implements
     /**
      * ArrayAccess::offsetUnset()
      *
-     * @param    int   $id
+     * @param    int $id
      * @return   bool success
      */
     public function offsetUnset($id)
@@ -295,6 +300,7 @@ abstract class AbstractStorage implements
         if ($this->iterationMax === null) {
             $this->iterationMax = $this->countMessages();
         }
+
         return $this->iterationPos && $this->iterationPos <= $this->iterationMax;
     }
 

@@ -25,12 +25,12 @@ class OrmPerformanceTestCase extends OrmFunctionalTestCase
 
         if ($this->maxRunningTime != 0 && $time > $this->maxRunningTime) {
             $this->fail(
-              sprintf(
-                'expected running time: <= %s but was: %s',
+                sprintf(
+                    'expected running time: <= %s but was: %s',
 
-                $this->maxRunningTime,
-                $time
-              )
+                    $this->maxRunningTime,
+                    $time
+                )
             );
         }
     }

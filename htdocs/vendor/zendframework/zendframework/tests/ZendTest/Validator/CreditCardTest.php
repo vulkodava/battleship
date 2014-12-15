@@ -35,7 +35,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic($input, $expected)
     {
-        $validator      = new CreditCard();
+        $validator = new CreditCard();
         $this->assertEquals($expected, $validator->isValid($input));
     }
 
@@ -108,7 +108,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
      */
     public function testProvider($input, $expected)
     {
-        $validator      = new CreditCard(CreditCard::VISA);
+        $validator = new CreditCard(CreditCard::VISA);
         $this->assertEquals($expected, $validator->isValid($input));
     }
 
@@ -201,10 +201,10 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
      * @dataProvider jcbValues
      *
      * @param string $input
-     * @param bool   $expected
+     * @param bool $expected
      *
-     * @group 6278
-     * @group 6927
+     * @group        6278
+     * @group        6927
      */
     public function testJcbCard($input, $expected)
     {
@@ -272,7 +272,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultiInstitute()
     {
-        $validator      = new CreditCard(array('type' => CreditCard::MASTERCARD));
+        $validator = new CreditCard(array('type' => CreditCard::MASTERCARD));
         $this->assertFalse($validator->isValid('4111111111111111'));
         $message = $validator->getMessages();
         $this->assertContains('not from an allowed institute', current($message));
@@ -282,7 +282,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new CreditCard();
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 
     public static function staticCallback($value)

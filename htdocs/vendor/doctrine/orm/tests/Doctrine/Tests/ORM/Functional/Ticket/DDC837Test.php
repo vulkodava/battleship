@@ -68,7 +68,7 @@ class DDC837Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertInstanceOf(__NAMESPACE__ . '\DDC837Aggregate', $e2->aggregate);
         $this->assertEquals('test2', $e2->aggregate->getSysname());
 
-        $all = $this->_em->getRepository(__NAMESPACE__.'\DDC837Super')->findAll();
+        $all = $this->_em->getRepository(__NAMESPACE__ . '\DDC837Super')->findAll();
 
         foreach ($all as $obj) {
             if ($obj instanceof DDC837Class1) {
@@ -101,7 +101,7 @@ abstract class DDC837Super
     /**
      * @Id @Column(name="id", type="integer")
      * @GeneratedValue(strategy="AUTO")
-    */
+     */
     public $id;
 }
 

@@ -62,6 +62,7 @@ class AuthenticationService implements AuthenticationServiceInterface
     public function setAdapter(Adapter\AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
+
         return $this;
     }
 
@@ -90,6 +91,7 @@ class AuthenticationService implements AuthenticationServiceInterface
     public function setStorage(Storage\StorageInterface $storage)
     {
         $this->storage = $storage;
+
         return $this;
     }
 

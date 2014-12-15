@@ -40,7 +40,7 @@ class DDC2084Test extends \Doctrine\Tests\OrmFunctionalTestCase
     {
         $e1 = $this->loadFixture();
         $e2 = $e1->getMyEntity2();
-        $e  = $this->_em->find(__NAMESPACE__ . '\DDC2084\MyEntity1', $e2);
+        $e = $this->_em->find(__NAMESPACE__ . '\DDC2084\MyEntity1', $e2);
 
         $this->assertInstanceOf(__NAMESPACE__ . '\DDC2084\MyEntity1', $e);
         $this->assertInstanceOf(__NAMESPACE__ . '\DDC2084\MyEntity2', $e->getMyEntity2());
@@ -49,7 +49,8 @@ class DDC2084Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
     /**
      * @expectedException \Doctrine\ORM\ORMInvalidArgumentException
-     * @expectedExceptionMessage  Binding entities to query parameters only allowed for entities that have an identifier.
+     * @expectedExceptionMessage  Binding entities to query parameters only allowed for entities that have an
+     *                            identifier.
      */
     public function testinvalidIdentifierBindingEntityException()
     {

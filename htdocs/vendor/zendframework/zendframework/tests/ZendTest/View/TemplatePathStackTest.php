@@ -98,7 +98,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     public function testMayEnableStreamWrapper()
     {
-        $flag = (bool) ini_get('short_open_tag');
+        $flag = (bool)ini_get('short_open_tag');
         if (!$flag) {
             $this->markTestSkipped('Short tags are disabled; cannot test');
         }
@@ -117,7 +117,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     public function testDisablingLfiProtectionAllowsParentDirectoryTraversal()
     {
         $this->stack->setLfiProtection(false)
-                    ->addPath(__DIR__ . '/_templates');
+            ->addPath(__DIR__ . '/_templates');
 
         $test = $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
         $this->assertContains('LfiProtectionCheck.phtml', $test);
@@ -140,20 +140,20 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     {
         $this->stack->addPath(__DIR__ . '/_templates');
         $expected = realpath(__DIR__ . '/_templates/test.phtml');
-        $test     = $this->stack->resolve('test.phtml');
+        $test = $this->stack->resolve('test.phtml');
         $this->assertEquals($expected, $test);
     }
 
     public function testReturnsPathWithStreamProtocolWhenStreamWrapperEnabled()
     {
-        $flag = (bool) ini_get('short_open_tag');
+        $flag = (bool)ini_get('short_open_tag');
         if (!$flag) {
             $this->markTestSkipped('Short tags are disabled; cannot test');
         }
         $this->stack->setUseStreamWrapper(true)
-                    ->addPath(__DIR__ . '/_templates');
+            ->addPath(__DIR__ . '/_templates');
         $expected = 'zend.view://' . realpath(__DIR__ . '/_templates/test.phtml');
-        $test     = $this->stack->resolve('test.phtml');
+        $test = $this->stack->resolve('test.phtml');
         $this->assertEquals($expected, $test);
     }
 
@@ -180,10 +180,11 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     public function validOptions()
     {
         $options = array(
-            'lfi_protection'     => false,
+            'lfi_protection' => false,
             'use_stream_wrapper' => true,
-            'default_suffix'     => 'php',
+            'default_suffix' => 'php',
         );
+
         return array(
             array($options),
             array(new \ArrayObject($options)),
@@ -199,7 +200,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $this->stack->setOptions($arg);
         $this->assertFalse($this->stack->isLfiProtectionOn());
 
-        $expected = (bool) ini_get('short_open_tag');
+        $expected = (bool)ini_get('short_open_tag');
         $this->assertSame($expected, $this->stack->useStreamWrapper());
 
         $this->assertSame($arg['default_suffix'], $this->stack->getDefaultSuffix());
@@ -216,7 +217,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $stack = new TemplatePathStack($arg);
         $this->assertFalse($stack->isLfiProtectionOn());
 
-        $expected = (bool) ini_get('short_open_tag');
+        $expected = (bool)ini_get('short_open_tag');
         $this->assertSame($expected, $stack->useStreamWrapper());
 
         $this->assertEquals(array_reverse($this->paths), $stack->getPaths()->toArray());

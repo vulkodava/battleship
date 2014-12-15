@@ -5,10 +5,10 @@
         <pagerange>10</pagerange>
     </default>
     <testing>
-	    <scrolling_style>Scrolling</scrolling_style>
+        <scrolling_style>Scrolling</scrolling_style>
         <scrolling_style_plugins>ZendTest\Paginator\TestAsset\ScrollingStylePluginManager</scrolling_style_plugins>
         <adapter_plugins>ZendTest\Paginator\TestAsset\AdapterPluginManager</adapter_plugins>
-	    <itemcountperpage>3</itemcountperpage>
-	    <pagerange>7</pagerange>
+        <itemcountperpage>3</itemcountperpage>
+        <pagerange>7</pagerange>
     </testing>
 </paginator>

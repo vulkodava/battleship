@@ -62,6 +62,7 @@ abstract class AbstractFilter implements FilterInterface
                 );
             }
         }
+
         return $this;
     }
 

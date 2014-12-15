@@ -38,8 +38,8 @@ class RequestCollector extends AbstractCollector
      */
     public function collect(MvcEvent $mvcEvent)
     {
-        $templates   = array();
-        $match       = $mvcEvent->getRouteMatch();
+        $templates = array();
+        $match = $mvcEvent->getRouteMatch();
 
         $templates[] = $mvcEvent->getViewModel()->getTemplate();
         if ($mvcEvent->getViewModel()->hasChildren()) {
@@ -53,11 +53,11 @@ class RequestCollector extends AbstractCollector
         }
 
         $this->data = array(
-            'templates'  => $templates,
-            'method'     => $mvcEvent->getRequest()->getMethod(),
-            'status'     => $mvcEvent->getResponse()->getStatusCode(),
-            'route'      => ($match === null) ? 'N/A' : $match->getMatchedRouteName(),
-            'action'     => ($match === null) ? 'N/A' : $match->getParam('action', 'N/A'),
+            'templates' => $templates,
+            'method' => $mvcEvent->getRequest()->getMethod(),
+            'status' => $mvcEvent->getResponse()->getStatusCode(),
+            'route' => ($match === null) ? 'N/A' : $match->getMatchedRouteName(),
+            'action' => ($match === null) ? 'N/A' : $match->getParam('action', 'N/A'),
             'controller' => ($match === null) ? 'N/A' : $match->getParam('controller', 'N/A'),
         );
     }

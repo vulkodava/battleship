@@ -20,7 +20,8 @@ use Doctrine\Common\Collections\Criteria;
  */
 class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
 {
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->useModelSet('company');
         parent::setUp();
         //$this->_em->getConnection()->getConfiguration()->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger);
@@ -91,8 +92,9 @@ class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertEquals(2, $numDeleted);
     }
 
-    public function testMultiLevelUpdateAndFind() {
-    	$manager = new CompanyManager;
+    public function testMultiLevelUpdateAndFind()
+    {
+        $manager = new CompanyManager;
         $manager->setName('Roman S. Borschel');
         $manager->setSalary(100000);
         $manager->setDepartment('IT');
@@ -117,7 +119,8 @@ class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertTrue(is_numeric($manager->getId()));
     }
 
-    public function testFindOnBaseClass() {
+    public function testFindOnBaseClass()
+    {
         $manager = new CompanyManager;
         $manager->setName('Roman S. Borschel');
         $manager->setSalary(100000);
@@ -138,8 +141,9 @@ class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
         //$this->assertInstanceOf('Doctrine\Tests\Models\Company\CompanyCar', $person->getCar());
     }
 
-    public function testSelfReferencingOneToOne() {
-    	$manager = new CompanyManager;
+    public function testSelfReferencingOneToOne()
+    {
+        $manager = new CompanyManager;
         $manager->setName('John Smith');
         $manager->setSalary(100000);
         $manager->setDepartment('IT');
@@ -263,7 +267,7 @@ class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $result = $q->getResult();
         $this->assertEquals(1, count($result));
-        $this->assertInstanceOf('Doctrine\Tests\Models\Company\CompanyAuction', $result[0], sprintf("Is of class %s",get_class($result[0])));
+        $this->assertInstanceOf('Doctrine\Tests\Models\Company\CompanyAuction', $result[0], sprintf("Is of class %s", get_class($result[0])));
 
         $this->_em->clear();
 
@@ -290,8 +294,8 @@ class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->createQuery($dql)->execute();
 
         $this->assertTrue(count($this->_em->createQuery(
-            'SELECT count(p.id) FROM Doctrine\Tests\Models\Company\CompanyEmployee p WHERE p.salary = 1')
-            ->getResult()) > 0);
+                'SELECT count(p.id) FROM Doctrine\Tests\Models\Company\CompanyEmployee p WHERE p.salary = 1')
+                ->getResult()) > 0);
     }
 
     /**
@@ -299,7 +303,7 @@ class ClassTableInheritanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
      */
     public function testBulkUpdateNonScalarParameterDDC1341()
     {
-        $dql   = 'UPDATE Doctrine\Tests\Models\Company\CompanyEmployee AS p SET p.startDate = ?0 WHERE p.department = ?1';
+        $dql = 'UPDATE Doctrine\Tests\Models\Company\CompanyEmployee AS p SET p.startDate = ?0 WHERE p.department = ?1';
         $query = $this->_em->createQuery($dql)
             ->setParameter(0, new \DateTime())
             ->setParameter(1, 'IT');

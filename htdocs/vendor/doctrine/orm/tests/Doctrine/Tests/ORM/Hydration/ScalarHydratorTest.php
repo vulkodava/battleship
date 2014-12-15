@@ -24,12 +24,12 @@ class ScalarHydratorTest extends HydrationTestCase
             array(
                 'u__id' => '1',
                 'u__name' => 'romanb'
-                ),
+            ),
             array(
                 'u__id' => '2',
                 'u__name' => 'jwage'
-                )
-            );
+            )
+        );
 
 
         $stmt = new HydratorMockStatement($resultSet);

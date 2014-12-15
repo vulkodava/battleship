@@ -20,24 +20,28 @@ class Response
 {
     /**
      * Return value
+     *
      * @var mixed
      */
     protected $return;
 
     /**
      * Return type
+     *
      * @var string
      */
     protected $type;
 
     /**
      * Response character encoding
+     *
      * @var string
      */
     protected $encoding = 'UTF-8';
 
     /**
      * Fault, if response is a fault response
+     *
      * @var null|\Zend\XmlRpc\Fault
      */
     protected $fault = null;
@@ -66,6 +70,7 @@ class Response
     {
         $this->encoding = $encoding;
         AbstractValue::setEncoding($encoding);
+
         return $this;
     }
 
@@ -91,7 +96,7 @@ class Response
     public function setReturnValue($value, $type = null)
     {
         $this->return = $value;
-        $this->type = (string) $type;
+        $this->type = (string)$type;
     }
 
     /**
@@ -150,6 +155,7 @@ class Response
         if (!is_string($response)) {
             $this->fault = new Fault(650);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
@@ -158,6 +164,7 @@ class Response
         } catch (\ZendXml\Exception\RuntimeException $e) {
             $this->fault = new Fault(651);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
@@ -166,6 +173,7 @@ class Response
             $this->fault = new Fault();
             $this->fault->setEncoding($this->getEncoding());
             $this->fault->loadXml($response);
+
             return false;
         }
 
@@ -173,6 +181,7 @@ class Response
             // Invalid response
             $this->fault = new Fault(652);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
@@ -185,10 +194,12 @@ class Response
         } catch (Exception\ValueException $e) {
             $this->fault = new Fault(653);
             $this->fault->setEncoding($this->getEncoding());
+
             return false;
         }
 
         $this->setReturnValue($value->getValue());
+
         return true;
     }
 
@@ -202,12 +213,12 @@ class Response
         $value = $this->_getXmlRpcReturn();
         $generator = AbstractValue::getGenerator();
         $generator->openElement('methodResponse')
-                  ->openElement('params')
-                  ->openElement('param');
+            ->openElement('params')
+            ->openElement('param');
         $value->generateXml();
         $generator->closeElement('param')
-                  ->closeElement('params')
-                  ->closeElement('methodResponse');
+            ->closeElement('params')
+            ->closeElement('methodResponse');
 
         return $generator->flush();
     }

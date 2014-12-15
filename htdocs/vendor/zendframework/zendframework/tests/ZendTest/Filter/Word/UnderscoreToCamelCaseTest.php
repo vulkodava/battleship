@@ -20,8 +20,8 @@ class UnderscoreToCamelCaseTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesCamelCasedWordsWithDashes()
     {
-        $string   = 'camel_cased_words';
-        $filter   = new UnderscoreToCamelCaseFilter();
+        $string = 'camel_cased_words';
+        $filter = new UnderscoreToCamelCaseFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -33,34 +33,34 @@ class UnderscoreToCamelCaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testSomeFilterValues()
     {
-        $filter   = new UnderscoreToCamelCaseFilter();
+        $filter = new UnderscoreToCamelCaseFilter();
 
-        $string   = 'zend_framework';
+        $string = 'zend_framework';
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('ZendFramework', $filtered);
 
-        $string   = 'zend_Framework';
+        $string = 'zend_Framework';
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('ZendFramework', $filtered);
 
-        $string   = 'zendFramework';
+        $string = 'zendFramework';
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('ZendFramework', $filtered);
 
-        $string   = 'zendframework';
+        $string = 'zendframework';
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Zendframework', $filtered);
 
-        $string   = '_zendframework';
+        $string = '_zendframework';
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Zendframework', $filtered);
 
-        $string   = '_zend_framework';
+        $string = '_zend_framework';
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('ZendFramework', $filtered);

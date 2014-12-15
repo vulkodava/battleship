@@ -41,15 +41,15 @@ class Sequence extends AbstractAsset
     protected $_initialValue = 1;
 
     /**
-     * @param string  $name
+     * @param string $name
      * @param integer $allocationSize
      * @param integer $initialValue
      */
-    public function __construct($name, $allocationSize=1, $initialValue=1)
+    public function __construct($name, $allocationSize = 1, $initialValue = 1)
     {
         $this->_setName($name);
-        $this->_allocationSize = (is_numeric($allocationSize))?$allocationSize:1;
-        $this->_initialValue = (is_numeric($initialValue))?$initialValue:1;
+        $this->_allocationSize = (is_numeric($allocationSize)) ? $allocationSize : 1;
+        $this->_initialValue = (is_numeric($initialValue)) ? $initialValue : 1;
     }
 
     /**
@@ -75,7 +75,7 @@ class Sequence extends AbstractAsset
      */
     public function setAllocationSize($allocationSize)
     {
-        $this->_allocationSize = (is_numeric($allocationSize))?$allocationSize:1;
+        $this->_allocationSize = (is_numeric($allocationSize)) ? $allocationSize : 1;
     }
 
     /**
@@ -85,7 +85,7 @@ class Sequence extends AbstractAsset
      */
     public function setInitialValue($initialValue)
     {
-        $this->_initialValue = (is_numeric($initialValue))?$initialValue:1;
+        $this->_initialValue = (is_numeric($initialValue)) ? $initialValue : 1;
     }
 
     /**
@@ -100,7 +100,7 @@ class Sequence extends AbstractAsset
      */
     public function isAutoIncrementsFor(Table $table)
     {
-        if ( ! $table->hasPrimaryKey()) {
+        if (!$table->hasPrimaryKey()) {
             return false;
         }
 
@@ -112,12 +112,12 @@ class Sequence extends AbstractAsset
 
         $column = $table->getColumn($pkColumns[0]);
 
-        if ( ! $column->getAutoincrement()) {
+        if (!$column->getAutoincrement()) {
             return false;
         }
 
-        $sequenceName      = $this->getShortestName($table->getNamespaceName());
-        $tableName         = $table->getShortestName($table->getNamespaceName());
+        $sequenceName = $this->getShortestName($table->getNamespaceName());
+        $tableName = $table->getShortestName($table->getNamespaceName());
         $tableSequenceName = sprintf('%s_%s_seq', $tableName, $pkColumns[0]);
 
         return $tableSequenceName === $sequenceName;

@@ -77,6 +77,7 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
         );
 
         $string = Type::getType('string');
+
         return new Column("foo", $string, $options);
     }
 

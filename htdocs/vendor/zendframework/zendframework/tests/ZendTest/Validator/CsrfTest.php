@@ -33,7 +33,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $sessionConfig = new StandardConfig(array(
             'storage' => 'Zend\Session\Storage\ArrayStorage',
         ));
-        $sessionManager       = new TestAsset\SessionManager($sessionConfig);
+        $sessionManager = new TestAsset\SessionManager($sessionConfig);
         $this->sessionManager = $sessionManager;
         Container::setDefaultManager($sessionManager);
 
@@ -90,10 +90,10 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             //    timeout  expected
-            array(600,     600),
-            array(null,    null),
-            array("0",     0),
-            array("100",   100),
+            array(600, 600),
+            array(null, null),
+            array("0", 0),
+            array("100", 100),
         );
     }
 
@@ -109,9 +109,9 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
     public function testAllOptionsMayBeSetViaConstructor()
     {
         $container = new Container('foo', $this->sessionManager);
-        $options   = array(
-            'name'    => 'hash',
-            'salt'    => 'hashful',
+        $options = array(
+            'name' => 'hash',
+            'salt' => 'hashful',
             'session' => $container,
             'timeout' => 600,
         );
@@ -173,18 +173,18 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
 
     public function testSessionContainerContainsHashAfterHashHasBeenGenerated()
     {
-        $hash        = $this->validator->getHash();
-        $container   = $this->validator->getSession();
-        $test        = $container->hash; // Doing this, as expiration hops are 1; have to grab on first access
+        $hash = $this->validator->getHash();
+        $container = $this->validator->getSession();
+        $test = $container->hash; // Doing this, as expiration hops are 1; have to grab on first access
         $this->assertEquals($hash, $test);
     }
 
     public function testSettingNewSessionContainerSetsHashInNewContainer()
     {
-        $hash        = $this->validator->getHash();
-        $container   = new Container('foo', $this->sessionManager);
+        $hash = $this->validator->getHash();
+        $container = new Container('foo', $this->sessionManager);
         $this->validator->setSession($container);
-        $test        = $container->hash; // Doing this, as expiration hops are 1; have to grab on first access
+        $test = $container->hash; // Doing this, as expiration hops are 1; have to grab on first access
         $this->assertEquals($hash, $test);
     }
 
@@ -200,7 +200,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
 
         $hashOne = $validatorOne->getHash();
         $hashTwo = $validatorTwo->getHash();
-        $this->assertNotEquals($hashOne , $hashTwo);
+        $this->assertNotEquals($hashOne, $hashTwo);
     }
 
     public function testCanValidateAnyHashWithinTheSameContainer()

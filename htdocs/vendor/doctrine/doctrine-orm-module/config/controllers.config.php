@@ -21,7 +21,7 @@ return array(
     'factories' => array(
         // Yuml controller, used to generate Yuml graphs since
         // yuml.me doesn't do redirects on its own
-        'DoctrineORMModule\\Yuml\\YumlController'  => function (\Zend\ServiceManager\AbstractPluginManager $pluginManager) {
+        'DoctrineORMModule\\Yuml\\YumlController' => function (\Zend\ServiceManager\AbstractPluginManager $pluginManager) {
             $config = $pluginManager->getServiceLocator()->get('Config');
 
             if (

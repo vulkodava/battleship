@@ -101,12 +101,12 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
         $this->assertEquals(4, $nodes->item(0)->childNodes->length, 'Invalid complex object definition.');
 
         foreach (array(
-            'boolean'       => 'xsd:boolean',
-            'string'        => 'xsd:string',
-            'int'           => 'xsd:int',
-            'array'         => 'soap-enc:Array'
+                     'boolean' => 'xsd:boolean',
+                     'string' => 'xsd:string',
+                     'int' => 'xsd:int',
+                     'array' => 'soap-enc:Array'
                  ) as $name => $type) {
-            $node = $this->xpath->query('xsd:element[@name="'.$name.'"]', $nodes->item(0));
+            $node = $this->xpath->query('xsd:element[@name="' . $name . '"]', $nodes->item(0));
             $this->assertEquals($name, $node->item(0)->getAttribute('name'),
                 'Invalid name attribute value in complex object definition'
             );
@@ -156,20 +156,20 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
         );
         $this->assertEquals(1, $nodes->length, 'Unable to find complex object in wsdl.');
 
-        $this->assertEquals('object',           $nodes->item(0)->getAttribute('name'),
+        $this->assertEquals('object', $nodes->item(0)->getAttribute('name'),
             'Invalid attribute name'
         );
-        $this->assertEquals('tns:ComplexTest',  $nodes->item(0)->getAttribute('type'),
+        $this->assertEquals('tns:ComplexTest', $nodes->item(0)->getAttribute('type'),
             'Invalid type name'
         );
-        $this->assertEquals('true',             $nodes->item(0)->getAttribute('nillable'),
+        $this->assertEquals('true', $nodes->item(0)->getAttribute('nillable'),
             'Invalid nillable attribute value'
         );
 
         // array of elements
         $nodes = $this->xpath->query(
             '//wsdl:types/*/xsd:complexType[@name="ArrayOfComplexObjectWithObjectStructure"]/'
-            .'xsd:complexContent/xsd:restriction'
+            . 'xsd:complexContent/xsd:restriction'
         );
         $this->assertEquals(1, $nodes->length, 'Unable to find complex type array definition in wsdl.');
         $this->assertEquals('soap-enc:Array', $nodes->item(0)->getAttribute('base'),
@@ -198,8 +198,8 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexObjectWithObjectStructure[]');
 
         // this xpath is proper version of simpler: //*[wsdl:arrayType="tns:ComplexObjectWithObjectStructure[]"] - namespaces in attributes and xpath
-        $nodes = $this->xpath->query('//*[@*[namespace-uri()="'.Wsdl::WSDL_NS_URI
-            .'" and local-name()="arrayType"]="tns:ComplexObjectWithObjectStructure[]"]'
+        $nodes = $this->xpath->query('//*[@*[namespace-uri()="' . Wsdl::WSDL_NS_URI
+            . '" and local-name()="arrayType"]="tns:ComplexObjectWithObjectStructure[]"]'
         );
         $this->assertEquals(1, $nodes->length,
             'Invalid array of complex type array type reference detected'
@@ -225,7 +225,7 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexObjectWithObjectStructure[]');
 
         // this xpath is proper version of simpler: //*[wsdl:arrayType="tns:ComplexObjectWithObjectStructure[]"] - namespaces in attributes and xpath
-        $nodes = $this->xpath->query('//*[@*[namespace-uri()="'.Wsdl::WSDL_NS_URI.
+        $nodes = $this->xpath->query('//*[@*[namespace-uri()="' . Wsdl::WSDL_NS_URI .
             '" and local-name()="arrayType"]="tns:ComplexObjectWithObjectStructure[]"]'
         );
         $this->assertEquals(1, $nodes->length,
@@ -256,10 +256,10 @@ class ArrayOfTypeComplexStrategyTest extends WsdlTestHelper
         $this->assertEquals(2, $nodes->item(0)->childNodes->length, 'Invalid complex object definition.');
 
         foreach (array(
-                     'bar'  => 'xsd:string',
-                     'foo'  => 'xsd:string',
+                     'bar' => 'xsd:string',
+                     'foo' => 'xsd:string',
                  ) as $name => $type) {
-            $node = $this->xpath->query('xsd:element[@name="'.$name.'"]', $nodes->item(0));
+            $node = $this->xpath->query('xsd:element[@name="' . $name . '"]', $nodes->item(0));
             $this->assertEquals($name, $node->item(0)->getAttribute('name'),
                 'Invalid name attribute value in complex object definition'
             );

@@ -80,16 +80,17 @@ class DebugUnitOfWorkListener
 
         $fh = fopen($this->file, "x+");
         if (count($identityMap) == 0) {
-            fwrite($fh, "Flush Operation [".$this->context."] - Empty identity map.\n");
+            fwrite($fh, "Flush Operation [" . $this->context . "] - Empty identity map.\n");
+
             return;
         }
 
-        fwrite($fh, "Flush Operation [".$this->context."] - Dumping identity map:\n");
+        fwrite($fh, "Flush Operation [" . $this->context . "] - Dumping identity map:\n");
         foreach ($identityMap as $className => $map) {
-            fwrite($fh, "Class: ". $className . "\n");
+            fwrite($fh, "Class: " . $className . "\n");
 
             foreach ($map as $entity) {
-                fwrite($fh, " Entity: " . $this->getIdString($entity, $uow) . " " . spl_object_hash($entity)."\n");
+                fwrite($fh, " Entity: " . $this->getIdString($entity, $uow) . " " . spl_object_hash($entity) . "\n");
                 fwrite($fh, "  Associations:\n");
 
                 $cm = $em->getClassMetadata($className);
@@ -113,15 +114,15 @@ class DebugUnitOfWorkListener
                         if ($value === null) {
                             fwrite($fh, " NULL\n");
                         } elseif ($initialized) {
-                            fwrite($fh, "[INITIALIZED] " . $this->getType($value). " " . count($value) . " elements\n");
+                            fwrite($fh, "[INITIALIZED] " . $this->getType($value) . " " . count($value) . " elements\n");
 
                             foreach ($value as $obj) {
-                                fwrite($fh, "    " . $this->getIdString($obj, $uow) . " " . spl_object_hash($obj)."\n");
+                                fwrite($fh, "    " . $this->getIdString($obj, $uow) . " " . spl_object_hash($obj) . "\n");
                             }
                         } else {
                             fwrite($fh, "[PROXY] " . $this->getType($value) . " unknown element size\n");
                             foreach ($value->unwrap() as $obj) {
-                                fwrite($fh, "    " . $this->getIdString($obj, $uow) . " " . spl_object_hash($obj)."\n");
+                                fwrite($fh, "    " . $this->getIdString($obj, $uow) . " " . spl_object_hash($obj) . "\n");
                             }
                         }
                     }
@@ -149,7 +150,7 @@ class DebugUnitOfWorkListener
     }
 
     /**
-     * @param object     $entity
+     * @param object $entity
      * @param UnitOfWork $uow
      *
      * @return string
@@ -161,7 +162,7 @@ class DebugUnitOfWorkListener
             $idstring = "";
 
             foreach ($ids as $k => $v) {
-                $idstring .= $k."=".$v;
+                $idstring .= $k . "=" . $v;
             }
         } else {
             $idstring = "NEWOBJECT ";

@@ -58,8 +58,9 @@ class Driver implements \Doctrine\DBAL\Driver
             $dsn .= ',' . $params['port'];
         }
 
-        if (isset($params['dbname'])) {;
-            $dsn .= ';Database=' .  $params['dbname'];
+        if (isset($params['dbname'])) {
+            ;
+            $dsn .= ';Database=' . $params['dbname'];
         }
 
         if (isset($params['MultipleActiveResultSets'])) {
@@ -76,6 +77,7 @@ class Driver implements \Doctrine\DBAL\Driver
     {
         return new \Doctrine\DBAL\Platforms\SQLServer2008Platform();
     }
+
     /**
      * {@inheritdoc}
      */

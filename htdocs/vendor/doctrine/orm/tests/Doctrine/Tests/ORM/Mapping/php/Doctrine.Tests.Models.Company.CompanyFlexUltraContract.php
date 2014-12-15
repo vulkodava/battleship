@@ -1,8 +1,8 @@
 <?php
 
 $metadata->mapField(array(
-    'type'      => 'integer',
-    'name'      => 'maxPrice',
+    'type' => 'integer',
+    'name' => 'maxPrice',
     'fieldName' => 'maxPrice',
 ));
 $metadata->addEntityListener(\Doctrine\ORM\Events::postPersist, 'CompanyContractListener', 'postPersistHandler');

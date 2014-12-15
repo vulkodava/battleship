@@ -9,10 +9,11 @@ require_once __DIR__ . '/../../../TestInit.php';
 
 class MySqlSchemaToolTest extends \Doctrine\Tests\OrmFunctionalTestCase
 {
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         if ($this->_em->getConnection()->getDatabasePlatform()->getName() !== 'mysql') {
-            $this->markTestSkipped('The ' . __CLASS__ .' requires the use of mysql.');
+            $this->markTestSkipped('The ' . __CLASS__ . ' requires the use of mysql.');
         }
     }
 

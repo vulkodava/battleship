@@ -67,8 +67,8 @@ class DDC736Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $dql = "select c, c.name, ca, ca.payment from Doctrine\Tests\Models\ECommerce\ECommerceCart ca join ca.customer c";
         $result = $this->_em->createQuery($dql)
-                            ->setHint(Query::HINT_CUSTOM_TREE_WALKERS, array('Doctrine\Tests\ORM\Functional\Ticket\DisableFetchJoinTreeWalker'))
-                            ->getResult();
+            ->setHint(Query::HINT_CUSTOM_TREE_WALKERS, array('Doctrine\Tests\ORM\Functional\Ticket\DisableFetchJoinTreeWalker'))
+            ->getResult();
 
         /* @var $cart2 Doctrine\Tests\Models\ECommerce\ECommerceCart */
         $cart2 = $result[0][0];

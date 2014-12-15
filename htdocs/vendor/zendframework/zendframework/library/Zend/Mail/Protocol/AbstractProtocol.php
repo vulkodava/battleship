@@ -12,7 +12,8 @@ namespace Zend\Mail\Protocol;
 use Zend\Validator;
 
 /**
- * Provides low-level methods for concrete adapters to communicate with a remote mail server and track requests and responses.
+ * Provides low-level methods for concrete adapters to communicate with a remote mail server and track requests and
+ * responses.
  *
  * @todo Implement proxy settings
  */
@@ -30,48 +31,56 @@ abstract class AbstractProtocol
 
     /**
      * Maximum of the transaction log
+     *
      * @var int
      */
     protected $maximumLog = 64;
 
     /**
      * Hostname or IP address of remote server
+     *
      * @var string
      */
     protected $host;
 
     /**
      * Port number of connection
+     *
      * @var int
      */
     protected $port;
 
     /**
      * Instance of Zend\Validator\ValidatorChain to check hostnames
+     *
      * @var \Zend\Validator\ValidatorChain
      */
     protected $validHost;
 
     /**
      * Socket connection resource
+     *
      * @var resource
      */
     protected $socket;
 
     /**
      * Last request sent to server
+     *
      * @var string
      */
     protected $request;
 
     /**
      * Array of server responses to last request
+     *
      * @var array
      */
     protected $response;
 
     /**
      * Log of mail requests and server responses for a session
+     *
      * @var array
      */
     private $log = array();
@@ -79,8 +88,8 @@ abstract class AbstractProtocol
     /**
      * Constructor.
      *
-     * @param  string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
-     * @param  int $port OPTIONAL Port number (default: null)
+     * @param  string $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
+     * @param  int $port    OPTIONAL Port number (default: null)
      * @throws Exception\RuntimeException
      */
     public function __construct($host = '127.0.0.1', $port = null)
@@ -112,7 +121,7 @@ abstract class AbstractProtocol
      */
     public function setMaximumLog($maximumLog)
     {
-        $this->maximumLog = (int) $maximumLog;
+        $this->maximumLog = (int)$maximumLog;
     }
 
     /**
@@ -128,7 +137,8 @@ abstract class AbstractProtocol
     /**
      * Create a connection to the remote host
      *
-     * Concrete adapters for this class will implement their own unique connect scripts, using the _connect() method to create the socket resource.
+     * Concrete adapters for this class will implement their own unique connect scripts, using the _connect() method to
+     * create the socket resource.
      */
     abstract public function connect();
 
@@ -299,7 +309,7 @@ abstract class AbstractProtocol
      * Throws a Zend\Mail\Protocol\Exception\ExceptionInterface if an unexpected code is returned.
      *
      * @param  string|array $code One or more codes that indicate a successful response
-     * @param  int $timeout Per-request timeout value if applicable
+     * @param  int $timeout       Per-request timeout value if applicable
      * @throws Exception\RuntimeException
      * @return string Last line of response string
      */
@@ -319,7 +329,7 @@ abstract class AbstractProtocol
             if ($errMsg !== '') {
                 $errMsg .= ' ' . $msg;
             } elseif ($cmd === null || !in_array($cmd, $code)) {
-                $errMsg =  $msg;
+                $errMsg = $msg;
             }
         } while (strpos($more, '-') === 0); // The '-' message prefix indicates an information string instead of a response string.
 

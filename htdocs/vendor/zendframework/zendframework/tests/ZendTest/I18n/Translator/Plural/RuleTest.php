@@ -18,39 +18,39 @@ class RuleTest extends TestCase
     {
         return array(
             // Basic calculations
-            'addition'         => array('2 + 3', 5),
-            'substraction'     => array('3 - 2', 1),
-            'multiplication'   => array('2 * 3', 6),
-            'division'         => array('6 / 3', 2),
+            'addition' => array('2 + 3', 5),
+            'substraction' => array('3 - 2', 1),
+            'multiplication' => array('2 * 3', 6),
+            'division' => array('6 / 3', 2),
             'integer-division' => array('7 / 4', 1),
-            'modulo'           => array('7 % 4', 3),
+            'modulo' => array('7 % 4', 3),
 
             // Boolean NOT
-            'boolean-not-0'  => array('!0', 1),
-            'boolean-not-1'  => array('!1', 0),
+            'boolean-not-0' => array('!0', 1),
+            'boolean-not-1' => array('!1', 0),
             'boolean-not-15' => array('!1', 0),
 
             // Equal operators
-            'equal-true'      => array('5 == 5', 1),
-            'equal-false'     => array('5 == 4', 0),
-            'not-equal-true'  => array('5 != 5', 0),
+            'equal-true' => array('5 == 5', 1),
+            'equal-false' => array('5 == 4', 0),
+            'not-equal-true' => array('5 != 5', 0),
             'not-equal-false' => array('5 != 4', 1),
 
             // Compare operators
-            'less-than-true'         => array('5 > 4', 1),
-            'less-than-false'        => array('5 > 5', 0),
-            'less-or-equal-true'     => array('5 >= 5', 1),
-            'less-or-equal-false'    => array('5 >= 6', 0),
-            'greater-than-true'      => array('5 < 6', 1),
-            'greater-than-false'     => array('5 < 5', 0),
-            'greater-or-equal-true'  => array('5 <= 5', 1),
+            'less-than-true' => array('5 > 4', 1),
+            'less-than-false' => array('5 > 5', 0),
+            'less-or-equal-true' => array('5 >= 5', 1),
+            'less-or-equal-false' => array('5 >= 6', 0),
+            'greater-than-true' => array('5 < 6', 1),
+            'greater-than-false' => array('5 < 5', 0),
+            'greater-or-equal-true' => array('5 <= 5', 1),
             'greater-or-equal-false' => array('5 <= 4', 0),
 
             // Boolean operators
-            'boolean-and-true'  => array('1 && 1', 1),
+            'boolean-and-true' => array('1 && 1', 1),
             'boolean-and-false' => array('1 && 0', 0),
-            'boolean-or-true'   => array('1 || 0', 1),
-            'boolean-or-false'  => array('0 || 0', 0),
+            'boolean-or-true' => array('1 || 0', 1),
+            'boolean-or-false' => array('0 || 0', 0),
 
             // Variable injection
             'variable-injection' => array('n', 0)
@@ -146,7 +146,7 @@ class RuleTest extends TestCase
         $rule = Rule::fromString('nplurals=9; plural=' . $rule);
 
         for ($i = 0; $i < 200; $i++) {
-            $this->assertEquals((int) $expectedValues[$i], $rule->evaluate($i));
+            $this->assertEquals((int)$expectedValues[$i], $rule->evaluate($i));
         }
     }
 

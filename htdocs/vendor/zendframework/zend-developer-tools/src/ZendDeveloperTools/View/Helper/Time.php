@@ -30,7 +30,7 @@ class Time extends AbstractHelper
      * Returns the formatted time.
      *
      * @param  integer|float $time
-     * @param  integer       $precision Will only be used for seconds.
+     * @param  integer $precision Will only be used for seconds.
      * @return string
      */
     public function __invoke($time, $precision = 2)

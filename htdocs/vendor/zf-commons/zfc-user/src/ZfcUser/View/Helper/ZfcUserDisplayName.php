@@ -69,6 +69,7 @@ class ZfcUserDisplayName extends AbstractHelper
     public function setAuthService(AuthenticationService $authService)
     {
         $this->authService = $authService;
+
         return $this;
     }
 }

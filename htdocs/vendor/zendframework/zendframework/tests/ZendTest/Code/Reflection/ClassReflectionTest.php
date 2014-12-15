@@ -150,22 +150,22 @@ EOS;
     public function testGetAnnotationsWithNoNameInformations()
     {
         $reflectionClass = new InjectableClassReflection(
-            // TestSampleClass5 has the annotations required to get to the
-            // right point in the getAnnotations method.
+        // TestSampleClass5 has the annotations required to get to the
+        // right point in the getAnnotations method.
             'ZendTest\Code\Reflection\TestAsset\TestSampleClass5'
         );
 
         $annotationManager = new \Zend\Code\Annotation\AnnotationManager();
 
         $fileScanner = $this->getMockBuilder('Zend\Code\Scanner\FileScanner')
-                            ->disableOriginalConstructor()
-                            ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $reflectionClass->setFileScanner($fileScanner);
 
         $fileScanner->expects($this->any())
-                    ->method('getClassNameInformation')
-                    ->will($this->returnValue(false));
+            ->method('getClassNameInformation')
+            ->will($this->returnValue(false));
 
         $this->assertFalse($reflectionClass->getAnnotations($annotationManager));
     }

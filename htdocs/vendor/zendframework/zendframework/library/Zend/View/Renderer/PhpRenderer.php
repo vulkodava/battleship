@@ -41,22 +41,28 @@ use Zend\View\Variables;
  * @method mixed escapeUrl($value, $recurse = \Zend\View\Helper\Escaper\AbstractHelper::RECURSE_NONE)
  * @method \Zend\View\Helper\FlashMessenger flashMessenger($namespace = null)
  * @method \Zend\View\Helper\Gravatar gravatar($email = "", $options = array(), $attribs = array())
- * @method \Zend\View\Helper\HeadLink headLink(array $attributes = null, $placement = \Zend\View\Helper\Placeholder\Container\AbstractContainer::APPEND)
- * @method \Zend\View\Helper\HeadMeta headMeta($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = \Zend\View\Helper\Placeholder\Container\AbstractContainer::APPEND)
- * @method \Zend\View\Helper\HeadScript headScript($mode = \Zend\View\Helper\HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+ * @method \Zend\View\Helper\HeadLink headLink(array $attributes = null, $placement =
+ *         \Zend\View\Helper\Placeholder\Container\AbstractContainer::APPEND)
+ * @method \Zend\View\Helper\HeadMeta headMeta($content = null, $keyValue = null, $keyType = 'name', $modifiers =
+ *         array(), $placement = \Zend\View\Helper\Placeholder\Container\AbstractContainer::APPEND)
+ * @method \Zend\View\Helper\HeadScript headScript($mode = \Zend\View\Helper\HeadScript::FILE, $spec = null, $placement
+ *         = 'APPEND', array $attrs = array(), $type = 'text/javascript')
  * @method \Zend\View\Helper\HeadStyle headStyle($content = null, $placement = 'APPEND', $attributes = array())
  * @method \Zend\View\Helper\HeadTitle headTitle($title = null, $setType = null)
  * @method string htmlFlash($data, array $attribs = array(), array $params = array(), $content = null)
  * @method string htmlList(array $items, $ordered = false, $attribs = false, $escape = true)
- * @method string htmlObject($data = null, $type = null, array $attribs = array(), array $params = array(), $content = null)
+ * @method string htmlObject($data = null, $type = null, array $attribs = array(), array $params = array(), $content =
+ *         null)
  * @method string htmlPage($data, array $attribs = array(), array $params = array(), $content = null)
  * @method string htmlQuicktime($data, array $attribs = array(), array $params = array(), $content = null)
  * @method mixed|null identity()
- * @method \Zend\View\Helper\InlineScript inlineScript($mode = \Zend\View\Helper\HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+ * @method \Zend\View\Helper\InlineScript inlineScript($mode = \Zend\View\Helper\HeadScript::FILE, $spec = null,
+ *         $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
  * @method string|void json($data, array $jsonOptions = array())
  * @method \Zend\View\Helper\Layout layout($template = null)
  * @method \Zend\View\Helper\Navigation navigation($container = null)
- * @method string paginationControl(\Zend\Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
+ * @method string paginationControl(\Zend\Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial =
+ *         null, $params = null)
  * @method string|\Zend\View\Helper\Partial partial($name = null, $values = null)
  * @method string partialLoop($name = null, $values = null)
  * @method \Zend\View\Helper\Placeholder\Container\AbstractContainer placeHolder($name = null)
@@ -91,6 +97,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
 
     /**
      * Queue of templates to render
+     *
      * @var array
      */
     private $__templates = array();
@@ -184,6 +191,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     public function setResolver(Resolver $resolver)
     {
         $this->__templateResolver = $resolver;
+
         return $this;
     }
 
@@ -234,6 +242,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         }
 
         $this->__vars = $variables;
+
         return $this;
     }
 
@@ -252,6 +261,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         if (null === $key) {
             return $this->__vars;
         }
+
         return $this->__vars[$key];
     }
 
@@ -279,6 +289,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     public function __get($name)
     {
         $vars = $this->vars();
+
         return $vars[$name];
     }
 
@@ -304,6 +315,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     public function __isset($name)
     {
         $vars = $this->vars();
+
         return isset($vars[$name]);
     }
 
@@ -362,13 +374,14 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         if (null === $this->__helpers) {
             $this->setHelperPluginManager(new HelperPluginManager());
         }
+
         return $this->__helpers;
     }
 
     /**
      * Get plugin instance
      *
-     * @param  string     $name Name of plugin to return
+     * @param  string $name        Name of plugin to return
      * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
      * @return AbstractHelper
      */
@@ -398,6 +411,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         if (is_callable($this->__pluginCache[$method])) {
             return call_user_func_array($this->__pluginCache[$method], $argv);
         }
+
         return $this->__pluginCache[$method];
     }
 
@@ -410,6 +424,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     public function setFilterChain(FilterChain $filters)
     {
         $this->__filterChain = $filters;
+
         return $this;
     }
 
@@ -423,22 +438,23 @@ class PhpRenderer implements Renderer, TreeRendererInterface
         if (null === $this->__filterChain) {
             $this->setFilterChain(new FilterChain());
         }
+
         return $this->__filterChain;
     }
 
     /**
      * Processes a view script and returns the output.
      *
-     * @param  string|Model $nameOrModel Either the template to use, or a
-     *                                   ViewModel. The ViewModel must have the
-     *                                   template as an option in order to be
-     *                                   valid.
-     * @param  null|array|Traversable $values Values to use when rendering. If none
-     *                                provided, uses those in the composed
-     *                                variables container.
+     * @param  string|Model $nameOrModel          Either the template to use, or a
+     *                                            ViewModel. The ViewModel must have the
+     *                                            template as an option in order to be
+     *                                            valid.
+     * @param  null|array|Traversable $values     Values to use when rendering. If none
+     *                                            provided, uses those in the composed
+     *                                            variables container.
      * @return string The script output.
      * @throws Exception\DomainException if a ViewModel is passed, but does not
-     *                                   contain a template option.
+     *                                            contain a template option.
      * @throws Exception\InvalidArgumentException if the values passed are not
      *                                            an array or ArrayAccess object
      * @throws Exception\RuntimeException if the template cannot be rendered
@@ -446,7 +462,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     public function render($nameOrModel, $values = null)
     {
         if ($nameOrModel instanceof Model) {
-            $model       = $nameOrModel;
+            $model = $nameOrModel;
             $nameOrModel = $model->getTemplate();
             if (empty($nameOrModel)) {
                 throw new Exception\DomainException(sprintf(
@@ -536,7 +552,8 @@ class PhpRenderer implements Renderer, TreeRendererInterface
      */
     public function setCanRenderTrees($renderTrees)
     {
-        $this->__renderTrees = (bool) $renderTrees;
+        $this->__renderTrees = (bool)$renderTrees;
+
         return $this;
     }
 
@@ -559,6 +576,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     public function addTemplate($template)
     {
         $this->__templates[] = $template;
+
         return $this;
     }
 

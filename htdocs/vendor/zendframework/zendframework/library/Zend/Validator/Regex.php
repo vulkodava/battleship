@@ -15,17 +15,17 @@ use Zend\Stdlib\ErrorHandler;
 
 class Regex extends AbstractValidator
 {
-    const INVALID   = 'regexInvalid';
+    const INVALID = 'regexInvalid';
     const NOT_MATCH = 'regexNotMatch';
-    const ERROROUS  = 'regexErrorous';
+    const ERROROUS = 'regexErrorous';
 
     /**
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID   => "Invalid type given. String, integer or float expected",
+        self::INVALID => "Invalid type given. String, integer or float expected",
         self::NOT_MATCH => "The input does not match against pattern '%pattern%'",
-        self::ERROROUS  => "There was an internal error while using the pattern '%pattern%'",
+        self::ERROROUS => "There was an internal error while using the pattern '%pattern%'",
     );
 
     /**
@@ -53,6 +53,7 @@ class Regex extends AbstractValidator
         if (is_string($pattern)) {
             $this->setPattern($pattern);
             parent::__construct(array());
+
             return;
         }
 
@@ -93,9 +94,9 @@ class Regex extends AbstractValidator
     public function setPattern($pattern)
     {
         ErrorHandler::start();
-        $this->pattern = (string) $pattern;
-        $status        = preg_match($this->pattern, "Test");
-        $error         = ErrorHandler::stop();
+        $this->pattern = (string)$pattern;
+        $status = preg_match($this->pattern, "Test");
+        $error = ErrorHandler::stop();
 
         if (false === $status) {
             throw new Exception\InvalidArgumentException(
@@ -118,6 +119,7 @@ class Regex extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -128,11 +130,13 @@ class Regex extends AbstractValidator
         ErrorHandler::stop();
         if (false === $status) {
             $this->error(self::ERROROUS);
+
             return false;
         }
 
         if (!$status) {
             $this->error(self::NOT_MATCH);
+
             return false;
         }
 

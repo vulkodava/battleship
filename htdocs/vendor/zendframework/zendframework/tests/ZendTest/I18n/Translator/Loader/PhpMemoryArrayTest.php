@@ -37,11 +37,12 @@ class PhpMemoryArrayTest extends TestCase
             Locale::setDefault($this->originalLocale);
         }
     }
+
     public function testLoaderFailsToLoadNonArray()
     {
         $loader = new PhpMemoryArrayLoader('foo');
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
-                                    'Expected an array, but received');
+            'Expected an array, but received');
         $loader->load('en_US', 'default');
     }
 
@@ -49,7 +50,7 @@ class PhpMemoryArrayTest extends TestCase
     {
         $loader = new PhpMemoryArrayLoader(array());
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
-                                    'Expected textdomain "default" to be an array, but it is not set');
+            'Expected textdomain "default" to be an array, but it is not set');
         $loader->load('en_US', 'default');
     }
 
@@ -57,7 +58,7 @@ class PhpMemoryArrayTest extends TestCase
     {
         $loader = new PhpMemoryArrayLoader(array('default' => array()));
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
-                                    'Expected locale "en_US" to be an array, but it is not set');
+            'Expected locale "en_US" to be an array, but it is not set');
         $loader->load('en_US', 'default');
     }
 
@@ -79,7 +80,7 @@ class PhpMemoryArrayTest extends TestCase
 
     public function testLoaderLoadsPluralRules()
     {
-        $loader     = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
+        $loader = new PhpMemoryArrayLoader(include $this->testFilesDir . '/translation_en.php');
         $textDomain = $loader->load('en_US', 'default');
 
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));

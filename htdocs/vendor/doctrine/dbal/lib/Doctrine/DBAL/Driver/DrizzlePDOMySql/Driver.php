@@ -37,6 +37,7 @@ class Driver implements \Doctrine\DBAL\Driver
             $password,
             $driverOptions
         );
+
         return $conn;
     }
 

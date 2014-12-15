@@ -2,7 +2,7 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @link       http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -46,12 +46,12 @@ class Simple implements RouteInterface
     /**
      * Create a new simple console route.
      *
-     * @param  string|RouteMatcherInterface             $routeOrRouteMatcher
-     * @param  array                                    $constraints
-     * @param  array                                    $defaults
-     * @param  array                                    $aliases
-     * @param  null|array|Traversable|FilterChain       $filters
-     * @param  null|array|Traversable|ValidatorChain    $validators
+     * @param  string|RouteMatcherInterface $routeOrRouteMatcher
+     * @param  array $constraints
+     * @param  array $defaults
+     * @param  array $aliases
+     * @param  null|array|Traversable|FilterChain $filters
+     * @param  null|array|Traversable|ValidatorChain $validators
      * @throws InvalidArgumentException
      */
     public function __construct(
@@ -61,7 +61,8 @@ class Simple implements RouteInterface
         array $aliases = array(),
         $filters = null,
         $validators = null
-    ) {
+    )
+    {
         if (is_string($routeOrRouteMatcher)) {
             $this->matcher = new DefaultRouteMatcher($routeOrRouteMatcher, $constraints, $defaults, $aliases);
         } elseif ($routeOrRouteMatcher instanceof RouteMatcherInterface) {
@@ -95,10 +96,10 @@ class Simple implements RouteInterface
         }
 
         foreach (array(
-            'constraints',
-            'defaults',
-            'aliases',
-        ) as $opt) {
+                     'constraints',
+                     'defaults',
+                     'aliases',
+                 ) as $opt) {
             if (!isset($options[$opt])) {
                 $options[$opt] = array();
             }
@@ -126,8 +127,8 @@ class Simple implements RouteInterface
      * match(): defined by Route interface.
      *
      * @see     Route::match()
-     * @param   Request             $request
-     * @param   null|int            $pathOffset
+     * @param   Request $request
+     * @param   null|int $pathOffset
      * @return  RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
@@ -136,12 +137,13 @@ class Simple implements RouteInterface
             return null;
         }
 
-        $params  = $request->getParams()->toArray();
+        $params = $request->getParams()->toArray();
         $matches = $this->matcher->match($params);
 
         if (null !== $matches) {
             return new RouteMatch($matches);
         }
+
         return null;
     }
 

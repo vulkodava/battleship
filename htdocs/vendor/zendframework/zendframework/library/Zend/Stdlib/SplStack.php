@@ -27,6 +27,7 @@ class SplStack extends \SplStack implements Serializable
         foreach ($this as $item) {
             $array[] = $item;
         }
+
         return $array;
     }
 

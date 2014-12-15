@@ -28,7 +28,7 @@ class MasterSlaveConnectionTest extends DbalFunctionalTestCase
             $sm->createTable($table);
 
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
 
         $this->_conn->executeUpdate('DELETE FROM master_slave_table');
@@ -38,9 +38,9 @@ class MasterSlaveConnectionTest extends DbalFunctionalTestCase
     public function createMasterSlaveConnection($keepSlave = false)
     {
         $params = $this->_conn->getParams();
-        $params['master']       = $params;
-        $params['slaves']       = array($params, $params);
-        $params['keepSlave']    = $keepSlave;
+        $params['master'] = $params;
+        $params['slaves'] = array($params, $params);
+        $params['keepSlave'] = $keepSlave;
         $params['wrapperClass'] = 'Doctrine\DBAL\Connections\MasterSlaveConnection';
 
         return DriverManager::getConnection($params);

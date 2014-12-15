@@ -32,7 +32,7 @@ interface MappingDriver
     /**
      * Loads the metadata for the specified class into the provided container.
      *
-     * @param string        $className
+     * @param string $className
      * @param ClassMetadata $metadata
      *
      * @return void

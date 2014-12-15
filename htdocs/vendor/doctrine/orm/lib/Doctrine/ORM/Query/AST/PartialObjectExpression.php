@@ -33,7 +33,7 @@ class PartialObjectExpression extends Node
 
     /**
      * @param string $identificationVariable
-     * @param array  $partialFieldSet
+     * @param array $partialFieldSet
      */
     public function __construct($identificationVariable, array $partialFieldSet)
     {

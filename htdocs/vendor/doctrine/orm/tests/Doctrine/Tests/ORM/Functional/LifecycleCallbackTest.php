@@ -1,13 +1,15 @@
 <?php
 
 namespace Doctrine\Tests\ORM\Functional;
+
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 require_once __DIR__ . '/../../TestInit.php';
 
 class LifecycleCallbackTest extends \Doctrine\Tests\OrmFunctionalTestCase
 {
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         try {
             $this->_schemaTool->createSchema(array(
@@ -185,8 +187,8 @@ class LifecycleCallbackTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     /**
-    * @group DDC-1955
-    */
+     * @group DDC-1955
+     */
     public function testLifecycleCallbackEventArgs()
     {
         $e = new LifecycleCallbackEventArgEntity;
@@ -200,7 +202,7 @@ class LifecycleCallbackTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
 
         $this->_em->refresh($e);
-        
+
         $this->_em->remove($e);
         $this->_em->flush();
 
@@ -243,7 +245,7 @@ class LifecycleCallbackTest extends \Doctrine\Tests\OrmFunctionalTestCase
             'Doctrine\ORM\Event\LifecycleEventArgs',
             $e->calls['postUpdateHandler']
         );
- 
+
         $this->assertInstanceOf(
             'Doctrine\ORM\Event\LifecycleEventArgs',
             $e->calls['preRemoveHandler']
@@ -257,20 +259,45 @@ class LifecycleCallbackTest extends \Doctrine\Tests\OrmFunctionalTestCase
 }
 
 /** @Entity @HasLifecycleCallbacks */
-class LifecycleCallbackTestUser {
+class LifecycleCallbackTestUser
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     private $id;
     /** @Column(type="string") */
     private $value;
     /** @Column(type="string") */
     private $name;
-    public function getId() {return $this->id;}
-    public function getValue() {return $this->value;}
-    public function setValue($value) {$this->value = $value;}
-    public function getName() {return $this->name;}
-    public function setName($name) {$this->name = $name;}
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
     /** @PreUpdate */
-    public function testCallback() {$this->value = 'Hello World';}
+    public function testCallback()
+    {
+        $this->value = 'Hello World';
+    }
 }
 
 /**
@@ -303,36 +330,43 @@ class LifecycleCallbackTestEntity
      */
     public $cascader;
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getValue() {
+    public function getValue()
+    {
         return $this->value;
     }
 
     /** @PrePersist */
-    public function doStuffOnPrePersist() {
+    public function doStuffOnPrePersist()
+    {
         $this->prePersistCallbackInvoked = true;
     }
 
     /** @PostPersist */
-    public function doStuffOnPostPersist() {
+    public function doStuffOnPostPersist()
+    {
         $this->postPersistCallbackInvoked = true;
     }
 
     /** @PostLoad */
-    public function doStuffOnPostLoad() {
+    public function doStuffOnPostLoad()
+    {
         $this->postLoadCallbackInvoked = true;
     }
 
     /** @PreUpdate */
-    public function doStuffOnPreUpdate() {
+    public function doStuffOnPreUpdate()
+    {
         $this->value = 'changed from preUpdate callback!';
     }
 
     /** @PreFlush */
-    public function doStuffOnPreFlush() {
+    public function doStuffOnPreFlush()
+    {
         $this->preFlushCallbackInvoked = true;
     }
 }
@@ -361,15 +395,18 @@ class LifecycleCallbackCascader
 }
 
 /** @MappedSuperclass @HasLifecycleCallbacks */
-class LifecycleCallbackParentEntity {
+class LifecycleCallbackParentEntity
+{
     /** @PrePersist */
-    function doStuff() {
+    function doStuff()
+    {
 
     }
 }
 
 /** @Entity @Table(name="lc_cb_childentity") */
-class LifecycleCallbackChildEntity extends LifecycleCallbackParentEntity {
+class LifecycleCallbackChildEntity extends LifecycleCallbackParentEntity
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     private $id;
 }

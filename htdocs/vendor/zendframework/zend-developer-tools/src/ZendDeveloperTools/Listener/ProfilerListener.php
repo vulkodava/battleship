@@ -44,11 +44,11 @@ class ProfilerListener implements ListenerAggregateInterface
      * Constructor.
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @param Options                 $options
+     * @param Options $options
      */
     public function __construct(ServiceLocatorInterface $serviceLocator, Options $options)
     {
-        $this->options        = $options;
+        $this->options = $options;
         $this->serviceLocator = $serviceLocator;
     }
 
@@ -84,10 +84,10 @@ class ProfilerListener implements ListenerAggregateInterface
      */
     public function onFinish(MvcEvent $event)
     {
-        $strict     = $this->options->isStrict();
+        $strict = $this->options->isStrict();
         $collectors = $this->options->getCollectors();
-        $report     = $this->serviceLocator->get('ZendDeveloperTools\Report');
-        $profiler   = $this->serviceLocator->get('ZendDeveloperTools\Profiler');
+        $report = $this->serviceLocator->get('ZendDeveloperTools\Report');
+        $profiler = $this->serviceLocator->get('ZendDeveloperTools\Profiler');
 
         $profiler->setErrorMode($strict);
 

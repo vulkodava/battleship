@@ -35,12 +35,13 @@ class DB2SchemaManager extends AbstractSchemaManager
      * {@inheritdoc}
      *
      * Apparently creator is the schema not the user who created it:
-     * {@link http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=/com.ibm.db29.doc.sqlref/db2z_sysibmsystablestable.htm}
+     * {@link
+     * http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=/com.ibm.db29.doc.sqlref/db2z_sysibmsystablestable.htm}
      */
     public function listTableNames()
     {
         $sql = $this->_platform->getListTablesSQL();
-        $sql .= " AND CREATOR = UPPER('".$this->_conn->getUsername()."')";
+        $sql .= " AND CREATOR = UPPER('" . $this->_conn->getUsername() . "')";
 
         $tables = $this->_conn->fetchAll($sql);
 
@@ -83,13 +84,13 @@ class DB2SchemaManager extends AbstractSchemaManager
         }
 
         $options = array(
-            'length'        => $length,
-            'unsigned'      => (bool)$unsigned,
-            'fixed'         => (bool)$fixed,
-            'default'       => ($tableColumn['default'] == "NULL") ? null : $tableColumn['default'],
-            'notnull'       => (bool) ($tableColumn['nulls'] == 'N'),
-            'scale'         => null,
-            'precision'     => null,
+            'length' => $length,
+            'unsigned' => (bool)$unsigned,
+            'fixed' => (bool)$fixed,
+            'default' => ($tableColumn['default'] == "NULL") ? null : $tableColumn['default'],
+            'notnull' => (bool)($tableColumn['nulls'] == 'N'),
+            'scale' => null,
+            'precision' => null,
             'platformOptions' => array(),
         );
 
@@ -118,12 +119,12 @@ class DB2SchemaManager extends AbstractSchemaManager
     /**
      * {@inheritdoc}
      */
-    protected function _getPortableTableIndexesList($tableIndexes, $tableName=null)
+    protected function _getPortableTableIndexesList($tableIndexes, $tableName = null)
     {
         $eventManager = $this->_platform->getEventManager();
 
         $indexes = array();
-        foreach($tableIndexes as $indexKey => $data) {
+        foreach ($tableIndexes as $indexKey => $data) {
             $data = array_change_key_case($data, \CASE_LOWER);
             $unique = ($data['uniquerule'] == "D") ? false : true;
             $primary = ($data['uniquerule'] == "P");
@@ -148,7 +149,7 @@ class DB2SchemaManager extends AbstractSchemaManager
                 $index = $eventArgs->getIndex();
             }
 
-            if ( ! $defaultPrevented) {
+            if (!$defaultPrevented) {
                 $index = new Index($data['name'], $data['columns'], $data['unique'], $data['primary']);
             }
 
@@ -206,7 +207,7 @@ class DB2SchemaManager extends AbstractSchemaManager
         //$view['text'] = (is_resource($view['text']) ? stream_get_contents($view['text']) : $view['text']);
         if (!is_resource($view['text'])) {
             $pos = strpos($view['text'], ' AS ');
-            $sql = substr($view['text'], $pos+4);
+            $sql = substr($view['text'], $pos + 4);
         } else {
             $sql = '';
         }

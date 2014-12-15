@@ -26,7 +26,7 @@ use Doctrine\DBAL\Driver\Statement;
 /**
  * SQL Server Statement.
  *
- * @since 2.3
+ * @since  2.3
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
 class SQLSrvStatement implements IteratorAggregate, Statement
@@ -92,8 +92,8 @@ class SQLSrvStatement implements IteratorAggregate, Statement
     const LAST_INSERT_ID_SQL = ';SELECT SCOPE_IDENTITY() AS LastInsertId;';
 
     /**
-     * @param resource     $conn
-     * @param string       $sql
+     * @param resource $conn
+     * @param string $sql
      * @param integer|null $lastInsertId
      */
     public function __construct($conn, $sql, $lastInsertId = null)
@@ -112,7 +112,7 @@ class SQLSrvStatement implements IteratorAggregate, Statement
      */
     public function bindValue($param, $value, $type = null)
     {
-        return $this->bindParam($param, $value, $type,null);
+        return $this->bindParam($param, $value, $type, null);
     }
 
     /**
@@ -125,9 +125,9 @@ class SQLSrvStatement implements IteratorAggregate, Statement
         }
 
         if ($type === \PDO::PARAM_LOB) {
-            $this->params[$column-1] = array($variable, SQLSRV_PARAM_IN, SQLSRV_PHPTYPE_STREAM(SQLSRV_ENC_BINARY), SQLSRV_SQLTYPE_VARBINARY('max'));
+            $this->params[$column - 1] = array($variable, SQLSRV_PARAM_IN, SQLSRV_PHPTYPE_STREAM(SQLSRV_ENC_BINARY), SQLSRV_SQLTYPE_VARBINARY('max'));
         } else {
-            $this->params[$column-1] = $variable;
+            $this->params[$column - 1] = $variable;
         }
     }
 
@@ -184,14 +184,14 @@ class SQLSrvStatement implements IteratorAggregate, Statement
         }
 
         $this->stmt = sqlsrv_query($this->conn, $this->sql, $this->params);
-        if ( ! $this->stmt) {
+        if (!$this->stmt) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
 
         if ($this->lastInsertId) {
             sqlsrv_next_result($this->stmt);
             sqlsrv_fetch($this->stmt);
-            $this->lastInsertId->setId( sqlsrv_get_field($this->stmt, 0) );
+            $this->lastInsertId->setId(sqlsrv_get_field($this->stmt, 0));
         }
     }
 
@@ -231,6 +231,7 @@ class SQLSrvStatement implements IteratorAggregate, Statement
                 $className = $args[1];
                 $ctorArgs = (isset($args[2])) ? $args[2] : array();
             }
+
             return sqlsrv_fetch_object($this->stmt, $className, $ctorArgs);
         }
 

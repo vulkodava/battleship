@@ -32,8 +32,8 @@ class DDC869ChequePayment extends DDC869Payment
     public static function loadMetadata(\Doctrine\ORM\Mapping\ClassMetadataInfo $metadata)
     {
         $metadata->mapField(array(
-           'fieldName'  => 'serialNumber',
-           'type'       => 'string',
+            'fieldName' => 'serialNumber',
+            'type' => 'string',
         ));
     }
 

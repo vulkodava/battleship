@@ -41,8 +41,8 @@ class AdapterChainEventTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testCodeAndMessages
-     * @covers \ZfcUser\Authentication\Adapter\AdapterChainEvent::getIdentity
-     * @covers \ZfcUser\Authentication\Adapter\AdapterChainEvent::setIdentity
+     * @covers  \ZfcUser\Authentication\Adapter\AdapterChainEvent::getIdentity
+     * @covers  \ZfcUser\Authentication\Adapter\AdapterChainEvent::setIdentity
      */
     public function testIdentity()
     {

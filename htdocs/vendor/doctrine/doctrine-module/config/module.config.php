@@ -31,15 +31,15 @@ return array(
                 'directory' => 'data/DoctrineModule/cache',
             ),
             'memcache' => array(
-                'class'    => 'Doctrine\Common\Cache\MemcacheCache',
+                'class' => 'Doctrine\Common\Cache\MemcacheCache',
                 'instance' => 'my_memcache_alias',
             ),
             'memcached' => array(
-                'class'    => 'Doctrine\Common\Cache\MemcachedCache',
+                'class' => 'Doctrine\Common\Cache\MemcachedCache',
                 'instance' => 'my_memcached_alias',
             ),
             'redis' => array(
-                'class'    => 'Doctrine\Common\Cache\RedisCache',
+                'class' => 'Doctrine\Common\Cache\RedisCache',
                 'instance' => 'my_redis_alias',
             ),
             'wincache' => array(

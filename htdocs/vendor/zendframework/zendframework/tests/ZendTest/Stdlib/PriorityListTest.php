@@ -77,9 +77,9 @@ class PriorityListTest extends TestCase
 
     public function testLIFOOnly()
     {
-        $this->list->insert('foo',    new \stdClass());
-        $this->list->insert('bar',    new \stdClass());
-        $this->list->insert('baz',    new \stdClass());
+        $this->list->insert('foo', new \stdClass());
+        $this->list->insert('bar', new \stdClass());
+        $this->list->insert('baz', new \stdClass());
         $this->list->insert('foobar', new \stdClass());
         $this->list->insert('barbaz', new \stdClass());
 
@@ -141,9 +141,9 @@ class PriorityListTest extends TestCase
     public function testFIFOOnly()
     {
         $this->list->isLIFO(false);
-        $this->list->insert('foo',    new \stdClass());
-        $this->list->insert('bar',    new \stdClass());
-        $this->list->insert('baz',    new \stdClass());
+        $this->list->insert('foo', new \stdClass());
+        $this->list->insert('bar', new \stdClass());
+        $this->list->insert('baz', new \stdClass());
         $this->list->insert('foobar', new \stdClass());
         $this->list->insert('barbaz', new \stdClass());
 
@@ -188,8 +188,8 @@ class PriorityListTest extends TestCase
 
         $this->assertEquals(
             array(
-                'bar' => array('data' => 'bar_value', 'priority' =>  1, 'serial' => 1),
-                'foo' => array('data' => 'foo_value', 'priority' =>  0, 'serial' => 0),
+                'bar' => array('data' => 'bar_value', 'priority' => 1, 'serial' => 1),
+                'foo' => array('data' => 'foo_value', 'priority' => 0, 'serial' => 0),
                 'baz' => array('data' => 'baz_value', 'priority' => -1, 'serial' => 2),
             ),
             $this->list->toArray(PriorityList::EXTR_BOTH)
@@ -217,10 +217,10 @@ class PriorityListTest extends TestCase
         $this->assertEquals($orders1, $orders2);
         $this->assertEquals(
             array(
-                'null'   => null,
-                'false'  => false,
+                'null' => null,
+                'false' => false,
                 'string' => 'test',
-                'true'   => true,
+                'true' => true,
             ),
             $orders2
         );

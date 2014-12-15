@@ -19,7 +19,7 @@ class Bar
 
     public function __construct(Module $module, ModuleManager $moduleManager)
     {
-        $this->module        = $module;
+        $this->module = $module;
         $this->moduleManager = $moduleManager;
     }
 }

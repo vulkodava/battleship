@@ -53,6 +53,7 @@ class SendResponseListener implements
         ));
         $this->eventManager = $eventManager;
         $this->attachDefaultListeners();
+
         return $this;
     }
 
@@ -68,6 +69,7 @@ class SendResponseListener implements
         if (!$this->eventManager instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->eventManager;
     }
 
@@ -125,6 +127,7 @@ class SendResponseListener implements
         if (!$this->event instanceof SendResponseEvent) {
             $this->setEvent(new SendResponseEvent());
         }
+
         return $this->event;
     }
 
@@ -137,6 +140,7 @@ class SendResponseListener implements
     public function setEvent(SendResponseEvent $e)
     {
         $this->event = $e;
+
         return $this;
     }
 

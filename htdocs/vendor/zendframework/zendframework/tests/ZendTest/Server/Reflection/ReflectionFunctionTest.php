@@ -147,9 +147,9 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $prototype  = $prototypes[0];
+        $prototype = $prototypes[0];
         $params = $prototype->getParameters();
-        $param  = $params[0];
+        $param = $params[0];
         $this->assertContains('Some description', $param->getDescription(), var_export($param, 1));
     }
 }

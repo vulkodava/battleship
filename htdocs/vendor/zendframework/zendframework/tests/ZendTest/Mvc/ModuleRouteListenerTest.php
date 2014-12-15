@@ -21,10 +21,10 @@ class ModuleRouteListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->request             = new Request();
-        $this->events              = new EventManager();
-        $this->router              = new Router\Http\TreeRouteStack();
-        $this->routeListener       = new RouteListener();
+        $this->request = new Request();
+        $this->events = new EventManager();
+        $this->router = new Router\Http\TreeRouteStack();
+        $this->routeListener = new RouteListener();
         $this->moduleRouteListener = new ModuleRouteListener();
 
         $this->events->attach($this->routeListener);
@@ -36,7 +36,7 @@ class ModuleRouteListenerTest extends TestCase
         $this->router->addRoute('foo', array(
             'type' => 'Literal',
             'options' => array(
-                'route'    => '/foo',
+                'route' => '/foo',
                 'defaults' => array(
                     ModuleRouteListener::MODULE_NAMESPACE => 'Foo',
                     'controller' => 'Index',
@@ -60,7 +60,7 @@ class ModuleRouteListenerTest extends TestCase
         $this->router->addRoute('foo', array(
             'type' => 'Literal',
             'options' => array(
-                'route'    => '/foo',
+                'route' => '/foo',
                 'defaults' => array(
                     'controller' => 'Index',
                 ),
@@ -85,7 +85,7 @@ class ModuleRouteListenerTest extends TestCase
         $this->router->addRoute('foo', array(
             'type' => 'Literal',
             'options' => array(
-                'route'    => '/foo',
+                'route' => '/foo',
                 'defaults' => array(
                     ModuleRouteListener::MODULE_NAMESPACE => 'Foo',
                     'controller' => 'Index',
@@ -112,7 +112,7 @@ class ModuleRouteListenerTest extends TestCase
         $this->router->addRoute('foo', array(
             'type' => 'Literal',
             'options' => array(
-                'route'    => '/foo',
+                'route' => '/foo',
                 'defaults' => array(
                     ModuleRouteListener::MODULE_NAMESPACE => 'Foo',
                     'controller' => 'some-index',

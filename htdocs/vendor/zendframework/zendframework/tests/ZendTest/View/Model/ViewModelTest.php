@@ -53,7 +53,7 @@ class ViewModelTest extends TestCase
 
     public function testAllowsPassingTraversableArgumentsToVariablesAndOptionsInConstructor()
     {
-        $vars    = new ArrayObject;
+        $vars = new ArrayObject;
         $options = new ArrayObject;
         $model = new ViewModel($vars, $options);
         $this->assertSame($vars, $model->getVariables());
@@ -62,7 +62,7 @@ class ViewModelTest extends TestCase
 
     public function testAllowsPassingNonArrayAccessObjectsAsArrayInConstructor()
     {
-        $vars  = array('foo' => new Variable);
+        $vars = array('foo' => new Variable);
         $model = new ViewModel($vars);
         $this->assertSame($vars, $model->getVariables());
     }
@@ -86,6 +86,7 @@ class ViewModelTest extends TestCase
         $model = new ViewModel(array('foo' => 'bar', 'bar' => 'baz'));
         $model->setVariables(array('bar' => 'BAZBAT'));
         $this->assertEquals(array('foo' => 'bar', 'bar' => 'BAZBAT'), $model->getVariables());
+
         return $model;
     }
 
@@ -125,6 +126,7 @@ class ViewModelTest extends TestCase
         $model = new ViewModel(array(), array('foo' => 'bar', 'bar' => 'baz'));
         $model->setOptions(array('bar' => 'BAZBAT'));
         $this->assertEquals(array('bar' => 'BAZBAT'), $model->getOptions());
+
         return $model;
     }
 
@@ -200,6 +202,7 @@ class ViewModelTest extends TestCase
         $this->assertEquals(1, count($model));
         $model->addChild($child);
         $this->assertEquals(2, count($model));
+
         return $model;
     }
 
@@ -230,7 +233,7 @@ class ViewModelTest extends TestCase
 
     public function testTemplateIsEmptyByDefault()
     {
-        $model    = new ViewModel();
+        $model = new ViewModel();
         $template = $model->getTemplate();
         $this->assertTrue(empty($template));
     }
@@ -267,14 +270,14 @@ class ViewModelTest extends TestCase
     public function testAllowsPassingViewVariablesContainerAsVariablesToConstructor()
     {
         $variables = new ViewVariables();
-        $model     = new ViewModel($variables);
+        $model = new ViewModel($variables);
         $this->assertSame($variables, $model->getVariables());
     }
 
     public function testPassingOverwriteFlagWhenSettingVariablesOverwritesContainer()
     {
         $variables = new ViewVariables(array('foo' => 'bar'));
-        $model     = new ViewModel($variables);
+        $model = new ViewModel($variables);
         $overwrite = new ViewVariables(array('foo' => 'baz'));
         $model->setVariables($overwrite, true);
         $this->assertSame($overwrite, $model->getVariables());
@@ -282,8 +285,8 @@ class ViewModelTest extends TestCase
 
     public function testPropertyOverloadingGivesAccessToProperties()
     {
-        $model      = new ViewModel();
-        $variables  = $model->getVariables();
+        $model = new ViewModel();
+        $variables = $model->getVariables();
         $model->foo = 'bar';
         $this->assertTrue(isset($model->foo));
         $this->assertEquals('bar', $variables['foo']);

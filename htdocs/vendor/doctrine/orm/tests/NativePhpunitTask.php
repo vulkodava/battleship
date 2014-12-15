@@ -16,7 +16,8 @@ require_once 'PHPUnit/Framework.php';
 /**
  * A more flexible and powerful PHPUnit Task than the native Phing one.
  *
- * Plus forward compatibility for PHPUnit 3.5 and later is ensured by using the PHPUnit Test Runner instead of implementing one.
+ * Plus forward compatibility for PHPUnit 3.5 and later is ensured by using the PHPUnit Test Runner instead of
+ * implementing one.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
@@ -31,47 +32,55 @@ class NativePhpunitTask extends Task
     private $haltonfailure = true;
     private $haltonerror = true;
 
-    public function setTestdirectory($directory) {
+    public function setTestdirectory($directory)
+    {
         $this->testdirectory = $directory;
     }
 
-    public function setTest($test) {
+    public function setTest($test)
+    {
         $this->test = $test;
     }
 
-    public function setTestfile($testfile) {
+    public function setTestfile($testfile)
+    {
         $this->testfile = $testfile;
     }
 
-    public function setJunitlogfile($junitlogfile) {
+    public function setJunitlogfile($junitlogfile)
+    {
         if (strlen($junitlogfile) == 0) {
-            $junitlogfile = NULL;
+            $junitlogfile = null;
         }
 
         $this->junitlogfile = $junitlogfile;
     }
 
-    public function setConfiguration($configuration) {
+    public function setConfiguration($configuration)
+    {
         if (strlen($configuration) == 0) {
-            $configuration = NULL;
+            $configuration = null;
         }
 
         $this->configuration = $configuration;
     }
 
-    public function setCoverageClover($coverageClover) {
+    public function setCoverageClover($coverageClover)
+    {
         if (strlen($coverageClover) == 0) {
-            $coverageClover = NULL;
+            $coverageClover = null;
         }
 
         $this->coverageClover = $coverageClover;
     }
 
-    public function setHaltonfailure($haltonfailures) {
+    public function setHaltonfailure($haltonfailures)
+    {
         $this->haltonfailure = $haltonfailures;
     }
 
-    public function setHaltonerror($haltonerrors) {
+    public function setHaltonerror($haltonerrors)
+    {
         $this->haltonerror = $haltonerrors;
     }
 
@@ -80,16 +89,14 @@ class NativePhpunitTask extends Task
         require_once "PHPUnit/Runner/Version.php";
         $version = PHPUnit_Runner_Version::id();
 
-        if (version_compare($version, '3.4.0') < 0)
-        {
+        if (version_compare($version, '3.4.0') < 0) {
             throw new BuildException("NativePHPUnitTask requires PHPUnit version >= 3.2.0", $this->getLocation());
         }
 
         require_once 'PHPUnit/Util/Filter.php';
 
         // point PHPUnit_MAIN_METHOD define to non-existing method
-        if (!defined('PHPUnit_MAIN_METHOD'))
-        {
+        if (!defined('PHPUnit_MAIN_METHOD')) {
             define('PHPUnit_MAIN_METHOD', 'PHPUnitTask::undefined');
         }
     }
@@ -97,7 +104,7 @@ class NativePhpunitTask extends Task
     public function main()
     {
         if (!is_dir(realpath($this->testdirectory))) {
-            throw new BuildException("NativePHPUnitTask requires a Test Directory path given, '".$this->testdirectory."' given.");
+            throw new BuildException("NativePHPUnitTask requires a Test Directory path given, '" . $this->testdirectory . "' given.");
         }
         set_include_path(realpath($this->testdirectory) . PATH_SEPARATOR . get_include_path());
 
@@ -118,25 +125,25 @@ class NativePhpunitTask extends Task
             $result = $runner->doRun($suite, $arguments);
             /* @var $result PHPUnit_Framework_TestResult */
 
-            if ( ($this->haltonfailure && $result->failureCount() > 0) || ($this->haltonerror && $result->errorCount() > 0) ) {
-                throw new BuildException("PHPUnit: ".$result->failureCount()." Failures and ".$result->errorCount()." Errors, ".
-                    "last failure message: ".$printer->getMessages());
+            if (($this->haltonfailure && $result->failureCount() > 0) || ($this->haltonerror && $result->errorCount() > 0)) {
+                throw new BuildException("PHPUnit: " . $result->failureCount() . " Failures and " . $result->errorCount() . " Errors, " .
+                    "last failure message: " . $printer->getMessages());
             }
 
-            $this->log("PHPUnit Success: ".count($result->passed())." tests passed, no ".
-                "failures (".$result->skippedCount()." skipped, ".$result->notImplementedCount()." not implemented)");
+            $this->log("PHPUnit Success: " . count($result->passed()) . " tests passed, no " .
+                "failures (" . $result->skippedCount() . " skipped, " . $result->notImplementedCount() . " not implemented)");
 
             // Hudson for example doesn't like the backslash in class names
             if (file_exists($this->coverageClover)) {
-                $this->log("Generated Clover Coverage XML to: ".$this->coverageClover);
+                $this->log("Generated Clover Coverage XML to: " . $this->coverageClover);
                 $content = file_get_contents($this->coverageClover);
                 $content = str_replace("\\", ".", $content);
                 file_put_contents($this->coverageClover, $content);
                 unset($content);
             }
 
-        } catch(\Exception $e) {
-            throw new BuildException("NativePhpunitTask failed: ".$e->getMessage());
+        } catch (\Exception $e) {
+            throw new BuildException("NativePhpunitTask failed: " . $e->getMessage());
         }
     }
 }
@@ -159,32 +166,32 @@ class NativePhpunitPrinter extends PHPUnit_Util_Printer implements PHPUnit_Frame
      * An error occurred.
      *
      * @param  PHPUnit_Framework_Test $test
-     * @param  Exception              $e
-     * @param  float                  $time
+     * @param  Exception $e
+     * @param  float $time
      */
     public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
-        $this->_messages[] = "Test ERROR: ".$test->getName().": ".$e->getMessage();
+        $this->_messages[] = "Test ERROR: " . $test->getName() . ": " . $e->getMessage();
     }
 
     /**
      * A failure occurred.
      *
-     * @param  PHPUnit_Framework_Test                 $test
+     * @param  PHPUnit_Framework_Test $test
      * @param  PHPUnit_Framework_AssertionFailedError $e
-     * @param  float                                  $time
+     * @param  float $time
      */
     public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time)
     {
-        $this->_messages[] = "Test FAILED: ".$test->getName().": ".$e->getMessage();
+        $this->_messages[] = "Test FAILED: " . $test->getName() . ": " . $e->getMessage();
     }
 
     /**
      * Incomplete test.
      *
      * @param  PHPUnit_Framework_Test $test
-     * @param  Exception              $e
-     * @param  float                  $time
+     * @param  Exception $e
+     * @param  float $time
      */
     public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
@@ -195,8 +202,8 @@ class NativePhpunitPrinter extends PHPUnit_Util_Printer implements PHPUnit_Frame
      * Skipped test.
      *
      * @param  PHPUnit_Framework_Test $test
-     * @param  Exception              $e
-     * @param  float                  $time
+     * @param  Exception $e
+     * @param  float $time
      * @since  Method available since Release 3.0.0
      */
     public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time)
@@ -240,7 +247,7 @@ class NativePhpunitPrinter extends PHPUnit_Util_Printer implements PHPUnit_Frame
      * A test ended.
      *
      * @param  PHPUnit_Framework_Test $test
-     * @param  float                  $time
+     * @param  float $time
      */
     public function endTest(PHPUnit_Framework_Test $test, $time)
     {

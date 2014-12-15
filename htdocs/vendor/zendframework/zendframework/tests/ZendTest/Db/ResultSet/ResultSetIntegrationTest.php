@@ -121,10 +121,11 @@ class ResultSetIntegrationTest extends TestCase
         $array = array();
         for ($i = 0; $i < $count; $i++) {
             $array[] = array(
-                'id'    => $i,
+                'id' => $i,
                 'title' => 'title ' . $i,
             );
         }
+
         return new ArrayIterator($array);
     }
 
@@ -158,7 +159,7 @@ class ResultSetIntegrationTest extends TestCase
 
     public function testCountReturnsCountOfRows()
     {
-        $count      = rand(3, 75);
+        $count = rand(3, 75);
         $dataSource = $this->getArrayDataSource($count);
         $this->resultSet->initialize($dataSource);
         $this->assertEquals($count, $this->resultSet->count());
@@ -166,10 +167,10 @@ class ResultSetIntegrationTest extends TestCase
 
     public function testToArrayRaisesExceptionForRowsThatAreNotArraysOrArrayCastable()
     {
-        $count      = rand(3, 75);
+        $count = rand(3, 75);
         $dataSource = $this->getArrayDataSource($count);
         foreach ($dataSource as $index => $row) {
-            $dataSource[$index] = (object) $row;
+            $dataSource[$index] = (object)$row;
         }
         $this->resultSet->initialize($dataSource);
         $this->setExpectedException('Zend\Db\ResultSet\Exception\RuntimeException');
@@ -178,7 +179,7 @@ class ResultSetIntegrationTest extends TestCase
 
     public function testToArrayCreatesArrayOfArraysRepresentingRows()
     {
-        $count      = rand(3, 75);
+        $count = rand(3, 75);
         $dataSource = $this->getArrayDataSource($count);
         $this->resultSet->initialize($dataSource);
         $test = $this->resultSet->toArray();

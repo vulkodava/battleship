@@ -6,13 +6,14 @@ use ZfcUserDoctrineORM\Mapper\User as ZfcUserDoctrineMapper;
 
 class UserDoctrine extends ZfcUserDoctrineMapper
 {
-    public function findAll() 
+    public function findAll()
     {
         $er = $this->em->getRepository($this->options->getUserEntityClass());
+
         return $er->findAll();
     }
 
-    
+
     public function remove($entity)
     {
         $this->getEventManager()->trigger('remove.pre', $this, array('entity' => $entity));

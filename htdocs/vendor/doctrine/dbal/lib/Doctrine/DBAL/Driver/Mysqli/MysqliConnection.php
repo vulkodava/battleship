@@ -32,10 +32,10 @@ class MysqliConnection implements Connection
     private $_conn;
 
     /**
-     * @param array  $params
+     * @param array $params
      * @param string $username
      * @param string $password
-     * @param array  $driverOptions
+     * @param array $driverOptions
      *
      * @throws \Doctrine\DBAL\Driver\Mysqli\MysqliException
      */
@@ -45,7 +45,7 @@ class MysqliConnection implements Connection
         $socket = isset($params['unix_socket']) ? $params['unix_socket'] : ini_get('mysqli.default_socket');
 
         $this->_conn = mysqli_init();
-        if ( ! $this->_conn->real_connect($params['host'], $username, $password, $params['dbname'], $port, $socket)) {
+        if (!$this->_conn->real_connect($params['host'], $username, $password, $params['dbname'], $port, $socket)) {
             throw new MysqliException($this->_conn->connect_error, $this->_conn->connect_errno);
         }
 
@@ -83,15 +83,16 @@ class MysqliConnection implements Connection
         $sql = $args[0];
         $stmt = $this->prepare($sql);
         $stmt->execute();
+
         return $stmt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function quote($input, $type=\PDO::PARAM_STR)
+    public function quote($input, $type = \PDO::PARAM_STR)
     {
-        return "'". $this->_conn->escape_string($input) ."'";
+        return "'" . $this->_conn->escape_string($input) . "'";
     }
 
     /**
@@ -100,6 +101,7 @@ class MysqliConnection implements Connection
     public function exec($statement)
     {
         $this->_conn->query($statement);
+
         return $this->_conn->affected_rows;
     }
 
@@ -117,6 +119,7 @@ class MysqliConnection implements Connection
     public function beginTransaction()
     {
         $this->_conn->query('START TRANSACTION');
+
         return true;
     }
 

@@ -20,6 +20,7 @@ class SchemaValidatorTest extends \Doctrine\Tests\OrmFunctionalTestCase
             }
             $modelSets[] = array($modelSet);
         }
+
         return $modelSets;
     }
 
@@ -44,7 +45,7 @@ class SchemaValidatorTest extends \Doctrine\Tests\OrmFunctionalTestCase
                 }
             }
 
-            $this->assertEquals(0, count($ce), "Invalid Modelset: " . $modelSet . " class " . $class->name . ": ". implode("\n", $ce));
+            $this->assertEquals(0, count($ce), "Invalid Modelset: " . $modelSet . " class " . $class->name . ": " . implode("\n", $ce));
         }
     }
 }

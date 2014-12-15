@@ -14,11 +14,25 @@ class MockPlatform extends \Doctrine\DBAL\Platforms\AbstractPlatform
         throw DBALException::notSupported(__METHOD__);
     }
 
-    public function getBooleanTypeDeclarationSQL(array $columnDef) {}
-    public function getIntegerTypeDeclarationSQL(array $columnDef) {}
-    public function getBigIntTypeDeclarationSQL(array $columnDef) {}
-    public function getSmallIntTypeDeclarationSQL(array $columnDef) {}
-    public function _getCommonIntegerTypeDeclarationSQL(array $columnDef) {}
+    public function getBooleanTypeDeclarationSQL(array $columnDef)
+    {
+    }
+
+    public function getIntegerTypeDeclarationSQL(array $columnDef)
+    {
+    }
+
+    public function getBigIntTypeDeclarationSQL(array $columnDef)
+    {
+    }
+
+    public function getSmallIntTypeDeclarationSQL(array $columnDef)
+    {
+    }
+
+    public function _getCommonIntegerTypeDeclarationSQL(array $columnDef)
+    {
+    }
 
     public function getVarcharTypeDeclarationSQL(array $field)
     {
@@ -40,8 +54,11 @@ class MockPlatform extends \Doctrine\DBAL\Platforms\AbstractPlatform
     {
         return 'mock';
     }
-    protected function initializeDoctrineTypeMappings() {
+
+    protected function initializeDoctrineTypeMappings()
+    {
     }
+
     protected function getVarcharTypeDeclarationSQLSnippet($length, $fixed)
     {
 

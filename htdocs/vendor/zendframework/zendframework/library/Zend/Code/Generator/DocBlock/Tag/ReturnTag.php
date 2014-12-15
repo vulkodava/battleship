@@ -23,6 +23,7 @@ class ReturnTag extends AbstractTypeableTag implements TagInterface
     {
         $tagManager = new TagManager();
         $tagManager->initializeDefaultTags();
+
         return $tagManager->createTagFromReflection($reflectionTag);
     }
 
@@ -59,8 +60,8 @@ class ReturnTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@return '
-        . $this->getTypesAsString()
-        . ((!empty($this->description)) ? ' ' . $this->description : '');
+            . $this->getTypesAsString()
+            . ((!empty($this->description)) ? ' ' . $this->description : '');
 
         return $output;
     }

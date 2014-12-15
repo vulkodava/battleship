@@ -61,7 +61,7 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
         $generator->openElement('test')->closeElement('test');
         $this->assertXml('<test/>', $generator);
         $this->assertContains('<test/>', $generator->flush());
-        $this->assertSame('', (string) $generator);
+        $this->assertSame('', (string)$generator);
     }
 
     /**

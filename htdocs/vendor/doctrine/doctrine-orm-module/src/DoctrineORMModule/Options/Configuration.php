@@ -449,7 +449,7 @@ class Configuration extends DBALConfiguration
 
         throw new InvalidArgumentException(sprintf(
             'namingStrategy must be either a string, a Doctrine\ORM\Mapping\NamingStrategy '
-                . 'instance or null, %s given',
+            . 'instance or null, %s given',
             is_object($namingStrategy) ? get_class($namingStrategy) : gettype($namingStrategy)
         ));
     }

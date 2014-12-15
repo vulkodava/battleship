@@ -16,10 +16,10 @@ require_once __DIR__ . '/../../../TestInit.php';
  * to cascade "merge" on cmUser::groups
  * -------------------------------------------------
  *
- * @PHP-Version 5.3.2
+ * @PHP-Version     5.3.2
  * @PHPUnit-Version 3.4.11
  *
- * @author markus
+ * @author          markus
  */
 class DDC501Test extends OrmFunctionalTestCase
 {
@@ -64,7 +64,7 @@ class DDC501Test extends OrmFunctionalTestCase
         $userClone = $this->_em->merge($userClone);
 
         // Back in managed world I would expect to have my phonenumbers back but they aren't!
-	// Remember I didn't touch (and probably didn't need) them at all while in detached mode.
+        // Remember I didn't touch (and probably didn't need) them at all while in detached mode.
         $this->assertEquals(4, count($userClone->getPhonenumbers()), 'Phonenumbers are not available anymore');
 
         // This works fine as long as cmUser::groups doesn't cascade "merge"
@@ -93,13 +93,13 @@ class DDC501Test extends OrmFunctionalTestCase
         $user->username = 'lukacho';
         $user->status = 'developer';
 
-        foreach(array(1111,2222,3333,4444) as $number) {
+        foreach (array(1111, 2222, 3333, 4444) as $number) {
             $phone = new CmsPhonenumber;
             $phone->phonenumber = $number;
             $user->addPhonenumber($phone);
         }
 
-        foreach(array('Moshers', 'Headbangers') as $groupName) {
+        foreach (array('Moshers', 'Headbangers') as $groupName) {
             $group = new CmsGroup;
             $group->setName($groupName);
             $user->addGroup($group);
@@ -116,9 +116,9 @@ class DDC501Test extends OrmFunctionalTestCase
     protected function loadUserFromEntityManager()
     {
         return $this->_em
-                ->createQuery('SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.name like :name')
-                ->setParameter('name', 'Luka')
-                ->getSingleResult();
+            ->createQuery('SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.name like :name')
+            ->setParameter('name', 'Luka')
+            ->getSingleResult();
     }
 
 }

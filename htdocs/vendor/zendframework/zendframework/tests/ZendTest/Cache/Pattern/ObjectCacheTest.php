@@ -28,8 +28,9 @@ class TestObjectCache
         ++static::$fooCounter;
         $args = func_get_args();
 
-        echo 'foobar_output('.implode(', ', $args) . ') : ' . static::$fooCounter;
-        return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
+        echo 'foobar_output(' . implode(', ', $args) . ') : ' . static::$fooCounter;
+
+        return 'foobar_return(' . implode(', ', $args) . ') : ' . static::$fooCounter;
     }
 
     public function __invoke()
@@ -59,7 +60,7 @@ class ObjectCacheTest extends CommonPatternTest
             'memory_limit' => 0
         ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
-            'object'  => new $class(),
+            'object' => new $class(),
             'storage' => $this->_storage,
         ));
         $this->_pattern = new Cache\Pattern\ObjectCache();
@@ -101,7 +102,7 @@ class ObjectCacheTest extends CommonPatternTest
         $args = array('arg1', 2, 3.33, null);
 
         $generatedKey = $this->_pattern->generateKey('emptyMethod', $args);
-        $usedKey      = null;
+        $usedKey = null;
         $this->_options->getStorage()->getEventManager()->attach('setItem.pre', function ($event) use (&$usedKey) {
             $params = $event->getParams();
             $usedKey = $params['key'];
@@ -138,7 +139,7 @@ class ObjectCacheTest extends CommonPatternTest
     {
         $returnSpec = 'foobar_return(' . implode(', ', $args) . ') : ';
         $outputSpec = 'foobar_output(' . implode(', ', $args) . ') : ';
-        $callback   = array($this->_pattern, $method);
+        $callback = array($this->_pattern, $method);
 
         // first call - not cached
         $firstCounter = TestObjectCache::$fooCounter + 1;

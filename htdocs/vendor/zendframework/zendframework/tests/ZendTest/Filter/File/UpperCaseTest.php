@@ -45,8 +45,8 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_filesPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
-        $this->_origFile  = $this->_filesPath . 'testfile2.txt';
-        $this->_newFile   = $this->_filesPath . 'newtestfile2.txt';
+        $this->_origFile = $this->_filesPath . 'testfile2.txt';
+        $this->_newFile = $this->_filesPath . 'newtestfile2.txt';
 
         if (!file_exists($this->_newFile)) {
             copy($this->_origFile, $this->_newFile);

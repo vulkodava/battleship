@@ -27,18 +27,21 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Cursor position
+     *
      * @var int
      */
     protected $position = 0;
 
     /**
      * Number of known rows
+     *
      * @var int
      */
     protected $numberOfRows = -1;
 
     /**
      * Is the current() operation already complete for this pointer position?
+     *
      * @var bool
      */
     protected $currentComplete = false;
@@ -61,6 +64,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Initialize
+     *
      * @param resource $resource
      * @return Result
      */
@@ -70,6 +74,7 @@ class Result implements Iterator, ResultInterface
             throw new Exception\InvalidArgumentException('Invalid resource provided.');
         }
         $this->resource = $resource;
+
         return $this;
     }
 
@@ -97,6 +102,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Return the resource
+     *
      * @return mixed
      */
     public function getResource()
@@ -116,6 +122,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Get affected rows
+     *
      * @return int
      */
     public function getAffectedRows()
@@ -125,6 +132,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Current
+     *
      * @return mixed
      */
     public function current()
@@ -150,8 +158,10 @@ class Result implements Iterator, ResultInterface
 
         if ($this->currentData !== false) {
             $this->position++;
+
             return true;
         }
+
         return false;
     }
 
@@ -165,6 +175,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Key
+     *
      * @return mixed
      */
     public function key()
@@ -184,6 +195,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Valid
+     *
      * @return bool
      */
     public function valid()
@@ -197,6 +209,7 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Count
+     *
      * @return int
      */
     public function count()

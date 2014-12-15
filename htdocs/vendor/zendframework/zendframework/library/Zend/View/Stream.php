@@ -57,7 +57,7 @@ class Stream
     public function stream_open($path, $mode, $options, &$opened_path)
     {
         // get the view script source
-        $path        = str_replace('zend.view://', '', $path);
+        $path = str_replace('zend.view://', '', $path);
         $this->data = file_get_contents($path);
 
         /**
@@ -66,6 +66,7 @@ class Stream
          */
         if ($this->data === false) {
             $this->stat = stat($path);
+
             return false;
         }
 
@@ -106,6 +107,7 @@ class Stream
     {
         $ret = substr($this->data, $this->pos, $count);
         $this->pos += strlen($ret);
+
         return $ret;
     }
 
@@ -152,6 +154,7 @@ class Stream
             case SEEK_SET:
                 if ($offset < strlen($this->data) && $offset >= 0) {
                     $this->pos = $offset;
+
                     return true;
                 } else {
                     return false;
@@ -161,6 +164,7 @@ class Stream
             case SEEK_CUR:
                 if ($offset >= 0) {
                     $this->pos += $offset;
+
                     return true;
                 } else {
                     return false;
@@ -170,6 +174,7 @@ class Stream
             case SEEK_END:
                 if (strlen($this->data) + $offset >= 0) {
                     $this->pos = strlen($this->data) + $offset;
+
                     return true;
                 } else {
                     return false;

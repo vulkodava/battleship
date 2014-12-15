@@ -83,7 +83,7 @@ class LimitSubqueryOutputWalkerTest extends PaginationTestCase
         $this->entityManager->getConnection()->setDatabasePlatform(new PostgreSqlPlatform);
 
         $query = $this->entityManager->createQuery(
-           'SELECT u, g, COUNT(g.id) AS hidden g_quantity FROM Doctrine\Tests\ORM\Tools\Pagination\User u JOIN u.groups g ORDER BY g_quantity, u.id DESC'
+            'SELECT u, g, COUNT(g.id) AS hidden g_quantity FROM Doctrine\Tests\ORM\Tools\Pagination\User u JOIN u.groups g ORDER BY g_quantity, u.id DESC'
         );
         $limitQuery = clone $query;
         $limitQuery->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, 'Doctrine\ORM\Tools\Pagination\LimitSubqueryOutputWalker');
@@ -105,7 +105,7 @@ class LimitSubqueryOutputWalkerTest extends PaginationTestCase
 
         $this->entityManager->getConnection()->setDatabasePlatform($odp);
     }
-    
+
     public function testLimitSubqueryWithSortOracle()
     {
         $odp = $this->entityManager->getConnection()->getDatabasePlatform();

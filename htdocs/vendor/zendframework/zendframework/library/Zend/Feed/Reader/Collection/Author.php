@@ -23,6 +23,7 @@ class Author extends AbstractCollection
         foreach ($this->getIterator() as $element) {
             $authors[] = $element['name'];
         }
+
         return array_unique($authors);
     }
 }

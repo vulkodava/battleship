@@ -91,7 +91,7 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
 
     public function testHasGetMetadata_NamespaceSeparatorIsNotNormalized()
     {
-        require_once __DIR__."/../../Models/Global/GlobalNamespaceModel.php";
+        require_once __DIR__ . "/../../Models/Global/GlobalNamespaceModel.php";
 
         $metadataDriver = $this->createAnnotationDriver(array(__DIR__ . '/../../Models/Global/'));
 
@@ -116,13 +116,13 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
         $cmf = new ClassMetadataFactory();
         $driver = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
         $driver->expects($this->at(0))
-               ->method('isTransient')
-               ->with($this->equalTo('Doctrine\Tests\Models\CMS\CmsUser'))
-               ->will($this->returnValue(true));
+            ->method('isTransient')
+            ->with($this->equalTo('Doctrine\Tests\Models\CMS\CmsUser'))
+            ->will($this->returnValue(true));
         $driver->expects($this->at(1))
-               ->method('isTransient')
-               ->with($this->equalTo('Doctrine\Tests\Models\CMS\CmsArticle'))
-               ->will($this->returnValue(false));
+            ->method('isTransient')
+            ->with($this->equalTo('Doctrine\Tests\Models\CMS\CmsArticle'))
+            ->will($this->returnValue(false));
 
         $em = $this->_createEntityManager($driver);
 
@@ -138,13 +138,13 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
         $cmf = new ClassMetadataFactory();
         $driver = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
         $driver->expects($this->at(0))
-               ->method('isTransient')
-               ->with($this->equalTo('Doctrine\Tests\Models\CMS\CmsUser'))
-               ->will($this->returnValue(true));
+            ->method('isTransient')
+            ->with($this->equalTo('Doctrine\Tests\Models\CMS\CmsUser'))
+            ->will($this->returnValue(true));
         $driver->expects($this->at(1))
-               ->method('isTransient')
-               ->with($this->equalTo('Doctrine\Tests\Models\CMS\CmsArticle'))
-               ->will($this->returnValue(false));
+            ->method('isTransient')
+            ->with($this->equalTo('Doctrine\Tests\Models\CMS\CmsArticle'))
+            ->will($this->returnValue(false));
 
         $em = $this->_createEntityManager($driver);
         $em->getConfiguration()->addEntityNamespace('CMS', 'Doctrine\Tests\Models\CMS');
@@ -215,6 +215,7 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
         $entityManager = $this->_createEntityManager($mockDriver);
         $cmf = new ClassMetadataFactoryTestSubject();
         $cmf->setEntityManager($entityManager);
+
         return $cmf;
     }
 
@@ -241,24 +242,25 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
         $cm1->mapOneToOne(array('fieldName' => 'association', 'targetEntity' => 'TestEntity1', 'joinColumns' => $joinColumns));
         // and an id generator type
         $cm1->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_AUTO);
+
         return $cm1;
     }
 
     /**
-    * @group DDC-1845
-    */
+     * @group DDC-1845
+     */
     public function testQuoteMetadata()
     {
-        $cmf    = new ClassMetadataFactory();
+        $cmf = new ClassMetadataFactory();
         $driver = $this->createAnnotationDriver(array(__DIR__ . '/../../Models/Quote/'));
-        $em     = $this->_createEntityManager($driver);
+        $em = $this->_createEntityManager($driver);
         $cmf->setEntityManager($em);
 
 
-        $userMetadata       = $cmf->getMetadataFor('Doctrine\Tests\Models\Quote\User');
-        $phoneMetadata      = $cmf->getMetadataFor('Doctrine\Tests\Models\Quote\Phone');
-        $groupMetadata      = $cmf->getMetadataFor('Doctrine\Tests\Models\Quote\Group');
-        $addressMetadata    = $cmf->getMetadataFor('Doctrine\Tests\Models\Quote\Address');
+        $userMetadata = $cmf->getMetadataFor('Doctrine\Tests\Models\Quote\User');
+        $phoneMetadata = $cmf->getMetadataFor('Doctrine\Tests\Models\Quote\Phone');
+        $groupMetadata = $cmf->getMetadataFor('Doctrine\Tests\Models\Quote\Group');
+        $addressMetadata = $cmf->getMetadataFor('Doctrine\Tests\Models\Quote\Address');
 
 
         // Phone Class Metadata
@@ -269,7 +271,6 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
         $this->assertTrue($user['joinColumns'][0]['quoted']);
         $this->assertEquals('user-id', $user['joinColumns'][0]['name']);
         $this->assertEquals('user-id', $user['joinColumns'][0]['referencedColumnName']);
-
 
 
         // User Group Metadata
@@ -284,7 +285,7 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
         $this->assertEquals('parent-id', $user['joinColumns'][0]['name']);
         $this->assertEquals('group-id', $user['joinColumns'][0]['referencedColumnName']);
 
-        
+
         // Address Class Metadata
         $this->assertTrue($addressMetadata->fieldMappings['id']['quoted']);
         $this->assertTrue($addressMetadata->fieldMappings['zip']['quoted']);
@@ -298,15 +299,14 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
         $this->assertEquals('user-id', $user['joinColumns'][0]['referencedColumnName']);
 
 
-
         // User Class Metadata
         $this->assertTrue($userMetadata->fieldMappings['id']['quoted']);
         $this->assertTrue($userMetadata->fieldMappings['name']['quoted']);
-        
+
         $this->assertEquals('user-id', $userMetadata->fieldMappings['id']['columnName']);
         $this->assertEquals('user-name', $userMetadata->fieldMappings['name']['columnName']);
 
-        
+
         $address = $userMetadata->associationMappings['address'];
         $this->assertTrue($address['joinColumns'][0]['quoted']);
         $this->assertEquals('address-id', $address['joinColumns'][0]['name']);
@@ -326,6 +326,7 @@ class ClassMetadataFactoryTest extends \Doctrine\Tests\OrmTestCase
 }
 
 /* Test subject class with overridden factory method for mocking purposes */
+
 class ClassMetadataFactoryTestSubject extends \Doctrine\ORM\Mapping\ClassMetadataFactory
 {
     private $mockMetadata = array();
@@ -335,9 +336,10 @@ class ClassMetadataFactoryTestSubject extends \Doctrine\ORM\Mapping\ClassMetadat
     protected function newClassMetadataInstance($className)
     {
         $this->requestedClasses[] = $className;
-        if ( ! isset($this->mockMetadata[$className])) {
+        if (!isset($this->mockMetadata[$className])) {
             throw new InvalidArgumentException("No mock metadata found for class $className.");
         }
+
         return $this->mockMetadata[$className];
     }
 

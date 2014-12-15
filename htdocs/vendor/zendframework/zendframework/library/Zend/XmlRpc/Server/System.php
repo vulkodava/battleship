@@ -39,6 +39,7 @@ class System
     public function listMethods()
     {
         $table = $this->server->getDispatchTable()->getMethods();
+
         return array_keys($table);
     }
 
@@ -73,6 +74,7 @@ class System
             throw new Exception\InvalidArgumentException('Method "' . $method . '" does not exist', 640);
         }
         $method = $table->getMethod($method)->toArray();
+
         return $method['prototypes'];
     }
 
@@ -133,7 +135,7 @@ class System
 
             if ($fault) {
                 $responses[] = array(
-                    'faultCode'   => $fault->getCode(),
+                    'faultCode' => $fault->getCode(),
                     'faultString' => $fault->getMessage()
                 );
             }

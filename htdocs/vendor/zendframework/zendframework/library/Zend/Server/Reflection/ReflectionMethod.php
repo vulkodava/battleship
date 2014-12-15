@@ -16,12 +16,14 @@ class ReflectionMethod extends AbstractFunction
 {
     /**
      * Parent class name
+     *
      * @var string
      */
     protected $class;
 
     /**
      * Parent class reflection
+     *
      * @var ReflectionClass
      */
     protected $classReflection;
@@ -37,7 +39,7 @@ class ReflectionMethod extends AbstractFunction
     public function __construct(ReflectionClass $class, \ReflectionMethod $r, $namespace = null, $argv = array())
     {
         $this->classReflection = $class;
-        $this->reflection      = $r;
+        $this->reflection = $r;
 
         $classNamespace = $class->getNamespace();
 

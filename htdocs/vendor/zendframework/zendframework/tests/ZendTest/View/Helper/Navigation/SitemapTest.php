@@ -38,6 +38,7 @@ class SitemapTest extends AbstractTest
 
     /**
      * Stores the original set timezone
+     *
      * @var string
      */
     private $_originaltimezone;
@@ -103,13 +104,13 @@ class SitemapTest extends AbstractTest
         $rendered2 = trim($this->_getExpected('sitemap/default2.xml'));
 
         $expected = array(
-            'registered'       => $rendered1,
-            'supplied'         => $rendered2,
+            'registered' => $rendered1,
+            'supplied' => $rendered2,
             'registered_again' => $rendered1
         );
         $actual = array(
-            'registered'       => $this->_helper->render(),
-            'supplied'         => $this->_helper->render($this->_nav2),
+            'registered' => $this->_helper->render(),
+            'supplied' => $this->_helper->render($this->_nav2),
             'registered_again' => $this->_helper->render()
         );
 
@@ -178,10 +179,11 @@ class SitemapTest extends AbstractTest
             $this->_helper->render($nav);
         } catch (View\Exception\ExceptionInterface $e) {
             $expected = sprintf(
-                    'Encountered an invalid URL for Sitemap XML: "%s"',
-                    'http://w.');
+                'Encountered an invalid URL for Sitemap XML: "%s"',
+                'http://w.');
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
+
             return;
         }
 
@@ -210,7 +212,7 @@ class SitemapTest extends AbstractTest
         try {
             $this->_helper->setServerUrl('site.example.org');
             $this->fail('An invalid server URL was given, but a ' .
-                        'Zend\URI\Exception\ExceptionInterface was not thrown');
+                'Zend\URI\Exception\ExceptionInterface was not thrown');
         } catch (\Zend\URI\Exception\ExceptionInterface $e) {
             $this->assertContains('Illegal scheme', $e->getMessage());
         }
@@ -243,6 +245,7 @@ class SitemapTest extends AbstractTest
     public function testUseSchemaValidation()
     {
         $this->markTestSkipped('Skipped because it fetches XSD from web');
+
         return;
         $nav = clone $this->_nav2;
         $this->_helper->setUseSitemapValidators(false);
@@ -253,10 +256,11 @@ class SitemapTest extends AbstractTest
             $this->_helper->render($nav);
         } catch (View\Exception\ExceptionInterface $e) {
             $expected = sprintf(
-                    'Sitemap is invalid according to XML Schema at "%s"',
-                    \Zend\View\Helper\Navigation\Sitemap::SITEMAP_XSD);
+                'Sitemap is invalid according to XML Schema at "%s"',
+                \Zend\View\Helper\Navigation\Sitemap::SITEMAP_XSD);
             $actual = $e->getMessage();
             $this->assertEquals($expected, $actual);
+
             return;
         }
 

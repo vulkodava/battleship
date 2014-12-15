@@ -46,6 +46,7 @@ class FeatureSet
         foreach ($this->features as $feature) {
             $feature->setRowGateway($this->rowGateway);
         }
+
         return $this;
     }
 
@@ -58,6 +59,7 @@ class FeatureSet
                 break;
             }
         }
+
         return $feature;
     }
 
@@ -66,6 +68,7 @@ class FeatureSet
         foreach ($features as $feature) {
             $this->addFeature($feature);
         }
+
         return $this;
     }
 
@@ -73,6 +76,7 @@ class FeatureSet
     {
         $this->features[] = $feature;
         $feature->setRowGateway($feature);
+
         return $this;
     }
 
@@ -104,6 +108,7 @@ class FeatureSet
     public function callMagicGet($property)
     {
         $return = null;
+
         return $return;
     }
 
@@ -124,6 +129,7 @@ class FeatureSet
     public function callMagicSet($property, $value)
     {
         $return = null;
+
         return $return;
     }
 
@@ -144,6 +150,7 @@ class FeatureSet
     public function callMagicCall($method, $arguments)
     {
         $return = null;
+
         return $return;
     }
 }

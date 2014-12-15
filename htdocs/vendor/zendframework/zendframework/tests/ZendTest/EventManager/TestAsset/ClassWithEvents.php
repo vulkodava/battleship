@@ -27,6 +27,7 @@ class ClassWithEvents
         if (null === $this->events) {
             $this->events = new EventManager(__CLASS__);
         }
+
         return $this->events;
     }
 

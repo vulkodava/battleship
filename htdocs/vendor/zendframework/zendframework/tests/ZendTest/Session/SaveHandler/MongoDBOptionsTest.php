@@ -55,12 +55,12 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
     {
         $options = new MongoDBOptions();
         $options->setDatabase('testDatabase')
-                ->setCollection('testCollection')
-                ->setSaveOptions(array('w' => 2))
-                ->setNameField('testName')
-                ->setDataField('testData')
-                ->setLifetimeField('testLifetime')
-                ->setModifiedField('testModified');
+            ->setCollection('testCollection')
+            ->setSaveOptions(array('w' => 2))
+            ->setNameField('testName')
+            ->setDataField('testData')
+            ->setLifetimeField('testLifetime')
+            ->setModifiedField('testModified');
 
         $this->assertEquals('testDatabase', $options->getDatabase());
         $this->assertEquals('testCollection', $options->getCollection());

@@ -68,10 +68,10 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
     protected function _createMetadataDriver($type, $path)
     {
         $mappingDriver = array(
-            'php'        => 'Doctrine\Common\Persistence\Mapping\Driver\PHPDriver',
+            'php' => 'Doctrine\Common\Persistence\Mapping\Driver\PHPDriver',
             'annotation' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-            'xml'        => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
-            'yaml'       => 'Doctrine\ORM\Mapping\Driver\YamlDriver',
+            'xml' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
+            'yaml' => 'Doctrine\ORM\Mapping\Driver\YamlDriver',
         );
         $this->assertArrayHasKey($type, $mappingDriver, "There is no metadata driver for the type '" . $type . "'.");
         $class = $mappingDriver[$type];
@@ -81,6 +81,7 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
         } else {
             $driver = new $class($path);
         }
+
         return $driver;
     }
 
@@ -92,12 +93,13 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
             $factory = new DisconnectedClassMetadataFactory();
         }
         $factory->setEntityManager($em);
+
         return $factory;
     }
 
     public function testExportDirectoryAndFilesAreCreated()
     {
-        $this->_deleteDirectory(__DIR__ . '/export/'.$this->_getType());
+        $this->_deleteDirectory(__DIR__ . '/export/' . $this->_getType());
 
         $type = $this->_getType();
         $metadataDriver = $this->_createMetadataDriver($type, __DIR__ . '/' . $type);
@@ -123,9 +125,9 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
         $exporter->export();
 
         if ($type == 'annotation') {
-            $this->assertTrue(file_exists(__DIR__ . '/export/' . $type . '/'.str_replace('\\', '/', 'Doctrine\Tests\ORM\Tools\Export\ExportedUser').$this->_extension));
+            $this->assertTrue(file_exists(__DIR__ . '/export/' . $type . '/' . str_replace('\\', '/', 'Doctrine\Tests\ORM\Tools\Export\ExportedUser') . $this->_extension));
         } else {
-            $this->assertTrue(file_exists(__DIR__ . '/export/' . $type . '/Doctrine.Tests.ORM.Tools.Export.ExportedUser'.$this->_extension));
+            $this->assertTrue(file_exists(__DIR__ . '/export/' . $type . '/Doctrine.Tests.ORM.Tools.Export.ExportedUser' . $this->_extension));
         }
     }
 
@@ -216,7 +218,7 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
     {
         $type = $this->_getType();
         if ($type == 'xml') {
-            $xml = simplexml_load_file(__DIR__ . '/export/'.$type.'/Doctrine.Tests.ORM.Tools.Export.ExportedUser.dcm.xml');
+            $xml = simplexml_load_file(__DIR__ . '/export/' . $type . '/Doctrine.Tests.ORM.Tools.Export.ExportedUser.dcm.xml');
 
             $xml->registerXPathNamespace("d", "http://doctrine-project.org/schemas/orm/doctrine-mapping");
             $nodes = $xml->xpath("/d:doctrine-mapping/d:entity/d:field[@name='name' and @type='string' and @nullable='true']");
@@ -224,9 +226,8 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
 
             $nodes = $xml->xpath("/d:doctrine-mapping/d:entity/d:field[@name='name' and @type='string' and @unique='true']");
             $this->assertEquals(1, count($nodes));
-        }
-        else {
-            $this->markTestSkipped('Test available only for '.$type.' driver');
+        } else {
+            $this->markTestSkipped('Test available only for ' . $type . ' driver');
         }
     }
 
@@ -352,14 +353,15 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
     {
         $this->assertEquals('user', $class->associationMappings['address']['inversedBy']);
     }
-	/**
+
+    /**
      * @depends testExportDirectoryAndFilesAreCreated
      */
     public function testCascadeAllCollapsed()
     {
         $type = $this->_getType();
         if ($type == 'xml') {
-            $xml = simplexml_load_file(__DIR__ . '/export/'.$type.'/Doctrine.Tests.ORM.Tools.Export.ExportedUser.dcm.xml');
+            $xml = simplexml_load_file(__DIR__ . '/export/' . $type . '/Doctrine.Tests.ORM.Tools.Export.ExportedUser.dcm.xml');
 
             $xml->registerXPathNamespace("d", "http://doctrine-project.org/schemas/orm/doctrine-mapping");
             $nodes = $xml->xpath("/d:doctrine-mapping/d:entity/d:one-to-many[@field='interests']/d:cascade/d:*");
@@ -369,16 +371,17 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
         } elseif ($type == 'yaml') {
 
             $yaml = new \Symfony\Component\Yaml\Parser();
-            $value = $yaml->parse(file_get_contents(__DIR__ . '/export/'.$type.'/Doctrine.Tests.ORM.Tools.Export.ExportedUser.dcm.yml'));
+            $value = $yaml->parse(file_get_contents(__DIR__ . '/export/' . $type . '/Doctrine.Tests.ORM.Tools.Export.ExportedUser.dcm.yml'));
 
             $this->assertTrue(isset($value['Doctrine\Tests\ORM\Tools\Export\ExportedUser']['oneToMany']['interests']['cascade']));
             $this->assertEquals(1, count($value['Doctrine\Tests\ORM\Tools\Export\ExportedUser']['oneToMany']['interests']['cascade']));
             $this->assertEquals('all', $value['Doctrine\Tests\ORM\Tools\Export\ExportedUser']['oneToMany']['interests']['cascade'][0]);
 
         } else {
-            $this->markTestSkipped('Test available only for '.$type.' driver');
+            $this->markTestSkipped('Test available only for ' . $type . ' driver');
         }
     }
+
     public function __destruct()
     {
 #        $this->_deleteDirectory(__DIR__ . '/export/'.$this->_getType());
@@ -389,10 +392,11 @@ abstract class AbstractClassMetadataExporterTest extends \Doctrine\Tests\OrmTest
         if (is_file($path)) {
             return unlink($path);
         } else if (is_dir($path)) {
-            $files = glob(rtrim($path,'/').'/*');
-            foreach ($files as $file){
+            $files = glob(rtrim($path, '/') . '/*');
+            foreach ($files as $file) {
                 $this->_deleteDirectory($file);
             }
+
             return rmdir($path);
         }
     }
@@ -402,10 +406,12 @@ class Address
 {
 
 }
+
 class Phonenumber
 {
 
 }
+
 class Group
 {
 

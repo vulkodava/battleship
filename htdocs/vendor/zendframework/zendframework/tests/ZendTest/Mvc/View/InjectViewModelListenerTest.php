@@ -20,15 +20,15 @@ class InjectViewModelListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->listener   = new InjectViewModelListener();
-        $this->event      = new MvcEvent();
+        $this->listener = new InjectViewModelListener();
+        $this->event = new MvcEvent();
         $this->routeMatch = new RouteMatch(array());
         $this->event->setRouteMatch($this->routeMatch);
     }
 
     public function testReplacesEventModelWithChildModelIfChildIsMarkedTerminal()
     {
-        $childModel  = new ViewModel();
+        $childModel = new ViewModel();
         $childModel->setTerminal(true);
         $this->event->setResult($childModel);
 
@@ -38,7 +38,7 @@ class InjectViewModelListenerTest extends TestCase
 
     public function testAddsViewModelAsChildOfEventViewModelWhenChildIsNotTerminal()
     {
-        $childModel  = new ViewModel();
+        $childModel = new ViewModel();
         $this->event->setResult($childModel);
 
         $this->listener->injectViewModel($this->event);
@@ -68,7 +68,7 @@ class InjectViewModelListenerTest extends TestCase
 
         $expectedCallback = array($this->listener, 'injectViewModel');
         $expectedPriority = -100;
-        $found            = false;
+        $found = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
             if ($callback === $expectedCallback) {
@@ -81,7 +81,7 @@ class InjectViewModelListenerTest extends TestCase
         $this->assertTrue($found, 'Listener not found');
 
         $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
-        $found     = false;
+        $found = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
             if ($callback === $expectedCallback) {

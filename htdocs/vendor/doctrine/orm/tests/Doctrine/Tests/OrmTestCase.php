@@ -35,14 +35,12 @@ abstract class OrmTestCase extends DoctrineTestCase
             $reader = new \Doctrine\Common\Annotations\CachedReader(
                 new \Doctrine\Common\Annotations\AnnotationReader(), new ArrayCache()
             );
-        }
-        else if (version_compare(\Doctrine\Common\Version::VERSION, '2.2.0-DEV', '>=')) {
+        } else if (version_compare(\Doctrine\Common\Version::VERSION, '2.2.0-DEV', '>=')) {
             // Register the ORM Annotations in the AnnotationRegistry
             $reader = new \Doctrine\Common\Annotations\SimpleAnnotationReader();
             $reader->addNamespace('Doctrine\ORM\Mapping');
             $reader = new \Doctrine\Common\Annotations\CachedReader($reader, new ArrayCache());
-        }
-        else if (version_compare(\Doctrine\Common\Version::VERSION, '2.1.0-BETA3-DEV', '>=')) {
+        } else if (version_compare(\Doctrine\Common\Version::VERSION, '2.1.0-BETA3-DEV', '>=')) {
             $reader = new \Doctrine\Common\Annotations\AnnotationReader();
             $reader->setIgnoreNotImportedAnnotations(true);
             $reader->setEnableParsePhpImports(false);
@@ -64,6 +62,7 @@ abstract class OrmTestCase extends DoctrineTestCase
         }
         \Doctrine\Common\Annotations\AnnotationRegistry::registerFile(
             __DIR__ . "/../../../lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php");
+
         return new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($reader, (array)$paths);
     }
 
@@ -75,10 +74,10 @@ abstract class OrmTestCase extends DoctrineTestCase
      * be configured in the tests to simulate the DBAL behavior that is desired
      * for a particular test,
      *
-     * @param \Doctrine\DBAL\Connection|array    $conn
-     * @param mixed                              $conf
+     * @param \Doctrine\DBAL\Connection|array $conn
+     * @param mixed $conf
      * @param \Doctrine\Common\EventManager|null $eventManager
-     * @param bool                               $withSharedMetadata
+     * @param bool $withSharedMetadata
      *
      * @return \Doctrine\ORM\EntityManager
      */
@@ -98,10 +97,10 @@ abstract class OrmTestCase extends DoctrineTestCase
 
         if ($conn === null) {
             $conn = array(
-                'driverClass'  => 'Doctrine\Tests\Mocks\DriverMock',
+                'driverClass' => 'Doctrine\Tests\Mocks\DriverMock',
                 'wrapperClass' => 'Doctrine\Tests\Mocks\ConnectionMock',
-                'user'         => 'john',
-                'password'     => 'wayne'
+                'user' => 'john',
+                'password' => 'wayne'
             );
         }
 

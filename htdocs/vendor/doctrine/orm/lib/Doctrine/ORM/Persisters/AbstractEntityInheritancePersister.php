@@ -29,7 +29,7 @@ use Doctrine\DBAL\Types\Type;
  *
  * @author Roman Borschel <roman@code-factory.org>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @since 2.0
+ * @since  2.0
  */
 abstract class AbstractEntityInheritancePersister extends BasicEntityPersister
 {
@@ -60,17 +60,17 @@ abstract class AbstractEntityInheritancePersister extends BasicEntityPersister
      */
     protected function getSelectColumnSQL($field, ClassMetadata $class, $alias = 'r')
     {
-        $tableAlias  = $alias == 'r' ? '' : $alias;
-        $columnName  = $class->columnNames[$field];
+        $tableAlias = $alias == 'r' ? '' : $alias;
+        $columnName = $class->columnNames[$field];
         $columnAlias = $this->getSQLColumnAlias($columnName);
-        $sql         = $this->getSQLTableAlias($class->name, $tableAlias) . '.'
-                            . $this->quoteStrategy->getColumnName($field, $class, $this->platform);
+        $sql = $this->getSQLTableAlias($class->name, $tableAlias) . '.'
+            . $this->quoteStrategy->getColumnName($field, $class, $this->platform);
 
         $this->rsm->addFieldResult($alias, $columnAlias, $field, $class->name);
 
         if (isset($class->fieldMappings[$field]['requireSQLConversion'])) {
-            $type   = Type::getType($class->getTypeOfField($field));
-            $sql    = $type->convertToPHPValueSQL($sql, $this->platform);
+            $type = Type::getType($class->getTypeOfField($field));
+            $sql = $type->convertToPHPValueSQL($sql, $this->platform);
         }
 
         return $sql . ' AS ' . $columnAlias;

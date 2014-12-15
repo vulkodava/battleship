@@ -65,7 +65,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      */
     public function setDisplayExceptions($displayExceptions)
     {
-        $this->displayExceptions = (bool) $displayExceptions;
+        $this->displayExceptions = (bool)$displayExceptions;
+
         return $this;
     }
 
@@ -87,7 +88,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      */
     public function setDisplayNotFoundReason($displayNotFoundReason)
     {
-        $this->displayNotFoundReason = (bool) $displayNotFoundReason;
+        $this->displayNotFoundReason = (bool)$displayNotFoundReason;
+
         return $this;
     }
 
@@ -109,7 +111,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      */
     public function setNotFoundTemplate($notFoundTemplate)
     {
-        $this->notFoundTemplate = (string) $notFoundTemplate;
+        $this->notFoundTemplate = (string)$notFoundTemplate;
+
         return $this;
     }
 
@@ -223,6 +226,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         // no route match, controller not found, or controller invalid
         if ($this->reason) {
             $model->setVariable('reason', $this->reason);
+
             return;
         }
 

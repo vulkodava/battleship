@@ -28,7 +28,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         $chain = new FilterChain();
         $chain->attach(new LowerCase())
-              ->attach(new StripUpperCase());
+            ->attach(new StripUpperCase());
         $value = 'AbC';
         $valueExpected = 'abc';
         $this->assertEquals($valueExpected, $chain->filter($value));
@@ -38,7 +38,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         $chain = new FilterChain();
         $chain->attach(new StripUpperCase())
-              ->attach(new LowerCase, 100);
+            ->attach(new LowerCase, 100);
         $value = 'AbC';
         $valueExpected = 'b';
         $this->assertEquals($valueExpected, $chain->filter($value));
@@ -62,8 +62,8 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
         $chain = new FilterChain();
         $chain->attachByName('string_trim', null, 100)
-              ->attachByName('strip_tags')
-              ->attachByName('string_to_lower', array('encoding' => 'utf-8'), 900);
+            ->attachByName('strip_tags')
+            ->attachByName('string_to_lower', array('encoding' => 'utf-8'), 900);
         $value = '<a name="foo"> ABC </a>';
         $valueExpected = 'abc';
         $this->assertEquals($valueExpected, $chain->filter($value));
@@ -72,7 +72,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     public function testAllowsConfiguringFilters()
     {
         $config = $this->getChainConfig();
-        $chain  = new FilterChain();
+        $chain = new FilterChain();
         $chain->setOptions($config);
         $value = '<a name="foo"> abc </a><img id="bar" />';
         $valueExpected = 'ABC <IMG ID="BAR" />';
@@ -82,7 +82,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     public function testAllowsConfiguringFiltersViaConstructor()
     {
         $config = $this->getChainConfig();
-        $chain  = new FilterChain($config);
+        $chain = new FilterChain($config);
         $value = '<a name="foo"> abc </a>';
         $valueExpected = 'ABC';
         $this->assertEquals($valueExpected, $chain->filter($value));
@@ -92,7 +92,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->getChainConfig();
         $config = new \ArrayIterator($config);
-        $chain  = new FilterChain($config);
+        $chain = new FilterChain($config);
         $value = '<a name="foo"> abc </a>';
         $valueExpected = 'ABC';
         $this->assertEquals($valueExpected, $chain->filter($value));
@@ -136,11 +136,11 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         $chain = new FilterChain();
         $chain->attachByName('PregReplace', array(
-            'pattern'     => '/Foo/',
+            'pattern' => '/Foo/',
             'replacement' => 'Bar',
         ));
         $chain->attachByName('PregReplace', array(
-            'pattern'     => '/Bar/',
+            'pattern' => '/Bar/',
             'replacement' => 'PARTY',
         ));
 
@@ -169,30 +169,30 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
     {
         $chain = new FilterChain();
         $chain->attach(new LowerCase())
-              ->attach(new StripUpperCase());
+            ->attach(new StripUpperCase());
         $serialized = serialize($chain);
 
         $unserialized = unserialize($serialized);
         $this->assertInstanceOf('Zend\Filter\FilterChain', $unserialized);
         $this->assertEquals(2, count($unserialized));
-        $value         = 'AbC';
+        $value = 'AbC';
         $valueExpected = 'abc';
         $this->assertEquals($valueExpected, $unserialized->filter($value));
     }
 
     public function testMergingTwoFilterChainsKeepFiltersPriority()
     {
-        $value         = 'AbC';
+        $value = 'AbC';
         $valueExpected = 'abc';
 
         $chain = new FilterChain();
         $chain->attach(new StripUpperCase())
-              ->attach(new LowerCase(), 1001);
+            ->attach(new LowerCase(), 1001);
         $this->assertEquals($valueExpected, $chain->filter($value));
 
         $chain = new FilterChain();
         $chain->attach(new LowerCase(), 1001)
-              ->attach(new StripUpperCase());
+            ->attach(new StripUpperCase());
         $this->assertEquals($valueExpected, $chain->filter($value));
 
         $chain = new FilterChain();

@@ -17,13 +17,15 @@ abstract class Factory
 {
     /**
      * Adapter plugin manager
+     *
      * @var AdapterPluginManager
      */
     protected static $adapters;
 
     /**
      * Create adapter from items if necessary, and return paginator
-     * @param Traversable/array $items
+     *
+     * @param Traversable /array $items
      * @return Paginator
      */
     protected static function createAdapterFromItems($items)
@@ -49,11 +51,13 @@ abstract class Factory
         $items = $items['items'];
 
         $paginator = static::getAdapterFromManager($items, $adapter);
+
         return $paginator;
     }
 
     /**
      * Get adapter from manager if necessary, and return paginator
+     *
      * @param mixed $items
      * @param mixed $adapter
      * @return Paginator
@@ -64,11 +68,13 @@ abstract class Factory
             return new Paginator($adapter);
         }
         $adapter = static::getAdapterPluginManager()->get($adapter, $items);
+
         return new Paginator($adapter);
     }
 
     /**
      * Create paginator with items and adapter
+     *
      * @param mixed $items
      * @param mixed $adapter
      * @return Paginator
@@ -77,9 +83,11 @@ abstract class Factory
     {
         if (null === $adapter) {
             $paginator = static::createAdapterFromItems($items);
+
             return $paginator;
         }
         $paginator = static::getAdapterFromManager($items, $adapter);
+
         return $paginator;
     }
 
@@ -104,6 +112,7 @@ abstract class Factory
         if (static::$adapters === null) {
             static::$adapters = new AdapterPluginManager();
         }
+
         return static::$adapters;
     }
 }

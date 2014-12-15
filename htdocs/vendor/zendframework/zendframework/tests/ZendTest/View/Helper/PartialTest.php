@@ -41,7 +41,7 @@ class PartialTest extends TestCase
     public function setUp()
     {
         $this->basePath = __DIR__ . '/_files/modules';
-        $this->helper   = new Partial();
+        $this->helper = new Partial();
     }
 
     /**

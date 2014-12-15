@@ -225,10 +225,10 @@ class FlashMessengerTest extends TestCase
 
         $displayInfoAssertion = '<div class="foo-baz foo-bar"><p>bar-info</p></div>';
         $displayInfo = $this->helper
-                ->setMessageOpenFormat('<div%s><p>')
-                ->setMessageSeparatorString('</p><p>')
-                ->setMessageCloseString('</p></div>')
-                ->render(PluginFlashMessenger::NAMESPACE_INFO, array('foo-baz', 'foo-bar'));
+            ->setMessageOpenFormat('<div%s><p>')
+            ->setMessageSeparatorString('</p><p>')
+            ->setMessageCloseString('</p></div>')
+            ->render(PluginFlashMessenger::NAMESPACE_INFO, array('foo-baz', 'foo-bar'));
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
@@ -238,10 +238,10 @@ class FlashMessengerTest extends TestCase
 
         $displayInfoAssertion = '<div class="foo-baz foo-bar"><p>bar-info</p></div>';
         $displayInfo = $this->helper
-                ->setMessageOpenFormat('<div%s><p>')
-                ->setMessageSeparatorString('</p><p>')
-                ->setMessageCloseString('</p></div>')
-                ->renderCurrent(PluginFlashMessenger::NAMESPACE_INFO, array('foo-baz', 'foo-bar'));
+            ->setMessageOpenFormat('<div%s><p>')
+            ->setMessageSeparatorString('</p><p>')
+            ->setMessageCloseString('</p></div>')
+            ->renderCurrent(PluginFlashMessenger::NAMESPACE_INFO, array('foo-baz', 'foo-bar'));
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
@@ -251,10 +251,10 @@ class FlashMessengerTest extends TestCase
 
         $displayInfoAssertion = '<div><p class="foo-baz foo-bar">foo</p><p class="foo-baz foo-bar">bar</p></div>';
         $displayInfo = $this->helper
-                ->setMessageOpenFormat('<div><p%s>')
-                ->setMessageSeparatorString('</p><p%s>')
-                ->setMessageCloseString('</p></div>')
-                ->render(PluginFlashMessenger::NAMESPACE_DEFAULT, array('foo-baz', 'foo-bar'));
+            ->setMessageOpenFormat('<div><p%s>')
+            ->setMessageSeparatorString('</p><p%s>')
+            ->setMessageCloseString('</p></div>')
+            ->render(PluginFlashMessenger::NAMESPACE_DEFAULT, array('foo-baz', 'foo-bar'));
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
@@ -264,10 +264,10 @@ class FlashMessengerTest extends TestCase
 
         $displayInfoAssertion = '<div><p class="foo-baz foo-bar">foo</p><p class="foo-baz foo-bar">bar</p></div>';
         $displayInfo = $this->helper
-                ->setMessageOpenFormat('<div><p%s>')
-                ->setMessageSeparatorString('</p><p%s>')
-                ->setMessageCloseString('</p></div>')
-                ->renderCurrent(PluginFlashMessenger::NAMESPACE_DEFAULT, array('foo-baz', 'foo-bar'));
+            ->setMessageOpenFormat('<div><p%s>')
+            ->setMessageSeparatorString('</p><p%s>')
+            ->setMessageCloseString('</p></div>')
+            ->renderCurrent(PluginFlashMessenger::NAMESPACE_DEFAULT, array('foo-baz', 'foo-bar'));
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
@@ -414,8 +414,8 @@ class FlashMessengerTest extends TestCase
     {
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
         $mockTranslator->expects($this->exactly(1))
-        ->method('translate')
-        ->will($this->returnValue('translated message'));
+            ->method('translate')
+            ->will($this->returnValue('translated message'));
 
         $this->helper->setTranslator($mockTranslator);
         $this->assertTrue($this->helper->hasTranslator());
@@ -431,8 +431,8 @@ class FlashMessengerTest extends TestCase
     {
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
         $mockTranslator->expects($this->exactly(1))
-        ->method('translate')
-        ->will($this->returnValue('translated message'));
+            ->method('translate')
+            ->will($this->returnValue('translated message'));
 
         $this->helper->setTranslator($mockTranslator);
         $this->assertTrue($this->helper->hasTranslator());

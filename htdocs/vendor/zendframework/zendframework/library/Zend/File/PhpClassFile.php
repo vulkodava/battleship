@@ -55,6 +55,7 @@ class PhpClassFile extends SplFileInfo
     public function addClass($class)
     {
         $this->classes[] = $class;
+
         return $this;
     }
 
@@ -70,6 +71,7 @@ class PhpClassFile extends SplFileInfo
             return $this;
         }
         $this->namespaces[] = $namespace;
+
         return $this;
     }
 }

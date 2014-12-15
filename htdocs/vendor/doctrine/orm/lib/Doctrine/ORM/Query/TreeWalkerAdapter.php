@@ -24,7 +24,7 @@ namespace Doctrine\ORM\Query;
  * are empty. ﻿This class exists as convenience for creating tree walkers.
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.0
+ * @since  2.0
  */
 abstract class TreeWalkerAdapter implements TreeWalker
 {

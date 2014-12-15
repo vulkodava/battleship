@@ -23,7 +23,7 @@ class InputDefinitionTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        self::$fixtures = __DIR__.'/../Fixtures/';
+        self::$fixtures = __DIR__ . '/../Fixtures/';
     }
 
     public function testConstructorArguments()
@@ -182,7 +182,7 @@ class InputDefinitionTest extends \PHPUnit_Framework_TestCase
             new InputArgument('foo1', InputArgument::OPTIONAL),
             new InputArgument('foo2', InputArgument::OPTIONAL, '', 'default'),
             new InputArgument('foo3', InputArgument::OPTIONAL | InputArgument::IS_ARRAY),
-        //  new InputArgument('foo4', InputArgument::OPTIONAL | InputArgument::IS_ARRAY, '', array(1, 2)),
+            //  new InputArgument('foo4', InputArgument::OPTIONAL | InputArgument::IS_ARRAY, '', array(1, 2)),
         ));
         $this->assertEquals(array('foo1' => null, 'foo2' => 'default', 'foo3' => array()), $definition->getArgumentDefaults(), '->getArgumentDefaults() return the default values for each argument');
 
@@ -385,7 +385,7 @@ class InputDefinitionTest extends \PHPUnit_Framework_TestCase
             new InputOption('qux', '', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'The qux option', array('http://foo.com/', 'bar')),
             new InputOption('qux2', '', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'The qux2 option', array('foo' => 'bar')),
         ));
-        $this->assertStringEqualsFile(self::$fixtures.'/definition_astext.txt', $definition->asText(), '->asText() returns a textual representation of the InputDefinition');
+        $this->assertStringEqualsFile(self::$fixtures . '/definition_astext.txt', $definition->asText(), '->asText() returns a textual representation of the InputDefinition');
     }
 
     public function testAsXml()
@@ -398,7 +398,7 @@ class InputDefinitionTest extends \PHPUnit_Framework_TestCase
             new InputOption('baz', null, InputOption::VALUE_OPTIONAL, 'The baz option', false),
             new InputOption('bar', 'b', InputOption::VALUE_OPTIONAL, 'The bar option', 'bar'),
         ));
-        $this->assertXmlStringEqualsXmlFile(self::$fixtures.'/definition_asxml.txt', $definition->asXml(), '->asText() returns a textual representation of the InputDefinition');
+        $this->assertXmlStringEqualsXmlFile(self::$fixtures . '/definition_asxml.txt', $definition->asXml(), '->asText() returns a textual representation of the InputDefinition');
     }
 
     protected function initializeArguments()

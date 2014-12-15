@@ -49,6 +49,7 @@ class AuthorTag extends AbstractGenerator implements TagInterface
     {
         $tagManager = new TagManager();
         $tagManager->initializeDefaultTags();
+
         return $tagManager->createTagFromReflection($reflectionTag);
     }
 
@@ -67,6 +68,7 @@ class AuthorTag extends AbstractGenerator implements TagInterface
     public function setAuthorEmail($authorEmail)
     {
         $this->authorEmail = $authorEmail;
+
         return $this;
     }
 
@@ -85,6 +87,7 @@ class AuthorTag extends AbstractGenerator implements TagInterface
     public function setAuthorName($authorName)
     {
         $this->authorName = $authorName;
+
         return $this;
     }
 

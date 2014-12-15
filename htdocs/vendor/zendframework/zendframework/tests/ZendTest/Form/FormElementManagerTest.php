@@ -43,6 +43,7 @@ class FormElementManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->setFactory('my-form', function ($elements) use ($factory) {
             $form = new Form();
             $form->setFormFactory($factory);
+
             return $form;
         });
         $form = $this->manager->get('my-Form');

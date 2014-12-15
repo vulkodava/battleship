@@ -35,7 +35,7 @@ class SingleSelectExecutor extends AbstractSqlExecutor
 {
     /**
      * @param \Doctrine\ORM\Query\AST\SelectStatement $AST
-     * @param \Doctrine\ORM\Query\SqlWalker           $sqlWalker
+     * @param \Doctrine\ORM\Query\SqlWalker $sqlWalker
      */
     public function __construct(SelectStatement $AST, SqlWalker $sqlWalker)
     {

@@ -106,6 +106,7 @@ class Driver implements \Doctrine\DBAL\Driver
         if (isset($params['dbname'])) {
             return $params['dbname'];
         }
+
         return $conn->query('SELECT DATABASE()')->fetchColumn();
     }
 }

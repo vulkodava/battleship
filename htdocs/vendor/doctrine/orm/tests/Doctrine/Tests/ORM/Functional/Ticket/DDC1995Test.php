@@ -15,7 +15,7 @@ class DDC1995Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->useModelSet('company');
         parent::setUp();
     }
-    
+
     public function testIssue()
     {
         $person = new CompanyPerson;
@@ -31,12 +31,12 @@ class DDC1995Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
         $this->_em->clear();
 
-        $dql    = 'SELECT u FROM Doctrine\Tests\Models\Company\CompanyPerson u WHERE u INSTANCE OF ?1';
-        $class  = $this->_em->getClassMetadata('Doctrine\Tests\Models\Company\CompanyEmployee');
+        $dql = 'SELECT u FROM Doctrine\Tests\Models\Company\CompanyPerson u WHERE u INSTANCE OF ?1';
+        $class = $this->_em->getClassMetadata('Doctrine\Tests\Models\Company\CompanyEmployee');
 
         $result = $this->_em->createQuery($dql)
-                ->setParameter(1, $class)
-                ->getResult();
+            ->setParameter(1, $class)
+            ->getResult();
 
         $this->assertCount(1, $result);
         $this->assertInstanceOf('Doctrine\Tests\Models\Company\CompanyEmployee', $result[0]);
@@ -57,19 +57,19 @@ class DDC1995Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
         $this->_em->clear();
 
-        $dql     = 'SELECT u FROM Doctrine\Tests\Models\Company\CompanyPerson u WHERE u INSTANCE OF :type';
-        $class1  = $this->_em->getClassMetadata('Doctrine\Tests\Models\Company\CompanyEmployee');
-        $class2  = $this->_em->getClassMetadata('Doctrine\Tests\Models\Company\CompanyPerson');
+        $dql = 'SELECT u FROM Doctrine\Tests\Models\Company\CompanyPerson u WHERE u INSTANCE OF :type';
+        $class1 = $this->_em->getClassMetadata('Doctrine\Tests\Models\Company\CompanyEmployee');
+        $class2 = $this->_em->getClassMetadata('Doctrine\Tests\Models\Company\CompanyPerson');
 
         $result1 = $this->_em->createQuery($dql)
-                ->setParameter('type', $class1)
-                ->useQueryCache(true)
-                ->getResult();
+            ->setParameter('type', $class1)
+            ->useQueryCache(true)
+            ->getResult();
 
         $result2 = $this->_em->createQuery($dql)
-                ->setParameter('type', $class2)
-                ->useQueryCache(true)
-                ->getResult();
+            ->setParameter('type', $class2)
+            ->useQueryCache(true)
+            ->getResult();
 
         $this->assertCount(1, $result1);
         $this->assertCount(1, $result2);

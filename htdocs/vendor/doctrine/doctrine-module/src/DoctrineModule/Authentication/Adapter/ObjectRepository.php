@@ -82,6 +82,7 @@ class ObjectRepository implements AdapterInterface
         }
 
         $this->options = $options;
+
         return $this;
     }
 
@@ -94,6 +95,7 @@ class ObjectRepository implements AdapterInterface
     public function setIdentityValue($identityValue)
     {
         $this->identityValue = $identityValue;
+
         return $this;
     }
 
@@ -114,6 +116,7 @@ class ObjectRepository implements AdapterInterface
     public function setCredentialValue($credentialValue)
     {
         $this->credentialValue = $credentialValue;
+
         return $this;
     }
 
@@ -131,7 +134,7 @@ class ObjectRepository implements AdapterInterface
     public function authenticate()
     {
         $this->setup();
-        $options  = $this->options;
+        $options = $this->options;
         $identity = $options->getObjectRepository()->findOneBy(array($options->getIdentityProperty() => $this->identityValue));
 
         if (!$identity) {
@@ -150,7 +153,7 @@ class ObjectRepository implements AdapterInterface
      * This method attempts to validate that the record in the resultset is indeed a
      * record that matched the identity provided to this adapter.
      *
-     * @param  object                              $identity
+     * @param  object $identity
      * @throws Exception\UnexpectedValueException
      * @return AuthenticationResult
      */
@@ -188,8 +191,8 @@ class ObjectRepository implements AdapterInterface
             return $this->createAuthenticationResult();
         }
 
-        $this->authenticationResultInfo['code']       = AuthenticationResult::SUCCESS;
-        $this->authenticationResultInfo['identity']   = $identity;
+        $this->authenticationResultInfo['code'] = AuthenticationResult::SUCCESS;
+        $this->authenticationResultInfo['identity'] = $identity;
         $this->authenticationResultInfo['messages'][] = 'Authentication successful.';
 
         return $this->createAuthenticationResult();
@@ -206,7 +209,7 @@ class ObjectRepository implements AdapterInterface
         if (null === $this->identityValue) {
             throw new Exception\RuntimeException(
                 'A value for the identity was not provided prior to authentication with ObjectRepository authentication '
-                    . 'adapter'
+                . 'adapter'
             );
         }
 

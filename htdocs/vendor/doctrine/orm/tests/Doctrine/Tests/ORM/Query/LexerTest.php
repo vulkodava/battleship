@@ -10,7 +10,8 @@ class LexerTest extends \Doctrine\Tests\OrmTestCase
 {
     //private $_lexer;
 
-    protected function setUp() {
+    protected function setUp()
+    {
     }
 
     public function testScannerRecognizesIdentifierWithLengthOfOneCharacter()
@@ -166,57 +167,57 @@ class LexerTest extends \Doctrine\Tests\OrmTestCase
         $tokens = array(
             array(
                 'value' => 'SELECT',
-                'type'  => Lexer::T_SELECT,
+                'type' => Lexer::T_SELECT,
                 'position' => 0
             ),
             array(
                 'value' => 'u',
-                'type'  => Lexer::T_IDENTIFIER,
+                'type' => Lexer::T_IDENTIFIER,
                 'position' => 7
             ),
             array(
                 'value' => 'FROM',
-                'type'  => Lexer::T_FROM,
+                'type' => Lexer::T_FROM,
                 'position' => 9
             ),
             array(
                 'value' => 'My\Namespace\User',
-                'type'  => Lexer::T_IDENTIFIER,
+                'type' => Lexer::T_IDENTIFIER,
                 'position' => 14
             ),
             array(
                 'value' => 'u',
-                'type'  => Lexer::T_IDENTIFIER,
+                'type' => Lexer::T_IDENTIFIER,
                 'position' => 32
             ),
             array(
                 'value' => 'WHERE',
-                'type'  => Lexer::T_WHERE,
+                'type' => Lexer::T_WHERE,
                 'position' => 34
             ),
             array(
                 'value' => 'u',
-                'type'  => Lexer::T_IDENTIFIER,
+                'type' => Lexer::T_IDENTIFIER,
                 'position' => 40
             ),
             array(
                 'value' => '.',
-                'type'  => Lexer::T_DOT,
+                'type' => Lexer::T_DOT,
                 'position' => 41
             ),
             array(
                 'value' => 'name',
-                'type'  => Lexer::T_IDENTIFIER,
+                'type' => Lexer::T_IDENTIFIER,
                 'position' => 42
             ),
             array(
                 'value' => '=',
-                'type'  => Lexer::T_EQUALS,
+                'type' => Lexer::T_EQUALS,
                 'position' => 47
             ),
             array(
                 'value' => "Jack O'Neil",
-                'type'  => Lexer::T_STRING,
+                'type' => Lexer::T_STRING,
                 'position' => 49
             )
         );

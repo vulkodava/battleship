@@ -108,10 +108,10 @@ EOS;
     {
         $docBlock = DocBlockGenerator::fromArray(array(
             'shortdescription' => 'foo',
-            'longdescription'  => 'bar',
+            'longdescription' => 'bar',
             'tags' => array(
                 array(
-                    'name'        => 'foo',
+                    'name' => 'foo',
                     'description' => 'bar',
                 )
             ),
@@ -132,7 +132,7 @@ EOS;
 
         $expected = '/**' . DocBlockGenerator::LINE_FEED
             . ' * @var This is a very large string that will be wrapped if it contains more than'
-            . DocBlockGenerator::LINE_FEED.' * 80 characters'. DocBlockGenerator::LINE_FEED
+            . DocBlockGenerator::LINE_FEED . ' * 80 characters' . DocBlockGenerator::LINE_FEED
             . ' */' . DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
     }
@@ -148,7 +148,7 @@ EOS;
 
         $expected = '/**' . DocBlockGenerator::LINE_FEED
             . ' * @var This is a very large string that will not be wrapped if it contains more than'
-            . ' 80 characters'. DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
+            . ' 80 characters' . DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
     }
 

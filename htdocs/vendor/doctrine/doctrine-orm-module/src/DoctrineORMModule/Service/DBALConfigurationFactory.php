@@ -53,7 +53,7 @@ class DBALConfigurationFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config  = new Configuration();
+        $config = new Configuration();
         $this->setupDBALConfiguration($serviceLocator, $config);
 
         return $config;
@@ -61,7 +61,7 @@ class DBALConfigurationFactory implements FactoryInterface
 
     /**
      * @param ServiceLocatorInterface $serviceLocator
-     * @param Configuration           $config
+     * @param Configuration $config
      */
     public function setupDBALConfiguration(ServiceLocatorInterface $serviceLocator, Configuration $config)
     {

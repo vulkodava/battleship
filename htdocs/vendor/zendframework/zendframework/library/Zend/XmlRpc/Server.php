@@ -49,59 +49,64 @@ class Server extends AbstractServer
 {
     /**
      * Character encoding
+     *
      * @var string
      */
     protected $encoding = 'UTF-8';
 
     /**
      * Request processed
+     *
      * @var null|Request
      */
     protected $request = null;
 
     /**
      * Class to use for responses; defaults to {@link Response\Http}
+     *
      * @var string
      */
     protected $responseClass = 'Zend\XmlRpc\Response\Http';
 
     /**
      * Dispatch table of name => method pairs
+     *
      * @var Definition
      */
     protected $table;
 
     /**
      * PHP types => XML-RPC types
+     *
      * @var array
      */
     protected $typeMap = array(
-        'i4'                         => 'i4',
-        'int'                        => 'int',
-        'integer'                    => 'int',
-        'i8'                         => 'i8',
-        'ex:i8'                      => 'i8',
-        'double'                     => 'double',
-        'float'                      => 'double',
-        'real'                       => 'double',
-        'boolean'                    => 'boolean',
-        'bool'                       => 'boolean',
-        'true'                       => 'boolean',
-        'false'                      => 'boolean',
-        'string'                     => 'string',
-        'str'                        => 'string',
-        'base64'                     => 'base64',
-        'dateTime.iso8601'           => 'dateTime.iso8601',
-        'date'                       => 'dateTime.iso8601',
-        'time'                       => 'dateTime.iso8601',
-        'DateTime'                   => 'dateTime.iso8601',
-        'array'                      => 'array',
-        'struct'                     => 'struct',
-        'null'                       => 'nil',
-        'nil'                        => 'nil',
-        'ex:nil'                     => 'nil',
-        'void'                       => 'void',
-        'mixed'                      => 'struct',
+        'i4' => 'i4',
+        'int' => 'int',
+        'integer' => 'int',
+        'i8' => 'i8',
+        'ex:i8' => 'i8',
+        'double' => 'double',
+        'float' => 'double',
+        'real' => 'double',
+        'boolean' => 'boolean',
+        'bool' => 'boolean',
+        'true' => 'boolean',
+        'false' => 'boolean',
+        'string' => 'string',
+        'str' => 'string',
+        'base64' => 'base64',
+        'dateTime.iso8601' => 'dateTime.iso8601',
+        'date' => 'dateTime.iso8601',
+        'time' => 'dateTime.iso8601',
+        'DateTime' => 'dateTime.iso8601',
+        'array' => 'array',
+        'struct' => 'struct',
+        'null' => 'nil',
+        'nil' => 'nil',
+        'ex:nil' => 'nil',
+        'void' => 'void',
+        'mixed' => 'struct',
     );
 
     /**
@@ -114,12 +119,14 @@ class Server extends AbstractServer
     /**
      * Flag: whether or not {@link handle()} should return a response instead
      * of automatically emitting it.
+     *
      * @var bool
      */
     protected $returnResponse = false;
 
     /**
      * Last response results.
+     *
      * @var Response
      */
     protected $response;
@@ -150,6 +157,7 @@ class Server extends AbstractServer
         if (!method_exists($system, $method)) {
             throw new Server\Exception\BadMethodCallException('Unknown instance method called on server: ' . $method);
         }
+
         return call_user_func_array(array($system, $method), $params);
     }
 
@@ -164,8 +172,8 @@ class Server extends AbstractServer
      * any arguments following the namespace will be aggregated and passed at
      * dispatch time.
      *
-     * @param string|array|callable $function  Valid callback
-     * @param string                $namespace Optional namespace prefix
+     * @param string|array|callable $function Valid callback
+     * @param string $namespace               Optional namespace prefix
      * @throws Server\Exception\InvalidArgumentException
      * @return void
      */
@@ -181,7 +189,7 @@ class Server extends AbstractServer
             $argv = array_slice($argv, 2);
         }
 
-        $function = (array) $function;
+        $function = (array)$function;
         foreach ($function as $func) {
             if (!is_string($func) || !function_exists($func)) {
                 throw new Server\Exception\InvalidArgumentException('Unable to attach function; invalid', 611);
@@ -204,7 +212,7 @@ class Server extends AbstractServer
      *
      * @param string|object $class
      * @param string $namespace Optional
-     * @param mixed $argv Optional arguments to pass to methods
+     * @param mixed $argv       Optional arguments to pass to methods
      * @return void
      * @throws Server\Exception\InvalidArgumentException on invalid input
      */
@@ -235,7 +243,7 @@ class Server extends AbstractServer
     public function fault($fault = null, $code = 404)
     {
         if (!$fault instanceof \Exception) {
-            $fault = (string) $fault;
+            $fault = (string)$fault;
             if (empty($fault)) {
                 $fault = 'Unknown Error';
             }
@@ -259,6 +267,7 @@ class Server extends AbstractServer
     public function setReturnResponse($flag = true)
     {
         $this->returnResponse = ($flag) ? true : false;
+
         return $this;
     }
 
@@ -306,6 +315,7 @@ class Server extends AbstractServer
 
         if (!$this->returnResponse) {
             echo $response;
+
             return;
         }
 
@@ -361,6 +371,7 @@ class Server extends AbstractServer
     {
         $this->encoding = $encoding;
         AbstractValue::setEncoding($encoding);
+
         return $this;
     }
 
@@ -404,6 +415,7 @@ class Server extends AbstractServer
         }
 
         $this->request = $request;
+
         return $this;
     }
 
@@ -440,6 +452,7 @@ class Server extends AbstractServer
             throw new Server\Exception\InvalidArgumentException('Invalid response class');
         }
         $this->responseClass = $class;
+
         return true;
     }
 
@@ -500,7 +513,8 @@ class Server extends AbstractServer
             return $this->sendArgumentsToAllMethods;
         }
 
-        $this->sendArgumentsToAllMethods = (bool) $flag;
+        $this->sendArgumentsToAllMethods = (bool)$flag;
+
         return $this;
     }
 
@@ -515,6 +529,7 @@ class Server extends AbstractServer
         if (isset($this->typeMap[$type])) {
             return $this->typeMap[$type];
         }
+
         return 'void';
     }
 
@@ -536,19 +551,19 @@ class Server extends AbstractServer
             throw new Server\Exception\RuntimeException('Method "' . $method . '" does not exist', 620);
         }
 
-        $info     = $this->table->getMethod($method);
-        $params   = $request->getParams();
-        $argv     = $info->getInvokeArguments();
+        $info = $this->table->getMethod($method);
+        $params = $request->getParams();
+        $argv = $info->getInvokeArguments();
         if (0 < count($argv) and $this->sendArgumentsToAllMethods()) {
             $params = array_merge($params, $argv);
         }
 
         // Check calling parameters against signatures
-        $matched    = false;
-        $sigCalled  = $request->getTypes();
+        $matched = false;
+        $sigCalled = $request->getTypes();
 
-        $sigLength  = count($sigCalled);
-        $paramsLen  = count($params);
+        $sigLength = count($sigCalled);
+        $paramsLen = count($params);
         if ($sigLength < $paramsLen) {
             for ($i = $sigLength; $i < $paramsLen; ++$i) {
                 $xmlRpcValue = AbstractValue::getXmlRpcValue($params[$i]);
@@ -568,8 +583,9 @@ class Server extends AbstractServer
             throw new Server\Exception\RuntimeException('Calling parameters do not match signature', 623);
         }
 
-        $return        = $this->_dispatch($info, $params);
+        $return = $this->_dispatch($info, $params);
         $responseClass = $this->getResponseClass();
+
         return new $responseClass($return);
     }
 
@@ -588,8 +604,8 @@ class Server extends AbstractServer
     /**
      * Checks if the object has this class as one of its parents
      *
-     * @see https://bugs.php.net/bug.php?id=53727
-     * @see https://github.com/zendframework/zf2/pull/1807
+     * @see        https://bugs.php.net/bug.php?id=53727
+     * @see        https://github.com/zendframework/zf2/pull/1807
      *
      * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *

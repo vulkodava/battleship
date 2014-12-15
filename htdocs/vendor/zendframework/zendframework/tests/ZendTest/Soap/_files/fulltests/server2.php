@@ -35,6 +35,7 @@ class Zend_Soap_Service_Server2
         $b = new Zend_Soap_Wsdl_ComplexTypeB();
         $b->bar = $bar;
         $b->foo = $foo;
+
         return $b;
     }
 }
@@ -42,7 +43,7 @@ class Zend_Soap_Service_Server2
 if (isset($_GET['wsdl'])) {
     $server = new Zend_Soap_AutoDiscover(new Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex());
 } else {
-    $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
+    $uri = "http://" . $_SERVER['HTTP_HOST'] . "/" . $_SERVER['PHP_SELF'] . "?wsdl";
     $server = new Zend_Soap_Server($uri);
 }
 $server->setClass('Zend_Soap_Service_Server2');

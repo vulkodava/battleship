@@ -35,6 +35,7 @@ abstract class AbstractConstraint implements ConstraintInterface
         }
 
         $this->columns = $columns;
+
         return $this;
     }
 
@@ -45,6 +46,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     public function addColumn($column)
     {
         $this->columns[] = $column;
+
         return $this;
     }
 

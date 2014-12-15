@@ -54,6 +54,7 @@ class Sql92 implements PlatformInterface
         if (is_array($identifierChain)) {
             $identifierChain = implode('"."', $identifierChain);
         }
+
         return '"' . $identifierChain . '"';
     }
 
@@ -78,6 +79,7 @@ class Sql92 implements PlatformInterface
         trigger_error(
             'Attempting to quote a value without specific driver level support can introduce security vulnerabilities in a production environment.'
         );
+
         return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
@@ -110,6 +112,7 @@ class Sql92 implements PlatformInterface
         do {
             $valueList[key($valueList)] = $this->quoteValue($value);
         } while ($value = next($valueList));
+
         return implode(', ', $valueList);
     }
 

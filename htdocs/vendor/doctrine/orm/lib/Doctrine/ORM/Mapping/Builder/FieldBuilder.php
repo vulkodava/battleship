@@ -56,7 +56,7 @@ class FieldBuilder
 
     /**
      * @param ClassMetadataBuilder $builder
-     * @param array                $mapping
+     * @param array $mapping
      */
     public function __construct(ClassMetadataBuilder $builder, array $mapping)
     {
@@ -74,6 +74,7 @@ class FieldBuilder
     public function length($length)
     {
         $this->mapping['length'] = $length;
+
         return $this;
     }
 
@@ -87,6 +88,7 @@ class FieldBuilder
     public function nullable($flag = true)
     {
         $this->mapping['nullable'] = (bool)$flag;
+
         return $this;
     }
 
@@ -100,6 +102,7 @@ class FieldBuilder
     public function unique($flag = true)
     {
         $this->mapping['unique'] = (bool)$flag;
+
         return $this;
     }
 
@@ -113,6 +116,7 @@ class FieldBuilder
     public function columnName($name)
     {
         $this->mapping['columnName'] = $name;
+
         return $this;
     }
 
@@ -126,6 +130,7 @@ class FieldBuilder
     public function precision($p)
     {
         $this->mapping['precision'] = $p;
+
         return $this;
     }
 
@@ -139,6 +144,7 @@ class FieldBuilder
     public function scale($s)
     {
         $this->mapping['scale'] = $s;
+
         return $this;
     }
 
@@ -150,6 +156,7 @@ class FieldBuilder
     public function isPrimaryKey()
     {
         $this->mapping['id'] = true;
+
         return $this;
     }
 
@@ -161,6 +168,7 @@ class FieldBuilder
     public function generatedValue($strategy = 'AUTO')
     {
         $this->generatedValue = $strategy;
+
         return $this;
     }
 
@@ -172,6 +180,7 @@ class FieldBuilder
     public function isVersionField()
     {
         $this->version = true;
+
         return $this;
     }
 
@@ -179,8 +188,8 @@ class FieldBuilder
      * Sets Sequence Generator.
      *
      * @param string $sequenceName
-     * @param int    $allocationSize
-     * @param int    $initialValue
+     * @param int $allocationSize
+     * @param int $initialValue
      *
      * @return FieldBuilder
      */
@@ -191,6 +200,7 @@ class FieldBuilder
             'allocationSize' => $allocationSize,
             'initialValue' => $initialValue,
         );
+
         return $this;
     }
 
@@ -204,6 +214,7 @@ class FieldBuilder
     public function columnDefinition($def)
     {
         $this->mapping['columnDefinition'] = $def;
+
         return $this;
     }
 
@@ -227,6 +238,7 @@ class FieldBuilder
         if ($this->sequenceDef) {
             $cm->setSequenceGeneratorDefinition($this->sequenceDef);
         }
+
         return $this->builder;
     }
 }

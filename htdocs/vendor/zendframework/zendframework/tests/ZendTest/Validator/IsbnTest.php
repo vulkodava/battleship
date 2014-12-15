@@ -99,20 +99,20 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitialization()
     {
-        $options = array('type'      => Isbn::AUTO,
-                         'separator' => ' ');
+        $options = array('type' => Isbn::AUTO,
+            'separator' => ' ');
         $validator = new Isbn($options);
         $this->assertTrue($validator->getType() == Isbn::AUTO);
         $this->assertTrue($validator->getSeparator() == ' ');
 
-        $options = array('type'      => Isbn::ISBN10,
-                         'separator' => '-');
+        $options = array('type' => Isbn::ISBN10,
+            'separator' => '-');
         $validator = new Isbn($options);
         $this->assertTrue($validator->getType() == Isbn::ISBN10);
         $this->assertTrue($validator->getSeparator() == '-');
 
-        $options = array('type'      => Isbn::ISBN13,
-                         'separator' => '');
+        $options = array('type' => Isbn::ISBN13,
+            'separator' => '');
         $validator = new Isbn($options);
         $this->assertTrue($validator->getType() == Isbn::ISBN13);
         $this->assertTrue($validator->getSeparator() == '');
@@ -212,14 +212,14 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
         $validator = new Isbn();
         $validator->setType(Isbn::ISBN13);
 
-        $this->assertFalse($validator->isValid((float) 1.2345));
-        $this->assertFalse($validator->isValid((object) 'Test'));
+        $this->assertFalse($validator->isValid((float)1.2345));
+        $this->assertFalse($validator->isValid((object)'Test'));
     }
 
     public function testEqualsMessageTemplates()
     {
         $validator = new Isbn();
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 }

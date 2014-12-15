@@ -44,8 +44,8 @@ class Model implements ArraySerializableInterface
     public function getArrayCopy()
     {
         return array(
-            'foo'    => $this->foo,
-            'bar'    => $this->bar,
+            'foo' => $this->foo,
+            'bar' => $this->bar,
             'foobar' => $this->foobar,
         );
     }

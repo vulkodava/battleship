@@ -15,7 +15,7 @@ use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 
 /**
-*/
+ */
 class AtomSource extends AbstractAtom implements Renderer\RendererInterface
 {
     /**
@@ -63,6 +63,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
             $ext->setDOMDocument($this->getDOMDocument(), $root);
             $ext->render();
         }
+
         return $this;
     }
 

@@ -21,22 +21,22 @@ class SimpleDecoderTest extends TestLdap\AbstractTestCase
     public function testDecodeSimpleSingleItem()
     {
         $data =
-"version: 1
+            "version: 1
 dn: cn=test3,ou=example,dc=cno
 objectclass: oc1
 attr3: foo";
         $expected = array(
-            'dn'          => 'cn=test3,ou=example,dc=cno',
+            'dn' => 'cn=test3,ou=example,dc=cno',
             'objectclass' => array('oc1'),
-            'attr3'       => array('foo'));
-        $actual   = Ldif\Encoder::decode($data);
+            'attr3' => array('foo'));
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testDecodeSingleItemWithFoldedAttribute()
     {
         $data =
-"dn: cn=test blabla,ou=example,dc=cno
+            "dn: cn=test blabla,ou=example,dc=cno
 objectclass: oc2
 attr1: 12345
 attr2: 1234
@@ -48,24 +48,24 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
  h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb
  5789thvngwr789cghm738";
         $expected = array(
-            'dn'          => 'cn=test blabla,ou=example,dc=cno',
+            'dn' => 'cn=test blabla,ou=example,dc=cno',
             'objectclass' => array('oc2'),
-            'attr1'       => array('12345'),
-            'attr2'       => array('1234', 'baz'),
-            'attr3'       => array('foo', 'bar'),
-            'cn'          => array('test blabla'),
-            'verylong'    => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8'
-                                 . 'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
-                                 . '5789thvngwr789cghm738'),
+            'attr1' => array('12345'),
+            'attr2' => array('1234', 'baz'),
+            'attr3' => array('foo', 'bar'),
+            'cn' => array('test blabla'),
+            'verylong' => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8'
+                . 'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
+                . '5789thvngwr789cghm738'),
         );
-        $actual   = Ldif\Encoder::decode($data);
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testDecodeSingleItemWithBase64Attributes()
     {
         $data =
-"dn:: Y249dGVzdCBibGFibGEsb3U9ZXhhbXBsZSxkYz1jbm8=
+            "dn:: Y249dGVzdCBibGFibGEsb3U9ZXhhbXBsZSxkYz1jbm8=
 objectclass: oc3
 attr1: 12345
 attr2: 1234
@@ -78,24 +78,24 @@ attr6:: OmJhZGluaXRjaGFy
 attr6:: PGJhZGluaXRjaGFy
 cn:: dGVzdCDDtsOkw7w=";
         $expected = array(
-            'dn'          => 'cn=test blabla,ou=example,dc=cno',
+            'dn' => 'cn=test blabla,ou=example,dc=cno',
             'objectclass' => array('oc3'),
-            'attr1'       => array('12345'),
-            'attr2'       => array('1234', 'baz'),
-            'attr3'       => array('foo', 'bar'),
-            'attr4'       => array('öäü'),
-            'attr5'       => array('endspace '),
-            'attr6'       => array(':badinitchar', '<badinitchar'),
-            'cn'          => array('test öäü'),
+            'attr1' => array('12345'),
+            'attr2' => array('1234', 'baz'),
+            'attr3' => array('foo', 'bar'),
+            'attr4' => array('öäü'),
+            'attr5' => array('endspace '),
+            'attr6' => array(':badinitchar', '<badinitchar'),
+            'cn' => array('test öäü'),
         );
-        $actual   = Ldif\Encoder::decode($data);
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testDecodeSingleItemWithFoldedBase64Attribute()
     {
         $data =
-"dn:: Y249dGVzdCBibGFibGEsb
+            "dn:: Y249dGVzdCBibGFibGEsb
  3U9ZXhhbXBsZSxkYz1jbm8=
 objectclass: oc3
 attr1: 12345
@@ -104,20 +104,20 @@ attr2: baz
 attr3: foo
 attr3: bar";
         $expected = array(
-            'dn'          => 'cn=test blabla,ou=example,dc=cno',
+            'dn' => 'cn=test blabla,ou=example,dc=cno',
             'objectclass' => array('oc3'),
-            'attr1'       => array('12345'),
-            'attr2'       => array('1234', 'baz'),
-            'attr3'       => array('foo', 'bar'),
+            'attr1' => array('12345'),
+            'attr2' => array('1234', 'baz'),
+            'attr3' => array('foo', 'bar'),
         );
-        $actual   = Ldif\Encoder::decode($data);
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testDecodeTwoItems()
     {
         $data =
-"version: 1
+            "version: 1
 dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
 objectclass: top
 objectclass: person
@@ -139,30 +139,30 @@ sn: Jensen
 telephonenumber: +1 408 555 1212";
         $expected = array(
             array(
-                'dn'              => 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com',
-                'objectclass'     => array('top', 'person', 'organizationalPerson'),
-                'cn'              => array('Barbara Jensen', 'Barbara J Jensen', 'Babs Jensen'),
-                'sn'              => array('Jensen'),
-                'uid'             => array('bjensen'),
+                'dn' => 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com',
+                'objectclass' => array('top', 'person', 'organizationalPerson'),
+                'cn' => array('Barbara Jensen', 'Barbara J Jensen', 'Babs Jensen'),
+                'sn' => array('Jensen'),
+                'uid' => array('bjensen'),
                 'telephonenumber' => array('+1 408 555 1212'),
-                'description'     => array('A big sailing fan.'),
+                'description' => array('A big sailing fan.'),
             ),
             array(
-                'dn'              => 'cn=Bjorn Jensen, ou=Accounting, dc=airius, dc=com',
-                'objectclass'     => array('top', 'person', 'organizationalPerson'),
-                'cn'              => array('Bjorn Jensen'),
-                'sn'              => array('Jensen'),
+                'dn' => 'cn=Bjorn Jensen, ou=Accounting, dc=airius, dc=com',
+                'objectclass' => array('top', 'person', 'organizationalPerson'),
+                'cn' => array('Bjorn Jensen'),
+                'sn' => array('Jensen'),
                 'telephonenumber' => array('+1 408 555 1212'),
             ),
         );
-        $actual   = Ldif\Encoder::decode($data);
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testDecodeStringContainingEntryWithFoldedAttributeValue()
     {
         $data =
-"version: 1
+            "version: 1
 dn:cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com
 objectclass:top
 objectclass:person
@@ -177,24 +177,24 @@ description:Babs is a big sailing fan, and travels extensively in sea
  rch of perfect sailing conditions.
 title:Product Manager, Rod and Reel Division";
         $expected = array(
-            'dn'                => 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com',
-            'objectclass'       => array('top', 'person', 'organizationalPerson'),
-            'cn'                => array('Barbara Jensen', 'Barbara J Jensen', 'Babs Jensen'),
-            'sn'                => array('Jensen'),
-            'uid'               => array('bjensen'),
-            'telephonenumber'   => array('+1 408 555 1212'),
-            'description'       => array('Babs is a big sailing fan, and travels extensively'
-                                       . ' in search of perfect sailing conditions.'),
-            'title'             => array('Product Manager, Rod and Reel Division'),
+            'dn' => 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com',
+            'objectclass' => array('top', 'person', 'organizationalPerson'),
+            'cn' => array('Barbara Jensen', 'Barbara J Jensen', 'Babs Jensen'),
+            'sn' => array('Jensen'),
+            'uid' => array('bjensen'),
+            'telephonenumber' => array('+1 408 555 1212'),
+            'description' => array('Babs is a big sailing fan, and travels extensively'
+                . ' in search of perfect sailing conditions.'),
+            'title' => array('Product Manager, Rod and Reel Division'),
         );
-        $actual   = Ldif\Encoder::decode($data);
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testDecodeStringContainingBase64EncodedValue()
     {
         $data =
-"version: 1
+            "version: 1
 dn: cn=Gern Jensen, ou=Product Testing, dc=airius, dc=com
 objectclass: top
 objectclass: person
@@ -209,25 +209,25 @@ description:: V2hhdCBhIGNhcmVmdWwgcmVhZGVyIHlvdSBhcmUhICBUaGlzIHZhbHVl
  VyIGluIGl0IChhIENSKS4NICBCeSB0aGUgd2F5LCB5b3Ugc2hvdWxkIHJlYWxseSBnZXQg
  b3V0IG1vcmUu";
         $expected = array(
-            'dn'              => 'cn=Gern Jensen, ou=Product Testing, dc=airius, dc=com',
-            'objectclass'     => array('top', 'person', 'organizationalPerson'),
-            'cn'              => array('Gern Jensen', 'Gern O Jensen'),
-            'sn'              => array('Jensen'),
-            'uid'             => array('gernj'),
+            'dn' => 'cn=Gern Jensen, ou=Product Testing, dc=airius, dc=com',
+            'objectclass' => array('top', 'person', 'organizationalPerson'),
+            'cn' => array('Gern Jensen', 'Gern O Jensen'),
+            'sn' => array('Jensen'),
+            'uid' => array('gernj'),
             'telephonenumber' => array('+1 408 555 1212'),
-            'description'     => array('What a careful reader you are!'
-                                     . '  This value is base-64-encoded because it has a '
-                                     . 'control character in it (a CR).' . "\r"
-                                     . '  By the way, you should really get out more.'),
+            'description' => array('What a careful reader you are!'
+                . '  This value is base-64-encoded because it has a '
+                . 'control character in it (a CR).' . "\r"
+                . '  By the way, you should really get out more.'),
         );
-        $actual   = Ldif\Encoder::decode($data);
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testDecodeStringContainingEntriesWithUtf8EncodedAttributeValues()
     {
         $data =
-"version: 1
+            "version: 1
 dn:: b3U95Za25qWt6YOoLG89QWlyaXVz
 # dn:: ou=営業部,o=Airius
 objectclass: top
@@ -320,7 +320,7 @@ title;lang-en: Sales, Director";
     public function testDecodeSingleItemWithFoldedAttributesAndEmptyLinesBetween()
     {
         $data =
-"dn: cn=test blabla,ou=example,dc=cno
+            "dn: cn=test blabla,ou=example,dc=cno
 
 objectclass: top
 
@@ -344,25 +344,25 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
 
  5789thvngwr789cghm738";
         $expected = array(
-            'dn'          => 'cn=test blabla,ou=example,dc=cno',
+            'dn' => 'cn=test blabla,ou=example,dc=cno',
             'objectclass' => array('top', 'person', 'organizationalPerson'),
             'description' => array('What a careful reader you are!'
-                                 . '  This value is base-64-encoded because it has a '
-                                 . 'control character in it (a CR).' . "\r"
-                                 . '  By the way, you should really get out more.'),
-            'verylong'    => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8'
-                                 . 'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
-                                 . '5789thvngwr789cghm738'),
+                . '  This value is base-64-encoded because it has a '
+                . 'control character in it (a CR).' . "\r"
+                . '  By the way, you should really get out more.'),
+            'verylong' => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8'
+                . 'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
+                . '5789thvngwr789cghm738'),
         );
-        $actual   = Ldif\Encoder::decode($data);
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testRoundtripEncoding()
     {
-        $node     = $this->createTestNode();
-        $ldif     = $node->toLdif();
-        $data     = Ldif\Encoder::decode($ldif);
+        $node = $this->createTestNode();
+        $ldif = $node->toLdif();
+        $data = Ldif\Encoder::decode($ldif);
         $expected = array_merge(array('dn' => $node->getDnString()), $node->getData(false));
         $this->assertEquals($expected, $data);
     }
@@ -370,15 +370,15 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
     public function testDecodeSimpleSingleItemWithUri()
     {
         $data =
-"version: 1
+            "version: 1
 dn: cn=test3,ou=example,dc=cno
 objectclass: oc1
 memberurl: ldap:///(&(cn=myName)(uid=something))";
         $expected = array(
-            'dn'          => 'cn=test3,ou=example,dc=cno',
+            'dn' => 'cn=test3,ou=example,dc=cno',
             'objectclass' => array('oc1'),
-            'memberurl'   => array('ldap:///(&(cn=myName)(uid=something))'));
-        $actual   = Ldif\Encoder::decode($data);
+            'memberurl' => array('ldap:///(&(cn=myName)(uid=something))'));
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -386,7 +386,7 @@ memberurl: ldap:///(&(cn=myName)(uid=something))";
     public function testDecodeSimpleSingleItemWithMultilineComment()
     {
         $data =
-"version: 1
+            "version: 1
 dn: cn=test3,ou=example,dc=cno
 objectclass: oc1
 attr3:: w7bDpMO8
@@ -398,10 +398,10 @@ objectclass: oc1
 attr3:: w7bDpMO8";
 
         $expected = array(
-            'dn'          => 'cn=test3,ou=example,dc=cno',
+            'dn' => 'cn=test3,ou=example,dc=cno',
             'objectclass' => array('oc1'),
-            'attr3'       => array('öäü'));
-        $actual   = Ldif\Encoder::decode($data);
+            'attr3' => array('öäü'));
+        $actual = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual[0]);
     }
 }

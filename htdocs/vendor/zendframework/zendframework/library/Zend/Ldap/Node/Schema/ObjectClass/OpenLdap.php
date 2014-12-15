@@ -61,6 +61,7 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
         if ($this->inheritedMust === null) {
             $this->resolveInheritance();
         }
+
         return $this->inheritedMust;
     }
 
@@ -74,6 +75,7 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
         if ($this->inheritedMay === null) {
             $this->resolveInheritance();
         }
+
         return $this->inheritedMay;
     }
 
@@ -85,18 +87,18 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
     protected function resolveInheritance()
     {
         $must = $this->must;
-        $may  = $this->may;
+        $may = $this->may;
         foreach ($this->getParents() as $p) {
             $must = array_merge($must, $p->getMustContain());
-            $may  = array_merge($may, $p->getMayContain());
+            $may = array_merge($may, $p->getMayContain());
         }
         $must = array_unique($must);
-        $may  = array_unique($may);
-        $may  = array_diff($may, $must);
+        $may = array_unique($may);
+        $may = array_diff($may, $must);
         sort($must, SORT_STRING);
         sort($may, SORT_STRING);
         $this->inheritedMust = $must;
-        $this->inheritedMay  = $may;
+        $this->inheritedMay = $may;
     }
 
     /**

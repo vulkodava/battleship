@@ -38,6 +38,7 @@ class ObjectRadio extends RadioElement
         if (null === $this->proxy) {
             $this->proxy = new Proxy();
         }
+
         return $this->proxy;
     }
 
@@ -48,6 +49,7 @@ class ObjectRadio extends RadioElement
     public function setOptions($options)
     {
         $this->getProxy()->setOptions($options);
+
         return parent::setOptions($options);
     }
 
@@ -67,6 +69,7 @@ class ObjectRadio extends RadioElement
         if (empty($this->valueOptions)) {
             $this->setValueOptions($this->getProxy()->getValueOptions());
         }
+
         return $this->valueOptions;
     }
 }

@@ -41,7 +41,7 @@ class ContainerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function validContainers()
     {
         $containers = array();
-        $config     = $this->config;
+        $config = $this->config;
         foreach ($config['session_containers'] as $name) {
             $containers[] = array($name, $name);
         }

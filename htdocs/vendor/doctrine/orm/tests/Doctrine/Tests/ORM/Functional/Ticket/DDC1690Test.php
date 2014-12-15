@@ -8,7 +8,8 @@ require_once __DIR__ . '/../../../TestInit.php';
 
 class DDC1690Test extends \Doctrine\Tests\OrmFunctionalTestCase
 {
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         try {
             $this->_schemaTool->createSchema(array(
@@ -46,8 +47,8 @@ class DDC1690Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $childId = $child->getId();
         unset($parent, $child);
 
-        $parent = $this->_em->find(__NAMESPACE__.'\DDC1690Parent', $parentId);
-        $child = $this->_em->find(__NAMESPACE__.'\DDC1690Child', $childId);
+        $parent = $this->_em->find(__NAMESPACE__ . '\DDC1690Parent', $parentId);
+        $child = $this->_em->find(__NAMESPACE__ . '\DDC1690Child', $childId);
 
         $this->assertEquals(1, count($parent->listeners));
         $this->assertInstanceOf(
@@ -60,14 +61,14 @@ class DDC1690Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertCount(1, $child->listeners);
         unset($parent, $child);
 
-        $parent = $this->_em->find(__NAMESPACE__.'\DDC1690Parent', $parentId);
+        $parent = $this->_em->find(__NAMESPACE__ . '\DDC1690Parent', $parentId);
         $child = $parent->getChild();
 
         $this->assertEquals(1, count($parent->listeners));
         $this->assertEquals(1, count($child->listeners));
         unset($parent, $child);
 
-        $child = $this->_em->find(__NAMESPACE__.'\DDC1690Child', $childId);
+        $child = $this->_em->find(__NAMESPACE__ . '\DDC1690Child', $childId);
         $parent = $child->getParent();
 
         $this->assertEquals(1, count($parent->listeners));
@@ -75,16 +76,19 @@ class DDC1690Test extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 }
 
-class NotifyBaseEntity implements NotifyPropertyChanged {
+class NotifyBaseEntity implements NotifyPropertyChanged
+{
     public $listeners = array();
 
-    public function addPropertyChangedListener(PropertyChangedListener $listener) {
+    public function addPropertyChangedListener(PropertyChangedListener $listener)
+    {
         if (!in_array($listener, $this->listeners)) {
             $this->listeners[] = $listener;
         }
     }
 
-    protected function onPropertyChanged($propName, $oldValue, $newValue) {
+    protected function onPropertyChanged($propName, $oldValue, $newValue)
+    {
         if ($this->listeners) {
             foreach ($this->listeners as $listener) {
                 $listener->propertyChanged($this, $propName, $oldValue, $newValue);
@@ -94,7 +98,8 @@ class NotifyBaseEntity implements NotifyPropertyChanged {
 }
 
 /** @Entity @ChangeTrackingPolicy("NOTIFY") */
-class DDC1690Parent extends NotifyBaseEntity {
+class DDC1690Parent extends NotifyBaseEntity
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     private $id;
 
@@ -104,30 +109,36 @@ class DDC1690Parent extends NotifyBaseEntity {
     /** @OneToOne(targetEntity="DDC1690Child") */
     private $child;
 
-    function getId() {
+    function getId()
+    {
         return $this->id;
     }
 
-    function getName() {
+    function getName()
+    {
         return $this->name;
     }
 
-    function setName($name) {
+    function setName($name)
+    {
         $this->onPropertyChanged('name', $this->name, $name);
         $this->name = $name;
     }
 
-    function setChild($child) {
+    function setChild($child)
+    {
         $this->child = $child;
     }
 
-    function getChild() {
+    function getChild()
+    {
         return $this->child;
     }
 }
 
 /** @Entity */
-class DDC1690Child extends NotifyBaseEntity {
+class DDC1690Child extends NotifyBaseEntity
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     private $id;
 
@@ -137,24 +148,29 @@ class DDC1690Child extends NotifyBaseEntity {
     /** @OneToOne(targetEntity="DDC1690Parent", mappedBy="child") */
     private $parent;
 
-    function getId() {
+    function getId()
+    {
         return $this->id;
     }
 
-    function getName() {
+    function getName()
+    {
         return $this->name;
     }
 
-    function setName($name) {
+    function setName($name)
+    {
         $this->onPropertyChanged('name', $this->name, $name);
         $this->name = $name;
     }
 
-    function setParent($parent) {
+    function setParent($parent)
+    {
         $this->parent = $parent;
     }
 
-    function getParent() {
+    function getParent()
+    {
         return $this->parent;
     }
 }

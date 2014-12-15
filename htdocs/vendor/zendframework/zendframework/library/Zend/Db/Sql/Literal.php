@@ -31,6 +31,7 @@ class Literal implements ExpressionInterface
     public function setLiteral($literal)
     {
         $this->literal = $literal;
+
         return $this;
     }
 

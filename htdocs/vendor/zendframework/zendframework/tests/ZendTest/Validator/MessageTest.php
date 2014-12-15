@@ -158,7 +158,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setMessages(
             array(
-                StringLength::TOO_LONG  => 'Your value is too long',
+                StringLength::TOO_LONG => 'Your value is too long',
                 StringLength::TOO_SHORT => 'Your value is too short'
             )
         );
@@ -245,13 +245,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
-                                     'messageVariables', $validator);
+            'messageVariables', $validator);
     }
 }

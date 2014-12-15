@@ -56,7 +56,7 @@ class StaticPHPDriver implements MappingDriver
      */
     public function __construct($paths)
     {
-        $this->addPaths((array) $paths);
+        $this->addPaths((array)$paths);
     }
 
     /**
@@ -137,6 +137,6 @@ class StaticPHPDriver implements MappingDriver
      */
     public function isTransient($className)
     {
-        return ! method_exists($className, 'loadMetadata');
+        return !method_exists($className, 'loadMetadata');
     }
 }

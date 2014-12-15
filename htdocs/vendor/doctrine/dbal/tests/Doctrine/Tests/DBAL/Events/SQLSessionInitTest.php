@@ -18,8 +18,8 @@ class SQLSessionInitTest extends DbalTestCase
     {
         $connectionMock = $this->getMock('Doctrine\DBAL\Connection', array(), array(), '', false);
         $connectionMock->expects($this->once())
-                       ->method('exec')
-                       ->with($this->equalTo("SET SEARCH_PATH TO foo, public, TIMEZONE TO 'Europe/Berlin'"));
+            ->method('exec')
+            ->with($this->equalTo("SET SEARCH_PATH TO foo, public, TIMEZONE TO 'Europe/Berlin'"));
 
         $eventArgs = new ConnectionEventArgs($connectionMock);
 

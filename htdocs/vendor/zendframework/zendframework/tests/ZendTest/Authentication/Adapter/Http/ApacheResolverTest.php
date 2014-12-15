@@ -46,11 +46,11 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_path      = __DIR__ . '/TestAsset';
+        $this->_path = __DIR__ . '/TestAsset';
         $this->_validPath = $this->_path . '/htbasic.plaintext';
-        $this->_digest    = $this->_path . '/htdigest';
-        $this->_apache    = new Apache($this->_validPath);
-        $this->_badPath   = 'invalid path';
+        $this->_digest = $this->_path . '/htdigest';
+        $this->_apache = new Apache($this->_validPath);
+        $this->_badPath = 'invalid path';
     }
 
     /**
@@ -100,11 +100,12 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
     public function providePasswordFiles()
     {
         $path = __DIR__ . '/TestAsset';
+
         return array(
-            array( $path . '/htbasic.plaintext' ),
-            array( $path . '/htbasic.md5' ),
-            array( $path . '/htbasic.sha1' ),
-            array( $path . '/htbasic.crypt' )
+            array($path . '/htbasic.plaintext'),
+            array($path . '/htbasic.md5'),
+            array($path . '/htbasic.sha1'),
+            array($path . '/htbasic.crypt')
         );
     }
 
@@ -148,7 +149,7 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($result->isValid());
     }
 
-        /**
+    /**
      * Ensure that resolve() failed for not valid password
      *
      * @dataProvider providePasswordFiles

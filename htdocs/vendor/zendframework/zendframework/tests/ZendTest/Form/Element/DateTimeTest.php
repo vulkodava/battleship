@@ -20,9 +20,9 @@ class DateTimeTest extends TestCase
         $element = new DateTimeElement('foo');
         $element->setAttributes(array(
             'inclusive' => true,
-            'min'       => '2000-01-01T00:00Z',
-            'max'       => '2001-01-01T00:00Z',
-            'step'      => '1',
+            'min' => '2000-01-01T00:00Z',
+            'max' => '2001-01-01T00:00Z',
+            'step' => '1',
         ));
 
         $inputSpec = $element->getInputSpecification();

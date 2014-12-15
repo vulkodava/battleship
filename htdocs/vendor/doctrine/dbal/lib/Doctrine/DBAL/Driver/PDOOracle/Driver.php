@@ -66,7 +66,7 @@ class Driver implements \Doctrine\DBAL\Driver
             }
 
             $database = 'SID=' . $params['dbname'];
-            $pooled   = '';
+            $pooled = '';
 
             if (isset($params['service']) && $params['service'] == true) {
                 $database = 'SERVICE_NAME=' . $params['dbname'];

@@ -63,20 +63,20 @@ class SQLServerPlatformTest extends AbstractPlatformTestCase
     public function testGeneratesTransactionsCommands()
     {
         $this->assertEquals(
-                'SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED',
-                $this->_platform->getSetTransactionIsolationSQL(\Doctrine\DBAL\Connection::TRANSACTION_READ_UNCOMMITTED)
+            'SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED',
+            $this->_platform->getSetTransactionIsolationSQL(\Doctrine\DBAL\Connection::TRANSACTION_READ_UNCOMMITTED)
         );
         $this->assertEquals(
-                'SET TRANSACTION ISOLATION LEVEL READ COMMITTED',
-                $this->_platform->getSetTransactionIsolationSQL(\Doctrine\DBAL\Connection::TRANSACTION_READ_COMMITTED)
+            'SET TRANSACTION ISOLATION LEVEL READ COMMITTED',
+            $this->_platform->getSetTransactionIsolationSQL(\Doctrine\DBAL\Connection::TRANSACTION_READ_COMMITTED)
         );
         $this->assertEquals(
-                'SET TRANSACTION ISOLATION LEVEL REPEATABLE READ',
-                $this->_platform->getSetTransactionIsolationSQL(\Doctrine\DBAL\Connection::TRANSACTION_REPEATABLE_READ)
+            'SET TRANSACTION ISOLATION LEVEL REPEATABLE READ',
+            $this->_platform->getSetTransactionIsolationSQL(\Doctrine\DBAL\Connection::TRANSACTION_REPEATABLE_READ)
         );
         $this->assertEquals(
-                'SET TRANSACTION ISOLATION LEVEL SERIALIZABLE',
-                $this->_platform->getSetTransactionIsolationSQL(\Doctrine\DBAL\Connection::TRANSACTION_SERIALIZABLE)
+            'SET TRANSACTION ISOLATION LEVEL SERIALIZABLE',
+            $this->_platform->getSetTransactionIsolationSQL(\Doctrine\DBAL\Connection::TRANSACTION_SERIALIZABLE)
         );
     }
 
@@ -93,36 +93,36 @@ class SQLServerPlatformTest extends AbstractPlatformTestCase
     public function testGeneratesTypeDeclarationForIntegers()
     {
         $this->assertEquals(
-                'INT',
-                $this->_platform->getIntegerTypeDeclarationSQL(array())
+            'INT',
+            $this->_platform->getIntegerTypeDeclarationSQL(array())
         );
         $this->assertEquals(
-                'INT IDENTITY',
-                $this->_platform->getIntegerTypeDeclarationSQL(array('autoincrement' => true)
-        ));
+            'INT IDENTITY',
+            $this->_platform->getIntegerTypeDeclarationSQL(array('autoincrement' => true)
+            ));
         $this->assertEquals(
-                'INT IDENTITY',
-                $this->_platform->getIntegerTypeDeclarationSQL(
-                        array('autoincrement' => true, 'primary' => true)
-        ));
+            'INT IDENTITY',
+            $this->_platform->getIntegerTypeDeclarationSQL(
+                array('autoincrement' => true, 'primary' => true)
+            ));
     }
 
     public function testGeneratesTypeDeclarationsForStrings()
     {
         $this->assertEquals(
-                'NCHAR(10)',
-                $this->_platform->getVarcharTypeDeclarationSQL(
-                        array('length' => 10, 'fixed' => true)
-        ));
+            'NCHAR(10)',
+            $this->_platform->getVarcharTypeDeclarationSQL(
+                array('length' => 10, 'fixed' => true)
+            ));
         $this->assertEquals(
-                'NVARCHAR(50)',
-                $this->_platform->getVarcharTypeDeclarationSQL(array('length' => 50)),
-                'Variable string declaration is not correct'
+            'NVARCHAR(50)',
+            $this->_platform->getVarcharTypeDeclarationSQL(array('length' => 50)),
+            'Variable string declaration is not correct'
         );
         $this->assertEquals(
-                'NVARCHAR(255)',
-                $this->_platform->getVarcharTypeDeclarationSQL(array()),
-                'Long string declaration is not correct'
+            'NVARCHAR(255)',
+            $this->_platform->getVarcharTypeDeclarationSQL(array()),
+            'Long string declaration is not correct'
         );
     }
 
@@ -229,9 +229,9 @@ class SQLServerPlatformTest extends AbstractPlatformTestCase
      */
     public function testModifyLimitQueryWithOrderByClause()
     {
-        $sql      = 'SELECT m0_.NOMBRE AS NOMBRE0, m0_.FECHAINICIO AS FECHAINICIO1, m0_.FECHAFIN AS FECHAFIN2 FROM MEDICION m0_ WITH (NOLOCK) INNER JOIN ESTUDIO e1_ ON m0_.ESTUDIO_ID = e1_.ID INNER JOIN CLIENTE c2_ ON e1_.CLIENTE_ID = c2_.ID INNER JOIN USUARIO u3_ ON c2_.ID = u3_.CLIENTE_ID WHERE u3_.ID = ? ORDER BY m0_.FECHAINICIO DESC';
+        $sql = 'SELECT m0_.NOMBRE AS NOMBRE0, m0_.FECHAINICIO AS FECHAINICIO1, m0_.FECHAFIN AS FECHAFIN2 FROM MEDICION m0_ WITH (NOLOCK) INNER JOIN ESTUDIO e1_ ON m0_.ESTUDIO_ID = e1_.ID INNER JOIN CLIENTE c2_ ON e1_.CLIENTE_ID = c2_.ID INNER JOIN USUARIO u3_ ON c2_.ID = u3_.CLIENTE_ID WHERE u3_.ID = ? ORDER BY m0_.FECHAINICIO DESC';
         $expected = 'SELECT * FROM (SELECT m0_.NOMBRE AS NOMBRE0, m0_.FECHAINICIO AS FECHAINICIO1, m0_.FECHAFIN AS FECHAFIN2, ROW_NUMBER() OVER (ORDER BY m0_.FECHAINICIO DESC) AS doctrine_rownum FROM MEDICION m0_ WITH (NOLOCK) INNER JOIN ESTUDIO e1_ ON m0_.ESTUDIO_ID = e1_.ID INNER JOIN CLIENTE c2_ ON e1_.CLIENTE_ID = c2_.ID INNER JOIN USUARIO u3_ ON c2_.ID = u3_.CLIENTE_ID WHERE u3_.ID = ?) AS doctrine_tbl WHERE doctrine_rownum BETWEEN 6 AND 15';
-        $actual   = $this->_platform->modifyLimitQuery($sql, 10, 5);
+        $actual = $this->_platform->modifyLimitQuery($sql, 10, 5);
 
         $this->assertEquals($expected, $actual);
     }
@@ -319,13 +319,14 @@ class SQLServerPlatformTest extends AbstractPlatformTestCase
             'ALTER TABLE [quoted] ADD CONSTRAINT FK_WITH_INTENDED_QUOTATION FOREIGN KEY ([create], foo, [bar]) REFERENCES [foo-bar] ([create], bar, [foo-bar])',
         );
     }
+
     /**
-     * @group DDC-2310
+     * @group        DDC-2310
      * @dataProvider getLockHints
      */
     public function testAppendsLockHint($lockMode, $lockHint)
     {
-        $fromClause     = 'FROM users';
+        $fromClause = 'FROM users';
         $expectedResult = $fromClause . $lockHint;
 
         $this->assertSame($expectedResult, $this->_platform->appendLockHint($fromClause, $lockMode));

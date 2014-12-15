@@ -134,7 +134,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
      */
     public function testBinaryConversion($op, $bin, $bin2c)
     {
-        $bin   = base64_decode($bin);
+        $bin = base64_decode($bin);
         $bin2c = base64_decode($bin2c);
         $opPos = ltrim($op, '-');
 
@@ -147,7 +147,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
     public function testDivisionByZeroRaisesException()
     {
         $this->setExpectedException('Zend\Math\BigInteger\Exception\DivisionByZeroException',
-                                    'Division by zero');
+            'Division by zero');
         $this->adapter->div('12345', '0');
     }
 
@@ -306,18 +306,18 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
     public function baseConversionProvider()
     {
         return array(
-            array('1234567890', 10, 2,  '1001001100101100000001011010010'),
-            array('1234567890', 10, 8,  '11145401322'),
+            array('1234567890', 10, 2, '1001001100101100000001011010010'),
+            array('1234567890', 10, 8, '11145401322'),
             array('1234567890', 10, 16, '499602d2'),
             array('1234567890', 10, 36, 'kf12oi'),
             array('1234567890', 10, 62, '1ly7vk'),
 
             // reverse
             array('1001001100101100000001011010010', 2, 10, '1234567890'),
-            array('11145401322', 8, 10,  '1234567890'),
-            array('499602d2',    16, 10,  '1234567890'),
-            array('kf12oi',      36, 10,  '1234567890'),
-            array('1ly7vk',      62, 10,  '1234567890'),
+            array('11145401322', 8, 10, '1234567890'),
+            array('499602d2', 16, 10, '1234567890'),
+            array('kf12oi', 36, 10, '1234567890'),
+            array('1ly7vk', 62, 10, '1234567890'),
         );
     }
 

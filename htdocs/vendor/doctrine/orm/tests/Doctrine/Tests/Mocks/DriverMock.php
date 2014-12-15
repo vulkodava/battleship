@@ -30,9 +30,10 @@ class DriverMock implements \Doctrine\DBAL\Driver
      */
     public function getDatabasePlatform()
     {
-        if ( ! $this->_platformMock) {
+        if (!$this->_platformMock) {
             $this->_platformMock = new DatabasePlatformMock;
         }
+
         return $this->_platformMock;
     }
 

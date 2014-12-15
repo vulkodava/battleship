@@ -70,11 +70,11 @@ class Icon extends AbstractHelper
     /**
      * Invoke Icon
      *
-     * @param  string      $icon
-     * @param  string      $color
+     * @param  string $icon
+     * @param  string $color
      * @return string|self
      */
-    public function __invoke ($icon = null, $color = '')
+    public function __invoke($icon = null, $color = '')
     {
         if ($icon) {
             return $this->render($icon, $color);
@@ -86,8 +86,8 @@ class Icon extends AbstractHelper
     /**
      * Display Icon
      *
-     * @param  string                    $method
-     * @param  array                     $argv
+     * @param  string $method
+     * @param  array $argv
      * @throws \InvalidArgumentException
      * @return string
      */
@@ -105,7 +105,7 @@ class Icon extends AbstractHelper
         }
 
         if ($argv) {
-            $argv = (string) $argv[0];
+            $argv = (string)$argv[0];
         }
 
         return $this->render($icon, $argv);
@@ -114,8 +114,8 @@ class Icon extends AbstractHelper
     /**
      * Render Icon
      *
-     * @param  string    $icon
-     * @param  string    $color
+     * @param  string $icon
+     * @param  string $color
      * @throws Exception
      * @return string
      */

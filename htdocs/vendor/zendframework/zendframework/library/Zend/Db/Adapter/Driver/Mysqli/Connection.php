@@ -68,6 +68,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Mysqli $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
@@ -78,6 +79,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -98,6 +100,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
+
         return $this;
     }
 
@@ -125,6 +128,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         /** @var $result \mysqli_result */
         $result = $this->resource->query('SELECT DATABASE()');
         $r = $result->fetch_row();
+
         return $r[0];
     }
 
@@ -137,6 +141,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setResource(\mysqli $resource)
     {
         $this->resource = $resource;
+
         return $this;
     }
 
@@ -148,6 +153,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function getResource()
     {
         $this->connect();
+
         return $this->resource;
     }
 
@@ -173,6 +179,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                     return $p[$name];
                 }
             }
+
             return;
         };
 
@@ -180,8 +187,8 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $username = $findParameterValue(array('username', 'user'));
         $password = $findParameterValue(array('password', 'passwd', 'pw'));
         $database = $findParameterValue(array('database', 'dbname', 'db', 'schema'));
-        $port     = (isset($p['port'])) ? (int) $p['port'] : null;
-        $socket   = (isset($p['socket'])) ? $p['socket'] : null;
+        $port = (isset($p['port'])) ? (int)$p['port'] : null;
+        $socket = (isset($p['socket'])) ? $p['socket'] : null;
 
         $this->resource = new \mysqli();
         $this->resource->init();
@@ -298,6 +305,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 
         $this->resource->rollback();
         $this->resource->autocommit(true);
+
         return $this;
     }
 
@@ -330,6 +338,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $resultPrototype = $this->driver->createResult(($resultResource === true) ? $this->resource : $resultResource);
+
         return $resultPrototype;
     }
 

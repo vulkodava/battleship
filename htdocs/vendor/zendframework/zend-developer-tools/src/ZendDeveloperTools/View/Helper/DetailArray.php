@@ -29,8 +29,8 @@ class DetailArray extends AbstractHelper
     /**
      * Renders a detail entry for an array.
      *
-     * @param  string  $label Label name
-     * @param  array   $details Value array (list)
+     * @param  string $label   Label name
+     * @param  array $details  Value array (list)
      * @param  bool $redundant Marks this detail as redundant.
      * @return string
      */
@@ -48,7 +48,7 @@ class DetailArray extends AbstractHelper
 
 
         $extraCss = '';
-        $newLine  = false;
+        $newLine = false;
 
         foreach ($details as $entry) {
             if ($newLine === true) {
@@ -59,7 +59,7 @@ class DetailArray extends AbstractHelper
 
             $r[] = sprintf('<span class="zdt-detail-value%s">%s</span>', $extraCss, $entry);
 
-            $newLine  = true;
+            $newLine = true;
             $extraCss = ' zdt-detail-extra-value';
         }
 

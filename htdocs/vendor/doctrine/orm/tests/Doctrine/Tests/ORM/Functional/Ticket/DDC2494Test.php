@@ -95,7 +95,7 @@ class DDC2494Currency
 
     public function __construct($id, $temp)
     {
-        $this->id   = $id;
+        $this->id = $id;
         $this->temp = $temp;
     }
 
@@ -174,12 +174,12 @@ class DDC2494TinyIntType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        $return = (string) $value;
+        $return = (string)$value;
 
         self::$calls[__FUNCTION__][] = array(
-            'value'     => $value,
-            'return'    => $return,
-            'platform'  => $platform,
+            'value' => $value,
+            'return' => $return,
+            'platform' => $platform,
         );
 
         return $return;
@@ -190,12 +190,12 @@ class DDC2494TinyIntType extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        $return = (integer) $value;
+        $return = (integer)$value;
 
         self::$calls[__FUNCTION__][] = array(
-            'value'     => $value,
-            'return'    => $return,
-            'platform'  => $platform,
+            'value' => $value,
+            'return' => $return,
+            'platform' => $platform,
         );
 
         return $return;

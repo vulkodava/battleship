@@ -50,12 +50,12 @@ class DefaultFileLocator implements FileLocator
      * Initializes a new FileDriver that looks in the given path(s) for mapping
      * documents and operates in the specified operating mode.
      *
-     * @param string|array $paths         One or multiple paths where mapping documents can be found.
-     * @param string|null  $fileExtension The file extension of mapping documents.
+     * @param string|array $paths        One or multiple paths where mapping documents can be found.
+     * @param string|null $fileExtension The file extension of mapping documents.
      */
     public function __construct($paths, $fileExtension = null)
     {
-        $this->addPaths((array) $paths);
+        $this->addPaths((array)$paths);
         $this->fileExtension = $fileExtension;
     }
 
@@ -129,7 +129,7 @@ class DefaultFileLocator implements FileLocator
 
         if ($this->paths) {
             foreach ($this->paths as $path) {
-                if ( ! is_dir($path)) {
+                if (!is_dir($path)) {
                     throw MappingException::fileMappingDriversRequireConfiguredDirectoryPath($path);
                 }
 
@@ -162,7 +162,7 @@ class DefaultFileLocator implements FileLocator
         $fileName = str_replace('\\', '.', $className) . $this->fileExtension;
 
         // Check whether file exists
-        foreach ((array) $this->paths as $path) {
+        foreach ((array)$this->paths as $path) {
             if (is_file($path . DIRECTORY_SEPARATOR . $fileName)) {
                 return true;
             }

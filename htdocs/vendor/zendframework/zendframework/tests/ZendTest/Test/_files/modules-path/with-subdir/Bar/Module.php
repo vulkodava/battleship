@@ -32,7 +32,7 @@ class Module
         return array(
             'factories' => array(
                 'BarObject' => function ($sm) {
-                    $foo      = $sm->get('FooObject');
+                    $foo = $sm->get('FooObject');
                     $foo->bar = 'baz';
 
                     return $foo;

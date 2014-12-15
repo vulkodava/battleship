@@ -75,7 +75,7 @@ class Table
     /**
      * Sets a style definition.
      *
-     * @param string     $name  The style name
+     * @param string $name      The style name
      * @param TableStyle $style A TableStyle instance
      */
     public static function setStyleDefinition($name, TableStyle $style)
@@ -257,7 +257,7 @@ class Table
 
         $markup = $this->style->getCrossingChar();
         for ($column = 0; $column < $count; $column++) {
-            $markup .= str_repeat($this->style->getHorizontalBorderChar(), $this->getColumnWidth($column)).$this->style->getCrossingChar();
+            $markup .= str_repeat($this->style->getHorizontalBorderChar(), $this->getColumnWidth($column)) . $this->style->getCrossingChar();
         }
 
         $this->output->writeln(sprintf($this->style->getBorderFormat(), $markup));
@@ -276,7 +276,7 @@ class Table
      *
      * Example: | 9971-5-0210-0 | A Tale of Two Cities  | Charles Dickens  |
      *
-     * @param array  $row
+     * @param array $row
      * @param string $cellFormat
      */
     private function renderRow(array $row, $cellFormat)
@@ -296,8 +296,8 @@ class Table
     /**
      * Renders table cell with padding.
      *
-     * @param array  $row
-     * @param int    $column
+     * @param array $row
+     * @param int $column
      * @param string $cellFormat
      */
     private function renderCell(array $row, $column, $cellFormat)
@@ -365,7 +365,7 @@ class Table
      * Gets cell width.
      *
      * @param array $row
-     * @param int   $column
+     * @param int $column
      *
      * @return int
      */
@@ -389,16 +389,14 @@ class Table
         $borderless
             ->setHorizontalBorderChar('=')
             ->setVerticalBorderChar(' ')
-            ->setCrossingChar(' ')
-        ;
+            ->setCrossingChar(' ');
 
         $compact = new TableStyle();
         $compact
             ->setHorizontalBorderChar('')
             ->setVerticalBorderChar(' ')
             ->setCrossingChar('')
-            ->setCellRowContentFormat('%s')
-        ;
+            ->setCellRowContentFormat('%s');
 
         return array(
             'default' => new TableStyle(),

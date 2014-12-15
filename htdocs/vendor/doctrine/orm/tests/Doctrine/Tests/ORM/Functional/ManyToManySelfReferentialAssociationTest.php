@@ -43,9 +43,9 @@ class ManyToManySelfReferentialAssociationTest extends AbstractManyToManyAssocia
         $this->_em->flush();
 
         $this->assertForeignKeysContain($this->firstProduct->getId(),
-                                   $this->firstRelated->getId());
+            $this->firstRelated->getId());
         $this->assertForeignKeysContain($this->firstProduct->getId(),
-                                   $this->secondRelated->getId());
+            $this->secondRelated->getId());
     }
 
     public function testRemovesAManyToManyAssociation()
@@ -58,9 +58,9 @@ class ManyToManySelfReferentialAssociationTest extends AbstractManyToManyAssocia
         $this->_em->flush();
 
         $this->assertForeignKeysNotContain($this->firstProduct->getId(),
-                                   $this->firstRelated->getId());
+            $this->firstRelated->getId());
         $this->assertForeignKeysContain($this->firstProduct->getId(),
-                                   $this->secondRelated->getId());
+            $this->secondRelated->getId());
     }
 
     public function testEagerLoadsOwningSide()
@@ -119,6 +119,7 @@ class ManyToManySelfReferentialAssociationTest extends AbstractManyToManyAssocia
     protected function _findProducts()
     {
         $query = $this->_em->createQuery('SELECT p, r FROM Doctrine\Tests\Models\ECommerce\ECommerceProduct p LEFT JOIN p.related r ORDER BY p.id, r.id');
+
         return $query->getResult();
     }
 }

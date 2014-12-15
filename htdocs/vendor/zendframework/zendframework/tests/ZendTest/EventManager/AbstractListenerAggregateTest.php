@@ -34,10 +34,10 @@ class AbstractListenerAggregateTest extends \PHPUnit_Framework_TestCase
      */
     public function testDetach()
     {
-        $eventManager          = $this->getMock('Zend\\EventManager\\EventManagerInterface');
+        $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
         $unrelatedEventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
-        $callbackHandlers      = array();
-        $test                  = $this;
+        $callbackHandlers = array();
+        $test = $this;
 
         $eventManager
             ->expects($this->exactly(2))

@@ -42,9 +42,9 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->error = false;
         Helper\Doctype::unsetDoctypeRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
-        $this->view     = new View();
+        $this->view = new View();
         $this->view->plugin('doctype')->__invoke('XHTML1_STRICT');
-        $this->helper   = new Helper\HeadMeta();
+        $this->helper = new Helper\HeadMeta();
         $this->helper->setView($this->view);
     }
 
@@ -99,6 +99,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $type = str_replace('-', ' ', $type);
         $type = ucwords($type);
         $type = str_replace(' ', '', $type);
+
         return $type;
     }
 
@@ -112,7 +113,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
             $values = $this->helper->getArrayCopy();
             $this->assertEquals($i + 1, count($values));
 
-            $item   = $values[$i];
+            $item = $values[$i];
             $this->assertObjectHasAttribute('type', $item);
             $this->assertObjectHasAttribute('modifiers', $item);
             $this->assertObjectHasAttribute('content', $item);
@@ -222,8 +223,8 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function testToStringReturnsValidHtml()
     {
         $this->helper->setName('keywords', 'foo bar', array('lang' => 'us_en', 'scheme' => 'foo', 'bogus' => 'unused'))
-                     ->prependName('title', 'boo bah')
-                     ->appendHttpEquiv('screen', 'projection');
+            ->prependName('title', 'boo bah')
+            ->appendHttpEquiv('screen', 'projection');
         $string = $this->helper->toString();
 
         $metas = substr_count($string, '<meta ');
@@ -314,7 +315,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             '<meta http-equiv="pragma" content="bar" />' . PHP_EOL . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL . '<meta name="keywords" content="bat" />',
             $view->plugin('headMeta')->toString()
-            );
+        );
     }
 
     /**
@@ -332,12 +333,12 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             '<meta name="description" content="foo" />' . PHP_EOL . '<meta http-equiv="pragma" content="baz" />' . PHP_EOL . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL . '<meta name="keywords" content="bar" />',
             $view->plugin('headMeta')->toString()
-            );
+        );
     }
 
     /**
      * @issue ZF-3780
-     * @link http://framework.zend.com/issues/browse/ZF-3780
+     * @link  http://framework.zend.com/issues/browse/ZF-3780
      */
     public function testPlacesMetaTagsInProperOrder()
     {
@@ -348,7 +349,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             '<meta name="bar" content="some content" />' . PHP_EOL . '<meta name="keywords" content="foo" />',
             $view->plugin('headMeta')->toString()
-            );
+        );
     }
 
     /**
@@ -364,9 +365,9 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $test = $this->helper->toString();
 
         $expected = '<meta name="keywords" content="foo" />' . PHP_EOL
-                  . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL
-                  . '<meta name="description" content="foo" />' . PHP_EOL
-                  . '<meta http-equiv="pragma" content="baz" />';
+            . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL
+            . '<meta name="description" content="foo" />' . PHP_EOL
+            . '<meta http-equiv="pragma" content="baz" />';
 
         $this->assertEquals($expected, $test);
     }
@@ -403,7 +404,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
             $view->plugin('headMeta')->toString());
     }
 
-     /**
+    /**
      * @group ZF-9743
      */
     public function testPropertyIsSupportedWithRdfaDoctype()
@@ -411,8 +412,8 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->view->doctype('XHTML1_RDFA');
         $this->helper->__invoke('foo', 'og:title', 'property');
         $this->assertEquals('<meta property="og:title" content="foo" />',
-                            $this->helper->toString()
-                           );
+            $this->helper->toString()
+        );
     }
 
     /**
@@ -429,7 +430,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-9743
+     * @group   ZF-9743
      * @depends testPropertyIsSupportedWithRdfaDoctype
      */
     public function testOverloadingAppendPropertyAppendsMetaTagToStack()
@@ -439,7 +440,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-9743
+     * @group   ZF-9743
      * @depends testPropertyIsSupportedWithRdfaDoctype
      */
     public function testOverloadingPrependPropertyPrependsMetaTagToStack()
@@ -449,7 +450,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-9743
+     * @group   ZF-9743
      * @depends testPropertyIsSupportedWithRdfaDoctype
      */
     public function testOverloadingSetPropertyOverwritesMetaTagStack()
@@ -458,7 +459,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->_testOverloadSet('property');
     }
 
-     /**
+    /**
      * @issue 3751
      */
     public function testItempropIsSupportedWithHtml5Doctype()
@@ -466,8 +467,8 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->view->doctype('HTML5');
         $this->helper->__invoke('HeadMeta with Microdata', 'description', 'itemprop');
         $this->assertEquals('<meta itemprop="description" content="HeadMeta with Microdata">',
-                            $this->helper->toString()
-                           );
+            $this->helper->toString()
+        );
     }
 
     /**
@@ -484,7 +485,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @issue 3751
+     * @issue   3751
      * @depends testItempropIsSupportedWithHtml5Doctype
      */
     public function testOverloadingAppendItempropAppendsMetaTagToStack()
@@ -494,7 +495,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @issue 3751
+     * @issue   3751
      * @depends testItempropIsSupportedWithHtml5Doctype
      */
     public function testOverloadingPrependItempropPrependsMetaTagToStack()
@@ -504,7 +505,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @issue 3751
+     * @issue   3751
      * @depends testItempropIsSupportedWithHtml5Doctype
      */
     public function testOverloadingSetItempropOverwritesMetaTagStack()

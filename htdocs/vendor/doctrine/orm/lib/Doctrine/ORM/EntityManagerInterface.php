@@ -111,7 +111,7 @@ interface EntityManagerInterface extends ObjectManager
     /**
      * Creates a native SQL query.
      *
-     * @param string           $sql
+     * @param string $sql
      * @param ResultSetMapping $rsm The ResultSetMapping to use.
      *
      * @return NativeQuery
@@ -139,7 +139,7 @@ interface EntityManagerInterface extends ObjectManager
      * without actually loading it, if the entity is not yet loaded.
      *
      * @param string $entityName The name of the entity type.
-     * @param mixed  $id         The entity identifier.
+     * @param mixed $id          The entity identifier.
      *
      * @return object The entity reference.
      *
@@ -163,7 +163,7 @@ interface EntityManagerInterface extends ObjectManager
      * never be loaded in the first place.
      *
      * @param string $entityName The name of the entity type.
-     * @param mixed  $identifier The entity identifier.
+     * @param mixed $identifier  The entity identifier.
      *
      * @return object The (partial) entity reference.
      */
@@ -181,8 +181,8 @@ interface EntityManagerInterface extends ObjectManager
     /**
      * Creates a copy of the given entity. Can create a shallow or a deep copy.
      *
-     * @param object  $entity The entity to copy.
-     * @param boolean $deep   FALSE for a shallow copy, TRUE for a deep copy.
+     * @param object $entity The entity to copy.
+     * @param boolean $deep  FALSE for a shallow copy, TRUE for a deep copy.
      *
      * @return object The new entity.
      *
@@ -193,8 +193,8 @@ interface EntityManagerInterface extends ObjectManager
     /**
      * Acquire a lock on the given entity.
      *
-     * @param object   $entity
-     * @param int      $lockMode
+     * @param object $entity
+     * @param int $lockMode
      * @param int|null $lockVersion
      *
      * @return void
@@ -233,17 +233,17 @@ interface EntityManagerInterface extends ObjectManager
     public function getUnitOfWork();
 
     /**
-    * Gets a hydrator for the given hydration mode.
-    *
-    * This method caches the hydrator instances which is used for all queries that don't
-    * selectively iterate over the result.
-    *
-    * @deprecated
-    *
-    * @param int $hydrationMode
-    *
-    * @return \Doctrine\ORM\Internal\Hydration\AbstractHydrator
-    */
+     * Gets a hydrator for the given hydration mode.
+     *
+     * This method caches the hydrator instances which is used for all queries that don't
+     * selectively iterate over the result.
+     *
+     * @deprecated
+     *
+     * @param int $hydrationMode
+     *
+     * @return \Doctrine\ORM\Internal\Hydration\AbstractHydrator
+     */
     public function getHydrator($hydrationMode);
 
     /**

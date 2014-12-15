@@ -30,7 +30,7 @@ use Doctrine\ORM\Query\AST;
  * Class Table Inheritance (JOINED).
  *
  * @author Roman Borschel <roman@code-factory.org>
- * @since 2.0
+ * @since  2.0
  */
 class MultiTableUpdateExecutor extends AbstractSqlExecutor
 {
@@ -62,7 +62,7 @@ class MultiTableUpdateExecutor extends AbstractSqlExecutor
     /**
      * Initializes a new <tt>MultiTableUpdateExecutor</tt>.
      *
-     * @param \Doctrine\ORM\Query\AST\Node  $AST The root AST node of the DQL query.
+     * @param \Doctrine\ORM\Query\AST\Node $AST        The root AST node of the DQL query.
      * @param \Doctrine\ORM\Query\SqlWalker $sqlWalker The walker used for SQL generation from the AST.
      *
      * @internal Any SQL construction and preparation takes place in the constructor for
@@ -70,26 +70,26 @@ class MultiTableUpdateExecutor extends AbstractSqlExecutor
      */
     public function __construct(AST\Node $AST, $sqlWalker)
     {
-        $em             = $sqlWalker->getEntityManager();
-        $conn           = $em->getConnection();
-        $platform       = $conn->getDatabasePlatform();
-        $quoteStrategy  = $em->getConfiguration()->getQuoteStrategy();
+        $em = $sqlWalker->getEntityManager();
+        $conn = $em->getConnection();
+        $platform = $conn->getDatabasePlatform();
+        $quoteStrategy = $em->getConfiguration()->getQuoteStrategy();
 
-        $updateClause   = $AST->updateClause;
-        $primaryClass   = $sqlWalker->getEntityManager()->getClassMetadata($updateClause->abstractSchemaName);
-        $rootClass      = $em->getClassMetadata($primaryClass->rootEntityName);
+        $updateClause = $AST->updateClause;
+        $primaryClass = $sqlWalker->getEntityManager()->getClassMetadata($updateClause->abstractSchemaName);
+        $rootClass = $em->getClassMetadata($primaryClass->rootEntityName);
 
-        $updateItems    = $updateClause->updateItems;
+        $updateItems = $updateClause->updateItems;
 
-        $tempTable      = $platform->getTemporaryTableName($rootClass->getTemporaryIdTableName());
-        $idColumnNames  = $rootClass->getIdentifierColumnNames();
-        $idColumnList   = implode(', ', $idColumnNames);
+        $tempTable = $platform->getTemporaryTableName($rootClass->getTemporaryIdTableName());
+        $idColumnNames = $rootClass->getIdentifierColumnNames();
+        $idColumnList = implode(', ', $idColumnNames);
 
         // 1. Create an INSERT INTO temptable ... SELECT identifiers WHERE $AST->getWhereClause()
         $sqlWalker->setSQLTableAlias($primaryClass->getTableName(), 't0', $updateClause->aliasIdentificationVariable);
 
         $this->_insertSql = 'INSERT INTO ' . $tempTable . ' (' . $idColumnList . ')'
-                . ' SELECT t0.' . implode(', t0.', $idColumnNames);
+            . ' SELECT t0.' . implode(', t0.', $idColumnNames);
 
         $rangeDecl = new AST\RangeVariableDeclaration($primaryClass->name, $updateClause->aliasIdentificationVariable);
         $fromClause = new AST\FromClause(array(new AST\IdentificationVariableDeclaration($rangeDecl, null, array())));
@@ -111,11 +111,12 @@ class MultiTableUpdateExecutor extends AbstractSqlExecutor
             foreach ($updateItems as $updateItem) {
                 $field = $updateItem->pathExpression->field;
 
-                if (isset($class->fieldMappings[$field]) && ! isset($class->fieldMappings[$field]['inherited']) ||
-                    isset($class->associationMappings[$field]) && ! isset($class->associationMappings[$field]['inherited'])) {
+                if (isset($class->fieldMappings[$field]) && !isset($class->fieldMappings[$field]['inherited']) ||
+                    isset($class->associationMappings[$field]) && !isset($class->associationMappings[$field]['inherited'])
+                ) {
                     $newValue = $updateItem->newValue;
 
-                    if ( ! $affected) {
+                    if (!$affected) {
                         $affected = true;
                         ++$i;
                     } else {
@@ -153,7 +154,7 @@ class MultiTableUpdateExecutor extends AbstractSqlExecutor
         }
 
         $this->_createTempTableSql = $platform->getCreateTemporaryTableSnippetSQL() . ' ' . $tempTable . ' ('
-                . $platform->getColumnDeclarationListSQL($columnDefinitions) . ')';
+            . $platform->getColumnDeclarationListSQL($columnDefinitions) . ')';
 
         $this->_dropTempTableSql = $platform->getDropTemporaryTableSQL($tempTable);
     }
@@ -179,12 +180,12 @@ class MultiTableUpdateExecutor extends AbstractSqlExecutor
             // Execute UPDATE statements
             foreach ($this->_sqlStatements as $key => $statement) {
                 $paramValues = array();
-                $paramTypes  = array();
+                $paramTypes = array();
 
                 if (isset($this->_sqlParameters[$key])) {
                     foreach ($this->_sqlParameters[$key] as $parameterKey => $parameterName) {
                         $paramValues[] = $params[$parameterKey];
-                        $paramTypes[]  = isset($types[$parameterKey]) ? $types[$parameterKey] : ParameterTypeInferer::inferType($params[$parameterKey]);
+                        $paramTypes[] = isset($types[$parameterKey]) ? $types[$parameterKey] : ParameterTypeInferer::inferType($params[$parameterKey]);
                     }
                 }
 

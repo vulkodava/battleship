@@ -31,6 +31,7 @@ class ClassMethodsCamelCase
     public function setFooBar($value)
     {
         $this->fooBar = $value;
+
         return $this;
     }
 
@@ -42,6 +43,7 @@ class ClassMethodsCamelCase
     public function setFooBarBaz($value)
     {
         $this->fooBarBaz = $value;
+
         return $this;
     }
 
@@ -53,6 +55,7 @@ class ClassMethodsCamelCase
     public function setIsFoo($value)
     {
         $this->isFoo = $value;
+
         return $this;
     }
 
@@ -64,6 +67,7 @@ class ClassMethodsCamelCase
     public function setIsBar($value)
     {
         $this->isBar = $value;
+
         return $this;
     }
 
@@ -75,6 +79,7 @@ class ClassMethodsCamelCase
     public function setHasFoo($value)
     {
         $this->hasFoo = $value;
+
         return $this;
     }
 
@@ -86,6 +91,7 @@ class ClassMethodsCamelCase
     public function setHasBar($value)
     {
         $this->hasBar = $value;
+
         return $this;
     }
 }

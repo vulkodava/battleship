@@ -21,12 +21,14 @@ class ExceptionStrategy extends AbstractListenerAggregate
 {
     /**
      * Display exceptions?
+     *
      * @var bool
      */
     protected $displayExceptions = false;
 
     /**
      * Name of exception template
+     *
      * @var string
      */
     protected $exceptionTemplate = 'error';
@@ -48,7 +50,8 @@ class ExceptionStrategy extends AbstractListenerAggregate
      */
     public function setDisplayExceptions($displayExceptions)
     {
-        $this->displayExceptions = (bool) $displayExceptions;
+        $this->displayExceptions = (bool)$displayExceptions;
+
         return $this;
     }
 
@@ -70,7 +73,8 @@ class ExceptionStrategy extends AbstractListenerAggregate
      */
     public function setExceptionTemplate($exceptionTemplate)
     {
-        $this->exceptionTemplate = (string) $exceptionTemplate;
+        $this->exceptionTemplate = (string)$exceptionTemplate;
+
         return $this;
     }
 
@@ -119,8 +123,8 @@ class ExceptionStrategy extends AbstractListenerAggregate
             case Application::ERROR_EXCEPTION:
             default:
                 $model = new ViewModel(array(
-                    'message'            => 'An error occurred during execution; please try again later.',
-                    'exception'          => $e->getParam('exception'),
+                    'message' => 'An error occurred during execution; please try again later.',
+                    'exception' => $e->getParam('exception'),
                     'display_exceptions' => $this->displayExceptions(),
                 ));
                 $model->setTemplate($this->getExceptionTemplate());

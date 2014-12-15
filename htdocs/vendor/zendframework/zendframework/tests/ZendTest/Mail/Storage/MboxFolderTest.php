@@ -43,13 +43,14 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
             closedir($dh);
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
 
         $this->_params = array();
         $this->_params['dirname'] = $this->_tmpdir;
-        $this->_params['folder']  = 'INBOX';
+        $this->_params['folder'] = 'INBOX';
 
         foreach ($this->_subdirs as $dir) {
             if ($dir != '.') {
@@ -164,9 +165,9 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
         $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume an order while iterating
-        $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder'                                => 'subfolder',
-                                DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
-                                DIRECTORY_SEPARATOR . 'INBOX'                                    => 'INBOX');
+        $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder' => 'subfolder',
+            DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
+            DIRECTORY_SEPARATOR . 'INBOX' => 'INBOX');
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -186,9 +187,9 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
         $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume an order while iterating
-        $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder'                                => 'subfolder',
-                                DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
-                                DIRECTORY_SEPARATOR . 'INBOX'                                    => 'INBOX');
+        $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder' => 'subfolder',
+            DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
+            DIRECTORY_SEPARATOR . 'INBOX' => 'INBOX');
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -289,6 +290,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
             chmod($this->_params['dirname'] . 'subfolder', $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
+
             return;
         }
 

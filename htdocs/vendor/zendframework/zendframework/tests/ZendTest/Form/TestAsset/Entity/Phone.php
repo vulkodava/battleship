@@ -23,6 +23,7 @@ class Phone
     public function setNumber($number)
     {
         $this->number = $number;
+
         return $this;
     }
 

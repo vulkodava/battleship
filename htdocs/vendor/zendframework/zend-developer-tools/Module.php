@@ -56,7 +56,7 @@ class Module implements
      */
     public function onLoadModulesPost($event)
     {
-        $eventManager  = $event->getTarget()->getEventManager();
+        $eventManager = $event->getTarget()->getEventManager();
         $configuration = $event->getConfigListener()->getMergedConfig(false);
 
         if (isset($configuration['zenddevelopertools']['profiler']['enabled'])
@@ -80,9 +80,9 @@ class Module implements
         }
 
         $app = $event->getApplication();
-        $em  = $app->getEventManager();
+        $em = $app->getEventManager();
         $sem = $em->getSharedManager();
-        $sm  = $app->getServiceManager();
+        $sm = $app->getServiceManager();
 
         $options = $sm->get('ZendDeveloperTools\Config');
 
@@ -141,8 +141,8 @@ class Module implements
     {
         return array(
             'invokables' => array(
-                'ZendDeveloperToolsTime'        => 'ZendDeveloperTools\View\Helper\Time',
-                'ZendDeveloperToolsMemory'      => 'ZendDeveloperTools\View\Helper\Memory',
+                'ZendDeveloperToolsTime' => 'ZendDeveloperTools\View\Helper\Time',
+                'ZendDeveloperToolsMemory' => 'ZendDeveloperTools\View\Helper\Memory',
                 'ZendDeveloperToolsDetailArray' => 'ZendDeveloperTools\View\Helper\DetailArray',
             ),
         );
@@ -158,21 +158,22 @@ class Module implements
                 'ZendDeveloperTools\ReportInterface' => 'ZendDeveloperTools\Report',
             ),
             'invokables' => array(
-                'ZendDeveloperTools\Report'             => 'ZendDeveloperTools\Report',
-                'ZendDeveloperTools\EventCollector'     => 'ZendDeveloperTools\Collector\EventCollector',
+                'ZendDeveloperTools\Report' => 'ZendDeveloperTools\Report',
+                'ZendDeveloperTools\EventCollector' => 'ZendDeveloperTools\Collector\EventCollector',
                 'ZendDeveloperTools\ExceptionCollector' => 'ZendDeveloperTools\Collector\ExceptionCollector',
-                'ZendDeveloperTools\RouteCollector'     => 'ZendDeveloperTools\Collector\RouteCollector',
-                'ZendDeveloperTools\RequestCollector'   => 'ZendDeveloperTools\Collector\RequestCollector',
-                'ZendDeveloperTools\ConfigCollector'    => 'ZendDeveloperTools\Collector\ConfigCollector',
-                'ZendDeveloperTools\MailCollector'      => 'ZendDeveloperTools\Collector\MailCollector',
-                'ZendDeveloperTools\MemoryCollector'    => 'ZendDeveloperTools\Collector\MemoryCollector',
-                'ZendDeveloperTools\TimeCollector'      => 'ZendDeveloperTools\Collector\TimeCollector',
-                'ZendDeveloperTools\FlushListener'      => 'ZendDeveloperTools\Listener\FlushListener',
+                'ZendDeveloperTools\RouteCollector' => 'ZendDeveloperTools\Collector\RouteCollector',
+                'ZendDeveloperTools\RequestCollector' => 'ZendDeveloperTools\Collector\RequestCollector',
+                'ZendDeveloperTools\ConfigCollector' => 'ZendDeveloperTools\Collector\ConfigCollector',
+                'ZendDeveloperTools\MailCollector' => 'ZendDeveloperTools\Collector\MailCollector',
+                'ZendDeveloperTools\MemoryCollector' => 'ZendDeveloperTools\Collector\MemoryCollector',
+                'ZendDeveloperTools\TimeCollector' => 'ZendDeveloperTools\Collector\TimeCollector',
+                'ZendDeveloperTools\FlushListener' => 'ZendDeveloperTools\Listener\FlushListener',
             ),
             'factories' => array(
                 'ZendDeveloperTools\Profiler' => function ($sm) {
                     $a = new Profiler($sm->get('ZendDeveloperTools\Report'));
                     $a->setEvent($sm->get('ZendDeveloperTools\Event'));
+
                     return $a;
                 },
                 'ZendDeveloperTools\Config' => function ($sm) {
@@ -207,7 +208,7 @@ class Module implements
                     );
                 },
                 'ZendDeveloperTools\DbCollector' => function ($sm) {
-                    $p  = false;
+                    $p = false;
                     $db = new Collector\DbCollector();
 
                     if ($sm->has('Zend\Db\Adapter\Adapter')) {

@@ -27,7 +27,7 @@ class Simple extends Base
      * Class constructor
      *
      * @see http://php.net/manual/en/function.date.php
-     * @param null|string $format Format specifier for log messages
+     * @param null|string $format         Format specifier for log messages
      * @param null|string $dateTimeFormat Format specifier for DateTime objects in event data
      * @throws Exception\InvalidArgumentException
      */
@@ -38,8 +38,8 @@ class Simple extends Base
         }
 
         if (is_array($format)) {
-            $dateTimeFormat = isset($format['dateTimeFormat'])? $format['dateTimeFormat'] : null;
-            $format         = isset($format['format'])? $format['format'] : null;
+            $dateTimeFormat = isset($format['dateTimeFormat']) ? $format['dateTimeFormat'] : null;
+            $format = isset($format['format']) ? $format['format'] : null;
         }
 
         if (isset($format) && !is_string($format)) {
@@ -77,6 +77,7 @@ class Simple extends Base
         ) {
             $output = rtrim($output, ' ');
         }
+
         return $output;
     }
 }

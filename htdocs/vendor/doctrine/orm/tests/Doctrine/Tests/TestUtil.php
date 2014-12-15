@@ -34,8 +34,9 @@ class TestUtil
     {
         if (isset($GLOBALS['db_type'], $GLOBALS['db_username'], $GLOBALS['db_password'],
                 $GLOBALS['db_host'], $GLOBALS['db_name'], $GLOBALS['db_port']) &&
-           isset($GLOBALS['tmpdb_type'], $GLOBALS['tmpdb_username'], $GLOBALS['tmpdb_password'],
-                $GLOBALS['tmpdb_host'], $GLOBALS['tmpdb_name'], $GLOBALS['tmpdb_port'])) {
+            isset($GLOBALS['tmpdb_type'], $GLOBALS['tmpdb_username'], $GLOBALS['tmpdb_password'],
+                $GLOBALS['tmpdb_host'], $GLOBALS['tmpdb_name'], $GLOBALS['tmpdb_port'])
+        ) {
             $realDbParams = array(
                 'driver' => $GLOBALS['db_type'],
                 'user' => $GLOBALS['db_username'],
@@ -55,7 +56,7 @@ class TestUtil
 
             $realConn = \Doctrine\DBAL\DriverManager::getConnection($realDbParams);
 
-            $platform  = $realConn->getDatabasePlatform();
+            $platform = $realConn->getDatabasePlatform();
 
             if ($platform->supportsCreateDropDatabase()) {
                 $dbname = $realConn->getDatabase();
@@ -77,7 +78,7 @@ class TestUtil
                 foreach ($stmts AS $stmt) {
                     try {
                         $realConn->exec($stmt);
-                    } catch(\Exception $e) {
+                    } catch (\Exception $e) {
                         // TODO: Now is this a real good idea?
                     }
                 }

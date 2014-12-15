@@ -83,7 +83,7 @@ class ObjectExists extends AbstractValidator
 
             throw new Exception\InvalidArgumentException(sprintf(
                 'Option "object_repository" is required and must be an instance of'
-                    . ' Doctrine\Common\Persistence\ObjectRepository, %s given',
+                . ' Doctrine\Common\Persistence\ObjectRepository, %s given',
                 $provided
             ));
         }
@@ -93,7 +93,7 @@ class ObjectExists extends AbstractValidator
         if (!isset($options['fields'])) {
             throw new Exception\InvalidArgumentException(
                 'Key `fields` must be provided and be a field or a list of fields to be used when searching for'
-                    . ' existing instances'
+                . ' existing instances'
             );
         }
 
@@ -111,7 +111,7 @@ class ObjectExists extends AbstractValidator
      */
     private function validateFields()
     {
-        $fields = (array) $this->fields;
+        $fields = (array)$this->fields;
 
         if (empty($fields)) {
             throw new Exception\InvalidArgumentException('Provided fields list was empty!');
@@ -132,13 +132,13 @@ class ObjectExists extends AbstractValidator
 
     /**
      * @param string|array $value a field value or an array of field values if more fields have been configured to be
-     *                      matched
+     *                            matched
      * @return array
      * @throws \Zend\Validator\Exception\RuntimeException
      */
     protected function cleanSearchValue($value)
     {
-        $value = (array) $value;
+        $value = (array)$value;
 
         if (ArrayUtils::isHashTable($value)) {
             $matchedFieldsValues = array();
@@ -147,7 +147,7 @@ class ObjectExists extends AbstractValidator
                 if (!array_key_exists($field, $value)) {
                     throw new Exception\RuntimeException(sprintf(
                         'Field "%s" was not provided, but was expected since the configured field lists needs'
-                            . ' it for validation',
+                        . ' it for validation',
                         $field
                     ));
                 }

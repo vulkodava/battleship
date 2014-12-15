@@ -50,6 +50,7 @@ class Json extends AbstractHelper
     public function setResponse(Response $response)
     {
         $this->response = $response;
+
         return $this;
     }
 }

@@ -26,27 +26,27 @@ class DDC2579Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
     public function testIssue()
     {
-        $id         = new DDC2579Id("foo");
-        $assoc      = new DDC2579AssocAssoc($id);
+        $id = new DDC2579Id("foo");
+        $assoc = new DDC2579AssocAssoc($id);
         $assocAssoc = new DDC2579EntityAssoc($assoc);
-        $entity     = new DDC2579Entity($assocAssoc);
+        $entity = new DDC2579Entity($assocAssoc);
         $repository = $this->_em->getRepository(DDC2579Entity::CLASSNAME);
 
         $this->_em->persist($assoc);
         $this->_em->persist($assocAssoc);
         $this->_em->persist($entity);
         $this->_em->flush();
-        
+
         $entity->value++;
 
         $this->_em->persist($entity);
         $this->_em->flush();
         $this->_em->clear();
 
-        $id       = $entity->id;
-        $value    = $entity->value;
+        $id = $entity->id;
+        $value = $entity->value;
         $criteria = array('assoc' => $assoc, 'id' => $id);
-        $entity   = $repository->findOneBy($criteria);
+        $entity = $repository->findOneBy($criteria);
 
         $this->assertInstanceOf(DDC2579Entity::CLASSNAME, $entity);
         $this->assertEquals($value, $entity->value);
@@ -88,7 +88,7 @@ class DDC2579Entity
 
     public function __construct(DDC2579EntityAssoc $assoc, $value = 0)
     {
-        $this->id    = $assoc->assocAssoc->associationId;
+        $this->id = $assoc->assocAssoc->associationId;
         $this->assoc = $assoc;
         $this->value = $value;
     }
@@ -130,7 +130,7 @@ class DDC2579AssocAssoc
 
     public function __construct(DDC2579Id $id)
     {
-        $this->associationId  = $id;
+        $this->associationId = $id;
     }
 }
 

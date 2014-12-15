@@ -36,6 +36,7 @@ class UUIDEntity
 {
     /** @Id @Column(type="string") @GeneratedValue(strategy="UUID") */
     private $id;
+
     /**
      * Get id.
      *

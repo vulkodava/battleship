@@ -96,6 +96,7 @@ class AnnotationDriverTest extends AbstractMappingDriverTest
     {
         $annotationDriver = $this->_loadDriver();
         $annotationDriver->addPaths(array(__DIR__ . '/../../Models/CMS/'));
+
         return $annotationDriver;
     }
 
@@ -144,7 +145,7 @@ class AnnotationDriverTest extends AbstractMappingDriverTest
         $factory->setEntityManager($em);
 
         $this->setExpectedException('Doctrine\ORM\Mapping\MappingException',
-            "It is illegal to put an inverse side one-to-many or many-to-many association on ".
+            "It is illegal to put an inverse side one-to-many or many-to-many association on " .
             "mapped superclass 'Doctrine\Tests\ORM\Mapping\InvalidMappedSuperClass#users'");
         $usingInvalidMsc = $factory->getMetadataFor('Doctrine\Tests\ORM\Mapping\UsingInvalidMappedSuperClass');
     }
@@ -162,7 +163,7 @@ class AnnotationDriverTest extends AbstractMappingDriverTest
         $factory->setEntityManager($em);
 
         $this->setExpectedException('Doctrine\ORM\Mapping\MappingException',
-            "Its not supported to define inheritance information on a mapped ".
+            "Its not supported to define inheritance information on a mapped " .
             "superclass 'Doctrine\Tests\ORM\Mapping\MappedSuperClassInheritence'.");
         $usingInvalidMsc = $factory->getMetadataFor('Doctrine\Tests\ORM\Mapping\MappedSuperClassInheritence');
     }
@@ -222,7 +223,7 @@ class AnnotationDriverTest extends AbstractMappingDriverTest
             $this->markTestSkipped('This test is only for 5.4+.');
         }
 
-        $factory       = $this->createClassMetadataFactory();
+        $factory = $this->createClassMetadataFactory();
 
         $metadataWithoutOverride = $factory->getMetadataFor('Doctrine\Tests\Models\DDC1872\DDC1872ExampleEntityWithoutOverride');
         $metadataWithOverride = $factory->getMetadataFor('Doctrine\Tests\Models\DDC1872\DDC1872ExampleEntityWithOverride');

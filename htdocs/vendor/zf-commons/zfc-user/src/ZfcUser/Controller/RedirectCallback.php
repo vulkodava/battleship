@@ -14,7 +14,7 @@ use ZfcUser\Options\ModuleOptions;
 class RedirectCallback
 {
 
-    /** @var RouteInterface  */
+    /** @var RouteInterface */
     private $router;
 
     /** @var Application */
@@ -46,17 +46,19 @@ class RedirectCallback
         $response = $this->application->getResponse();
         $response->getHeaders()->addHeaderLine('Location', $redirect);
         $response->setStatusCode(302);
+
         return $response;
     }
 
     /**
      * Return the redirect from param.
      * First checks GET then POST
+     *
      * @return string
      */
     private function getRedirectRouteFromRequest()
     {
-        $request  = $this->application->getRequest();
+        $request = $this->application->getRequest();
         $redirect = $request->getQuery('redirect');
         if ($redirect && $this->routeExists($redirect)) {
             return $redirect;
@@ -81,6 +83,7 @@ class RedirectCallback
         } catch (Exception\RuntimeException $e) {
             return false;
         }
+
         return true;
     }
 
@@ -104,10 +107,12 @@ class RedirectCallback
             case 'zfcuser/register':
             case 'zfcuser/login':
                 $route = ($redirect) ?: $this->options->getLoginRedirectRoute();
+
                 return $this->router->assemble(array(), array('name' => $route));
                 break;
             case 'zfcuser/logout':
                 $route = ($redirect) ?: $this->options->getLogoutRedirectRoute();
+
                 return $this->router->assemble(array(), array('name' => $route));
                 break;
             default:

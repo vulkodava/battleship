@@ -15,24 +15,28 @@ class Folder implements RecursiveIterator
 {
     /**
      * subfolders of folder array(localName => \Zend\Mail\Storage\Folder folder)
+     *
      * @var array
      */
     protected $folders;
 
     /**
      * local name (name of folder in parent folder)
+     *
      * @var string
      */
     protected $localName;
 
     /**
      * global name (absolute name of folder)
+     *
      * @var string
      */
     protected $globalName;
 
     /**
      * folder is selectable if folder is able to hold messages, else it's just a parent folder
+     *
      * @var bool
      */
     protected $selectable = true;
@@ -42,15 +46,16 @@ class Folder implements RecursiveIterator
      *
      * @param string $localName  name of folder in current subdirectory
      * @param string $globalName absolute name of folder
-     * @param bool   $selectable if true folder holds messages, if false it's just a parent for subfolders (Default: true)
-     * @param array  $folders    init with given instances of \Zend\Mail\Storage\Folder as subfolders
+     * @param bool $selectable   if true folder holds messages, if false it's just a parent for subfolders (Default:
+     *                           true)
+     * @param array $folders     init with given instances of \Zend\Mail\Storage\Folder as subfolders
      */
     public function __construct($localName, $globalName = '', $selectable = true, array $folders = array())
     {
-        $this->localName  = $localName;
+        $this->localName = $localName;
         $this->globalName = $globalName ? $globalName : $localName;
         $this->selectable = $selectable;
-        $this->folders    = $folders;
+        $this->folders = $folders;
     }
 
     /**
@@ -61,6 +66,7 @@ class Folder implements RecursiveIterator
     public function hasChildren()
     {
         $current = $this->current();
+
         return $current && $current instanceof Folder && !$current->isLeaf();
     }
 
@@ -139,7 +145,7 @@ class Folder implements RecursiveIterator
     /**
      * add or replace subfolder named $name
      *
-     * @param string $name local name of subfolder
+     * @param string $name                      local name of subfolder
      * @param \Zend\Mail\Storage\Folder $folder instance for new subfolder
      */
     public function __set($name, Folder $folder)
@@ -164,7 +170,7 @@ class Folder implements RecursiveIterator
      */
     public function __toString()
     {
-        return (string) $this->getGlobalName();
+        return (string)$this->getGlobalName();
     }
 
     /**

@@ -28,7 +28,7 @@ class DDC512Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
         $this->_em->clear();
 
-        $q = $this->_em->createQuery("select u,i from ".__NAMESPACE__."\\DDC512Customer u left join u.item i");
+        $q = $this->_em->createQuery("select u,i from " . __NAMESPACE__ . "\\DDC512Customer u left join u.item i");
         $result = $q->getResult();
 
         $this->assertEquals(2, count($result));
@@ -48,7 +48,8 @@ class DDC512Test extends \Doctrine\Tests\OrmFunctionalTestCase
 /**
  * @Entity
  */
-class DDC512Customer {
+class DDC512Customer
+{
     /**
      * @Id
      * @Column(type="integer")
@@ -68,7 +69,7 @@ class DDC512Customer {
 
 /**
  * @Entity
-  */
+ */
 class DDC512OfferItem extends DDC512Item
 {
 }

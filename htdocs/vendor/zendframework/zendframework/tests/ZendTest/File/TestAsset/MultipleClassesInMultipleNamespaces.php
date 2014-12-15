@@ -7,8 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\File\TestAsset
-{
+namespace ZendTest\File\TestAsset {
 
     class LocatorShouldFindFirstClass
     {
@@ -20,8 +19,7 @@ namespace ZendTest\File\TestAsset
 
 }
 
-namespace ZendTest\File\TestAsset\SecondTestNamespace
-{
+namespace ZendTest\File\TestAsset\SecondTestNamespace {
 
     class LocatorShouldFindThirdClass
     {

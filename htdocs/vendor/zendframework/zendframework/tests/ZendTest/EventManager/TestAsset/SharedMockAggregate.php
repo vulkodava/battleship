@@ -33,17 +33,17 @@ class SharedMockAggregate implements SharedListenerAggregateInterface
         $this->priority = $priority;
 
         $listeners = array();
-        $listeners[] = $events->attach($this->identity, 'foo.bar', array( $this, 'fooBar' ));
-        $listeners[] = $events->attach($this->identity, 'foo.baz', array( $this, 'fooBaz' ));
+        $listeners[] = $events->attach($this->identity, 'foo.bar', array($this, 'fooBar'));
+        $listeners[] = $events->attach($this->identity, 'foo.baz', array($this, 'fooBaz'));
 
-        $this->listeners[ \spl_object_hash($events) ] = $listeners;
+        $this->listeners[\spl_object_hash($events)] = $listeners;
 
         return __METHOD__;
     }
 
     public function detachShared(SharedEventManagerInterface $events)
     {
-        foreach ($this->listeners[ \spl_object_hash($events) ] as $listener) {
+        foreach ($this->listeners[\spl_object_hash($events)] as $listener) {
             $events->detach($this->identity, $listener);
         }
 

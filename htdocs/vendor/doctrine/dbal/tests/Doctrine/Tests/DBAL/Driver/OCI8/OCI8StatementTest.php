@@ -50,7 +50,7 @@ class OCI8StatementTest extends \Doctrine\Tests\DbalTestCase
             ->with(
                 $this->equalTo(3),
                 $this->equalTo($params[2])
-          );
+            );
 
         // can't pass to constructor since we don't have a real database handle,
         // but execute must check the connection for the executeMode

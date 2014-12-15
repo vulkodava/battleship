@@ -46,11 +46,11 @@ class OnClearEventArgs extends \Doctrine\Common\EventArgs
      * Constructor.
      *
      * @param \Doctrine\ORM\EntityManager $em
-     * @param string|null                 $entityClass Optional entity class.
+     * @param string|null $entityClass Optional entity class.
      */
     public function __construct(EntityManager $em, $entityClass = null)
     {
-        $this->em          = $em;
+        $this->em = $em;
         $this->entityClass = $entityClass;
     }
 

@@ -94,14 +94,14 @@ class MenuTest extends AbstractTest
         $rendered1 = $this->_getExpected('menu/default1.html');
         $rendered2 = $this->_getExpected('menu/default2.html');
         $expected = array(
-            'registered'       => $rendered1,
-            'supplied'         => $rendered2,
+            'registered' => $rendered1,
+            'supplied' => $rendered2,
             'registered_again' => $rendered1
         );
 
         $actual = array(
-            'registered'       => $this->_helper->render(),
-            'supplied'         => $this->_helper->render($this->_nav2),
+            'registered' => $this->_helper->render(),
+            'supplied' => $this->_helper->render($this->_nav2),
             'registered_again' => $this->_helper->render()
         );
 
@@ -232,7 +232,7 @@ class MenuTest extends AbstractTest
         $this->_helper->setTranslator($translator);
 
         $expected = $this->_getExpected('menu/textdomain.html');
-        $test     = $this->_helper->render($this->_nav3);
+        $test = $this->_helper->render($this->_nav3);
         $this->assertEquals(trim($expected), trim($test));
     }
 
@@ -373,9 +373,9 @@ class MenuTest extends AbstractTest
     public function testOnlyActiveBranchNoParentsAndBothDepthsSpecified()
     {
         $this->_helper->setOnlyActiveBranch()
-                      ->setMinDepth(1)
-                      ->setMaxDepth(2)
-                      ->setRenderParents(false);
+            ->setMinDepth(1)
+            ->setMaxDepth(2)
+            ->setRenderParents(false);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_np_bd.html');
         $actual = $this->_helper->renderMenu();
@@ -401,9 +401,9 @@ class MenuTest extends AbstractTest
         $this->_setActive('Page 2');
 
         $this->_helper->setOnlyActiveBranch()
-                      ->setMinDepth(1)
-                      ->setMaxDepth(1)
-                      ->setRenderParents(false);
+            ->setMinDepth(1)
+            ->setMaxDepth(1)
+            ->setRenderParents(false);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_np_bd2.html');
         $actual = $this->_helper->renderMenu();
@@ -414,9 +414,9 @@ class MenuTest extends AbstractTest
     public function testRenderSubMenuShouldOverrideOptions()
     {
         $this->_helper->setOnlyActiveBranch(false)
-                      ->setMinDepth(1)
-                      ->setMaxDepth(2)
-                      ->setRenderParents(true);
+            ->setMinDepth(1)
+            ->setMaxDepth(2)
+            ->setRenderParents(true);
 
         $expected = $this->_getExpected('menu/onlyactivebranch_noparents.html');
         $actual = $this->_helper->renderSubMenu();
@@ -551,7 +551,7 @@ class MenuTest extends AbstractTest
         ));
 
         $expected = $this->_getExpected('menu/addclasstolistitem_as_false.html');
-        $actual   = $this->_helper->renderMenu($container);
+        $actual = $this->_helper->renderMenu($container);
 
         $this->assertEquals(trim($expected), trim($actual));
     }
@@ -595,6 +595,7 @@ class MenuTest extends AbstractTest
 
     /**
      * Returns the contens of the expected $file, normalizes newlines
+     *
      * @param  string $file
      * @return string
      */

@@ -29,7 +29,7 @@ class WinCacheTest extends CommonAdapterTest
 
         $enabled = ini_get('wincache.ucenabled');
         if (PHP_SAPI == 'cli') {
-            $enabled = $enabled && (bool) ini_get('wincache.enablecli');
+            $enabled = $enabled && (bool)ini_get('wincache.enablecli');
         }
 
         if (!$enabled) {

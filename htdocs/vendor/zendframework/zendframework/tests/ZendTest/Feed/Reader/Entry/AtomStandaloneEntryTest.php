@@ -13,9 +13,9 @@ use DateTime;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -70,6 +70,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get Id (Unencoded Text)
+     *
      * @group ZFR002
      */
     public function testGetsIdFromAtom10()
@@ -82,6 +83,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get creation date (Unencoded Text)
+     *
      * @group ZFR002
      */
     public function testGetsDateCreatedFromAtom10()
@@ -95,6 +97,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get modification date (Unencoded Text)
+     *
      * @group ZFR002
      */
     public function testGetsDateModifiedFromAtom10()
@@ -108,6 +111,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get Title (Unencoded Text)
+     *
      * @group ZFR002
      */
     public function testGetsTitleFromAtom10()
@@ -120,6 +124,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get Authors (Unencoded Text)
+     *
      * @group ZFR002
      */
     public function testGetsAuthorsFromAtom10()
@@ -129,19 +134,20 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         );
 
         $authors = array(
-            array('email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
-            array('name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
-            array('name'=>'Joe Bloggs'),
-            array('email'=>'joe@example.com','uri'=>'http://www.example.com'),
-            array('uri'=>'http://www.example.com'),
-            array('email'=>'joe@example.com')
+            array('email' => 'joe@example.com', 'name' => 'Joe Bloggs', 'uri' => 'http://www.example.com'),
+            array('name' => 'Joe Bloggs', 'uri' => 'http://www.example.com'),
+            array('name' => 'Joe Bloggs'),
+            array('email' => 'joe@example.com', 'uri' => 'http://www.example.com'),
+            array('uri' => 'http://www.example.com'),
+            array('email' => 'joe@example.com')
         );
 
-        $this->assertEquals($authors, (array) $entry->getAuthors());
+        $this->assertEquals($authors, (array)$entry->getAuthors());
     }
 
     /**
      * Get Author (Unencoded Text)
+     *
      * @group ZFR002
      */
     public function testGetsAuthorFromAtom10()
@@ -149,11 +155,12 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $entry = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/author/atom10.xml')
         );
-        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com','uri'=>'http://www.example.com'), $entry->getAuthor());
+        $this->assertEquals(array('name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'), $entry->getAuthor());
     }
 
     /**
      * Get Description (Unencoded Text)
+     *
      * @group ZFR002
      */
     public function testGetsDescriptionFromAtom10()
@@ -166,24 +173,26 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get enclosure
+     *
      * @group ZFR002
      */
     public function testGetsEnclosureFromAtom10()
     {
         $entry = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/enclosure/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/enclosure/atom10.xml')
         );
 
         $expected = new \stdClass();
-        $expected->url    = 'http://www.example.org/myaudiofile.mp3';
+        $expected->url = 'http://www.example.org/myaudiofile.mp3';
         $expected->length = '1234';
-        $expected->type   = 'audio/mpeg';
+        $expected->type = 'audio/mpeg';
 
         $this->assertEquals($expected, $entry->getEnclosure());
     }
 
     /**
      * TEXT
+     *
      * @group ZFRATOMCONTENT
      */
     public function testGetsContentFromAtom10()
@@ -196,6 +205,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * HTML Escaped
+     *
      * @group ZFRATOMCONTENT
      */
     public function testGetsContentFromAtom10Html()
@@ -208,6 +218,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * HTML CDATA Escaped
+     *
      * @group ZFRATOMCONTENT
      */
     public function testGetsContentFromAtom10HtmlCdata()
@@ -220,6 +231,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * XHTML
+     *
      * @group ZFRATOMCONTENT
      */
     public function testGetsContentFromAtom10XhtmlNamespaced()
@@ -232,6 +244,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get Link (Unencoded Text)
+     *
      * @group ZFR002
      */
     public function testGetsLinkFromAtom10()
@@ -244,6 +257,7 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get Comment HTML Link
+     *
      * @group ZFR002
      */
     public function testGetsCommentLinkFromAtom10()
@@ -256,14 +270,15 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get category data
+     *
      * @group ZFR002
      */
     public function testGetsCategoriesFromAtom10()
     {
         $entry = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/category/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/category/atom10.xml')
         );
-        $this->assertEquals($this->expectedCats, (array) $entry->getCategories());
-        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+        $this->assertEquals($this->expectedCats, (array)$entry->getCategories());
+        $this->assertEquals(array('topic1', 'Cat & Dog'), array_values($entry->getCategories()->getValues()));
     }
 }

@@ -16,7 +16,7 @@ use Zend\Feed\Reader;
 use Zend\Feed\Reader\Exception;
 
 /**
-*/
+ */
 abstract class AbstractFeed implements FeedInterface
 {
     /**
@@ -72,7 +72,7 @@ abstract class AbstractFeed implements FeedInterface
      * Constructor
      *
      * @param DOMDocument $domDocument The DOM object for the feed's XML
-     * @param string $type Feed type
+     * @param string $type             Feed type
      */
     public function __construct(DOMDocument $domDocument, $type = null)
     {
@@ -162,6 +162,7 @@ abstract class AbstractFeed implements FeedInterface
         if (empty($assumed)) {
             $assumed = 'UTF-8';
         }
+
         return $assumed;
     }
 
@@ -256,7 +257,7 @@ abstract class AbstractFeed implements FeedInterface
             }
         }
         throw new Exception\BadMethodCallException('Method: ' . $method
-        . 'does not exist and could not be located on a registered Extension');
+            . 'does not exist and could not be located on a registered Extension');
     }
 
     /**
@@ -270,14 +271,15 @@ abstract class AbstractFeed implements FeedInterface
         if (array_key_exists($name . '\\Feed', $this->extensions)) {
             return $this->extensions[$name . '\\Feed'];
         }
+
         return null;
     }
 
     protected function loadExtensions()
     {
-        $all     = Reader\Reader::getExtensions();
+        $all = Reader\Reader::getExtensions();
         $manager = Reader\Reader::getExtensionManager();
-        $feed    = $all['feed'];
+        $feed = $all['feed'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;

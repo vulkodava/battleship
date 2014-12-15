@@ -20,7 +20,7 @@ class SchemaTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($schema->hasTable($tableName));
 
         $tables = $schema->getTables();
-        $this->assertTrue( isset($tables[$tableName]) );
+        $this->assertTrue(isset($tables[$tableName]));
         $this->assertSame($table, $tables[$tableName]);
         $this->assertSame($table, $schema->getTable($tableName));
         $this->assertTrue($schema->hasTable($tableName));

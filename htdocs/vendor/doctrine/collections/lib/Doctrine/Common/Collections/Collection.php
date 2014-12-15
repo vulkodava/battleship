@@ -137,8 +137,8 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
     /**
      * Sets an element in the collection at the specified key/index.
      *
-     * @param string|integer $key   The key/index of the element to set.
-     * @param mixed          $value The element to set.
+     * @param string|integer $key The key/index of the element to set.
+     * @param mixed $value        The element to set.
      *
      * @return void
      */
@@ -254,7 +254,7 @@ interface Collection extends Countable, IteratorAggregate, ArrayAccess
      * Keys have to be preserved by this method. Calling this method will only return the
      * selected slice and NOT change the elements contained in the collection slice is called on.
      *
-     * @param int      $offset The offset to start from.
+     * @param int $offset      The offset to start from.
      * @param int|null $length The maximum number of elements to return, or null for no limit.
      *
      * @return array

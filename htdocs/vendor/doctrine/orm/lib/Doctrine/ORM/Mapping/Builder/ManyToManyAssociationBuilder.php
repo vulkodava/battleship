@@ -47,16 +47,17 @@ class ManyToManyAssociationBuilder extends OneToManyAssociationBuilder
     public function setJoinTable($name)
     {
         $this->joinTableName = $name;
+
         return $this;
     }
 
     /**
      * Adds Inverse Join Columns.
      *
-     * @param string      $columnName
-     * @param string      $referencedColumnName
-     * @param bool        $nullable
-     * @param bool        $unique
+     * @param string $columnName
+     * @param string $referencedColumnName
+     * @param bool $nullable
+     * @param bool $unique
      * @param string|null $onDelete
      * @param string|null $columnDef
      *
@@ -72,6 +73,7 @@ class ManyToManyAssociationBuilder extends OneToManyAssociationBuilder
             'onDelete' => $onDelete,
             'columnDefinition' => $columnDef,
         );
+
         return $this;
     }
 
@@ -93,6 +95,7 @@ class ManyToManyAssociationBuilder extends OneToManyAssociationBuilder
         }
         $cm = $this->builder->getClassMetadata();
         $cm->mapManyToMany($mapping);
+
         return $this->builder;
     }
 }

@@ -66,7 +66,8 @@ class JsonStrategy extends AbstractListenerAggregate
      */
     public function setCharset($charset)
     {
-        $this->charset = (string) $charset;
+        $this->charset = (string)$charset;
+
         return $this;
     }
 
@@ -114,7 +115,7 @@ class JsonStrategy extends AbstractListenerAggregate
             return;
         }
 
-        $result   = $e->getResult();
+        $result = $e->getResult();
         if (!is_string($result)) {
             // We don't have a string, and thus, no JSON
             return;

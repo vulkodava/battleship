@@ -33,6 +33,7 @@ class Cache implements SaveHandlerInterface
 
     /**
      * The cache storage
+     *
      * @var CacheStorage
      */
     protected $cacheStorage;
@@ -58,7 +59,7 @@ class Cache implements SaveHandlerInterface
     {
         // @todo figure out if we want to use these
         $this->sessionSavePath = $savePath;
-        $this->sessionName     = $name;
+        $this->sessionName = $name;
 
         return true;
     }
@@ -119,6 +120,7 @@ class Cache implements SaveHandlerInterface
         if ($cache instanceof ClearExpiredCacheStorage) {
             return $cache->clearExpired();
         }
+
         return true;
     }
 
@@ -131,6 +133,7 @@ class Cache implements SaveHandlerInterface
     public function setCacheStorage(CacheStorage $cacheStorage)
     {
         $this->cacheStorage = $cacheStorage;
+
         return $this;
     }
 

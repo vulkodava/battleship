@@ -42,7 +42,7 @@ class CustomTreeWalkersJoinTest extends \Doctrine\Tests\OrmTestCase
         try {
             $query = $this->em->createQuery($dqlToBeTested);
             $query->setHint(Query::HINT_CUSTOM_TREE_WALKERS, array('Doctrine\Tests\ORM\Query\CustomTreeWalkerJoin'))
-                  ->useQueryCache(false);
+                ->useQueryCache(false);
 
             $this->assertEquals($sqlToBeConfirmed, $query->getSql());
             $query->free();

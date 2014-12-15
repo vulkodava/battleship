@@ -13,7 +13,7 @@ class SQLAzureFederationsSynchronizerTest extends AbstractTestCase
         $synchronizer = new SQLAzureFederationsSynchronizer($this->conn, $this->sm);
         $sql = $synchronizer->getCreateSchema($schema);
 
-        $this->assertEquals(array (
+        $this->assertEquals(array(
             "--Create Federation\nCREATE FEDERATION Orders_Federation (CustID INT  RANGE)",
             "USE FEDERATION Orders_Federation (CustID = 0) WITH RESET, FILTERING = OFF;",
             "CREATE TABLE Products (ProductID INT NOT NULL, SupplierID INT NOT NULL, ProductName NVARCHAR(255) NOT NULL, Price NUMERIC(12, 2) NOT NULL, PRIMARY KEY (ProductID))",

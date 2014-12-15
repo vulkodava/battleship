@@ -20,10 +20,10 @@ if (file_exists(__DIR__ . '/../../../vendor/autoload.php')) {
 $classLoader->add('Doctrine\\Tests\\', __DIR__ . '/../../');
 unset($classLoader);
 
-if ( ! file_exists(__DIR__ . '/Proxies') && ! mkdir(__DIR__ . '/Proxies')) {
-    throw new \Exception("Could not create " . __DIR__."/Proxies Folder.");
+if (!file_exists(__DIR__ . '/Proxies') && !mkdir(__DIR__ . '/Proxies')) {
+    throw new \Exception("Could not create " . __DIR__ . "/Proxies Folder.");
 }
 
-if ( ! file_exists(__DIR__ . '/ORM/Proxy/generated') &&  ! mkdir(__DIR__ . '/ORM/Proxy/generated')) {
+if (!file_exists(__DIR__ . '/ORM/Proxy/generated') && !mkdir(__DIR__ . '/ORM/Proxy/generated')) {
     throw new \Exception('Could not create ' . __DIR__ . '/ORM/Proxy/generated Folder.');
 }

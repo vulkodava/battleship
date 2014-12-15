@@ -64,6 +64,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -118,6 +119,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
+
         return $this;
     }
 
@@ -180,18 +182,20 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
             }
             $statement->initialize($this->connection->getResource());
         }
+
         return $statement;
     }
 
     /**
      * @param  resource $resource
-     * @param  null     $isBuffered
+     * @param  null $isBuffered
      * @return Result
      */
     public function createResult($resource, $isBuffered = null)
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue(), $isBuffered);
+
         return $result;
     }
 
@@ -205,7 +209,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
 
     /**
      * @param string $name
-     * @param mixed  $type
+     * @param mixed $type
      * @return string
      */
     public function formatParameterName($name, $type = null)

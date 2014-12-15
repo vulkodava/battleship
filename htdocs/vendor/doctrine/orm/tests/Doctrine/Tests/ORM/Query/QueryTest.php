@@ -78,18 +78,18 @@ class QueryTest extends \Doctrine\Tests\OrmTestCase
     {
         $q = $this->_em->createQuery("select a from Doctrine\Tests\Models\CMS\CmsArticle a");
         $q2 = $q->expireQueryCache(true)
-          ->setQueryCacheLifetime(3600)
-          ->setQueryCacheDriver(null)
-          ->expireResultCache(true)
-          ->setHint('foo', 'bar')
-          ->setHint('bar', 'baz')
-          ->setParameter(1, 'bar')
-          ->setParameters(new ArrayCollection(array(new Parameter(2, 'baz'))))
-          ->setResultCacheDriver(null)
-          ->setResultCacheId('foo')
-          ->setDql('foo')
-          ->setFirstResult(10)
-          ->setMaxResults(10);
+            ->setQueryCacheLifetime(3600)
+            ->setQueryCacheDriver(null)
+            ->expireResultCache(true)
+            ->setHint('foo', 'bar')
+            ->setHint('bar', 'baz')
+            ->setParameter(1, 'bar')
+            ->setParameters(new ArrayCollection(array(new Parameter(2, 'baz'))))
+            ->setResultCacheDriver(null)
+            ->setResultCacheId('foo')
+            ->setDql('foo')
+            ->setFirstResult(10)
+            ->setMaxResults(10);
 
         $this->assertSame($q2, $q);
     }
@@ -155,12 +155,12 @@ class QueryTest extends \Doctrine\Tests\OrmTestCase
             9 => "St Julien"
         );
 
-        $query  = $this->_em
-                ->createQuery("SELECT a FROM Doctrine\Tests\Models\CMS\CmsAddress a WHERE a.city IN (:cities)")
-                ->setParameter('cities', $cities);
+        $query = $this->_em
+            ->createQuery("SELECT a FROM Doctrine\Tests\Models\CMS\CmsAddress a WHERE a.city IN (:cities)")
+            ->setParameter('cities', $cities);
 
         $parameters = $query->getParameters();
-        $parameter  = $parameters->first();
+        $parameter = $parameters->first();
 
         $this->assertEquals('cities', $parameter->getName());
         $this->assertEquals($cities, $parameter->getValue());
@@ -171,7 +171,7 @@ class QueryTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testProcessParameterValueClassMetadata()
     {
-        $query  = $this->_em->createQuery("SELECT a FROM Doctrine\Tests\Models\CMS\CmsAddress a WHERE a.city IN (:cities)");
+        $query = $this->_em->createQuery("SELECT a FROM Doctrine\Tests\Models\CMS\CmsAddress a WHERE a.city IN (:cities)");
         $this->assertEquals(
             'Doctrine\Tests\Models\CMS\CmsAddress',
             $query->processParameterValue($this->_em->getClassMetadata('Doctrine\Tests\Models\CMS\CmsAddress'))

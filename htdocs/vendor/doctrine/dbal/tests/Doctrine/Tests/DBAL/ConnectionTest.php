@@ -110,7 +110,7 @@ class ConnectionTest extends \Doctrine\Tests\DbalTestCase
 
         $driverMock = $this->getMock('Doctrine\DBAL\Driver');
         $driverMock->expects(($this->at(0)))
-                   ->method('connect');
+            ->method('connect');
         $platform = new Mocks\MockPlatform();
 
         $conn = new Connection(array('platform' => $platform), $driverMock, new Configuration(), $eventManager);

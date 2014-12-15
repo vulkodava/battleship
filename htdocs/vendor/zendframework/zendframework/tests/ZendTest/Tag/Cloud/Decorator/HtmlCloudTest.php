@@ -25,8 +25,8 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             '<ul class="zend-tag-cloud">foo bar</ul>',
             $decorator->render(
                 array(
-                     'foo',
-                     'bar'
+                    'foo',
+                    'bar'
                 )
             )
         );
@@ -37,8 +37,8 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\HtmlCloud();
         $decorator->setHtmlTags(
             array(
-                 'span',
-                 'div' => array('id' => 'tag-cloud')
+                'span',
+                'div' => array('id' => 'tag-cloud')
             )
         );
 
@@ -46,8 +46,8 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             '<div id="tag-cloud"><span>foo bar</span></div>',
             $decorator->render(
                 array(
-                     'foo',
-                     'bar'
+                    'foo',
+                    'bar'
                 )
             )
         );
@@ -62,8 +62,8 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
             '<ul class="zend-tag-cloud">foo-bar</ul>',
             $decorator->render(
                 array(
-                     'foo',
-                     'bar'
+                    'foo',
+                    'bar'
                 )
             )
         );
@@ -72,15 +72,15 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithArray()
     {
         $decorator = new Decorator\HtmlCloud(array(
-                                                  'htmlTags'  => array('div'),
-                                                  'separator' => ' '
-                                             ));
+            'htmlTags' => array('div'),
+            'separator' => ' '
+        ));
 
         $this->assertEquals(
             '<div>foo bar</div>', $decorator->render(
                 array(
-                     'foo',
-                     'bar'
+                    'foo',
+                    'bar'
                 )
             )
         );
@@ -91,8 +91,8 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\HtmlCloud(
             new \Zend\Config\Config(
                 array(
-                     'htmlTags'  => array('div'),
-                     'separator' => ' '
+                    'htmlTags' => array('div'),
+                    'separator' => ' '
                 )
             )
         );
@@ -100,8 +100,8 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             '<div>foo bar</div>', $decorator->render(
                 array(
-                     'foo',
-                     'bar'
+                    'foo',
+                    'bar'
                 )
             )
         );
@@ -112,16 +112,16 @@ class HtmlCloudTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\HtmlCloud();
         $decorator->setOptions(
             array(
-                 'htmlTags'  => array('div'),
-                 'separator' => ' '
+                'htmlTags' => array('div'),
+                'separator' => ' '
             )
         );
 
         $this->assertEquals(
             '<div>foo bar</div>', $decorator->render(
                 array(
-                     'foo',
-                     'bar'
+                    'foo',
+                    'bar'
                 )
             )
         );

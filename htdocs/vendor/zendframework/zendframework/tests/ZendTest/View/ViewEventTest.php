@@ -127,18 +127,18 @@ class ViewEventTest extends TestCase
 
     public function testSpecializedParametersMayBeSetViaSetParams()
     {
-        $model    = new ViewModel();
+        $model = new ViewModel();
         $renderer = new PhpRenderer();
-        $request  = new Request();
+        $request = new Request();
         $response = new Response();
-        $result   = 'some result';
+        $result = 'some result';
 
-        $params   = array(
-            'model'    => $model,
+        $params = array(
+            'model' => $model,
             'renderer' => $renderer,
-            'request'  => $request,
+            'request' => $request,
             'response' => $response,
-            'result'   => $result,
+            'result' => $result,
             'otherkey' => 'other value',
         );
 

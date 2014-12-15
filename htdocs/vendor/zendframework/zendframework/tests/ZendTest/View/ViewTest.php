@@ -27,10 +27,10 @@ class ViewTest extends TestCase
 {
     public function setUp()
     {
-        $this->request  = new Request;
+        $this->request = new Request;
         $this->response = new Response;
-        $this->model    = new ViewModel;
-        $this->view     = new View;
+        $this->model = new ViewModel;
+        $this->view = new View;
 
         $this->view->setRequest($this->request);
         $this->view->setResponse($this->response);
@@ -104,7 +104,7 @@ class ViewTest extends TestCase
         $expected = var_export(new ViewVariables(array(
             'parent' => 'node',
             'child1' => var_export(array(
-                'foo'    => 'bar',
+                'foo' => 'bar',
                 'child2' => var_export(array('bar' => 'baz'), true),
             ), true),
         )), true);
@@ -118,6 +118,7 @@ class ViewTest extends TestCase
             if (!$model instanceof ViewModel) {
                 return;
             }
+
             return new TestAsset\Renderer\VarExportRenderer();
         });
         $this->view->addRenderingStrategy(function ($e) {
@@ -125,6 +126,7 @@ class ViewTest extends TestCase
             if (!$model instanceof JsonModel) {
                 return;
             }
+
             return new Renderer\JsonRenderer();
         }, 10); // higher priority, so it matches earlier
         $this->result = $result = new stdClass;
@@ -232,8 +234,8 @@ class ViewTest extends TestCase
 
     public function testUsesTreeRendererInterfaceToDetermineWhetherOrNotToPassOnlyRootViewModelToPhpRenderer()
     {
-        $resolver    = new Resolver\TemplateMapResolver(array(
-            'layout'  => __DIR__ . '/_templates/nested-view-model-layout.phtml',
+        $resolver = new Resolver\TemplateMapResolver(array(
+            'layout' => __DIR__ . '/_templates/nested-view-model-layout.phtml',
             'content' => __DIR__ . '/_templates/nested-view-model-content.phtml',
         ));
         $phpRenderer = new PhpRenderer();
@@ -276,7 +278,7 @@ class ViewTest extends TestCase
             $result->content = $e->getResult();
         });
 
-        $layout  = new ViewModel(array('status' => 200));
+        $layout = new ViewModel(array('status' => 200));
         $content = new ViewModel(array('foo' => 'bar'));
         $content->setCaptureTo('response');
         $layout->addChild($content);
@@ -294,7 +296,7 @@ class ViewTest extends TestCase
     public function testCanTriggerPostRendererEvent()
     {
         $this->attachTestStrategies();
-        $test = (object) array('flag' => false);
+        $test = (object)array('flag' => false);
         $this->view->getEventManager()->attach(ViewEvent::EVENT_RENDERER_POST, function ($e) use ($test) {
             $test->flag = true;
         });
@@ -328,8 +330,8 @@ class ViewTest extends TestCase
         });
 
         $renderer->expects($this->once())
-                 ->method('render')
-                 ->with($model2);
+            ->method('render')
+            ->with($model2);
 
         $this->view->render($model1);
     }

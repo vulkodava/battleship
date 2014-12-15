@@ -21,8 +21,8 @@ class ExpressionBuilderTest extends \Doctrine\Tests\DbalTestCase
         $this->expr = new ExpressionBuilder($conn);
 
         $conn->expects($this->any())
-             ->method('getExpressionBuilder')
-             ->will($this->returnValue($this->expr));
+            ->method('getExpressionBuilder')
+            ->will($this->returnValue($this->expr));
     }
 
     /**
@@ -36,7 +36,7 @@ class ExpressionBuilderTest extends \Doctrine\Tests\DbalTestCase
             $composite->add($part);
         }
 
-        $this->assertEquals($expected, (string) $composite);
+        $this->assertEquals($expected, (string)$composite);
     }
 
     public function provideDataForAndX()
@@ -92,7 +92,7 @@ class ExpressionBuilderTest extends \Doctrine\Tests\DbalTestCase
             $composite->add($part);
         }
 
-        $this->assertEquals($expected, (string) $composite);
+        $this->assertEquals($expected, (string)$composite);
     }
 
     public function provideDataForOrX()
@@ -144,7 +144,7 @@ class ExpressionBuilderTest extends \Doctrine\Tests\DbalTestCase
     {
         $part = $this->expr->comparison($leftExpr, $operator, $rightExpr);
 
-        $this->assertEquals($expected, (string) $part);
+        $this->assertEquals($expected, (string)$part);
     }
 
     public function provideDataForComparison()
@@ -201,11 +201,11 @@ class ExpressionBuilderTest extends \Doctrine\Tests\DbalTestCase
 
     public function testIn()
     {
-        $this->assertEquals('u.groups IN (1, 3, 4, 7)', $this->expr->in('u.groups', array(1,3,4,7)));
+        $this->assertEquals('u.groups IN (1, 3, 4, 7)', $this->expr->in('u.groups', array(1, 3, 4, 7)));
     }
 
     public function testNotIn()
     {
-        $this->assertEquals('u.groups NOT IN (1, 3, 4, 7)', $this->expr->notIn('u.groups', array(1,3,4,7)));
+        $this->assertEquals('u.groups NOT IN (1, 3, 4, 7)', $this->expr->notIn('u.groups', array(1, 3, 4, 7)));
     }
 }

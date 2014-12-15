@@ -16,12 +16,14 @@ class DbSelectFactory implements FactoryInterface
 {
     /**
      * Adapter options
+     *
      * @var array
      */
     protected $creationOptions;
 
     /**
      * Construct with adapter options
+     *
      * @param array $creationOptions
      */
     public function __construct(array $creationOptions)
@@ -36,6 +38,7 @@ class DbSelectFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $class = new \ReflectionClass('Zend\Paginator\Adapter\DbSelect');
+
         return $class->newInstanceArgs($this->creationOptions);
     }
 }

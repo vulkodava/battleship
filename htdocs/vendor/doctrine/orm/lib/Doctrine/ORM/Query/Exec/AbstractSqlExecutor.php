@@ -29,7 +29,7 @@ use Doctrine\DBAL\Cache\QueryCacheProfile;
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @link        http://www.doctrine-project.org
  * @since       2.0
- * @todo Rename: AbstractSQLExecutor
+ * @todo        Rename: AbstractSQLExecutor
  */
 abstract class AbstractSqlExecutor
 {
@@ -66,9 +66,9 @@ abstract class AbstractSqlExecutor
     /**
      * Executes all sql statements.
      *
-     * @param Connection $conn   The database connection that is used to execute the queries.
-     * @param array      $params The parameters.
-     * @param array      $types  The parameter types.
+     * @param Connection $conn The database connection that is used to execute the queries.
+     * @param array $params    The parameters.
+     * @param array $types     The parameter types.
      *
      * @return \Doctrine\DBAL\Driver\Statement
      */

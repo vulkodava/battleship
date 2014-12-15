@@ -29,21 +29,21 @@ class SendmailTest extends \PHPUnit_Framework_TestCase
         $this->transport = new Sendmail();
         $self = $this;
         $this->transport->setCallable(function ($to, $subject, $message, $additional_headers, $additional_parameters = null) use ($self) {
-            $self->to                    = $to;
-            $self->subject               = $subject;
-            $self->message               = $message;
-            $self->additional_headers    = $additional_headers;
+            $self->to = $to;
+            $self->subject = $subject;
+            $self->message = $message;
+            $self->additional_headers = $additional_headers;
             $self->additional_parameters = $additional_parameters;
         });
-        $this->operating_system      = strtoupper(substr(PHP_OS, 0, 3));
+        $this->operating_system = strtoupper(substr(PHP_OS, 0, 3));
     }
 
     public function tearDown()
     {
-        $this->to                    = null;
-        $this->subject               = null;
-        $this->message               = null;
-        $this->additional_headers    = null;
+        $this->to = null;
+        $this->subject = null;
+        $this->message = null;
+        $this->additional_headers = null;
         $this->additional_parameters = null;
     }
 
@@ -51,18 +51,19 @@ class SendmailTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message();
         $message->addTo('zf-devteam@zend.com', 'ZF DevTeam')
-                ->addCc('matthew@zend.com')
-                ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
-                ->addFrom(array(
-                    'zf-devteam@zend.com',
-                    'matthew@zend.com' => 'Matthew',
-                ))
-                ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
-                ->setSubject('Testing Zend\Mail\Transport\Sendmail')
-                ->setBody('This is only a test.');
+            ->addCc('matthew@zend.com')
+            ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
+            ->addFrom(array(
+                'zf-devteam@zend.com',
+                'matthew@zend.com' => 'Matthew',
+            ))
+            ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
+            ->setSubject('Testing Zend\Mail\Transport\Sendmail')
+            ->setBody('This is only a test.');
         $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
+
         return $message;
     }
 

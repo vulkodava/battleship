@@ -64,7 +64,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      * @param  \PHPUnit_Framework_TestResult $result
      * @return void
      */
-    public function run(\PHPUnit_Framework_TestResult $result = NULL)
+    public function run(\PHPUnit_Framework_TestResult $result = null)
     {
         $this->setPreserveGlobalState(false);
 
@@ -176,9 +176,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testContainerInstantiatesManagerWithDefaultsWhenNotInjected()
     {
         $container = new Container();
-        $manager   = $container->getManager();
+        $manager = $container->getManager();
         $this->assertTrue($manager instanceof Manager);
-        $config  = $manager->getConfig();
+        $config = $manager->getConfig();
         $this->assertTrue($config instanceof Session\Config\SessionConfig);
         $storage = $manager->getStorage();
         $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
@@ -238,8 +238,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $storage = $this->manager->getStorage();
         $metadata = $storage->getMetadata($this->container->getName());
         $this->assertEquals($_SERVER['REQUEST_TIME'] + 1800, $metadata['EXPIRE_KEYS']['foo']);
-        $this->assertEquals($_SERVER['REQUEST_TIME'] +  900, $metadata['EXPIRE_KEYS']['baz']);
-        $this->assertEquals($_SERVER['REQUEST_TIME'] +  900, $metadata['EXPIRE_KEYS']['bat']);
+        $this->assertEquals($_SERVER['REQUEST_TIME'] + 900, $metadata['EXPIRE_KEYS']['baz']);
+        $this->assertEquals($_SERVER['REQUEST_TIME'] + 900, $metadata['EXPIRE_KEYS']['bat']);
         $this->assertEquals($_SERVER['REQUEST_TIME'] + 3600, $metadata['EXPIRE']);
     }
 
@@ -352,16 +352,16 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $metadata = $storage->getMetadata('Default');
         $this->assertTrue(array_key_exists('EXPIRE_HOPS_KEYS', $metadata));
 
-        $hops     = $metadata['EXPIRE_HOPS_KEYS'];
-        $ts       = $storage->getRequestAccessTime();
+        $hops = $metadata['EXPIRE_HOPS_KEYS'];
+        $ts = $storage->getRequestAccessTime();
         $expected = array(
             'foo' => array(
                 'hops' => 2,
-                'ts'   => $ts,
+                'ts' => $ts,
             ),
             'baz' => array(
                 'hops' => 2,
-                'ts'   => $ts,
+                'ts' => $ts,
             ),
         );
         $this->assertEquals($expected, $hops);
@@ -501,9 +501,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $storage = $this->manager->getStorage();
         $storage->setMetadata('Default', array('EXPIRE_KEYS' => array('foo' => $_SERVER['REQUEST_TIME'] - 18600)));
         $expected = array('bar' => 'baz');
-        $test     = array();
+        $test = array();
         foreach ($this->container as $key => $value) {
-            $test[$key] =  $value;
+            $test[$key] = $value;
         }
         $this->assertSame($expected, $test);
     }
@@ -560,7 +560,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetArrayCopyAfterExchangeArray()
     {
-        $this->container->exchangeArray(array('foo'=>'bar'));
+        $this->container->exchangeArray(array('foo' => 'bar'));
 
         $contents = $this->container->getArrayCopy();
 

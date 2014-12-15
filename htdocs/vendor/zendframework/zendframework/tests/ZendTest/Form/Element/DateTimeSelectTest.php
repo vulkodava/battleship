@@ -63,7 +63,7 @@ class DateTimeSelectTest extends TestCase
 
     public function testCanSetDateFromDateTime()
     {
-        $element  = new DateTimeSelectElement();
+        $element = new DateTimeSelectElement();
         $element->setValue(new DateTime('2012-09-24 03:04:05'));
 
         $this->assertEquals('2012', $element->getYearElement()->getValue());
@@ -76,7 +76,7 @@ class DateTimeSelectTest extends TestCase
 
     public function testCanSetDateFromString()
     {
-        $element  = new DateTimeSelectElement();
+        $element = new DateTimeSelectElement();
         $element->setValue('2012-09-24 03:04:05');
 
         $this->assertEquals('2012', $element->getYearElement()->getValue());
@@ -89,7 +89,7 @@ class DateTimeSelectTest extends TestCase
 
     public function testCanGetValue()
     {
-        $element  = new DateTimeSelectElement();
+        $element = new DateTimeSelectElement();
         $element->setValue(new DateTime('2012-09-24 03:04:05'));
 
         $this->assertEquals('2012-09-24 03:04:05', $element->getValue());
@@ -100,13 +100,13 @@ class DateTimeSelectTest extends TestCase
      */
     public function testThrowsOnInvalidValue()
     {
-        $element  = new DateTimeSelectElement();
+        $element = new DateTimeSelectElement();
         $element->setValue('hello world');
     }
 
     public function testUseDefaultValueForSecondsIfNotProvided()
     {
-        $element  = new DateTimeSelectElement();
+        $element = new DateTimeSelectElement();
         $element->setValue(array(
             'year' => '2012',
             'month' => '09',
@@ -140,7 +140,7 @@ class DateTimeSelectTest extends TestCase
 
     public function testPassingNullValueToSetValueWillUseCurrentDate()
     {
-        $now     = new DateTime;
+        $now = new DateTime;
         $element = new DateTimeSelectElement();
         $element->setValue(null);
         $yearElement = $element->getYearElement();

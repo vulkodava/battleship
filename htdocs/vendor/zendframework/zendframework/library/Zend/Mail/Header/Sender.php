@@ -66,22 +66,24 @@ class Sender implements HeaderInterface
         }
 
         $email = sprintf('<%s>', $this->address->getEmail());
-        $name  = $this->address->getName();
+        $name = $this->address->getName();
         if (!empty($name)) {
             $encoding = $this->getEncoding();
             if ($format == HeaderInterface::FORMAT_ENCODED
                 && 'ASCII' !== $encoding
             ) {
-                $name  = HeaderWrap::mimeEncodeValue($name, $encoding);
+                $name = HeaderWrap::mimeEncodeValue($name, $encoding);
             }
             $email = sprintf('%s %s', $name, $email);
         }
+
         return $email;
     }
 
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -115,6 +117,7 @@ class Sender implements HeaderInterface
             ));
         }
         $this->address = $emailOrAddress;
+
         return $this;
     }
 

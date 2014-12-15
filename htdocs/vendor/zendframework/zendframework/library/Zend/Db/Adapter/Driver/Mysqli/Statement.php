@@ -65,7 +65,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
      */
     public function __construct($bufferResults = false)
     {
-        $this->bufferResults = (bool) $bufferResults;
+        $this->bufferResults = (bool)$bufferResults;
     }
 
     /**
@@ -77,6 +77,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Mysqli $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
@@ -87,6 +88,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -107,6 +109,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function initialize(\mysqli $mysqli)
     {
         $this->mysqli = $mysqli;
+
         return $this;
     }
 
@@ -119,6 +122,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
@@ -131,6 +135,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -154,6 +159,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     {
         $this->resource = $mysqliStatement;
         $this->isPrepared = true;
+
         return $this;
     }
 
@@ -213,6 +219,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->isPrepared = true;
+
         return $this;
     }
 
@@ -271,6 +278,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource, $buffered);
+
         return $result;
     }
 

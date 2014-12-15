@@ -25,15 +25,15 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $testFile = __DIR__ . '/_files/testsize.mo';
         $testData = array(
             //    Options, isValid Param, Expected value
-            array(794,     $testFile,     true),
-            array(500,     $testFile,     false),
-            array(array('min' => 0, 'max' => 10000),      $testFile,   true),
-            array(array('min' => 0, 'max' => '10 MB'),    $testFile,   true),
-            array(array('min' => '4B', 'max' => '10 MB'), $testFile,   true),
-            array(array('min' => 0, 'max' => '10MB'),     $testFile,   true),
-            array(array('min' => 0, 'max' => '10  MB'),   $testFile,   true),
-            array(array('min' => 794),                    $testFile,   true),
-            array(array('min' => 0, 'max' => 500),        $testFile,   false),
+            array(794, $testFile, true),
+            array(500, $testFile, false),
+            array(array('min' => 0, 'max' => 10000), $testFile, true),
+            array(array('min' => 0, 'max' => '10 MB'), $testFile, true),
+            array(array('min' => '4B', 'max' => '10 MB'), $testFile, true),
+            array(array('min' => 0, 'max' => '10MB'), $testFile, true),
+            array(array('min' => 0, 'max' => '10  MB'), $testFile, true),
+            array(array('min' => 794), $testFile, true),
+            array(array('min' => 0, 'max' => 500), $testFile, false),
         );
 
         // Dupe data in File Upload format
@@ -44,6 +44,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
             );
             $testData[] = array($data[0], $fileUpload, $data[2]);
         }
+
         return $testData;
     }
 
@@ -212,11 +213,11 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(File\Size::NOT_FOUND, $validator->getMessages());
 
         $filesArray = array(
-            'name'      => '',
-            'size'      => 0,
-            'tmp_name'  => '',
-            'error'     => UPLOAD_ERR_NO_FILE,
-            'type'      => '',
+            'name' => '',
+            'size' => 0,
+            'tmp_name' => '',
+            'error' => UPLOAD_ERR_NO_FILE,
+            'type' => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

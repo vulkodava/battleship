@@ -20,7 +20,7 @@ return array(
                     'route' => '/user',
                     'defaults' => array(
                         'controller' => 'zfcuser',
-                        'action'     => 'index',
+                        'action' => 'index',
                     ),
                 ),
                 'may_terminate' => true,
@@ -31,7 +31,7 @@ return array(
                             'route' => '/login',
                             'defaults' => array(
                                 'controller' => 'zfcuser',
-                                'action'     => 'login',
+                                'action' => 'login',
                             ),
                         ),
                     ),
@@ -41,7 +41,7 @@ return array(
                             'route' => '/authenticate',
                             'defaults' => array(
                                 'controller' => 'zfcuser',
-                                'action'     => 'authenticate',
+                                'action' => 'authenticate',
                             ),
                         ),
                     ),
@@ -51,7 +51,7 @@ return array(
                             'route' => '/logout',
                             'defaults' => array(
                                 'controller' => 'zfcuser',
-                                'action'     => 'logout',
+                                'action' => 'logout',
                             ),
                         ),
                     ),
@@ -61,7 +61,7 @@ return array(
                             'route' => '/register',
                             'defaults' => array(
                                 'controller' => 'zfcuser',
-                                'action'     => 'register',
+                                'action' => 'register',
                             ),
                         ),
                     ),
@@ -71,7 +71,7 @@ return array(
                             'route' => '/change-password',
                             'defaults' => array(
                                 'controller' => 'zfcuser',
-                                'action'     => 'changepassword',
+                                'action' => 'changepassword',
                             ),
                         ),
                     ),

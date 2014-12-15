@@ -24,8 +24,8 @@ class Crc32Test extends \PHPUnit_Framework_TestCase
         $testFile = __DIR__ . '/_files/picture.jpg';
         $pictureTests = array(
             //    Options, isValid Param, Expected value, Expected message
-            array('3f8d07e2',                    $testFile, true, ''),
-            array('9f8d07e2',                    $testFile, false, 'fileCrc32DoesNotMatch'),
+            array('3f8d07e2', $testFile, true, ''),
+            array('9f8d07e2', $testFile, false, 'fileCrc32DoesNotMatch'),
             array(array('9f8d07e2', '3f8d07e2'), $testFile, true, ''),
             array(array('9f8d07e2', '7f8d07e2'), $testFile, false, 'fileCrc32DoesNotMatch'),
         );
@@ -39,7 +39,7 @@ class Crc32Test extends \PHPUnit_Framework_TestCase
         $testFile = __DIR__ . '/_files/testsize.mo';
         $sizeFileTests = array(
             //    Options, isValid Param, Expected value, message
-            array('ffeb8d5d', $testFile, true,  ''),
+            array('ffeb8d5d', $testFile, true, ''),
             array('9f8d07e2', $testFile, false, 'fileCrc32DoesNotMatch'),
         );
 
@@ -52,6 +52,7 @@ class Crc32Test extends \PHPUnit_Framework_TestCase
             );
             $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
+
         return $testData;
     }
 
@@ -194,11 +195,11 @@ class Crc32Test extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(File\Crc32::NOT_FOUND, $validator->getMessages());
 
         $filesArray = array(
-            'name'      => '',
-            'size'      => 0,
-            'tmp_name'  => '',
-            'error'     => UPLOAD_ERR_NO_FILE,
-            'type'      => '',
+            'name' => '',
+            'size' => 0,
+            'tmp_name' => '',
+            'error' => UPLOAD_ERR_NO_FILE,
+            'type' => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

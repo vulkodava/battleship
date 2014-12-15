@@ -49,7 +49,7 @@ class SqlsrvTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv::registerResultPrototype
+     * @covers   Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv::registerResultPrototype
      * @requires extension sqlsrv
      */
     public function testRegisterResultPrototype()
@@ -71,7 +71,7 @@ class SqlsrvTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testRegisterConnection
-     * @covers Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv::getConnection
+     * @covers  Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv::getConnection
      */
     public function testGetConnection($mockConnection)
     {
@@ -112,7 +112,7 @@ class SqlsrvTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -124,7 +124,7 @@ class SqlsrvTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -136,7 +136,7 @@ class SqlsrvTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 }

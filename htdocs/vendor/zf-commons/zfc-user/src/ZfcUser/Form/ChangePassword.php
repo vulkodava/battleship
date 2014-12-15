@@ -64,7 +64,7 @@ class ChangePassword extends ProvidesEventsForm
             'name' => 'submit',
             'attributes' => array(
                 'value' => 'Submit',
-                'type'  => 'submit'
+                'type' => 'submit'
             ),
         ));
 
@@ -80,6 +80,7 @@ class ChangePassword extends ProvidesEventsForm
     public function setAuthenticationOptions(AuthenticationOptionsInterface $authOptions)
     {
         $this->authOptions = $authOptions;
+
         return $this;
     }
 

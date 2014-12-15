@@ -30,7 +30,7 @@ use Doctrine\Common\Collections\Expr\CompositeExpression;
  * Visit Expressions and generate SQL WHERE conditions from them.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @since 2.3
+ * @since  2.3
  */
 class SqlExpressionVisitor extends ExpressionVisitor
 {
@@ -67,8 +67,9 @@ class SqlExpressionVisitor extends ExpressionVisitor
 
         if (isset($this->classMetadata->associationMappings[$field]) &&
             $value !== null &&
-            ! is_object($value) &&
-            ! in_array($comparison->getOperator(), array(Comparison::IN, Comparison::NIN))) {
+            !is_object($value) &&
+            !in_array($comparison->getOperator(), array(Comparison::IN, Comparison::NIN))
+        ) {
 
             throw PersisterException::matchingAssocationFieldRequiresObject($this->classMetadata->name, $field);
         }
@@ -93,7 +94,7 @@ class SqlExpressionVisitor extends ExpressionVisitor
             $expressionList[] = $this->dispatch($child);
         }
 
-        switch($expr->getType()) {
+        switch ($expr->getType()) {
             case CompositeExpression::TYPE_AND:
                 return '(' . implode(' AND ', $expressionList) . ')';
 

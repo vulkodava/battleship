@@ -32,7 +32,7 @@ interface EntityListenerResolver
      * Clear all instances from the set, or a specific class when given.
      *
      * @param  string $className The fully-qualified class name
-     * 
+     *
      * @return void
      */
     function clear($className = null);
@@ -41,7 +41,7 @@ interface EntityListenerResolver
      * Returns a entity listener instance for the given class name.
      *
      * @param   string $className The fully-qualified class name
-     * 
+     *
      * @return  object An entity listener
      */
     function resolve($className);

@@ -20,11 +20,12 @@ class SessionManager extends AbstractManager
      * Default options when a call to {@link destroy()} is made
      * - send_expire_cookie: whether or not to send a cookie expiring the current session cookie
      * - clear_storage: whether or not to empty the storage object of any stored values
+     *
      * @var array
      */
     protected $defaultDestroyOptions = array(
         'send_expire_cookie' => true,
-        'clear_storage'      => false,
+        'clear_storage' => false,
     );
 
     /**
@@ -65,6 +66,7 @@ class SessionManager extends AbstractManager
         if (headers_sent()) {
             return true;
         }
+
         return false;
     }
 
@@ -160,7 +162,7 @@ class SessionManager extends AbstractManager
         // session_write_close() operation, no changes made to it will be
         // flushed to the session handler. As such, we now mark the storage
         // object isImmutable.
-        $storage  = $this->getStorage();
+        $storage = $this->getStorage();
         if (!$storage->isImmutable()) {
             $_SESSION = $storage->toArray(true);
             session_write_close();
@@ -195,6 +197,7 @@ class SessionManager extends AbstractManager
 
         $this->name = $name;
         session_name($name);
+
         return $this;
     }
 
@@ -214,6 +217,7 @@ class SessionManager extends AbstractManager
             // in order to do things such as setting cookies.
             $this->name = session_name();
         }
+
         return $this->name;
     }
 
@@ -231,6 +235,7 @@ class SessionManager extends AbstractManager
             throw new Exception\RuntimeException('Session has already been started, to change the session ID call regenerateId()');
         }
         session_id($id);
+
         return $this;
     }
 
@@ -257,7 +262,8 @@ class SessionManager extends AbstractManager
      */
     public function regenerateId($deleteOldSession = true)
     {
-        session_regenerate_id((bool) $deleteOldSession);
+        session_regenerate_id((bool)$deleteOldSession);
+
         return $this;
     }
 
@@ -275,6 +281,7 @@ class SessionManager extends AbstractManager
             $ttl = $this->getConfig()->getRememberMeSeconds();
         }
         $this->setSessionCookieLifetime($ttl);
+
         return $this;
     }
 
@@ -288,6 +295,7 @@ class SessionManager extends AbstractManager
     public function forgetMe()
     {
         $this->setSessionCookieLifetime(0);
+
         return $this;
     }
 
@@ -302,6 +310,7 @@ class SessionManager extends AbstractManager
     public function setValidatorChain(EventManagerInterface $chain)
     {
         $this->validatorChain = $chain;
+
         return $this;
     }
 
@@ -317,6 +326,7 @@ class SessionManager extends AbstractManager
         if (null === $this->validatorChain) {
             $this->setValidatorChain(new ValidatorChain($this->getStorage()));
         }
+
         return $this->validatorChain;
     }
 
@@ -338,6 +348,7 @@ class SessionManager extends AbstractManager
             // If execution was halted, validation failed
             return false;
         }
+
         // Otherwise, we're good to go
         return true;
     }

@@ -49,7 +49,7 @@ class TestCase extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $em   = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $tool = new SchemaTool($em);
         $tool->updateSchema($em->getMetadataFactory()->getAllMetadata());
         $this->hasDb = true;
@@ -60,7 +60,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function dropDb()
     {
-        $em   = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $tool = new SchemaTool($em);
         $tool->dropSchema($em->getMetadataFactory()->getAllMetadata());
         $em->clear();

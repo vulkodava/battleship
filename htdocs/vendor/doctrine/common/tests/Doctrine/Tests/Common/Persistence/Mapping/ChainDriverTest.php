@@ -16,25 +16,25 @@ class DriverChainTest extends DoctrineTestCase
 
         $driver1 = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
         $driver1->expects($this->never())
-                ->method('loadMetadataForClass');
+            ->method('loadMetadataForClass');
         $driver1->expectS($this->never())
-                ->method('isTransient');
+            ->method('isTransient');
 
         $driver2 = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
         $driver2->expects($this->at(0))
-                ->method('loadMetadataForClass')
-                ->with($this->equalTo($className), $this->equalTo($classMetadata));
+            ->method('loadMetadataForClass')
+            ->with($this->equalTo($className), $this->equalTo($classMetadata));
         $driver2->expects($this->at(1))
-                ->method('isTransient')
-                ->with($this->equalTo($className))
-                ->will($this->returnValue( true ));
+            ->method('isTransient')
+            ->with($this->equalTo($className))
+            ->will($this->returnValue(true));
 
         $chain->addDriver($driver1, 'Doctrine\Tests\Models\Company');
         $chain->addDriver($driver2, 'Doctrine\Tests\Common\Persistence\Mapping');
 
         $chain->loadMetadataForClass($className, $classMetadata);
 
-        $this->assertTrue( $chain->isTransient($className) );
+        $this->assertTrue($chain->isTransient($className));
     }
 
     public function testLoadMetadata_NoDelegatorFound_ThrowsMappingException()
@@ -57,13 +57,13 @@ class DriverChainTest extends DoctrineTestCase
 
         $driver1 = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
         $driver1->expects($this->once())
-                ->method('getAllClassNames')
-                ->will($this->returnValue(array('Doctrine\Tests\Models\Company\Foo')));
+            ->method('getAllClassNames')
+            ->will($this->returnValue(array('Doctrine\Tests\Models\Company\Foo')));
 
         $driver2 = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
         $driver2->expects($this->once())
-                ->method('getAllClassNames')
-                ->will($this->returnValue(array('Doctrine\Tests\ORM\Mapping\Bar', 'Doctrine\Tests\ORM\Mapping\Baz', 'FooBarBaz')));
+            ->method('getAllClassNames')
+            ->will($this->returnValue(array('Doctrine\Tests\ORM\Mapping\Bar', 'Doctrine\Tests\ORM\Mapping\Baz', 'FooBarBaz')));
 
         $chain->addDriver($driver1, 'Doctrine\Tests\Models\Company');
         $chain->addDriver($driver2, 'Doctrine\Tests\ORM\Mapping');
@@ -92,11 +92,11 @@ class DriverChainTest extends DoctrineTestCase
      */
     public function testDefaultDriver()
     {
-        $companyDriver      = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
-        $defaultDriver      = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
-        $entityClassName    = 'Doctrine\Tests\ORM\Mapping\DriverChainEntity';
-        $managerClassName   = 'Doctrine\Tests\Models\Company\CompanyManager';
-        $chain              = new MappingDriverChain();
+        $companyDriver = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
+        $defaultDriver = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
+        $entityClassName = 'Doctrine\Tests\ORM\Mapping\DriverChainEntity';
+        $managerClassName = 'Doctrine\Tests\Models\Company\CompanyManager';
+        $chain = new MappingDriverChain();
 
         $companyDriver->expects($this->never())
             ->method('loadMetadataForClass');
@@ -127,7 +127,7 @@ class DriverChainTest extends DoctrineTestCase
     {
         $companyDriver = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
         $defaultDriver = $this->getMock('Doctrine\Common\Persistence\Mapping\Driver\MappingDriver');
-        $chain         = new MappingDriverChain();
+        $chain = new MappingDriverChain();
 
         $companyDriver->expects($this->once())
             ->method('getAllClassNames')

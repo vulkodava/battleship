@@ -35,11 +35,11 @@ class Callback implements AdapterInterface
      */
     public function __construct($itemsCallback, $countCallback)
     {
-        if (! $itemsCallback instanceof CallbackHandler) {
+        if (!$itemsCallback instanceof CallbackHandler) {
             $itemsCallback = new CallbackHandler($itemsCallback);
         }
 
-        if (! $countCallback instanceof CallbackHandler) {
+        if (!$countCallback instanceof CallbackHandler) {
             $countCallback = new CallbackHandler($countCallback);
         }
 
@@ -52,7 +52,7 @@ class Callback implements AdapterInterface
      *
      * Executes the {$itemsCallback}.
      *
-     * @param  int $offset Page offset
+     * @param  int $offset           Page offset
      * @param  int $itemCountPerPage Number of items per page
      * @return array
      */

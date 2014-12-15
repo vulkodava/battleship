@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -35,12 +35,12 @@ class Module implements
     public function onBootstrap(EventInterface $event)
     {
         /* @var $app \Zend\Mvc\ApplicationInterface */
-        $app            = $event->getTarget();
+        $app = $event->getTarget();
         /* @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
         $serviceManager = $app->getServiceManager();
-        $config         = $serviceManager->get('BjyAuthorize\Config');
-        $strategy       = $serviceManager->get($config['unauthorized_strategy']);
-        $guards         = $serviceManager->get('BjyAuthorize\Guards');
+        $config = $serviceManager->get('BjyAuthorize\Config');
+        $strategy = $serviceManager->get($config['unauthorized_strategy']);
+        $guards = $serviceManager->get('BjyAuthorize\Guards');
 
         foreach ($guards as $guard) {
             $app->getEventManager()->attach($guard);

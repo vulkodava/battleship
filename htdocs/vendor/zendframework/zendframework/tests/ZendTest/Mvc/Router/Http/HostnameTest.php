@@ -60,7 +60,7 @@ class HostnameTest extends TestCase
                 new Hostname(
                     'www.:domain.com',
                     array('domain' => '(mydomain|myaltdomain1|myaltdomain2)'),
-                    array('domain'    => 'mydomain')
+                    array('domain' => 'mydomain')
                 ),
                 'www.mydomain.com',
                 array('domain' => 'mydomain')
@@ -161,8 +161,8 @@ class HostnameTest extends TestCase
     /**
      * @dataProvider routeProvider
      * @param        Hostname $route
-     * @param        string   $hostname
-     * @param        array    $params
+     * @param        string $hostname
+     * @param        array $params
      */
     public function testMatching(Hostname $route, $hostname, array $params = null)
     {
@@ -184,8 +184,8 @@ class HostnameTest extends TestCase
     /**
      * @dataProvider routeProvider
      * @param        Hostname $route
-     * @param        string   $hostname
-     * @param        array    $params
+     * @param        string $hostname
+     * @param        array $params
      */
     public function testAssembling(Hostname $route, $hostname, array $params = null)
     {
@@ -194,7 +194,7 @@ class HostnameTest extends TestCase
             return;
         }
 
-        $uri  = new HttpUri();
+        $uri = new HttpUri();
         $path = $route->assemble($params, array('uri' => $uri));
 
         $this->assertEquals('', $path);
@@ -203,7 +203,7 @@ class HostnameTest extends TestCase
 
     public function testNoMatchWithoutUriMethod()
     {
-        $route   = new Hostname('example.com');
+        $route = new Hostname('example.com');
         $request = new BaseRequest();
 
         $this->assertNull($route->match($request));
@@ -214,14 +214,14 @@ class HostnameTest extends TestCase
         $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Missing parameter "foo"');
 
         $route = new Hostname(':foo.example.com');
-        $uri   = new HttpUri();
+        $uri = new HttpUri();
         $route->assemble(array(), array('uri' => $uri));
     }
 
     public function testGetAssembledParams()
     {
         $route = new Hostname(':foo.example.com');
-        $uri   = new HttpUri();
+        $uri = new HttpUri();
         $route->assemble(array('foo' => 'bar', 'baz' => 'bat'), array('uri' => $uri));
 
         $this->assertEquals(array('foo'), $route->getAssembledParams());

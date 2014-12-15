@@ -18,15 +18,15 @@ class PubSubHubbub
     /**
      * Verification Modes
      */
-    const VERIFICATION_MODE_SYNC  = 'sync';
+    const VERIFICATION_MODE_SYNC = 'sync';
     const VERIFICATION_MODE_ASYNC = 'async';
 
     /**
      * Subscription States
      */
-    const SUBSCRIPTION_VERIFIED    = 'verified';
+    const SUBSCRIPTION_VERIFIED = 'verified';
     const SUBSCRIPTION_NOTVERIFIED = 'not_verified';
-    const SUBSCRIPTION_TODELETE    = 'to_delete';
+    const SUBSCRIPTION_TODELETE = 'to_delete';
 
     /**
      * @var Escaper
@@ -58,9 +58,10 @@ class PubSubHubbub
             $feed = $source;
         } else {
             throw new Exception\InvalidArgumentException('The source parameter was'
-            . ' invalid, i.e. not a URL string or an instance of type'
-            . ' Zend\Feed\Reader\Feed\AbstractFeed');
+                . ' invalid, i.e. not a URL string or an instance of type'
+                . ' Zend\Feed\Reader\Feed\AbstractFeed');
         }
+
         return $feed->getHubs();
     }
 
@@ -90,6 +91,7 @@ class PubSubHubbub
         } else {
             static::$httpClient->resetParameters();
         }
+
         return static::$httpClient;
     }
 
@@ -128,6 +130,7 @@ class PubSubHubbub
         if (null === static::$escaper) {
             static::setEscaper(new Escaper());
         }
+
         return static::$escaper;
     }
 
@@ -139,9 +142,10 @@ class PubSubHubbub
      */
     public static function urlencode($string)
     {
-        $escaper    = static::getEscaper();
+        $escaper = static::getEscaper();
         $rawencoded = $escaper->escapeUrl($string);
         $rfcencoded = str_replace('%7E', '~', $rawencoded);
+
         return $rfcencoded;
     }
 }

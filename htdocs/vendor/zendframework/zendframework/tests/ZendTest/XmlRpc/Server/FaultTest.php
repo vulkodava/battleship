@@ -56,6 +56,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests ZF-1825
+     *
      * @return void
      */
     public function testAttachFaultExceptionAllowsForDerivativeExceptionClasses()
@@ -183,20 +184,20 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function test__toString()
     {
-        $dom  = new \DOMDocument('1.0', 'UTF-8');
-        $r    = $dom->appendChild($dom->createElement('methodResponse'));
-        $f    = $r->appendChild($dom->createElement('fault'));
-        $v    = $f->appendChild($dom->createElement('value'));
-        $s    = $v->appendChild($dom->createElement('struct'));
+        $dom = new \DOMDocument('1.0', 'UTF-8');
+        $r = $dom->appendChild($dom->createElement('methodResponse'));
+        $f = $r->appendChild($dom->createElement('fault'));
+        $v = $f->appendChild($dom->createElement('value'));
+        $s = $v->appendChild($dom->createElement('struct'));
 
-        $m1   = $s->appendChild($dom->createElement('member'));
+        $m1 = $s->appendChild($dom->createElement('member'));
         $m1->appendChild($dom->createElement('name', 'faultCode'));
-        $cv   = $m1->appendChild($dom->createElement('value'));
+        $cv = $m1->appendChild($dom->createElement('value'));
         $cv->appendChild($dom->createElement('int', 411));
 
-        $m2   = $s->appendChild($dom->createElement('member'));
+        $m2 = $s->appendChild($dom->createElement('member'));
         $m2->appendChild($dom->createElement('name', 'faultString'));
-        $sv   = $m2->appendChild($dom->createElement('value'));
+        $sv = $m2->appendChild($dom->createElement('value'));
         $sv->appendChild($dom->createElement('string', 'Testing fault'));
 
         $xml = $dom->saveXML();
@@ -212,12 +213,15 @@ class FaultTest extends \PHPUnit_Framework_TestCase
 class Exception extends \Exception
 {
 }
+
 class Exception2 extends \Exception
 {
 }
+
 class Exception3 extends \Exception
 {
 }
+
 class Exception4 extends Exception
 {
 }

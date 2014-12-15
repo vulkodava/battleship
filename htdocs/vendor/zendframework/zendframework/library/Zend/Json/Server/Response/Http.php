@@ -47,6 +47,7 @@ class Http extends JsonResponse
 
         if (!$this->isError() && (null === $this->getId())) {
             header('HTTP/1.1 204 No Content');
+
             return;
         }
 

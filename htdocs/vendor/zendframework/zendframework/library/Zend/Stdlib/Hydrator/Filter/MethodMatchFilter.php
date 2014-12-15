@@ -12,19 +12,21 @@ class MethodMatchFilter implements FilterInterface
 {
     /**
      * The method to exclude
+     *
      * @var string
      */
     protected $method = null;
 
     /**
      * Either an exclude or an include
+     *
      * @var bool
      */
     protected $exclude = null;
 
     /**
      * @param string $method The method to exclude or include
-     * @param bool $exclude If the method should be excluded
+     * @param bool $exclude  If the method should be excluded
      */
     public function __construct($method, $exclude = true)
     {
@@ -43,6 +45,7 @@ class MethodMatchFilter implements FilterInterface
         if (substr($property, $pos) === $this->method) {
             return $this->exclude ? false : true;
         }
+
         return $this->exclude ? true : false;
     }
 }

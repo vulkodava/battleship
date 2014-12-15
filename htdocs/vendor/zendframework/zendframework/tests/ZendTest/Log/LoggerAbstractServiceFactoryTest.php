@@ -39,7 +39,7 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->setService('Config', array(
             'log' => array(
                 'Application\Frontend' => array(),
-                'Application\Backend'  => array(),
+                'Application\Backend' => array(),
             ),
         ));
     }
@@ -104,13 +104,13 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
                 'Application\Log' => array(
                     'writers' => array(
                         array(
-                            'name'     => 'db',
+                            'name' => 'db',
                             'priority' => 1,
-                            'options'  => array(
+                            'options' => array(
                                 'separator' => '_',
-                                'column'    => array(),
-                                'table'     => 'applicationlog',
-                                'db'        => 'Db\Logger',
+                                'column' => array(),
+                                'table' => 'applicationlog',
+                                'db' => 'Db\Logger',
                             ),
                         ),
                     ),
@@ -120,7 +120,7 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $logger = $serviceManager->get('Application\Log');
         $this->assertInstanceOf('Zend\Log\Logger', $logger);
         $writers = $logger->getWriters();
-        $found   = false;
+        $found = false;
         foreach ($writers as $writer) {
             if ($writer instanceof DbWriter) {
                 $found = true;

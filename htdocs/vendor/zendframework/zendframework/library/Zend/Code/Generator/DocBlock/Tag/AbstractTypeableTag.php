@@ -14,6 +14,7 @@ use Zend\Code\Generator\AbstractGenerator;
 /**
  * This abstract class can be used as parent for all tags
  * that use a type part in their content.
+ *
  * @see http://www.phpdoc.org/docs/latest/for-users/phpdoc/types.html
  */
 abstract class AbstractTypeableTag extends AbstractGenerator
@@ -50,6 +51,7 @@ abstract class AbstractTypeableTag extends AbstractGenerator
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -74,6 +76,7 @@ abstract class AbstractTypeableTag extends AbstractGenerator
             $types = explode('|', $types);
         }
         $this->types = $types;
+
         return $this;
     }
 

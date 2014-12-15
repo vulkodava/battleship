@@ -262,8 +262,8 @@ class ManyToManyBasicAssociationTest extends \Doctrine\Tests\OrmFunctionalTestCa
         $this->_em->clear();
 
         $newUser = $this->_em->createQuery('SELECT u, g FROM Doctrine\Tests\Models\CMS\CmsUser u LEFT JOIN u.groups g WHERE u.id = ?1')
-                             ->setParameter(1, $user->getId())
-                             ->getSingleResult();
+            ->setParameter(1, $user->getId())
+            ->getSingleResult();
         $this->assertEquals(0, count($newUser->groups));
         $this->assertInternalType('array', $newUser->groups->getMapping());
 
@@ -287,7 +287,7 @@ class ManyToManyBasicAssociationTest extends \Doctrine\Tests\OrmFunctionalTestCa
         $user->username = 'gblanco';
         $user->status = 'developer';
 
-        for ($i=0; $i < $groupCount; ++$i) {
+        for ($i = 0; $i < $groupCount; ++$i) {
             $group = new CmsGroup;
             $group->name = 'Developers_' . $i;
             $user->addGroup($group);

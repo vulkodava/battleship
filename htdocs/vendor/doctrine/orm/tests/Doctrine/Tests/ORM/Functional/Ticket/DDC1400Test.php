@@ -1,6 +1,7 @@
 <?php
 
 namespace Doctrine\Tests\ORM\Functional\Ticket;
+
 use Doctrine\ORM\UnitOfWork;
 
 require_once __DIR__ . '/../../../TestInit.php';
@@ -53,9 +54,9 @@ class DDC1400Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
         $this->_em->clear();
 
-        $user1 = $this->_em->getReference(__NAMESPACE__.'\DDC1400User', $user1->id);
+        $user1 = $this->_em->getReference(__NAMESPACE__ . '\DDC1400User', $user1->id);
 
-        $q = $this->_em->createQuery("SELECT a, s FROM ".__NAMESPACE__."\DDC1400Article a JOIN a.userStates s WITH s.user = :activeUser");
+        $q = $this->_em->createQuery("SELECT a, s FROM " . __NAMESPACE__ . "\DDC1400Article a JOIN a.userStates s WITH s.user = :activeUser");
         $q->setParameter('activeUser', $user1);
         $articles = $q->getResult();
 
@@ -107,14 +108,14 @@ class DDC1400UserState
 {
 
     /**
-      * @Id
-     *  @ManyToOne(targetEntity="DDC1400Article", inversedBy="userStates")
+     * @Id
+     * @ManyToOne(targetEntity="DDC1400Article", inversedBy="userStates")
      */
     public $article;
 
     /**
-      * @Id
-     *  @ManyToOne(targetEntity="DDC1400User", inversedBy="userStates")
+     * @Id
+     * @ManyToOne(targetEntity="DDC1400User", inversedBy="userStates")
      */
     public $user;
 

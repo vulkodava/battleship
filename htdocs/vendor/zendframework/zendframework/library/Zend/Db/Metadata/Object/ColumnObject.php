@@ -142,6 +142,7 @@ class ColumnObject
     public function setTableName($tableName)
     {
         $this->tableName = $tableName;
+
         return $this;
     }
 
@@ -180,6 +181,7 @@ class ColumnObject
     public function setOrdinalPosition($ordinalPosition)
     {
         $this->ordinalPosition = $ordinalPosition;
+
         return $this;
     }
 
@@ -198,6 +200,7 @@ class ColumnObject
     public function setColumnDefault($columnDefault)
     {
         $this->columnDefault = $columnDefault;
+
         return $this;
     }
 
@@ -216,6 +219,7 @@ class ColumnObject
     public function setIsNullable($isNullable)
     {
         $this->isNullable = $isNullable;
+
         return $this;
     }
 
@@ -242,6 +246,7 @@ class ColumnObject
     public function setDataType($dataType)
     {
         $this->dataType = $dataType;
+
         return $this;
     }
 
@@ -260,6 +265,7 @@ class ColumnObject
     public function setCharacterMaximumLength($characterMaximumLength)
     {
         $this->characterMaximumLength = $characterMaximumLength;
+
         return $this;
     }
 
@@ -278,6 +284,7 @@ class ColumnObject
     public function setCharacterOctetLength($characterOctetLength)
     {
         $this->characterOctetLength = $characterOctetLength;
+
         return $this;
     }
 
@@ -296,6 +303,7 @@ class ColumnObject
     public function setNumericPrecision($numericPrecision)
     {
         $this->numericPrecision = $numericPrecision;
+
         return $this;
     }
 
@@ -314,6 +322,7 @@ class ColumnObject
     public function setNumericScale($numericScale)
     {
         $this->numericScale = $numericScale;
+
         return $this;
     }
 
@@ -332,6 +341,7 @@ class ColumnObject
     public function setNumericUnsigned($numericUnsigned)
     {
         $this->numericUnsigned = $numericUnsigned;
+
         return $this;
     }
 
@@ -360,6 +370,7 @@ class ColumnObject
         foreach ($erratas as $name => $value) {
             $this->setErrata($name, $value);
         }
+
         return $this;
     }
 
@@ -372,6 +383,7 @@ class ColumnObject
         if (array_key_exists($errataName, $this->errata)) {
             return $this->errata[$errataName];
         }
+
         return null;
     }
 
@@ -383,6 +395,7 @@ class ColumnObject
     public function setErrata($errataName, $errataValue)
     {
         $this->errata[$errataName] = $errataValue;
+
         return $this;
     }
 }

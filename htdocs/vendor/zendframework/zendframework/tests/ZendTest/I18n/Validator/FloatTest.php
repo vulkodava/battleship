@@ -34,7 +34,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ext/intl not enabled');
         }
 
-        $this->locale    = Locale::getDefault();
+        $this->locale = Locale::getDefault();
         $this->validator = new FloatValidator(array('locale' => 'en'));
     }
 
@@ -49,9 +49,9 @@ class FloatTest extends \PHPUnit_Framework_TestCase
      * Test float and interger type variables. Includes decimal and scientific notation NumberFormatter-formatted
      * versions. Should return true for all locales.
      *
-     * @param string  $value    that will be tested
+     * @param string $value     that will be tested
      * @param boolean $expected expected result of assertion
-     * @param string  $locale   locale for validation
+     * @param string $locale    locale for validation
      * @dataProvider floatAndIntegerProvider
      * @return void
      */
@@ -70,8 +70,8 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
     public function floatAndIntegerProvider()
     {
-        $trueArray       = array();
-        $testingLocales  = array('ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru');
+        $trueArray = array();
+        $testingLocales = array('ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru');
         $testingExamples = array(1000, -2000, +398.00, 0.04, -0.5, .6, -.70, 8E10, -9.3456E-2, 10.23E6,
             123.1234567890987654321);
 
@@ -97,6 +97,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
                 );
             }
         }
+
         return $trueArray;
     }
 
@@ -105,9 +106,9 @@ class FloatTest extends \PHPUnit_Framework_TestCase
      * NO-BREAK SPACE, ARABIC THOUSANDS SEPARATOR, and ARABIC DECIMAL SEPARATOR are replaced with more typical ASCII
      * characters.
      *
-     * @param string  $value    that will be tested
+     * @param string $value     that will be tested
      * @param boolean $expected expected result of assertion
-     * @param string  $locale   locale for validation
+     * @param string $locale    locale for validation
      * @dataProvider lookAlikeProvider
      * @return void
      */
@@ -124,8 +125,8 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
     public function lookAlikeProvider()
     {
-        $trueArray     = array();
-        $testingArray  = array(
+        $trueArray = array();
+        $testingArray = array(
             'ar' => "\xD9\xA1'\xD9\xA1\xD9\xA1\xD9\xA1,\xD9\xA2\xD9\xA3",
             'ru' => '2 000,00'
         );
@@ -134,6 +135,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         foreach ($testingArray as $locale => $example) {
             $trueArray[] = array($example, true, $locale);
         }
+
         return $trueArray;
     }
 
@@ -142,9 +144,9 @@ class FloatTest extends \PHPUnit_Framework_TestCase
      * NO-BREAK SPACE, ARABIC THOUSANDS SEPARATOR, and ARABIC DECIMAL SEPARATOR are replaced with more typical ASCII
      * characters.
      *
-     * @param string  $value    that will be tested
+     * @param string $value     that will be tested
      * @param boolean $expected expected result of assertion
-     * @param string  $locale   locale for validation
+     * @param string $locale    locale for validation
      * @dataProvider validationFailureProvider
      * @return void
      */
@@ -161,11 +163,11 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
     public function validationFailureProvider()
     {
-        $trueArray     = array();
-        $testingArray  = array(
-            'ar'    => array('10.1', '66notflot.6'),
-            'ru'    => array('10.1', '66notflot.6', '2,000.00', '2 00'),
-            'en'    => array('10,1', '66notflot.6', '2.000,00', '2 000', '2,00'),
+        $trueArray = array();
+        $testingArray = array(
+            'ar' => array('10.1', '66notflot.6'),
+            'ru' => array('10.1', '66notflot.6', '2,000.00', '2 00'),
+            'en' => array('10,1', '66notflot.6', '2.000,00', '2 000', '2,00'),
             'fr-CH' => array('10,1', '66notflot.6', '2,000.00', '2 000', "2'00")
         );
 
@@ -175,6 +177,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
                 $trueArray[] = array($example, false, $locale);
             }
         }
+
         return $trueArray;
     }
 

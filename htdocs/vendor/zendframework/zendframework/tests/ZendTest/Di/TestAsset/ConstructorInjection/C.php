@@ -13,6 +13,7 @@ class C
 {
     public $a = null;
     public $params = array();
+
     public function __construct(A $a, array $params = array())
     {
         $this->a = $a;

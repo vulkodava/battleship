@@ -68,8 +68,8 @@ class Image extends AbstractHelper
     /**
      * Invoke Image
      *
-     * @param  string      $src
-     * @param  string      $class
+     * @param  string $src
+     * @param  string $class
      * @return string|self
      */
     public function __invoke($src = '', $class = '')

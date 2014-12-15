@@ -9,7 +9,7 @@ return array(
 
             'orm_default' => array(
                 'drivers' => array(
-                    'ZfcUser\Entity'  => 'zfcuser_entity'
+                    'ZfcUser\Entity' => 'zfcuser_entity'
                 )
             )
         )

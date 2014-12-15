@@ -19,7 +19,7 @@ class CustomForm extends Form
         parent::__construct('test_form');
 
         $this->setAttribute('method', 'post')
-             ->setHydrator(new ClassMethodsHydrator());
+            ->setHydrator(new ClassMethodsHydrator());
 
         $this->add(array(
             'name' => 'submit',

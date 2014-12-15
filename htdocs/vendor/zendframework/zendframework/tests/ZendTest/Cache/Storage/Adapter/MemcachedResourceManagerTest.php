@@ -75,7 +75,7 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
                 ),
                 '',
                 array(
-                    array('host' => '127.0.0.1', 'port' => 1234,  'weight' => 0),
+                    array('host' => '127.0.0.1', 'port' => 1234, 'weight' => 0),
                     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 0),
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3),
                     array('host' => 'localhost', 'port' => 11211, 'weight' => 0),
@@ -97,7 +97,7 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
                 ),
                 '',
                 array(
-                    array('host' => '127.0.0.1', 'port' => 1234,  'weight' => 0),
+                    array('host' => '127.0.0.1', 'port' => 1234, 'weight' => 0),
                     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 0),
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3),
                     array('host' => 'localhost', 'port' => 11211, 'weight' => 0),
@@ -119,7 +119,7 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
                 ),
                 '',
                 array(
-                    array('host' => '127.0.0.1', 'port' => 1234,  'weight' => 0),
+                    array('host' => '127.0.0.1', 'port' => 1234, 'weight' => 0),
                     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 0),
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3),
                     array('host' => 'localhost', 'port' => 11211, 'weight' => 0),
@@ -133,14 +133,14 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
                 array(
                     'servers' => array(
                         array(
-                           'host' => '127.0.0.1',
-                           'port' => 1234,
+                            'host' => '127.0.0.1',
+                            'port' => 1234,
                         ),
                         array(
-                           'host' => '127.0.0.1',
+                            'host' => '127.0.0.1',
                         ),
                         array(
-                            'host'   => '192.1.0.1',
+                            'host' => '192.1.0.1',
                             'weight' => 3,
                         ),
                         array(
@@ -155,7 +155,7 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
                 ),
                 '',
                 array(
-                    array('host' => '127.0.0.1', 'port' => 1234,  'weight' => 0),
+                    array('host' => '127.0.0.1', 'port' => 1234, 'weight' => 0),
                     array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 0),
                     array('host' => '192.1.0.1', 'port' => 11211, 'weight' => 3),
                     array('host' => 'localhost', 'port' => 11211, 'weight' => 0),
@@ -169,14 +169,14 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
                 array(
                     'lib_options' => array(
                         'COMPRESSION' => false,
-                        'PREFIX_KEY'  => 'test_',
+                        'PREFIX_KEY' => 'test_',
                     ),
                 ),
                 '',
                 array(),
                 class_exists('Memcached', false) ? array(
                     \Memcached::OPT_COMPRESSION => false,
-                    \Memcached::OPT_PREFIX_KEY  => 'test_',
+                    \Memcached::OPT_PREFIX_KEY => 'test_',
                 ) : array(),
             ),
 
@@ -186,14 +186,14 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
                 array(
                     'lib_options' => class_exists('Memcached', false) ? array(
                         \Memcached::OPT_COMPRESSION => false,
-                        \Memcached::OPT_PREFIX_KEY  => 'test_',
+                        \Memcached::OPT_PREFIX_KEY => 'test_',
                     ) : array(),
                 ),
                 '',
                 array(),
                 class_exists('Memcached', false) ? array(
                     \Memcached::OPT_COMPRESSION => false,
-                    \Memcached::OPT_PREFIX_KEY  => 'test_',
+                    \Memcached::OPT_PREFIX_KEY => 'test_',
                 ) : array(),
             ),
         );
@@ -204,10 +204,10 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validResourceProvider
      * @param string $resourceId
-     * @param mixed  $resource
+     * @param mixed $resource
      * @param string $expectedPersistentId
-     * @param array  $expectedServers
-     * @param array  $expectedLibOptions
+     * @param array $expectedServers
+     * @param array $expectedLibOptions
      */
     public function testValidResources($resourceId, $resource, $expectedPersistentId, $expectedServers, $expectedLibOptions)
     {

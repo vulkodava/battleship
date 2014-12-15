@@ -109,6 +109,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         if ($this->driver instanceof Profiler\ProfilerAwareInterface) {
             $this->driver->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -131,6 +132,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         if ($this->driver == null) {
             throw new Exception\RuntimeException('Driver has not been set or configured for this adapter.');
         }
+
         return $this->driver;
     }
 
@@ -193,6 +195,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         if ($result instanceof Driver\ResultInterface && $result->isQueryResult()) {
             $resultSet = clone ($resultPrototype ?: $this->queryResultSetPrototype);
             $resultSet->initialize($result);
+
             return $resultSet;
         }
 
@@ -213,6 +216,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
             $initialParameters = new ParameterContainer((is_array($initialParameters) ? $initialParameters : array()));
         }
         $statement->setParameterContainer($initialParameters);
+
         return $statement;
     }
 
@@ -223,10 +227,14 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         foreach (func_get_args() as $arg) {
             switch ($arg) {
                 case self::FUNCTION_QUOTE_IDENTIFIER:
-                    $functions[] = function ($value) use ($platform) { return $platform->quoteIdentifier($value); };
+                    $functions[] = function ($value) use ($platform) {
+                        return $platform->quoteIdentifier($value);
+                    };
                     break;
                 case self::FUNCTION_QUOTE_VALUE:
-                    $functions[] = function ($value) use ($platform) { return $platform->quoteValue($value); };
+                    $functions[] = function ($value) use ($platform) {
+                        return $platform->quoteValue($value);
+                    };
                     break;
 
             }
@@ -272,7 +280,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
 
         $options = array();
         if (isset($parameters['options'])) {
-            $options = (array) $parameters['options'];
+            $options = (array)$parameters['options'];
             unset($parameters['options']);
         }
 
@@ -328,6 +336,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
             case 'Mysql':
                 // mysqli or pdo_mysql driver
                 $driver = ($this->driver instanceof Driver\Mysqli\Mysqli || $this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null;
+
                 return new Platform\Mysql($driver);
             case 'SqlServer':
                 // PDO is only supported driver for quoting values in this platform
@@ -341,6 +350,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
             case 'Postgresql':
                 // pgsql or pdo postgres driver
                 $driver = ($this->driver instanceof Driver\Pgsql\Pgsql || $this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null;
+
                 return new Platform\Postgresql($driver);
             case 'IbmDb2':
                 // ibm_db2 driver escaping does not need an action connection
@@ -361,6 +371,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
                 '"profiler" parameter must be an instance of ProfilerInterface or a boolean'
             );
         }
+
         return $profiler;
     }
 

@@ -20,7 +20,8 @@
 namespace Doctrine\ORM\Query\AST;
 
 /**
- * SubselectFromClause ::= "FROM" SubselectIdentificationVariableDeclaration {"," SubselectIdentificationVariableDeclaration}*
+ * SubselectFromClause ::= "FROM" SubselectIdentificationVariableDeclaration {","
+ * SubselectIdentificationVariableDeclaration}*
  *
  * @link    www.doctrine-project.org
  * @since   2.0

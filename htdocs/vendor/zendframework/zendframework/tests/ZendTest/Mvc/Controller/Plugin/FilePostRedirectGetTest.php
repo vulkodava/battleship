@@ -40,17 +40,17 @@ class FilePostRedirectGetTest extends TestCase
     {
         $this->form = new Form();
 
-        $this->collection = new Collection('links',array(
-                'count' => 1,
-                'allow_add' => true,
-                'target_element' => array(
-                    'type' => 'ZendTest\Mvc\Controller\Plugin\TestAsset\LinksFieldset',
-                ),
+        $this->collection = new Collection('links', array(
+            'count' => 1,
+            'allow_add' => true,
+            'target_element' => array(
+                'type' => 'ZendTest\Mvc\Controller\Plugin\TestAsset\LinksFieldset',
+            ),
         ));
 
         $router = new SimpleRouteStack;
         $router->addRoute('home', LiteralRoute::factory(array(
-            'route'    => '/',
+            'route' => '/',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             )
@@ -71,8 +71,8 @@ class FilePostRedirectGetTest extends TestCase
         )));
 
         $this->controller = new SampleController();
-        $this->request    = new Request();
-        $this->event      = new MvcEvent();
+        $this->request = new Request();
+        $this->event = new MvcEvent();
         $this->routeMatch = new RouteMatch(array('controller' => 'controller-sample', 'action' => 'postPage'));
 
         $this->event->setRequest($this->request);
@@ -88,7 +88,7 @@ class FilePostRedirectGetTest extends TestCase
 
     public function testReturnsFalseOnIntialGet()
     {
-        $result    = $this->controller->dispatch($this->request, $this->response);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $prgResult = $this->controller->fileprg($this->form, 'home');
 
         $this->assertFalse($prgResult);
@@ -228,7 +228,7 @@ class FilePostRedirectGetTest extends TestCase
         ));
         $inputFilter = new InputFilter();
         $inputFilter->add(array(
-            'name'     => 'postval1',
+            'name' => 'postval1',
             'required' => true,
         ));
         $this->form->setInputFilter($inputFilter);
@@ -244,7 +244,7 @@ class FilePostRedirectGetTest extends TestCase
         $this->request = new Request();
         $this->controller->dispatch($this->request, $this->response);
         $prgResult = $this->controller->fileprg($this->form, '/test/getPage', true);
-        $messages  = $this->form->getMessages();
+        $messages = $this->form->getMessages();
 
         $this->assertEquals($params, $prgResult);
         $this->assertNotEmpty($messages['postval1']['isEmpty']);
@@ -270,7 +270,7 @@ class FilePostRedirectGetTest extends TestCase
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
-        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri() , 'redirect to the same url');
+        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri(), 'redirect to the same url');
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
 
@@ -305,13 +305,13 @@ class FilePostRedirectGetTest extends TestCase
         $this->assertEquals('/', $prgResultUrl->getHeaders()->get('Location')->getUri());
         $this->assertEquals(303, $prgResultUrl->getStatusCode());
 
-        $this->assertCount(count($params['links']),  $this->form->get('links')->getFieldsets());
-        $this->assertCount(count($this->form->get('links')->getFieldsets()),  $this->form->getInputFilter()->get('links')->getInputs());
+        $this->assertCount(count($params['links']), $this->form->get('links')->getFieldsets());
+        $this->assertCount(count($this->form->get('links')->getFieldsets()), $this->form->getInputFilter()->get('links')->getInputs());
 
         // GET
         $this->request = new Request();
         $form = new Form();
-        $collection = new Collection('links',array(
+        $collection = new Collection('links', array(
             'count' => 1,
             'allow_add' => true,
             'target_element' => array(
@@ -320,11 +320,11 @@ class FilePostRedirectGetTest extends TestCase
         ));
         $form->add($collection);
         $this->controller->dispatch($this->request, $this->response);
-        $prgResult = $this->controller->fileprg( $form);
+        $prgResult = $this->controller->fileprg($form);
 
         $this->assertEquals($params, $prgResult);
-        $this->assertCount(count($params['links']),  $form->get('links')->getFieldsets());
-        $this->assertCount(count( $form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
+        $this->assertCount(count($params['links']), $form->get('links')->getFieldsets());
+        $this->assertCount(count($form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
     }
 
     public function testCollectionInputFilterIsInitializedBeforePluginRetrievesIt()
@@ -343,10 +343,10 @@ class FilePostRedirectGetTest extends TestCase
 
         $postData = array(
             'test_collection' => array(
-                array (
+                array(
                     'test_field' => 'foo'
                 ),
-                array (
+                array(
                     'test_field' => 'bar'
                 )
             )

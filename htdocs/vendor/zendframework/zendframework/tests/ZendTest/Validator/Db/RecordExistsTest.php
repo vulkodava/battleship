@@ -32,7 +32,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
 
         // Mock has result
-        $mockHasResultRow      = new ArrayObject();
+        $mockHasResultRow = new ArrayObject();
         $mockHasResultRow->one = 'one';
 
         $mockHasResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
@@ -102,9 +102,9 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicFindsRecord()
     {
-        $validator = new RecordExists(array('table'   => 'users',
-                                            'field'   => 'field1',
-                                            'adapter' => $this->getMockHasResult()));
+        $validator = new RecordExists(array('table' => 'users',
+            'field' => 'field1',
+            'adapter' => $this->getMockHasResult()));
         $this->assertTrue($validator->isValid('value1'));
     }
 
@@ -115,9 +115,9 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicFindsNoRecord()
     {
-        $validator = new RecordExists(array('table'   => 'users',
-                                            'field'   => 'field1',
-                                            'adapter' => $this->getMockNoResult()));
+        $validator = new RecordExists(array('table' => 'users',
+            'field' => 'field1',
+            'adapter' => $this->getMockNoResult()));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -128,11 +128,11 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArray()
     {
-        $validator = new RecordExists(array('table'   => 'users',
-                                            'field'   => 'field1',
-                                            'exclude' => array('field' => 'id',
-                                                               'value' => 1),
-                                            'adapter' => $this->getMockHasResult()));
+        $validator = new RecordExists(array('table' => 'users',
+            'field' => 'field1',
+            'exclude' => array('field' => 'id',
+                'value' => 1),
+            'adapter' => $this->getMockHasResult()));
         $this->assertTrue($validator->isValid('value3'));
     }
 
@@ -144,11 +144,11 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArrayNoRecord()
     {
-        $validator = new RecordExists(array('table'   => 'users',
-                                            'field'   => 'field1',
-                                            'exclude' => array('field' => 'id',
-                                                               'value' => 1),
-                                            'adapter' => $this->getMockNoResult()));
+        $validator = new RecordExists(array('table' => 'users',
+            'field' => 'field1',
+            'exclude' => array('field' => 'id',
+                'value' => 1),
+            'adapter' => $this->getMockNoResult()));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -160,10 +160,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithString()
     {
-        $validator = new RecordExists(array('table'   => 'users',
-                                            'field'   => 'field1',
-                                            'exclude' => 'id != 1',
-                                            'adapter' => $this->getMockHasResult()));
+        $validator = new RecordExists(array('table' => 'users',
+            'field' => 'field1',
+            'exclude' => 'id != 1',
+            'adapter' => $this->getMockHasResult()));
         $this->assertTrue($validator->isValid('value3'));
     }
 
@@ -198,7 +198,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new RecordExists('users', 'field1', 'id != 1');
         $this->setExpectedException('Zend\Validator\Exception\RuntimeException',
-                                    'No database adapter present');
+            'No database adapter present');
         $validator->isValid('nosuchvalue');
     }
 
@@ -210,7 +210,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testWithSchema()
     {
         $validator = new RecordExists(array('table' => 'users', 'schema' => 'my'),
-                                      'field1', null, $this->getMockHasResult());
+            'field1', null, $this->getMockHasResult());
         $this->assertTrue($validator->isValid('value1'));
     }
 
@@ -222,7 +222,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testWithSchemaNoResult()
     {
         $validator = new RecordExists(array('table' => 'users', 'schema' => 'my'),
-                                      'field1', null, $this->getMockNoResult());
+            'field1', null, $this->getMockNoResult());
         $this->assertFalse($validator->isValid('value1'));
     }
 
@@ -233,17 +233,17 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testSelectAcknowledgesTableAndSchema()
     {
         $validator = new RecordExists(array('table' => 'users', 'schema' => 'my'),
-                                      'field1', null, $this->getMockHasResult());
+            'field1', null, $this->getMockHasResult());
         $table = $validator->getSelect()->getRawState('table');
         $this->assertInstanceOf('Zend\Db\Sql\TableIdentifier', $table);
-        $this->assertEquals(array('users','my'), $table->getTableAndSchema());
+        $this->assertEquals(array('users', 'my'), $table->getTableAndSchema());
     }
 
     public function testEqualsMessageTemplates()
     {
-        $validator  = new RecordExists('users', 'field1');
+        $validator = new RecordExists('users', 'field1');
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 
     /**

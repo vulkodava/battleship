@@ -93,6 +93,7 @@ class PrototypeClassFactory
     public function hasPrototype($name)
     {
         $name = $this->normalizeName($name);
+
         return isset($this->prototypes[$name]);
     }
 

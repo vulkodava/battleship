@@ -33,9 +33,9 @@ class ConnectionMock extends \Doctrine\DBAL\Connection
     private $_executeUpdates = array();
 
     /**
-     * @param array                              $params
-     * @param \Doctrine\DBAL\Driver              $driver
-     * @param \Doctrine\DBAL\Configuration|null  $config
+     * @param array $params
+     * @param \Doctrine\DBAL\Driver $driver
+     * @param \Doctrine\DBAL\Configuration|null $config
      * @param \Doctrine\Common\EventManager|null $eventManager
      */
     public function __construct(array $params, $driver, $config = null, $eventManager = null)
@@ -96,6 +96,7 @@ class ConnectionMock extends \Doctrine\DBAL\Connection
         if (is_string($input)) {
             return "'" . $input . "'";
         }
+
         return $input;
     }
 

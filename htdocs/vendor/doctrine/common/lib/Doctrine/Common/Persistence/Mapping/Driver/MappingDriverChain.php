@@ -73,7 +73,7 @@ class MappingDriverChain implements MappingDriver
      * Adds a nested driver.
      *
      * @param MappingDriver $nestedDriver
-     * @param string        $namespace
+     * @param string $namespace
      *
      * @return void
      */
@@ -101,12 +101,14 @@ class MappingDriverChain implements MappingDriver
         foreach ($this->drivers as $namespace => $driver) {
             if (strpos($className, $namespace) === 0) {
                 $driver->loadMetadataForClass($className, $metadata);
+
                 return;
             }
         }
 
         if (null !== $this->defaultDriver) {
             $this->defaultDriver->loadMetadataForClass($className, $metadata);
+
             return;
         }
 

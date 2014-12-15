@@ -31,9 +31,9 @@ namespace Doctrine\ORM\Query\AST;
  */
 class Join extends Node
 {
-    const JOIN_TYPE_LEFT      = 1;
+    const JOIN_TYPE_LEFT = 1;
     const JOIN_TYPE_LEFTOUTER = 2;
-    const JOIN_TYPE_INNER     = 3;
+    const JOIN_TYPE_INNER = 3;
 
     /**
      * @var int
@@ -51,7 +51,7 @@ class Join extends Node
     public $conditionalExpression = null;
 
     /**
-     * @param int  $joinType
+     * @param int $joinType
      * @param Node $joinAssociationDeclaration
      */
     public function __construct($joinType, $joinAssociationDeclaration)

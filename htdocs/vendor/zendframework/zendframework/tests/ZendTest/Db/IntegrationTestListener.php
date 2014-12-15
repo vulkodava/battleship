@@ -51,9 +51,9 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
             if (extension_loaded('pgsql')) {
                 $this->adapters['pgsql'] = pg_connect(
                     'host=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_HOSTNAME']
-                        . ' dbname=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_DATABASE']
-                        . ' user=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_USERNAME']
-                        . ' password=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_PASSWORD']
+                    . ' dbname=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_DATABASE']
+                    . ' user=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_USERNAME']
+                    . ' password=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_PGSQL_PASSWORD']
                 );
             }
             if (extension_loaded('pdo')) {
@@ -90,8 +90,8 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
             if (extension_loaded('pdo')) {
                 $this->adapters['pdo_sqlsrv'] = new \Pdo(
                     'sqlsrv:Server=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME']
-                        . ';Database=' . (isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'])
-                            ? $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'] : null),
+                    . ';Database=' . (isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'])
+                        ? $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'] : null),
                     $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME'],
                     $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD']
                 );
@@ -103,21 +103,27 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
     public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
     }
+
     public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time)
     {
     }
+
     public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
     }
+
     public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
     }
+
     public function startTestSuite(PHPUnit_Framework_TestSuite $suite)
     {
     }
+
     public function endTestSuite(PHPUnit_Framework_TestSuite $suite)
     {
     }
+
     public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
     } // Support PHPUnit 3.8+
@@ -145,7 +151,7 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
      * A test ended.
      *
      * @param  PHPUnit_Framework_Test $test
-     * @param  float                  $time
+     * @param  float $time
      */
     public function endTest(PHPUnit_Framework_Test $test, $time)
     {

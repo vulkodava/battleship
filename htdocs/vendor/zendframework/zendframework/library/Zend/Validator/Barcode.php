@@ -13,16 +13,16 @@ use Traversable;
 
 class Barcode extends AbstractValidator
 {
-    const INVALID        = 'barcodeInvalid';
-    const FAILED         = 'barcodeFailed';
-    const INVALID_CHARS  = 'barcodeInvalidChars';
+    const INVALID = 'barcodeInvalid';
+    const FAILED = 'barcodeFailed';
+    const INVALID_CHARS = 'barcodeInvalidChars';
     const INVALID_LENGTH = 'barcodeInvalidLength';
 
     protected $messageTemplates = array(
-        self::FAILED         => "The input failed checksum validation",
-        self::INVALID_CHARS  => "The input contains invalid characters",
+        self::FAILED => "The input failed checksum validation",
+        self::INVALID_CHARS => "The input contains invalid characters",
         self::INVALID_LENGTH => "The input should have a length of %length% characters",
-        self::INVALID        => "Invalid type given. String expected",
+        self::INVALID => "Invalid type given. String expected",
     );
 
     /**
@@ -35,9 +35,9 @@ class Barcode extends AbstractValidator
     );
 
     protected $options = array(
-        'adapter'     => null,  // Barcode adapter Zend\Validator\Barcode\AbstractAdapter
-        'options'     => null,  // Options for this adapter
-        'length'      => null,
+        'adapter' => null,  // Barcode adapter Zend\Validator\Barcode\AbstractAdapter
+        'options' => null,  // Options for this adapter
+        'length' => null,
         'useChecksum' => null,
     );
 
@@ -77,7 +77,7 @@ class Barcode extends AbstractValidator
      * Sets a new barcode adapter
      *
      * @param  string|Barcode\AbstractAdapter $adapter Barcode adapter to use
-     * @param  array  $options Options for this adapter
+     * @param  array $options                          Options for this adapter
      * @return Barcode
      * @throws Exception\InvalidArgumentException
      */
@@ -141,13 +141,14 @@ class Barcode extends AbstractValidator
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
         $this->setValue($value);
-        $adapter                 = $this->getAdapter();
+        $adapter = $this->getAdapter();
         $this->options['length'] = $adapter->getLength();
-        $result                  = $adapter->hasValidLength($value);
+        $result = $adapter->hasValidLength($value);
         if (!$result) {
             if (is_array($this->options['length'])) {
                 $temp = $this->options['length'];
@@ -161,12 +162,14 @@ class Barcode extends AbstractValidator
             }
 
             $this->error(self::INVALID_LENGTH);
+
             return false;
         }
 
         $result = $adapter->hasValidCharacters($value);
         if (!$result) {
             $this->error(self::INVALID_CHARS);
+
             return false;
         }
 
@@ -174,6 +177,7 @@ class Barcode extends AbstractValidator
             $result = $adapter->hasValidChecksum($value);
             if (!$result) {
                 $this->error(self::FAILED);
+
                 return false;
             }
         }

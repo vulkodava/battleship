@@ -69,7 +69,7 @@ abstract class AbstractCallback implements CallbackInterface
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Array or Traversable object'
-            . 'expected, got ' . gettype($options));
+                . 'expected, got ' . gettype($options));
         }
 
         if (is_array($options)) {
@@ -79,6 +79,7 @@ abstract class AbstractCallback implements CallbackInterface
         if (array_key_exists('storage', $options)) {
             $this->setStorage($options['storage']);
         }
+
         return $this;
     }
 
@@ -106,6 +107,7 @@ abstract class AbstractCallback implements CallbackInterface
     public function setStorage(Model\SubscriptionPersistenceInterface $storage)
     {
         $this->storage = $storage;
+
         return $this;
     }
 
@@ -123,6 +125,7 @@ abstract class AbstractCallback implements CallbackInterface
             throw new Exception\RuntimeException('No storage object has been'
                 . ' set that subclasses Zend\Feed\Pubsubhubbub\Model\SubscriptionPersistence');
         }
+
         return $this->storage;
     }
 
@@ -143,6 +146,7 @@ abstract class AbstractCallback implements CallbackInterface
                 . ' Zend\Http\PhpEnvironment\Response');
         }
         $this->httpResponse = $httpResponse;
+
         return $this;
     }
 
@@ -158,6 +162,7 @@ abstract class AbstractCallback implements CallbackInterface
         if ($this->httpResponse === null) {
             $this->httpResponse = new HttpResponse;
         }
+
         return $this->httpResponse;
     }
 
@@ -178,6 +183,7 @@ abstract class AbstractCallback implements CallbackInterface
                 . ' greater than zero');
         }
         $this->subscriberCount = $count;
+
         return $this;
     }
 
@@ -194,6 +200,7 @@ abstract class AbstractCallback implements CallbackInterface
 
     /**
      * Attempt to detect the callback URL (specifically the path forward)
+     *
      * @return string
      */
     protected function _detectCallbackUrl()
@@ -214,11 +221,12 @@ abstract class AbstractCallback implements CallbackInterface
                 $callbackUrl = substr($callbackUrl, strlen($schemeAndHttpHost));
             }
         } elseif (isset($_SERVER['ORIG_PATH_INFO'])) {
-            $callbackUrl= $_SERVER['ORIG_PATH_INFO'];
+            $callbackUrl = $_SERVER['ORIG_PATH_INFO'];
             if (!empty($_SERVER['QUERY_STRING'])) {
                 $callbackUrl .= '?' . $_SERVER['QUERY_STRING'];
             }
         }
+
         return $callbackUrl;
     }
 
@@ -269,6 +277,7 @@ abstract class AbstractCallback implements CallbackInterface
                 return $headers[$header];
             }
         }
+
         return false;
     }
 
@@ -286,6 +295,7 @@ abstract class AbstractCallback implements CallbackInterface
         if (strlen(trim($body)) > 0) {
             return $body;
         }
+
         return false;
     }
 }

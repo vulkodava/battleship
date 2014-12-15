@@ -20,6 +20,7 @@ class CallbackFactory implements
 {
     /**
      * Adapter options
+     *
      * @var array
      */
     protected $creationOptions;

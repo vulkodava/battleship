@@ -19,7 +19,7 @@ class CountryFieldset extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('country');
         $this->setHydrator(new ClassMethodsHydrator())
-             ->setObject(new Entity\Country());
+            ->setObject(new Entity\Country());
 
         $name = new \Zend\Form\Element('name', array('label' => 'Name of the country'));
         $name->setAttribute('type', 'text');

@@ -1,34 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?><feed
-  xmlns="http://www.w3.org/2005/Atom"
-  xmlns:thr="http://purl.org/syndication/thread/1.0"
-  xml:lang="en"
-  xml:base="http://www.norm2782.com/wp-atom.php"
-   >
-	<title type="text">Norm 2782</title>
-	<subtitle type="text">Why are you here?</subtitle>
+<?xml version="1.0" encoding="UTF-8"?>
+<feed
+        xmlns="http://www.w3.org/2005/Atom"
+        xmlns:thr="http://purl.org/syndication/thread/1.0"
+        xml:lang="en"
+        xml:base="http://www.norm2782.com/wp-atom.php"
+        >
+    <title type="text">Norm 2782</title>
+    <subtitle type="text">Why are you here?</subtitle>
 
-	<updated>2009-03-07T08:03:50Z</updated>
-	<generator uri="http://wordpress.org/" version="2.8">WordPress</generator>
+    <updated>2009-03-07T08:03:50Z</updated>
+    <generator uri="http://wordpress.org/" version="2.8">WordPress</generator>
 
-	<link rel="alternate" type="text/html" href="http://www.norm2782.com" />
-	<id>http://www.norm2782.com/feed/atom/</id>
-	<link rel="self" type="application/atom+xml" href="http://www.norm2782.com/feed/atom/" />
+    <link rel="alternate" type="text/html" href="http://www.norm2782.com"/>
+    <id>http://www.norm2782.com/feed/atom/</id>
+    <link rel="self" type="application/atom+xml" href="http://www.norm2782.com/feed/atom/"/>
 
-			<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[Wth&#8230; reading books?]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/03/wth-reading-books/" />
-		<id>http://www.norm2782.com/?p=114</id>
-		<updated>2009-03-07T08:03:50Z</updated>
-		<published>2009-03-02T08:09:33Z</published>
-		<category scheme="http://www.norm2782.com" term="New Zealand" /><category scheme="http://www.norm2782.com" term="Personal" /><category scheme="http://www.norm2782.com" term="Programming" /><category scheme="http://www.norm2782.com" term="Study" />		<summary type="html"><![CDATA[Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[Wth&#8230; reading books?]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/03/wth-reading-books/"/>
+        <id>http://www.norm2782.com/?p=114</id>
+        <updated>2009-03-07T08:03:50Z</updated>
+        <published>2009-03-02T08:09:33Z</published>
+        <category scheme="http://www.norm2782.com" term="New Zealand"/>
+        <category scheme="http://www.norm2782.com" term="Personal"/>
+        <category scheme="http://www.norm2782.com" term="Programming"/>
+        <category scheme="http://www.norm2782.com" term="Study"/>
+        <summary type="html"><![CDATA[Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.
 
 Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle
 Domain-Driven Design: Tackling Complexity in the [...]]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/03/wth-reading-books/"><![CDATA[<p>Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.</p>
+        <content type="html" xml:base="http://www.norm2782.com/2009/03/wth-reading-books/"><![CDATA[<p>Being in New Zealand does strange things to a person. Everybody who knows me, knows I don&#8217;t much like that crazy invention called a Book. However, being here I&#8217;ve already finished 4 books, all of which I can highly recommend.</p>
 
 <ul>
 <li><a href="http://www.amazon.com/Agile-Software-Development-Scrum/dp/0130676349/">Agile Software Development with Scrum, by Ken Schwaber and Mike Beedle</a></li>
@@ -39,22 +44,28 @@ Domain-Driven Design: Tackling Complexity in the [...]]]></summary>
 </ul>
 <p>Next up: <a href="http://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional/dp/0201633612/">Design Patterns: Elements of Reusable Object-Oriented Software, by the Gang of Four</a>. Yes, talk about classics and shame on me for not having ordered it sooner! Also reading <a href="http://www.amazon.com/Implementation-Patterns-Addison-Wesley-Signature-Kent/dp/0321413091/">Implementation Patterns, by Kent Beck</a> at the moment.</p>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/03/wth-reading-books/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/03/wth-reading-books/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[My first few weeks in New Zealand]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/02/my-first-few-weeks-in-new-zealand/" />
-		<id>http://www.norm2782.com/?p=105</id>
-		<updated>2009-02-18T03:30:07Z</updated>
-		<published>2009-02-15T03:29:21Z</published>
-		<category scheme="http://www.norm2782.com" term="New Zealand" /><category scheme="http://www.norm2782.com" term="Personal" />		<summary type="html"><![CDATA[It&#8217;s been a while since my last blog post. Things have been quite hectic for me these last few weeks. There was my final week at Angry Bytes, followed by a pre-NZ party and then my trip to New Zealand. Currently New Zealand looks pretty much the same as the Netherlands, seeing as I&#8217;m locked [...]]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/02/my-first-few-weeks-in-new-zealand/"><![CDATA[<p>It&#8217;s been a while since my last blog post. Things have been quite hectic for me these last few weeks. There was my final week at <a href="http://www.angrybytes.com">Angry Bytes</a>, followed by a pre-NZ party and then my trip to New Zealand. Currently New Zealand looks pretty much the same as the Netherlands, seeing as I&#8217;m locked away in an office most of my time.</p>
+        <link rel="replies" type="text/html" href="http://www.norm2782.com/2009/03/wth-reading-books/#comments"
+              thr:count="0"/>
+        <link rel="replies" type="application/atom+xml"
+              href="http://www.norm2782.com/2009/03/wth-reading-books/feed/atom/" thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[My first few weeks in New Zealand]]></title>
+        <link rel="alternate" type="text/html"
+              href="http://www.norm2782.com/2009/02/my-first-few-weeks-in-new-zealand/"/>
+        <id>http://www.norm2782.com/?p=105</id>
+        <updated>2009-02-18T03:30:07Z</updated>
+        <published>2009-02-15T03:29:21Z</published>
+        <category scheme="http://www.norm2782.com" term="New Zealand"/>
+        <category scheme="http://www.norm2782.com" term="Personal"/>
+        <summary type="html">
+            <![CDATA[It&#8217;s been a while since my last blog post. Things have been quite hectic for me these last few weeks. There was my final week at Angry Bytes, followed by a pre-NZ party and then my trip to New Zealand. Currently New Zealand looks pretty much the same as the Netherlands, seeing as I&#8217;m locked [...]]]></summary>
+        <content type="html" xml:base="http://www.norm2782.com/2009/02/my-first-few-weeks-in-new-zealand/"><![CDATA[<p>It&#8217;s been a while since my last blog post. Things have been quite hectic for me these last few weeks. There was my final week at <a href="http://www.angrybytes.com">Angry Bytes</a>, followed by a pre-NZ party and then my trip to New Zealand. Currently New Zealand looks pretty much the same as the Netherlands, seeing as I&#8217;m locked away in an office most of my time.</p>
 
 <p><span id="more-105"></span><br />
 My adventure into Kiwi-land started with a long and interesting trip to San Francisco. The interesting part was my new book: <a href="http://domaindrivendesign.org/books/#DDD">Domain Driven Design: Tackling Complexity in the Heart of Software</a>, by Eric Evans. This book, combined with KLM&#8217;s excellent on-board service made my flight to SF a breeze.</p>
@@ -75,23 +86,27 @@ My adventure into Kiwi-land started with a long and interesting trip to San Fran
 <p><img src="http://farm4.static.flickr.com/3408/3279649371_521a113552.jpg?v=0" alt="Me!" /></p>
 <p>Well, that&#8217;s my first NZ blog-post. There will definitely be more of these! Let&#8217;s hope they fix my internet soon&#8230; See <a href="http://www.flickr.com/photos/34800767@N05/">my Flickr photo-stream</a> for more pictures.</p>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/02/my-first-few-weeks-in-new-zealand/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/02/my-first-few-weeks-in-new-zealand/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[Properties in PHP &#8211; revisited]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/properties-in-php-revisited/" />
-		<id>http://www.norm2782.com/?p=94</id>
-		<updated>2009-01-14T10:47:25Z</updated>
-		<published>2009-01-14T10:47:25Z</published>
-		<category scheme="http://www.norm2782.com" term="PHP" /><category scheme="http://www.norm2782.com" term="Proof-of-concepts" />		<summary type="html"><![CDATA[A while ago I was daydreaming about native property support in PHP. Unfortunately it will be a while before PHP itself will support this natively and an even longer while before shared hosting providers will upgrade to a newer version of PHP.
+        <link rel="replies" type="text/html"
+              href="http://www.norm2782.com/2009/02/my-first-few-weeks-in-new-zealand/#comments" thr:count="0"/>
+        <link rel="replies" type="application/atom+xml"
+              href="http://www.norm2782.com/2009/02/my-first-few-weeks-in-new-zealand/feed/atom/" thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[Properties in PHP &#8211; revisited]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/properties-in-php-revisited/"/>
+        <id>http://www.norm2782.com/?p=94</id>
+        <updated>2009-01-14T10:47:25Z</updated>
+        <published>2009-01-14T10:47:25Z</published>
+        <category scheme="http://www.norm2782.com" term="PHP"/>
+        <category scheme="http://www.norm2782.com" term="Proof-of-concepts"/>
+        <summary type="html"><![CDATA[A while ago I was daydreaming about native property support in PHP. Unfortunately it will be a while before PHP itself will support this natively and an even longer while before shared hosting providers will upgrade to a newer version of PHP.
 So what&#8217;s the big deal about those properties? In short, they make a developers [...]]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/01/properties-in-php-revisited/"><![CDATA[<p>A while ago I was daydreaming about native <a href="http://www.norm2782.com/2009/01/properties-in-php/">property support in PHP</a>. Unfortunately it will be a while before PHP itself will support this natively and an even longer while before shared hosting providers will upgrade to a newer version of PHP.</p>
+        <content type="html" xml:base="http://www.norm2782.com/2009/01/properties-in-php-revisited/"><![CDATA[<p>A while ago I was daydreaming about native <a href="http://www.norm2782.com/2009/01/properties-in-php/">property support in PHP</a>. Unfortunately it will be a while before PHP itself will support this natively and an even longer while before shared hosting providers will upgrade to a newer version of PHP.</p>
 
 <p>So what&#8217;s the big deal about those properties? In short, they make a developers life easier by allowing the developer to code no more than needed at that moment. And lets face it&#8230; less code is better! In this post we&#8217;ll see that it&#8217;s not impossible to enjoy properties in PHP <em>today</em>. As with a lot of good things, it does come with a small price though&#8230;</p>
 <p><span id="more-94"></span><br />
@@ -199,24 +214,28 @@ try {
 <p>This method works by assuming you have get- and set methods that have the same name as the property you&#8217;re trying to access. When there&#8217;s a public attribute, it will use that. If there&#8217;s no public attribute, it will fall back to __get or __set and the logic will take it from there.</p>
 <p>All of this is just a proof-of-concept of implementing properties in PHP and of the way I want to be using properties to access data the data in my objects. Please comment your experiences with this approach or similar approaches. I&#8217;m curious to see how practical this solution would be in a real-life situation.</p>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/properties-in-php-revisited/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/properties-in-php-revisited/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[Filters for Zend_Paginator]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/filters-for-zend_paginator/" />
-		<id>http://www.norm2782.com/?p=72</id>
-		<updated>2009-01-14T08:23:19Z</updated>
-		<published>2009-01-13T12:57:53Z</published>
-		<category scheme="http://www.norm2782.com" term="PHP" /><category scheme="http://www.norm2782.com" term="Zend Framework" />		<summary type="html"><![CDATA[Zend_Paginator has a new feature! It is now possible to add a filter to your Paginator object which acts on the data retrieved from the adapter. This filter can be any instance of Zend_Filter_Interface, including a filter-chain. If a filter(-chain) is set, the raw data from the adapter will be passed to the filter() method.
+        <link rel="replies" type="text/html"
+              href="http://www.norm2782.com/2009/01/properties-in-php-revisited/#comments" thr:count="0"/>
+        <link rel="replies" type="application/atom+xml"
+              href="http://www.norm2782.com/2009/01/properties-in-php-revisited/feed/atom/" thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[Filters for Zend_Paginator]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/filters-for-zend_paginator/"/>
+        <id>http://www.norm2782.com/?p=72</id>
+        <updated>2009-01-14T08:23:19Z</updated>
+        <published>2009-01-13T12:57:53Z</published>
+        <category scheme="http://www.norm2782.com" term="PHP"/>
+        <category scheme="http://www.norm2782.com" term="Zend Framework"/>
+        <summary type="html"><![CDATA[Zend_Paginator has a new feature! It is now possible to add a filter to your Paginator object which acts on the data retrieved from the adapter. This filter can be any instance of Zend_Filter_Interface, including a filter-chain. If a filter(-chain) is set, the raw data from the adapter will be passed to the filter() method.
 
 So [...]]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/01/filters-for-zend_paginator/"><![CDATA[<p>Zend_Paginator has a new feature! It is now possible to add a filter to your Paginator object which acts on the data retrieved from the adapter. This filter can be any instance of Zend_Filter_Interface, including a filter-chain. If a filter(-chain) is set, the raw data from the adapter will be passed to the filter() method.</p>
+        <content type="html" xml:base="http://www.norm2782.com/2009/01/filters-for-zend_paginator/"><![CDATA[<p>Zend_Paginator has a new feature! It is now possible to add a filter to your Paginator object which acts on the data retrieved from the adapter. This filter can be any instance of Zend_Filter_Interface, including a filter-chain. If a filter(-chain) is set, the raw data from the adapter will be passed to the filter() method.</p>
 
 <p><span id="more-72"></span><br />
 So why would you want to apply filters to your result set? Usually my domain models don&#8217;t inherit from Zend_Db_Table_Row but that is the data type I get from the Paginator when I use the DbTableSelect adapter (wrapped in a nice Zend_Db_Table_Rowset). Instead, I would like to load my rows into my models and preferably without using the Paginator abilities or having to apply weird hacks. Previously this was only possible (in a sane way) by subclassing an adapter so it could return a collection of model objects instead of a rowset. With the new filter support you can just inject a filter to do this for you.</p>
@@ -309,67 +328,76 @@ class MyModel
 <p>The callback also accepts object instead of a static reference to a class. Internally it uses call_user_func to execute the filter() method, so any notation that works there, works with the Callback filter.</p>
 <p>Enjoy!</p>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/filters-for-zend_paginator/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/filters-for-zend_paginator/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[ZF-3239]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/zf-3239/" />
-		<id>http://www.norm2782.com/?p=68</id>
-		<updated>2009-01-11T09:53:20Z</updated>
-		<published>2009-01-07T11:48:31Z</published>
-		<category scheme="http://www.norm2782.com" term="PHP" /><category scheme="http://www.norm2782.com" term="Zend Framework" />		<summary type="html"><![CDATA[Zend_Db_Table_Select users, rejoice! I&#8217;ve just committed a patch for ZF-3239 in revision 13530. This should be a relief for those of you who have been implementing workarounds for those &#8220;No table has been specified for the FROM clause&#8221; exceptions.
+        <link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/filters-for-zend_paginator/#comments"
+              thr:count="0"/>
+        <link rel="replies" type="application/atom+xml"
+              href="http://www.norm2782.com/2009/01/filters-for-zend_paginator/feed/atom/" thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[ZF-3239]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/zf-3239/"/>
+        <id>http://www.norm2782.com/?p=68</id>
+        <updated>2009-01-11T09:53:20Z</updated>
+        <published>2009-01-07T11:48:31Z</published>
+        <category scheme="http://www.norm2782.com" term="PHP"/>
+        <category scheme="http://www.norm2782.com" term="Zend Framework"/>
+        <summary type="html"><![CDATA[Zend_Db_Table_Select users, rejoice! I&#8217;ve just committed a patch for ZF-3239 in revision 13530. This should be a relief for those of you who have been implementing workarounds for those &#8220;No table has been specified for the FROM clause&#8221; exceptions.
 ]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/01/zf-3239/"><![CDATA[<p>Zend_Db_Table_Select users, rejoice! I&#8217;ve just committed a patch for <a href="http://framework.zend.com/issues/browse/ZF-3239">ZF-3239</a> in revision 13530. This should be a relief for those of you who have been implementing workarounds for those &#8220;No table has been specified for the FROM clause&#8221; exceptions.</p>
+        <content type="html" xml:base="http://www.norm2782.com/2009/01/zf-3239/"><![CDATA[<p>Zend_Db_Table_Select users, rejoice! I&#8217;ve just committed a patch for <a href="http://framework.zend.com/issues/browse/ZF-3239">ZF-3239</a> in revision 13530. This should be a relief for those of you who have been implementing workarounds for those &#8220;No table has been specified for the FROM clause&#8221; exceptions.</p>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/zf-3239/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/zf-3239/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[New in-ear earphones]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/new-in-ear-earphones/" />
-		<id>http://www.norm2782.com/?p=53</id>
-		<updated>2009-01-03T18:51:43Z</updated>
-		<published>2009-01-03T15:49:19Z</published>
-		<category scheme="http://www.norm2782.com" term="Personal" />		<summary type="html"><![CDATA[Just got myself the Sennheiser CX 300 II Precision in-ear earphones. Check &#8216;em out by clicking the read more link!
+        <link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/zf-3239/#comments" thr:count="0"/>
+        <link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/zf-3239/feed/atom/"
+              thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[New in-ear earphones]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/new-in-ear-earphones/"/>
+        <id>http://www.norm2782.com/?p=53</id>
+        <updated>2009-01-03T18:51:43Z</updated>
+        <published>2009-01-03T15:49:19Z</published>
+        <category scheme="http://www.norm2782.com" term="Personal"/>
+        <summary type="html"><![CDATA[Just got myself the Sennheiser CX 300 II Precision in-ear earphones. Check &#8216;em out by clicking the read more link!
 
 
 ]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/01/new-in-ear-earphones/"><![CDATA[<p>Just got myself the Sennheiser CX 300 II Precision in-ear earphones. Check &#8216;em out by clicking the read more link!</p>
+        <content type="html" xml:base="http://www.norm2782.com/2009/01/new-in-ear-earphones/"><![CDATA[<p>Just got myself the Sennheiser CX 300 II Precision in-ear earphones. Check &#8216;em out by clicking the read more link!</p>
 
 <p><span id="more-53"></span><br />
 <img src="http://www.norm2782.com/wp-content/uploads/2009/01/cx300.jpeg" alt="cx300" title="cx300" width="300" height="300" class="alignnone size-full wp-image-60" /></p>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/new-in-ear-earphones/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/new-in-ear-earphones/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[Seven Things &#8211; Tagged by Pádraic]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/seven-things-tagged-by-padraic/" />
-		<id>http://www.norm2782.com/?p=44</id>
-		<updated>2009-01-03T11:47:19Z</updated>
-		<published>2009-01-03T10:14:38Z</published>
-		<category scheme="http://www.norm2782.com" term="Personal" />		<summary type="html"><![CDATA[Well, this was bound to happen: I got tagged by Pádraic because I&#8217;m working on Zend_Feed_Reader with him. Luckily I&#8217;ve just setup this new blog, so here we go!
+        <link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/new-in-ear-earphones/#comments"
+              thr:count="0"/>
+        <link rel="replies" type="application/atom+xml"
+              href="http://www.norm2782.com/2009/01/new-in-ear-earphones/feed/atom/" thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[Seven Things &#8211; Tagged by Pádraic]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/seven-things-tagged-by-padraic/"/>
+        <id>http://www.norm2782.com/?p=44</id>
+        <updated>2009-01-03T11:47:19Z</updated>
+        <published>2009-01-03T10:14:38Z</published>
+        <category scheme="http://www.norm2782.com" term="Personal"/>
+        <summary type="html"><![CDATA[Well, this was bound to happen: I got tagged by Pádraic because I&#8217;m working on Zend_Feed_Reader with him. Luckily I&#8217;ve just setup this new blog, so here we go!
 Did you know that&#8230;
 
 Every bit of PHP I know is self-taught
 My programming adventure started out with Visual Basic 3 back in 1993. I was just 8 years [...]]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/01/seven-things-tagged-by-padraic/"><![CDATA[<p>Well, this was bound to happen: I got tagged by <a href="http://blog.astrumfutura.com/">Pádraic</a> because I&#8217;m working on <a href="http://framework.zend.com/code/browse/Zend_Framework/standard/incubator/library/Zend/Feed">Zend_Feed_Reader</a> with him. Luckily I&#8217;ve just setup this new blog, so here we go!</p>
+        <content type="html" xml:base="http://www.norm2782.com/2009/01/seven-things-tagged-by-padraic/"><![CDATA[<p>Well, this was bound to happen: I got tagged by <a href="http://blog.astrumfutura.com/">Pádraic</a> because I&#8217;m working on <a href="http://framework.zend.com/code/browse/Zend_Framework/standard/incubator/library/Zend/Feed">Zend_Feed_Reader</a> with him. Luckily I&#8217;ve just setup this new blog, so here we go!</p>
 
 <p>Did you know that&#8230;</p>
 <ul>
@@ -403,22 +431,28 @@ My programming adventure started out with Visual Basic 3 back in 1993. I was jus
 
 </ul>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/seven-things-tagged-by-padraic/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/seven-things-tagged-by-padraic/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[AMF Server class for WordPress]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/amf-server-class-for-wordpress/" />
-		<id>http://www.norm2782.com/?p=27</id>
-		<updated>2009-01-06T15:00:54Z</updated>
-		<published>2009-01-02T14:49:42Z</published>
-		<category scheme="http://www.norm2782.com" term="Flex" /><category scheme="http://www.norm2782.com" term="PHP" /><category scheme="http://www.norm2782.com" term="Zend Framework" />		<summary type="html"><![CDATA[After browsing through WordPress&#8217; code I quickly found that there&#8217;s no sane way to create AMF support as a WP plugin. At least not for someone who hasn&#8217;t done any old-skool procedural PHP in years. Instead of writing a plugin, I decided to write a standalone server script. It&#8217;s still very basic and currently setup [...]]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/01/amf-server-class-for-wordpress/"><![CDATA[<p>After browsing through WordPress&#8217; code I quickly found that there&#8217;s no sane way to create AMF support as a WP plugin. At least not for someone who hasn&#8217;t done any old-skool procedural PHP in years. Instead of writing a plugin, I decided to write a standalone server script. It&#8217;s still very basic and currently setup to work for me. To get it working for your WP setup you should probably make some minor modifications. Click the read more link to check out the code. I&#8217;ve released it under the generous BSD license, so knock yourself out! Use it at your own risk&#8230; I&#8217;m not going to support it. Any updates will be posted in this post. Also, please note that I haven&#8217;t tested it yet. If you access the script directly it should output &#8220;Zend Amf Endpoint&#8221; just fine, but that&#8217;s all I can guarantee at this point <img src='http://www.norm2782.com/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' /> </p>
+        <link rel="replies" type="text/html"
+              href="http://www.norm2782.com/2009/01/seven-things-tagged-by-padraic/#comments" thr:count="0"/>
+        <link rel="replies" type="application/atom+xml"
+              href="http://www.norm2782.com/2009/01/seven-things-tagged-by-padraic/feed/atom/" thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[AMF Server class for WordPress]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/amf-server-class-for-wordpress/"/>
+        <id>http://www.norm2782.com/?p=27</id>
+        <updated>2009-01-06T15:00:54Z</updated>
+        <published>2009-01-02T14:49:42Z</published>
+        <category scheme="http://www.norm2782.com" term="Flex"/>
+        <category scheme="http://www.norm2782.com" term="PHP"/>
+        <category scheme="http://www.norm2782.com" term="Zend Framework"/>
+        <summary type="html">
+            <![CDATA[After browsing through WordPress&#8217; code I quickly found that there&#8217;s no sane way to create AMF support as a WP plugin. At least not for someone who hasn&#8217;t done any old-skool procedural PHP in years. Instead of writing a plugin, I decided to write a standalone server script. It&#8217;s still very basic and currently setup [...]]]></summary>
+        <content type="html" xml:base="http://www.norm2782.com/2009/01/amf-server-class-for-wordpress/"><![CDATA[<p>After browsing through WordPress&#8217; code I quickly found that there&#8217;s no sane way to create AMF support as a WP plugin. At least not for someone who hasn&#8217;t done any old-skool procedural PHP in years. Instead of writing a plugin, I decided to write a standalone server script. It&#8217;s still very basic and currently setup to work for me. To get it working for your WP setup you should probably make some minor modifications. Click the read more link to check out the code. I&#8217;ve released it under the generous BSD license, so knock yourself out! Use it at your own risk&#8230; I&#8217;m not going to support it. Any updates will be posted in this post. Also, please note that I haven&#8217;t tested it yet. If you access the script directly it should output &#8220;Zend Amf Endpoint&#8221; just fine, but that&#8217;s all I can guarantee at this point <img src='http://www.norm2782.com/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' /> </p>
 
 <p><span id="more-27"></span></p>
 <pre name="code" class="php:nogutter">
@@ -636,45 +670,54 @@ $server-&gt;setProduction($production)
 
 </pre>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/amf-server-class-for-wordpress/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/amf-server-class-for-wordpress/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[Flex frontend]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/flex-frontend/" />
-		<id>http://www.norm2782.com/?p=22</id>
-		<updated>2009-01-02T09:27:20Z</updated>
-		<published>2009-01-01T23:29:35Z</published>
-		<category scheme="http://www.norm2782.com" term="Flex" /><category scheme="http://www.norm2782.com" term="PHP" />		<summary type="html"><![CDATA[I was planning on writing a quick Flex frontend for this blog, but it appears WordPress only offers the posts themselves as RSS feed. If I get real bored (which I doubt,  unfortunately) I&#8217;ll have a look and see if I can create a Zend_AMF plugin for WordPress that allows me to retrieve virtually [...]]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/01/flex-frontend/"><![CDATA[<p>I was planning on writing a quick Flex frontend for this blog, but it appears WordPress only offers the posts themselves as RSS feed. If I get real bored (which I doubt,  unfortunately) I&#8217;ll have a look and see if I can create a Zend_AMF plugin for WordPress that allows me to retrieve virtually all data from my WordPress install. Would be cool <img src='http://www.norm2782.com/wp-includes/images/smilies/icon_biggrin.gif' alt=':D' class='wp-smiley' /> </p>
+        <link rel="replies" type="text/html"
+              href="http://www.norm2782.com/2009/01/amf-server-class-for-wordpress/#comments" thr:count="0"/>
+        <link rel="replies" type="application/atom+xml"
+              href="http://www.norm2782.com/2009/01/amf-server-class-for-wordpress/feed/atom/" thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[Flex frontend]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/flex-frontend/"/>
+        <id>http://www.norm2782.com/?p=22</id>
+        <updated>2009-01-02T09:27:20Z</updated>
+        <published>2009-01-01T23:29:35Z</published>
+        <category scheme="http://www.norm2782.com" term="Flex"/>
+        <category scheme="http://www.norm2782.com" term="PHP"/>
+        <summary type="html">
+            <![CDATA[I was planning on writing a quick Flex frontend for this blog, but it appears WordPress only offers the posts themselves as RSS feed. If I get real bored (which I doubt,  unfortunately) I&#8217;ll have a look and see if I can create a Zend_AMF plugin for WordPress that allows me to retrieve virtually [...]]]></summary>
+        <content type="html" xml:base="http://www.norm2782.com/2009/01/flex-frontend/"><![CDATA[<p>I was planning on writing a quick Flex frontend for this blog, but it appears WordPress only offers the posts themselves as RSS feed. If I get real bored (which I doubt,  unfortunately) I&#8217;ll have a look and see if I can create a Zend_AMF plugin for WordPress that allows me to retrieve virtually all data from my WordPress install. Would be cool <img src='http://www.norm2782.com/wp-includes/images/smilies/icon_biggrin.gif' alt=':D' class='wp-smiley' /> </p>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/flex-frontend/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/flex-frontend/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-		<entry>
-		<author>
-			<name>norm2782</name>
-						<uri>http://www.norm2782.com</uri>
-					</author>
-		<title type="html"><![CDATA[Properties in PHP]]></title>
-		<link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/properties-in-php/" />
-		<id>http://www.norm2782.com/?p=8</id>
-		<updated>2009-01-02T15:13:15Z</updated>
-		<published>2009-01-01T23:02:54Z</published>
-		<category scheme="http://www.norm2782.com" term="Daydreaming" /><category scheme="http://www.norm2782.com" term="PHP" />		<summary type="html"><![CDATA[A while ago Dynom from #php_bnl pointed me to an interesting entry on the PHP 5.3 wiki page. In the &#8220;Future PHP releases&#8221; sections there&#8217;s an entry called &#8220;29. “real” properties with attached getters and setters&#8221;. Personally I can&#8217;t wait for this. Hopefully it will look something like ActionScript 3&#8217;s properties:
+        <link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/flex-frontend/#comments"
+              thr:count="0"/>
+        <link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/flex-frontend/feed/atom/"
+              thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+    <entry>
+        <author>
+            <name>norm2782</name>
+            <uri>http://www.norm2782.com</uri>
+        </author>
+        <title type="html"><![CDATA[Properties in PHP]]></title>
+        <link rel="alternate" type="text/html" href="http://www.norm2782.com/2009/01/properties-in-php/"/>
+        <id>http://www.norm2782.com/?p=8</id>
+        <updated>2009-01-02T15:13:15Z</updated>
+        <published>2009-01-01T23:02:54Z</published>
+        <category scheme="http://www.norm2782.com" term="Daydreaming"/>
+        <category scheme="http://www.norm2782.com" term="PHP"/>
+        <summary type="html"><![CDATA[A while ago Dynom from #php_bnl pointed me to an interesting entry on the PHP 5.3 wiki page. In the &#8220;Future PHP releases&#8221; sections there&#8217;s an entry called &#8220;29. “real” properties with attached getters and setters&#8221;. Personally I can&#8217;t wait for this. Hopefully it will look something like ActionScript 3&#8217;s properties:
 
 
 &#60;?php
 class Bar
 {
     [...]]]></summary>
-		<content type="html" xml:base="http://www.norm2782.com/2009/01/properties-in-php/"><![CDATA[<p>A while ago Dynom from #php_bnl pointed me to an interesting entry on the <a title="PHP 5.3 wiki page" href="http://wiki.php.net/todo/php53">PHP 5.3 wiki page</a>. In the &#8220;Future PHP releases&#8221; sections there&#8217;s an entry called &#8220;29. “real” properties with attached getters and setters&#8221;. Personally I can&#8217;t wait for this. Hopefully it will look something like ActionScript 3&#8217;s properties:</p>
+        <content type="html" xml:base="http://www.norm2782.com/2009/01/properties-in-php/"><![CDATA[<p>A while ago Dynom from #php_bnl pointed me to an interesting entry on the <a title="PHP 5.3 wiki page" href="http://wiki.php.net/todo/php53">PHP 5.3 wiki page</a>. In the &#8220;Future PHP releases&#8221; sections there&#8217;s an entry called &#8220;29. “real” properties with attached getters and setters&#8221;. Personally I can&#8217;t wait for this. Hopefully it will look something like ActionScript 3&#8217;s properties:</p>
 <pre name="code" class="php:nogutter">
 &lt;?php
 class Bar
@@ -698,8 +741,10 @@ echo $bar->foo; // prints baz
 
 </pre>
 ]]></content>
-		<link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/properties-in-php/#comments" thr:count="0"/>
-		<link rel="replies" type="application/atom+xml" href="http://www.norm2782.com/2009/01/properties-in-php/feed/atom/" thr:count="0"/>
-		<thr:total>0</thr:total>
-	</entry>
-	</feed>
+        <link rel="replies" type="text/html" href="http://www.norm2782.com/2009/01/properties-in-php/#comments"
+              thr:count="0"/>
+        <link rel="replies" type="application/atom+xml"
+              href="http://www.norm2782.com/2009/01/properties-in-php/feed/atom/" thr:count="0"/>
+        <thr:total>0</thr:total>
+    </entry>
+</feed>

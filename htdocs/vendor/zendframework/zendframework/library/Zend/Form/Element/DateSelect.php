@@ -28,8 +28,8 @@ class DateSelect extends MonthSelect
     /**
      * Constructor. Add the day select element
      *
-     * @param  null|int|string  $name    Optional name for the element
-     * @param  array            $options Optional options for the element
+     * @param  null|int|string $name Optional name for the element
+     * @param  array $options        Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -73,6 +73,7 @@ class DateSelect extends MonthSelect
     public function setDayAttributes(array $dayAttributes)
     {
         $this->dayElement->setAttributes($dayAttributes);
+
         return $this;
     }
 
@@ -103,9 +104,9 @@ class DateSelect extends MonthSelect
 
         if ($value instanceof PhpDateTime) {
             $value = array(
-                'year'  => $value->format('Y'),
+                'year' => $value->format('Y'),
                 'month' => $value->format('m'),
-                'day'   => $value->format('d')
+                'day' => $value->format('d')
             );
         }
 
@@ -168,7 +169,7 @@ class DateSelect extends MonthSelect
             'required' => false,
             'filters' => array(
                 array(
-                    'name'    => 'Callback',
+                    'name' => 'Callback',
                     'options' => array(
                         'callback' => function ($date) {
                             // Convert the date to a specific format
@@ -192,8 +193,8 @@ class DateSelect extends MonthSelect
      */
     public function __clone()
     {
-        $this->dayElement   = clone $this->dayElement;
+        $this->dayElement = clone $this->dayElement;
         $this->monthElement = clone $this->monthElement;
-        $this->yearElement  = clone $this->yearElement;
+        $this->yearElement = clone $this->yearElement;
     }
 }

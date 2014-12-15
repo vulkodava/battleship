@@ -17,8 +17,8 @@ use Symfony\Component\Console\Output\NullOutput;
 /**
  * Provides helpers to display table output.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
- * @author Fabien Potencier <fabien@symfony.com>
+ * @author     Саша Стаменковић <umpirsky@gmail.com>
+ * @author     Fabien Potencier <fabien@symfony.com>
  *
  * @deprecated Deprecated since 2.5, to be removed in 3.0; use Table instead.
  */

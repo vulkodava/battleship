@@ -552,8 +552,8 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests-persistence');
 
         $controller = $this->getApplicationServiceLocator()
-                            ->get('ControllerLoader')
-                            ->get('baz_index');
+            ->get('ControllerLoader')
+            ->get('baz_index');
         $flashMessenger = $controller->flashMessenger();
         $messages = $flashMessenger->getMessages();
         $this->assertCount(0, $messages);
@@ -563,8 +563,8 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
 
         $controller = $this->getApplicationServiceLocator()
-                            ->get('ControllerLoader')
-                            ->get('baz_index');
+            ->get('ControllerLoader')
+            ->get('baz_index');
         $flashMessenger = $controller->flashMessenger();
         $messages = $flashMessenger->getMessages();
 
@@ -576,8 +576,8 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests-persistence');
 
         $controller = $this->getApplicationServiceLocator()
-                            ->get('ControllerLoader')
-                            ->get('baz_index');
+            ->get('ControllerLoader')
+            ->get('baz_index');
         $flashMessenger = $controller->flashMessenger();
         $messages = $flashMessenger->getMessages();
         $this->assertCount(0, $messages);
@@ -587,8 +587,8 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
 
         $controller = $this->getApplicationServiceLocator()
-                            ->get('ControllerLoader')
-                            ->get('baz_index');
+            ->get('ControllerLoader')
+            ->get('baz_index');
         $flashMessenger = $controller->flashMessenger();
         $messages = $flashMessenger->getMessages();
 

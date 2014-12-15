@@ -81,7 +81,7 @@ class DateTimeTzType extends Type
         }
 
         $val = \DateTime::createFromFormat($platform->getDateTimeTzFormatString(), $value);
-        if ( ! $val) {
+        if (!$val) {
             throw ConversionException::conversionFailedFormat($value, $this->getName(), $platform->getDateTimeTzFormatString());
         }
 

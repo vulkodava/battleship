@@ -25,6 +25,7 @@ class HydrationTestCase extends \Doctrine\Tests\OrmTestCase
         //$parserResult->setDefaultQueryComponentAlias(key($queryComponents));
         //$parserResult->setTableAliasMap($tableToClassAliasMap);
         $parserResult->setMixedQuery($isMixedQuery);
+
         return $parserResult;
     }
 }

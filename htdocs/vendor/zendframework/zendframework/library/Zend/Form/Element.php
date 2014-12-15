@@ -57,8 +57,8 @@ class Element implements
     protected $value;
 
     /**
-     * @param  null|int|string  $name    Optional name for the element
-     * @param  array            $options Optional options for the element
+     * @param  null|int|string $name Optional name for the element
+     * @param  array $options        Optional options for the element
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($name = null, $options = array())
@@ -91,6 +91,7 @@ class Element implements
     public function setName($name)
     {
         $this->setAttribute('name', $name);
+
         return $this;
     }
 
@@ -176,6 +177,7 @@ class Element implements
     public function setOption($key, $value)
     {
         $this->options[$key] = $value;
+
         return $this;
     }
 
@@ -183,7 +185,7 @@ class Element implements
      * Set a single element attribute
      *
      * @param  string $key
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return Element|ElementInterface
      */
     public function setAttribute($key, $value)
@@ -191,9 +193,11 @@ class Element implements
         // Do not include the value in the list of attributes
         if ($key === 'value') {
             $this->setValue($value);
+
             return $this;
         }
         $this->attributes[$key] = $value;
+
         return $this;
     }
 
@@ -221,6 +225,7 @@ class Element implements
     public function removeAttribute($key)
     {
         unset($this->attributes[$key]);
+
         return $this;
     }
 
@@ -256,6 +261,7 @@ class Element implements
         foreach ($arrayOrTraversable as $key => $value) {
             $this->setAttribute($key, $value);
         }
+
         return $this;
     }
 
@@ -292,6 +298,7 @@ class Element implements
     public function clearAttributes()
     {
         $this->attributes = array();
+
         return $this;
     }
 
@@ -304,6 +311,7 @@ class Element implements
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -351,6 +359,7 @@ class Element implements
     public function setLabelAttributes(array $labelAttributes)
     {
         $this->labelAttributes = $labelAttributes;
+
         return $this;
     }
 
@@ -385,6 +394,7 @@ class Element implements
         foreach ($arrayOrTraversable as $key => $value) {
             $this->setLabelOption($key, $value);
         }
+
         return $this;
     }
 
@@ -406,6 +416,7 @@ class Element implements
     public function clearLabelOptions()
     {
         $this->labelOptions = array();
+
         return $this;
     }
 
@@ -428,12 +439,13 @@ class Element implements
      * Set a single label optionn
      *
      * @param  string $key
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return Element|ElementInterface
      */
     public function setLabelOption($key, $value)
     {
         $this->labelOptions[$key] = $value;
+
         return $this;
     }
 
@@ -461,6 +473,7 @@ class Element implements
     public function removeLabelOption($key)
     {
         unset($this->labelOptions[$key]);
+
         return $this;
     }
 
@@ -493,6 +506,7 @@ class Element implements
         }
 
         $this->messages = $messages;
+
         return $this;
     }
 

@@ -15,8 +15,8 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 {
     public function testResponseFactoryFromStringCreatesValidResponse()
     {
-        $string = 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n";
-        $stream = fopen('php://temp','rb+');
+        $string = 'HTTP/1.0 200 OK' . "\r\n\r\n" . 'Foo Bar' . "\r\n";
+        $stream = fopen('php://temp', 'rb+');
         fwrite($stream, 'Bar Foo');
         rewind($stream);
 
@@ -26,14 +26,14 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group 6027
+     * @group  6027
      *
      * @covers \Zend\Http\Response\Stream::fromStream
      */
     public function testResponseFactoryFromEmptyStringCreatesValidResponse()
     {
-        $stream = fopen('php://temp','rb+');
-        fwrite($stream, 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n".'Bar Foo');
+        $stream = fopen('php://temp', 'rb+');
+        fwrite($stream, 'HTTP/1.0 200 OK' . "\r\n\r\n" . 'Foo Bar' . "\r\n" . 'Bar Foo');
         rewind($stream);
 
         $response = Stream::fromStream('', $stream);
@@ -43,10 +43,10 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 
     public function testGzipResponse()
     {
-        $stream = fopen(__DIR__ . '/../_files/response_gzip','rb');
+        $stream = fopen(__DIR__ . '/../_files/response_gzip', 'rb');
 
         $headers = '';
-        while (false!== ($newLine = fgets($stream))) {
+        while (false !== ($newLine = fgets($stream))) {
             $headers .= $newLine;
             if ($headers == "\n" || $headers == "\r\n") {
                 break;
@@ -66,7 +66,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 
     public function test300isRedirect()
     {
-        $values   = $this->readResponse('response_302');
+        $values = $this->readResponse('response_302');
         $response = Stream::fromStream($values['data'], $values['stream']);
 
         $this->assertEquals(302, $response->getStatusCode(), 'Response code is expected to be 302, but it\'s not.');
@@ -83,7 +83,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 
     public function testMultilineHeader()
     {
-        $values   = $this->readResponse('response_multiline_header');
+        $values = $this->readResponse('response_multiline_header');
         $response = Stream::fromStream($values['data'], $values['stream']);
 
         // Make sure we got the corrent no. of headers
@@ -106,7 +106,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $stream = fopen(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $response, 'rb');
 
         $data = '';
-        while (false!== ($newLine = fgets($stream))) {
+        while (false !== ($newLine = fgets($stream))) {
             $data .= $newLine;
             if ($newLine == "\n" || $newLine == "\r\n") {
                 break;
@@ -118,7 +118,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 
         $return = array();
         $return['stream'] = $stream;
-        $return['data']   = $data;
+        $return['data'] = $data;
 
         return $return;
     }

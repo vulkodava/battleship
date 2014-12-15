@@ -10,11 +10,12 @@ use Doctrine\Tests\Models\CMS\CmsUser;
  * Description of InsertPerformanceTest
  *
  * @author robo
- * @group performance
+ * @group  performance
  */
 class InsertPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
 {
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->useModelSet('cms');
         parent::setUp();
     }
@@ -33,7 +34,7 @@ class InsertPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         //echo "Memory usage before: " . (memory_get_usage() / 1024) . " KB" . PHP_EOL;
 
         $batchSize = 20;
-        for ($i=1; $i<=10000; ++$i) {
+        for ($i = 1; $i <= 10000; ++$i) {
             $user = new CmsUser;
             $user->status = 'user';
             $user->username = 'user' . $i;

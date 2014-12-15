@@ -25,7 +25,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithOptions()
     {
         $filter = new CallbackFilter(array(
-            'callback'        => array($this, 'objectCallbackWithParams'),
+            'callback' => array($this, 'objectCallbackWithParams'),
             'callback_params' => 0,
         ));
 

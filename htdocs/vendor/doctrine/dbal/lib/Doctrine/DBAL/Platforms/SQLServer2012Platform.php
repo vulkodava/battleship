@@ -36,7 +36,7 @@ class SQLServer2012Platform extends SQLServer2008Platform
     public function getAlterSequenceSQL(Sequence $sequence)
     {
         return 'ALTER SEQUENCE ' . $sequence->getQuotedName($this) .
-               ' INCREMENT BY ' . $sequence->getAllocationSize();
+        ' INCREMENT BY ' . $sequence->getAllocationSize();
     }
 
     /**
@@ -45,9 +45,9 @@ class SQLServer2012Platform extends SQLServer2008Platform
     public function getCreateSequenceSQL(Sequence $sequence)
     {
         return 'CREATE SEQUENCE ' . $sequence->getQuotedName($this) .
-               ' START WITH ' . $sequence->getInitialValue() .
-               ' INCREMENT BY ' . $sequence->getAllocationSize() .
-               ' MINVALUE ' . $sequence->getInitialValue();
+        ' START WITH ' . $sequence->getInitialValue() .
+        ' INCREMENT BY ' . $sequence->getAllocationSize() .
+        ' MINVALUE ' . $sequence->getInitialValue();
     }
 
     /**

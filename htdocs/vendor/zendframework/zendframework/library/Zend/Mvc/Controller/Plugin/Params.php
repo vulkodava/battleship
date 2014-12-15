@@ -26,13 +26,14 @@ class Params extends AbstractPlugin
         if ($param === null) {
             return $this;
         }
+
         return $this->fromRoute($param, $default);
     }
 
     /**
      * Return all files or a single file.
      *
-     * @param  string $name File name to retrieve, or null to get all.
+     * @param  string $name   File name to retrieve, or null to get all.
      * @param  mixed $default Default value to use when the file is missing.
      * @return array|\ArrayAccess|null
      */
@@ -64,7 +65,7 @@ class Params extends AbstractPlugin
     /**
      * Return all post parameters or a single post parameter.
      *
-     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param string $param  Parameter name to retrieve, or null to get all.
      * @param mixed $default Default value to use when the parameter is missing.
      * @return mixed
      */
@@ -80,7 +81,7 @@ class Params extends AbstractPlugin
     /**
      * Return all query parameters or a single query parameter.
      *
-     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param string $param  Parameter name to retrieve, or null to get all.
      * @param mixed $default Default value to use when the parameter is missing.
      * @return mixed
      */
@@ -96,7 +97,7 @@ class Params extends AbstractPlugin
     /**
      * Return all route parameters or a single route parameter.
      *
-     * @param string $param Parameter name to retrieve, or null to get all.
+     * @param string $param  Parameter name to retrieve, or null to get all.
      * @param mixed $default Default value to use when the parameter is missing.
      * @return mixed
      * @throws RuntimeException

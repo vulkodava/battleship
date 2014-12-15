@@ -227,8 +227,8 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
     public function testHeadScriptAppropriatelySetsScriptItems()
     {
         $this->helper->__invoke('FILE', 'foo', 'set')
-                     ->__invoke('SCRIPT', 'bar', 'prepend')
-                     ->__invoke('SCRIPT', 'baz', 'append');
+            ->__invoke('SCRIPT', 'bar', 'prepend')
+            ->__invoke('SCRIPT', 'baz', 'append');
         $items = $this->helper->getArrayCopy();
         for ($i = 0; $i < 3; ++$i) {
             $item = $items[$i];
@@ -253,8 +253,8 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
     public function testToStringRendersValidHtml()
     {
         $this->helper->__invoke('FILE', 'foo', 'set')
-                     ->__invoke('SCRIPT', 'bar', 'prepend')
-                     ->__invoke('SCRIPT', 'baz', 'append');
+            ->__invoke('SCRIPT', 'bar', 'prepend')
+            ->__invoke('SCRIPT', 'baz', 'append');
         $string = $this->helper->toString();
 
         $scripts = substr_count($string, '<script ');
@@ -322,7 +322,7 @@ document.write(bar.strlen());');
     public function testCanRenderArbitraryAttributesOnRequest()
     {
         $this->helper->__invoke()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'))
-             ->setAllowArbitraryAttributes(true);
+            ->setAllowArbitraryAttributes(true);
         $test = $this->helper->__invoke()->toString();
         $this->assertContains('bogus="deferred"', $test);
     }
@@ -355,7 +355,7 @@ document.write(bar.strlen());');
 
     /**
      * @issue ZF-3928
-     * @link http://framework.zend.com/issues/browse/ZF-3928
+     * @link  http://framework.zend.com/issues/browse/ZF-3928
      */
     public function testTurnOffAutoEscapeDoesNotEncodeAmpersand()
     {
@@ -416,9 +416,9 @@ document.write(bar.strlen());');
         $test = $this->helper->toString();
 
         $expected = '<script type="text/javascript" src="test1.js"></script>' . PHP_EOL
-                  . '<script type="text/javascript" src="test4.js"></script>' . PHP_EOL
-                  . '<script type="text/javascript" src="test3.js"></script>' . PHP_EOL
-                  . '<script type="text/javascript" src="test2.js"></script>';
+            . '<script type="text/javascript" src="test4.js"></script>' . PHP_EOL
+            . '<script type="text/javascript" src="test3.js"></script>' . PHP_EOL
+            . '<script type="text/javascript" src="test2.js"></script>';
 
         $this->assertEquals($expected, $test);
     }

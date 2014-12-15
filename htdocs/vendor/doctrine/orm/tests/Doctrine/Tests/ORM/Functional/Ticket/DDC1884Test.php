@@ -9,7 +9,7 @@ use Doctrine\Tests\Models\Taxi\Car,
 require_once __DIR__ . '/../../../TestInit.php';
 
 /**
- * @group DDC-1884
+ * @group  DDC-1884
  * @author Sander Coolen <sander@jibber.nl>
  */
 class DDC1884Test extends \Doctrine\Tests\OrmFunctionalTestCase
@@ -143,7 +143,7 @@ class DDC1884Test extends \Doctrine\Tests\OrmFunctionalTestCase
     {
         $qb = $this->_em->createQueryBuilder();
 
-        $result =  $qb->select('r, d, c')
+        $result = $qb->select('r, d, c')
             ->from('Doctrine\Tests\Models\Taxi\PaidRide', 'r')
             ->leftJoin('r.driver', 'd')
             ->leftJoin('r.car', 'c')

@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -41,8 +41,8 @@ class Config implements ProviderInterface
     }
 
     /**
-     * @param string      $name
-     * @param array       $options
+     * @param string $name
+     * @param array $options
      * @param string|null $parent
      *
      * @return array
@@ -55,8 +55,8 @@ class Config implements ProviderInterface
             $children = array();
         }
 
-        $roles   = array();
-        $role    = new Role($name, $parent);
+        $roles = array();
+        $role = new Role($name, $parent);
         $roles[] = $role;
 
         foreach ($children as $key => $value) {

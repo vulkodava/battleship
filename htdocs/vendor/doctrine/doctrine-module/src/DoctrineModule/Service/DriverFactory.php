@@ -59,8 +59,8 @@ class DriverFactory extends AbstractFactory
     }
 
     /**
-     * @param  ServiceLocatorInterface  $sl
-     * @param  DriverOptions            $options
+     * @param  ServiceLocatorInterface $sl
+     * @param  DriverOptions $options
      * @throws InvalidArgumentException
      * @return MappingDriver
      */
@@ -84,8 +84,8 @@ class DriverFactory extends AbstractFactory
 
         // Special options for AnnotationDrivers.
         if (($class == 'Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver') ||
-            (is_subclass_of($class, 'Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver')))
-        {
+            (is_subclass_of($class, 'Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver'))
+        ) {
             $reader = new Annotations\AnnotationReader;
             $reader = new Annotations\CachedReader(
                 new Annotations\IndexedReader($reader),
@@ -108,7 +108,7 @@ class DriverFactory extends AbstractFactory
             } else {
                 throw new InvalidArgumentException(sprintf(
                     'Discovered file locator for driver of type "%s" is an instance of "%s". This factory '
-                        . 'supports only the DefaultFileLocator when an extension is set for the file locator',
+                    . 'supports only the DefaultFileLocator when an extension is set for the file locator',
                     get_class($driver),
                     get_class($locator)
                 ));

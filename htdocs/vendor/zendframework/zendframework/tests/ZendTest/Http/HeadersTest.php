@@ -256,7 +256,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $cookie2 = new Header\SetCookie('bar', 'baz');
         $headers->addHeader($cookie1);
         $headers->addHeader($cookie2);
-        $array   = $headers->toArray();
+        $array = $headers->toArray();
         $expected = array(
             'Set-Cookie' => array(
                 $cookie1->getFieldValue(),
@@ -273,7 +273,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $cookie2 = new Header\SetCookie('bar', 'baz');
         $headers->addHeader($cookie1);
         $headers->addHeader($cookie2);
-        $string  = $headers->toString();
+        $string = $headers->toString();
         $expected = array(
             'Set-Cookie: ' . $cookie1->getFieldValue(),
             'Set-Cookie: ' . $cookie2->getFieldValue(),

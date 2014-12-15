@@ -24,7 +24,7 @@ namespace Doctrine\ORM\Internal\Hydration;
  * during the iteration. An IterableResult is obtained by AbstractHydrator#iterate().
  *
  * @author robo
- * @since 2.0
+ * @since  2.0
  */
 class IterableResult implements \Iterator
 {
@@ -80,6 +80,7 @@ class IterableResult implements \Iterator
     {
         $this->_current = $this->_hydrator->hydrateRow();
         $this->_key++;
+
         return $this->_current;
     }
 
@@ -104,6 +105,6 @@ class IterableResult implements \Iterator
      */
     public function valid()
     {
-        return ($this->_current!=false);
+        return ($this->_current != false);
     }
 }

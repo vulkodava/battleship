@@ -24,7 +24,7 @@ class DDC1843Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata('Doctrine\Tests\Models\Quote\Phone'),
                 $this->_em->getClassMetadata('Doctrine\Tests\Models\Quote\Address'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -47,16 +47,16 @@ class DDC1843Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
         $this->_em->clear();
 
-        $e1Id   = $e1->id;
-        $e2Id   = $e2->id;
-        $e3Id   = $e3->id;
-        $e4Id   = $e4->id;
+        $e1Id = $e1->id;
+        $e2Id = $e2->id;
+        $e3Id = $e3->id;
+        $e4Id = $e4->id;
 
         // Retrieve
-        $e1     = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e1Id);
-        $e2     = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e2Id);
-        $e3     = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e3Id);
-        $e4     = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e4Id);
+        $e1 = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e1Id);
+        $e2 = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e2Id);
+        $e3 = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e3Id);
+        $e4 = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e4Id);
 
         $this->assertInstanceOf('Doctrine\Tests\Models\Quote\Group', $e1);
         $this->assertInstanceOf('Doctrine\Tests\Models\Quote\Group', $e2);
@@ -111,7 +111,7 @@ class DDC1843Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->remove($e3);
         $this->_em->remove($e2);
         $this->_em->remove($e1);
-        
+
         $this->_em->flush();
         $this->_em->clear();
 
@@ -122,10 +122,10 @@ class DDC1843Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertInstanceOf('Doctrine\Tests\Models\Quote\Group', $e4);
 
         // Retrieve
-        $e1     = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e1Id);
-        $e2     = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e2Id);
-        $e3     = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e3Id);
-        $e4     = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e4Id);
+        $e1 = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e1Id);
+        $e2 = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e2Id);
+        $e3 = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e3Id);
+        $e4 = $this->_em->find('Doctrine\Tests\Models\Quote\Group', $e4Id);
 
         $this->assertNull($e1);
         $this->assertNull($e2);

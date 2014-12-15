@@ -11,7 +11,7 @@ use Doctrine\DBAL\Schema\Index;
 
 class IndexTest extends \PHPUnit_Framework_TestCase
 {
-    public function createIndex($unique=false, $primary=false)
+    public function createIndex($unique = false, $primary = false)
     {
         return new Index("foo", array("bar", "baz"), $unique, $primary);
     }

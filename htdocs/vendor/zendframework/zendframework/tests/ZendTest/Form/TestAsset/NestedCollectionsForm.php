@@ -22,8 +22,8 @@ class NestedCollectionsForm extends Form
             'name' => 'testFieldset',
             'type' => 'Zend\Form\Fieldset',
             'options' => array(
-                 'use_as_base_fieldset' => true,
-             ),
+                'use_as_base_fieldset' => true,
+            ),
             'elements' => array(
                 array(
                     'spec' => array(

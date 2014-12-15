@@ -17,7 +17,7 @@ class DDC1209Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1209_2'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1209_3')
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -69,24 +69,24 @@ class DDC1209_1
 class DDC1209_2
 {
     /**
-     *  @Id
-     *  @ManyToOne(targetEntity="DDC1209_1")
-     *  @JoinColumn(referencedColumnName="id", nullable=false)
+     * @Id
+     * @ManyToOne(targetEntity="DDC1209_1")
+     * @JoinColumn(referencedColumnName="id", nullable=false)
      */
     private $future1;
     /**
-     *  @Id
-     *  @Column(type="datetime", nullable=false)
+     * @Id
+     * @Column(type="datetime", nullable=false)
      */
     private $starting_datetime;
     /**
-     *  @Id
-     *  @Column(type="datetime", nullable=false)
+     * @Id
+     * @Column(type="datetime", nullable=false)
      */
     private $during_datetime;
     /**
-     *  @Id
-     *  @Column(type="datetime", nullable=false)
+     * @Id
+     * @Column(type="datetime", nullable=false)
      */
     private $ending_datetime;
 

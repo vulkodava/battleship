@@ -43,14 +43,14 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     public function testExpectedResultsWithBasicInputValues()
     {
         $valuesExpected = array(
-            'abc123'  => true,
+            'abc123' => true,
             'abc 123' => false,
-            'abcxyz'  => true,
+            'abcxyz' => true,
             'AZ@#4.3' => false,
-            'aBc123'  => true,
-            ''        => false,
-            ' '       => false,
-            "\n"      => false,
+            'aBc123' => true,
+            '' => false,
+            ' ' => false,
+            "\n" => false,
             'foobar1' => true
         );
         foreach ($valuesExpected as $input => $result) {
@@ -78,23 +78,23 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         $this->validator->setAllowWhiteSpace(true);
 
         $valuesExpected = array(
-            'abc123'  => true,
+            'abc123' => true,
             'abc 123' => true,
-            'abcxyz'  => true,
+            'abcxyz' => true,
             'AZ@#4.3' => false,
-            'aBc123'  => true,
-            ''        => false,
-            ' '       => true,
-            "\n"      => true,
-            " \t "    => true,
+            'aBc123' => true,
+            '' => false,
+            ' ' => true,
+            "\n" => true,
+            " \t " => true,
             'foobar1' => true
-            );
+        );
         foreach ($valuesExpected as $input => $result) {
             $this->assertEquals(
                 $result,
                 $this->validator->isValid($input),
                 "Expected '$input' to be considered " . ($result ? '' : 'in') . "valid"
-                );
+            );
         }
     }
 
@@ -145,6 +145,6 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 }

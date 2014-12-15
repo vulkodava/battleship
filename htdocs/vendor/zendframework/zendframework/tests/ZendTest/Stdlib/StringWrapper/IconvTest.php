@@ -41,6 +41,7 @@ class IconvTest extends CommonStringWrapperTest
 
         $wrapper = new Iconv();
         $wrapper->setEncoding($encoding, $convertEncoding);
+
         return $wrapper;
     }
 }

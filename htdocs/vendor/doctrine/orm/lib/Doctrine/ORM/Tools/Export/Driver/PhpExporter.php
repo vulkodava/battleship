@@ -86,14 +86,14 @@ class PhpExporter extends AbstractExporter
             $lines[] = '$metadata->mapField(' . $this->_varExport($fieldMapping) . ');';
         }
 
-        if ( ! $metadata->isIdentifierComposite && $generatorType = $this->_getIdGeneratorTypeString($metadata->generatorType)) {
+        if (!$metadata->isIdentifierComposite && $generatorType = $this->_getIdGeneratorTypeString($metadata->generatorType)) {
             $lines[] = '$metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_' . $generatorType . ');';
         }
 
         foreach ($metadata->associationMappings as $associationMapping) {
             $cascade = array('remove', 'persist', 'refresh', 'merge', 'detach');
             foreach ($cascade as $key => $value) {
-                if ( ! $associationMapping['isCascade'.ucfirst($value)]) {
+                if (!$associationMapping['isCascade' . ucfirst($value)]) {
                     unset($cascade[$key]);
                 }
             }
@@ -103,17 +103,17 @@ class PhpExporter extends AbstractExporter
             }
 
             $associationMappingArray = array(
-                'fieldName'    => $associationMapping['fieldName'],
+                'fieldName' => $associationMapping['fieldName'],
                 'targetEntity' => $associationMapping['targetEntity'],
-                'cascade'     => $cascade,
+                'cascade' => $cascade,
             );
 
             if ($associationMapping['type'] & ClassMetadataInfo::TO_ONE) {
                 $method = 'mapOneToOne';
                 $oneToOneMappingArray = array(
-                    'mappedBy'      => $associationMapping['mappedBy'],
-                    'inversedBy'    => $associationMapping['inversedBy'],
-                    'joinColumns'   => $associationMapping['joinColumns'],
+                    'mappedBy' => $associationMapping['mappedBy'],
+                    'inversedBy' => $associationMapping['inversedBy'],
+                    'joinColumns' => $associationMapping['joinColumns'],
                     'orphanRemoval' => $associationMapping['orphanRemoval'],
                 );
 

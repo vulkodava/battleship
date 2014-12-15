@@ -42,7 +42,7 @@ class NoObjectExistsTest extends BaseTestCase
 
         $validator = new NoObjectExists(array(
             'object_repository' => $repository,
-            'fields'            => 'matchKey',
+            'fields' => 'matchKey',
         ));
         $this->assertTrue($validator->isValid('matchValue'));
     }
@@ -57,7 +57,7 @@ class NoObjectExistsTest extends BaseTestCase
 
         $validator = new NoObjectExists(array(
             'object_repository' => $repository,
-            'fields'            => 'matchKey',
+            'fields' => 'matchKey',
         ));
         $this->assertFalse($validator->isValid('matchValue'));
     }

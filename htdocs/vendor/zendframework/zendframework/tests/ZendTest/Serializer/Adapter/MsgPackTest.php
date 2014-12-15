@@ -42,7 +42,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value    = 'test';
+        $value = 'test';
         $expected = msgpack_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -51,7 +51,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeFalse()
     {
-        $value    = false;
+        $value = false;
         $expected = msgpack_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -60,7 +60,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNull()
     {
-        $value    = null;
+        $value = null;
         $expected = msgpack_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -69,7 +69,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNumeric()
     {
-        $value    = 100;
+        $value = 100;
         $expected = msgpack_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -78,7 +78,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value    = new \stdClass();
+        $value = new \stdClass();
         $expected = msgpack_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -88,7 +88,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeString()
     {
         $expected = 'test';
-        $value    = msgpack_serialize($expected);
+        $value = msgpack_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -97,7 +97,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeFalse()
     {
         $expected = false;
-        $value    = msgpack_serialize($expected);
+        $value = msgpack_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -106,7 +106,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeNull()
     {
         $expected = null;
-        $value    = msgpack_serialize($expected);
+        $value = msgpack_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -115,7 +115,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeNumeric()
     {
         $expected = 100;
-        $value    = msgpack_serialize($expected);
+        $value = msgpack_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -124,7 +124,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeObject()
     {
         $expected = new \stdClass();
-        $value    = msgpack_serialize($expected);
+        $value = msgpack_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -133,7 +133,7 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
     public function testUnserialize0()
     {
         $expected = 0;
-        $value    = msgpack_serialize($expected);
+        $value = msgpack_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);

@@ -12,5 +12,6 @@ namespace ZendTest\Di\TestAsset\AwareClasses;
 interface NoParamsAwareInterface
 {
     public function setSomething(A $something);
+
     public function getSomething();
 }

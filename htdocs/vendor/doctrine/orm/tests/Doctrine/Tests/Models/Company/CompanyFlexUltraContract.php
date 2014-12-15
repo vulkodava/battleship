@@ -32,8 +32,8 @@ class CompanyFlexUltraContract extends CompanyFlexContract
     static public function loadMetadata(\Doctrine\ORM\Mapping\ClassMetadataInfo $metadata)
     {
         $metadata->mapField(array(
-            'type'      => 'integer',
-            'name'      => 'maxPrice',
+            'type' => 'integer',
+            'name' => 'maxPrice',
             'fieldName' => 'maxPrice',
         ));
         $metadata->addEntityListener(\Doctrine\ORM\Events::postPersist, 'CompanyContractListener', 'postPersistHandler');
@@ -47,7 +47,7 @@ class CompanyFlexUltraContract extends CompanyFlexContract
 
         $metadata->addEntityListener(\Doctrine\ORM\Events::preFlush, 'CompanyContractListener', 'preFlushHandler');
         $metadata->addEntityListener(\Doctrine\ORM\Events::postLoad, 'CompanyContractListener', 'postLoadHandler');
-        
+
         $metadata->addEntityListener(\Doctrine\ORM\Events::prePersist, 'CompanyFlexUltraContractListener', 'prePersistHandler1');
         $metadata->addEntityListener(\Doctrine\ORM\Events::prePersist, 'CompanyFlexUltraContractListener', 'prePersistHandler2');
     }

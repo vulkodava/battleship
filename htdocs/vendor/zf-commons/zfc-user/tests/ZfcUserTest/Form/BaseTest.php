@@ -13,14 +13,14 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     {
         $options = $this->getMock('ZfcUser\Options\RegistrationOptionsInterface');
         $options->expects($this->once())
-                ->method('getUseRegistrationFormCaptcha')
-                ->will($this->returnValue($useCaptcha));
+            ->method('getUseRegistrationFormCaptcha')
+            ->will($this->returnValue($useCaptcha));
         if ($useCaptcha && class_exists('\Zend\Captcha\AbstractAdapter')) {
             $captcha = $this->getMockForAbstractClass('\Zend\Captcha\AbstractAdapter');
 
             $options->expects($this->once())
-                    ->method('getFormCaptchaOptions')
-                    ->will($this->returnValue($captcha));
+                ->method('getFormCaptchaOptions')
+                ->will($this->returnValue($captcha));
         }
 
         $form = new Form($options);

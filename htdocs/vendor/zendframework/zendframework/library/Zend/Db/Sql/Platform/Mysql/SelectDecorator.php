@@ -61,6 +61,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         if ($this->limit === null && $this->offset !== null) {
             $this->specifications[self::LIMIT] = 'LIMIT 18446744073709551615';
         }
+
         return parent::getSqlString($platform);
     }
 
@@ -89,6 +90,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         }
         if ($driver) {
             $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
+
             return array($driver->formatParameterName('offset'));
         }
 

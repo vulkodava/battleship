@@ -46,7 +46,7 @@ class LifecycleEventArgs extends EventArgs
     /**
      * Constructor.
      *
-     * @param object        $object
+     * @param object $object
      * @param ObjectManager $objectManager
      */
     public function __construct($object, ObjectManager $objectManager)

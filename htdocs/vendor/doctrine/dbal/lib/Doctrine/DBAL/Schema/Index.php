@@ -49,15 +49,15 @@ class Index extends AbstractAsset implements Constraint
     protected $_flags = array();
 
     /**
-     * @param string  $indexName
-     * @param array   $columns
+     * @param string $indexName
+     * @param array $columns
      * @param boolean $isUnique
      * @param boolean $isPrimary
-     * @param array   $flags
+     * @param array $flags
      */
     public function __construct($indexName, array $columns, $isUnique = false, $isPrimary = false, array $flags = array())
     {
-        $isUnique = ($isPrimary)?true:$isUnique;
+        $isUnique = ($isPrimary) ? true : $isUnique;
 
         $this->_setName($indexName);
         $this->_isUnique = $isUnique;
@@ -80,7 +80,7 @@ class Index extends AbstractAsset implements Constraint
      */
     protected function _addColumn($column)
     {
-        if(is_string($column)) {
+        if (is_string($column)) {
             $this->_columns[$column] = new Identifier($column);
         } else {
             throw new \InvalidArgumentException("Expecting a string as Index Column");
@@ -144,14 +144,14 @@ class Index extends AbstractAsset implements Constraint
     }
 
     /**
-     * @param string  $columnName
+     * @param string $columnName
      * @param integer $pos
      *
      * @return boolean
      */
     public function hasColumnAtPosition($columnName, $pos = 0)
     {
-        $columnName   = $this->trimQuotes(strtolower($columnName));
+        $columnName = $this->trimQuotes(strtolower($columnName));
         $indexColumns = array_map('strtolower', $this->getUnquotedColumns());
 
         return array_search($columnName, $indexColumns) === $pos;
@@ -166,12 +166,12 @@ class Index extends AbstractAsset implements Constraint
      */
     public function spansColumns(array $columnNames)
     {
-        $columns         = $this->getColumns();
+        $columns = $this->getColumns();
         $numberOfColumns = count($columns);
-        $sameColumns     = true;
+        $sameColumns = true;
 
         for ($i = 0; $i < $numberOfColumns; $i++) {
-            if ( ! isset($columnNames[$i]) || $this->trimQuotes(strtolower($columns[$i])) !== $this->trimQuotes(strtolower($columnNames[$i]))) {
+            if (!isset($columnNames[$i]) || $this->trimQuotes(strtolower($columns[$i])) !== $this->trimQuotes(strtolower($columnNames[$i]))) {
                 $sameColumns = false;
             }
         }
@@ -198,7 +198,7 @@ class Index extends AbstractAsset implements Constraint
         $sameColumns = $this->spansColumns($other->getColumns());
 
         if ($sameColumns) {
-            if ( ! $this->isUnique() && !$this->isPrimary()) {
+            if (!$this->isUnique() && !$this->isPrimary()) {
                 // this is a special case: If the current key is neither primary or unique, any uniqe or
                 // primary key will always have the same effect for the index and there cannot be any constraint
                 // overlaps. This means a primary or unique index can always fulfill the requirements of just an

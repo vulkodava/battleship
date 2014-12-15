@@ -56,7 +56,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $this->assertEquals('phonenumbers', $oneOneMapping['fieldName']);
         $this->assertEquals('Doctrine\Tests\Models\CMS\CmsAddress', $oneOneMapping['targetEntity']);
         $this->assertTrue($cm->isReadOnly);
-        $this->assertEquals(array('dql' => array('name'=>'dql','query'=>'foo','dql'=>'foo')), $cm->namedQueries);
+        $this->assertEquals(array('dql' => array('name' => 'dql', 'query' => 'foo', 'dql' => 'foo')), $cm->namedQueries);
     }
 
     public function testFieldIsNullable()
@@ -82,7 +82,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testMapAssociationInGlobalNamespace()
     {
-        require_once __DIR__."/../../Models/Global/GlobalNamespaceModel.php";
+        require_once __DIR__ . "/../../Models/Global/GlobalNamespaceModel.php";
 
         $cm = new ClassMetadata('DoctrineGlobal_Article');
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
@@ -105,9 +105,9 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
         $cm->mapManyToMany(
             array(
-            'fieldName' => 'groups',
-            'targetEntity' => 'CmsGroup'
-        ));
+                'fieldName' => 'groups',
+                'targetEntity' => 'CmsGroup'
+            ));
 
         $assoc = $cm->associationMappings['groups'];
         //$this->assertInstanceOf('Doctrine\ORM\Mapping\ManyToManyMapping', $assoc);
@@ -125,9 +125,9 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
         $cm->mapManyToMany(
             array(
-            'fieldName' => 'groups',
-            'targetEntity' => 'CmsGroup'
-        ));
+                'fieldName' => 'groups',
+                'targetEntity' => 'CmsGroup'
+            ));
 
         /* @var $assoc \Doctrine\ORM\Mapping\ManyToManyMapping */
         $assoc = $cm->associationMappings['groups'];
@@ -141,7 +141,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testSetDiscriminatorMapInGlobalNamespace()
     {
-        require_once __DIR__."/../../Models/Global/GlobalNamespaceModel.php";
+        require_once __DIR__ . "/../../Models/Global/GlobalNamespaceModel.php";
 
         $cm = new ClassMetadata('DoctrineGlobal_User');
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
@@ -156,7 +156,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testSetSubClassesInGlobalNamespace()
     {
-        require_once __DIR__."/../../Models/Global/GlobalNamespaceModel.php";
+        require_once __DIR__ . "/../../Models/Global/GlobalNamespaceModel.php";
 
         $cm = new ClassMetadata('DoctrineGlobal_User');
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
@@ -185,7 +185,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
     {
         $cm = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsUser');
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
-        $cm->isIdentifierComposite  = true;
+        $cm->isIdentifierComposite = true;
 
         $this->setExpectedException('Doctrine\ORM\Mapping\MappingException');
         $cm->getSingleIdentifierFieldName();
@@ -292,7 +292,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
             'targetEntity' => 'CmsUser',
             'inversedBy' => 'users',
             'joinTable' => array('joinColumns' => array(array('referencedColumnName' => 'id')),
-                                 'inverseJoinColumns' => array(array('referencedColumnName' => 'id')))));
+                'inverseJoinColumns' => array(array('referencedColumnName' => 'id')))));
         $this->assertEquals('cmsaddress_cmsuser', $cm->associationMappings['user']['joinTable']['name']);
     }
 
@@ -316,8 +316,8 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
             'targetEntity' => 'CmsUser',
             'inversedBy' => 'users',
             'joinTable' => array('name' => 'user_CmsUser',
-                                'joinColumns' => array(array('referencedColumnName' => 'id')),
-                                'inverseJoinColumns' => array(array('referencedColumnName' => 'id')))));
+                'joinColumns' => array(array('referencedColumnName' => 'id')),
+                'inverseJoinColumns' => array(array('referencedColumnName' => 'id')))));
         $this->assertEquals('cmsaddress_id', $cm->associationMappings['user']['joinTable']['joinColumns'][0]['name']);
         $this->assertEquals('cmsuser_id', $cm->associationMappings['user']['joinTable']['inverseJoinColumns'][0]['name']);
     }
@@ -327,23 +327,23 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testUnderscoreNamingStrategyDefaults()
     {
-        $namingStrategy     = new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy(CASE_UPPER);
-        $oneToOneMetadata   = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsAddress', $namingStrategy);
+        $namingStrategy = new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy(CASE_UPPER);
+        $oneToOneMetadata = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsAddress', $namingStrategy);
         $manyToManyMetadata = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsAddress', $namingStrategy);
 
         $oneToOneMetadata->mapOneToOne(array(
-            'fieldName'     => 'user',
-            'targetEntity'  => 'CmsUser'
+            'fieldName' => 'user',
+            'targetEntity' => 'CmsUser'
         ));
 
         $manyToManyMetadata->mapManyToMany(array(
-            'fieldName'     => 'user',
-            'targetEntity'  => 'CmsUser'
+            'fieldName' => 'user',
+            'targetEntity' => 'CmsUser'
         ));
 
-        $this->assertEquals(array('USER_ID'=>'ID'), $oneToOneMetadata->associationMappings['user']['sourceToTargetKeyColumns']);
-        $this->assertEquals(array('USER_ID'=>'USER_ID'), $oneToOneMetadata->associationMappings['user']['joinColumnFieldNames']);
-        $this->assertEquals(array('ID'=>'USER_ID'), $oneToOneMetadata->associationMappings['user']['targetToSourceKeyColumns']);
+        $this->assertEquals(array('USER_ID' => 'ID'), $oneToOneMetadata->associationMappings['user']['sourceToTargetKeyColumns']);
+        $this->assertEquals(array('USER_ID' => 'USER_ID'), $oneToOneMetadata->associationMappings['user']['joinColumnFieldNames']);
+        $this->assertEquals(array('ID' => 'USER_ID'), $oneToOneMetadata->associationMappings['user']['targetToSourceKeyColumns']);
 
         $this->assertEquals('USER_ID', $oneToOneMetadata->associationMappings['user']['joinColumns'][0]['name']);
         $this->assertEquals('ID', $oneToOneMetadata->associationMappings['user']['joinColumns'][0]['referencedColumnName']);
@@ -351,9 +351,9 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
 
         $this->assertEquals('CMS_ADDRESS_CMS_USER', $manyToManyMetadata->associationMappings['user']['joinTable']['name']);
 
-        $this->assertEquals(array('CMS_ADDRESS_ID','CMS_USER_ID'), $manyToManyMetadata->associationMappings['user']['joinTableColumns']);
-        $this->assertEquals(array('CMS_ADDRESS_ID'=>'ID'), $manyToManyMetadata->associationMappings['user']['relationToSourceKeyColumns']);
-        $this->assertEquals(array('CMS_USER_ID'=>'ID'), $manyToManyMetadata->associationMappings['user']['relationToTargetKeyColumns']);
+        $this->assertEquals(array('CMS_ADDRESS_ID', 'CMS_USER_ID'), $manyToManyMetadata->associationMappings['user']['joinTableColumns']);
+        $this->assertEquals(array('CMS_ADDRESS_ID' => 'ID'), $manyToManyMetadata->associationMappings['user']['relationToSourceKeyColumns']);
+        $this->assertEquals(array('CMS_USER_ID' => 'ID'), $manyToManyMetadata->associationMappings['user']['relationToTargetKeyColumns']);
 
         $this->assertEquals('CMS_ADDRESS_ID', $manyToManyMetadata->associationMappings['user']['joinTable']['joinColumns'][0]['name']);
         $this->assertEquals('CMS_USER_ID', $manyToManyMetadata->associationMappings['user']['joinTable']['inverseJoinColumns'][0]['name']);
@@ -503,7 +503,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $this->assertEquals(0, count($cm->getNamedQueries()));
 
         $cm->addNamedQuery(array(
-            'name'  => 'userById',
+            'name' => 'userById',
             'query' => 'SELECT u FROM __CLASS__ u WHERE u.id = ?1'
         ));
 
@@ -522,10 +522,10 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $this->assertEquals(0, count($cm->getSqlResultSetMappings()));
 
         $cm->addSqlResultSetMapping(array(
-            'name'      => 'find-all',
-            'entities'  => array(
+            'name' => 'find-all',
+            'entities' => array(
                 array(
-                    'entityClass'   => 'Doctrine\Tests\Models\CMS\CmsUser',
+                    'entityClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
                 ),
             ),
         ));
@@ -540,7 +540,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
 
 
         $cm->addNamedQuery(array(
-            'name'  => 'all',
+            'name' => 'all',
             'query' => 'SELECT u FROM __CLASS__ u'
         ));
 
@@ -557,17 +557,17 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
 
         $cm->addNamedNativeQuery(array(
-            'name'              => 'find-all',
-            'query'             => 'SELECT * FROM cms_users',
-            'resultSetMapping'  => 'result-mapping-name',
-            'resultClass'       => 'Doctrine\Tests\Models\CMS\CmsUser',
+            'name' => 'find-all',
+            'query' => 'SELECT * FROM cms_users',
+            'resultSetMapping' => 'result-mapping-name',
+            'resultClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
         ));
 
         $cm->addNamedNativeQuery(array(
-            'name'              => 'find-by-id',
-            'query'             => 'SELECT * FROM cms_users WHERE id = ?',
-            'resultClass'       => '__CLASS__',
-            'resultSetMapping'  => 'result-mapping-name',
+            'name' => 'find-by-id',
+            'query' => 'SELECT * FROM cms_users WHERE id = ?',
+            'resultClass' => '__CLASS__',
+            'resultSetMapping' => 'result-mapping-name',
         ));
 
         $mapping = $cm->getNamedNativeQuery('find-all');
@@ -590,36 +590,36 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
 
         $cm->addSqlResultSetMapping(array(
-            'name'      => 'find-all',
-            'entities'  => array(
+            'name' => 'find-all',
+            'entities' => array(
                 array(
-                    'entityClass'   => '__CLASS__',
-                    'fields'        => array(
+                    'entityClass' => '__CLASS__',
+                    'fields' => array(
                         array(
-                            'name'  => 'id',
-                            'column'=> 'id'
+                            'name' => 'id',
+                            'column' => 'id'
                         ),
                         array(
-                            'name'  => 'name',
-                            'column'=> 'name'
+                            'name' => 'name',
+                            'column' => 'name'
                         )
                     )
                 ),
                 array(
-                    'entityClass'   => 'Doctrine\Tests\Models\CMS\CmsEmail',
-                    'fields'        => array(
+                    'entityClass' => 'Doctrine\Tests\Models\CMS\CmsEmail',
+                    'fields' => array(
                         array(
-                            'name'  => 'id',
-                            'column'=> 'id'
+                            'name' => 'id',
+                            'column' => 'id'
                         ),
                         array(
-                            'name'  => 'email',
-                            'column'=> 'email'
+                            'name' => 'email',
+                            'column' => 'email'
                         )
                     )
                 )
             ),
-            'columns'   => array(
+            'columns' => array(
                 array(
                     'name' => 'scalarColumn'
                 )
@@ -629,12 +629,12 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $mapping = $cm->getSqlResultSetMapping('find-all');
 
         $this->assertEquals('Doctrine\Tests\Models\CMS\CmsUser', $mapping['entities'][0]['entityClass']);
-        $this->assertEquals(array('name'=>'id','column'=>'id'), $mapping['entities'][0]['fields'][0]);
-        $this->assertEquals(array('name'=>'name','column'=>'name'), $mapping['entities'][0]['fields'][1]);
+        $this->assertEquals(array('name' => 'id', 'column' => 'id'), $mapping['entities'][0]['fields'][0]);
+        $this->assertEquals(array('name' => 'name', 'column' => 'name'), $mapping['entities'][0]['fields'][1]);
 
         $this->assertEquals('Doctrine\Tests\Models\CMS\CmsEmail', $mapping['entities'][1]['entityClass']);
-        $this->assertEquals(array('name'=>'id','column'=>'id'), $mapping['entities'][1]['fields'][0]);
-        $this->assertEquals(array('name'=>'email','column'=>'email'), $mapping['entities'][1]['fields'][1]);
+        $this->assertEquals(array('name' => 'id', 'column' => 'id'), $mapping['entities'][1]['fields'][0]);
+        $this->assertEquals(array('name' => 'email', 'column' => 'email'), $mapping['entities'][1]['fields'][1]);
 
         $this->assertEquals('scalarColumn', $mapping['columns'][0]['name']);
     }
@@ -648,10 +648,10 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
 
         $cm->addSqlResultSetMapping(array(
-            'name'      => 'find-all',
-            'entities'  => array(
+            'name' => 'find-all',
+            'entities' => array(
                 array(
-                    'entityClass'   => 'Doctrine\Tests\Models\CMS\CmsUser',
+                    'entityClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
                 ),
             ),
         ));
@@ -670,10 +670,10 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
 
 
         $cm->addNamedNativeQuery(array(
-            'name'              => 'find-all',
-            'query'             => 'SELECT * FROM cms_users',
-            'resultClass'       => 'Doctrine\Tests\Models\CMS\CmsUser',
-            'resultSetMapping'  => 'result-mapping-name'
+            'name' => 'find-all',
+            'query' => 'SELECT * FROM cms_users',
+            'resultClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
+            'resultSetMapping' => 'result-mapping-name'
         ));
 
         $this->assertTrue($cm->hasNamedNativeQuery('find-all'));
@@ -687,7 +687,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
 
 
         $cm->addNamedQuery(array(
-            'name'  => 'userById',
+            'name' => 'userById',
             'query' => 'SELECT u FROM __CLASS__ u WHERE u.id = ?1'
         ));
 
@@ -705,10 +705,10 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $this->assertEquals(0, count($cm->getNamedNativeQueries()));
 
         $cm->addNamedNativeQuery(array(
-            'name'              => 'find-all',
-            'query'             => 'SELECT * FROM cms_users',
-            'resultClass'       => 'Doctrine\Tests\Models\CMS\CmsUser',
-            'resultSetMapping'  => 'result-mapping-name'
+            'name' => 'find-all',
+            'query' => 'SELECT * FROM cms_users',
+            'resultClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
+            'resultSetMapping' => 'result-mapping-name'
         ));
 
         $this->assertEquals(1, count($cm->getNamedNativeQueries()));
@@ -725,7 +725,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $metadata->addEntityListener(\Doctrine\ORM\Events::prePersist, 'CompanyContractListener', 'prePersistHandler');
         $metadata->addEntityListener(\Doctrine\ORM\Events::postPersist, 'CompanyContractListener', 'postPersistHandler');
 
-        $serialize   = serialize($metadata);
+        $serialize = serialize($metadata);
         $unserialize = unserialize($serialize);
 
         $this->assertEquals($metadata->entityListeners, $unserialize->entityListeners);
@@ -733,7 +733,8 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
 
     /**
      * @expectedException \Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Query named "userById" in "Doctrine\Tests\Models\CMS\CmsUser" was already declared, but it must be declared only once
+     * @expectedExceptionMessage Query named "userById" in "Doctrine\Tests\Models\CMS\CmsUser" was already declared,
+     *                           but it must be declared only once
      */
     public function testNamingCollisionNamedQueryShouldThrowException()
     {
@@ -741,21 +742,22 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
 
         $cm->addNamedQuery(array(
-            'name'  => 'userById',
+            'name' => 'userById',
             'query' => 'SELECT u FROM __CLASS__ u WHERE u.id = ?1'
         ));
 
         $cm->addNamedQuery(array(
-            'name'  => 'userById',
+            'name' => 'userById',
             'query' => 'SELECT u FROM __CLASS__ u WHERE u.id = ?1'
         ));
     }
 
     /**
-     * @group DDC-1663
+     * @group                    DDC-1663
      *
      * @expectedException \Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Query named "find-all" in "Doctrine\Tests\Models\CMS\CmsUser" was already declared, but it must be declared only once
+     * @expectedExceptionMessage Query named "find-all" in "Doctrine\Tests\Models\CMS\CmsUser" was already declared,
+     *                           but it must be declared only once
      */
     public function testNamingCollisionNamedNativeQueryShouldThrowException()
     {
@@ -763,25 +765,26 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
 
         $cm->addNamedNativeQuery(array(
-            'name'              => 'find-all',
-            'query'             => 'SELECT * FROM cms_users',
-            'resultClass'       => 'Doctrine\Tests\Models\CMS\CmsUser',
-            'resultSetMapping'  => 'result-mapping-name'
+            'name' => 'find-all',
+            'query' => 'SELECT * FROM cms_users',
+            'resultClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
+            'resultSetMapping' => 'result-mapping-name'
         ));
 
         $cm->addNamedNativeQuery(array(
-            'name'              => 'find-all',
-            'query'             => 'SELECT * FROM cms_users',
-            'resultClass'       => 'Doctrine\Tests\Models\CMS\CmsUser',
-            'resultSetMapping'  => 'result-mapping-name'
+            'name' => 'find-all',
+            'query' => 'SELECT * FROM cms_users',
+            'resultClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
+            'resultSetMapping' => 'result-mapping-name'
         ));
     }
 
     /**
-     * @group DDC-1663
+     * @group                    DDC-1663
      *
      * @expectedException \Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Result set mapping named "find-all" in "Doctrine\Tests\Models\CMS\CmsUser" was already declared, but it must be declared only once
+     * @expectedExceptionMessage Result set mapping named "find-all" in "Doctrine\Tests\Models\CMS\CmsUser" was already
+     *                           declared, but it must be declared only once
      */
     public function testNamingCollisionSqlResultSetMappingShouldThrowException()
     {
@@ -789,19 +792,19 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
 
         $cm->addSqlResultSetMapping(array(
-            'name'      => 'find-all',
-            'entities'  => array(
+            'name' => 'find-all',
+            'entities' => array(
                 array(
-                    'entityClass'   => 'Doctrine\Tests\Models\CMS\CmsUser',
+                    'entityClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
                 ),
             ),
         ));
 
         $cm->addSqlResultSetMapping(array(
-            'name'      => 'find-all',
-            'entities'  => array(
+            'name' => 'find-all',
+            'entities' => array(
                 array(
-                    'entityClass'   => 'Doctrine\Tests\Models\CMS\CmsUser',
+                    'entityClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
                 ),
             ),
         ));
@@ -846,7 +849,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
     }
 
     /**
-     * @group DDC-1663
+     * @group                    DDC-1663
      *
      * @expectedException \Doctrine\ORM\Mapping\MappingException
      * @expectedExceptionMessage Query name on entity class 'Doctrine\Tests\Models\CMS\CmsUser' is not defined.
@@ -861,7 +864,7 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
     }
 
     /**
-     * @group DDC-1663
+     * @group                    DDC-1663
      *
      * @expectedException \Doctrine\ORM\Mapping\MappingException
      * @expectedExceptionMessage Query name on entity class 'Doctrine\Tests\Models\CMS\CmsUser' is not defined.
@@ -871,25 +874,26 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
         $cm = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsUser');
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
         $cm->addNamedQuery(array(
-            'query'             => 'SELECT * FROM cms_users',
-            'resultClass'       => 'Doctrine\Tests\Models\CMS\CmsUser',
-            'resultSetMapping'  => 'result-mapping-name'
+            'query' => 'SELECT * FROM cms_users',
+            'resultClass' => 'Doctrine\Tests\Models\CMS\CmsUser',
+            'resultSetMapping' => 'result-mapping-name'
         ));
     }
 
     /**
-     * @group DDC-1663
+     * @group                    DDC-1663
      *
      * @expectedException \Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Result set mapping named "find-all" in "Doctrine\Tests\Models\CMS\CmsUser requires a entity class name.
+     * @expectedExceptionMessage Result set mapping named "find-all" in "Doctrine\Tests\Models\CMS\CmsUser requires a
+     *                           entity class name.
      */
     public function testNameIsMandatoryForEntityNameSqlResultSetMappingException()
     {
         $cm = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsUser');
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
         $cm->addSqlResultSetMapping(array(
-            'name'      => 'find-all',
-            'entities'  => array(
+            'name' => 'find-all',
+            'entities' => array(
                 array(
                     'fields' => array()
                 )
@@ -899,7 +903,8 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
 
     /**
      * @expectedException \Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Discriminator column name on entity class 'Doctrine\Tests\Models\CMS\CmsUser' is not defined.
+     * @expectedExceptionMessage Discriminator column name on entity class 'Doctrine\Tests\Models\CMS\CmsUser' is not
+     *                           defined.
      */
     public function testNameIsMandatoryForDiscriminatorColumnsMappingException()
     {
@@ -915,23 +920,23 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testFullyQualifiedClassNameShouldBeGivenToNamingStrategy()
     {
-        $namingStrategy     = new MyNamespacedNamingStrategy();
-        $addressMetadata    = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsAddress', $namingStrategy);
-        $articleMetadata    = new ClassMetadata('DoctrineGlobal_Article', $namingStrategy);
-        $routingMetadata    = new ClassMetadata('Doctrine\Tests\Models\Routing\RoutingLeg',$namingStrategy);
+        $namingStrategy = new MyNamespacedNamingStrategy();
+        $addressMetadata = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsAddress', $namingStrategy);
+        $articleMetadata = new ClassMetadata('DoctrineGlobal_Article', $namingStrategy);
+        $routingMetadata = new ClassMetadata('Doctrine\Tests\Models\Routing\RoutingLeg', $namingStrategy);
 
         $addressMetadata->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
         $articleMetadata->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
         $routingMetadata->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
 
         $addressMetadata->mapManyToMany(array(
-            'fieldName'     => 'user',
-            'targetEntity'  => 'CmsUser'
+            'fieldName' => 'user',
+            'targetEntity' => 'CmsUser'
         ));
 
         $articleMetadata->mapManyToMany(array(
-            'fieldName'     => 'author',
-            'targetEntity'  => 'Doctrine\Tests\Models\CMS\CmsUser'
+            'fieldName' => 'author',
+            'targetEntity' => 'Doctrine\Tests\Models\CMS\CmsUser'
         ));
 
         $this->assertEquals('routing_routingleg', $routingMetadata->table['name']);
@@ -946,16 +951,16 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
     public function testFullyQualifiedClassNameShouldBeGivenToNamingStrategyPropertyToColumnName()
     {
         $namingStrategy = new MyPrefixNamingStrategy();
-        $metadata       = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsAddress', $namingStrategy);
+        $metadata = new ClassMetadata('Doctrine\Tests\Models\CMS\CmsAddress', $namingStrategy);
 
         $metadata->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
 
-        $metadata->mapField(array('fieldName'=>'country'));
-        $metadata->mapField(array('fieldName'=>'city'));
+        $metadata->mapField(array('fieldName' => 'country'));
+        $metadata->mapField(array('fieldName' => 'city'));
 
         $this->assertEquals($metadata->fieldNames, array(
-            'cmsaddress_country'   => 'country',
-            'cmsaddress_city'      => 'city'
+            'cmsaddress_country' => 'country',
+            'cmsaddress_city' => 'city'
         ));
     }
 
@@ -971,12 +976,13 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
 
 
         $cm->mapManyToOne(array('fieldName' => 'address', 'targetEntity' => 'UnknownClass', 'cascade' => array('invalid')));
-     }
+    }
 
     /**
-     * @group DDC-964
+     * @group                    DDC-964
      * @expectedException        Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Invalid field override named 'invalidPropertyName' for class 'Doctrine\Tests\Models\DDC964\DDC964Admin
+     * @expectedExceptionMessage Invalid field override named 'invalidPropertyName' for class
+     *                           'Doctrine\Tests\Models\DDC964\DDC964Admin
      */
     public function testInvalidPropertyAssociationOverrideNameException()
     {
@@ -988,9 +994,10 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
     }
 
     /**
-     * @group DDC-964
+     * @group                    DDC-964
      * @expectedException        Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Invalid field override named 'invalidPropertyName' for class 'Doctrine\Tests\Models\DDC964\DDC964Guest'.
+     * @expectedExceptionMessage Invalid field override named 'invalidPropertyName' for class
+     *                           'Doctrine\Tests\Models\DDC964\DDC964Guest'.
      */
     public function testInvalidPropertyAttributeOverrideNameException()
     {
@@ -1002,24 +1009,26 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
     }
 
     /**
-     * @group DDC-964
+     * @group                    DDC-964
      * @expectedException        Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage The column type of attribute 'name' on class 'Doctrine\Tests\Models\DDC964\DDC964Guest' could not be changed.
+     * @expectedExceptionMessage The column type of attribute 'name' on class
+     *                           'Doctrine\Tests\Models\DDC964\DDC964Guest' could not be changed.
      */
     public function testInvalidOverrideAttributeFieldTypeException()
     {
         $cm = new ClassMetadata('Doctrine\Tests\Models\DDC964\DDC964Guest');
         $cm->initializeReflection(new \Doctrine\Common\Persistence\Mapping\RuntimeReflectionService);
-        $cm->mapField(array('fieldName' => 'name', 'type'=>'string'));
+        $cm->mapField(array('fieldName' => 'name', 'type' => 'string'));
 
-        $cm->setAttributeOverride('name', array('type'=>'date'));
+        $cm->setAttributeOverride('name', array('type' => 'date'));
     }
 
     /**
-     * @group DDC-1955
+     * @group                    DDC-1955
      *
      * @expectedException        Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Entity Listener "\InvalidClassName" declared on "Doctrine\Tests\Models\CMS\CmsUser" not found.
+     * @expectedExceptionMessage Entity Listener "\InvalidClassName" declared on "Doctrine\Tests\Models\CMS\CmsUser"
+     *                           not found.
      */
     public function testInvalidEntityListenerClassException()
     {
@@ -1030,10 +1039,11 @@ class ClassMetadataTest extends \Doctrine\Tests\OrmTestCase
     }
 
     /**
-     * @group DDC-1955
+     * @group                    DDC-1955
      *
      * @expectedException        Doctrine\ORM\Mapping\MappingException
-     * @expectedExceptionMessage Entity Listener "\Doctrine\Tests\Models\Company\CompanyContractListener" declared on "Doctrine\Tests\Models\CMS\CmsUser" has no method "invalidMethod".
+     * @expectedExceptionMessage Entity Listener "\Doctrine\Tests\Models\Company\CompanyContractListener" declared on
+     *                           "Doctrine\Tests\Models\CMS\CmsUser" has no method "invalidMethod".
      */
     public function testInvalidEntityListenerMethodException()
     {

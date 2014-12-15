@@ -72,6 +72,7 @@ class Definition
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 
@@ -83,7 +84,8 @@ class Definition
      */
     public function setName($name)
     {
-        $this->name = (string) $name;
+        $this->name = (string)$name;
+
         return $this;
     }
 
@@ -112,6 +114,7 @@ class Definition
             throw new Server\Exception\InvalidArgumentException('Invalid method callback provided');
         }
         $this->callback = $callback;
+
         return $this;
     }
 
@@ -140,6 +143,7 @@ class Definition
             throw new Server\Exception\InvalidArgumentException('Invalid method prototype provided');
         }
         $this->prototypes[] = $prototype;
+
         return $this;
     }
 
@@ -154,6 +158,7 @@ class Definition
         foreach ($prototypes as $prototype) {
             $this->addPrototype($prototype);
         }
+
         return $this;
     }
 
@@ -167,6 +172,7 @@ class Definition
     {
         $this->prototypes = array();
         $this->addPrototypes($prototypes);
+
         return $this;
     }
 
@@ -188,7 +194,8 @@ class Definition
      */
     public function setMethodHelp($methodHelp)
     {
-        $this->methodHelp = (string) $methodHelp;
+        $this->methodHelp = (string)$methodHelp;
+
         return $this;
     }
 
@@ -215,6 +222,7 @@ class Definition
             throw new Server\Exception\InvalidArgumentException('Invalid object passed to ' . __CLASS__ . '::' . __METHOD__);
         }
         $this->object = $object;
+
         return $this;
     }
 
@@ -237,6 +245,7 @@ class Definition
     public function setInvokeArguments(array $invokeArguments)
     {
         $this->invokeArguments = $invokeArguments;
+
         return $this;
     }
 
@@ -264,12 +273,12 @@ class Definition
         }
 
         return array(
-            'name'            => $this->getName(),
-            'callback'        => $this->getCallback()->toArray(),
-            'prototypes'      => $signatures,
-            'methodHelp'      => $this->getMethodHelp(),
+            'name' => $this->getName(),
+            'callback' => $this->getCallback()->toArray(),
+            'prototypes' => $signatures,
+            'methodHelp' => $this->getMethodHelp(),
             'invokeArguments' => $this->getInvokeArguments(),
-            'object'          => $this->getObject(),
+            'object' => $this->getObject(),
         );
     }
 }

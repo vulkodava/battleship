@@ -71,8 +71,8 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     /**
      * Constructor. Add two selects elements
      *
-     * @param  null|int|string  $name    Optional name for the element
-     * @param  array            $options Optional options for the element
+     * @param  null|int|string $name Optional name for the element
+     * @param  array $options        Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
@@ -151,6 +151,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     public function setMonthAttributes(array $monthAttributes)
     {
         $this->monthElement->setAttributes($monthAttributes);
+
         return $this;
     }
 
@@ -173,6 +174,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     public function setYearAttributes(array $yearAttributes)
     {
         $this->yearElement->setAttributes($yearAttributes);
+
         return $this;
     }
 
@@ -193,6 +195,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     public function setMinYear($minYear)
     {
         $this->minYear = $minYear;
+
         return $this;
     }
 
@@ -211,6 +214,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     public function setMaxYear($maxYear)
     {
         $this->maxYear = $maxYear;
+
         return $this;
     }
 
@@ -228,7 +232,8 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      */
     public function setShouldCreateEmptyOption($createEmptyOption)
     {
-        $this->createEmptyOption = (bool) $createEmptyOption;
+        $this->createEmptyOption = (bool)$createEmptyOption;
+
         return $this;
     }
 
@@ -246,7 +251,8 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      */
     public function setShouldRenderDelimiters($renderDelimiters)
     {
-        $this->renderDelimiters = (bool) $renderDelimiters;
+        $this->renderDelimiters = (bool)$renderDelimiters;
+
         return $this;
     }
 
@@ -266,7 +272,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     {
         if ($value instanceof PhpDateTime) {
             $value = array(
-                'year'  => $value->format('Y'),
+                'year' => $value->format('Y'),
                 'month' => $value->format('m')
             );
         }
@@ -323,7 +329,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
             'required' => false,
             'filters' => array(
                 array(
-                    'name'    => 'Callback',
+                    'name' => 'Callback',
                     'options' => array(
                         'callback' => function ($date) {
                             // Convert the date to a specific format
@@ -348,6 +354,6 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     public function __clone()
     {
         $this->monthElement = clone $this->monthElement;
-        $this->yearElement  = clone $this->yearElement;
+        $this->yearElement = clone $this->yearElement;
     }
 }

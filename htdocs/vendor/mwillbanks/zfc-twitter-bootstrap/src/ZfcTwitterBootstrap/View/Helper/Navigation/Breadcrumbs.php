@@ -30,8 +30,8 @@ class Breadcrumbs extends ZendBreadcrumbs
     /**
      * Returns an HTML string containing an 'a' element for the given page
      *
-     * @param  AbstractPage $page  page to generate HTML for
-     * @param  boolean      $hasParent if the breadcrumb has a parent
+     * @param  AbstractPage $page page to generate HTML for
+     * @param  boolean $hasParent if the breadcrumb has a parent
      * @return string
      */
     public function htmlify(AbstractPage $page, $hasParent = false)
@@ -60,6 +60,7 @@ class Breadcrumbs extends ZendBreadcrumbs
             $html .= '<span class="divider">' . $this->getSeparator() . '</span>';
         }
         $html .= '</li>';
+
         return $html;
     }
 

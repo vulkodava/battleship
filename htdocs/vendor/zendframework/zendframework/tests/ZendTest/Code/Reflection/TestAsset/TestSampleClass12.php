@@ -13,8 +13,8 @@ class TestSampleClass12
 {
     /**
      *
-     * @param  int    $one
-     * @param  int    $two
+     * @param  int $one
+     * @param  int $two
      * @return string
      */
     protected function doSomething(&$one, $two)

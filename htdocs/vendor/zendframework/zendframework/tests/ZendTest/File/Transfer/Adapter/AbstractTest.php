@@ -290,7 +290,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($count instanceof Word\SeparatorToCamelCase);
         $size = array_shift($test);
         $this->assertTrue($size instanceof Filter\Boolean);
-        $ext  = array_shift($test);
+        $ext = array_shift($test);
         $orig = array_pop($filters);
         $this->assertSame($orig, $ext);
     }
@@ -393,7 +393,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         }
 
         $newdirectory = __DIR__
-                      . DIRECTORY_SEPARATOR . '_files';
+            . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($newdirectory, 'foo');
         $this->assertEquals($newdirectory, $this->adapter->getDestination('foo'));
         $this->assertEquals($directory, $this->adapter->getDestination('bar'));
@@ -466,7 +466,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldAllowRetrievingFileName()
     {
         $path = __DIR__
-              . DIRECTORY_SEPARATOR . '_files';
+            . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $this->assertEquals($path . DIRECTORY_SEPARATOR . 'foo.jpg', $this->adapter->getFileName('foo'));
     }
@@ -474,7 +474,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldAllowRetrievingFileNameWithoutPath()
     {
         $path = __DIR__
-              . DIRECTORY_SEPARATOR . '_files';
+            . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $this->assertEquals('foo.jpg', $this->adapter->getFileName('foo', false));
     }
@@ -482,7 +482,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldAllowRetrievingAllFileNames()
     {
         $path = __DIR__
-              . DIRECTORY_SEPARATOR . '_files';
+            . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName();
         $this->assertTrue(is_array($files));
@@ -492,7 +492,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldAllowRetrievingAllFileNamesWithoutPath()
     {
         $path = __DIR__
-              . DIRECTORY_SEPARATOR . '_files';
+            . DIRECTORY_SEPARATOR . '_files';
         $this->adapter->setDestination($path);
         $files = $this->adapter->getFileName(null, false);
         $this->assertTrue(is_array($files));
@@ -650,17 +650,17 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testSettingAndRetrievingDetectInfosOption()
     {
         $this->assertEquals(array(
-            'foo' => array(
-                'ignoreNoFile' => false,
-                'useByteString' => true,
-                'detectInfos' => true))
+                'foo' => array(
+                    'ignoreNoFile' => false,
+                    'useByteString' => true,
+                    'detectInfos' => true))
             , $this->adapter->getOptions('foo'));
         $this->adapter->setOptions(array('detectInfos' => false));
         $this->assertEquals(array(
-            'foo' => array(
-                'ignoreNoFile' => false,
-                'useByteString' => true,
-                'detectInfos' => false))
+                'foo' => array(
+                    'ignoreNoFile' => false,
+                    'useByteString' => true,
+                    'detectInfos' => false))
             , $this->adapter->getOptions('foo'));
     }
 }

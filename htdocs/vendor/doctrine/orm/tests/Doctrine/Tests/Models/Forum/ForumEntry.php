@@ -19,7 +19,8 @@ class ForumEntry
      */
     public $topic;
 
-    public function &getTopicByReference() {
+    public function &getTopicByReference()
+    {
         return $this->topic;
     }
 }

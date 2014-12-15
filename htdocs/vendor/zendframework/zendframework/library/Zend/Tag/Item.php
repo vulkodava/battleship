@@ -119,7 +119,8 @@ class Item implements TaggableInterface
             throw new Exception\InvalidArgumentException('Title must be a string');
         }
 
-        $this->title = (string) $title;
+        $this->title = (string)$title;
+
         return $this;
     }
 
@@ -146,7 +147,8 @@ class Item implements TaggableInterface
             throw new Exception\InvalidArgumentException('Weight must be numeric');
         }
 
-        $this->weight = (float) $weight;
+        $this->weight = (float)$weight;
+
         return $this;
     }
 
@@ -169,12 +171,13 @@ class Item implements TaggableInterface
      * Defined by Zend\Tag\TaggableInterface
      *
      * @param  string $name
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return \Zend\Tag\Item
      */
     public function setParam($name, $value)
     {
         $this->params[$name] = $value;
+
         return $this;
     }
 
@@ -189,6 +192,7 @@ class Item implements TaggableInterface
         if (isset($this->params[$name])) {
             return $this->params[$name];
         }
+
         return null;
     }
 }

@@ -46,7 +46,7 @@ class Iterator implements AdapterInterface
     /**
      * Returns an iterator of items for a page, or an empty array.
      *
-     * @param  int $offset Page offset
+     * @param  int $offset           Page offset
      * @param  int $itemCountPerPage Number of items per page
      * @return array|\Zend\Paginator\SerializableLimitIterator
      */
@@ -55,6 +55,7 @@ class Iterator implements AdapterInterface
         if ($this->count == 0) {
             return array();
         }
+
         return new Paginator\SerializableLimitIterator($this->iterator, $offset, $itemCountPerPage);
     }
 

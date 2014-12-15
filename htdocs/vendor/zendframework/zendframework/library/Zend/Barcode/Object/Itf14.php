@@ -16,6 +16,7 @@ class Itf14 extends Code25interleaved
 {
     /**
      * Default options for Identcode barcode
+     *
      * @return void
      */
     protected function getDefaultOptions()

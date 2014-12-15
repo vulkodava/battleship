@@ -28,15 +28,16 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
             'tmp_name' => $testFile, 'name' => basename($testFile),
             'size' => 200, 'error' => 0, 'type' => 'image/jpeg'
         );
+
         return array(
             //    Options, isValid Param, Expected value
-            array('image/gif',                      $fileUpload, true),
-            array('image',                          $fileUpload, false),
-            array('test/notype',                    $fileUpload, true),
-            array('image/gif, image/jpeg',          $fileUpload, false),
+            array('image/gif', $fileUpload, true),
+            array('image', $fileUpload, false),
+            array('test/notype', $fileUpload, true),
+            array('image/gif, image/jpeg', $fileUpload, false),
             array(array('image/vasa', 'image/gif'), $fileUpload, true),
-            array(array('image/gif', 'jpeg'),       $fileUpload, false),
-            array(array('image/gif', 'gif'),        $fileUpload, true),
+            array(array('image/gif', 'jpeg'), $fileUpload, false),
+            array(array('image/gif', 'gif'), $fileUpload, true),
         );
     }
 
@@ -139,11 +140,11 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(ExcludeMimeType::NOT_READABLE, $validator->getMessages());
 
         $filesArray = array(
-            'name'      => '',
-            'size'      => 0,
-            'tmp_name'  => '',
-            'error'     => UPLOAD_ERR_NO_FILE,
-            'type'      => '',
+            'name' => '',
+            'size' => 0,
+            'tmp_name' => '',
+            'error' => UPLOAD_ERR_NO_FILE,
+            'type' => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

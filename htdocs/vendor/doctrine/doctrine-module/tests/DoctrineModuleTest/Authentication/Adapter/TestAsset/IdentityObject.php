@@ -43,7 +43,7 @@ class IdentityObject
      */
     public function setPassword($password)
     {
-        $this->password = (string) $password;
+        $this->password = (string)$password;
     }
 
     /**
@@ -59,7 +59,7 @@ class IdentityObject
      */
     public function setUsername($username)
     {
-        $this->username = (string) $username;
+        $this->username = (string)$username;
     }
 
     /**

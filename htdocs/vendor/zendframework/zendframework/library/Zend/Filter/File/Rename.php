@@ -111,8 +111,8 @@ class Rename extends Filter\AbstractFilter
      * Returns only the new filename without moving it
      * But existing files will be erased when the overwrite option is true
      *
-     * @param  string  $value  Full path of file to change
-     * @param  bool $source Return internal informations
+     * @param  string $value Full path of file to change
+     * @param  bool $source  Return internal informations
      * @return string The new filename which has been set
      * @throws Exception\InvalidArgumentException If the target file already exists.
      */
@@ -173,7 +173,7 @@ class Rename extends Filter\AbstractFilter
 
             $isFileUpload = true;
             $uploadData = $value;
-            $value      = $value['tmp_name'];
+            $value = $value['tmp_name'];
         }
 
         $file = $this->getNewName($value, true);
@@ -199,8 +199,10 @@ class Rename extends Filter\AbstractFilter
 
         if ($isFileUpload) {
             $uploadData['tmp_name'] = $file['target'];
+
             return $uploadData;
         }
+
         return $file['target'];
     }
 
@@ -222,19 +224,19 @@ class Rename extends Filter\AbstractFilter
 
             switch ($key) {
                 case "source":
-                    $files['source'] = (string) $value;
+                    $files['source'] = (string)$value;
                     break;
 
                 case 'target':
-                    $files['target'] = (string) $value;
+                    $files['target'] = (string)$value;
                     break;
 
                 case 'overwrite':
-                    $files['overwrite'] = (bool) $value;
+                    $files['overwrite'] = (bool)$value;
                     break;
 
                 case 'randomize':
-                    $files['randomize'] = (bool) $value;
+                    $files['randomize'] = (bool)$value;
                     break;
 
                 default:
@@ -266,12 +268,12 @@ class Rename extends Filter\AbstractFilter
         foreach ($this->files as $key => $value) {
             if ($value['source'] == $files['source']) {
                 $this->files[$key] = $files;
-                $found             = true;
+                $found = true;
             }
         }
 
         if (!$found) {
-            $count               = count($this->files);
+            $count = count($this->files);
             $this->files[$count] = $files;
         }
 
@@ -291,7 +293,7 @@ class Rename extends Filter\AbstractFilter
         foreach ($this->files as $value) {
             if ($value['source'] == '*') {
                 if (!isset($rename['source'])) {
-                    $rename           = $value;
+                    $rename = $value;
                     $rename['source'] = $file;
                 }
             }

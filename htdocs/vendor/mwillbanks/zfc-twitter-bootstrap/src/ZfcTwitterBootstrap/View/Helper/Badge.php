@@ -16,7 +16,7 @@ class Badge extends AbstractHelper
     /**
      * @var string
      */
-     protected $format = <<<FORMAT
+    protected $format = <<<FORMAT
 <span class="badge %s">%s</span>
 FORMAT;
 
@@ -92,8 +92,8 @@ FORMAT;
     /**
      * Invoke Badge
      *
-     * @param  string      $badge
-     * @param  string      $class
+     * @param  string $badge
+     * @param  string $class
      * @return string|self
      */
     public function __invoke($badge = null, $class = '')

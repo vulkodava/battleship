@@ -39,13 +39,13 @@ class RoutePluginManagerTest extends TestCase
     {
         return array(
             'hostname' => array('Zend\Mvc\Router\Http\Hostname', array('route' => 'example.com')),
-            'literal'  => array('Zend\Mvc\Router\Http\Literal', array('route' => '/example')),
-            'regex'    => array('Zend\Mvc\Router\Http\Regex', array('regex' => '[a-z]+', 'spec' => '%s')),
-            'scheme'   => array('Zend\Mvc\Router\Http\Scheme', array('scheme' => 'http')),
-            'segment'  => array('Zend\Mvc\Router\Http\Segment', array('route' => '/:segment')),
+            'literal' => array('Zend\Mvc\Router\Http\Literal', array('route' => '/example')),
+            'regex' => array('Zend\Mvc\Router\Http\Regex', array('regex' => '[a-z]+', 'spec' => '%s')),
+            'scheme' => array('Zend\Mvc\Router\Http\Scheme', array('scheme' => 'http')),
+            'segment' => array('Zend\Mvc\Router\Http\Segment', array('route' => '/:segment')),
             'wildcard' => array('Zend\Mvc\Router\Http\Wildcard', array()),
             //'query'    => array('Zend\Mvc\Router\Http\Query', array()),
-            'method'   => array('Zend\Mvc\Router\Http\Method', array('verb' => 'GET')),
+            'method' => array('Zend\Mvc\Router\Http\Method', array('verb' => 'GET')),
         );
     }
 
@@ -61,7 +61,7 @@ class RoutePluginManagerTest extends TestCase
         }
 
         // Add DI abstract factory
-        $di                = new Di;
+        $di = new Di;
         $diAbstractFactory = new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI);
         $routes->addAbstractFactory($diAbstractFactory);
 
@@ -91,7 +91,7 @@ class RoutePluginManagerTest extends TestCase
         }
 
         // Add DI abstract factory
-        $di                = new Di;
+        $di = new Di;
         $diAbstractFactory = new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI);
         $routes->addAbstractFactory($diAbstractFactory);
 

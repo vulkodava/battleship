@@ -28,8 +28,8 @@ class DDC2012Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
     public function testIssue()
     {
-        $item       = new DDC2012ItemPerson();
-        $item->tsv  = array('word1', 'word2', 'word3');
+        $item = new DDC2012ItemPerson();
+        $item->tsv = array('word1', 'word2', 'word3');
 
         $this->_em->persist($item);
         $this->_em->flush();
@@ -123,8 +123,8 @@ class DDC2012TsVectorType extends Type
         }
 
         self::$calls[__FUNCTION__][] = array(
-            'value'     => $value,
-            'platform'  => $platform,
+            'value' => $value,
+            'platform' => $platform,
         );
 
         return $value;
@@ -136,8 +136,8 @@ class DDC2012TsVectorType extends Type
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         self::$calls[__FUNCTION__][] = array(
-            'value'     => $value,
-            'platform'  => $platform,
+            'value' => $value,
+            'platform' => $platform,
         );
 
         return explode(" ", strtolower($value));
@@ -149,13 +149,13 @@ class DDC2012TsVectorType extends Type
     public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform)
     {
         self::$calls[__FUNCTION__][] = array(
-            'sqlExpr'   => $sqlExpr,
-            'platform'  => $platform,
+            'sqlExpr' => $sqlExpr,
+            'platform' => $platform,
         );
 
         // changed to upper expression to keep the test compatible with other Databases
         //sprintf('to_tsvector(%s)', $sqlExpr);
-        
+
         return $platform->getUpperExpression($sqlExpr);
     }
 

@@ -29,7 +29,7 @@ class DDC1276Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         for ($i = 0; $i < 2; $i++) {
             $group = new CmsGroup();
-            $group->name = "group".$i;
+            $group->name = "group" . $i;
             $user->groups[] = $group;
             $this->_em->persist($group);
         }

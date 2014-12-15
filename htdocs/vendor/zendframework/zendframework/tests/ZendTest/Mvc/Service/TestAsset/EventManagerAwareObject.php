@@ -36,6 +36,7 @@ class EventManagerAwareObject implements EventManagerAwareInterface
         ) {
             $this->setEventManager(static::$defaultEvents);
         }
+
         return $this->events;
     }
 }

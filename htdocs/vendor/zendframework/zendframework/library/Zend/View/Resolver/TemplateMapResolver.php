@@ -69,6 +69,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
         }
 
         $this->map = $map;
+
         return $this;
     }
 
@@ -84,6 +85,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
     {
         if (is_array($nameOrMap) || $nameOrMap instanceof Traversable) {
             $this->merge($nameOrMap);
+
             return $this;
         }
 
@@ -99,10 +101,12 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
             if (isset($this->map[$nameOrMap])) {
                 unset($this->map[$nameOrMap]);
             }
+
             return $this;
         }
 
         $this->map[$nameOrMap] = $path;
+
         return $this;
     }
 
@@ -128,6 +132,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
         }
 
         $this->map = array_replace_recursive($this->map, $map);
+
         return $this;
     }
 
@@ -154,6 +159,7 @@ class TemplateMapResolver implements IteratorAggregate, ResolverInterface
         if (!$this->has($name)) {
             return false;
         }
+
         return $this->map[$name];
     }
 

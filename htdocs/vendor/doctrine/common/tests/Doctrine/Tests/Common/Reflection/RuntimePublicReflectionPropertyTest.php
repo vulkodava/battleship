@@ -75,17 +75,17 @@ class RuntimePublicReflectionPropertyTestProxyMock implements Proxy
     /**
      * @var \Closure|null
      */
-    private $initializer     = null;
+    private $initializer = null;
 
     /**
      * @var \Closure|null
      */
-    private $initialized     = false;
+    private $initialized = false;
 
     /**
      * @var string
      */
-    public  $checkedProperty = 'testValue';
+    public $checkedProperty = 'testValue';
 
     /**
      * {@inheritDoc}
@@ -130,7 +130,7 @@ class RuntimePublicReflectionPropertyTestProxyMock implements Proxy
      */
     public function __setInitialized($initialized)
     {
-        $this->initialized = (bool) $initialized;
+        $this->initialized = (bool)$initialized;
     }
 
     /**
@@ -148,7 +148,7 @@ class RuntimePublicReflectionPropertyTestProxyMock implements Proxy
 
     /**
      * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      */
     public function __set($name, $value)
     {

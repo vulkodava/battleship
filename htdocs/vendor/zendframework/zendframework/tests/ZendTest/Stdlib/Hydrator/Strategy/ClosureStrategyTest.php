@@ -20,17 +20,23 @@ class ClosureStrategyTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(
-                function ($value) { return strtoupper($value); },
+                function ($value) {
+                    return strtoupper($value);
+                },
                 new \ArrayObject(array('foo' => 'foo', 'bar' => 'bar')),
                 array('foo' => 'FOO', 'bar' => 'BAR'),
             ),
             array(
-                function ($value, $data) { return isset($data['bar']) ? strtoupper($value) : $value; },
+                function ($value, $data) {
+                    return isset($data['bar']) ? strtoupper($value) : $value;
+                },
                 new \ArrayObject(array('foo' => 'foo', 'bar' => 'bar')),
                 array('foo' => 'FOO', 'bar' => 'BAR'),
             ),
             array(
-                function ($value, $data) { return isset($data['bar']) ? strtoupper($value) : $value; },
+                function ($value, $data) {
+                    return isset($data['bar']) ? strtoupper($value) : $value;
+                },
                 new \ArrayObject(array('foo' => 'foo', 'baz' => 'baz')),
                 array('foo' => 'foo', 'baz' => 'baz'),
             ),
@@ -44,22 +50,30 @@ class ClosureStrategyTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(
-                function ($value) { return strtoupper($value); },
+                function ($value) {
+                    return strtoupper($value);
+                },
                 array('foo' => 'foo', 'bar' => 'bar'),
                 array('foo' => 'FOO', 'bar' => 'BAR'),
             ),
             array(
-                function ($value, $data) { return strtoupper($value); },
+                function ($value, $data) {
+                    return strtoupper($value);
+                },
                 array('foo' => 'foo', 'bar' => 'bar'),
                 array('foo' => 'FOO', 'bar' => 'BAR'),
             ),
             array(
-                function ($value, $data) { return isset($data['bar']) ? strtoupper($value) : $value; },
+                function ($value, $data) {
+                    return isset($data['bar']) ? strtoupper($value) : $value;
+                },
                 array('foo' => 'foo', 'bar' => 'bar'),
                 array('foo' => 'FOO', 'bar' => 'BAR'),
             ),
             array(
-                function ($value, $data) { return isset($data['bar']) ? strtoupper($value) : $value; },
+                function ($value, $data) {
+                    return isset($data['bar']) ? strtoupper($value) : $value;
+                },
                 array('foo' => 'foo', 'baz' => 'baz'),
                 array('foo' => 'foo', 'baz' => 'baz'),
             ),
@@ -67,12 +81,12 @@ class ClosureStrategyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Stdlib\Hydrator\Strategy\ClosureStrategy::extract()
+     * @covers       \Zend\Stdlib\Hydrator\Strategy\ClosureStrategy::extract()
      * @dataProvider extractDataProvider
      *
      * @param Callable $extractFunc
-     * @param array    $data
-     * @param array    $expected
+     * @param array $data
+     * @param array $expected
      */
     public function testExtract($extractFunc, $data, $expected)
     {
@@ -87,12 +101,12 @@ class ClosureStrategyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Stdlib\Hydrator\Strategy\ClosureStrategy::hydrate()
+     * @covers       \Zend\Stdlib\Hydrator\Strategy\ClosureStrategy::hydrate()
      * @dataProvider hydrateDataProvider
      *
      * @param Callable $hydrateFunc
-     * @param array    $data
-     * @param array    $expected
+     * @param array $data
+     * @param array $expected
      */
     public function testHydrate($hydrateFunc, $data, $expected)
     {

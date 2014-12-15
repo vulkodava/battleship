@@ -39,11 +39,11 @@ class AllowRemoveByReference extends AbstractCollectionStrategy
      */
     public function hydrate($value)
     {
-        $collection      = $this->getCollectionFromObjectByReference();
+        $collection = $this->getCollectionFromObjectByReference();
         $collectionArray = $collection->toArray();
 
-        $toAdd      = array_udiff($value, $collectionArray, array($this, 'compareObjects'));
-        $toRemove   = array_udiff($collectionArray, $value, array($this, 'compareObjects'));
+        $toAdd = array_udiff($value, $collectionArray, array($this, 'compareObjects'));
+        $toRemove = array_udiff($collectionArray, $value, array($this, 'compareObjects'));
 
         foreach ($toAdd as $element) {
             $collection->add($element);

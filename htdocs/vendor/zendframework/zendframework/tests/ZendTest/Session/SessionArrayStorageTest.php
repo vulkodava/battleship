@@ -40,7 +40,7 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
     public function testPassingArrayToConstructorOverwritesSessionSuperglobal()
     {
         $_SESSION['foo'] = 'bar';
-        $array   = array('foo' => 'FOO');
+        $array = array('foo' => 'FOO');
         $storage = new SessionArrayStorage($array);
         $expected = array(
             'foo' => 'FOO',

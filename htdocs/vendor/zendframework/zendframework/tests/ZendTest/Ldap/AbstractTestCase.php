@@ -22,13 +22,14 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
     protected function createTestArrayData()
     {
         $data = array(
-            'dn'          => 'cn=name,dc=example,dc=org',
-            'cn'          => array('name'),
-            'host'        => array('a', 'b', 'c'),
-            'empty'       => array(),
-            'boolean'     => array('TRUE', 'FALSE'),
+            'dn' => 'cn=name,dc=example,dc=org',
+            'cn' => array('name'),
+            'host' => array('a', 'b', 'c'),
+            'empty' => array(),
+            'boolean' => array('TRUE', 'FALSE'),
             'objectclass' => array('account', 'top'),
         );
+
         return $data;
     }
 

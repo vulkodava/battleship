@@ -22,7 +22,7 @@ class DDC1526Test extends \Doctrine\Tests\OrmFunctionalTestCase
             $entity = new DDC1526Menu;
 
             if (isset ($parents[($i % 3)])) {
-                $entity->parent = $parents[($i%3)];
+                $entity->parent = $parents[($i % 3)];
             }
 
             $this->_em->persist($entity);

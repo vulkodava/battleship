@@ -34,6 +34,7 @@ class HydratorStrategy extends DefaultStrategy
         foreach ($value as $instance) {
             $result[] = $instance->getField1();
         }
+
         return $result;
     }
 
@@ -46,6 +47,7 @@ class HydratorStrategy extends DefaultStrategy
                 $result[] = $this->findEntity($field1);
             }
         }
+
         return $result;
     }
 
@@ -58,6 +60,7 @@ class HydratorStrategy extends DefaultStrategy
                 break;
             }
         }
+
         return $result;
     }
 }

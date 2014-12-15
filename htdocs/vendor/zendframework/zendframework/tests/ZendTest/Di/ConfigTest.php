@@ -62,21 +62,21 @@ class ConfigTest extends TestCase
         $this->assertEquals(
             array('username' => null, 'password' => null),
             $definition->getInjectionMethodParameters('My\DbAdapter', '__construct')
-            );
+        );
 
         $this->assertTrue($definition->hasClass('My\Mapper'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Mapper'));
         $this->assertEquals(
             array('dbAdapter' => 'My\DbAdapter'),
             $definition->getInjectionMethodParameters('My\Mapper', '__construct')
-            );
+        );
 
         $this->assertTrue($definition->hasClass('My\Repository'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Repository'));
         $this->assertEquals(
             array('mapper' => 'My\Mapper'),
             $definition->getInjectionMethodParameters('My\Repository', '__construct')
-            );
+        );
     }
 
     public function testConfigCanConfigureRuntimeDefinitionDefaultFromIni()

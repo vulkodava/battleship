@@ -52,6 +52,7 @@ abstract class AbstractListener
     public function setOptions(ListenerOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -66,6 +67,7 @@ abstract class AbstractListener
     {
         $content = "<?php\nreturn " . var_export($array, 1) . ';';
         file_put_contents($filePath, $content);
+
         return $this;
     }
 }

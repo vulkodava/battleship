@@ -34,7 +34,7 @@ class FormDateTimeSelectTest extends CommonTestCase
     public function testGeneratesFiveSelectsWithElementByDefault()
     {
         $element = new DateTimeSelect('foo');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);
@@ -47,7 +47,7 @@ class FormDateTimeSelectTest extends CommonTestCase
     {
         $element = new DateTimeSelect('foo');
         $element->setShouldShowSeconds(true);
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);
@@ -60,7 +60,7 @@ class FormDateTimeSelectTest extends CommonTestCase
     {
         $element = new DateTimeSelect('foo');
         $element->setShouldCreateEmptyOption(true);
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);
@@ -96,7 +96,7 @@ class FormDateTimeSelectTest extends CommonTestCase
     public function testInvokeProxiesToRender()
     {
         $element = new DateTimeSelect('foo');
-        $markup  = $this->helper->__invoke($element);
+        $markup = $this->helper->__invoke($element);
         $this->assertContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);
@@ -111,19 +111,19 @@ class FormDateTimeSelectTest extends CommonTestCase
 
     public function testNoMinutesDelimiterIfSecondsNotShown()
     {
-        $element  = new DateTimeSelect('foo');
+        $element = new DateTimeSelect('foo');
         $element->setValue(array(
-            'year'   => '2012',
-            'month'  => '09',
-            'day'    => '24',
-            'hour'   => '03',
+            'year' => '2012',
+            'month' => '09',
+            'day' => '24',
+            'hour' => '03',
             'minute' => '04',
             'second' => '59',
         ));
 
         $element->setShouldShowSeconds(false);
         $element->shouldRenderDelimiters(true);
-        $markup  = $this->helper->__invoke($element);
+        $markup = $this->helper->__invoke($element);
 
         // the last $markup char should be the '>' of the minutes  html select
         // closing tag and not the delimiter

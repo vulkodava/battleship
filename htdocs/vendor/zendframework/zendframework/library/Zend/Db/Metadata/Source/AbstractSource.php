@@ -61,7 +61,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get table names
      *
      * @param  string $schema
-     * @param  bool   $includeViews
+     * @param  bool $includeViews
      * @return string[]
      */
     public function getTableNames($schema = null, $includeViews = false)
@@ -82,6 +82,7 @@ abstract class AbstractSource implements MetadataInterface
                 $tableNames[] = $tableName;
             }
         }
+
         return $tableNames;
     }
 
@@ -89,7 +90,7 @@ abstract class AbstractSource implements MetadataInterface
      * Get tables
      *
      * @param  string $schema
-     * @param  bool   $includeViews
+     * @param  bool $includeViews
      * @return Object\TableObject[]
      */
     public function getTables($schema = null, $includeViews = false)
@@ -102,6 +103,7 @@ abstract class AbstractSource implements MetadataInterface
         foreach ($this->getTableNames($schema, $includeViews) as $tableName) {
             $tables[] = $this->getTable($tableName, $schema);
         }
+
         return $tables;
     }
 
@@ -140,6 +142,7 @@ abstract class AbstractSource implements MetadataInterface
         }
         $table->setColumns($this->getColumns($tableName, $schema));
         $table->setConstraints($this->getConstraints($tableName, $schema));
+
         return $table;
     }
 
@@ -163,6 +166,7 @@ abstract class AbstractSource implements MetadataInterface
                 $viewNames[] = $tableName;
             }
         }
+
         return $viewNames;
     }
 
@@ -182,6 +186,7 @@ abstract class AbstractSource implements MetadataInterface
         foreach ($this->getViewNames($schema) as $tableName) {
             $views[] = $this->getTable($tableName, $schema);
         }
+
         return $views;
     }
 
@@ -248,6 +253,7 @@ abstract class AbstractSource implements MetadataInterface
         foreach ($this->getColumnNames($table, $schema) as $columnName) {
             $columns[] = $this->getColumn($columnName, $table, $schema);
         }
+
         return $columns;
     }
 
@@ -347,16 +353,16 @@ abstract class AbstractSource implements MetadataInterface
         $constraint = new Object\ConstraintObject($constraintName, $table, $schema);
 
         foreach (array(
-            'constraint_type'         => 'setType',
-            'match_option'            => 'setMatchOption',
-            'update_rule'             => 'setUpdateRule',
-            'delete_rule'             => 'setDeleteRule',
-            'columns'                 => 'setColumns',
-            'referenced_table_schema' => 'setReferencedTableSchema',
-            'referenced_table_name'   => 'setReferencedTableName',
-            'referenced_columns'      => 'setReferencedColumns',
-            'check_clause'            => 'setCheckClause',
-        ) as $key => $setMethod) {
+                     'constraint_type' => 'setType',
+                     'match_option' => 'setMatchOption',
+                     'update_rule' => 'setUpdateRule',
+                     'delete_rule' => 'setDeleteRule',
+                     'columns' => 'setColumns',
+                     'referenced_table_schema' => 'setReferencedTableSchema',
+                     'referenced_table_name' => 'setReferencedTableName',
+                     'referenced_columns' => 'setReferencedColumns',
+                     'check_clause' => 'setCheckClause',
+                 ) as $key => $setMethod) {
             if (isset($info[$key])) {
                 $constraint->{$setMethod}($info[$key]);
             }
@@ -443,6 +449,7 @@ abstract class AbstractSource implements MetadataInterface
         foreach ($this->getTriggerNames($schema) as $triggerName) {
             $triggers[] = $this->getTrigger($triggerName, $schema);
         }
+
         return $triggers;
     }
 

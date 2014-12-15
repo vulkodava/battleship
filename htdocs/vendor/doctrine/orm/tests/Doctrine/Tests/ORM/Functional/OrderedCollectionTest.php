@@ -35,13 +35,13 @@ class OrderedCollectionTest extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $leg1 = new RoutingLeg();
         $leg1->fromLocation = $this->locations['Berlin'];
-        $leg1->toLocation   = $this->locations['Bonn'];
+        $leg1->toLocation = $this->locations['Bonn'];
         $leg1->departureDate = new \DateTime("now");
         $leg1->arrivalDate = new \DateTime("now +5 hours");
 
         $leg2 = new RoutingLeg();
         $leg2->fromLocation = $this->locations['Bonn'];
-        $leg2->toLocation   = $this->locations['Brasilia'];
+        $leg2->toLocation = $this->locations['Brasilia'];
         $leg2->departureDate = new \DateTime("now +6 hours");
         $leg2->arrivalDate = new \DateTime("now +24 hours");
 
@@ -103,8 +103,8 @@ class OrderedCollectionTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $routeId = $this->createPersistedRouteWithLegs();
 
         $route = $this->_em->createQuery("SELECT r, l FROM Doctrine\Tests\Models\Routing\RoutingRoute r JOIN r.legs l WHERE r.id = ?1")
-                           ->setParameter(1, $routeId)
-                           ->getSingleResult();
+            ->setParameter(1, $routeId)
+            ->getSingleResult();
 
         $this->assertEquals(2, count($route->legs));
         $this->assertEquals("Berlin", $route->legs[0]->fromLocation->getName());

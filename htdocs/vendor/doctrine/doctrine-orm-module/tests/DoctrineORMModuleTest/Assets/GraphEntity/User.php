@@ -64,7 +64,7 @@ class User
      */
     public function __construct()
     {
-        $this->groups   = new ArrayCollection();
+        $this->groups = new ArrayCollection();
         $this->sessions = new ArrayCollection();
     }
 }

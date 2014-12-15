@@ -38,7 +38,7 @@ class TypeConversionTest extends \Doctrine\Tests\DbalFunctionalTestCase
             foreach ($this->_conn->getDatabasePlatform()->getCreateTableSQL($table) AS $sql) {
                 $this->_conn->executeQuery($sql);
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
@@ -50,20 +50,20 @@ class TypeConversionTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $obj->bar = "baz";
 
         return array(
-            array('string',     'ABCDEFGaaaBBB', 'string'),
-            array('boolean',    true, 'bool'),
-            array('boolean',    false, 'bool'),
-            array('bigint',     12345678, 'string'),
-            array('smallint',   123, 'int'),
-            array('datetime',   new \DateTime('2010-04-05 10:10:10'), 'DateTime'),
+            array('string', 'ABCDEFGaaaBBB', 'string'),
+            array('boolean', true, 'bool'),
+            array('boolean', false, 'bool'),
+            array('bigint', 12345678, 'string'),
+            array('smallint', 123, 'int'),
+            array('datetime', new \DateTime('2010-04-05 10:10:10'), 'DateTime'),
             array('datetimetz', new \DateTime('2010-04-05 10:10:10'), 'DateTime'),
-            array('date',       new \DateTime('2010-04-05'), 'DateTime'),
-            array('time',       new \DateTime('10:10:10'), 'DateTime'),
-            array('text',       str_repeat('foo ', 1000), 'string'),
-            array('array',      array('foo' => 'bar'), 'array'),
-            array('object',     $obj, 'object'),
-            array('float',      1.5, 'float'),
-            array('decimal',    1.55, 'string'),
+            array('date', new \DateTime('2010-04-05'), 'DateTime'),
+            array('time', new \DateTime('10:10:10'), 'DateTime'),
+            array('text', str_repeat('foo ', 1000), 'string'),
+            array('array', array('foo' => 'bar'), 'array'),
+            array('object', $obj, 'object'),
+            array('float', 1.5, 'float'),
+            array('decimal', 1.55, 'string'),
         );
     }
 

@@ -34,7 +34,7 @@ class FormDateSelectTest extends CommonTestCase
     public function testGeneratesThreeSelectsWithElement()
     {
         $element = new DateSelect('foo');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);
@@ -44,7 +44,7 @@ class FormDateSelectTest extends CommonTestCase
     {
         $element = new DateSelect('foo');
         $element->setShouldCreateEmptyOption(true);
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);
@@ -77,7 +77,7 @@ class FormDateSelectTest extends CommonTestCase
     public function testInvokeProxiesToRender()
     {
         $element = new DateSelect('foo');
-        $markup  = $this->helper->__invoke($element);
+        $markup = $this->helper->__invoke($element);
         $this->assertContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);

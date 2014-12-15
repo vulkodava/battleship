@@ -21,12 +21,13 @@ class DDC2230Test extends OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC2230User'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC2230Address'),
             ));
-        } catch (ToolsException $e) {}
+        } catch (ToolsException $e) {
+        }
     }
 
     public function testNotifyTrackingNotCalledOnUninitializedProxies()
     {
-        $insertedUser          = new DDC2230User();
+        $insertedUser = new DDC2230User();
         $insertedUser->address = new DDC2230Address();
 
         $this->_em->persist($insertedUser);

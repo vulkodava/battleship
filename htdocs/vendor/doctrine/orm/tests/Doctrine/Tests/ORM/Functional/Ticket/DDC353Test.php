@@ -1,6 +1,7 @@
 <?php
 
 namespace Doctrine\Tests\ORM\Functional\Ticket;
+
 use Doctrine\ORM\UnitOfWork;
 
 require_once __DIR__ . '/../../../TestInit.php';
@@ -15,7 +16,8 @@ class DDC353Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC353File'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC353Picture'),
             ));
-        } catch(\Exception $ignored) {}
+        } catch (\Exception $ignored) {
+        }
     }
 
     public function testWorkingCase()

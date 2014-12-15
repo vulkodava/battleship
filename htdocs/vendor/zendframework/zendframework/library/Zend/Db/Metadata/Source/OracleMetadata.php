@@ -53,28 +53,29 @@ class OracleMetadata extends AbstractSource
         );
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM all_tab_columns'
-             . ' WHERE owner = :ownername AND table_name = :tablename';
+            . ' FROM all_tab_columns'
+            . ' WHERE owner = :ownername AND table_name = :tablename';
 
         $result = $this->adapter->query($sql)->execute($parameters);
         $columns = array();
 
         foreach ($result as $row) {
             $columns[$row['COLUMN_NAME']] = array(
-                'ordinal_position'          => $row['COLUMN_ID'],
-                'column_default'            => $row['DATA_DEFAULT'],
-                'is_nullable'               => ('Y' == $row['NULLABLE']),
-                'data_type'                 => $row['DATA_TYPE'],
-                'character_maximum_length'  => $row['DATA_LENGTH'],
-                'character_octet_length'    => null,
-                'numeric_precision'         => $row['DATA_PRECISION'],
-                'numeric_scale'             => $row['DATA_SCALE'],
-                'numeric_unsigned'          => false,
-                'erratas'                   => array(),
+                'ordinal_position' => $row['COLUMN_ID'],
+                'column_default' => $row['DATA_DEFAULT'],
+                'is_nullable' => ('Y' == $row['NULLABLE']),
+                'data_type' => $row['DATA_TYPE'],
+                'character_maximum_length' => $row['DATA_LENGTH'],
+                'character_octet_length' => null,
+                'numeric_precision' => $row['DATA_PRECISION'],
+                'numeric_scale' => $row['DATA_SCALE'],
+                'numeric_unsigned' => false,
+                'erratas' => array(),
             );
         }
 
         $this->data['columns'][$schema][$table] = $columns;
+
         return $this;
     }
 
@@ -145,7 +146,7 @@ class OracleMetadata extends AbstractSource
                 $constraints[$name] = array(
                     'constraint_name' => $name,
                     'constraint_type' => $this->getConstraintType($row['CONSTRAINT_TYPE']),
-                    'table_name'      => $row['TABLE_NAME'],
+                    'table_name' => $row['TABLE_NAME'],
                 );
 
                 if ('C' == $row['CONSTRAINT_TYPE']) {
@@ -158,11 +159,11 @@ class OracleMetadata extends AbstractSource
                 $isFK = ('R' == $row['CONSTRAINT_TYPE']);
                 if ($isFK) {
                     $constraints[$name]['referenced_table_schema'] = $row['REF_OWNER'];
-                    $constraints[$name]['referenced_table_name']   = $row['REF_TABLE'];
-                    $constraints[$name]['referenced_columns']      = array();
-                    $constraints[$name]['match_option']            = 'NONE';
-                    $constraints[$name]['update_rule']             = null;
-                    $constraints[$name]['delete_rule']             = $row['DELETE_RULE'];
+                    $constraints[$name]['referenced_table_name'] = $row['REF_TABLE'];
+                    $constraints[$name]['referenced_columns'] = array();
+                    $constraints[$name]['match_option'] = 'NONE';
+                    $constraints[$name]['update_rule'] = null;
+                    $constraints[$name]['delete_rule'] = $row['DELETE_RULE'];
                 }
             }
 
@@ -235,6 +236,7 @@ class OracleMetadata extends AbstractSource
         }
 
         $this->data['table_names'][$schema] = $tables;
+
         return $this;
     }
 

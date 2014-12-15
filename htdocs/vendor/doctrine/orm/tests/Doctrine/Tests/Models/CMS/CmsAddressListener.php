@@ -15,7 +15,7 @@ class CmsAddressListener
     {
         $this->calls[__FUNCTION__][] = func_get_args();
     }
-    
+
     public function preUpdate()
     {
         $this->calls[__FUNCTION__][] = func_get_args();

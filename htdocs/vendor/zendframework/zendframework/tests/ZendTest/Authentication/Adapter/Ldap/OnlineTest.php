@@ -36,10 +36,10 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('LDAP online tests are not enabled');
         }
         $this->options = array(
-            'host'     => TESTS_ZEND_LDAP_HOST,
+            'host' => TESTS_ZEND_LDAP_HOST,
             'username' => TESTS_ZEND_LDAP_USERNAME,
             'password' => TESTS_ZEND_LDAP_PASSWORD,
-            'baseDn'   => TESTS_ZEND_LDAP_BASE_DN,
+            'baseDn' => TESTS_ZEND_LDAP_BASE_DN,
         );
         if (defined('TESTS_ZEND_LDAP_PORT')) {
             $this->options['port'] = TESTS_ZEND_LDAP_PORT;

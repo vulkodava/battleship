@@ -103,6 +103,7 @@ class Event implements EventInterface
         }
 
         $this->params = $params;
+
         return $this;
     }
 
@@ -140,6 +141,7 @@ class Event implements EventInterface
         if (!isset($this->params->{$name})) {
             return $default;
         }
+
         return $this->params->{$name};
     }
 
@@ -151,7 +153,8 @@ class Event implements EventInterface
      */
     public function setName($name)
     {
-        $this->name = (string) $name;
+        $this->name = (string)$name;
+
         return $this;
     }
 
@@ -164,6 +167,7 @@ class Event implements EventInterface
     public function setTarget($target)
     {
         $this->target = $target;
+
         return $this;
     }
 
@@ -183,6 +187,7 @@ class Event implements EventInterface
             // Objects
             $this->params->{$name} = $value;
         }
+
         return $this;
     }
 
@@ -194,7 +199,7 @@ class Event implements EventInterface
      */
     public function stopPropagation($flag = true)
     {
-        $this->stopPropagation = (bool) $flag;
+        $this->stopPropagation = (bool)$flag;
     }
 
     /**

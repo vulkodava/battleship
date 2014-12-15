@@ -37,7 +37,7 @@ class DefaultRenderingStrategyTest extends TestCase
 
         $expectedCallback = array($this->strategy, 'render');
         $expectedPriority = -10000;
-        $found            = false;
+        $found = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
             if ($callback === $expectedCallback) {
@@ -69,10 +69,10 @@ class DefaultRenderingStrategyTest extends TestCase
         $mockApplication = new MockApplication;
         $mockApplication->setServiceManager($sm);
 
-        $event    = new MvcEvent();
+        $event = new MvcEvent();
         $event->setApplication($mockApplication);
 
-        $model    = new Model\ViewModel(array('content' => 'Page not found'));
+        $model = new Model\ViewModel(array('content' => 'Page not found'));
         $response = new Response();
         $event->setResult($model);
         $event->setResponse($response);

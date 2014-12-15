@@ -58,7 +58,7 @@ class QueryCacheTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     /**
-     * @param <type> $query
+     * @param   <type> $query
      * @depends testQueryCache_DependsOnHints
      */
     public function testQueryCache_DependsOnFirstResult($query)
@@ -74,7 +74,7 @@ class QueryCacheTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     /**
-     * @param <type> $query
+     * @param   <type> $query
      * @depends testQueryCache_DependsOnHints
      */
     public function testQueryCache_DependsOnMaxResults($query)
@@ -89,7 +89,7 @@ class QueryCacheTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     /**
-     * @param <type> $query
+     * @param   <type> $query
      * @depends testQueryCache_DependsOnHints
      */
     public function testQueryCache_DependsOnHydrationMode($query)
@@ -127,23 +127,23 @@ class QueryCacheTest extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $sqlExecMock = $this->getMock('Doctrine\ORM\Query\Exec\AbstractSqlExecutor', array('execute'));
         $sqlExecMock->expects($this->once())
-                    ->method('execute')
-                    ->will($this->returnValue( 10 ));
+            ->method('execute')
+            ->will($this->returnValue(10));
 
         $parserResultMock = $this->getMock('Doctrine\ORM\Query\ParserResult');
         $parserResultMock->expects($this->once())
-                         ->method('getSqlExecutor')
-                         ->will($this->returnValue($sqlExecMock));
+            ->method('getSqlExecutor')
+            ->will($this->returnValue($sqlExecMock));
 
         $cache = $this->getMock('Doctrine\Common\Cache\CacheProvider',
-                array('doFetch', 'doContains', 'doSave', 'doDelete', 'doFlush', 'doGetStats'));
+            array('doFetch', 'doContains', 'doSave', 'doDelete', 'doFlush', 'doGetStats'));
         $cache->expects($this->at(0))->method('doFetch')->will($this->returnValue(1));
         $cache->expects($this->at(1))
-              ->method('doFetch')
-              ->with($this->isType('string'))
-              ->will($this->returnValue($parserResultMock));
+            ->method('doFetch')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($parserResultMock));
         $cache->expects($this->never())
-              ->method('doSave');
+            ->method('doSave');
 
         $query->setQueryCacheDriver($cache);
 

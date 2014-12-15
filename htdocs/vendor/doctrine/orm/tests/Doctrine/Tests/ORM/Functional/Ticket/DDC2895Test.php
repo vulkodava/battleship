@@ -4,8 +4,9 @@ namespace Doctrine\Tests\ORM\Functional\Ticket;
 
 /**
  * Class DDC2895Test
+ *
  * @package Doctrine\Tests\ORM\Functional\Ticket
- * @author http://github.com/gwagner
+ * @author  http://github.com/gwagner
  */
 class DDC2895Test extends \Doctrine\Tests\OrmFunctionalTestCase
 {
@@ -16,7 +17,7 @@ class DDC2895Test extends \Doctrine\Tests\OrmFunctionalTestCase
             $this->_schemaTool->createSchema(array(
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC2895'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
@@ -71,7 +72,7 @@ abstract class AbstractDDC2895
     /**
      * @param \DateTime $lastModified
      */
-    public function setLastModified( $lastModified )
+    public function setLastModified($lastModified)
     {
         $this->lastModified = $lastModified;
     }
@@ -97,7 +98,7 @@ class DDC2895 extends AbstractDDC2895
     /**
      * @param mixed $id
      */
-    public function setId( $id )
+    public function setId($id)
     {
         $this->id = $id;
     }

@@ -34,8 +34,8 @@ class GuidTest extends \Doctrine\Tests\DbalTestCase
 
         $mock = $this->getMock(get_class($this->_platform));
         $mock->expects($this->any())
-             ->method('hasNativeGuidType')
-             ->will($this->returnValue(true));
+            ->method('hasNativeGuidType')
+            ->will($this->returnValue(true));
 
         $this->assertFalse($this->_type->requiresSQLCommentHint($mock));
     }

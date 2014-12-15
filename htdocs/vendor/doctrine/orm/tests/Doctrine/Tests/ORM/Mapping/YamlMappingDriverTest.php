@@ -44,10 +44,11 @@ class YamlMappingDriverTest extends AbstractMappingDriverTest
     }
 
     /**
-     * @group DDC-1468
+     * @group                    DDC-1468
      *
      * @expectedException Doctrine\Common\Persistence\Mapping\MappingException
-     * @expectedExceptionMessage Invalid mapping file 'Doctrine.Tests.Models.Generic.SerializationModel.dcm.yml' for class 'Doctrine\Tests\Models\Generic\SerializationModel'.
+     * @expectedExceptionMessage Invalid mapping file 'Doctrine.Tests.Models.Generic.SerializationModel.dcm.yml' for
+     *                           class 'Doctrine\Tests\Models\Generic\SerializationModel'.
      */
     public function testInvalidMappingFileException()
     {
@@ -59,11 +60,11 @@ class YamlMappingDriverTest extends AbstractMappingDriverTest
      */
     public function testSpacesShouldBeIgnoredWhenUseExplode()
     {
-        $metadata = $this->createClassMetadata(__NAMESPACE__.'\DDC2069Entity');
-        $unique   = $metadata->table['uniqueConstraints'][0]['columns'];
-        $indexes  = $metadata->table['indexes'][0]['columns'];
+        $metadata = $this->createClassMetadata(__NAMESPACE__ . '\DDC2069Entity');
+        $unique = $metadata->table['uniqueConstraints'][0]['columns'];
+        $indexes = $metadata->table['indexes'][0]['columns'];
 
-        $nameField  = $metadata->fieldMappings['name'];
+        $nameField = $metadata->fieldMappings['name'];
         $valueField = $metadata->fieldMappings['value'];
 
         $this->assertEquals('name', $unique[0]);

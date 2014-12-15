@@ -78,6 +78,7 @@ class Mvc extends AbstractPage
     /**
      * If true and set routeMatch than getHref will use routeMatch params
      * to assemble uri
+     *
      * @var bool
      */
     protected $useRouteMatch = false;
@@ -124,13 +125,13 @@ class Mvc extends AbstractPage
         if (!$this->active) {
             $reqParams = array();
             if ($this->routeMatch instanceof RouteMatch) {
-                $reqParams  = $this->routeMatch->getParams();
+                $reqParams = $this->routeMatch->getParams();
 
                 if (isset($reqParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
                     $reqParams['controller'] = $reqParams[ModuleRouteListener::ORIGINAL_CONTROLLER];
                 }
 
-                $myParams   = $this->params;
+                $myParams = $this->params;
                 if (null !== $this->controller) {
                     $myParams['controller'] = $this->controller;
                 }
@@ -144,6 +145,7 @@ class Mvc extends AbstractPage
                         && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
                     ) {
                         $this->active = true;
+
                         return $this->active;
                     } else {
                         return parent::isActive($recursive);
@@ -173,6 +175,7 @@ class Mvc extends AbstractPage
 
             if (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams)) {
                 $this->active = true;
+
                 return true;
             }
         }
@@ -267,7 +270,7 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string $action             action name
+     * @param  string $action action name
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid $action is given
      */
@@ -279,8 +282,9 @@ class Mvc extends AbstractPage
             );
         }
 
-        $this->action    = $action;
+        $this->action = $action;
         $this->hrefCache = null;
+
         return $this;
     }
 
@@ -301,7 +305,7 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string|null $controller    controller name
+     * @param  string|null $controller controller name
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid controller name is given
      */
@@ -314,7 +318,8 @@ class Mvc extends AbstractPage
         }
 
         $this->controller = $controller;
-        $this->hrefCache  = null;
+        $this->hrefCache = null;
+
         return $this;
     }
 
@@ -334,13 +339,14 @@ class Mvc extends AbstractPage
      * Sets URL query part to use when assembling URL
      *
      * @see getHref()
-     * @param  array|string|null $query    URL query part
+     * @param  array|string|null $query URL query part
      * @return self   fluent interface, returns self
      */
     public function setQuery($query)
     {
-        $this->query      = $query;
-        $this->hrefCache  = null;
+        $this->query = $query;
+        $this->hrefCache = null;
+
         return $this;
     }
 
@@ -368,6 +374,7 @@ class Mvc extends AbstractPage
     {
         $this->params = empty($params) ? array() : $params;
         $this->hrefCache = null;
+
         return $this;
     }
 
@@ -388,7 +395,7 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string $route              route name to use when assembling URL
+     * @param  string $route route name to use when assembling URL
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid $route is given
      */
@@ -400,8 +407,9 @@ class Mvc extends AbstractPage
             );
         }
 
-        $this->route     = $route;
+        $this->route = $route;
         $this->hrefCache = null;
+
         return $this;
     }
 
@@ -436,6 +444,7 @@ class Mvc extends AbstractPage
     public function setRouteMatch(RouteMatch $matches)
     {
         $this->routeMatch = $matches;
+
         return $this;
     }
 
@@ -458,8 +467,9 @@ class Mvc extends AbstractPage
      */
     public function setUseRouteMatch($useRouteMatch = true)
     {
-        $this->useRouteMatch = (bool) $useRouteMatch;
+        $this->useRouteMatch = (bool)$useRouteMatch;
         $this->hrefCache = null;
+
         return $this;
     }
 
@@ -484,6 +494,7 @@ class Mvc extends AbstractPage
     public function setRouter(RouteStackInterface $router)
     {
         $this->router = $router;
+
         return $this;
     }
 
@@ -542,12 +553,12 @@ class Mvc extends AbstractPage
         return array_merge(
             parent::toArray(),
             array(
-                 'action'     => $this->getAction(),
-                 'controller' => $this->getController(),
-                 'params'     => $this->getParams(),
-                 'route'      => $this->getRoute(),
-                 'router'     => $this->getRouter(),
-                 'route_match' => $this->getRouteMatch(),
+                'action' => $this->getAction(),
+                'controller' => $this->getController(),
+                'params' => $this->getParams(),
+                'route' => $this->getRoute(),
+                'router' => $this->getRouter(),
+                'route_match' => $this->getRouteMatch(),
             )
         );
     }

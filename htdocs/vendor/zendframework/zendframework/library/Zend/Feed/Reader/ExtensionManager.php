@@ -53,6 +53,7 @@ class ExtensionManager implements ExtensionManagerInterface
                 __CLASS__
             ));
         }
+
         return call_user_func_array(array($this->pluginManager, $method), $args);
     }
 

@@ -19,8 +19,8 @@ abstract class PaginationTestCase extends OrmTestCase
 
 
 /**
-* @Entity
-*/
+ * @Entity
+ */
 class MyBlogPost
 {
 
@@ -50,8 +50,8 @@ class MyAuthor
 }
 
 /**
-* @Entity
-*/
+ * @Entity
+ */
 class MyCategory
 {
 

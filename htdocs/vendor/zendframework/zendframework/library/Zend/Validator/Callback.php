@@ -27,7 +27,7 @@ class Callback extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID_VALUE    => "The input is not valid",
+        self::INVALID_VALUE => "The input is not valid",
         self::INVALID_CALLBACK => "An exception has been raised within the callback",
     );
 
@@ -37,8 +37,8 @@ class Callback extends AbstractValidator
      * @var mixed
      */
     protected $options = array(
-        'callback'         => null,     // Callback in a call_user_func format, string || array
-        'callbackOptions'  => array(),  // Options for the callback
+        'callback' => null,     // Callback in a call_user_func format, string || array
+        'callbackOptions' => array(),  // Options for the callback
     );
 
     /**
@@ -79,6 +79,7 @@ class Callback extends AbstractValidator
         }
 
         $this->options['callback'] = $callback;
+
         return $this;
     }
 
@@ -100,7 +101,8 @@ class Callback extends AbstractValidator
      */
     public function setCallbackOptions($options)
     {
-        $this->options['callbackOptions'] = (array) $options;
+        $this->options['callbackOptions'] = (array)$options;
+
         return $this;
     }
 
@@ -117,7 +119,7 @@ class Callback extends AbstractValidator
     {
         $this->setValue($value);
 
-        $options  = $this->getCallbackOptions();
+        $options = $this->getCallbackOptions();
         $callback = $this->getCallback();
         if (empty($callback)) {
             throw new Exception\InvalidArgumentException('No callback given');
@@ -132,16 +134,18 @@ class Callback extends AbstractValidator
         }
         if (!empty($options) && !empty($context)) {
             $args[] = $context;
-            $args   = array_merge($args, $options);
+            $args = array_merge($args, $options);
         }
 
         try {
             if (!call_user_func_array($callback, $args)) {
                 $this->error(self::INVALID_VALUE);
+
                 return false;
             }
         } catch (\Exception $e) {
             $this->error(self::INVALID_CALLBACK);
+
             return false;
         }
 

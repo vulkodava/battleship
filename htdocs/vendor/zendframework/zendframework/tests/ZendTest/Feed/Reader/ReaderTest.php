@@ -15,9 +15,9 @@ use Zend\Http\Response as HttpResponse;
 use Zend\Feed\Reader;
 
 /**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @group Zend_Feed
+ * @group Zend_Feed_Reader
+ */
 class ReaderTest extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -35,14 +35,14 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testStringImportTrimsContentToAllowSlightlyInvalidXml()
     {
         $feed = Reader\Reader::importString(
-            '   ' . file_get_contents($this->feedSamplePath.'/Reader/rss20.xml')
+            '   ' . file_get_contents($this->feedSamplePath . '/Reader/rss20.xml')
         );
     }
 
     public function testDetectsFeedIsRss20()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/rss20.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/rss20.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_20, $type);
     }
@@ -50,7 +50,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testDetectsFeedIsRss094()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/rss094.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/rss094.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_094, $type);
     }
@@ -58,7 +58,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testDetectsFeedIsRss093()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/rss093.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/rss093.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_093, $type);
     }
@@ -66,7 +66,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testDetectsFeedIsRss092()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/rss092.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/rss092.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_092, $type);
     }
@@ -74,7 +74,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testDetectsFeedIsRss091()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/rss091.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/rss091.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_091, $type);
     }
@@ -82,7 +82,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testDetectsFeedIsRss10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/rss10.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/rss10.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_10, $type);
     }
@@ -90,7 +90,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testDetectsFeedIsRss090()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/rss090.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/rss090.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_090, $type);
     }
@@ -98,7 +98,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testDetectsFeedIsAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/atom10.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/atom10.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_ATOM_10, $type);
     }
@@ -106,7 +106,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testDetectsFeedIsAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath.'/Reader/atom03.xml'));
+            file_get_contents($this->feedSamplePath . '/Reader/atom03.xml'));
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_ATOM_03, $type);
     }
@@ -181,7 +181,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($links instanceof Reader\FeedSet);
         $this->assertEquals(array(
             'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/'
-        ), (array) $links->getIterator()->current());
+        ), (array)$links->getIterator()->current());
     }
 
     public function testFeedSetLoadsFeedObjectWhenFeedArrayKeyAccessed()
@@ -265,14 +265,17 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * This test is failing on windows:
-     * Failed asserting that exception of type "Zend\Feed\Reader\Exception\RuntimeException" matches expected exception "Zend\Feed\Reader\Exception\InvalidArgumentException". Message was: "DOMDocument cannot parse XML: Entity 'discloseInfo' failed to parse".
+     * Failed asserting that exception of type "Zend\Feed\Reader\Exception\RuntimeException" matches expected exception
+     * "Zend\Feed\Reader\Exception\InvalidArgumentException". Message was: "DOMDocument cannot parse XML: Entity
+     * 'discloseInfo' failed to parse".
+     *
      * @todo why is the assertEquals commented out?
      */
     public function testXxePreventionOnFeedParsing()
     {
         $this->setExpectedException('Zend\Feed\Reader\Exception\InvalidArgumentException');
-        $string = file_get_contents($this->feedSamplePath.'/Reader/xxe-atom10.xml');
-        $string = str_replace('XXE_URI', $this->feedSamplePath.'/Reader/xxe-info.txt', $string);
+        $string = file_get_contents($this->feedSamplePath . '/Reader/xxe-atom10.xml');
+        $string = str_replace('XXE_URI', $this->feedSamplePath . '/Reader/xxe-info.txt', $string);
         $feed = Reader\Reader::importString($string);
         //$this->assertEquals('info:', $feed->getTitle());
     }
@@ -331,7 +334,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
                 return $dir;
             }
         }
-        $tempFile = tempnam(md5(uniqid(rand(), TRUE)), '');
+        $tempFile = tempnam(md5(uniqid(rand(), true)), '');
         if ($tempFile) {
             $dir = realpath(dirname($tempFile));
             unlink($tempFile);

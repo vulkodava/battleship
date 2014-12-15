@@ -54,8 +54,7 @@ class CountWalker extends TreeWalkerAdapter
         foreach ($this->_getQueryComponents() as $dqlAlias => $qComp) {
             $isParent = array_key_exists('parent', $qComp)
                 && $qComp['parent'] === null
-                && $qComp['nestingLevel'] == 0
-            ;
+                && $qComp['nestingLevel'] == 0;
             if ($isParent) {
                 $rootComponents[] = array($dqlAlias => $qComp);
             }
@@ -63,9 +62,9 @@ class CountWalker extends TreeWalkerAdapter
         if (count($rootComponents) > 1) {
             throw new \RuntimeException("Cannot count query which selects two FROM components, cannot make distinction");
         }
-        $root                = reset($rootComponents);
-        $parentName          = key($root);
-        $parent              = current($root);
+        $root = reset($rootComponents);
+        $parentName = key($root);
+        $parent = current($root);
         $identifierFieldName = $parent['metadata']->getSingleIdentifierFieldName();
 
         $pathType = PathExpression::TYPE_STATE_FIELD;

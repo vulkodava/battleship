@@ -29,7 +29,7 @@ class OptimizeByFactorTest extends CommonPluginTest
         $this->_options = new Cache\Storage\Plugin\PluginOptions(array(
             'optimizing_factor' => 1,
         ));
-        $this->_plugin  = new Cache\Storage\Plugin\OptimizeByFactor();
+        $this->_plugin = new Cache\Storage\Plugin\OptimizeByFactor();
         $this->_plugin->setOptions($this->_options);
     }
 
@@ -39,7 +39,7 @@ class OptimizeByFactorTest extends CommonPluginTest
 
         // check attached callbacks
         $expectedListeners = array(
-            'removeItem.post'  => 'optimizeByFactor',
+            'removeItem.post' => 'optimizeByFactor',
             'removeItems.post' => 'optimizeByFactor',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {

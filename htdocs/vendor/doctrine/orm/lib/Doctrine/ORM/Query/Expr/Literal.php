@@ -33,7 +33,7 @@ class Literal extends Base
     /**
      * @var string
      */
-    protected $preSeparator  = '';
+    protected $preSeparator = '';
 
     /**
      * @var string

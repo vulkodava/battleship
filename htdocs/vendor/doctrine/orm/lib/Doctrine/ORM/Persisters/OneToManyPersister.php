@@ -39,8 +39,8 @@ class OneToManyPersister extends AbstractCollectionPersister
      */
     public function get(PersistentCollection $coll, $index)
     {
-        $mapping   = $coll->getMapping();
-        $uow       = $this->em->getUnitOfWork();
+        $mapping = $coll->getMapping();
+        $uow = $this->em->getUnitOfWork();
         $persister = $uow->getEntityPersister($mapping['targetEntity']);
 
         if (!isset($mapping['indexBy'])) {
@@ -62,13 +62,13 @@ class OneToManyPersister extends AbstractCollectionPersister
      */
     protected function getDeleteRowSQL(PersistentCollection $coll)
     {
-        $mapping    = $coll->getMapping();
-        $class      = $this->em->getClassMetadata($mapping['targetEntity']);
-        $tableName  = $this->quoteStrategy->getTableName($class, $this->platform);
-        $idColumns  = $class->getIdentifierColumnNames();
+        $mapping = $coll->getMapping();
+        $class = $this->em->getClassMetadata($mapping['targetEntity']);
+        $tableName = $this->quoteStrategy->getTableName($class, $this->platform);
+        $idColumns = $class->getIdentifierColumnNames();
 
         return 'DELETE FROM ' . $tableName
-             . ' WHERE ' . implode('= ? AND ', $idColumns) . ' = ?';
+        . ' WHERE ' . implode('= ? AND ', $idColumns) . ' = ?';
     }
 
     /**
@@ -134,13 +134,13 @@ class OneToManyPersister extends AbstractCollectionPersister
      */
     public function count(PersistentCollection $coll)
     {
-        $mapping     = $coll->getMapping();
+        $mapping = $coll->getMapping();
         $targetClass = $this->em->getClassMetadata($mapping['targetEntity']);
         $sourceClass = $this->em->getClassMetadata($mapping['sourceEntity']);
-        $id          = $this->em->getUnitOfWork()->getEntityIdentifier($coll->getOwner());
+        $id = $this->em->getUnitOfWork()->getEntityIdentifier($coll->getOwner());
 
         $whereClauses = array();
-        $params       = array();
+        $params = array();
 
         $joinColumns = $targetClass->associationMappings[$mapping['mappedBy']]['joinColumns'];
         foreach ($joinColumns as $joinColumn) {
@@ -159,23 +159,23 @@ class OneToManyPersister extends AbstractCollectionPersister
         }
 
         $sql = 'SELECT count(*)'
-             . ' FROM ' . $this->quoteStrategy->getTableName($targetClass, $this->platform) . ' t'
-             . ' WHERE ' . implode(' AND ', $whereClauses);
+            . ' FROM ' . $this->quoteStrategy->getTableName($targetClass, $this->platform) . ' t'
+            . ' WHERE ' . implode(' AND ', $whereClauses);
 
         return $this->conn->fetchColumn($sql, $params);
     }
 
     /**
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param int                                $offset
-     * @param int|null                           $length
+     * @param int $offset
+     * @param int|null $length
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function slice(PersistentCollection $coll, $offset, $length = null)
     {
-        $mapping   = $coll->getMapping();
-        $uow       = $this->em->getUnitOfWork();
+        $mapping = $coll->getMapping();
+        $uow = $this->em->getUnitOfWork();
         $persister = $uow->getEntityPersister($mapping['targetEntity']);
 
         return $persister->getOneToManyCollection($mapping, $coll->getOwner(), $offset, $length);
@@ -183,14 +183,14 @@ class OneToManyPersister extends AbstractCollectionPersister
 
     /**
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param object                             $element
+     * @param object $element
      *
      * @return boolean
      */
     public function contains(PersistentCollection $coll, $element)
     {
         $mapping = $coll->getMapping();
-        $uow     = $this->em->getUnitOfWork();
+        $uow = $this->em->getUnitOfWork();
 
         // shortcut for new entities
         $entityState = $uow->getEntityState($element, UnitOfWork::STATE_NEW);
@@ -209,14 +209,14 @@ class OneToManyPersister extends AbstractCollectionPersister
         // only works with single id identifier entities. Will throw an
         // exception in Entity Persisters if that is not the case for the
         // 'mappedBy' field.
-        $id = current( $uow->getEntityIdentifier($coll->getOwner()));
+        $id = current($uow->getEntityIdentifier($coll->getOwner()));
 
         return $persister->exists($element, array($mapping['mappedBy'] => $id));
     }
 
     /**
      * @param \Doctrine\ORM\PersistentCollection $coll
-     * @param object                             $element
+     * @param object $element
      *
      * @return boolean
      */
@@ -238,10 +238,10 @@ class OneToManyPersister extends AbstractCollectionPersister
         }
 
         $mapping = $coll->getMapping();
-        $class   = $this->em->getClassMetadata($mapping['targetEntity']);
-        $sql     = 'DELETE FROM ' . $this->quoteStrategy->getTableName($class, $this->platform)
-                 . ' WHERE ' . implode('= ? AND ', $class->getIdentifierColumnNames()) . ' = ?';
+        $class = $this->em->getClassMetadata($mapping['targetEntity']);
+        $sql = 'DELETE FROM ' . $this->quoteStrategy->getTableName($class, $this->platform)
+            . ' WHERE ' . implode('= ? AND ', $class->getIdentifierColumnNames()) . ' = ?';
 
-        return (bool) $this->conn->executeUpdate($sql, $this->getDeleteRowSQLParameters($coll, $element));
+        return (bool)$this->conn->executeUpdate($sql, $this->getDeleteRowSQLParameters($coll, $element));
     }
 }

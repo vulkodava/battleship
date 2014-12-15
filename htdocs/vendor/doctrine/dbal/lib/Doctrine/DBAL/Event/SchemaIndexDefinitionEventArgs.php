@@ -23,7 +23,8 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Index;
 
 /**
- * Event Arguments used when the portable index definition is generated inside Doctrine\DBAL\Schema\AbstractSchemaManager.
+ * Event Arguments used when the portable index definition is generated inside
+ * Doctrine\DBAL\Schema\AbstractSchemaManager.
  *
  * @link   www.doctrine-project.org
  * @since  2.2
@@ -54,14 +55,14 @@ class SchemaIndexDefinitionEventArgs extends SchemaEventArgs
     private $_connection;
 
     /**
-     * @param array                     $tableIndex
-     * @param string                    $table
+     * @param array $tableIndex
+     * @param string $table
      * @param \Doctrine\DBAL\Connection $connection
      */
     public function __construct(array $tableIndex, $table, Connection $connection)
     {
         $this->_tableIndex = $tableIndex;
-        $this->_table      = $table;
+        $this->_table = $table;
         $this->_connection = $connection;
     }
 

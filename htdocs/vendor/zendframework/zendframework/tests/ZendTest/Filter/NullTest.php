@@ -34,7 +34,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param mixed $value
-     * @param bool  $expected
+     * @param bool $expected
      * @dataProvider defaultTestProvider
      */
     public function testDefault($value, $expected)

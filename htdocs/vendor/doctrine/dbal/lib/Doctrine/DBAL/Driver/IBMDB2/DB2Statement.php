@@ -89,7 +89,7 @@ class DB2Statement implements \IteratorAggregate, Statement
      */
     public function closeCursor()
     {
-        if ( ! $this->_stmt) {
+        if (!$this->_stmt) {
             return false;
         }
 
@@ -106,7 +106,7 @@ class DB2Statement implements \IteratorAggregate, Statement
      */
     public function columnCount()
     {
-        if ( ! $this->_stmt) {
+        if (!$this->_stmt) {
             return false;
         }
 
@@ -137,7 +137,7 @@ class DB2Statement implements \IteratorAggregate, Statement
      */
     public function execute($params = null)
     {
-        if ( ! $this->_stmt) {
+        if (!$this->_stmt) {
             return false;
         }
 
@@ -229,6 +229,6 @@ class DB2Statement implements \IteratorAggregate, Statement
      */
     public function rowCount()
     {
-        return (@db2_num_rows($this->_stmt))?:0;
+        return (@db2_num_rows($this->_stmt)) ?: 0;
     }
 }

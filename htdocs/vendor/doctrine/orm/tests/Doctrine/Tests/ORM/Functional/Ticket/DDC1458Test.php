@@ -70,7 +70,8 @@ class TestEntity
      */
     protected $value;
     /**
-     * @OneToOne(targetEntity="TestAdditionalEntity", inversedBy="entity", orphanRemoval=true, cascade={"persist", "remove"})
+     * @OneToOne(targetEntity="TestAdditionalEntity", inversedBy="entity", orphanRemoval=true, cascade={"persist",
+     *                                                "remove"})
      */
     protected $additional;
 
@@ -94,6 +95,7 @@ class TestEntity
         $this->additional = $additional;
     }
 }
+
 /**
  * @Entity
  */

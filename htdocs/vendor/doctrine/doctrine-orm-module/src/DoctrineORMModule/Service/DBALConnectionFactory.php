@@ -40,21 +40,21 @@ class DBALConnectionFactory extends AbstractFactory
     {
         /** @var $options \DoctrineORMModule\Options\DBALConnection */
         $options = $this->getOptions($sl, 'connection');
-        $pdo     = $options->getPdo();
+        $pdo = $options->getPdo();
 
         if (is_string($pdo)) {
             $pdo = $sl->get($pdo);
         }
 
         $params = array(
-            'driverClass'  => $options->getDriverClass(),
+            'driverClass' => $options->getDriverClass(),
             'wrapperClass' => $options->getWrapperClass(),
-            'pdo'          => $pdo,
+            'pdo' => $pdo,
         );
         $params = array_merge($params, $options->getParams());
 
         $configuration = $sl->get($options->getConfiguration());
-        $eventManager  = $sl->get($options->getEventManager());
+        $eventManager = $sl->get($options->getEventManager());
 
         $connection = DriverManager::getConnection($params, $configuration, $eventManager);
         $platform = $connection->getDatabasePlatform();

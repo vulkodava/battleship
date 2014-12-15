@@ -65,11 +65,11 @@ class RenameTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filesPath  = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
-        $this->_origFile   = $this->_filesPath . 'original.file';
-        $this->_oldFile    = $this->_filesPath . 'testfile.txt';
-        $this->_newFile    = $this->_filesPath . 'newfile.xml';
-        $this->_newDir     = $this->_filesPath . DIRECTORY_SEPARATOR . '_testDir2';
+        $this->_filesPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
+        $this->_origFile = $this->_filesPath . 'original.file';
+        $this->_oldFile = $this->_filesPath . 'testfile.txt';
+        $this->_newFile = $this->_filesPath . 'newfile.xml';
+        $this->_newDir = $this->_filesPath . DIRECTORY_SEPARATOR . '_testDir2';
         $this->_newDirFile = $this->_newDir . DIRECTORY_SEPARATOR . 'testfile.txt';
 
         if (file_exists($this->_origFile)) {
@@ -122,8 +122,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
+                'source' => '*',
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -144,8 +144,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
+                'source' => '*',
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -171,8 +171,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
+                'source' => $this->_oldFile,
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -194,13 +194,13 @@ class RenameTest extends \PHPUnit_Framework_TestCase
             'target' => $this->_newFile,
             'overwrite' => true,
             'randomize' => false,
-            'unknown'   => false
+            'unknown' => false
         ));
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
+                'source' => $this->_oldFile,
+                'target' => $this->_newFile,
                 'overwrite' => true,
                 'randomize' => false,
             )),
@@ -224,8 +224,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
+                'source' => $this->_oldFile,
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -247,8 +247,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => '*',
+                'source' => $this->_oldFile,
+                'target' => '*',
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -270,8 +270,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
+                'source' => '*',
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -292,8 +292,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newDir,
+                'source' => '*',
+                'target' => $this->_newDir,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -316,8 +316,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newDir,
+                'source' => $this->_oldFile,
+                'target' => $this->_newDir,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -341,8 +341,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newDir,
+                'source' => $this->_oldFile,
+                'target' => $this->_newDir,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -364,8 +364,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newDir,
+                'source' => '*',
+                'target' => $this->_newDir,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -390,8 +390,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
+                'source' => $this->_oldFile,
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -412,8 +412,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newDir,
+                'source' => $this->_oldFile,
+                'target' => $this->_newDir,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -435,8 +435,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
+                'source' => $this->_oldFile,
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => false,
             )),
@@ -452,16 +452,16 @@ class RenameTest extends \PHPUnit_Framework_TestCase
     public function testGetNewNameOverwriteWithExistingFile()
     {
         $filter = new FileRename(array(
-            'source'    => $this->_oldFile,
-            'target'    => $this->_newFile,
+            'source' => $this->_oldFile,
+            'target' => $this->_newFile,
             'overwrite' => true));
 
         copy($this->_oldFile, $this->_newFile);
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
+                'source' => $this->_oldFile,
+                'target' => $this->_newFile,
                 'overwrite' => true,
                 'randomize' => false,
             )),
@@ -476,15 +476,15 @@ class RenameTest extends \PHPUnit_Framework_TestCase
     public function testGetRandomizedFile()
     {
         $filter = new FileRename(array(
-            'source'    => $this->_oldFile,
-            'target'    => $this->_newFile,
+            'source' => $this->_oldFile,
+            'target' => $this->_newFile,
             'randomize' => true
         ));
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $this->_newFile,
+                'source' => $this->_oldFile,
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => true,
             )),
@@ -501,15 +501,15 @@ class RenameTest extends \PHPUnit_Framework_TestCase
     {
         $fileNoExt = $this->_filesPath . 'newfile';
         $filter = new FileRename(array(
-            'source'    => $this->_oldFile,
-            'target'    => $fileNoExt,
+            'source' => $this->_oldFile,
+            'target' => $fileNoExt,
             'randomize' => true
         ));
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => $this->_oldFile,
-                'target'    => $fileNoExt,
+                'source' => $this->_oldFile,
+                'target' => $fileNoExt,
                 'overwrite' => false,
                 'randomize' => true,
             )),
@@ -528,8 +528,8 @@ class RenameTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             array(0 => array(
-                'source'    => '*',
-                'target'    => $this->_newFile,
+                'source' => '*',
+                'target' => $this->_newFile,
                 'overwrite' => false,
                 'randomize' => false,
             )),

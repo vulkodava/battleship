@@ -29,7 +29,7 @@ class TableGeneratorTest extends \Doctrine\Tests\DbalFunctionalTestCase
                 $this->_conn->exec($sql);
             }
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
         $this->generator = new TableGenerator($this->_conn);
     }

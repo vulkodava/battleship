@@ -44,7 +44,7 @@ class AbstractSourceTest extends \PHPUnit_Framework_TestCase
             'constraint_keys' => array(
                 'foo_schema' => array(
                     array(
-                        'table_name'=> 'bar_table',
+                        'table_name' => 'bar_table',
                         'constraint_name' => 'bam_constraint',
                         'column_name' => 'a',
                         'ordinal_position' => 1,

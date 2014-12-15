@@ -37,7 +37,7 @@ class FormLabelTest extends CommonTestCase
     public function testPassingArrayToOpenTagRendersAttributes()
     {
         $attributes = array(
-            'class'     => 'email-label',
+            'class' => 'email-label',
             'data-type' => 'label',
         );
         $markup = $this->helper->openTag($attributes);
@@ -161,8 +161,8 @@ class FormLabelTest extends CommonTestCase
 
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
         $mockTranslator->expects($this->exactly(1))
-                       ->method('translate')
-                       ->will($this->returnValue('translated content'));
+            ->method('translate')
+            ->will($this->returnValue('translated content'));
 
         $this->helper->setTranslator($mockTranslator);
         $this->assertTrue($this->helper->hasTranslator());

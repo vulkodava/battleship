@@ -49,7 +49,7 @@ class SQLServerSchemaManager extends AbstractSchemaManager
     {
         $dbType = strtok($tableColumn['type'], '(), ');
         $fixed = null;
-        $length = (int) $tableColumn['length'];
+        $length = (int)$tableColumn['length'];
         $default = $tableColumn['default'];
 
         if (!isset($tableColumn['name'])) {
@@ -93,12 +93,12 @@ class SQLServerSchemaManager extends AbstractSchemaManager
         $options = array(
             'length' => ($length == 0 || !in_array($type, array('text', 'string'))) ? null : $length,
             'unsigned' => false,
-            'fixed' => (bool) $fixed,
+            'fixed' => (bool)$fixed,
             'default' => $default !== 'NULL' ? $default : null,
-            'notnull' => (bool) $tableColumn['notnull'],
+            'notnull' => (bool)$tableColumn['notnull'],
             'scale' => $tableColumn['scale'],
             'precision' => $tableColumn['precision'],
-            'autoincrement' => (bool) $tableColumn['autoincrement'],
+            'autoincrement' => (bool)$tableColumn['autoincrement'],
         );
 
         $platformOptions = array(
@@ -119,7 +119,7 @@ class SQLServerSchemaManager extends AbstractSchemaManager
         $foreignKeys = array();
 
         foreach ($tableForeignKeys as $tableForeignKey) {
-            if ( ! isset($foreignKeys[$tableForeignKey['ForeignKey']])) {
+            if (!isset($foreignKeys[$tableForeignKey['ForeignKey']])) {
                 $foreignKeys[$tableForeignKey['ForeignKey']] = array(
                     'local_columns' => array($tableForeignKey['ColumnName']),
                     'foreign_table' => $tableForeignKey['ReferenceTableName'],
@@ -142,11 +142,11 @@ class SQLServerSchemaManager extends AbstractSchemaManager
     /**
      * {@inheritdoc}
      */
-    protected function _getPortableTableIndexesList($tableIndexRows, $tableName=null)
+    protected function _getPortableTableIndexesList($tableIndexRows, $tableName = null)
     {
         foreach ($tableIndexRows as &$tableIndex) {
-            $tableIndex['non_unique'] = (boolean) $tableIndex['non_unique'];
-            $tableIndex['primary'] = (boolean) $tableIndex['primary'];
+            $tableIndex['non_unique'] = (boolean)$tableIndex['non_unique'];
+            $tableIndex['primary'] = (boolean)$tableIndex['primary'];
             $tableIndex['flags'] = $tableIndex['flags'] ? array($tableIndex['flags']) : null;
         }
 
@@ -201,13 +201,13 @@ class SQLServerSchemaManager extends AbstractSchemaManager
 
         try {
             $tableIndexes = $this->_conn->fetchAll($sql);
-        } catch(\PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == "IMSSP") {
                 return array();
             } else {
                 throw $e;
             }
-        } catch(SQLSrvException $e) {
+        } catch (SQLSrvException $e) {
             if (strpos($e->getMessage(), 'SQLSTATE [01000, 15472]') === 0) {
                 return array();
             } else {
@@ -223,8 +223,8 @@ class SQLServerSchemaManager extends AbstractSchemaManager
      */
     public function alterTable(TableDiff $tableDiff)
     {
-        if(count($tableDiff->removedColumns) > 0) {
-            foreach($tableDiff->removedColumns as $col){
+        if (count($tableDiff->removedColumns) > 0) {
+            foreach ($tableDiff->removedColumns as $col) {
                 $columnConstraintSql = $this->getColumnConstraintSQL($tableDiff->name, $col->getName());
                 foreach ($this->_conn->fetchAll($columnConstraintSql) as $constraint) {
                     $this->_conn->exec("ALTER TABLE $tableDiff->name DROP CONSTRAINT " . $constraint['Name']);
@@ -250,7 +250,7 @@ class SQLServerSchemaManager extends AbstractSchemaManager
             ON Tab.[ID] = Sysobjects.[Parent_Obj]
             INNER JOIN sys.default_constraints DefCons ON DefCons.[object_id] = Sysobjects.[ID]
             INNER JOIN SysColumns Col ON Col.[ColID] = DefCons.[parent_column_id] AND Col.[ID] = Tab.[ID]
-            WHERE Col.[Name] = " . $this->_conn->quote($column) ." AND Tab.[Name] = " . $this->_conn->quote($table) . "
+            WHERE Col.[Name] = " . $this->_conn->quote($column) . " AND Tab.[Name] = " . $this->_conn->quote($table) . "
             ORDER BY Col.[Name]";
     }
 }

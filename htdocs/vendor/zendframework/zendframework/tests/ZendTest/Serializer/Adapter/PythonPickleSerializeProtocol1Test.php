@@ -36,7 +36,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNull()
     {
-        $value    = null;
+        $value = null;
         $expected = 'N.';
 
         $data = $this->adapter->serialize($value);
@@ -45,7 +45,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeTrue()
     {
-        $value    = true;
+        $value = true;
         $expected = "I01\r\n.";
 
         $data = $this->adapter->serialize($value);
@@ -54,7 +54,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeFalse()
     {
-        $value    = false;
+        $value = false;
         $expected = "I00\r\n.";
 
         $data = $this->adapter->serialize($value);
@@ -63,7 +63,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeBinInt1()
     {
-        $value    = 255;
+        $value = 255;
         $expected = "K\xff.";
 
         $data = $this->adapter->serialize($value);
@@ -72,7 +72,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeBinInt2()
     {
-        $value    = 256;
+        $value = 256;
         $expected = "M\x00\x01.";
 
         $data = $this->adapter->serialize($value);
@@ -81,7 +81,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeBinInt()
     {
-        $value    = -2;
+        $value = -2;
         $expected = "J\xfe\xff\xff\xff.";
 
         $data = $this->adapter->serialize($value);
@@ -90,7 +90,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeBinFloat()
     {
-        $value    = -12345.6789;
+        $value = -12345.6789;
         $expected = "G\xc0\xc8\x1c\xd6\xe6\x31\xf8\xa1.";
 
         $data = $this->adapter->serialize($value);
@@ -99,9 +99,9 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeShortBinString()
     {
-        $value    = 'test';
+        $value = 'test';
         $expected = "U\x04test"
-                  . "q\x00.";
+            . "q\x00.";
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -109,14 +109,14 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
 
     public function testSerializeBinString()
     {
-        $value    = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                  . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                  . "01234567890123456789012345678901234567890123456789012345";
+        $value = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+            . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+            . "01234567890123456789012345678901234567890123456789012345";
         $expected = "T\x00\x01\x00\x00"
-                  . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                  . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
-                  . "01234567890123456789012345678901234567890123456789012345"
-                  . "q\x00.";
+            . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+            . "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+            . "01234567890123456789012345678901234567890123456789012345"
+            . "q\x00.";
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);

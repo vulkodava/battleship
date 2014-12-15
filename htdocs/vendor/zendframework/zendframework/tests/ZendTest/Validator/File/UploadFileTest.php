@@ -37,16 +37,17 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
             $data[] = array(
                 // fileInfo
                 array(
-                    'name'     => 'test' . $errorCode,
-                    'type'     => 'text',
-                    'size'     => 200 + $errorCode,
+                    'name' => 'test' . $errorCode,
+                    'type' => 'text',
+                    'size' => 200 + $errorCode,
                     'tmp_name' => $testSizeFile,
-                    'error'    => $errorCode,
+                    'error' => $errorCode,
                 ),
                 // messageKey
                 $errorType,
             );
         }
+
         return $data;
     }
 
@@ -97,11 +98,11 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
         $validator = new File\UploadFile();
 
         $filesArray = array(
-            'name'      => '',
-            'size'      => 0,
-            'tmp_name'  => '',
-            'error'     => UPLOAD_ERR_NO_FILE,
-            'type'      => '',
+            'name' => '',
+            'size' => 0,
+            'tmp_name' => '',
+            'error' => UPLOAD_ERR_NO_FILE,
+            'type' => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

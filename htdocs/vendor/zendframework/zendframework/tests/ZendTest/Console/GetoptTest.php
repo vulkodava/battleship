@@ -91,21 +91,21 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     public function testGetoptExceptionForMissingFlag()
     {
         $this->setExpectedException('\Zend\Console\Exception\InvalidArgumentException', 'Blank flag not allowed in rule');
-        $opts = new Getopt(array('|a'=>'Apple option'));
+        $opts = new Getopt(array('|a' => 'Apple option'));
     }
 
     public function testGetoptExceptionForKeyWithDuplicateFlagsViaOrOperator()
     {
         $this->setExpectedException('\Zend\Console\Exception\InvalidArgumentException', 'defined more than once');
         $opts = new Getopt(
-            array('apple|apple'=>'apple-option'));
+            array('apple|apple' => 'apple-option'));
     }
 
     public function testGetoptExceptionForKeysThatDuplicateFlags()
     {
         $this->setExpectedException('\Zend\Console\Exception\InvalidArgumentException', 'defined more than once');
         $opts = new Getopt(
-            array('a'=>'Apple option', 'apple|a'=>'Apple option'));
+            array('a' => 'Apple option', 'apple|a' => 'Apple option'));
     }
 
     public function testGetoptAddRules()
@@ -278,9 +278,9 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $opts = new Getopt(array(
-                'apple|a-s' => 'apple',
-                'banana1|banana2|banana3|banana4' => 'banana',
-                'pear=s' => 'pear'),
+                    'apple|a-s' => 'apple',
+                    'banana1|banana2|banana3|banana4' => 'banana',
+                    'pear=s' => 'pear'),
                 array('-x'));
             $opts->parse();
             $this->fail('Expected to catch \Zend\Console\Exception\RuntimeException');
@@ -437,13 +437,13 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
             array( // rules
                 'man-bear|m-s' => 'ManBear with dash',
                 'man-bear-pig|b=s' => 'ManBearPid with dash',
-                ),
+            ),
             array( // arguments
                 '--man-bear-pig=mbp',
                 '--man-bear',
                 'foobar'
-                )
-            );
+            )
+        );
 
         $opts->parse();
         $this->assertEquals('foobar', $opts->getOption('man-bear'));
@@ -458,9 +458,9 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         // Fails if warning is thrown: Should not happen!
         $opts = new Getopt('abp:');
         $opts->addRules(
-          array(
-            'verbose|v' => 'Print verbose output'
-          )
+            array(
+                'verbose|v' => 'Print verbose output'
+            )
         );
     }
 
@@ -534,7 +534,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     public function testGetoptWithCumulativeFlagsOptionHandleCountOfEqualFlags()
     {
         $opts = new Getopt('v', array('-v', '-v', '-v'),
-                           array(Getopt::CONFIG_CUMULATIVE_FLAGS => true));
+            array(Getopt::CONFIG_CUMULATIVE_FLAGS => true));
 
         $this->assertEquals(3, $opts->v);
     }
@@ -711,7 +711,9 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     public function testOptionCallbackReturnsFallsAndThrowException()
     {
         $opts = new Getopt('x', array('-x'));
-        $opts->setOptionCallback('x', function () {return false;});
+        $opts->setOptionCallback('x', function () {
+                return false;
+            });
         $opts->parse();
     }
 }

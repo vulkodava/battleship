@@ -50,15 +50,15 @@ class MemoryCollector extends AbstractCollector implements EventCollectorInterfa
      * Saves the current memory usage.
      *
      * @param string $id
-     * @param Event  $event
+     * @param Event $event
      */
     public function collectEvent($id, Event $event)
     {
-        $contextProvider   = new EventContextProvider($event);
-        $context['name']   = $contextProvider->getEvent()->getName();
+        $contextProvider = new EventContextProvider($event);
+        $context['name'] = $contextProvider->getEvent()->getName();
         $context['target'] = $contextProvider->getEventTarget();
-        $context['file']   = $contextProvider->getEventTriggerFile();
-        $context['line']   = $contextProvider->getEventTriggerLine();
+        $context['file'] = $contextProvider->getEventTriggerFile();
+        $context['line'] = $contextProvider->getEventTriggerLine();
         $context['memory'] = memory_get_usage(true);
 
         if (!isset($this->data['event'][$id])) {

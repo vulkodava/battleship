@@ -35,7 +35,7 @@ class DDC742Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC742User'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC742Comment')
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
 

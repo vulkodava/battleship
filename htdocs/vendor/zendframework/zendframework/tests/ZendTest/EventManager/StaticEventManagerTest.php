@@ -32,7 +32,7 @@ class StaticEventManagerTest extends TestCase
     public function testOperatesAsASingleton()
     {
         $expected = StaticEventManager::getInstance();
-        $test     = StaticEventManager::getInstance();
+        $test = StaticEventManager::getInstance();
         $this->assertSame($expected, $test);
     }
 
@@ -54,8 +54,8 @@ class StaticEventManagerTest extends TestCase
         $events = StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
         $this->assertContains('bar', $events->getEvents('foo'));
-        $expected  = array($this, __FUNCTION__);
-        $found     = false;
+        $expected = array($this, __FUNCTION__);
+        $found = false;
         $listeners = $events->getListeners('foo', 'bar');
         $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
         $this->assertTrue(0 < count($listeners), 'Empty listeners!');
@@ -76,7 +76,7 @@ class StaticEventManagerTest extends TestCase
         $this->assertContains('test', $events->getEvents('bar'));
         $expected = array($this, __FUNCTION__);
         foreach (array('foo', 'test') as $event) {
-            $found     = false;
+            $found = false;
             $listeners = $events->getListeners('bar', $event);
             $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
             $this->assertTrue(0 < count($listeners), 'Empty listeners!');
@@ -98,7 +98,7 @@ class StaticEventManagerTest extends TestCase
         $this->assertContains('bar', $events->getEvents('test'));
         $expected = array($this, __FUNCTION__);
         foreach (array('foo', 'test') as $id) {
-            $found     = false;
+            $found = false;
             $listeners = $events->getListeners($id, 'bar');
             $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
             $this->assertTrue(0 < count($listeners), 'Empty listeners!');
@@ -121,7 +121,7 @@ class StaticEventManagerTest extends TestCase
         $expected = array($this, __FUNCTION__);
         foreach (array('bar', 'baz') as $resource) {
             foreach (array('foo', 'test') as $event) {
-                $found     = false;
+                $found = false;
                 $listeners = $events->getListeners($resource, $event);
                 $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
                 $this->assertTrue(0 < count($listeners), 'Empty listeners!');
@@ -138,7 +138,7 @@ class StaticEventManagerTest extends TestCase
 
     public function testListenersAttachedUsingWildcardEventWillBeTriggeredByResource()
     {
-        $test     = new stdClass;
+        $test = new stdClass;
         $test->events = array();
         $callback = function ($e) use ($test) {
             $test->events[] = $e->getName();
@@ -242,7 +242,7 @@ class StaticEventManagerTest extends TestCase
     public function testListenersAttachedToAnyIdentifierProvidedToEventManagerWillBeTriggered()
     {
         $identifiers = array('foo', 'bar');
-        $events  = StaticEventManager::getInstance();
+        $events = StaticEventManager::getInstance();
         $manager = new EventManager($identifiers);
         $manager->setSharedManager($events);
 
@@ -261,7 +261,7 @@ class StaticEventManagerTest extends TestCase
     public function testListenersAttachedToWildcardsWillBeTriggered()
     {
         $identifiers = array('foo', 'bar');
-        $events  = StaticEventManager::getInstance();
+        $events = StaticEventManager::getInstance();
         $manager = new EventManager($identifiers);
         $manager->setSharedManager($events);
 
@@ -281,7 +281,7 @@ class StaticEventManagerTest extends TestCase
     public function testListenersAttachedToAnyIdentifierProvidedToEventManagerOrWildcardsWillBeTriggered()
     {
         $identifiers = array('foo', 'bar');
-        $events  = StaticEventManager::getInstance();
+        $events = StaticEventManager::getInstance();
         $manager = new EventManager($identifiers);
         $manager->setSharedManager($events);
 

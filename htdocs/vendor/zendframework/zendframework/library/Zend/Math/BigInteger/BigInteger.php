@@ -62,6 +62,7 @@ abstract class BigInteger
         if (static::$adapters === null) {
             static::$adapters = new AdapterPluginManager();
         }
+
         return static::$adapters;
     }
 
@@ -85,6 +86,7 @@ abstract class BigInteger
         if (null === static::$defaultAdapter) {
             static::$defaultAdapter = static::getAvailableAdapter();
         }
+
         return static::$defaultAdapter;
     }
 
@@ -103,6 +105,7 @@ abstract class BigInteger
         } else {
             throw new Exception\RuntimeException('Big integer math support is not detected');
         }
+
         return static::factory($adapterName);
     }
 
@@ -116,6 +119,7 @@ abstract class BigInteger
     public static function __callStatic($method, $args)
     {
         $adapter = static::getDefaultAdapter();
+
         return call_user_func_array(array($adapter, $method), $args);
     }
 }

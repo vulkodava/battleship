@@ -51,8 +51,7 @@ It's also possible to get raw list of commands (useful for embedding command run
 
   <info>php %command.full_name% --raw</info>
 EOF
-            )
-        ;
+            );
     }
 
     /**

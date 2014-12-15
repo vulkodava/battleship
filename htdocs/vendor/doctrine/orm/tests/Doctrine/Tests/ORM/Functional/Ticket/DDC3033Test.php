@@ -103,9 +103,9 @@ class DDC3033Product
      */
     public function postUpdate(LifecycleEventArgs $eventArgs)
     {
-        $em            = $eventArgs->getEntityManager();
-        $uow           = $em->getUnitOfWork();
-        $entity        = $eventArgs->getEntity();
+        $em = $eventArgs->getEntityManager();
+        $uow = $em->getUnitOfWork();
+        $entity = $eventArgs->getEntity();
         $classMetadata = $em->getClassMetadata(get_class($entity));
 
         $uow->computeChangeSet($classMetadata, $entity);

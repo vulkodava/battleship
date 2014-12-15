@@ -23,18 +23,21 @@ class ReflectionParameter
 
     /**
      * Parameter position
+     *
      * @var int
      */
     protected $position;
 
     /**
      * Parameter type
+     *
      * @var string
      */
     protected $type;
 
     /**
      * Parameter description
+     *
      * @var string
      */
     protected $description;
@@ -43,7 +46,7 @@ class ReflectionParameter
      * Constructor
      *
      * @param \ReflectionParameter $r
-     * @param string $type Parameter type
+     * @param string $type        Parameter type
      * @param string $description Parameter description
      */
     public function __construct(\ReflectionParameter $r, $type = 'mixed', $description = '')
@@ -130,7 +133,7 @@ class ReflectionParameter
      */
     public function setPosition($index)
     {
-        $this->position = (int) $index;
+        $this->position = (int)$index;
     }
 
     /**

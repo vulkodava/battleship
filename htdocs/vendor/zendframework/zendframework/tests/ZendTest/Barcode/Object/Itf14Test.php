@@ -127,7 +127,7 @@ class Itf14Test extends TestCommon
         $this->object->setStretchText(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Itf14_0000123456789_stretchtext_instructions');
+            'Itf14_0000123456789_stretchtext_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -137,7 +137,7 @@ class Itf14Test extends TestCommon
         $this->object->setWithBorder(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Itf14_0000123456789_border_instructions');
+            'Itf14_0000123456789_border_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -147,7 +147,7 @@ class Itf14Test extends TestCommon
         $this->object->setWithBearerBars(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Itf14_0000123456789_bearerbar_instructions');
+            'Itf14_0000123456789_bearerbar_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -157,7 +157,7 @@ class Itf14Test extends TestCommon
         $this->object->setOrientation(60);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Itf14_0000123456789_oriented_instructions');
+            'Itf14_0000123456789_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -168,7 +168,7 @@ class Itf14Test extends TestCommon
         $this->object->setStretchText(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Itf14_0000123456789_stretchtext_oriented_instructions');
+            'Itf14_0000123456789_stretchtext_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -179,7 +179,7 @@ class Itf14Test extends TestCommon
         $this->object->setWithBorder(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Itf14_0000123456789_border_oriented_instructions');
+            'Itf14_0000123456789_border_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -190,7 +190,7 @@ class Itf14Test extends TestCommon
         $this->object->setWithBearerBars(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Itf14_0000123456789_bearerbar_oriented_instructions');
+            'Itf14_0000123456789_bearerbar_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 

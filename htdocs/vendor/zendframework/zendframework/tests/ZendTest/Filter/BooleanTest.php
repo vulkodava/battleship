@@ -19,7 +19,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
     public function testConstructorOptions()
     {
         $filter = new BooleanFilter(array(
-            'type'    => BooleanFilter::TYPE_INTEGER,
+            'type' => BooleanFilter::TYPE_INTEGER,
             'casting' => false,
         ));
 
@@ -37,7 +37,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param mixed $value
-     * @param bool  $expected
+     * @param bool $expected
      * @dataProvider defaultTestProvider
      */
     public function testDefault($value, $expected)
@@ -48,7 +48,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param mixed $value
-     * @param bool  $expected
+     * @param bool $expected
      * @dataProvider noCastingTestProvider
      */
     public function testNoCasting($value, $expected)
@@ -107,9 +107,9 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
             'type' => BooleanFilter::TYPE_LOCALIZED,
             'translations' => array(
                 'yes' => true,
-                'y'   => true,
-                'no'  => false,
-                'n'   => false,
+                'y' => true,
+                'no' => false,
+                'n' => false,
                 'yay' => true,
                 'nay' => false,
             )

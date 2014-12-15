@@ -61,6 +61,7 @@ class Source extends AbstractAtom implements Renderer\RendererInterface
             $ext->setDomDocument($this->getDomDocument(), $root);
             $ext->render();
         }
+
         return $this;
     }
 

@@ -9,10 +9,11 @@ require_once __DIR__ . '/../../../TestInit.php';
 
 class PostgreSqlSchemaToolTest extends \Doctrine\Tests\OrmFunctionalTestCase
 {
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         if ($this->_em->getConnection()->getDatabasePlatform()->getName() !== 'postgresql') {
-            $this->markTestSkipped('The ' . __CLASS__ .' requires the use of postgresql.');
+            $this->markTestSkipped('The ' . __CLASS__ . ' requires the use of postgresql.');
         }
     }
 
@@ -117,14 +118,16 @@ class PostgreSqlSchemaToolTest extends \Doctrine\Tests\OrmFunctionalTestCase
         );
         try {
             $this->_em->getConnection()->exec("CREATE SCHEMA stonewood");
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
 
         $tool = new SchemaTool($this->_em);
         $tool->createSchema($classes);
 
         $sql = $tool->getUpdateSchemaSql($classes);
-        $sql = array_filter($sql, function($sql) { return (strpos($sql, "DROP SEQUENCE stonewood.") === 0); });
+        $sql = array_filter($sql, function ($sql) {
+                return (strpos($sql, "DROP SEQUENCE stonewood.") === 0);
+            });
 
         $this->assertCount(0, $sql, implode("\n", $sql));
     }
@@ -138,6 +141,7 @@ class DDC1657Screen
 {
     /**
      * Identifier
+     *
      * @var integer
      *
      * @Id
@@ -148,6 +152,7 @@ class DDC1657Screen
 
     /**
      * Title
+     *
      * @var string
      *
      * @Column(name="title", type="string", length=255, nullable=false)
@@ -156,6 +161,7 @@ class DDC1657Screen
 
     /**
      * Path
+     *
      * @var string
      *
      * @Column(name="path", type="string", length=255, nullable=false)
@@ -164,6 +170,7 @@ class DDC1657Screen
 
     /**
      * Register date
+     *
      * @var Date
      *
      * @Column(name="ddate", type="date", nullable=false)
@@ -172,6 +179,7 @@ class DDC1657Screen
 
     /**
      * Avatar
+     *
      * @var Stonewood\Model\Entity\Avatar
      *
      * @ManyToOne(targetEntity="DDC1657Avatar")
@@ -188,6 +196,7 @@ class DDC1657Avatar
 {
     /**
      * Identifier
+     *
      * @var integer
      *
      * @Id

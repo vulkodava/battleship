@@ -44,6 +44,7 @@ class View implements EventManagerAwareInterface
     public function setRequest(Request $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -56,6 +57,7 @@ class View implements EventManagerAwareInterface
     public function setResponse(Response $response)
     {
         $this->response = $response;
+
         return $this;
     }
 
@@ -92,6 +94,7 @@ class View implements EventManagerAwareInterface
             get_class($this),
         ));
         $this->events = $events;
+
         return $this;
     }
 
@@ -107,6 +110,7 @@ class View implements EventManagerAwareInterface
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
+
         return $this->events;
     }
 
@@ -126,6 +130,7 @@ class View implements EventManagerAwareInterface
     public function addRenderingStrategy($callable, $priority = 1)
     {
         $this->getEventManager()->attach(ViewEvent::EVENT_RENDERER, $callable, $priority);
+
         return $this;
     }
 
@@ -147,6 +152,7 @@ class View implements EventManagerAwareInterface
     public function addResponseStrategy($callable, $priority = 1)
     {
         $this->getEventManager()->attach(ViewEvent::EVENT_RESPONSE, $callable, $priority);
+
         return $this;
     }
 
@@ -167,9 +173,9 @@ class View implements EventManagerAwareInterface
      */
     public function render(Model $model)
     {
-        $event   = $this->getEvent();
+        $event = $this->getEvent();
         $event->setModel($model);
-        $events  = $this->getEventManager();
+        $events = $this->getEventManager();
         $results = $events->trigger(ViewEvent::EVENT_RENDERER, $event, function ($result) {
             return ($result instanceof Renderer);
         });
@@ -186,7 +192,7 @@ class View implements EventManagerAwareInterface
 
         // If EVENT_RENDERER or EVENT_RENDERER_POST changed the model, make sure
         // we use this new model instead of the current $model
-        $model   = $event->getModel();
+        $model = $event->getModel();
 
         // If we have children, render them first, but only if:
         // a) the renderer does not implement TreeRendererInterface, or
@@ -230,12 +236,12 @@ class View implements EventManagerAwareInterface
                 throw new Exception\DomainException('Inconsistent state; child view model is marked as terminal');
             }
             $child->setOption('has_parent', true);
-            $result  = $this->render($child);
+            $result = $this->render($child);
             $child->setOption('has_parent', null);
             $capture = $child->captureTo();
             if (!empty($capture)) {
                 if ($child->isAppend()) {
-                    $oldResult=$model->{$capture};
+                    $oldResult = $model->{$capture};
                     $model->setVariable($capture, $oldResult . $result);
                 } else {
                     $model->setVariable($capture, $result);
@@ -259,6 +265,7 @@ class View implements EventManagerAwareInterface
         if (null !== ($response = $this->getResponse())) {
             $event->setResponse($response);
         }
+
         return $event;
     }
 }

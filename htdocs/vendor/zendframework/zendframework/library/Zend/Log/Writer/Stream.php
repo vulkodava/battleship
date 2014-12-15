@@ -34,8 +34,8 @@ class Stream extends AbstractWriter
      * Constructor
      *
      * @param  string|resource|array|Traversable $streamOrUrl Stream or URL to open as a stream
-     * @param  string|null $mode Mode, only applicable if a URL is given
-     * @param  null|string $logSeparator Log separator string
+     * @param  string|null $mode                              Mode, only applicable if a URL is given
+     * @param  null|string $logSeparator                      Log separator string
      * @return Stream
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -48,9 +48,9 @@ class Stream extends AbstractWriter
 
         if (is_array($streamOrUrl)) {
             parent::__construct($streamOrUrl);
-            $mode         = isset($streamOrUrl['mode'])          ? $streamOrUrl['mode']          : null;
+            $mode = isset($streamOrUrl['mode']) ? $streamOrUrl['mode'] : null;
             $logSeparator = isset($streamOrUrl['log_separator']) ? $streamOrUrl['log_separator'] : null;
-            $streamOrUrl  = isset($streamOrUrl['stream'])        ? $streamOrUrl['stream']        : null;
+            $streamOrUrl = isset($streamOrUrl['stream']) ? $streamOrUrl['stream'] : null;
         }
 
         // Setting the default mode
@@ -117,7 +117,8 @@ class Stream extends AbstractWriter
      */
     public function setLogSeparator($logSeparator)
     {
-        $this->logSeparator = (string) $logSeparator;
+        $this->logSeparator = (string)$logSeparator;
+
         return $this;
     }
 

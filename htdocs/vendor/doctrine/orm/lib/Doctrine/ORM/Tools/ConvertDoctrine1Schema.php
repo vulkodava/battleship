@@ -61,7 +61,7 @@ class ConvertDoctrine1Schema
      */
     public function __construct($from)
     {
-        $this->from = (array) $from;
+        $this->from = (array)$from;
     }
 
     /**
@@ -77,10 +77,10 @@ class ConvertDoctrine1Schema
             if (is_dir($path)) {
                 $files = glob($path . '/*.yml');
                 foreach ($files as $file) {
-                    $schema = array_merge($schema, (array) Yaml::parse($file));
+                    $schema = array_merge($schema, (array)Yaml::parse($file));
                 }
             } else {
-                $schema = array_merge($schema, (array) Yaml::parse($path));
+                $schema = array_merge($schema, (array)Yaml::parse($path));
             }
         }
 
@@ -94,7 +94,7 @@ class ConvertDoctrine1Schema
 
     /**
      * @param string $className
-     * @param array  $mappingInformation
+     * @param array $mappingInformation
      *
      * @return \Doctrine\ORM\Mapping\ClassMetadataInfo
      */
@@ -111,8 +111,8 @@ class ConvertDoctrine1Schema
     }
 
     /**
-     * @param string            $className
-     * @param array             $model
+     * @param string $className
+     * @param array $model
      * @param ClassMetadataInfo $metadata
      *
      * @return void
@@ -132,8 +132,8 @@ class ConvertDoctrine1Schema
     }
 
     /**
-     * @param string            $className
-     * @param array             $model
+     * @param string $className
+     * @param array $model
      * @param ClassMetadataInfo $metadata
      *
      * @return void
@@ -152,7 +152,7 @@ class ConvertDoctrine1Schema
             }
         }
 
-        if ( ! $id) {
+        if (!$id) {
             $fieldMapping = array(
                 'fieldName' => 'id',
                 'columnName' => 'id',
@@ -165,9 +165,9 @@ class ConvertDoctrine1Schema
     }
 
     /**
-     * @param string            $className
-     * @param string            $name
-     * @param string|array      $column
+     * @param string $className
+     * @param string $name
+     * @param string|array $column
      * @param ClassMetadataInfo $metadata
      *
      * @return array
@@ -182,7 +182,7 @@ class ConvertDoctrine1Schema
             $column['type'] = $string;
         }
 
-        if ( ! isset($column['name'])) {
+        if (!isset($column['name'])) {
             $column['name'] = $name;
         }
 
@@ -204,7 +204,7 @@ class ConvertDoctrine1Schema
             $column['type'] = $this->legacyTypeMap[$column['type']];
         }
 
-        if ( ! Type::hasType($column['type'])) {
+        if (!Type::hasType($column['type'])) {
             throw ToolsException::couldNotMapDoctrine1Type($column['type']);
         }
 
@@ -238,7 +238,7 @@ class ConvertDoctrine1Schema
             $metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_SEQUENCE);
 
             $definition = array(
-                'sequenceName' => is_array($column['sequence']) ? $column['sequence']['name']:$column['sequence']
+                'sequenceName' => is_array($column['sequence']) ? $column['sequence']['name'] : $column['sequence']
             );
 
             if (isset($column['sequence']['size'])) {
@@ -256,8 +256,8 @@ class ConvertDoctrine1Schema
     }
 
     /**
-     * @param string            $className
-     * @param array             $model
+     * @param string $className
+     * @param array $model
      * @param ClassMetadataInfo $metadata
      *
      * @return void
@@ -279,8 +279,8 @@ class ConvertDoctrine1Schema
     }
 
     /**
-     * @param string            $className
-     * @param array             $model
+     * @param string $className
+     * @param array $model
      * @param ClassMetadataInfo $metadata
      *
      * @return void
@@ -292,19 +292,19 @@ class ConvertDoctrine1Schema
         }
 
         foreach ($model['relations'] as $name => $relation) {
-            if ( ! isset($relation['alias'])) {
+            if (!isset($relation['alias'])) {
                 $relation['alias'] = $name;
             }
-            if ( ! isset($relation['class'])) {
+            if (!isset($relation['class'])) {
                 $relation['class'] = $name;
             }
-            if ( ! isset($relation['local'])) {
+            if (!isset($relation['local'])) {
                 $relation['local'] = Inflector::tableize($relation['class']);
             }
-            if ( ! isset($relation['foreign'])) {
+            if (!isset($relation['foreign'])) {
                 $relation['foreign'] = 'id';
             }
-            if ( ! isset($relation['foreignAlias'])) {
+            if (!isset($relation['foreignAlias'])) {
                 $relation['foreignAlias'] = $className;
             }
 

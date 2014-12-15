@@ -64,6 +64,7 @@ class Profiler implements ProfilerInterface
         $current['end'] = microtime(true);
         $current['elapse'] = $current['end'] - $current['start'];
         $this->currentIndex++;
+
         return $this;
     }
 

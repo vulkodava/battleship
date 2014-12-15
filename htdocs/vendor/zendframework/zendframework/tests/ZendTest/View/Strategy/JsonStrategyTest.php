@@ -27,7 +27,7 @@ class JsonStrategyTest extends TestCase
     {
         $this->renderer = new JsonRenderer;
         $this->strategy = new JsonStrategy($this->renderer);
-        $this->event    = new ViewEvent();
+        $this->event = new ViewEvent();
         $this->response = new HttpResponse();
     }
 
@@ -150,7 +150,7 @@ class JsonStrategyTest extends TestCase
 
     public function testReturnsNullWhenCannotSelectRenderer()
     {
-        $model   = new ViewModel();
+        $model = new ViewModel();
         $request = new HttpRequest();
         $this->event->setModel($model);
         $this->event->setRequest($request);
@@ -164,10 +164,10 @@ class JsonStrategyTest extends TestCase
         $events->attachAggregate($this->strategy);
 
         foreach (array('renderer' => 'selectRenderer', 'response' => 'injectResponse') as $event => $method) {
-            $listeners        = $events->getListeners($event);
+            $listeners = $events->getListeners($event);
             $expectedCallback = array($this->strategy, $method);
             $expectedPriority = 1;
-            $found            = false;
+            $found = false;
             foreach ($listeners as $listener) {
                 $callback = $listener->getCallback();
                 if ($callback === $expectedCallback) {
@@ -187,10 +187,10 @@ class JsonStrategyTest extends TestCase
         $events->attachAggregate($this->strategy, 1000);
 
         foreach (array('renderer' => 'selectRenderer', 'response' => 'injectResponse') as $event => $method) {
-            $listeners        = $events->getListeners($event);
+            $listeners = $events->getListeners($event);
             $expectedCallback = array($this->strategy, $method);
             $expectedPriority = 1000;
-            $found            = false;
+            $found = false;
             foreach ($listeners as $listener) {
                 $callback = $listener->getCallback();
                 if ($callback === $expectedCallback) {

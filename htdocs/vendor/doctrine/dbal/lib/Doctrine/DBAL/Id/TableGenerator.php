@@ -80,7 +80,7 @@ class TableGenerator
 
     /**
      * @param \Doctrine\DBAL\Connection $conn
-     * @param string                    $generatorTableName
+     * @param string $generatorTableName
      *
      * @throws \Doctrine\DBAL\DBALException
      */
@@ -120,8 +120,8 @@ class TableGenerator
         try {
             $platform = $this->conn->getDatabasePlatform();
             $sql = "SELECT sequence_value, sequence_increment_by " .
-                   "FROM " . $platform->appendLockHint($this->generatorTableName, \Doctrine\DBAL\LockMode::PESSIMISTIC_WRITE) . " " .
-                   "WHERE sequence_name = ? " . $platform->getWriteLockSQL();
+                "FROM " . $platform->appendLockHint($this->generatorTableName, \Doctrine\DBAL\LockMode::PESSIMISTIC_WRITE) . " " .
+                "WHERE sequence_name = ? " . $platform->getWriteLockSQL();
             $stmt = $this->conn->executeQuery($sql, array($sequenceName));
 
             if ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
@@ -137,9 +137,9 @@ class TableGenerator
                     );
                 }
 
-                $sql = "UPDATE " . $this->generatorTableName . " ".
-                       "SET sequence_value = sequence_value + sequence_increment_by " .
-                       "WHERE sequence_name = ? AND sequence_value = ?";
+                $sql = "UPDATE " . $this->generatorTableName . " " .
+                    "SET sequence_value = sequence_value + sequence_increment_by " .
+                    "WHERE sequence_name = ? AND sequence_value = ?";
                 $rows = $this->conn->executeUpdate($sql, array($sequenceName, $row['sequence_value']));
 
                 if ($rows != 1) {
@@ -155,7 +155,7 @@ class TableGenerator
 
             $this->conn->commit();
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->conn->rollback();
             throw new \Doctrine\DBAL\DBALException("Error occurred while generating ID with TableGenerator, aborted generation: " . $e->getMessage(), 0, $e);
         }

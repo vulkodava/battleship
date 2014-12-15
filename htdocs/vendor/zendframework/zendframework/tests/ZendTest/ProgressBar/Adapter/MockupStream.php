@@ -25,6 +25,7 @@ class MockupStream
         $this->position = 0;
 
         static::$tests[$url["host"]] = '';
+
         return true;
     }
 
@@ -32,6 +33,7 @@ class MockupStream
     {
         $ret = substr(static::$tests[$this->test], $this->position, $count);
         $this->position += strlen($ret);
+
         return $ret;
     }
 
@@ -41,6 +43,7 @@ class MockupStream
         $right = substr(static::$tests[$this->test], $this->position + strlen($data));
         static::$tests[$this->test] = $left . $data . $right;
         $this->position += strlen($data);
+
         return strlen($data);
     }
 
@@ -60,6 +63,7 @@ class MockupStream
             case SEEK_SET:
                 if ($offset < strlen(static::$tests[$this->test]) && $offset >= 0) {
                     $this->position = $offset;
+
                     return true;
                 } else {
                     return false;
@@ -69,6 +73,7 @@ class MockupStream
             case SEEK_CUR:
                 if ($offset >= 0) {
                     $this->position += $offset;
+
                     return true;
                 } else {
                     return false;
@@ -78,6 +83,7 @@ class MockupStream
             case SEEK_END:
                 if (strlen(static::$tests[$this->test]) + $offset >= 0) {
                     $this->position = strlen(static::$tests[$this->test]) + $offset;
+
                     return true;
                 } else {
                     return false;

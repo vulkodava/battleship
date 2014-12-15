@@ -26,14 +26,14 @@ use Doctrine\Common\Collections\Expr\CompositeExpression;
  * Criteria for filtering Selectable collections.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @since 2.3
+ * @since  2.3
  */
 class Criteria
 {
     /**
      * @var string
      */
-    const ASC  = 'ASC';
+    const ASC = 'ASC';
 
     /**
      * @var string
@@ -85,6 +85,7 @@ class Criteria
         if (self::$expressionBuilder === null) {
             self::$expressionBuilder = new ExpressionBuilder();
         }
+
         return self::$expressionBuilder;
     }
 
@@ -93,15 +94,15 @@ class Criteria
      *
      * @param Expression $expression
      * @param array|null $orderings
-     * @param int|null   $firstResult
-     * @param int|null   $maxResults
+     * @param int|null $firstResult
+     * @param int|null $maxResults
      */
     public function __construct(Expression $expression = null, array $orderings = null, $firstResult = null, $maxResults = null)
     {
-        $this->expression  = $expression;
-        $this->orderings   = $orderings;
+        $this->expression = $expression;
+        $this->orderings = $orderings;
         $this->firstResult = $firstResult;
-        $this->maxResults  = $maxResults;
+        $this->maxResults = $maxResults;
     }
 
     /**
@@ -114,6 +115,7 @@ class Criteria
     public function where(Expression $expression)
     {
         $this->expression = $expression;
+
         return $this;
     }
 
@@ -194,6 +196,7 @@ class Criteria
     public function orderBy(array $orderings)
     {
         $this->orderings = $orderings;
+
         return $this;
     }
 
@@ -217,6 +220,7 @@ class Criteria
     public function setFirstResult($firstResult)
     {
         $this->firstResult = $firstResult;
+
         return $this;
     }
 
@@ -240,6 +244,7 @@ class Criteria
     public function setMaxResults($maxResults)
     {
         $this->maxResults = $maxResults;
+
         return $this;
     }
 }

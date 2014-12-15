@@ -72,16 +72,16 @@ class ArrayHydrator extends AbstractHydrator
      */
     protected function prepare()
     {
-        $this->_isSimpleQuery  = count($this->_rsm->aliasMap) <= 1;
-        $this->_identifierMap  = array();
+        $this->_isSimpleQuery = count($this->_rsm->aliasMap) <= 1;
+        $this->_identifierMap = array();
         $this->_resultPointers = array();
-        $this->_idTemplate     = array();
-        $this->_resultCounter  = 0;
+        $this->_idTemplate = array();
+        $this->_resultCounter = 0;
 
         foreach ($this->_rsm->aliasMap as $dqlAlias => $className) {
-            $this->_identifierMap[$dqlAlias]  = array();
+            $this->_identifierMap[$dqlAlias] = array();
             $this->_resultPointers[$dqlAlias] = array();
-            $this->_idTemplate[$dqlAlias]     = '';
+            $this->_idTemplate[$dqlAlias] = '';
         }
     }
 
@@ -91,7 +91,7 @@ class ArrayHydrator extends AbstractHydrator
     protected function hydrateAllData()
     {
         $result = array();
-        $cache  = array();
+        $cache = array();
 
         while ($data = $this->_stmt->fetch(PDO::FETCH_ASSOC)) {
             $this->hydrateRowData($data, $cache, $result);
@@ -129,10 +129,10 @@ class ArrayHydrator extends AbstractHydrator
                 // It's a joined result
 
                 $parent = $this->_rsm->parentAliasMap[$dqlAlias];
-                $path   = $parent . '.' . $dqlAlias;
+                $path = $parent . '.' . $dqlAlias;
 
                 // missing parent data, skipping as RIGHT JOIN hydration is not supported.
-                if ( ! isset($nonemptyComponents[$parent]) ) {
+                if (!isset($nonemptyComponents[$parent])) {
                     continue;
                 }
 
@@ -154,19 +154,19 @@ class ArrayHydrator extends AbstractHydrator
                 $relation = $this->getClassMetadata($this->_rsm->aliasMap[$parent])->associationMappings[$relationAlias];
 
                 // Check the type of the relation (many or single-valued)
-                if ( ! ($relation['type'] & ClassMetadata::TO_ONE)) {
+                if (!($relation['type'] & ClassMetadata::TO_ONE)) {
                     $oneToOne = false;
 
                     if (isset($nonemptyComponents[$dqlAlias])) {
-                        if ( ! isset($baseElement[$relationAlias])) {
+                        if (!isset($baseElement[$relationAlias])) {
                             $baseElement[$relationAlias] = array();
                         }
 
-                        $indexExists  = isset($this->_identifierMap[$path][$id[$parent]][$id[$dqlAlias]]);
-                        $index        = $indexExists ? $this->_identifierMap[$path][$id[$parent]][$id[$dqlAlias]] : false;
+                        $indexExists = isset($this->_identifierMap[$path][$id[$parent]][$id[$dqlAlias]]);
+                        $index = $indexExists ? $this->_identifierMap[$path][$id[$parent]][$id[$dqlAlias]] : false;
                         $indexIsValid = $index !== false ? isset($baseElement[$relationAlias][$index]) : false;
 
-                        if ( ! $indexExists || ! $indexIsValid) {
+                        if (!$indexExists || !$indexIsValid) {
                             $element = $data;
 
                             if (isset($this->_rsm->indexByMap[$dqlAlias])) {
@@ -179,18 +179,18 @@ class ArrayHydrator extends AbstractHydrator
 
                             $this->_identifierMap[$path][$id[$parent]][$id[$dqlAlias]] = key($baseElement[$relationAlias]);
                         }
-                    } else if ( ! isset($baseElement[$relationAlias])) {
+                    } else if (!isset($baseElement[$relationAlias])) {
                         $baseElement[$relationAlias] = array();
                     }
                 } else {
                     $oneToOne = true;
 
                     if (
-                        ( ! isset($nonemptyComponents[$dqlAlias])) &&
-                        ( ! isset($baseElement[$relationAlias]))
+                        (!isset($nonemptyComponents[$dqlAlias])) &&
+                        (!isset($baseElement[$relationAlias]))
                     ) {
                         $baseElement[$relationAlias] = null;
-                    } else if ( ! isset($baseElement[$relationAlias])) {
+                    } else if (!isset($baseElement[$relationAlias])) {
                         $baseElement[$relationAlias] = $data;
                     }
                 }
@@ -207,7 +207,7 @@ class ArrayHydrator extends AbstractHydrator
                 $entityKey = $this->_rsm->entityMappings[$dqlAlias] ?: 0;
 
                 // if this row has a NULL value for the root result id then make it a null result.
-                if ( ! isset($nonemptyComponents[$dqlAlias]) ) {
+                if (!isset($nonemptyComponents[$dqlAlias])) {
                     $result[] = $this->_rsm->isMixed
                         ? array($entityKey => null)
                         : null;
@@ -219,7 +219,7 @@ class ArrayHydrator extends AbstractHydrator
                 }
 
                 // Check for an existing element
-                if ($this->_isSimpleQuery || ! isset($this->_identifierMap[$dqlAlias][$id[$dqlAlias]])) {
+                if ($this->_isSimpleQuery || !isset($this->_identifierMap[$dqlAlias][$id[$dqlAlias]])) {
                     $element = $this->_rsm->isMixed
                         ? array($entityKey => $rowData[$dqlAlias])
                         : $rowData[$dqlAlias];
@@ -251,7 +251,7 @@ class ArrayHydrator extends AbstractHydrator
 
         // Append scalar values to mixed result sets
         if (isset($scalars)) {
-            if ( ! isset($resultKey) ) {
+            if (!isset($resultKey)) {
                 // this only ever happens when no object is fetched (scalar result only)
                 $resultKey = isset($this->_rsm->indexByMap['scalars'])
                     ? $row[$this->_rsm->indexByMap['scalars']]
@@ -268,10 +268,10 @@ class ArrayHydrator extends AbstractHydrator
      * Updates the result pointer for an Entity. The result pointers point to the
      * last seen instance of each Entity type. This is used for graph construction.
      *
-     * @param array           $coll     The element.
-     * @param boolean|integer $index    Index of the element in the collection.
-     * @param string          $dqlAlias
-     * @param boolean         $oneToOne Whether it is a single-valued association or not.
+     * @param array $coll            The element.
+     * @param boolean|integer $index Index of the element in the collection.
+     * @param string $dqlAlias
+     * @param boolean $oneToOne      Whether it is a single-valued association or not.
      *
      * @return void
      */
@@ -295,7 +295,7 @@ class ArrayHydrator extends AbstractHydrator
             return;
         }
 
-        if ( ! $coll) {
+        if (!$coll) {
             return;
         }
 
@@ -314,7 +314,7 @@ class ArrayHydrator extends AbstractHydrator
      */
     private function getClassMetadata($className)
     {
-        if ( ! isset($this->_ce[$className])) {
+        if (!isset($this->_ce[$className])) {
             $this->_ce[$className] = $this->_em->getClassMetadata($className);
         }
 

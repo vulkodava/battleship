@@ -45,6 +45,7 @@ class StaticEventManager extends SharedEventManager
         if (null === static::$instance) {
             static::setInstance(new static());
         }
+
         return static::$instance;
     }
 

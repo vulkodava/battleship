@@ -53,7 +53,7 @@ class LocatorRegistrationListenerTest extends TestCase
         $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
 
         $this->application = new MockApplication;
-        $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
+        $events = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
         $events->setSharedManager($this->sharedEvents);
         $this->application->setEventManager($events);
 
@@ -83,11 +83,12 @@ class LocatorRegistrationListenerTest extends TestCase
 
     public function testModuleClassIsRegisteredWithDiAndInjectedWithSharedInstances()
     {
-        $locator         = $this->serviceManager;
+        $locator = $this->serviceManager;
         $locator->setFactory('Foo\Bar', function ($s) {
-            $module   = $s->get('ListenerTestModule\Module');
-            $manager  = $s->get('Zend\ModuleManager\ModuleManager');
+            $module = $s->get('ListenerTestModule\Module');
+            $manager = $s->get('Zend\ModuleManager\ModuleManager');
             $instance = new \Foo\Bar($module, $manager);
+
             return $instance;
         });
 
@@ -104,7 +105,7 @@ class LocatorRegistrationListenerTest extends TestCase
         $sharedInstance2 = $locator->get('Zend\ModuleManager\ModuleManager');
 
         $this->assertInstanceOf('ListenerTestModule\Module', $sharedInstance1);
-        $foo     = false;
+        $foo = false;
         $message = '';
         try {
             $foo = $locator->get('Foo\Bar');

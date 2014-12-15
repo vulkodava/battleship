@@ -20,7 +20,9 @@
 namespace DoctrineORMModule\Collector;
 
 use ZendDeveloperTools\Collector\CollectorInterface;
-use ZendDeveloperTools\Collector\AutoHideInterface;;
+use ZendDeveloperTools\Collector\AutoHideInterface;
+
+;
 
 use Zend\Mvc\MvcEvent;
 
@@ -58,12 +60,12 @@ class MappingCollector implements CollectorInterface, AutoHideInterface, \Serial
 
     /**
      * @param ClassMetadataFactory $classMetadataFactory
-     * @param string               $name
+     * @param string $name
      */
     public function __construct(ClassMetadataFactory $classMetadataFactory, $name)
     {
         $this->classMetadataFactory = $classMetadataFactory;
-        $this->name                 = (string) $name;
+        $this->name = (string)$name;
     }
 
     /**
@@ -92,7 +94,7 @@ class MappingCollector implements CollectorInterface, AutoHideInterface, \Serial
         }
 
         /* @var $metadata \Doctrine\Common\Persistence\Mapping\ClassMetadata[] */
-        $metadata      = $this->classMetadataFactory->getAllMetadata();
+        $metadata = $this->classMetadataFactory->getAllMetadata();
         $this->classes = array();
 
         foreach ($metadata as $class) {
@@ -114,7 +116,7 @@ class MappingCollector implements CollectorInterface, AutoHideInterface, \Serial
     public function serialize()
     {
         return serialize(array(
-            'name'    => $this->name,
+            'name' => $this->name,
             'classes' => $this->classes,
         ));
     }
@@ -124,8 +126,8 @@ class MappingCollector implements CollectorInterface, AutoHideInterface, \Serial
      */
     public function unserialize($serialized)
     {
-        $data          = unserialize($serialized);
-        $this->name    = $data['name'];
+        $data = unserialize($serialized);
+        $this->name = $data['name'];
         $this->classes = $data['classes'];
     }
 

@@ -12,6 +12,7 @@ require_once __DIR__ . '/../TestInit.php';
 
 /**
  * Tests for the Configuration object
+ *
  * @author Marco Pivetta <ocramius@gmail.com>
  */
 class ConfigurationTest extends PHPUnit_Framework_TestCase
@@ -146,21 +147,24 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
         try {
             $this->configuration->ensureProductionSettings();
             $this->fail('Didn\'t check all production settings');
-        } catch (ORMException $e) {}
+        } catch (ORMException $e) {
+        }
 
         $this->configuration->setQueryCacheImpl($cache);
 
         try {
             $this->configuration->ensureProductionSettings();
             $this->fail('Didn\'t check all production settings');
-        } catch (ORMException $e) {}
+        } catch (ORMException $e) {
+        }
 
         $this->configuration->setMetadataCacheImpl($cache);
 
         try {
             $this->configuration->ensureProductionSettings();
             $this->fail('Didn\'t check all production settings');
-        } catch (ORMException $e) {}
+        } catch (ORMException $e) {
+        }
 
         $this->configuration->setAutoGenerateProxyClasses(false);
         $this->configuration->ensureProductionSettings();

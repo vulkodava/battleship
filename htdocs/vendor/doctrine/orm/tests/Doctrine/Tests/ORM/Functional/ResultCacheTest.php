@@ -15,12 +15,13 @@ require_once __DIR__ . '/../../TestInit.php';
  */
 class ResultCacheTest extends \Doctrine\Tests\OrmFunctionalTestCase
 {
-   /**
+    /**
      * @var \ReflectionProperty
      */
     private $cacheDataReflection;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->cacheDataReflection = new \ReflectionProperty("Doctrine\Common\Cache\ArrayCache", "data");
         $this->cacheDataReflection->setAccessible(true);
         $this->useModelSet('cms');
@@ -164,7 +165,7 @@ class ResultCacheTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     /**
-     * @param <type> $query
+     * @param   <type> $query
      * @depends testNativeQueryResultCaching
      */
     public function testResultCacheDependsOnParameters($query)
@@ -179,7 +180,7 @@ class ResultCacheTest extends \Doctrine\Tests\OrmFunctionalTestCase
     }
 
     /**
-     * @param <type> $query
+     * @param   <type> $query
      * @depends testNativeQueryResultCaching
      */
     public function testResultCacheNotDependsOnHydrationMode($query)

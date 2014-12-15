@@ -18,7 +18,7 @@ class DumbTest extends CommonTestCase
 {
     public function setUp()
     {
-        $this->helper  = new DumbCaptchaHelper();
+        $this->helper = new DumbCaptchaHelper();
         $this->captcha = new DumbCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
@@ -29,6 +29,7 @@ class DumbTest extends CommonTestCase
     {
         $element = new CaptchaElement('foo');
         $element->setCaptcha($this->captcha);
+
         return $element;
     }
 
@@ -43,7 +44,7 @@ class DumbTest extends CommonTestCase
     public function testRendersHiddenInputForId()
     {
         $element = $this->getElement();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;id\&\#x5D\;").*?(type="hidden")#', $markup);
         $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;id\&\#x5D\;").*?(value="' . $this->captcha->getId() . '")#', $markup);
@@ -52,7 +53,7 @@ class DumbTest extends CommonTestCase
     public function testRendersTextInputForInput()
     {
         $element = $this->getElement();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;input\&\#x5D\;").*?(type="text")#', $markup);
     }
@@ -60,7 +61,7 @@ class DumbTest extends CommonTestCase
     public function testRendersLabelPriorToInputByDefault()
     {
         $element = $this->getElement();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains($this->captcha->getLabel() . ' <b>' . strrev($this->captcha->getWord()) . '</b>' . $this->helper->getSeparator() . '<input', $markup);
     }
 
@@ -68,7 +69,7 @@ class DumbTest extends CommonTestCase
     {
         $this->helper->setCaptchaPosition('prepend');
         $element = $this->getElement();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('>' . $this->captcha->getLabel() . ' <b>' . strrev($this->captcha->getWord()) . '</b>' . $this->helper->getSeparator(), $markup);
     }
 
@@ -92,7 +93,7 @@ class DumbTest extends CommonTestCase
     {
         $element = $this->getElement();
         $this->helper->setSeparator('<br />');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertContains($this->captcha->getLabel() . ' <b>' . strrev($this->captcha->getWord()) . '</b>' . $this->helper->getSeparator() . '<input name="foo&#x5B;id&#x5D;" type="hidden"', $markup);
         $this->assertNotContains($this->helper->getSeparator() . '<input name="foo[input]" type="text"', $markup);

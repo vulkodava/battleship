@@ -67,10 +67,10 @@ class HydratorListenerTest extends PHPUnit_Framework_TestCase
      */
     public function testOnHydrate()
     {
-        $object   = new stdClass();
+        $object = new stdClass();
         $hydrated = new stdClass();
-        $data     = array('foo' => 'bar');
-        $event    = $this
+        $data = array('foo' => 'bar');
+        $event = $this
             ->getMockBuilder('Zend\Stdlib\Hydrator\Aggregate\HydrateEvent')
             ->disableOriginalConstructor()
             ->getMock();
@@ -95,8 +95,8 @@ class HydratorListenerTest extends PHPUnit_Framework_TestCase
     public function testOnExtract()
     {
         $object = new stdClass();
-        $data   = array('foo' => 'bar');
-        $event  = $this
+        $data = array('foo' => 'bar');
+        $event = $this
             ->getMockBuilder('Zend\Stdlib\Hydrator\Aggregate\ExtractEvent')
             ->disableOriginalConstructor()
             ->getMock();

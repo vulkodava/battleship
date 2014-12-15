@@ -28,12 +28,12 @@ class AuthenticationIdentityProviderServiceFactoryTest extends PHPUnit_Framework
     public function testCreateService()
     {
         $config = array(
-            'default_role'       => 'test-guest',
+            'default_role' => 'test-guest',
             'authenticated_role' => 'test-user',
         );
 
-        $user           = $this->getMock('ZfcUser\\Service\\User', array('getAuthService'));
-        $auth           = $this->getMock('Zend\\Authentication\\AuthenticationService');
+        $user = $this->getMock('ZfcUser\\Service\\User', array('getAuthService'));
+        $auth = $this->getMock('Zend\\Authentication\\AuthenticationService');
         $serviceLocator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
 
         $user->expects($this->once())->method('getAuthService')->will($this->returnValue($auth));
@@ -54,7 +54,7 @@ class AuthenticationIdentityProviderServiceFactoryTest extends PHPUnit_Framework
             );
 
         $authenticationFactory = new AuthenticationIdentityProviderServiceFactory();
-        $authentication        = $authenticationFactory->createService($serviceLocator);
+        $authentication = $authenticationFactory->createService($serviceLocator);
 
         $this->assertEquals($authentication->getDefaultRole(), 'test-guest');
         $this->assertEquals($authentication->getAuthenticatedRole(), 'test-user');

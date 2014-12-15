@@ -40,21 +40,21 @@ class ObjectRepositoryTest extends BaseTestCase
         $entity->setUsername('a username');
         $entity->setPassword('a password');
 
-        $objectRepository =  $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $objectRepository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
         $objectRepository->expects($this->exactly(1))
-                         ->method('find')
-                         ->with($this->equalTo('a username'))
-                         ->will($this->returnValue($entity));
+            ->method('find')
+            ->with($this->equalTo('a username'))
+            ->will($this->returnValue($entity));
 
         $metadata = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
         $metadata->expects($this->exactly(1))
-                 ->method('getIdentifierValues')
-                 ->with($this->equalTo($entity))
-                 ->will($this->returnValue($entity->getUsername()));
-        
+            ->method('getIdentifierValues')
+            ->with($this->equalTo($entity))
+            ->will($this->returnValue($entity->getUsername()));
+
         $storage = new ObjectRepositoryStorage(array(
-            'objectRepository' => $objectRepository, 
-            'classMetadata' => $metadata, 
+            'objectRepository' => $objectRepository,
+            'classMetadata' => $metadata,
             'storage' => new NonPersistentStorage()
         ));
 
@@ -63,7 +63,7 @@ class ObjectRepositoryTest extends BaseTestCase
 
         $result = $storage->read();
         $this->assertEquals($entity, $result);
-        
+
         $key = $storage->readKeyOnly();
         $this->assertEquals('a username', $key);
     }

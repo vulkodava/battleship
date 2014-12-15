@@ -20,8 +20,8 @@ class MockPlugin extends AbstractPlugin
     protected $options;
     protected $handles = array();
     protected $calledEvents = array();
-    protected $eventCallbacks  = array(
-        'setItem.pre'  => 'onSetItemPre',
+    protected $eventCallbacks = array(
+        'setItem.pre' => 'onSetItemPre',
         'setItem.post' => 'onSetItemPost'
     );
 
@@ -38,6 +38,7 @@ class MockPlugin extends AbstractPlugin
     public function setOptions(Plugin\PluginOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 

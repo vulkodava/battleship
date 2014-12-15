@@ -41,15 +41,15 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $argument = array(
             array(
                 'label' => 'Page 1',
-                'uri'   => 'page1.html'
+                'uri' => 'page1.html'
             ),
             array(
                 'label' => 'Page 2',
-                'uri'   => 'page2.html'
+                'uri' => 'page2.html'
             ),
             array(
                 'label' => 'Page 3',
-                'uri'   => 'page3.html'
+                'uri' => 'page3.html'
             )
         );
 
@@ -62,15 +62,15 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $argument = new Config\Config(array(
             array(
                 'label' => 'Page 1',
-                'uri'   => 'page1.html'
+                'uri' => 'page1.html'
             ),
             array(
                 'label' => 'Page 2',
-                'uri'   => 'page2.html'
+                'uri' => 'page2.html'
             ),
             array(
                 'label' => 'Page 3',
-                'uri'   => 'page3.html'
+                'uri' => 'page3.html'
             )
         ));
 
@@ -83,8 +83,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $nav = new Navigation\Navigation('ok');
             $this->fail('An invalid argument was given to the constructor, ' .
-                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
-                        'not thrown');
+                'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                'not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
         }
@@ -92,8 +92,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $nav = new Navigation\Navigation(1337);
             $this->fail('An invalid argument was given to the constructor, ' .
-                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
-                        'not thrown');
+                'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                'not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
         }
@@ -101,8 +101,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $nav = new Navigation\Navigation(new \stdClass());
             $this->fail('An invalid argument was given to the constructor, ' .
-                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
-                        'not thrown');
+                'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                'not thrown');
         } catch (Navigation\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
         }
@@ -228,7 +228,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      * @group 4517
      * @group 3211
      *
-     * @link https://github.com/zendframework/zf2/issues/3211
+     * @link  https://github.com/zendframework/zf2/issues/3211
      */
     public function testHasChildrenCompatibility()
     {
@@ -380,12 +380,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             'before' => array('Page 1', 'Page 2', 'Page 3'),
-            'after'  => array('Page 3', 'Page 1', 'Page 2')
+            'after' => array('Page 3', 'Page 1', 'Page 2')
         );
 
         $actual = array(
             'before' => array(),
-            'after'  => array()
+            'after' => array()
         );
 
         foreach ($nav as $page) {
@@ -460,7 +460,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->assertEquals(2, count($nav),
-                            'Expected 2 pages, found ' . count($nav));
+            'Expected 2 pages, found ' . count($nav));
     }
 
     public function testAddPagesShouldWorkWithConfig()
@@ -479,7 +479,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         )));
 
         $this->assertEquals(2, count($nav),
-                            'Expected 2 pages, found ' . count($nav));
+            'Expected 2 pages, found ' . count($nav));
     }
 
     public function testAddPagesShouldWorkWithMixedArray()
@@ -502,7 +502,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         )));
 
         $this->assertEquals(3, count($nav),
-                            'Expected 3 pages, found ' . count($nav));
+            'Expected 3 pages, found ' . count($nav));
     }
 
     /**
@@ -530,8 +530,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $nav->addPages('this is a string');
             $this->fail('An invalid argument was given to addPages(), ' .
-                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
-                        'not thrown');
+                'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                'not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $pages must be', $e->getMessage());
         }
@@ -544,8 +544,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $nav->addPages($pages = new \stdClass());
             $this->fail('An invalid argument was given to addPages(), ' .
-                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
-                        'not thrown');
+                'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                'not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
             $this->assertContains('Invalid argument: $pages must be', $e->getMessage());
         }
@@ -568,7 +568,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav->removePages();
 
         $this->assertEquals(0, count($nav),
-                            'Expected 0 pages, found ' . count($nav));
+            'Expected 0 pages, found ' . count($nav));
     }
 
     public function testSettingPages()
@@ -593,7 +593,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->assertEquals(1, count($nav),
-                            'Expected 1 page, found ' . count($nav));
+            'Expected 1 page, found ' . count($nav));
     }
 
     public function testGetPagesShouldReturnAnArrayOfPages()
@@ -681,21 +681,21 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         ));
 
         $expected = array(
-            'remove0'      => true,
-            'remove32'     => true,
+            'remove0' => true,
+            'remove32' => true,
             'remove0again' => true,
-            'remove1000'   => false,
-            'count'        => 1,
-            'current'      => 'Page 4'
+            'remove1000' => false,
+            'count' => 1,
+            'current' => 'Page 4'
         );
 
         $actual = array(
-            'remove0'      => $nav->removePage(0),
-            'remove32'     => $nav->removePage(32),
+            'remove0' => $nav->removePage(0),
+            'remove32' => $nav->removePage(32),
             'remove0again' => $nav->removePage(0),
-            'remove1000'   => $nav->removePage(1000),
-            'count'        => $nav->count(),
-            'current'      => $nav->current()->getLabel()
+            'remove1000' => $nav->removePage(1000),
+            'count' => $nav->count(),
+            'current' => $nav->current()->getLabel()
         );
 
         $this->assertEquals($expected, $actual);
@@ -795,16 +795,16 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $page1->addPage($page1_3);
 
         $expected = array(
-            'haspage0'            => false,
-            'haspage2'            => true,
-            'haspage1_1'          => false,
+            'haspage0' => false,
+            'haspage2' => true,
+            'haspage1_1' => false,
             'haspage1_1recursive' => true
         );
 
         $actual = array(
-            'haspage0'            => $nav->hasPage($page0),
-            'haspage2'            => $nav->hasPage($page2),
-            'haspage1_1'          => $nav->hasPage($page1_1),
+            'haspage0' => $nav->hasPage($page0),
+            'haspage2' => $nav->hasPage($page2),
+            'haspage1_1' => $nav->hasPage($page1_1),
             'haspage1_1recursive' => $nav->hasPage($page1_1, true)
         );
 
@@ -1065,8 +1065,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $found = $nav->findSomeById('page_2_and_3');
             $this->fail('An invalid magic finder method was used, ' .
-                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
-                        'not thrown');
+                'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                'not thrown');
         } catch (Navigation\Exception\BadMethodCallException $e) {
             $this->assertContains('Bad method call', $e->getMessage());
         }
@@ -1079,8 +1079,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $found = $nav->getPagez();
             $this->fail('An invalid magic finder method was used, ' .
-                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
-                        'not thrown');
+                'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                'not thrown');
         } catch (Navigation\Exception\BadMethodCallException $e) {
             $this->assertContains('Bad method call', $e->getMessage());
         }
@@ -1096,43 +1096,43 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         return new Navigation\Navigation(array(
             array(
                 'label' => 'Page 1',
-                'uri'   => 'page-1',
-                'foo'   => 'bar',
+                'uri' => 'page-1',
+                'foo' => 'bar',
                 'pages' => array(
                     array(
                         'label' => 'Page 1.1',
-                        'uri'   => 'page-1.1',
-                        'foo'   => 'bar',
+                        'uri' => 'page-1.1',
+                        'foo' => 'bar',
                         'title' => 'The given title'
                     ),
                     array(
                         'label' => 'Page 1.2',
-                        'uri'   => 'page-1.2',
+                        'uri' => 'page-1.2',
                         'title' => 'The given title'
                     ),
                     array(
-                        'type'   => 'uri',
-                        'label'  => 'Page 1.3',
-                        'uri'    => 'page-1.3',
-                        'title'  => 'The given title',
+                        'type' => 'uri',
+                        'label' => 'Page 1.3',
+                        'uri' => 'page-1.3',
+                        'title' => 'The given title',
                         'action' => 'about'
                     )
                 )
             ),
             array(
-                'id'         => 'page_2_and_3',
-                'label'      => 'Page 2',
-                'module'     => 'page2',
+                'id' => 'page_2_and_3',
+                'label' => 'Page 2',
+                'module' => 'page2',
                 'controller' => 'index',
-                'action'     => 'page1',
-                'page2'      => 'page2'
+                'action' => 'page1',
+                'page2' => 'page2'
             ),
             array(
-                'id'         => 'page_2_and_3',
-                'label'      => 'Page 3',
-                'module'     => 'page3',
+                'id' => 'page_2_and_3',
+                'label' => 'Page 3',
+                'module' => 'page3',
                 'controller' => 'index',
-                'action'     => 'about'
+                'action' => 'about'
             )
         ));
     }
@@ -1142,11 +1142,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container = new Navigation\Navigation(array(
             array(
                 'label' => 'Page 2',
-                'type'  => 'uri'
+                'type' => 'uri'
             ),
             array(
                 'label' => 'Page 1',
-                'type'  => 'uri',
+                'type' => 'uri',
                 'order' => -1
             )
         ));
@@ -1160,11 +1160,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container = new \ZendTest\Navigation\TestAsset\AbstractContainer(array(
             array(
                 'label' => 'Page 2',
-                'type'  => 'uri'
+                'type' => 'uri'
             ),
             array(
                 'label' => 'Page 1',
-                'type'  => 'uri',
+                'type' => 'uri',
                 'order' => -1
             )
         ));
@@ -1172,8 +1172,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         try {
             $page = $container->current();
             $this->fail('AbstractContainer index is invalid, ' .
-                        'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
-                        'not thrown');
+                'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
+                'not thrown');
         } catch (Navigation\Exception\OutOfBoundsException $e) {
             $this->assertContains('Corruption detected', $e->getMessage());
         }

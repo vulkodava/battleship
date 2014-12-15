@@ -45,7 +45,7 @@ class Shell
     {
         $this->hasReadline = function_exists('readline');
         $this->application = $application;
-        $this->history = getenv('HOME').'/.history_'.$application->getName();
+        $this->history = getenv('HOME') . '/.history_' . $application->getName();
         $this->output = new ConsoleOutput();
     }
 
@@ -99,8 +99,7 @@ EOF
                     ->add($_SERVER['argv'][0])
                     ->add($command)
                     ->inheritEnvironmentVariables(true)
-                    ->getProcess()
-                ;
+                    ->getProcess();
 
                 $output = $this->output;
                 $process->run(function ($type, $data) use ($output) {
@@ -145,7 +144,7 @@ EOF;
     protected function getPrompt()
     {
         // using the formatter here is required when using readline
-        return $this->output->getFormatter()->format($this->application->getName().' > ');
+        return $this->output->getFormatter()->format($this->application->getName() . ' > ');
     }
 
     protected function getOutput()
@@ -188,7 +187,7 @@ EOF;
 
         $list = array('--help');
         foreach ($command->getDefinition()->getOptions() as $option) {
-            $list[] = '--'.$option->getName();
+            $list[] = '--' . $option->getName();
         }
 
         return $list;
@@ -219,7 +218,7 @@ EOF;
 
     public function setProcessIsolation($processIsolation)
     {
-        $this->processIsolation = (bool) $processIsolation;
+        $this->processIsolation = (bool)$processIsolation;
 
         if ($this->processIsolation && !class_exists('Symfony\\Component\\Process\\Process')) {
             throw new \RuntimeException('Unable to isolate processes as the Symfony Process Component is not installed.');

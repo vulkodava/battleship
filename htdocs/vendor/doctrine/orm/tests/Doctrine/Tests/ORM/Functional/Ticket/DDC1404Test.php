@@ -28,10 +28,10 @@ class DDC1404Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
     public function testTicket()
     {
-        $repository     = $this->_em->getRepository(__NAMESPACE__ . '\DDC1404ChildEntity');
-        $queryAll       = $repository->createNamedQuery('all');
-        $queryFirst     = $repository->createNamedQuery('first');
-        $querySecond    = $repository->createNamedQuery('second');
+        $repository = $this->_em->getRepository(__NAMESPACE__ . '\DDC1404ChildEntity');
+        $queryAll = $repository->createNamedQuery('all');
+        $queryFirst = $repository->createNamedQuery('first');
+        $querySecond = $repository->createNamedQuery('second');
 
 
         $this->assertEquals('SELECT p FROM Doctrine\Tests\ORM\Functional\Ticket\DDC1404ChildEntity p', $queryAll->getDQL());

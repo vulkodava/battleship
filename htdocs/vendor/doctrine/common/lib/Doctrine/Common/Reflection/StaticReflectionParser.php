@@ -99,9 +99,9 @@ class StaticReflectionParser implements ReflectionProviderInterface
     /**
      * Parses a class residing in a PSR-0 hierarchy.
      *
-     * @param string               $className               The full, namespaced class name.
+     * @param string $className                             The full, namespaced class name.
      * @param ClassFinderInterface $finder                  A ClassFinder object which finds the class.
-     * @param boolean              $classAnnotationOptimize Only retrieve the class docComment.
+     * @param boolean $classAnnotationOptimize              Only retrieve the class docComment.
      *                                                      Presumes there is only one statement per line.
      */
     public function __construct($className, $finder, $classAnnotationOptimize = false)
@@ -164,12 +164,12 @@ class StaticReflectionParser implements ReflectionProviderInterface
                             // For example, it can be T_FINAL.
                             continue 2;
                         }
-                        // No break.
+                    // No break.
                     case T_FUNCTION:
                         // The next string after function is the name, but
                         // there can be & before the function name so find the
                         // string.
-                        while (($token = $tokenParser->next()) && $token[0] !== T_STRING);
+                        while (($token = $tokenParser->next()) && $token[0] !== T_STRING) ;
                         $methodName = $token[1];
                         $this->docComment['method'][$methodName] = $docComment;
                         $docComment = '';
@@ -192,7 +192,7 @@ class StaticReflectionParser implements ReflectionProviderInterface
                                 if ($alias == $prefix) {
                                     $this->parentClassName = '\\' . $use . $postfix;
                                     $fullySpecified = true;
-                              }
+                                }
                             }
                         }
                         if (!$fullySpecified) {

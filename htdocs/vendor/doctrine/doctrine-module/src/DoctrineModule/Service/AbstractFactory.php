@@ -61,9 +61,9 @@ abstract class AbstractFactory implements FactoryInterface
     /**
      * Gets options from configuration based on name.
      *
-     * @param  ServiceLocatorInterface      $sl
-     * @param  string                       $key
-     * @param  null|string                  $name
+     * @param  ServiceLocatorInterface $sl
+     * @param  string $key
+     * @param  null|string $name
      * @return \Zend\Stdlib\AbstractOptions
      * @throws \RuntimeException
      */

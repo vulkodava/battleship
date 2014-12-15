@@ -210,7 +210,7 @@ class OptimisticTest extends \Doctrine\Tests\OrmFunctionalTestCase
         // Try to lock the record with an older timestamp and it should throw an exception
         $caughtException = null;
         try {
-            $expectedVersionExpired = DateTime::createFromFormat('U', $test->version->getTimestamp()-3600);
+            $expectedVersionExpired = DateTime::createFromFormat('U', $test->version->getTimestamp() - 3600);
             $this->_em->lock($test, LockMode::OPTIMISTIC, $expectedVersionExpired);
         } catch (OptimisticLockException $e) {
             $caughtException = $e;
@@ -283,7 +283,10 @@ class OptimisticStandard
      */
     private $version;
 
-    function getVersion() {return $this->version;}
+    function getVersion()
+    {
+        return $this->version;
+    }
 }
 
 /**

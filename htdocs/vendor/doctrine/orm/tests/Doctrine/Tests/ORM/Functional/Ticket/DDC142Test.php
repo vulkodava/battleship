@@ -25,19 +25,19 @@ class DDC142Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata('Doctrine\Tests\Models\Quote\Phone'),
                 $this->_em->getClassMetadata('Doctrine\Tests\Models\Quote\Address'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
     public function testCreateRetrieveUpdateDelete()
     {
 
-        $user           = new User;
-        $user->name     = 'FabioBatSilva';
+        $user = new User;
+        $user->name = 'FabioBatSilva';
         $this->_em->persist($user);
 
-        $address        = new Address;
-        $address->zip   = '12345';
+        $address = new Address;
+        $address->zip = '12345';
         $this->_em->persist($address);
 
         $this->_em->flush();
@@ -52,9 +52,9 @@ class DDC142Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $id = $user->id;
         $this->assertNotNull($id);
 
-        
-        $user       = $this->_em->find('Doctrine\Tests\Models\Quote\User', $id);
-        $address    = $user->getAddress();
+
+        $user = $this->_em->find('Doctrine\Tests\Models\Quote\User', $id);
+        $address = $user->getAddress();
 
         $this->assertInstanceOf('Doctrine\Tests\Models\Quote\User', $user);
         $this->assertInstanceOf('Doctrine\Tests\Models\Quote\Address', $user->getAddress());
@@ -63,8 +63,8 @@ class DDC142Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertEquals('12345', $address->zip);
 
 
-        $user->name     = 'FabioBatSilva1';
-        $user->address  = null;
+        $user->name = 'FabioBatSilva1';
+        $user->address = null;
 
         $this->_em->persist($user);
         $this->_em->remove($address);
@@ -77,8 +77,8 @@ class DDC142Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertNull($user->getAddress());
 
         $this->assertEquals('FabioBatSilva1', $user->name);
-        
-        
+
+
         $this->_em->remove($user);
         $this->_em->flush();
         $this->_em->clear();

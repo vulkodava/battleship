@@ -30,7 +30,7 @@ class FormInputTest extends CommonTestCase
     public function testGeneratesTextInputTagWhenProvidedAnElementWithNoTypeAttribute()
     {
         $element = new Element('foo');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="text"', $markup);
     }
@@ -39,7 +39,7 @@ class FormInputTest extends CommonTestCase
     {
         $element = new Element('foo');
         $element->setAttribute('type', 'email');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="email"', $markup);
     }
@@ -86,7 +86,7 @@ class FormInputTest extends CommonTestCase
     {
         $element = new Element('foo');
         $element->setAttribute('type', $type);
-        $markup   = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $expected = sprintf('type="%s"', $type);
         $this->$assertion($expected, $markup);
     }
@@ -216,113 +216,114 @@ class FormInputTest extends CommonTestCase
     {
         $element = new Element('foo');
         $element->setAttributes(array(
-            'accept'             => 'value',
-            'accesskey'          => 'value',
-            'alt'                => 'value',
-            'autocomplete'       => 'on',
-            'autofocus'          => 'autofocus',
-            'checked'            => 'checked',
-            'class'              => 'value',
-            'contenteditable'    => 'value',
-            'contextmenu'        => 'value',
-            'dir'                => 'value',
-            'dirname'            => 'value',
-            'disabled'           => 'disabled',
-            'draggable'          => 'value',
-            'dropzone'           => 'value',
-            'form'               => 'value',
-            'formaction'         => 'value',
-            'formenctype'        => 'value',
-            'formmethod'         => 'value',
-            'formnovalidate'     => 'value',
-            'formtarget'         => 'value',
-            'height'             => 'value',
-            'hidden'             => 'value',
-            'id'                 => 'value',
-            'lang'               => 'value',
-            'list'               => 'value',
-            'max'                => 'value',
-            'maxlength'          => 'value',
-            'min'                => 'value',
-            'multiple'           => 'multiple',
-            'name'               => 'value',
-            'onabort'            => 'value',
-            'onblur'             => 'value',
-            'oncanplay'          => 'value',
-            'oncanplaythrough'   => 'value',
-            'onchange'           => 'value',
-            'onclick'            => 'value',
-            'oncontextmenu'      => 'value',
-            'ondblclick'         => 'value',
-            'ondrag'             => 'value',
-            'ondragend'          => 'value',
-            'ondragenter'        => 'value',
-            'ondragleave'        => 'value',
-            'ondragover'         => 'value',
-            'ondragstart'        => 'value',
-            'ondrop'             => 'value',
-            'ondurationchange'   => 'value',
-            'onemptied'          => 'value',
-            'onended'            => 'value',
-            'onerror'            => 'value',
-            'onfocus'            => 'value',
-            'oninput'            => 'value',
-            'oninvalid'          => 'value',
-            'onkeydown'          => 'value',
-            'onkeypress'         => 'value',
-            'onkeyup'            => 'value',
-            'onload'             => 'value',
-            'onloadeddata'       => 'value',
-            'onloadedmetadata'   => 'value',
-            'onloadstart'        => 'value',
-            'onmousedown'        => 'value',
-            'onmousemove'        => 'value',
-            'onmouseout'         => 'value',
-            'onmouseover'        => 'value',
-            'onmouseup'          => 'value',
-            'onmousewheel'       => 'value',
-            'onpause'            => 'value',
-            'onplay'             => 'value',
-            'onplaying'          => 'value',
-            'onprogress'         => 'value',
-            'onratechange'       => 'value',
+            'accept' => 'value',
+            'accesskey' => 'value',
+            'alt' => 'value',
+            'autocomplete' => 'on',
+            'autofocus' => 'autofocus',
+            'checked' => 'checked',
+            'class' => 'value',
+            'contenteditable' => 'value',
+            'contextmenu' => 'value',
+            'dir' => 'value',
+            'dirname' => 'value',
+            'disabled' => 'disabled',
+            'draggable' => 'value',
+            'dropzone' => 'value',
+            'form' => 'value',
+            'formaction' => 'value',
+            'formenctype' => 'value',
+            'formmethod' => 'value',
+            'formnovalidate' => 'value',
+            'formtarget' => 'value',
+            'height' => 'value',
+            'hidden' => 'value',
+            'id' => 'value',
+            'lang' => 'value',
+            'list' => 'value',
+            'max' => 'value',
+            'maxlength' => 'value',
+            'min' => 'value',
+            'multiple' => 'multiple',
+            'name' => 'value',
+            'onabort' => 'value',
+            'onblur' => 'value',
+            'oncanplay' => 'value',
+            'oncanplaythrough' => 'value',
+            'onchange' => 'value',
+            'onclick' => 'value',
+            'oncontextmenu' => 'value',
+            'ondblclick' => 'value',
+            'ondrag' => 'value',
+            'ondragend' => 'value',
+            'ondragenter' => 'value',
+            'ondragleave' => 'value',
+            'ondragover' => 'value',
+            'ondragstart' => 'value',
+            'ondrop' => 'value',
+            'ondurationchange' => 'value',
+            'onemptied' => 'value',
+            'onended' => 'value',
+            'onerror' => 'value',
+            'onfocus' => 'value',
+            'oninput' => 'value',
+            'oninvalid' => 'value',
+            'onkeydown' => 'value',
+            'onkeypress' => 'value',
+            'onkeyup' => 'value',
+            'onload' => 'value',
+            'onloadeddata' => 'value',
+            'onloadedmetadata' => 'value',
+            'onloadstart' => 'value',
+            'onmousedown' => 'value',
+            'onmousemove' => 'value',
+            'onmouseout' => 'value',
+            'onmouseover' => 'value',
+            'onmouseup' => 'value',
+            'onmousewheel' => 'value',
+            'onpause' => 'value',
+            'onplay' => 'value',
+            'onplaying' => 'value',
+            'onprogress' => 'value',
+            'onratechange' => 'value',
             'onreadystatechange' => 'value',
-            'onreset'            => 'value',
-            'onscroll'           => 'value',
-            'onseeked'           => 'value',
-            'onseeking'          => 'value',
-            'onselect'           => 'value',
-            'onshow'             => 'value',
-            'onstalled'          => 'value',
-            'onsubmit'           => 'value',
-            'onsuspend'          => 'value',
-            'ontimeupdate'       => 'value',
-            'onvolumechange'     => 'value',
-            'onwaiting'          => 'value',
-            'pattern'            => 'value',
-            'placeholder'        => 'value',
-            'readonly'           => 'readonly',
-            'required'           => 'required',
-            'size'               => 'value',
-            'spellcheck'         => 'value',
-            'src'                => 'value',
-            'step'               => 'value',
-            'style'              => 'value',
-            'tabindex'           => 'value',
-            'title'              => 'value',
-            'width'              => 'value',
-            'wrap'               => 'value',
-            'xml:base'           => 'value',
-            'xml:lang'           => 'value',
-            'xml:space'          => 'value',
-            'data-some-key'      => 'value',
-            'option'             => 'value',
-            'optgroup'           => 'value',
-            'arbitrary'          => 'value',
-            'meta'               => 'value',
-            'role'               => 'value',
+            'onreset' => 'value',
+            'onscroll' => 'value',
+            'onseeked' => 'value',
+            'onseeking' => 'value',
+            'onselect' => 'value',
+            'onshow' => 'value',
+            'onstalled' => 'value',
+            'onsubmit' => 'value',
+            'onsuspend' => 'value',
+            'ontimeupdate' => 'value',
+            'onvolumechange' => 'value',
+            'onwaiting' => 'value',
+            'pattern' => 'value',
+            'placeholder' => 'value',
+            'readonly' => 'readonly',
+            'required' => 'required',
+            'size' => 'value',
+            'spellcheck' => 'value',
+            'src' => 'value',
+            'step' => 'value',
+            'style' => 'value',
+            'tabindex' => 'value',
+            'title' => 'value',
+            'width' => 'value',
+            'wrap' => 'value',
+            'xml:base' => 'value',
+            'xml:lang' => 'value',
+            'xml:space' => 'value',
+            'data-some-key' => 'value',
+            'option' => 'value',
+            'optgroup' => 'value',
+            'arbitrary' => 'value',
+            'meta' => 'value',
+            'role' => 'value',
         ));
         $element->setValue('value');
+
         return $element;
     }
 
@@ -333,13 +334,13 @@ class FormInputTest extends CommonTestCase
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
     {
         $element = $this->getCompleteElement();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         switch ($attribute) {
             case 'value':
-                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                $expect = sprintf('%s="%s"', $attribute, $element->getValue());
                 break;
             default:
-                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                $expect = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
                 break;
         }
         $this->$assertion($expect, $markup);
@@ -404,7 +405,7 @@ class FormInputTest extends CommonTestCase
     }
 
     /**
-     * @group ZF2-391
+     * @group        ZF2-391
      * @dataProvider booleanAttributeTypes
      */
     public function testBooleanAttributeTypesAreRenderedCorrectly($attribute, $on, $off)
@@ -445,7 +446,7 @@ class FormInputTest extends CommonTestCase
     public function testInvokeProxiesToRender()
     {
         $element = new Element('foo');
-        $markup  = $this->helper->__invoke($element);
+        $markup = $this->helper->__invoke($element);
         $this->assertContains('<input', $markup);
         $this->assertContains('name="foo"', $markup);
     }
@@ -467,8 +468,8 @@ class FormInputTest extends CommonTestCase
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
 
         $mockTranslator->expects($this->exactly(1))
-                ->method('translate')
-                ->will($this->returnValue('translated string'));
+            ->method('translate')
+            ->will($this->returnValue('translated string'));
 
         $this->helper->setTranslator($mockTranslator);
 
@@ -487,9 +488,9 @@ class FormInputTest extends CommonTestCase
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
 
         $mockTranslator->expects($this->exactly(1))
-                ->method('translate')
-                ->with($this->equalTo('test'))
-                ->will($this->returnValue('translated string'));
+            ->method('translate')
+            ->with($this->equalTo('test'))
+            ->will($this->returnValue('translated string'));
 
         $this->helper->setTranslator($mockTranslator);
 

@@ -60,7 +60,7 @@ class SingleDatabaseSynchronizer extends AbstractSchemaSynchronizer
     public function getUpdateSchema(Schema $toSchema, $noDrops = false)
     {
         $comparator = new Comparator();
-        $sm         = $this->conn->getSchemaManager();
+        $sm = $this->conn->getSchemaManager();
 
         $fromSchema = $sm->createSchema();
         $schemaDiff = $comparator->compare($fromSchema, $toSchema);
@@ -77,22 +77,22 @@ class SingleDatabaseSynchronizer extends AbstractSchemaSynchronizer
      */
     public function getDropSchema(Schema $dropSchema)
     {
-        $visitor    = new DropSchemaSqlCollector($this->platform);
-        $sm         = $this->conn->getSchemaManager();
+        $visitor = new DropSchemaSqlCollector($this->platform);
+        $sm = $this->conn->getSchemaManager();
 
         $fullSchema = $sm->createSchema();
 
         foreach ($fullSchema->getTables() as $table) {
-            if ( $dropSchema->hasTable($table->getName())) {
+            if ($dropSchema->hasTable($table->getName())) {
                 $visitor->acceptTable($table);
             }
 
             foreach ($table->getForeignKeys() as $foreignKey) {
-                if ( ! $dropSchema->hasTable($table->getName())) {
+                if (!$dropSchema->hasTable($table->getName())) {
                     continue;
                 }
 
-                if ( ! $dropSchema->hasTable($foreignKey->getForeignTableName())) {
+                if (!$dropSchema->hasTable($foreignKey->getForeignTableName())) {
                     continue;
                 }
 
@@ -100,7 +100,7 @@ class SingleDatabaseSynchronizer extends AbstractSchemaSynchronizer
             }
         }
 
-        if ( ! $this->platform->supportsSequences()) {
+        if (!$this->platform->supportsSequences()) {
             return $visitor->getQueries();
         }
 
@@ -109,7 +109,7 @@ class SingleDatabaseSynchronizer extends AbstractSchemaSynchronizer
         }
 
         foreach ($dropSchema->getTables() as $table) {
-            if ( ! $table->hasPrimaryKey()) {
+            if (!$table->hasPrimaryKey()) {
                 continue;
             }
 
@@ -132,11 +132,11 @@ class SingleDatabaseSynchronizer extends AbstractSchemaSynchronizer
      */
     public function getDropAllSchema()
     {
-        $sm      = $this->conn->getSchemaManager();
+        $sm = $this->conn->getSchemaManager();
         $visitor = new DropSchemaSqlCollector($this->platform);
 
         /* @var $schema \Doctrine\DBAL\Schema\Schema */
-        $schema  = $sm->createSchema();
+        $schema = $sm->createSchema();
         $schema->visit($visitor);
 
         return $visitor->getQueries();

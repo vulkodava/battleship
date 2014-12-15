@@ -38,11 +38,11 @@ class DDC2306Test extends \Doctrine\Tests\OrmFunctionalTestCase
      */
     public function testIssue()
     {
-        $zone          = new DDC2306Zone();
-        $user          = new DDC2306User;
-        $address       = new DDC2306Address;
-        $userAddress   = new DDC2306UserAddress($user, $address);
-        $user->zone    = $zone;
+        $zone = new DDC2306Zone();
+        $user = new DDC2306User;
+        $address = new DDC2306Address;
+        $userAddress = new DDC2306UserAddress($user, $address);
+        $user->zone = $zone;
         $address->zone = $zone;
 
         $this->_em->persist($zone);
@@ -55,7 +55,7 @@ class DDC2306Test extends \Doctrine\Tests\OrmFunctionalTestCase
         /* @var $address DDC2306Address */
         $address = $this->_em->find(__NAMESPACE__ . '\\DDC2306Address', $address->id);
         /* @var $user DDC2306User|\Doctrine\ORM\Proxy\Proxy */
-        $user    = $address->users->first()->user;
+        $user = $address->users->first()->user;
 
         $this->assertInstanceOf('Doctrine\ORM\Proxy\Proxy', $user);
         $this->assertInstanceOf(__NAMESPACE__ . '\\DDC2306User', $user);
@@ -100,7 +100,8 @@ class DDC2306User
     public $zone;
 
     /** Constructor */
-    public function __construct() {
+    public function __construct()
+    {
         $this->addresses = new ArrayCollection();
     }
 }
@@ -122,7 +123,8 @@ class DDC2306Address
     public $zone;
 
     /** Constructor */
-    public function __construct() {
+    public function __construct()
+    {
         $this->users = new ArrayCollection();
     }
 }
@@ -142,7 +144,7 @@ class DDC2306UserAddress
     /** Constructor */
     public function __construct(DDC2306User $user, DDC2306Address $address)
     {
-        $this->user    = $user;
+        $this->user = $user;
         $this->address = $address;
 
         $user->addresses->add($this);

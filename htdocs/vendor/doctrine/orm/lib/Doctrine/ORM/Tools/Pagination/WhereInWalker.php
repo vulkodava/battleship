@@ -75,8 +75,7 @@ class WhereInWalker extends TreeWalkerAdapter
         foreach ($this->_getQueryComponents() as $dqlAlias => $qComp) {
             $isParent = array_key_exists('parent', $qComp)
                 && $qComp['parent'] === null
-                && $qComp['nestingLevel'] == 0
-            ;
+                && $qComp['nestingLevel'] == 0;
             if ($isParent) {
                 $rootComponents[] = array($dqlAlias => $qComp);
             }
@@ -84,9 +83,9 @@ class WhereInWalker extends TreeWalkerAdapter
         if (count($rootComponents) > 1) {
             throw new \RuntimeException("Cannot count query which selects two FROM components, cannot make distinction");
         }
-        $root                = reset($rootComponents);
-        $parentName          = key($root);
-        $parent              = current($root);
+        $root = reset($rootComponents);
+        $parentName = key($root);
+        $parent = current($root);
         $identifierFieldName = $parent['metadata']->getSingleIdentifierFieldName();
 
         $pathType = PathExpression::TYPE_STATE_FIELD;
@@ -94,7 +93,7 @@ class WhereInWalker extends TreeWalkerAdapter
             $pathType = PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION;
         }
 
-        $pathExpression       = new PathExpression(PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION, $parentName, $identifierFieldName);
+        $pathExpression = new PathExpression(PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION, $parentName, $identifierFieldName);
         $pathExpression->type = $pathType;
 
         $count = $this->_getQuery()->getHint(self::HINT_PAGINATOR_ID_COUNT);

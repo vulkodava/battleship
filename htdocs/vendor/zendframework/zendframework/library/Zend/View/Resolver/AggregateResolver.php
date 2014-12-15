@@ -18,10 +18,11 @@ use Zend\View\Resolver\ResolverInterface as Resolver;
 class AggregateResolver implements Countable, IteratorAggregate, ResolverInterface
 {
     const FAILURE_NO_RESOLVERS = 'AggregateResolver_Failure_No_Resolvers';
-    const FAILURE_NOT_FOUND    = 'AggregateResolver_Failure_Not_Found';
+    const FAILURE_NOT_FOUND = 'AggregateResolver_Failure_Not_Found';
 
     /**
      * Last lookup failure
+     *
      * @var false|string
      */
     protected $lastLookupFailure = false;
@@ -77,6 +78,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
     public function attach(Resolver $resolver, $priority = 1)
     {
         $this->queue->insert($resolver, $priority);
+
         return $this;
     }
 
@@ -89,11 +91,12 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
      */
     public function resolve($name, Renderer $renderer = null)
     {
-        $this->lastLookupFailure      = false;
+        $this->lastLookupFailure = false;
         $this->lastSuccessfulResolver = null;
 
         if (0 === count($this->queue)) {
             $this->lastLookupFailure = static::FAILURE_NO_RESOLVERS;
+
             return false;
         }
 
@@ -106,10 +109,12 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
 
             // Resource found; return it
             $this->lastSuccessfulResolver = $resolver;
+
             return $resource;
         }
 
         $this->lastLookupFailure = static::FAILURE_NOT_FOUND;
+
         return false;
     }
 

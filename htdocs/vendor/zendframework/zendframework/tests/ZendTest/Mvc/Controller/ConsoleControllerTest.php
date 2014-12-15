@@ -26,7 +26,7 @@ class ConsoleControllerTest extends TestCase
     {
         $this->controller = new TestAsset\ConsoleController();
         $routeMatch = new RouteMatch(array('controller' => 'controller-sample'));
-        $event      = new MvcEvent();
+        $event = new MvcEvent();
         $event->setRouteMatch($routeMatch);
         $this->controller->setEvent($event);
     }

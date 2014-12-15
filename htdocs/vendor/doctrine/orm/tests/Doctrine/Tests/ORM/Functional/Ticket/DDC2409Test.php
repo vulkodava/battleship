@@ -19,18 +19,18 @@ class DDC2409Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
     public function testIssue()
     {
-        $em     = $this->_em;
-        $uow    = $em->getUnitOfWork();
-        
-        $originalArticle  = new CmsArticle();
-        $originalUser     = new CmsUser();
+        $em = $this->_em;
+        $uow = $em->getUnitOfWork();
+
+        $originalArticle = new CmsArticle();
+        $originalUser = new CmsUser();
 
         $originalArticle->topic = 'Unit Test';
-        $originalArticle->text  = 'How to write a test';
+        $originalArticle->text = 'How to write a test';
 
-        $originalUser->name     = 'Doctrine Bot';
+        $originalUser->name = 'Doctrine Bot';
         $originalUser->username = 'DoctrineBot';
-        $originalUser->status   = 'active';
+        $originalUser->status = 'active';
 
         $originalUser->addArticle($originalArticle);
 
@@ -39,12 +39,12 @@ class DDC2409Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $em->flush();
         $em->clear();
 
-        $article  = $em->find('Doctrine\Tests\Models\CMS\CmsArticle', $originalArticle->id);
-        $user     = new CmsUser();
+        $article = $em->find('Doctrine\Tests\Models\CMS\CmsArticle', $originalArticle->id);
+        $user = new CmsUser();
 
-        $user->name     = 'Doctrine Bot 2.0';
+        $user->name = 'Doctrine Bot 2.0';
         $user->username = 'BotDoctrine2';
-        $user->status   = 'new';
+        $user->status = 'new';
 
         $article->setAuthor($user);
 
@@ -56,8 +56,8 @@ class DDC2409Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $em->detach($user);
         $em->detach($article);
 
-        $userMerged     = $em->merge($user);
-        $articleMerged  = $em->merge($article);
+        $userMerged = $em->merge($user);
+        $articleMerged = $em->merge($article);
 
         $this->assertEquals(UnitOfWork::STATE_NEW, $uow->getEntityState($user));
         $this->assertEquals(UnitOfWork::STATE_DETACHED, $uow->getEntityState($article));

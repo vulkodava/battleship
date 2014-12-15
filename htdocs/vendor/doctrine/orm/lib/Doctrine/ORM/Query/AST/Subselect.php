@@ -61,7 +61,7 @@ class Subselect extends Node
     public $orderByClause;
 
     /**
-     * @param SimpleSelectClause  $simpleSelectClause
+     * @param SimpleSelectClause $simpleSelectClause
      * @param SubselectFromClause $subselectFromClause
      */
     public function __construct($simpleSelectClause, $subselectFromClause)

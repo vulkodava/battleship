@@ -34,7 +34,7 @@ class Uri extends AbstractPage
     /**
      * Sets page URI
      *
-     * @param  string $uri                page URI, must a string or null
+     * @param  string $uri page URI, must a string or null
      *
      * @return Uri   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if $uri is invalid
@@ -48,6 +48,7 @@ class Uri extends AbstractPage
         }
 
         $this->uri = $uri;
+
         return $this;
     }
 
@@ -101,6 +102,7 @@ class Uri extends AbstractPage
             if ($this->getRequest() instanceof Request) {
                 if ($this->getRequest()->getUri()->getPath() == $this->getUri()) {
                     $this->active = true;
+
                     return true;
                 }
             }
@@ -128,6 +130,7 @@ class Uri extends AbstractPage
     public function setRequest(Request $request = null)
     {
         $this->request = $request;
+
         return $this;
     }
 

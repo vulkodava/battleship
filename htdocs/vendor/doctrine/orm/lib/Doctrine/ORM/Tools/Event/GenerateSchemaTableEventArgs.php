@@ -50,8 +50,8 @@ class GenerateSchemaTableEventArgs extends EventArgs
 
     /**
      * @param ClassMetadata $classMetadata
-     * @param Schema        $schema
-     * @param Table         $classTable
+     * @param Schema $schema
+     * @param Table $classTable
      */
     public function __construct(ClassMetadata $classMetadata, Schema $schema, Table $classTable)
     {

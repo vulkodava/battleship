@@ -12,13 +12,13 @@ class OracleSchemaManagerTest extends SchemaManagerFunctionalTestCase
     {
         parent::setUp();
 
-        if(!isset($GLOBALS['db_username'])) {
+        if (!isset($GLOBALS['db_username'])) {
             $this->markTestSkipped('Foo');
         }
 
         $username = $GLOBALS['db_username'];
 
-        $query = "GRANT ALL PRIVILEGES TO ".$username;
+        $query = "GRANT ALL PRIVILEGES TO " . $username;
 
         $conn = \Doctrine\Tests\TestUtil::getTempConnection();
         $conn->executeUpdate($query);

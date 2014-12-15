@@ -38,10 +38,12 @@ class ConsoleResponseSenderTest extends TestCase
             function () use (&$returnValue) {
                 if (false === $returnValue) {
                     $returnValue = true;
+
                     return false;
                 }
+
                 return true;
-        }));
+            }));
         $responseSender = new ConsoleResponseSender();
         ob_start();
         $result = $responseSender($mockSendResponseEvent);
@@ -60,6 +62,7 @@ class ConsoleResponseSenderTest extends TestCase
     {
         $mockSendResponseEvent = $this->getMock('Zend\Mvc\ResponseSender\SendResponseEvent', array('getResponse', 'contentSent', 'setContentSent'));
         $mockSendResponseEvent->expects($this->any())->method('getResponse')->will($this->returnValue($response));
+
         return $mockSendResponseEvent;
     }
 }

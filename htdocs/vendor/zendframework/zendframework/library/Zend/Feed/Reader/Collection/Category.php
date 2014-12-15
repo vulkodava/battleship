@@ -29,6 +29,7 @@ class Category extends AbstractCollection
                 $categories[] = $element['term'];
             }
         }
+
         return array_unique($categories);
     }
 }

@@ -41,6 +41,7 @@ class IntlTest extends CommonStringWrapperTest
 
         $wrapper = new Intl();
         $wrapper->setEncoding($encoding, $convertEncoding);
+
         return $wrapper;
     }
 }

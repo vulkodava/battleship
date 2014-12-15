@@ -16,6 +16,7 @@ class Identcode extends Code25interleaved
 {
     /**
      * Default options for Identcode barcode
+     *
      * @return void
      */
     protected function getDefaultOptions()
@@ -26,6 +27,7 @@ class Identcode extends Code25interleaved
 
     /**
      * Retrieve text to display
+     *
      * @return string
      */
     public function getTextToDisplay()
@@ -35,6 +37,7 @@ class Identcode extends Code25interleaved
 
     /**
      * Check allowed characters
+     *
      * @param  string $value
      * @return string
      * @throws Exception\BarcodeValidationException
@@ -55,7 +58,7 @@ class Identcode extends Code25interleaved
         $this->checkText($text);
         $checksum = 0;
 
-        for ($i = strlen($text); $i > 0; $i --) {
+        for ($i = strlen($text); $i > 0; $i--) {
             $checksum += intval($text{$i - 1}) * (($i % 2) ? 4 : 9);
         }
 

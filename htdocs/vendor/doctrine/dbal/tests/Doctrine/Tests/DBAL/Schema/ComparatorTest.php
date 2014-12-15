@@ -35,88 +35,88 @@ use Doctrine\DBAL\Schema\Schema,
     Doctrine\DBAL\Schema\ForeignKeyConstraint;
 
 /**
- * @license http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link    www.doctrine-project.org
+ * @license   http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @link      www.doctrine-project.org
  * @copyright Copyright (C) 2005-2009 eZ Systems AS. All rights reserved.
- * @license http://ez.no/licenses/new_bsd New BSD License
- * @since   2.0
- * @version $Revision$
- * @author  Benjamin Eberlei <kontakt@beberlei.de>
+ * @license   http://ez.no/licenses/new_bsd New BSD License
+ * @since     2.0
+ * @version   $Revision$
+ * @author    Benjamin Eberlei <kontakt@beberlei.de>
  */
 class ComparatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testCompareSame1()
     {
-        $schema1 = new Schema( array(
+        $schema1 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
-                    'integerfield1' => new Column('integerfield1', Type::getType('integer' ) ),
+                array(
+                    'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                 )
             ),
-        ) );
-        $schema2 = new Schema( array(
+        ));
+        $schema2 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
-                    'integerfield1' => new Column('integerfield1', Type::getType('integer') ),
+                array(
+                    'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                 )
             ),
-        ) );
+        ));
 
         $expected = new SchemaDiff();
         $expected->fromSchema = $schema1;
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ) );
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
     public function testCompareSame2()
     {
-        $schema1 = new Schema( array(
+        $schema1 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 )
             ),
-        ) );
-        $schema2 = new Schema( array(
+        ));
+        $schema2 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                 )
             ),
-        ) );
+        ));
 
         $expected = new SchemaDiff();
         $expected->fromSchema = $schema1;
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ) );
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
     public function testCompareMissingTable()
     {
         $schemaConfig = new \Doctrine\DBAL\Schema\SchemaConfig;
-        $table = new Table('bugdb', array ('integerfield1' => new Column('integerfield1', Type::getType('integer'))));
+        $table = new Table('bugdb', array('integerfield1' => new Column('integerfield1', Type::getType('integer'))));
         $table->setSchemaConfig($schemaConfig);
 
-        $schema1 = new Schema( array($table), array(), $schemaConfig );
-        $schema2 = new Schema( array(),       array(), $schemaConfig );
+        $schema1 = new Schema(array($table), array(), $schemaConfig);
+        $schema2 = new Schema(array(), array(), $schemaConfig);
 
-        $expected = new SchemaDiff( array(), array(), array('bugdb' => $table), $schema1 );
+        $expected = new SchemaDiff(array(), array(), array('bugdb' => $table), $schema1);
 
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ) );
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
     public function testCompareNewTable()
     {
         $schemaConfig = new \Doctrine\DBAL\Schema\SchemaConfig;
-        $table = new Table('bugdb', array ('integerfield1' => new Column('integerfield1', Type::getType('integer'))));
+        $table = new Table('bugdb', array('integerfield1' => new Column('integerfield1', Type::getType('integer'))));
         $table->setSchemaConfig($schemaConfig);
 
-        $schema1 = new Schema( array(),       array(), $schemaConfig );
-        $schema2 = new Schema( array($table), array(), $schemaConfig );
+        $schema1 = new Schema(array(), array(), $schemaConfig);
+        $schema2 = new Schema(array($table), array(), $schemaConfig);
 
-        $expected = new SchemaDiff( array('bugdb' => $table), array(), array(), $schema1 );
+        $expected = new SchemaDiff(array('bugdb' => $table), array(), array(), $schema1);
 
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ) );
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
     public function testCompareOnlyAutoincrementChanged()
@@ -133,26 +133,26 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
     public function testCompareMissingField()
     {
         $missingColumn = new Column('integerfield1', Type::getType('integer'));
-        $schema1 = new Schema( array(
+        $schema1 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => $missingColumn,
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 )
             ),
-        ) );
-        $schema2 = new Schema( array(
+        ));
+        $schema2 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 )
             ),
-        ) );
+        ));
 
-        $expected = new SchemaDiff ( array(),
-            array (
-                'bugdb' => new TableDiff( 'bugdb', array(), array(),
-                    array (
+        $expected = new SchemaDiff (array(),
+            array(
+                'bugdb' => new TableDiff('bugdb', array(), array(),
+                    array(
                         'integerfield1' => $missingColumn,
                     )
                 )
@@ -161,31 +161,31 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $expected->fromSchema = $schema1;
         $expected->changedTables['bugdb']->fromTable = $schema1->getTable('bugdb');
 
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ) );
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
     public function testCompareNewField()
     {
-        $schema1 = new Schema( array(
+        $schema1 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                 )
             ),
-        ) );
-        $schema2 = new Schema( array(
+        ));
+        $schema2 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 )
             ),
-        ) );
+        ));
 
-        $expected = new SchemaDiff ( array(),
-            array (
+        $expected = new SchemaDiff (array(),
+            array(
                 'bugdb' => new TableDiff ('bugdb',
-                    array (
+                    array(
                         'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                     )
                 ),
@@ -194,7 +194,7 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $expected->fromSchema = $schema1;
         $expected->changedTables['bugdb']->fromTable = $schema1->getTable('bugdb');
 
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ) );
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
     public function testCompareChangedColumns_ChangeType()
@@ -245,13 +245,13 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testCompareRemovedIndex()
     {
-        $schema1 = new Schema( array(
+        $schema1 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 ),
-                array (
+                array(
                     'primary' => new Index('primary',
                         array(
                             'integerfield1'
@@ -260,67 +260,20 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
-        ) );
-        $schema2 = new Schema( array(
+        ));
+        $schema2 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 )
             ),
-        ) );
+        ));
 
-        $expected = new SchemaDiff ( array(),
-            array (
-                'bugdb' => new TableDiff( 'bugdb', array(), array(), array(), array(), array(),
-                    array (
-                        'primary' => new Index('primary',
-                        array(
-                            'integerfield1'
-                        ),
-                        true
-                    )
-                    )
-                ),
-            )
-        );
-        $expected->fromSchema = $schema1;
-        $expected->changedTables['bugdb']->fromTable = $schema1->getTable('bugdb');
-
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ) );
-    }
-
-    public function testCompareNewIndex()
-    {
-        $schema1 = new Schema( array(
-            'bugdb' => new Table('bugdb',
-                array (
-                    'integerfield1' => new Column('integerfield1', Type::getType('integer')),
-                    'integerfield2' => new Column('integerfield2', Type::getType('integer')),
-                )
-            ),
-        ) );
-        $schema2 = new Schema( array(
-            'bugdb' => new Table('bugdb',
-                array (
-                    'integerfield1' => new Column('integerfield1', Type::getType('integer')),
-                    'integerfield2' => new Column('integerfield2', Type::getType('integer')),
-                ),
-                array (
-                    'primary' => new Index('primary',
-                        array(
-                            'integerfield1'
-                        ),
-                        true
-                    )
-                )
-            ),
-        ) );
-
-        $expected = new SchemaDiff ( array(),
-            array (
-                'bugdb' => new TableDiff( 'bugdb', array(), array(), array(),
-                    array (
+        $expected = new SchemaDiff (array(),
+            array(
+                'bugdb' => new TableDiff('bugdb', array(), array(), array(), array(), array(),
+                    array(
                         'primary' => new Index('primary',
                             array(
                                 'integerfield1'
@@ -334,18 +287,26 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $expected->fromSchema = $schema1;
         $expected->changedTables['bugdb']->fromTable = $schema1->getTable('bugdb');
 
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ) );
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
-    public function testCompareChangedIndex()
+    public function testCompareNewIndex()
     {
-        $schema1 = new Schema( array(
+        $schema1 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
+                    'integerfield1' => new Column('integerfield1', Type::getType('integer')),
+                    'integerfield2' => new Column('integerfield2', Type::getType('integer')),
+                )
+            ),
+        ));
+        $schema2 = new Schema(array(
+            'bugdb' => new Table('bugdb',
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 ),
-                array (
+                array(
                     'primary' => new Index('primary',
                         array(
                             'integerfield1'
@@ -354,26 +315,65 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
                     )
                 )
             ),
-        ) );
-        $schema2 = new Schema( array(
+        ));
+
+        $expected = new SchemaDiff (array(),
+            array(
+                'bugdb' => new TableDiff('bugdb', array(), array(), array(),
+                    array(
+                        'primary' => new Index('primary',
+                            array(
+                                'integerfield1'
+                            ),
+                            true
+                        )
+                    )
+                ),
+            )
+        );
+        $expected->fromSchema = $schema1;
+        $expected->changedTables['bugdb']->fromTable = $schema1->getTable('bugdb');
+
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
+    }
+
+    public function testCompareChangedIndex()
+    {
+        $schema1 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 ),
-                array (
+                array(
+                    'primary' => new Index('primary',
+                        array(
+                            'integerfield1'
+                        ),
+                        true
+                    )
+                )
+            ),
+        ));
+        $schema2 = new Schema(array(
+            'bugdb' => new Table('bugdb',
+                array(
+                    'integerfield1' => new Column('integerfield1', Type::getType('integer')),
+                    'integerfield2' => new Column('integerfield2', Type::getType('integer')),
+                ),
+                array(
                     'primary' => new Index('primary',
                         array('integerfield1', 'integerfield2'),
                         true
                     )
                 )
             ),
-        ) );
+        ));
 
-        $expected = new SchemaDiff ( array(),
-            array (
-                'bugdb' => new TableDiff( 'bugdb', array(), array(), array(), array(),
-                    array (
+        $expected = new SchemaDiff (array(),
+            array(
+                'bugdb' => new TableDiff('bugdb', array(), array(), array(), array(),
+                    array(
                         'primary' => new Index('primary',
                             array(
                                 'integerfield1',
@@ -388,38 +388,38 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $expected->fromSchema = $schema1;
         $expected->changedTables['bugdb']->fromTable = $schema1->getTable('bugdb');
 
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ));
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
     public function testCompareChangedIndexFieldPositions()
     {
-        $schema1 = new Schema( array(
+        $schema1 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 ),
-                array (
+                array(
                     'primary' => new Index('primary', array('integerfield1', 'integerfield2'), true)
                 )
             ),
-        ) );
-        $schema2 = new Schema( array(
+        ));
+        $schema2 = new Schema(array(
             'bugdb' => new Table('bugdb',
-                array (
+                array(
                     'integerfield1' => new Column('integerfield1', Type::getType('integer')),
                     'integerfield2' => new Column('integerfield2', Type::getType('integer')),
                 ),
-                array (
+                array(
                     'primary' => new Index('primary', array('integerfield2', 'integerfield1'), true)
                 )
             ),
-        ) );
+        ));
 
-        $expected = new SchemaDiff ( array(),
-            array (
+        $expected = new SchemaDiff (array(),
+            array(
                 'bugdb' => new TableDiff('bugdb', array(), array(), array(), array(),
-                    array (
+                    array(
                         'primary' => new Index('primary', array('integerfield2', 'integerfield1'), true)
                     )
                 ),
@@ -428,7 +428,7 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $expected->fromSchema = $schema1;
         $expected->changedTables['bugdb']->fromTable = $schema1->getTable('bugdb');
 
-        $this->assertEquals($expected, Comparator::compareSchemas( $schema1, $schema2 ));
+        $this->assertEquals($expected, Comparator::compareSchemas($schema1, $schema2));
     }
 
     public function testCompareSequences()
@@ -764,7 +764,7 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $c = new \Doctrine\DBAL\Schema\Comparator;
         $diff = $c->compare($schema, $schemaNew);
 
-        $this->assertSame($diff->changedSequences[0] , $schemaNew->getSequence('baz'));
+        $this->assertSame($diff->changedSequences[0], $schemaNew->getSequence('baz'));
     }
 
     /**
@@ -792,7 +792,7 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
         $oldSchema = new Schema(array(), array(), $config);
         $oldSchema->createTable('bar');
 
-        $newSchema= new Schema(array(), array(), $config);
+        $newSchema = new Schema(array(), array(), $config);
         $newSchema->createTable('foo.bar');
 
         $expected = new SchemaDiff();
@@ -933,7 +933,7 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
      * @param int $changeTableCount
      * @param int $removeTableCount
      */
-    public function assertSchemaTableChangeCount($diff, $newTableCount=0, $changeTableCount=0, $removeTableCount=0)
+    public function assertSchemaTableChangeCount($diff, $newTableCount = 0, $changeTableCount = 0, $removeTableCount = 0)
     {
         $this->assertEquals($newTableCount, count($diff->newTables));
         $this->assertEquals($changeTableCount, count($diff->changedTables));
@@ -946,7 +946,7 @@ class ComparatorTest extends \PHPUnit_Framework_TestCase
      * @param int $changeSequenceCount
      * @param int $changeSequenceCount
      */
-    public function assertSchemaSequenceChangeCount($diff, $newSequenceCount=0, $changeSequenceCount=0, $removeSequenceCount=0)
+    public function assertSchemaSequenceChangeCount($diff, $newSequenceCount = 0, $changeSequenceCount = 0, $removeSequenceCount = 0)
     {
         $this->assertEquals($newSequenceCount, count($diff->newSequences), "Expected number of new sequences is wrong.");
         $this->assertEquals($changeSequenceCount, count($diff->changedSequences), "Expected number of changed sequences is wrong.");

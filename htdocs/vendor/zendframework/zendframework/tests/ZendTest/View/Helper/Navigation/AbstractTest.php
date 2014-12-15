@@ -110,12 +110,12 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         // setup service manager
         $smConfig = array(
-            'modules'                 => array(),
+            'modules' => array(),
             'module_listener_options' => array(
                 'config_cache_enabled' => false,
-                'cache_dir'            => 'data/cache',
-                'module_paths'         => array(),
-                'extra_config'         => array(
+                'cache_dir' => 'data/cache',
+                'module_paths' => array(),
+                'extra_config' => array(
                     'service_manager' => array(
                         'factories' => array(
                             'Config' => function () use ($config) {
@@ -143,13 +143,14 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $app = $this->serviceManager->get('Application');
         $app->getMvcEvent()->setRouteMatch(new RouteMatch(array(
             'controller' => 'post',
-            'action'     => 'view',
-            'id'         => '1337',
+            'action' => 'view',
+            'id' => '1337',
         )));
     }
 
     /**
      * Returns the contens of the expected $file
+     *
      * @param  string $file
      * @return string
      */
@@ -195,17 +196,18 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
-            'Page 1'       => 'Side 1',
-            'Page 1.1'     => 'Side 1.1',
-            'Page 2'       => 'Side 2',
-            'Page 2.3'     => 'Side 2.3',
+            'Page 1' => 'Side 1',
+            'Page 1.1' => 'Side 1.1',
+            'Page 2' => 'Side 2',
+            'Page 2.3' => 'Side 2.3',
             'Page 2.3.3.1' => 'Side 2.3.3.1',
-            'Home'         => 'Hjem',
-            'Go home'      => 'Gå hjem'
+            'Home' => 'Hjem',
+            'Go home' => 'Gå hjem'
         );
         $translator = new Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
+
         return $translator;
     }
 
@@ -218,21 +220,21 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $loader1 = new TestAsset\ArrayTranslator();
         $loader1->translations = array(
-            'Page 1'       => 'TextDomain1 1',
-            'Page 1.1'     => 'TextDomain1 1.1',
-            'Page 2'       => 'TextDomain1 2',
-            'Page 2.3'     => 'TextDomain1 2.3',
-            'Page 2.3.3'   => 'TextDomain1 2.3.3',
+            'Page 1' => 'TextDomain1 1',
+            'Page 1.1' => 'TextDomain1 1.1',
+            'Page 2' => 'TextDomain1 2',
+            'Page 2.3' => 'TextDomain1 2.3',
+            'Page 2.3.3' => 'TextDomain1 2.3.3',
             'Page 2.3.3.1' => 'TextDomain1 2.3.3.1',
         );
 
         $loader2 = new TestAsset\ArrayTranslator();
         $loader2->translations = array(
-            'Page 1'       => 'TextDomain2 1',
-            'Page 1.1'     => 'TextDomain2 1.1',
-            'Page 2'       => 'TextDomain2 2',
-            'Page 2.3'     => 'TextDomain2 2.3',
-            'Page 2.3.3'   => 'TextDomain2 2.3.3',
+            'Page 1' => 'TextDomain2 1',
+            'Page 1.1' => 'TextDomain2 1.1',
+            'Page 2' => 'TextDomain2 2',
+            'Page 2.3' => 'TextDomain2 2.3',
+            'Page 2.3.3' => 'TextDomain2 2.3.3',
             'Page 2.3.3.1' => 'TextDomain2 2.3.3.1',
         );
 
@@ -241,6 +243,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $translator->getPluginManager()->setService('default2', $loader2);
         $translator->addTranslationFile('default1', null, 'ZendTest_1');
         $translator->addTranslationFile('default2', null, 'ZendTest_2');
+
         return $translator;
     }
 }

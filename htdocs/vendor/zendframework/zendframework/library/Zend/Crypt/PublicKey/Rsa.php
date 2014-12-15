@@ -18,9 +18,9 @@ use Zend\Stdlib\ArrayUtils;
  */
 class Rsa
 {
-    const MODE_AUTO   = 1;
+    const MODE_AUTO = 1;
     const MODE_BASE64 = 2;
-    const MODE_RAW    = 3;
+    const MODE_RAW = 3;
 
     /**
      * @var RsaOptions
@@ -121,6 +121,7 @@ class Rsa
     public function setOptions(RsaOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -145,13 +146,14 @@ class Rsa
         while (false !== ($error = openssl_error_string())) {
             $message .= $error . "\n";
         }
+
         return trim($message);
     }
 
     /**
      * Sign with private key
      *
-     * @param  string     $data
+     * @param  string $data
      * @param  Rsa\PrivateKey $privateKey
      * @return string
      * @throws Rsa\Exception\RuntimeException
@@ -193,7 +195,7 @@ class Rsa
      * @param  string $data
      * @param  string $signature
      * @param  null|Rsa\PublicKey $publicKey
-     * @param  int                $mode Input encoding
+     * @param  int $mode Input encoding
      * @return bool
      * @throws Rsa\Exception\RuntimeException
      * @see Rsa::MODE_AUTO
@@ -205,7 +207,8 @@ class Rsa
         $signature,
         Rsa\PublicKey $publicKey = null,
         $mode = self::MODE_AUTO
-    ) {
+    )
+    {
         if (null === $publicKey) {
             $publicKey = $this->options->getPublicKey();
         }
@@ -244,7 +247,7 @@ class Rsa
     /**
      * Encrypt with private/public key
      *
-     * @param  string          $data
+     * @param  string $data
      * @param  Rsa\AbstractKey $key
      * @return string
      * @throws Rsa\Exception\InvalidArgumentException
@@ -276,9 +279,9 @@ class Rsa
      *  - MODE_BASE64: Decode $data using base64 algorithm.
      *  - MODE_RAW: $data is not encoded.
      *
-     * @param  string          $data
+     * @param  string $data
      * @param  Rsa\AbstractKey $key
-     * @param  int             $mode Input encoding
+     * @param  int $mode Input encoding
      * @return string
      * @throws Rsa\Exception\InvalidArgumentException
      * @see Rsa::MODE_AUTO
@@ -289,7 +292,8 @@ class Rsa
         $data,
         Rsa\AbstractKey $key = null,
         $mode = self::MODE_AUTO
-    ) {
+    )
+    {
         if (null === $key) {
             $key = $this->options->getPrivateKey();
         }
@@ -319,6 +323,7 @@ class Rsa
 
     /**
      * Generate new private/public key pair
+     *
      * @see RsaOptions::generateKeys()
      *
      * @param  array $opensslConfig
@@ -328,6 +333,7 @@ class Rsa
     public function generateKeys(array $opensslConfig = array())
     {
         $this->options->generateKeys($opensslConfig);
+
         return $this;
     }
 }

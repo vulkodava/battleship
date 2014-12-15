@@ -38,10 +38,10 @@ class DDC371Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->flush();
         $this->_em->clear();
 
-        $children = $this->_em->createQuery('select c,p from '.__NAMESPACE__.'\DDC371Child c '
-                . 'left join c.parent p where c.id = 1 and p.id = 1')
-                ->setHint(Query::HINT_REFRESH, true)
-                ->getResult();
+        $children = $this->_em->createQuery('select c,p from ' . __NAMESPACE__ . '\DDC371Child c '
+            . 'left join c.parent p where c.id = 1 and p.id = 1')
+            ->setHint(Query::HINT_REFRESH, true)
+            ->getResult();
 
         $this->assertEquals(1, count($children));
         $this->assertNotInstanceOf('Doctrine\ORM\Proxy\Proxy', $children[0]->parent);
@@ -51,7 +51,8 @@ class DDC371Test extends \Doctrine\Tests\OrmFunctionalTestCase
 }
 
 /** @Entity */
-class DDC371Child {
+class DDC371Child
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     private $id;
     /** @Column(type="string") */
@@ -61,7 +62,8 @@ class DDC371Child {
 }
 
 /** @Entity */
-class DDC371Parent {
+class DDC371Parent
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     private $id;
     /** @Column(type="string") */

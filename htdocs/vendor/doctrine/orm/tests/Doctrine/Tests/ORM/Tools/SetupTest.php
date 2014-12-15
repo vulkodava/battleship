@@ -24,14 +24,14 @@ class SetupTest extends \Doctrine\Tests\OrmTestCase
 
     public function tearDown()
     {
-        if ( ! $this->originalIncludePath) {
+        if (!$this->originalIncludePath) {
             return;
         }
 
         set_include_path($this->originalIncludePath);
         $loaders = spl_autoload_functions();
         for ($i = 0; $i < count($loaders); $i++) {
-            if ($i > $this->originalAutoloaderCount+1) {
+            if ($i > $this->originalAutoloaderCount + 1) {
                 spl_autoload_unregister($loaders[$i]);
             }
         }

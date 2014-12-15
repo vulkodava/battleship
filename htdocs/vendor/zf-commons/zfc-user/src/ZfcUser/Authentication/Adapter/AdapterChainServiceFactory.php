@@ -47,6 +47,7 @@ class AdapterChainServiceFactory implements FactoryInterface
     public function setOptions(ModuleOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 

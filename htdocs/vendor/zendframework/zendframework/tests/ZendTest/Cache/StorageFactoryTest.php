@@ -144,11 +144,11 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $factory = array(
             'adapter' => array(
-                 'name' => 'Memory',
-                 'options' => array(
-                     'ttl' => 123,
-                     'namespace' => 'willBeOverwritten'
-                 ),
+                'name' => 'Memory',
+                'options' => array(
+                    'ttl' => 123,
+                    'namespace' => 'willBeOverwritten'
+                ),
             ),
             'plugins' => array(
                 // plugin as a simple string entry
@@ -161,9 +161,9 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
                 // plugin with full definition
                 array(
-                    'name'     => 'IgnoreUserAbort',
+                    'name' => 'IgnoreUserAbort',
                     'priority' => 100,
-                    'options'  => array(
+                    'options' => array(
                         'exit_on_abort' => false,
                     ),
                 ),

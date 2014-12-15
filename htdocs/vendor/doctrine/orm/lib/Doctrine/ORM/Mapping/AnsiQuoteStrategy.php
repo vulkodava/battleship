@@ -25,7 +25,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 /**
  * ANSI compliant quote strategy, this strategy does not apply any quote.
  * To use this strategy all mapped tables and columns should be ANSI compliant.
- * 
+ *
  * @since   2.5
  * @author  Fabio B. Silva <fabio.bat.silva@gmail.com>
  */

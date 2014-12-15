@@ -49,9 +49,9 @@ class ColumnDiff
     public $fromColumn;
 
     /**
-     * @param string                       $oldColumnName
+     * @param string $oldColumnName
      * @param \Doctrine\DBAL\Schema\Column $column
-     * @param array                        $changedProperties
+     * @param array $changedProperties
      * @param \Doctrine\DBAL\Schema\Column $fromColumn
      */
     public function __construct($oldColumnName, Column $column, array $changedProperties = array(), Column $fromColumn = null)

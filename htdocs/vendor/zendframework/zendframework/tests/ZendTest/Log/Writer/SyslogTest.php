@@ -57,9 +57,9 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
      */
     public function testFluentInterface()
     {
-        $writer   = new SyslogWriter();
+        $writer = new SyslogWriter();
         $instance = $writer->setFacility(LOG_USER)
-                           ->setApplicationName('my_app');
+            ->setApplicationName('my_app');
 
         $this->assertTrue($instance instanceof SyslogWriter);
     }
@@ -95,18 +95,18 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassApplicationNameViaConstructor()
     {
-        $writer   = new CustomSyslogWriter(array('application' => 'test_app'));
+        $writer = new CustomSyslogWriter(array('application' => 'test_app'));
         $this->assertEquals('test_app', $writer->getApplicationName());
     }
 
     public function testConstructWithOptions()
     {
         $formatter = new \Zend\Log\Formatter\Simple();
-        $filter    = new \Zend\Log\Filter\Mock();
+        $filter = new \Zend\Log\Filter\Mock();
         $writer = new CustomSyslogWriter(array(
-                'filters'   => $filter,
-                'formatter' => $formatter,
-                'application'  => 'test_app',
+            'filters' => $filter,
+            'formatter' => $formatter,
+            'application' => 'test_app',
         ));
         $this->assertEquals('test_app', $writer->getApplicationName());
         $this->assertAttributeEquals($formatter, 'formatter', $writer);
@@ -118,7 +118,7 @@ class SyslogTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultFormatter()
     {
-        $writer   = new CustomSyslogWriter(array('application' => 'test_app'));
+        $writer = new CustomSyslogWriter(array('application' => 'test_app'));
         $this->assertAttributeInstanceOf('Zend\Log\Formatter\Simple', 'formatter', $writer);
     }
 }

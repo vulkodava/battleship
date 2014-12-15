@@ -34,7 +34,7 @@ class EntityManagerFactory extends AbstractFactory
         /* @var $options \DoctrineORMModule\Options\EntityManager */
         $options = $this->getOptions($sl, 'entitymanager');
         $connection = $sl->get($options->getConnection());
-        $config     = $sl->get($options->getConfiguration());
+        $config = $sl->get($options->getConfiguration());
 
         return EntityManager::create($connection, $config);
     }

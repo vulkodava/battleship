@@ -11,7 +11,7 @@ namespace ZendTest\Json;
 
 use Zend\Json;
 
-error_reporting( E_ALL | E_STRICT ); // now required for each test suite
+error_reporting(E_ALL | E_STRICT); // now required for each test suite
 
 /**
  * Zend_JSON
@@ -460,36 +460,36 @@ EOT;
      * XML characteristic to be tested: XML containing invalid syntax.
      *
      */
-/*
-    public function testUsingXML7()
-    {
-        // Set the XML contents that will be tested here.
-        $xmlStringContents = <<<EOT
-This is an invalid XML file.
-Use this file to test the xml2json feature in the Zend_JSON class.
-Since it is an invalid XML file, an appropriate exception should be
-thrown by the Zend_Json::fromXml function.
-<?xml version="1.0"?>
-<invalidxml>
-        </code>
-    </listing>
-</invalidxml>
+    /*
+        public function testUsingXML7()
+        {
+            // Set the XML contents that will be tested here.
+            $xmlStringContents = <<<EOT
+    This is an invalid XML file.
+    Use this file to test the xml2json feature in the Zend_JSON class.
+    Since it is an invalid XML file, an appropriate exception should be
+    thrown by the Zend_Json::fromXml function.
+    <?xml version="1.0"?>
+    <invalidxml>
+            </code>
+        </listing>
+    </invalidxml>
 
-EOT;
+    EOT;
 
-        // There are not going to be any XML attributes in this test XML.
-        // Hence, set the flag to ignore XML attributes.
-        $ignoreXmlAttributes = true;
-        $jsonContents = "";
+            // There are not going to be any XML attributes in this test XML.
+            // Hence, set the flag to ignore XML attributes.
+            $ignoreXmlAttributes = true;
+            $jsonContents = "";
 
-        // Convert XML to JSON now.
-        // fromXml function simply takes a String containing XML contents as input.
-        $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
-    }
-*/
+            // Convert XML to JSON now.
+            // fromXml function simply takes a String containing XML contents as input.
+            $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
+        }
+    */
 
     /**
-     *  @group ZF-3257
+     * @group ZF-3257
      */
     public function testUsingXML8()
     {
@@ -525,7 +525,7 @@ EOT;
     }
 
     /**
-     * @group ZF-11385
+     * @group        ZF-11385
      * @expectedException Zend\Json\Exception\RecursionException
      * @dataProvider providerNestingDepthIsHandledProperly
      */
@@ -536,7 +536,7 @@ EOT;
     }
 
     /**
-     * @group ZF-11385
+     * @group        ZF-11385
      * @dataProvider providerNestingDepthIsHandledProperly
      */
     public function testNestingDepthIsHandledProperlyWhenNestingDepthDoesNotExceedMaximum($xmlStringContents)
@@ -550,6 +550,7 @@ EOT;
 
     /**
      * XML document provider for ZF-11385 tests
+     *
      * @return array
      */
     public static function providerNestingDepthIsHandledProperly()
@@ -592,6 +593,7 @@ EOT;
     <execution_time>0.0790269374847</execution_time>
 </response>
 EOT;
+
         return array(array($xmlStringContents));
     }
 }

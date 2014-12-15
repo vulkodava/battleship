@@ -72,6 +72,7 @@ class Step extends AbstractValidator
     public function setBaseValue($baseValue)
     {
         $this->baseValue = $baseValue;
+
         return $this;
     }
 
@@ -93,7 +94,8 @@ class Step extends AbstractValidator
      */
     public function setStep($step)
     {
-        $this->step = (float) $step;
+        $this->step = (float)$step;
+
         return $this;
     }
 
@@ -117,6 +119,7 @@ class Step extends AbstractValidator
     {
         if (!is_numeric($value)) {
             $this->error(self::INVALID);
+
             return false;
         }
 
@@ -126,6 +129,7 @@ class Step extends AbstractValidator
 
         if ($fmod !== 0.0 && $fmod !== $this->step) {
             $this->error(self::NOT_STEP);
+
             return false;
         }
 
@@ -146,7 +150,7 @@ class Step extends AbstractValidator
         }
 
         //find the maximum precision from both input params to give accurate results
-        $precision = strlen(substr($x, strpos($x, '.')+1)) + strlen(substr($y, strpos($y, '.')+1));
+        $precision = strlen(substr($x, strpos($x, '.') + 1)) + strlen(substr($y, strpos($y, '.') + 1));
 
         return round($x - $y * floor($x / $y), $precision);
     }

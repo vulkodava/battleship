@@ -19,9 +19,9 @@ class IntegrationTest extends TestCase
 {
     public function setUp()
     {
-        $this->plugins      = new PluginManager();
+        $this->plugins = new PluginManager();
         $this->sharedEvents = new SharedEventManager();
-        $this->services     = new ServiceManager();
+        $this->services = new ServiceManager();
         $this->services->setService('ControllerPluginManager', $this->plugins);
         $this->services->setService('SharedEventManager', $this->sharedEvents);
         $this->services->setService('Zend\ServiceManager\ServiceLocatorInterface', $this->services);
@@ -35,7 +35,7 @@ class IntegrationTest extends TestCase
         $this->controllers->setInvokableClass('first', 'ZendTest\Mvc\Controller\TestAsset\SampleController');
         $this->controllers->setInvokableClass('second', 'ZendTest\Mvc\Controller\TestAsset\SampleController');
 
-        $first  = $this->controllers->get('first');
+        $first = $this->controllers->get('first');
         $second = $this->controllers->get('second');
         $this->assertNotSame($first, $second);
 

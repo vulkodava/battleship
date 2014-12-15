@@ -1,6 +1,7 @@
 <?php
 
 namespace Doctrine\Tests\ORM\Functional;
+
 use Doctrine\Tests\Models\Navigation\NavCountry;
 use Doctrine\Tests\Models\Navigation\NavPointOfInterest;
 use Doctrine\Tests\Models\Navigation\NavTour;
@@ -76,13 +77,13 @@ class CompositePrimaryKeyTest extends \Doctrine\Tests\OrmFunctionalTestCase
     {
         $this->putGermanysBrandenburderTor();
 
-        $poi    = $this->_em->find('Doctrine\Tests\Models\Navigation\NavPointOfInterest', array('lat' => 100, 'long' => 200));
-        $photo  = new NavPhotos($poi, "asdf");
+        $poi = $this->_em->find('Doctrine\Tests\Models\Navigation\NavPointOfInterest', array('lat' => 100, 'long' => 200));
+        $photo = new NavPhotos($poi, "asdf");
         $this->_em->persist($photo);
         $this->_em->flush();
         $this->_em->clear();
 
-        $dql    = "SELECT IDENTITY(p.poi, 'long') AS long, IDENTITY(p.poi, 'lat') AS lat FROM Doctrine\Tests\Models\Navigation\NavPhotos p";
+        $dql = "SELECT IDENTITY(p.poi, 'long') AS long, IDENTITY(p.poi, 'lat') AS lat FROM Doctrine\Tests\Models\Navigation\NavPhotos p";
         $result = $this->_em->createQuery($dql)->getResult();
 
         $this->assertCount(1, $result);
@@ -106,7 +107,7 @@ class CompositePrimaryKeyTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->putTripAroundEurope();
 
         $dql = 'SELECT t, p, c FROM Doctrine\Tests\Models\Navigation\NavTour t ' .
-               'INNER JOIN t.pois p INNER JOIN p.country c';
+            'INNER JOIN t.pois p INNER JOIN p.country c';
         $tours = $this->_em->createQuery($dql)->getResult();
 
         $this->assertEquals(1, count($tours));
@@ -125,9 +126,9 @@ class CompositePrimaryKeyTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->putTripAroundEurope();
 
         $dql = 'SELECT t FROM Doctrine\Tests\Models\Navigation\NavTour t, Doctrine\Tests\Models\Navigation\NavPointOfInterest p ' .
-               'WHERE p MEMBER OF t.pois';
+            'WHERE p MEMBER OF t.pois';
         $tours = $this->_em->createQuery($dql)
-                           ->getResult();
+            ->getResult();
 
         $this->assertEquals(1, count($tours));
     }

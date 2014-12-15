@@ -48,9 +48,9 @@ class AggregateExpression extends Node
     public $isDistinct = false;
 
     /**
-     * @param string                                    $functionName
+     * @param string $functionName
      * @param PathExpression|SimpleArithmeticExpression $pathExpression
-     * @param bool                                      $isDistinct
+     * @param bool $isDistinct
      */
     public function __construct($functionName, $pathExpression, $isDistinct)
     {

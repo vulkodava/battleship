@@ -102,7 +102,7 @@ class Ean5Test extends TestCommon
         $this->object->setWithBorder(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Ean5_45678_border_instructions');
+            'Ean5_45678_border_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -112,7 +112,7 @@ class Ean5Test extends TestCommon
         $this->object->setOrientation(60);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Ean5_45678_oriented_instructions');
+            'Ean5_45678_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -123,7 +123,7 @@ class Ean5Test extends TestCommon
         $this->object->setWithBorder(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-                'Ean5_45678_border_oriented_instructions');
+            'Ean5_45678_border_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 

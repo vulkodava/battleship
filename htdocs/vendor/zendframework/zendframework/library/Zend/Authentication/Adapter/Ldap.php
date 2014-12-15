@@ -40,7 +40,7 @@ class Ldap extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array  $options    An array of arrays of Zend\Ldap\Ldap options
+     * @param  array $options     An array of arrays of Zend\Ldap\Ldap options
      * @param  string $identity   The username of the account being authenticated
      * @param  string $credential The password of the account being authenticated
      */
@@ -81,6 +81,7 @@ class Ldap extends AbstractAdapter
         if (array_key_exists('credential', $this->options)) {
             $this->options['password'] = $this->options['credential'];
         }
+
         return $this;
     }
 
@@ -192,6 +193,7 @@ class Ldap extends AbstractAdapter
         if (!$username) {
             $code = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
             $messages[0] = 'A username is required';
+
             return new AuthenticationResult($code, '', $messages);
         }
         if (!$password) {
@@ -200,6 +202,7 @@ class Ldap extends AbstractAdapter
              */
             $code = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
             $messages[0] = 'A password is required';
+
             return new AuthenticationResult($code, '', $messages);
         }
 
@@ -268,6 +271,7 @@ class Ldap extends AbstractAdapter
                         // rebinding with authenticated user
                         $ldap->bind($dn, $password);
                     }
+
                     return new AuthenticationResult(AuthenticationResult::SUCCESS, $canonicalName, $messages);
                 } else {
                     $messages[0] = 'Account is not a member of the specified group';
@@ -301,7 +305,7 @@ class Ldap extends AbstractAdapter
                     $line = $zle->getLine();
                     $messages[] = $zle->getFile() . "($line): " . $zle->getMessage();
                     $messages[] = preg_replace(
-                        '/\b'.preg_quote(substr($password, 0, 15), '/').'\b/',
+                        '/\b' . preg_quote(substr($password, 0, 15), '/') . '\b/',
                         '*****',
                         $zle->getTraceAsString()
                     );
@@ -321,19 +325,19 @@ class Ldap extends AbstractAdapter
      * Sets the LDAP specific options on the Zend\Ldap\Ldap instance
      *
      * @param  ZendLdap\Ldap $ldap
-     * @param  array         $options
+     * @param  array $options
      * @return array of auth-adapter specific options
      */
     protected function prepareOptions(ZendLdap\Ldap $ldap, array $options)
     {
         $adapterOptions = array(
-            'group'       => null,
-            'groupDn'     => $ldap->getBaseDn(),
-            'groupScope'  => ZendLdap\Ldap::SEARCH_SCOPE_SUB,
-            'groupAttr'   => 'cn',
+            'group' => null,
+            'groupDn' => $ldap->getBaseDn(),
+            'groupScope' => ZendLdap\Ldap::SEARCH_SCOPE_SUB,
+            'groupAttr' => 'cn',
             'groupFilter' => 'objectClass=groupOfUniqueNames',
-            'memberAttr'  => 'uniqueMember',
-            'memberIsDn'  => true
+            'memberAttr' => 'uniqueMember',
+            'memberIsDn' => true
         );
         foreach ($adapterOptions as $key => $value) {
             if (array_key_exists($key, $options)) {
@@ -341,7 +345,7 @@ class Ldap extends AbstractAdapter
                 unset($options[$key]);
                 switch ($key) {
                     case 'groupScope':
-                        $value = (int) $value;
+                        $value = (int)$value;
                         if (in_array(
                             $value,
                             array(
@@ -356,7 +360,7 @@ class Ldap extends AbstractAdapter
                         break;
                     case 'memberIsDn':
                         $adapterOptions[$key] = ($value === true ||
-                                $value === '1' || strcasecmp($value, 'true') == 0);
+                            $value === '1' || strcasecmp($value, 'true') == 0);
                         break;
                     default:
                         $adapterOptions[$key] = trim($value);
@@ -365,6 +369,7 @@ class Ldap extends AbstractAdapter
             }
         }
         $ldap->setOptions($options);
+
         return $adapterOptions;
     }
 
@@ -372,9 +377,9 @@ class Ldap extends AbstractAdapter
      * Checks the group membership of the bound user
      *
      * @param  ZendLdap\Ldap $ldap
-     * @param  string        $canonicalName
-     * @param  string        $dn
-     * @param  array         $adapterOptions
+     * @param  string $canonicalName
+     * @param  string $dn
+     * @param  array $adapterOptions
      * @return string|true
      */
     protected function checkGroupMembership(ZendLdap\Ldap $ldap, $canonicalName, $dn, array $adapterOptions)
@@ -389,9 +394,9 @@ class Ldap extends AbstractAdapter
             $user = $dn;
         }
 
-        $groupName   = ZendLdap\Filter::equals($adapterOptions['groupAttr'], $adapterOptions['group']);
-        $membership  = ZendLdap\Filter::equals($adapterOptions['memberAttr'], $user);
-        $group       = ZendLdap\Filter::andFilter($groupName, $membership);
+        $groupName = ZendLdap\Filter::equals($adapterOptions['groupAttr'], $adapterOptions['group']);
+        $membership = ZendLdap\Filter::equals($adapterOptions['memberAttr'], $user);
+        $group = ZendLdap\Filter::andFilter($groupName, $membership);
         $groupFilter = $adapterOptions['groupFilter'];
         if (!empty($groupFilter)) {
             $group = $group->addAnd($groupFilter);
@@ -425,7 +430,7 @@ class Ldap extends AbstractAdapter
         $returnObject = new stdClass();
 
         $returnAttribs = array_map('strtolower', $returnAttribs);
-        $omitAttribs   = array_map('strtolower', $omitAttribs);
+        $omitAttribs = array_map('strtolower', $omitAttribs);
         $returnAttribs = array_diff($returnAttribs, $omitAttribs);
 
         $entry = $this->getLdap()->getEntry($this->authenticatedDn, $returnAttribs, true);
@@ -440,6 +445,7 @@ class Ldap extends AbstractAdapter
                 $returnObject->$attr = $value;
             }
         }
+
         return $returnObject;
     }
 
@@ -461,6 +467,7 @@ class Ldap extends AbstractAdapter
             }
             $str .= $key . '=' . $val;
         }
+
         return $str;
     }
 }

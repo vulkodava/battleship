@@ -62,7 +62,7 @@ class Configuration
     public function getSQLLogger()
     {
         return isset($this->_attributes['sqlLogger']) ?
-                $this->_attributes['sqlLogger'] : null;
+            $this->_attributes['sqlLogger'] : null;
     }
 
     /**
@@ -73,7 +73,7 @@ class Configuration
     public function getResultCacheImpl()
     {
         return isset($this->_attributes['resultCacheImpl']) ?
-                $this->_attributes['resultCacheImpl'] : null;
+            $this->_attributes['resultCacheImpl'] : null;
     }
 
     /**

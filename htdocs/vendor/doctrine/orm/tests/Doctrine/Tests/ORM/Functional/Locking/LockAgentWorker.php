@@ -18,7 +18,7 @@ class LockAgentWorker
         $worker->addFunction("dqlWithLock", array($lockAgent, "dqlWithLock"));
         $worker->addFunction('lock', array($lockAgent, 'lock'));
 
-        while($worker->work()) {
+        while ($worker->work()) {
             if ($worker->returnCode() != GEARMAN_SUCCESS) {
                 echo "return_code: " . $worker->returnCode() . "\n";
                 break;
@@ -45,14 +45,14 @@ class LockAgentWorker
 
     public function findWithLock($job)
     {
-        return $this->process($job, function($fixture, $em) {
+        return $this->process($job, function ($fixture, $em) {
             $entity = $em->find($fixture['entityName'], $fixture['entityId'], $fixture['lockMode']);
         });
     }
 
     public function dqlWithLock($job)
     {
-        return $this->process($job, function($fixture, $em) {
+        return $this->process($job, function ($fixture, $em) {
             /* @var $query Doctrine\ORM\Query */
             $query = $em->createQuery($fixture['dql']);
             $query->setLockMode($fixture['lockMode']);
@@ -63,7 +63,7 @@ class LockAgentWorker
 
     public function lock($job)
     {
-        return $this->process($job, function($fixture, $em) {
+        return $this->process($job, function ($fixture, $em) {
             $entity = $em->find($fixture['entityName'], $fixture['entityId']);
             $em->lock($entity, $fixture['lockMode']);
         });
@@ -85,6 +85,7 @@ class LockAgentWorker
         if (!isset($workload['fixture'])) {
             throw new \InvalidArgumentException("Missing Fixture parameters");
         }
+
         return $workload['fixture'];
     }
 

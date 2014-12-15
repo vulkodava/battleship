@@ -99,7 +99,7 @@ class OutputFormatterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             "(\033[32mz>=2.0,<a2.3\033[39m)",
-            $formatter->format('(<info>'.$formatter->escape('z>=2.0,<a2.3').'</info>)')
+            $formatter->format('(<info>' . $formatter->escape('z>=2.0,<a2.3') . '</info>)')
         );
     }
 
@@ -158,7 +158,7 @@ class OutputFormatterTest extends \PHPUnit_Framework_TestCase
     {
         $formatter = new OutputFormatter(true);
         $long = str_repeat("\\", 14000);
-        $this->assertEquals("\033[37;41msome error\033[39;49m".$long, $formatter->format('<error>some error</error>'.$long));
+        $this->assertEquals("\033[37;41msome error\033[39;49m" . $long, $formatter->format('<error>some error</error>' . $long));
     }
 
     public function testNotDecoratedFormatter()
@@ -211,7 +211,7 @@ EOF
 <info>
 some text</info>
 EOF
-        ));
+            ));
 
         $this->assertEquals(<<<EOF
 \033[32msome text
@@ -221,7 +221,7 @@ EOF
 <info>some text
 </info>
 EOF
-        ));
+            ));
 
         $this->assertEquals(<<<EOF
 \033[32m
@@ -233,7 +233,7 @@ EOF
 some text
 </info>
 EOF
-        ));
+            ));
 
         $this->assertEquals(<<<EOF
 \033[32m
@@ -247,6 +247,6 @@ some text
 more text
 </info>
 EOF
-        ));
+            ));
     }
 }

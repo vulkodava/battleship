@@ -56,12 +56,12 @@ abstract class AbstractSchemaManager
     /**
      * Constructor. Accepts the Connection instance to manage the schema for.
      *
-     * @param \Doctrine\DBAL\Connection                      $conn
+     * @param \Doctrine\DBAL\Connection $conn
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform|null $platform
      */
     public function __construct(\Doctrine\DBAL\Connection $conn, AbstractPlatform $platform = null)
     {
-        $this->_conn     = $conn;
+        $this->_conn = $conn;
         $this->_platform = $platform ?: $this->_conn->getDatabasePlatform();
     }
 
@@ -144,14 +144,14 @@ abstract class AbstractSchemaManager
      * of a table. We're a RDBMS specifies more details these are held
      * in the platformDetails array.
      *
-     * @param string      $table    The name of the table.
+     * @param string $table The name of the table.
      * @param string|null $database
      *
      * @return \Doctrine\DBAL\Schema\Column[]
      */
     public function listTableColumns($table, $database = null)
     {
-        if ( ! $database) {
+        if (!$database) {
             $database = $this->_conn->getDatabase();
         }
 
@@ -220,13 +220,14 @@ abstract class AbstractSchemaManager
     protected function filterAssetNames($assetNames)
     {
         $filterExpr = $this->getFilterSchemaAssetsExpression();
-        if ( ! $filterExpr) {
+        if (!$filterExpr) {
             return $assetNames;
         }
 
-        return array_values (
+        return array_values(
             array_filter($assetNames, function ($assetName) use ($filterExpr) {
                 $assetName = ($assetName instanceof AbstractAsset) ? $assetName->getName() : $assetName;
+
                 return preg_match($filterExpr, $assetName);
             })
         );
@@ -291,7 +292,7 @@ abstract class AbstractSchemaManager
     /**
      * Lists the foreign keys for the given table.
      *
-     * @param string      $table    The name of the table.
+     * @param string $table The name of the table.
      * @param string|null $database
      *
      * @return \Doctrine\DBAL\Schema\ForeignKeyConstraint[]
@@ -345,7 +346,7 @@ abstract class AbstractSchemaManager
      */
     public function dropIndex($index, $table)
     {
-        if($index instanceof Index) {
+        if ($index instanceof Index) {
             $index = $index->getQuotedName($this->_platform);
         }
 
@@ -355,8 +356,8 @@ abstract class AbstractSchemaManager
     /**
      * Drops the constraint from the given table.
      *
-     * @param \Doctrine\DBAL\Schema\Constraint   $constraint
-     * @param \Doctrine\DBAL\Schema\Table|string $table      The name of the table.
+     * @param \Doctrine\DBAL\Schema\Constraint $constraint
+     * @param \Doctrine\DBAL\Schema\Table|string $table The name of the table.
      *
      * @return void
      */
@@ -369,7 +370,7 @@ abstract class AbstractSchemaManager
      * Drops a foreign key from a table.
      *
      * @param \Doctrine\DBAL\Schema\ForeignKeyConstraint|string $foreignKey The name of the foreign key.
-     * @param \Doctrine\DBAL\Schema\Table|string                $table      The name of the table with the foreign key.
+     * @param \Doctrine\DBAL\Schema\Table|string $table                     The name of the table with the foreign key.
      *
      * @return void
      */
@@ -425,7 +426,7 @@ abstract class AbstractSchemaManager
      */
     public function createTable(Table $table)
     {
-        $createFlags = AbstractPlatform::CREATE_INDEXES|AbstractPlatform::CREATE_FOREIGNKEYS;
+        $createFlags = AbstractPlatform::CREATE_INDEXES | AbstractPlatform::CREATE_FOREIGNKEYS;
         $this->_execSql($this->_platform->getCreateTableSQL($table, $createFlags));
     }
 
@@ -446,7 +447,7 @@ abstract class AbstractSchemaManager
     /**
      * Creates a constraint on a table.
      *
-     * @param \Doctrine\DBAL\Schema\Constraint   $constraint
+     * @param \Doctrine\DBAL\Schema\Constraint $constraint
      * @param \Doctrine\DBAL\Schema\Table|string $table
      *
      * @return void
@@ -459,7 +460,7 @@ abstract class AbstractSchemaManager
     /**
      * Creates a new index on a table.
      *
-     * @param \Doctrine\DBAL\Schema\Index        $index
+     * @param \Doctrine\DBAL\Schema\Index $index
      * @param \Doctrine\DBAL\Schema\Table|string $table The name of the table on which the index is to be created.
      *
      * @return void
@@ -473,7 +474,8 @@ abstract class AbstractSchemaManager
      * Creates a new foreign key.
      *
      * @param \Doctrine\DBAL\Schema\ForeignKeyConstraint $foreignKey The ForeignKey instance.
-     * @param \Doctrine\DBAL\Schema\Table|string         $table      The name of the table on which the foreign key is to be created.
+     * @param \Doctrine\DBAL\Schema\Table|string $table              The name of the table on which the foreign key is
+     *                                                               to be created.
      *
      * @return void
      */
@@ -502,7 +504,7 @@ abstract class AbstractSchemaManager
      * @see dropConstraint()
      * @see createConstraint()
      *
-     * @param \Doctrine\DBAL\Schema\Constraint   $constraint
+     * @param \Doctrine\DBAL\Schema\Constraint $constraint
      * @param \Doctrine\DBAL\Schema\Table|string $table
      *
      * @return void
@@ -516,7 +518,7 @@ abstract class AbstractSchemaManager
     /**
      * Drops and creates a new index on a table.
      *
-     * @param \Doctrine\DBAL\Schema\Index        $index
+     * @param \Doctrine\DBAL\Schema\Index $index
      * @param \Doctrine\DBAL\Schema\Table|string $table The name of the table on which the index is to be created.
      *
      * @return void
@@ -530,8 +532,10 @@ abstract class AbstractSchemaManager
     /**
      * Drops and creates a new foreign key.
      *
-     * @param \Doctrine\DBAL\Schema\ForeignKeyConstraint $foreignKey An associative array that defines properties of the foreign key to be created.
-     * @param \Doctrine\DBAL\Schema\Table|string         $table      The name of the table on which the foreign key is to be created.
+     * @param \Doctrine\DBAL\Schema\ForeignKeyConstraint $foreignKey An associative array that defines properties of
+     *                                                               the foreign key to be created.
+     * @param \Doctrine\DBAL\Schema\Table|string $table              The name of the table on which the foreign key is
+     *                                                               to be created.
      *
      * @return void
      */
@@ -749,9 +753,9 @@ abstract class AbstractSchemaManager
      *
      * The name of the created column instance however is kept in its case.
      *
-     * @param string $table        The name of the table.
+     * @param string $table The name of the table.
      * @param string $database
-     * @param array  $tableColumns
+     * @param array $tableColumns
      *
      * @return array
      */
@@ -772,7 +776,7 @@ abstract class AbstractSchemaManager
                 $column = $eventArgs->getColumn();
             }
 
-            if ( ! $defaultPrevented) {
+            if (!$defaultPrevented) {
                 $column = $this->_getPortableTableColumnDefinition($tableColumn);
             }
 
@@ -797,22 +801,22 @@ abstract class AbstractSchemaManager
     /**
      * Aggregates and groups the index results according to the required data result.
      *
-     * @param array       $tableIndexRows
+     * @param array $tableIndexRows
      * @param string|null $tableName
      *
      * @return array
      */
-    protected function _getPortableTableIndexesList($tableIndexRows, $tableName=null)
+    protected function _getPortableTableIndexesList($tableIndexRows, $tableName = null)
     {
         $result = array();
-        foreach($tableIndexRows as $tableIndex) {
+        foreach ($tableIndexRows as $tableIndex) {
             $indexName = $keyName = $tableIndex['key_name'];
-            if($tableIndex['primary']) {
+            if ($tableIndex['primary']) {
                 $keyName = 'primary';
             }
             $keyName = strtolower($keyName);
 
-            if(!isset($result[$keyName])) {
+            if (!isset($result[$keyName])) {
                 $result[$keyName] = array(
                     'name' => $indexName,
                     'columns' => array($tableIndex['column_name']),
@@ -828,7 +832,7 @@ abstract class AbstractSchemaManager
         $eventManager = $this->_platform->getEventManager();
 
         $indexes = array();
-        foreach($result as $indexKey => $data) {
+        foreach ($result as $indexKey => $data) {
             $index = null;
             $defaultPrevented = false;
 
@@ -840,7 +844,7 @@ abstract class AbstractSchemaManager
                 $index = $eventArgs->getIndex();
             }
 
-            if ( ! $defaultPrevented) {
+            if (!$defaultPrevented) {
                 $index = new Index($data['name'], $data['columns'], $data['unique'], $data['primary'], $data['flags']);
             }
 
@@ -967,7 +971,7 @@ abstract class AbstractSchemaManager
      */
     protected function _execSql($sql)
     {
-        foreach ((array) $sql as $query) {
+        foreach ((array)$sql as $query) {
             $this->_conn->executeUpdate($query);
         }
     }
@@ -980,7 +984,7 @@ abstract class AbstractSchemaManager
     public function createSchema()
     {
         $sequences = array();
-        if($this->_platform->supportsSequences()) {
+        if ($this->_platform->supportsSequences()) {
             $sequences = $this->listSequences();
         }
         $tables = $this->listTables();
@@ -1054,6 +1058,6 @@ abstract class AbstractSchemaManager
      */
     public function removeDoctrineTypeFromComment($comment, $type)
     {
-        return str_replace('(DC2Type:'.$type.')', '', $comment);
+        return str_replace('(DC2Type:' . $type . ')', '', $comment);
     }
 }

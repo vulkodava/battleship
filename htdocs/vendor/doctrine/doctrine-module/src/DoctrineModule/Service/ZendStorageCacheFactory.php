@@ -41,7 +41,7 @@ class ZendStorageCacheFactory extends CacheFactory
     public function createService(ServiceLocatorInterface $sl)
     {
         /** @var $options \DoctrineModule\Options\Cache */
-        $options  = $this->getOptions($sl, 'cache');
+        $options = $this->getOptions($sl, 'cache');
         $instance = $options->getInstance();
 
         if (!$instance) {

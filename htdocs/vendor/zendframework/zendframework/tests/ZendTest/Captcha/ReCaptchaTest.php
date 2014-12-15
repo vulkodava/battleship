@@ -42,12 +42,12 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     {
         $options = array(
             'privKey' => 'privateKey',
-            'pubKey'  => 'publicKey',
-            'ssl'     => true,
-            'xhtml'   => true,
+            'pubKey' => 'publicKey',
+            'ssl' => true,
+            'xhtml' => true,
         );
         $captcha = new ReCaptcha($options);
-        $test    = $captcha->getOptions();
+        $test = $captcha->getOptions();
         $compare = array('privKey' => $options['privKey'], 'pubKey' => $options['pubKey']);
         $this->assertEquals($compare, $test);
 
@@ -63,7 +63,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     public function testShouldAllowSpecifyingServiceObject()
     {
         $captcha = new ReCaptcha();
-        $try     = new ReCaptchaService();
+        $try = new ReCaptchaService();
         $this->assertNotSame($captcha->getService(), $try);
         $captcha->setService($try);
         $this->assertSame($captcha->getService(), $try);
@@ -75,7 +75,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
         $pubKey = 'pubKey';
         $privKey = 'privKey';
         $captcha->setPubkey($pubKey)
-                ->setPrivkey($privKey);
+            ->setPrivkey($privKey);
 
         $this->assertSame($pubKey, $captcha->getPubkey());
         $this->assertSame($privKey, $captcha->getPrivkey());
@@ -100,7 +100,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     /** @group ZF-7654 */
     public function testConstructorShouldAllowSettingLangOptionOnServiceObject()
     {
-        $options = array('lang'=>'fr');
+        $options = array('lang' => 'fr');
         $captcha = new ReCaptcha($options);
         $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
     }
@@ -108,7 +108,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     /** @group ZF-7654 */
     public function testConstructorShouldAllowSettingThemeOptionOnServiceObject()
     {
-        $options = array('theme'=>'black');
+        $options = array('theme' => 'black');
         $captcha = new ReCaptcha($options);
         $this->assertEquals('black', $captcha->getService()->getOption('theme'));
     }

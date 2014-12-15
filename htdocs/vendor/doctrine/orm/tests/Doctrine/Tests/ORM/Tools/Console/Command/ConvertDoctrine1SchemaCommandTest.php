@@ -14,8 +14,8 @@ class ConvertDoctrine1SchemaCommandTest extends \Doctrine\Tests\OrmTestCase
 
         $output = $this->getMock('Symfony\Component\Console\Output\OutputInterface');
         $output->expects($this->once())
-               ->method('writeln')
-               ->with($this->equalTo('No Metadata Classes to process.'));
+            ->method('writeln')
+            ->with($this->equalTo('No Metadata Classes to process.'));
 
         $command->convertDoctrine1Schema(array(), sys_get_temp_dir(), 'annotation', 4, null, $output);
     }

@@ -83,7 +83,7 @@ abstract class StringUtils
      */
     public static function registerWrapper($wrapper)
     {
-        $wrapper = (string) $wrapper;
+        $wrapper = (string)$wrapper;
         if (!in_array($wrapper, static::$wrapperRegistry, true)) {
             static::$wrapperRegistry[] = $wrapper;
         }
@@ -97,7 +97,7 @@ abstract class StringUtils
      */
     public static function unregisterWrapper($wrapper)
     {
-        $index = array_search((string) $wrapper, static::$wrapperRegistry, true);
+        $index = array_search((string)$wrapper, static::$wrapperRegistry, true);
         if ($index !== false) {
             unset(static::$wrapperRegistry[$index]);
         }
@@ -117,7 +117,7 @@ abstract class StringUtils
      * Get the first string wrapper supporting the given character encoding
      * and supports to convert into the given convert encoding.
      *
-     * @param string      $encoding        Character encoding to support
+     * @param string $encoding             Character encoding to support
      * @param string|null $convertEncoding OPTIONAL character encoding to convert in
      * @return StringWrapperInterface
      * @throws Exception\RuntimeException If no wrapper supports given character encodings
@@ -128,6 +128,7 @@ abstract class StringUtils
             if ($wrapperClass::isSupported($encoding, $convertEncoding)) {
                 $wrapper = new $wrapperClass($encoding, $convertEncoding);
                 $wrapper->setEncoding($encoding, $convertEncoding);
+
                 return $wrapper;
             }
         }
@@ -182,6 +183,7 @@ abstract class StringUtils
             static::$hasPcreUnicodeSupport = defined('PREG_BAD_UTF8_OFFSET_ERROR') && preg_match('/\pL/u', 'a') == 1;
             ErrorHandler::stop();
         }
+
         return static::$hasPcreUnicodeSupport;
     }
 }

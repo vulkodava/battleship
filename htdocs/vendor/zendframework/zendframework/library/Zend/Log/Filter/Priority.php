@@ -29,7 +29,7 @@ class Priority implements FilterInterface
      * event whose priority value is less than or equal to $priority.
      *
      * @param  int|array|Traversable $priority Priority
-     * @param  string $operator Comparison operator
+     * @param  string $operator                Comparison operator
      * @return Priority
      * @throws Exception\InvalidArgumentException
      */
@@ -49,7 +49,7 @@ class Priority implements FilterInterface
             ));
         }
 
-        $this->priority = (int) $priority;
+        $this->priority = (int)$priority;
         $this->operator = $operator === null ? '<=' : $operator;
     }
 

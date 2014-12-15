@@ -1,11 +1,11 @@
-(function() {
+(function () {
 
     /**
      * @param {Cookie} cookie
      * @returns {Toolbar}
      * @constructor
      */
-    var Toolbar = function(cookie) {
+    var Toolbar = function (cookie) {
         /** @type {Toolbar} */
         var self = this;
         /** @type {HTMLElement} */
@@ -23,7 +23,7 @@
         /** @type {number} */
         var widthHiddenState = 25;
 
-        self.toggle = function() {
+        self.toggle = function () {
             !self.isHidden() ? self.hide() : self.show();
         };
 
@@ -31,7 +31,7 @@
          * @returns {boolean}
          * @throws {Error}
          */
-        self.isHidden = function() {
+        self.isHidden = function () {
             if (typeof(hidden) == "undefined") {
                 throw new Error("Field 'hidden' didn't initialize.");
             }
@@ -39,7 +39,7 @@
             return hidden;
         };
 
-        self.hide = function() {
+        self.hide = function () {
             slide((widthHiddenState - width));
 
             toggleTrigger.innerHTML = "►";
@@ -49,7 +49,7 @@
             cookie.set(cookieKeyHidden, 1);
         };
 
-        self.show = function() {
+        self.show = function () {
             slide(0);
 
             toggleTrigger.innerHTML = "◄";
@@ -107,7 +107,9 @@
 
             container.style.left = newPosition + "px";
 
-            setTimeout(function() { slide(toPosition); }, 3);
+            setTimeout(function () {
+                slide(toPosition);
+            }, 3);
         }
 
         /**
@@ -139,7 +141,7 @@
      * @returns {Cookie}
      * @constructor
      */
-    var Cookie = function() {
+    var Cookie = function () {
         /** @type {Cookie} */
         var self = this;
 
@@ -147,7 +149,7 @@
          * @param {string} key
          * @returns {string|null}
          */
-        self.get = function(key) {
+        self.get = function (key) {
             var cookie = document.cookie;
 
             if (cookie.indexOf(key + "=") == -1) {
@@ -163,7 +165,7 @@
          * @param {string} key
          * @param {string} value
          */
-        self.set = function(key, value) {
+        self.set = function (key, value) {
             document.cookie = key + "=" + value;
         };
 

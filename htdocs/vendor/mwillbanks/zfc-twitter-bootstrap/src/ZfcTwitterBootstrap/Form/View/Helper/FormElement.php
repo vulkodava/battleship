@@ -144,9 +144,9 @@ class FormElement extends ZendFormElement
     public function setElementErrorHelper(FormElementErrors $errorHelper)
     {
         $errorHelper->setView($this->getView());
-        
+
         $this->elementErrorHelper = $errorHelper;
-        
+
         return $this;
     }
 
@@ -200,7 +200,7 @@ class FormElement extends ZendFormElement
      */
     public function setGroupWrapper($groupWrapper)
     {
-        $this->groupWrapper = (string) $groupWrapper;
+        $this->groupWrapper = (string)$groupWrapper;
 
         return $this;
     }
@@ -218,12 +218,12 @@ class FormElement extends ZendFormElement
     /**
      * Set Control Wrapper
      *
-     * @param  string $controlWrapper;
+     * @param  string $controlWrapper ;
      * @return self
      */
     public function setControlWrapper($controlWrapper)
     {
-        $this->controlWrapper = (string) $controlWrapper;
+        $this->controlWrapper = (string)$controlWrapper;
 
         return $this;
     }
@@ -242,8 +242,8 @@ class FormElement extends ZendFormElement
      * Render
      *
      * @param  \Zend\Form\ElementInterface $element
-     * @param  string                      $groupWrapper
-     * @param  string                      $controlWrapper
+     * @param  string $groupWrapper
+     * @param  string $controlWrapper
      * @return string
      */
     public function render(ElementInterface $element, $groupWrapper = null, $controlWrapper = null)
@@ -288,8 +288,8 @@ class FormElement extends ZendFormElement
         if ($label && !$element->getOption('skipLabel')) {
 
             $controlLabel .= $labelHelper->openTag(array(
-                'class' => ($element->getOption('wrapCheckboxInLabel') ? 'checkbox' : 'control-label'),
-            ) + ($element->hasAttribute('id') ? array('for' => $id) : array()));
+                    'class' => ($element->getOption('wrapCheckboxInLabel') ? 'checkbox' : 'control-label'),
+                ) + ($element->hasAttribute('id') ? array('for' => $id) : array()));
 
             if (null !== ($translator = $labelHelper->getTranslator())) {
                 $label = $translator->translate(
@@ -306,7 +306,8 @@ class FormElement extends ZendFormElement
             }
             $controlLabel .= $labelHelper->closeTag();
             if ($element instanceof \Zend\Form\Element\Radio
-                || $element instanceof \Zend\Form\Element\MultiCheckbox) {
+                || $element instanceof \Zend\Form\Element\MultiCheckbox
+            ) {
                 $controlLabel = str_replace(array('<label', '</label>'), array('<div', '</div>'), $controlLabel);
             }
         }
@@ -321,11 +322,11 @@ class FormElement extends ZendFormElement
         }
 
         $html = $hiddenElementForCheckbox . $controlLabel . sprintf($controlWrapper,
-            $id,
-            $controls,
-            $descriptionHelper->render($element),
-            $elementErrorHelper->render($element)
-        );
+                $id,
+                $controls,
+                $descriptionHelper->render($element),
+                $elementErrorHelper->render($element)
+            );
 
         $addtClass = ($element->getMessages()) ? ' error' : '';
 
@@ -336,8 +337,8 @@ class FormElement extends ZendFormElement
      * Magical Invoke
      *
      * @param  \Zend\Form\ElementInterface $element
-     * @param  string                      $groupWrapper
-     * @param  string                      $controlWrapper
+     * @param  string $groupWrapper
+     * @param  string $controlWrapper
      * @return string|self
      */
     public function __invoke(ElementInterface $element = null, $groupWrapper = null, $controlWrapper = null)

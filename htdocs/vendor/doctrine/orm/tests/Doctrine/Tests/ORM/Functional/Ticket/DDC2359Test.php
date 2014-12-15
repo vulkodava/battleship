@@ -16,18 +16,18 @@ class DDC2359Test extends \PHPUnit_Framework_TestCase
      */
     public function testIssue()
     {
-        $mockDriver      = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\Driver\\MappingDriver');
-        $mockMetadata    = $this->getMock('Doctrine\\ORM\\Mapping\\ClassMetadata', array(), array(), '', false);
-        $entityManager   = $this->getMock('Doctrine\\ORM\\EntityManager', array(), array(), '', false);
+        $mockDriver = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\Driver\\MappingDriver');
+        $mockMetadata = $this->getMock('Doctrine\\ORM\\Mapping\\ClassMetadata', array(), array(), '', false);
+        $entityManager = $this->getMock('Doctrine\\ORM\\EntityManager', array(), array(), '', false);
 
         /* @var $metadataFactory \Doctrine\ORM\Mapping\ClassMetadataFactory|\PHPUnit_Framework_MockObject_MockObject */
         $metadataFactory = $this->getMock(
             'Doctrine\\ORM\\Mapping\\ClassMetadataFactory',
             array('newClassMetadataInstance', 'wakeupReflection')
         );
-        
-        $configuration   = $this->getMock('Doctrine\\ORM\\Configuration', array('getMetadataDriverImpl'));
-        $connection      = $this->getMock('Doctrine\\DBAL\\Connection', array(), array(), '', false);
+
+        $configuration = $this->getMock('Doctrine\\ORM\\Configuration', array('getMetadataDriverImpl'));
+        $connection = $this->getMock('Doctrine\\DBAL\\Connection', array(), array(), '', false);
 
         $configuration
             ->expects($this->any())

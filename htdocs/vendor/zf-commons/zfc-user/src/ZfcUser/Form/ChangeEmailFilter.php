@@ -14,8 +14,8 @@ class ChangeEmailFilter extends InputFilter
         $this->emailValidator = $emailValidator;
 
         $identityParams = array(
-            'name'       => 'identity',
-            'required'   => true,
+            'name' => 'identity',
+            'required' => true,
             'validators' => array()
         );
 
@@ -28,8 +28,8 @@ class ChangeEmailFilter extends InputFilter
         $this->add($identityParams);
 
         $this->add(array(
-            'name'       => 'newIdentity',
-            'required'   => true,
+            'name' => 'newIdentity',
+            'required' => true,
             'validators' => array(
                 array(
                     'name' => 'EmailAddress'
@@ -39,8 +39,8 @@ class ChangeEmailFilter extends InputFilter
         ));
 
         $this->add(array(
-            'name'       => 'newIdentityVerify',
-            'required'   => true,
+            'name' => 'newIdentityVerify',
+            'required' => true,
             'validators' => array(
                 array(
                     'name' => 'identical',
@@ -60,6 +60,7 @@ class ChangeEmailFilter extends InputFilter
     public function setEmailValidator($emailValidator)
     {
         $this->emailValidator = $emailValidator;
+
         return $this;
     }
 }

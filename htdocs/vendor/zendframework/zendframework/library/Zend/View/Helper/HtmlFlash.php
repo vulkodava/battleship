@@ -20,8 +20,8 @@ class HtmlFlash extends AbstractHtmlElement
      * Output a flash movie object tag
      *
      * @param  string $data    The flash file
-     * @param  array  $attribs Attribs for the object tag
-     * @param  array  $params  Params for in the object tag
+     * @param  array $attribs  Attribs for the object tag
+     * @param  array $params   Params for in the object tag
      * @param  string $content Alternative content
      * @return string
      */
@@ -30,6 +30,7 @@ class HtmlFlash extends AbstractHtmlElement
         $params = array_merge(array('movie' => $data, 'quality' => 'high'), $params);
 
         $htmlObject = $this->getView()->plugin('htmlObject');
+
         return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

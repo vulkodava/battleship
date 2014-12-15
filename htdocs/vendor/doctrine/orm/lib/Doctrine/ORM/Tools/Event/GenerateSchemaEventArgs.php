@@ -45,7 +45,7 @@ class GenerateSchemaEventArgs extends EventArgs
 
     /**
      * @param EntityManager $em
-     * @param Schema        $schema
+     * @param Schema $schema
      */
     public function __construct(EntityManager $em, Schema $schema)
     {

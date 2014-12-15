@@ -99,7 +99,7 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
         $formatter = new SimpleFormatter($expected);
         $writer->setFormatter($formatter);
 
-        $writer->write(array('bar'=>'baz'));
+        $writer->write(array('bar' => 'baz'));
         rewind($stream);
         $contents = stream_get_contents($stream);
         fclose($stream);
@@ -135,8 +135,8 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
     public function testAllowsSpecifyingLogSeparatorWithinArrayPassedToConstructor()
     {
         $options = array(
-            'stream'        => 'php://memory',
-            'mode'          => 'w+',
+            'stream' => 'php://memory',
+            'mode' => 'w+',
             'log_separator' => '::',
         );
         $writer = new StreamWriter($options);
@@ -146,13 +146,13 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
     public function testConstructWithOptions()
     {
         $formatter = new \Zend\Log\Formatter\Simple();
-        $filter    = new \Zend\Log\Filter\Mock();
+        $filter = new \Zend\Log\Filter\Mock();
         $writer = new StreamWriter(array(
-                'filters'   => $filter,
-                'formatter' => $formatter,
-                'stream'        => 'php://memory',
-                'mode'          => 'w+',
-                'log_separator' => '::',
+            'filters' => $filter,
+            'formatter' => $formatter,
+            'stream' => 'php://memory',
+            'mode' => 'w+',
+            'log_separator' => '::',
 
         ));
         $this->assertEquals('::', $writer->getLogSeparator());

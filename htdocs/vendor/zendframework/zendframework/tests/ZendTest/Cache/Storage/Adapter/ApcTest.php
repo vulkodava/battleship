@@ -38,9 +38,9 @@ class ApcTest extends CommonAdapterTest
             }
         }
 
-        $enabled = (bool) ini_get('apc.enabled');
+        $enabled = (bool)ini_get('apc.enabled');
         if (PHP_SAPI == 'cli') {
-            $enabled = $enabled && (bool) ini_get('apc.enable_cli');
+            $enabled = $enabled && (bool)ini_get('apc.enable_cli');
         }
 
         if (!$enabled) {

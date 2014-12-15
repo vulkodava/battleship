@@ -109,6 +109,7 @@ class SimpleRouteStack implements RouteStackInterface
     public function setRoutePluginManager(RoutePluginManager $routePlugins)
     {
         $this->routePluginManager = $routePlugins;
+
         return $this;
     }
 
@@ -147,8 +148,8 @@ class SimpleRouteStack implements RouteStackInterface
      * addRoute(): defined by RouteStackInterface interface.
      *
      * @see    RouteStackInterface::addRoute()
-     * @param  string  $name
-     * @param  mixed   $route
+     * @param  string $name
+     * @param  mixed $route
      * @param  int $priority
      * @return SimpleRouteStack
      */
@@ -177,6 +178,7 @@ class SimpleRouteStack implements RouteStackInterface
     public function removeRoute($name)
     {
         $this->routes->remove($name);
+
         return $this;
     }
 
@@ -190,6 +192,7 @@ class SimpleRouteStack implements RouteStackInterface
     {
         $this->routes->clear();
         $this->addRoutes($routes);
+
         return $this;
     }
 
@@ -234,6 +237,7 @@ class SimpleRouteStack implements RouteStackInterface
     public function setDefaultParams(array $params)
     {
         $this->defaultParams = $params;
+
         return $this;
     }
 
@@ -241,12 +245,13 @@ class SimpleRouteStack implements RouteStackInterface
      * Set a default parameter.
      *
      * @param  string $name
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return SimpleRouteStack
      */
     public function setDefaultParam($name, $value)
     {
         $this->defaultParams[$name] = $value;
+
         return $this;
     }
 

@@ -23,7 +23,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
     {
         $config = array(
             'accept_schemes' => 'basic',
-            'realm'          => 'testing',
+            'realm' => 'testing',
         );
 
         $this->_wrapper = new Wrapper($config);

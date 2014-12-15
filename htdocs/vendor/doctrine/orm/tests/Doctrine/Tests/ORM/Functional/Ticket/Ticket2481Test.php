@@ -36,9 +36,9 @@ class Ticket2481Test extends \Doctrine\Tests\OrmFunctionalTestCase
  */
 class Ticket2481Product
 {
-  /**
-   * @Id @Column(type="integer")
-   * @GeneratedValue(strategy="AUTO")
-   */
-  public $id;
+    /**
+     * @Id @Column(type="integer")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    public $id;
 }

@@ -47,7 +47,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
     public function testSetParent()
     {
         $parent = new Node('string');
-        $child  = new Node('array');
+        $child = new Node('array');
 
         $child->setParent($parent);
 
@@ -74,7 +74,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
     public function testAttachChild()
     {
         $parent = new Node('string');
-        $child  = new Node('array');
+        $child = new Node('array');
 
         $parent->attachChild($child);
         $this->assertTrue($parent === $child->getParent());

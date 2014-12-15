@@ -42,11 +42,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $headers = $this->message->getHeaders();
         $this->assertInstanceOf('Zend\Mail\Headers', $headers);
         $this->assertTrue($headers->has('date'));
-        $header  = $headers->get('date');
-        $date    = date('r');
-        $date    = substr($date, 0, 16);
-        $test    = $header->getFieldValue();
-        $test    = substr($test, 0, 16);
+        $header = $headers->get('date');
+        $date = date('r');
+        $date = substr($date, 0, 16);
+        $test = $header->getFieldValue();
+        $test = substr($test, 0, 16);
         $this->assertEquals($date, $test);
     }
 
@@ -72,11 +72,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testToAddressListLivesInHeaders()
     {
         $this->message->addTo('zf-devteam@example.com');
-        $to      = $this->message->getTo();
+        $to = $this->message->getTo();
         $headers = $this->message->getHeaders();
         $this->assertInstanceOf('Zend\Mail\Headers', $headers);
         $this->assertTrue($headers->has('to'));
-        $header  = $headers->get('to');
+        $header = $headers->get('to');
         $this->assertSame($header->getAddressList(), $to);
     }
 
@@ -90,11 +90,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testFromAddressListLivesInHeaders()
     {
         $this->message->addFrom('zf-devteam@example.com');
-        $from    = $this->message->getFrom();
+        $from = $this->message->getFrom();
         $headers = $this->message->getHeaders();
         $this->assertInstanceOf('Zend\Mail\Headers', $headers);
         $this->assertTrue($headers->has('from'));
-        $header  = $headers->get('from');
+        $header = $headers->get('from');
         $this->assertSame($header->getAddressList(), $from);
     }
 
@@ -108,11 +108,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testCcAddressListLivesInHeaders()
     {
         $this->message->addCc('zf-devteam@example.com');
-        $cc      = $this->message->getCc();
+        $cc = $this->message->getCc();
         $headers = $this->message->getHeaders();
         $this->assertInstanceOf('Zend\Mail\Headers', $headers);
         $this->assertTrue($headers->has('cc'));
-        $header  = $headers->get('cc');
+        $header = $headers->get('cc');
         $this->assertSame($header->getAddressList(), $cc);
     }
 
@@ -126,11 +126,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testBccAddressListLivesInHeaders()
     {
         $this->message->addBcc('zf-devteam@example.com');
-        $bcc     = $this->message->getBcc();
+        $bcc = $this->message->getBcc();
         $headers = $this->message->getHeaders();
         $this->assertInstanceOf('Zend\Mail\Headers', $headers);
         $this->assertTrue($headers->has('bcc'));
-        $header  = $headers->get('bcc');
+        $header = $headers->get('bcc');
         $this->assertSame($header->getAddressList(), $bcc);
     }
 
@@ -148,7 +148,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $headers = $this->message->getHeaders();
         $this->assertInstanceOf('Zend\Mail\Headers', $headers);
         $this->assertTrue($headers->has('reply-to'));
-        $header  = $headers->get('reply-to');
+        $header = $headers->get('reply-to');
         $this->assertSame($header->getAddressList(), $replyTo);
     }
 
@@ -664,11 +664,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $this->message->setEncoding('utf-8');
         $headers = $this->message->getHeaders();
-        $header  = $headers->get('date');
-        $date    = date('r');
-        $date    = substr($date, 0, 16);
-        $test    = $header->getFieldValue();
-        $test    = substr($test, 0, 16);
+        $header = $headers->get('date');
+        $date = date('r');
+        $date = substr($date, 0, 16);
+        $test = $header->getFieldValue();
+        $test = substr($test, 0, 16);
         $this->assertEquals($date, $test);
     }
 
@@ -679,7 +679,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->message->addCc('zf-contributors@example.com', 'ZF Contributors List');
         $this->message->setSubject('This is a subject');
         $this->message->setBody('foo');
-        $serialized      = $this->message->toString();
+        $serialized = $this->message->toString();
         $restoredMessage = Message::fromString($serialized);
         $this->assertEquals($serialized, $restoredMessage->toString());
     }

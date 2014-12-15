@@ -33,7 +33,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value    = 'test';
+        $value = 'test';
         $expected = 's:4:"test";';
 
         $data = $this->adapter->serialize($value);
@@ -42,7 +42,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeFalse()
     {
-        $value    = false;
+        $value = false;
         $expected = 'b:0;';
 
         $data = $this->adapter->serialize($value);
@@ -51,7 +51,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNull()
     {
-        $value    = null;
+        $value = null;
         $expected = 'N;';
 
         $data = $this->adapter->serialize($value);
@@ -60,7 +60,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNumeric()
     {
-        $value    = 100;
+        $value = 100;
         $expected = 'i:100;';
 
         $data = $this->adapter->serialize($value);
@@ -69,7 +69,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value    = new \stdClass();
+        $value = new \stdClass();
         $expected = 'O:8:"stdClass":0:{}';
 
         $data = $this->adapter->serialize($value);
@@ -78,7 +78,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeString()
     {
-        $value    = 's:4:"test";';
+        $value = 's:4:"test";';
         $expected = 'test';
 
         $data = $this->adapter->unserialize($value);
@@ -87,7 +87,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeFalse()
     {
-        $value    = 'b:0;';
+        $value = 'b:0;';
         $expected = false;
 
         $data = $this->adapter->unserialize($value);
@@ -96,7 +96,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeNull()
     {
-        $value    = 'N;';
+        $value = 'N;';
         $expected = null;
 
         $data = $this->adapter->unserialize($value);
@@ -105,7 +105,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeNumeric()
     {
-        $value    = 'i:100;';
+        $value = 'i:100;';
         $expected = 100;
 
         $data = $this->adapter->unserialize($value);
@@ -114,7 +114,7 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeObject()
     {
-        $value    = 'O:8:"stdClass":0:{}';
+        $value = 'O:8:"stdClass":0:{}';
         $expected = new \stdClass();
 
         $data = $this->adapter->unserialize($value);

@@ -55,7 +55,7 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     public function testSetCallbackShouldAcceptArray()
     {
         $callback = array(
-            'type'     => 'function',
+            'type' => 'function',
             'function' => 'foo',
         );
         $this->definition->setCallback($callback);
@@ -166,18 +166,18 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
 
     public function testDefintionShouldSerializeToArray()
     {
-        $name       = 'foo.bar';
-        $callback   = array('function' => 'foo', 'type' => 'function');
+        $name = 'foo.bar';
+        $callback = array('function' => 'foo', 'type' => 'function');
         $prototypes = array(array('returnType' => 'struct', 'parameters' => array('string', 'array')));
         $methodHelp = 'foo bar';
-        $object     = new \stdClass;
+        $object = new \stdClass;
         $invokeArgs = array('foo', array('bar', 'baz'));
         $this->definition->setName($name)
-                         ->setCallback($callback)
-                         ->setPrototypes($prototypes)
-                         ->setMethodHelp($methodHelp)
-                         ->setObject($object)
-                         ->setInvokeArguments($invokeArgs);
+            ->setCallback($callback)
+            ->setPrototypes($prototypes)
+            ->setMethodHelp($methodHelp)
+            ->setObject($object)
+            ->setInvokeArguments($invokeArgs);
         $test = $this->definition->toArray();
         $this->assertEquals($name, $test['name']);
         $this->assertEquals($callback, $test['callback']);
@@ -190,11 +190,11 @@ class DefinitionTest extends \PHPUnit_Framework_TestCase
     public function testPassingOptionsToConstructorShouldSetObjectState()
     {
         $options = array(
-            'name'            => 'foo.bar',
-            'callback'        => array('function' => 'foo', 'type' => 'function'),
-            'prototypes'      => array(array('returnType' => 'struct', 'parameters' => array('string', 'array'))),
-            'methodHelp'      => 'foo bar',
-            'object'          => new \stdClass,
+            'name' => 'foo.bar',
+            'callback' => array('function' => 'foo', 'type' => 'function'),
+            'prototypes' => array(array('returnType' => 'struct', 'parameters' => array('string', 'array'))),
+            'methodHelp' => 'foo bar',
+            'object' => new \stdClass,
             'invokeArguments' => array('foo', array('bar', 'baz')),
         );
         $definition = new Method\Definition($options);

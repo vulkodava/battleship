@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 // Path to composer autoloader. You can use different provided by your favorite framework,
 // if you want to.
 $loaderPath = __DIR__ . '/../../vendor/autoload.php';
-if(!is_readable($loaderPath)){
+if (!is_readable($loaderPath)) {
     throw new LogicException('Run php composer.phar install at first');
 }
 $loader = require $loaderPath;
@@ -35,7 +35,7 @@ $config->setProxyNamespace('Proxies');
 // Database connection information
 $connectionOptions = array(
     'driver' => 'pdo_sqlite',
-    'path'   => 'database.sqlite'
+    'path' => 'database.sqlite'
 );
 
 return EntityManager::create($connectionOptions, $config);

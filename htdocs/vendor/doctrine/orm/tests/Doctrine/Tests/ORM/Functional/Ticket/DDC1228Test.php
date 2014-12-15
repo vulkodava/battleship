@@ -21,7 +21,7 @@ class DDC1228Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1228User'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1228Profile'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

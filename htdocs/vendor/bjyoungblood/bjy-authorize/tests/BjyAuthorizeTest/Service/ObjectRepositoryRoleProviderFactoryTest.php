@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -25,10 +25,10 @@ class ObjectRepositoryRoleProviderFactoryTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->locator       = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->locator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
         $this->entityManager = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
-        $this->repository    = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $this->factory       = new ObjectRepositoryRoleProviderFactory();
+        $this->repository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $this->factory = new ObjectRepositoryRoleProviderFactory();
     }
 
     /**
@@ -42,7 +42,7 @@ class ObjectRepositoryRoleProviderFactoryTest extends PHPUnit_Framework_TestCase
             'role_providers' => array(
                 'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
                     'role_entity_class' => $testClassName,
-                    'object_manager'    => 'doctrine.entitymanager.orm_default',
+                    'object_manager' => 'doctrine.entitymanager.orm_default',
                 ),
             ),
         );

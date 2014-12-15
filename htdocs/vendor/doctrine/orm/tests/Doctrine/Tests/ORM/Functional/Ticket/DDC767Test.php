@@ -67,7 +67,7 @@ class DDC767Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
             $this->_em->flush();
             $this->_em->commit();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->_em->rollback();
         }
     }

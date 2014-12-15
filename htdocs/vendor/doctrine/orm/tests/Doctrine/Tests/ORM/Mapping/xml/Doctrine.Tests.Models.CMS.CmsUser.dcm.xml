@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-                              
+
     <entity name="Doctrine\Tests\Models\CMS\CmsUser" table="cms_users">
 
         <named-queries>
@@ -21,19 +21,31 @@
             </named-native-query>
 
             <named-native-query name="fetchJoinedAddress" result-set-mapping="mappingJoinedAddress">
-                <query>SELECT u.id, u.name, u.status, a.id AS a_id, a.country, a.zip, a.city FROM cms_users u INNER JOIN cms_addresses a ON u.id = a.user_id WHERE u.username = ?</query>
+                <query>SELECT u.id, u.name, u.status, a.id AS a_id, a.country, a.zip, a.city FROM cms_users u INNER JOIN
+                    cms_addresses a ON u.id = a.user_id WHERE u.username = ?
+                </query>
             </named-native-query>
 
             <named-native-query name="fetchJoinedPhonenumber" result-set-mapping="mappingJoinedPhonenumber">
-                <query>SELECT id, name, status, phonenumber AS number FROM cms_users INNER JOIN cms_phonenumbers ON id = user_id WHERE username = ?</query>
+                <query>SELECT id, name, status, phonenumber AS number FROM cms_users INNER JOIN cms_phonenumbers ON id =
+                    user_id WHERE username = ?
+                </query>
             </named-native-query>
 
             <named-native-query name="fetchUserPhonenumberCount" result-set-mapping="mappingUserPhonenumberCount">
-                <query>SELECT id, name, status, COUNT(phonenumber) AS numphones FROM cms_users INNER JOIN cms_phonenumbers ON id = user_id WHERE username IN (?) GROUP BY id, name, status, username ORDER BY username</query>
+                <query>SELECT id, name, status, COUNT(phonenumber) AS numphones FROM cms_users INNER JOIN
+                    cms_phonenumbers ON id = user_id WHERE username IN (?) GROUP BY id, name, status, username ORDER BY
+                    username
+                </query>
             </named-native-query>
 
-            <named-native-query name="fetchMultipleJoinsEntityResults" result-set-mapping="mappingMultipleJoinsEntityResults">
-                <query>SELECT u.id AS u_id, u.name AS u_name, u.status AS u_status, a.id AS a_id, a.zip AS a_zip, a.country AS a_country, COUNT(p.phonenumber) AS numphones FROM cms_users u INNER JOIN cms_addresses a ON u.id = a.user_id INNER JOIN cms_phonenumbers p ON u.id = p.user_id GROUP BY u.id, u.name, u.status, u.username, a.id, a.zip, a.country ORDER BY u.username</query>
+            <named-native-query name="fetchMultipleJoinsEntityResults"
+                                result-set-mapping="mappingMultipleJoinsEntityResults">
+                <query>SELECT u.id AS u_id, u.name AS u_name, u.status AS u_status, a.id AS a_id, a.zip AS a_zip,
+                    a.country AS a_country, COUNT(p.phonenumber) AS numphones FROM cms_users u INNER JOIN cms_addresses
+                    a ON u.id = a.user_id INNER JOIN cms_phonenumbers p ON u.id = p.user_id GROUP BY u.id, u.name,
+                    u.status, u.username, a.id, a.zip, a.country ORDER BY u.username
+                </query>
             </named-native-query>
         </named-native-queries>
 
@@ -86,7 +98,7 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
-        
+
         <field name="status" column="status" type="string" length="50" unique="true"/>
         <field name="username" column="username" type="string" length="255" unique="true"/>
         <field name="name" column="name" type="string" length="255"/>
@@ -95,14 +107,14 @@
             <cascade>
                 <cascade-persist/>
             </cascade>
-            <join-column name="address_id" referenced-column-name="id"  />
+            <join-column name="address_id" referenced-column-name="id"/>
         </one-to-one>
 
         <one-to-one field="email" target-entity="CmsEmail" inversed-by="user" orphan-removal="true">
             <cascade>
                 <cascade-persist/>
             </cascade>
-            <join-column referenced-column-name="id" nullable="true" />
+            <join-column referenced-column-name="id" nullable="true"/>
         </one-to-one>
 
         <one-to-many field="phonenumbers" target-entity="CmsPhonenumber" mapped-by="user" orphan-removal="true">
@@ -117,7 +129,7 @@
                 <cascade-detach/>
             </cascade>
         </one-to-many>
-        
+
         <many-to-many field="groups" target-entity="CmsGroup">
             <cascade>
                 <cascade-persist/>

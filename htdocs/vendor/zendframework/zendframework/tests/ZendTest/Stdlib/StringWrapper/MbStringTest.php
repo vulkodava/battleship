@@ -41,6 +41,7 @@ class MbStringTest extends CommonStringWrapperTest
 
         $wrapper = new MbString();
         $wrapper->setEncoding($encoding, $convertEncoding);
+
         return $wrapper;
     }
 }

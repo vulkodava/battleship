@@ -29,7 +29,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     const SPECIFICATION_WHERE = 'where';
 
     const VALUES_MERGE = 'merge';
-    const VALUES_SET   = 'set';
+    const VALUES_SET = 'set';
     /**@#-**/
 
     protected $specifications = array(
@@ -81,6 +81,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function table($table)
     {
         $this->table = $table;
+
         return $this;
     }
 
@@ -88,7 +89,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * Set key/value pairs to update
      *
      * @param  array $values Associative array of key values
-     * @param  string $flag One of the VALUES_* constants
+     * @param  string $flag  One of the VALUES_* constants
      * @throws Exception\InvalidArgumentException
      * @return Update
      */
@@ -108,6 +109,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             }
             $this->set->insert($k, $v, $priority);
         }
+
         return $this;
     }
 
@@ -126,6 +128,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } else {
             $this->where->addPredicates($predicate, $combination);
         }
+
         return $this;
     }
 
@@ -137,6 +140,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             'set' => $this->set->toArray(),
             'where' => $this->where
         );
+
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
@@ -149,7 +153,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
-        $driver   = $adapter->getDriver();
+        $driver = $adapter->getDriver();
         $platform = $adapter->getPlatform();
         $parameterContainer = $statementContainer->getParameterContainer();
 
@@ -237,6 +241,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
             $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
         }
+
         return $sql;
     }
 

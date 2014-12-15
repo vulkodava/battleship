@@ -207,10 +207,10 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     public function testBasic($locale, $timezone, $timeType, $dateType, $date)
     {
         $this->helper
-             ->setTimezone($timezone);
+            ->setTimezone($timezone);
 
         $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone)
-                         ->format($date->getTimestamp());
+            ->format($date->getTimestamp());
 
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $date, $dateType, $timeType, $locale, null
@@ -227,7 +227,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             ->setLocale($locale);
 
         $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone)
-                         ->format($date->getTimestamp());
+            ->format($date->getTimestamp());
 
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $date, $dateType, $timeType
@@ -240,10 +240,10 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     public function testUseCustomPattern($locale, $timezone, $timeType, $dateType, $pattern, $date)
     {
         $this->helper
-             ->setTimezone($timezone);
+            ->setTimezone($timezone);
 
         $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern)
-                         ->format($date->getTimestamp());
+            ->format($date->getTimestamp());
 
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $date, $dateType, $timeType, $locale, $pattern
@@ -268,11 +268,11 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     public function assertMbStringEquals($expected, $test, $message = '')
     {
         $expected = str_replace(array("\xC2\xA0", ' '), '', $expected);
-        $test     = str_replace(array("\xC2\xA0", ' '), '', $test);
+        $test = str_replace(array("\xC2\xA0", ' '), '', $test);
         $this->assertEquals($expected, $test, $message);
     }
 
-    public function getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern=null)
+    public function getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern = null)
     {
         return new IntlDateFormatter($locale, $dateType, $timeType, $timezone, null, $pattern);
     }

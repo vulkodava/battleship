@@ -30,6 +30,7 @@ class UserAdminController extends AbstractActionController
 
         $paginator->setItemCountPerPage(100);
         $paginator->setCurrentPageNumber($this->getEvent()->getRouteMatch()->getParam('p'));
+
         return array(
             'users' => $paginator,
             'userlistElements' => $this->getOptions()->getUserListElements()
@@ -55,6 +56,7 @@ class UserAdminController extends AbstractActionController
                 $user = $this->getAdminUserService()->create($form, (array)$request->getPost());
                 if ($user) {
                     $this->flashMessenger()->addSuccessMessage('The user was created');
+
                     return $this->redirect()->toRoute('zfcadmin/zfcuseradmin/list');
                 }
             }
@@ -82,6 +84,7 @@ class UserAdminController extends AbstractActionController
                 $user = $this->getAdminUserService()->edit($form, (array)$request->getPost(), $user);
                 if ($user) {
                     $this->flashMessenger()->addSuccessMessage('The user was edited');
+
                     return $this->redirect()->toRoute('zfcadmin/zfcuseradmin/list');
                 }
             }
@@ -117,6 +120,7 @@ class UserAdminController extends AbstractActionController
     public function setOptions(ModuleOptions $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -125,6 +129,7 @@ class UserAdminController extends AbstractActionController
         if (!$this->options instanceof ModuleOptions) {
             $this->setOptions($this->getServiceLocator()->get('zfcuseradmin_module_options'));
         }
+
         return $this->options;
     }
 
@@ -133,12 +138,14 @@ class UserAdminController extends AbstractActionController
         if (null === $this->userMapper) {
             $this->userMapper = $this->getServiceLocator()->get('zfcuser_user_mapper');
         }
+
         return $this->userMapper;
     }
 
     public function setUserMapper(UserInterface $userMapper)
     {
         $this->userMapper = $userMapper;
+
         return $this;
     }
 
@@ -147,18 +154,21 @@ class UserAdminController extends AbstractActionController
         if (null === $this->adminUserService) {
             $this->adminUserService = $this->getServiceLocator()->get('zfcuseradmin_user_service');
         }
+
         return $this->adminUserService;
     }
 
     public function setAdminUserService($service)
     {
         $this->adminUserService = $service;
+
         return $this;
     }
 
     public function setZfcUserOptions(ZfcUserModuleOptions $options)
     {
         $this->zfcUserOptions = $options;
+
         return $this;
     }
 
@@ -170,6 +180,7 @@ class UserAdminController extends AbstractActionController
         if (!$this->zfcUserOptions instanceof ZfcUserModuleOptions) {
             $this->setZfcUserOptions($this->getServiceLocator()->get('zfcuser_module_options'));
         }
+
         return $this->zfcUserOptions;
     }
 }

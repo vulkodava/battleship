@@ -23,6 +23,7 @@ abstract class Console
     /**
      * Allow overriding whether or not we're in a console env. If set, and
      * boolean, returns that value from isConsole().
+     *
      * @var bool
      */
     protected static $isConsole;
@@ -30,10 +31,10 @@ abstract class Console
     /**
      * Create and return Adapter\AdapterInterface instance.
      *
-     * @param  null|string  $forceAdapter Optional adapter class name. Can be absolute namespace or class name
+     * @param  null|string $forceAdapter  Optional adapter class name. Can be absolute namespace or class name
      *                                    relative to Zend\Console\Adapter\. If not provided, a best matching
      *                                    adapter will be automatically selected.
-     * @param  null|string  $forceCharset optional charset name can be absolute namespace or class name relative to
+     * @param  null|string $forceCharset  optional charset name can be absolute namespace or class name relative to
      *                                    Zend\Console\Charset\. If not provided, charset will be detected
      *                                    automatically.
      * @throws Exception\InvalidArgumentException
@@ -119,8 +120,7 @@ abstract class Console
     {
         return
             (defined('PHP_OS') && (substr_compare(PHP_OS, 'win', 0, 3, true) === 0)) ||
-            (getenv('OS') != false && substr_compare(getenv('OS'), 'windows', 0, 7, true))
-        ;
+            (getenv('OS') != false && substr_compare(getenv('OS'), 'windows', 0, 7, true));
     }
 
     /**
@@ -146,6 +146,7 @@ abstract class Console
         if (null === static::$isConsole) {
             static::$isConsole = (PHP_SAPI == 'cli');
         }
+
         return static::$isConsole;
     }
 
@@ -157,13 +158,14 @@ abstract class Console
     public static function overrideIsConsole($flag)
     {
         if (null != $flag) {
-            $flag = (bool) $flag;
+            $flag = (bool)$flag;
         }
         static::$isConsole = $flag;
     }
 
     /**
      * Try to detect best matching adapter
+     *
      * @return string|null
      */
     public static function detectBestAdapter()
@@ -186,6 +188,7 @@ abstract class Console
 
         // Default is a Posix console
         $className = __NAMESPACE__ . '\Adapter\Posix';
+
         return $className;
     }
 
@@ -199,6 +202,7 @@ abstract class Console
     public static function __callStatic($funcName, $arguments)
     {
         $instance = static::getInstance();
+
         return call_user_func_array(array($instance, $funcName), $arguments);
     }
 }

@@ -33,7 +33,9 @@ class StatementMock implements \IteratorAggregate, \Doctrine\DBAL\Driver\Stateme
     /**
      * {@inheritdoc}
      */
-    public function errorInfo(){}
+    public function errorInfo()
+    {
+    }
 
     /**
      * {@inheritdoc}

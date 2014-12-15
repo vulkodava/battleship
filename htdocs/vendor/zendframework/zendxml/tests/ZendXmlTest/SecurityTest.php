@@ -51,6 +51,7 @@ XML;
             $result = XmlSecurity::scan($xml);
         } catch (Exception\RuntimeException $e) {
             unlink($file);
+
             return;
         }
         $this->fail('An expected exception has not been raised.');

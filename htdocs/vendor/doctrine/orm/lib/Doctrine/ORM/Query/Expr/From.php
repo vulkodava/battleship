@@ -52,8 +52,8 @@ class From
      */
     public function __construct($from, $alias, $indexBy = null)
     {
-        $this->from    = $from;
-        $this->alias   = $alias;
+        $this->from = $from;
+        $this->alias = $alias;
         $this->indexBy = $indexBy;
     }
 
@@ -87,6 +87,6 @@ class From
     public function __toString()
     {
         return $this->from . ' ' . $this->alias .
-                ($this->indexBy ? ' INDEX BY ' . $this->indexBy : '');
+        ($this->indexBy ? ' INDEX BY ' . $this->indexBy : '');
     }
 }

@@ -26,9 +26,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testCanCreateFormFromStandardEntity()
     {
-        $entity  = new TestAsset\Annotation\Entity();
+        $entity = new TestAsset\Annotation\Entity();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertTrue($form->has('username'));
         $this->assertTrue($form->has('password'));
@@ -60,9 +60,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testCanCreateFormWithClassAnnotations()
     {
-        $entity  = new TestAsset\Annotation\ClassEntity();
+        $entity = new TestAsset\Annotation\ClassEntity();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertTrue($form->has('keeper'));
         $this->assertFalse($form->has('keep'));
@@ -76,7 +76,7 @@ class AnnotationBuilderTest extends TestCase
         $filter = $form->getInputFilter();
         $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\InputFilter', $filter);
 
-        $keeper     = $form->get('keeper');
+        $keeper = $form->get('keeper');
         $attributes = $keeper->getAttributes();
         $this->assertArrayHasKey('type', $attributes);
         $this->assertEquals('text', $attributes['type']);
@@ -87,9 +87,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testComplexEntityCreationWithPriorities()
     {
-        $entity  = new TestAsset\Annotation\ComplexEntity();
+        $entity = new TestAsset\Annotation\ComplexEntity();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertEquals('user', $form->getName());
         $attributes = $form->getAttributes();
@@ -103,7 +103,7 @@ class AnnotationBuilderTest extends TestCase
         $this->assertTrue($form->has('username'));
 
         $email = $form->get('email');
-        $test  = $form->getIterator()->getIterator()->current();
+        $test = $form->getIterator()->getIterator()->current();
         $this->assertSame($email, $test, 'Test is element ' . $test->getName());
 
         $hydrator = $form->getHydrator();
@@ -112,17 +112,17 @@ class AnnotationBuilderTest extends TestCase
 
     public function testCanRetrieveOnlyFormSpecification()
     {
-        $entity  = new TestAsset\Annotation\ComplexEntity();
+        $entity = new TestAsset\Annotation\ComplexEntity();
         $builder = new Annotation\AnnotationBuilder();
-        $spec    = $builder->getFormSpecification($entity);
+        $spec = $builder->getFormSpecification($entity);
         $this->assertInstanceOf('ArrayObject', $spec);
     }
 
     public function testAllowsExtensionOfEntities()
     {
-        $entity  = new TestAsset\Annotation\ExtendedEntity();
+        $entity = new TestAsset\Annotation\ExtendedEntity();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertTrue($form->has('username'));
         $this->assertTrue($form->has('password'));
@@ -130,7 +130,7 @@ class AnnotationBuilderTest extends TestCase
 
         $this->assertEquals('extended', $form->getName());
         $expected = array('username', 'password', 'email');
-        $test     = array();
+        $test = array();
         foreach ($form as $element) {
             $test[] = $element->getName();
         }
@@ -139,9 +139,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testAllowsSpecifyingFormAndElementTypes()
     {
-        $entity  = new TestAsset\Annotation\TypedEntity();
+        $entity = new TestAsset\Annotation\TypedEntity();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Form', $form);
         $element = $form->get('typed_element');
@@ -150,9 +150,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testAllowsComposingChildEntities()
     {
-        $entity  = new TestAsset\Annotation\EntityComposingAnEntity();
+        $entity = new TestAsset\Annotation\EntityComposingAnEntity();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertTrue($form->has('composed'));
         $composed = $form->get('composed');
@@ -170,9 +170,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testAllowsComposingMultipleChildEntities()
     {
-        $entity  = new TestAsset\Annotation\EntityComposingMultipleEntities();
+        $entity = new TestAsset\Annotation\EntityComposingMultipleEntities();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertTrue($form->has('composed'));
         $composed = $form->get('composed');
@@ -186,9 +186,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testCanHandleOptionsAnnotation()
     {
-        $entity  = new TestAsset\Annotation\EntityUsingOptions();
+        $entity = new TestAsset\Annotation\EntityUsingOptions();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertTrue($form->useAsBaseFieldset());
 
@@ -203,9 +203,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testCanHandleHydratorArrayAnnotation()
     {
-        $entity  = new TestAsset\Annotation\EntityWithHydratorArray();
+        $entity = new TestAsset\Annotation\EntityWithHydratorArray();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $hydrator = $form->getHydrator();
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ClassMethods', $hydrator);
@@ -214,9 +214,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testAllowTypeAsElementNameInInputFilter()
     {
-        $entity  = new TestAsset\Annotation\EntityWithTypeAsElementName();
+        $entity = new TestAsset\Annotation\EntityWithTypeAsElementName();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $this->assertInstanceOf('Zend\Form\Form', $form);
         $element = $form->get('type');
@@ -225,9 +225,9 @@ class AnnotationBuilderTest extends TestCase
 
     public function testAllowEmptyInput()
     {
-        $entity  = new TestAsset\Annotation\SampleEntity();
+        $entity = new TestAsset\Annotation\SampleEntity();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
 
         $inputFilter = $form->getInputFilter();
         $sampleinput = $inputFilter->get('sampleinput');
@@ -253,9 +253,9 @@ class AnnotationBuilderTest extends TestCase
         $fieldset = $form->get('object');
         /* @var $fieldset Zend\Form\Fieldset */
 
-        $this->assertInstanceOf('Zend\Form\Fieldset',$fieldset);
-        $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Entity',$fieldset->getObject());
-        $this->assertInstanceOf("Zend\Stdlib\Hydrator\ClassMethods",$fieldset->getHydrator());
+        $this->assertInstanceOf('Zend\Form\Fieldset', $fieldset);
+        $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Entity', $fieldset->getObject());
+        $this->assertInstanceOf("Zend\Stdlib\Hydrator\ClassMethods", $fieldset->getHydrator());
         $this->assertFalse($fieldset->getHydrator()->getUnderscoreSeparatedKeys());
     }
 

@@ -63,6 +63,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Pgsql $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
@@ -73,6 +74,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+
         return $this;
     }
 
@@ -122,6 +124,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
+
         return $this;
     }
 
@@ -144,6 +147,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
+
         return $this;
     }
 
@@ -225,7 +229,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->profiler->profilerStart($this);
         }
 
-        $resultResource = pg_execute($this->pgsql, $this->statementName, (array) $parameters);
+        $resultResource = pg_execute($this->pgsql, $this->statementName, (array)$parameters);
 
         if ($this->profiler) {
             $this->profiler->profilerFinish();
@@ -236,6 +240,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($resultResource);
+
         return $result;
     }
 }

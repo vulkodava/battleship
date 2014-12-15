@@ -12,7 +12,7 @@ namespace Zend\Feed\Reader\Extension\Slash;
 use Zend\Feed\Reader\Extension;
 
 /**
-*/
+ */
 class Entry extends Extension\AbstractEntry
 {
     /**
@@ -49,7 +49,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         $stringParade = $this->getData($name);
-        $hitParade    = array();
+        $hitParade = array();
 
         if (!empty($stringParade)) {
             $stringParade = explode(',', $stringParade);
@@ -60,6 +60,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         $this->data[$name] = $hitParade;
+
         return $hitParade;
     }
 
@@ -80,6 +81,7 @@ class Entry extends Extension\AbstractEntry
 
         if (!$comments) {
             $this->data[$name] = null;
+
             return $this->data[$name];
         }
 
@@ -88,6 +90,7 @@ class Entry extends Extension\AbstractEntry
 
     /**
      * Get the entry data specified by name
+     *
      * @param string $name
      * @param string $type
      *

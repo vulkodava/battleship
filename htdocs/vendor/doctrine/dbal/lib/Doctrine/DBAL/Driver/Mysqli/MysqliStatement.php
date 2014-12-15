@@ -77,7 +77,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
 
     /**
      * @param \mysqli $conn
-     * @param string  $prepareString
+     * @param string $prepareString
      *
      * @throws \Doctrine\DBAL\Driver\Mysqli\MysqliException
      */
@@ -152,7 +152,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
     {
         if (null !== $this->_bindedValues) {
             if (null !== $params) {
-                if ( ! $this->_bindValues($params)) {
+                if (!$this->_bindValues($params)) {
                     throw new MysqliException($this->_stmt->error, $this->_stmt->errno);
                 }
             } else {
@@ -162,7 +162,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
             }
         }
 
-        if ( ! $this->_stmt->execute()) {
+        if (!$this->_stmt->execute()) {
             throw new MysqliException($this->_stmt->error, $this->_stmt->errno);
         }
 
@@ -179,7 +179,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
                 $meta->free();
 
                 $this->_columnNames = $columnNames;
-                $this->_rowBindedValues = array_fill(0, count($columnNames), NULL);
+                $this->_rowBindedValues = array_fill(0, count($columnNames), null);
 
                 $refs = array();
                 foreach ($this->_rowBindedValues as $key => &$value) {
@@ -230,6 +230,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
                 // Mysqli converts them to a scalar type it can fit in.
                 $values[] = null === $v ? null : (string)$v;
             }
+
             return $values;
         }
 
@@ -262,6 +263,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
             case PDO::FETCH_BOTH:
                 $ret = array_combine($this->_columnNames, $values);
                 $ret += $values;
+
                 return $ret;
 
             default:
@@ -337,6 +339,7 @@ class MysqliStatement implements \IteratorAggregate, Statement
         if (false === $this->_columnNames) {
             return $this->_stmt->affected_rows;
         }
+
         return $this->_stmt->num_rows;
     }
 

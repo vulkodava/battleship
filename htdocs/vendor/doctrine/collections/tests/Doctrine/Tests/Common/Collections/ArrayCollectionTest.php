@@ -82,12 +82,12 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
             $collectionNext = $collection->next();
             $arrayNext = next($elements);
 
-            if(!$collectionNext || !$arrayNext) {
+            if (!$collectionNext || !$arrayNext) {
                 break;
             }
 
-            $this->assertSame($arrayNext,      $collectionNext,        "Returned value of ArrayCollection::next() and next() not match");
-            $this->assertSame(key($elements),     $collection->key(),     "Keys not match");
+            $this->assertSame($arrayNext, $collectionNext, "Returned value of ArrayCollection::next() and next() not match");
+            $this->assertSame(key($elements), $collection->key(), "Keys not match");
             $this->assertSame(current($elements), $collection->current(), "Current values not match");
         }
     }
@@ -145,7 +145,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
         $collection = new ArrayCollection($elements);
 
         $iterations = 0;
-        foreach($collection->getIterator() as $key => $item) {
+        foreach ($collection->getIterator() as $key => $item) {
             $this->assertSame($elements[$key], $item, "Item {$key} not match");
             $iterations++;
         }
@@ -159,9 +159,9 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
     public function provideDifferentElements()
     {
         return array(
-            'indexed'     => array(array(1, 2, 3, 4, 5)),
+            'indexed' => array(array(1, 2, 3, 4, 5)),
             'associative' => array(array('A' => 'a', 'B' => 'b', 'C' => 'c')),
-            'mixed'       => array(array('A' => 'a', 1, 'B' => 'b', 2, 3)),
+            'mixed' => array(array('A' => 'a', 1, 'B' => 'b', 2, 3)),
         );
     }
 
@@ -209,9 +209,9 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
         $elements = array(1, 'A' => 'a', 2, 'null' => null, 3, 'A2' => 'a', 'B2' => 'b');
         $collection = new ArrayCollection($elements);
 
-        $this->assertTrue($collection->containsKey(0),               "Contains index 0");
-        $this->assertTrue($collection->containsKey('A'),             "Contains key \"A\"");
-        $this->assertTrue($collection->containsKey('null'),          "Contains key \"null\", with value null");
+        $this->assertTrue($collection->containsKey(0), "Contains index 0");
+        $this->assertTrue($collection->containsKey('A'), "Contains key \"A\"");
+        $this->assertTrue($collection->containsKey('null'), "Contains key \"null\", with value null");
         $this->assertFalse($collection->containsKey('non-existent'), "Doesn't contain key");
     }
 
@@ -229,9 +229,9 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
         $elements = array(1, 'A' => 'a', 2, 'null' => null, 3, 'A2' => 'a', 'zero' => 0);
         $collection = new ArrayCollection($elements);
 
-        $this->assertTrue($collection->contains(0),               "Contains Zero");
-        $this->assertTrue($collection->contains('a'),             "Contains \"a\"");
-        $this->assertTrue($collection->contains(null),            "Contains Null");
+        $this->assertTrue($collection->contains(0), "Contains Zero");
+        $this->assertTrue($collection->contains('a'), "Contains \"a\"");
+        $this->assertTrue($collection->contains(null), "Contains Null");
         $this->assertFalse($collection->contains('non-existent'), "Doesn't contain an element");
     }
 
@@ -240,11 +240,11 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
         $elements = array(1, 'A' => 'a', 2, 'null' => null, 3, 'A2' => 'a', 'zero' => 0);
         $collection = new ArrayCollection($elements);
 
-        $this->assertTrue($collection->exists(function($key, $element) {
+        $this->assertTrue($collection->exists(function ($key, $element) {
             return $key == 'A' && $element == 'a';
         }), "Element exists");
 
-        $this->assertFalse($collection->exists(function($key, $element) {
+        $this->assertFalse($collection->exists(function ($key, $element) {
             return $key == 'non-existent' && $element == 'non-existent';
         }), "Element not exists");
     }
@@ -254,8 +254,8 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
         $elements = array(1, 'A' => 'a', 2, 'null' => null, 3, 'A2' => 'a', 'zero' => 0);
         $collection = new ArrayCollection($elements);
 
-        $this->assertSame(array_search(2,              $elements, true), $collection->indexOf(2),              'Index of 2');
-        $this->assertSame(array_search(null,           $elements, true), $collection->indexOf(null),           'Index of null');
+        $this->assertSame(array_search(2, $elements, true), $collection->indexOf(2), 'Index of 2');
+        $this->assertSame(array_search(null, $elements, true), $collection->indexOf(null), 'Index of null');
         $this->assertSame(array_search('non-existent', $elements, true), $collection->indexOf('non-existent'), 'Index of non existent');
     }
 
@@ -264,8 +264,8 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
         $elements = array(1, 'A' => 'a', 2, 'null' => null, 3, 'A2' => 'a', 'zero' => 0);
         $collection = new ArrayCollection($elements);
 
-        $this->assertSame(2,    $collection->get(1),              'Get element by index');
-        $this->assertSame('a',  $collection->get('A'),            'Get element by name');
+        $this->assertSame(2, $collection->get(1), 'Get element by index');
+        $this->assertSame('a', $collection->get('A'), 'Get element by name');
         $this->assertSame(null, $collection->get('non-existent'), 'Get non existent element');
     }
 }

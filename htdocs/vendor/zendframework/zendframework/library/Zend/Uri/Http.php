@@ -26,7 +26,7 @@ class Http extends Uri
      * @see Uri::$defaultPorts
      */
     protected static $defaultPorts = array(
-        'http'  => 80,
+        'http' => 80,
         'https' => 443,
     );
 
@@ -37,12 +37,14 @@ class Http extends Uri
 
     /**
      * User name as provided in authority of URI
+     *
      * @var null|string
      */
     protected $user;
 
     /**
      * Password as provided in authority of URI
+     *
      * @var null|string
      */
     protected $password;
@@ -73,6 +75,7 @@ class Http extends Uri
         }
 
         $this->parseUserInfo();
+
         return $this->user;
     }
 
@@ -88,6 +91,7 @@ class Http extends Uri
         }
 
         $this->parseUserInfo();
+
         return $this->password;
     }
 
@@ -100,6 +104,7 @@ class Http extends Uri
     public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -112,6 +117,7 @@ class Http extends Uri
     public function setPassword($password)
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -121,7 +127,7 @@ class Http extends Uri
      * This overrides the common URI validation method with a DNS or IP only
      * default. Users may still enforce allowing other host types.
      *
-     * @param  string  $host
+     * @param  string $host
      * @param  int $allowed
      * @return bool
      */
@@ -148,6 +154,7 @@ class Http extends Uri
         // If no ':' separator, we only have a username
         if (false === strpos($this->userInfo, ':')) {
             $this->setUser($this->userInfo);
+
             return;
         }
 
@@ -172,6 +179,7 @@ class Http extends Uri
                 return static::$defaultPorts[$this->scheme];
             }
         }
+
         return $this->port;
     }
 

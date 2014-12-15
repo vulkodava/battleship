@@ -114,6 +114,7 @@ class PHPInput
             $data = substr(static::$_data, 0, $count);
             static::$_data = substr(static::$_data, $count);
         }
+
         return $data;
     }
 

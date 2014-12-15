@@ -26,8 +26,8 @@ class PortabilityTest extends \Doctrine\Tests\DbalFunctionalTestCase
     }
 
     /**
-     * @param   integer     $portabilityMode
-     * @param   integer     $case
+     * @param   integer $portabilityMode
+     * @param   integer $case
      * @return  Connection
      */
     private function getPortableConnection($portabilityMode = \Doctrine\DBAL\Portability\Connection::PORTABILITY_ALL, $case = \PDO::CASE_LOWER)
@@ -52,7 +52,7 @@ class PortabilityTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
                 $this->portableConnection->insert('portability_table', array('Test_Int' => 1, 'Test_String' => 'foo', 'Test_Null' => ''));
                 $this->portableConnection->insert('portability_table', array('Test_Int' => 2, 'Test_String' => 'foo  ', 'Test_Null' => null));
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
 
             }
         }
@@ -93,18 +93,18 @@ class PortabilityTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
         $stmt = $conn->query('SELECT * FROM portability_table');
         foreach ($stmt as $row) {
-          $this->assertFetchResultRow($row);
+            $this->assertFetchResultRow($row);
         }
 
         $stmt = $conn->query('SELECT * FROM portability_table');
         while (($row = $stmt->fetch())) {
-          $this->assertFetchResultRow($row);
+            $this->assertFetchResultRow($row);
         }
 
         $stmt = $conn->prepare('SELECT * FROM portability_table');
         $stmt->execute();
         while (($row = $stmt->fetch())) {
-          $this->assertFetchResultRow($row);
+            $this->assertFetchResultRow($row);
         }
     }
 

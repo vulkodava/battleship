@@ -48,7 +48,7 @@ class DDC1452Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $results = $this->_em->createQuery($dql)->setMaxResults(1)->getResult();
 
         $this->assertSame($results[0], $results[0]->entitiesB[0]->entityAFrom);
-        $this->assertFalse( $results[0]->entitiesB[0]->entityATo instanceof \Doctrine\ORM\Proxy\Proxy );
+        $this->assertFalse($results[0]->entitiesB[0]->entityATo instanceof \Doctrine\ORM\Proxy\Proxy);
         $this->assertInstanceOf('Doctrine\Common\Collections\Collection', $results[0]->entitiesB[0]->entityATo->getEntitiesB());
     }
 

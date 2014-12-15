@@ -74,6 +74,7 @@ class Collection implements Iterator, Countable
         foreach ($this as $item) {
             $data[] = $item;
         }
+
         return $data;
     }
 
@@ -86,8 +87,10 @@ class Collection implements Iterator, Countable
     {
         if ($this->count() > 0) {
             $this->rewind();
+
             return $this->current();
         }
+
         return null;
     }
 
@@ -132,8 +135,10 @@ class Collection implements Iterator, Countable
                 }
                 $this->cache[$this->current] = $this->createEntry($current);
             }
+
             return $this->cache[$this->current];
         }
+
         return null;
     }
 
@@ -159,8 +164,10 @@ class Collection implements Iterator, Countable
             if ($this->current < 0) {
                 $this->rewind();
             }
+
             return $this->iterator->key();
         }
+
         return null;
     }
 
@@ -176,8 +183,10 @@ class Collection implements Iterator, Countable
             if ($this->current < 0) {
                 $this->rewind();
             }
+
             return $this->current;
         }
+
         return null;
     }
 
@@ -217,6 +226,7 @@ class Collection implements Iterator, Countable
         if (isset($this->cache[$this->current])) {
             return true;
         }
+
         return $this->iterator->valid();
     }
 }

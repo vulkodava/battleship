@@ -99,11 +99,11 @@ class Column extends AbstractAsset
     /**
      * Creates a new Column.
      *
-     * @param string                    $columnName
+     * @param string $columnName
      * @param \Doctrine\DBAL\Types\Type $type
-     * @param array                     $options
+     * @param array $options
      */
-    public function __construct($columnName, Type $type, array $options=array())
+    public function __construct($columnName, Type $type, array $options = array())
     {
         $this->_setName($columnName);
         $this->setType($type);
@@ -118,7 +118,7 @@ class Column extends AbstractAsset
     public function setOptions(array $options)
     {
         foreach ($options as $name => $value) {
-            $method = "set".$name;
+            $method = "set" . $name;
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -135,6 +135,7 @@ class Column extends AbstractAsset
     public function setType(Type $type)
     {
         $this->_type = $type;
+
         return $this;
     }
 
@@ -145,7 +146,7 @@ class Column extends AbstractAsset
      */
     public function setLength($length)
     {
-        if($length !== null) {
+        if ($length !== null) {
             $this->_length = (int)$length;
         } else {
             $this->_length = null;
@@ -248,7 +249,7 @@ class Column extends AbstractAsset
 
     /**
      * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return \Doctrine\DBAL\Schema\Column
      */
@@ -387,6 +388,7 @@ class Column extends AbstractAsset
     public function setAutoincrement($flag)
     {
         $this->_autoincrement = $flag;
+
         return $this;
     }
 
@@ -412,7 +414,7 @@ class Column extends AbstractAsset
 
     /**
      * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return \Doctrine\DBAL\Schema\Column
      */
@@ -477,15 +479,15 @@ class Column extends AbstractAsset
     public function toArray()
     {
         return array_merge(array(
-            'name'          => $this->_name,
-            'type'          => $this->_type,
-            'default'       => $this->_default,
-            'notnull'       => $this->_notnull,
-            'length'        => $this->_length,
-            'precision'     => $this->_precision,
-            'scale'         => $this->_scale,
-            'fixed'         => $this->_fixed,
-            'unsigned'      => $this->_unsigned,
+            'name' => $this->_name,
+            'type' => $this->_type,
+            'default' => $this->_default,
+            'notnull' => $this->_notnull,
+            'length' => $this->_length,
+            'precision' => $this->_precision,
+            'scale' => $this->_scale,
+            'fixed' => $this->_fixed,
+            'unsigned' => $this->_unsigned,
             'autoincrement' => $this->_autoincrement,
             'columnDefinition' => $this->_columnDefinition,
             'comment' => $this->_comment,

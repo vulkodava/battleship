@@ -16,6 +16,7 @@ class Error extends AbstractObject
 {
     /**
      * All texts are accepted
+     *
      * @param string $value
      * @return bool
      */
@@ -26,6 +27,7 @@ class Error extends AbstractObject
 
     /**
      * Height is forced
+     *
      * @param bool $recalculate
      * @return int
      */
@@ -36,6 +38,7 @@ class Error extends AbstractObject
 
     /**
      * Width is forced
+     *
      * @param bool $recalculate
      * @return int
      */
@@ -47,6 +50,7 @@ class Error extends AbstractObject
     /**
      * Reset precedent instructions
      * and draw the error message
+     *
      * @return array
      */
     public function draw()
@@ -54,11 +58,13 @@ class Error extends AbstractObject
         $this->instructions = array();
         $this->addText('ERROR:', 10, array(5, 18), $this->font, 0, 'left');
         $this->addText($this->text, 10, array(5, 32), $this->font, 0, 'left');
+
         return $this->instructions;
     }
 
     /**
      * For compatibility reason
+     *
      * @return void
      */
     protected function prepareBarcode()
@@ -67,6 +73,7 @@ class Error extends AbstractObject
 
     /**
      * For compatibility reason
+     *
      * @return void
      */
     protected function checkSpecificParams()
@@ -75,6 +82,7 @@ class Error extends AbstractObject
 
     /**
      * For compatibility reason
+     *
      * @return void
      */
     protected function calculateBarcodeWidth()

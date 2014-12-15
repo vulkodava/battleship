@@ -20,8 +20,8 @@ class UnderscoreToSeparatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesCamelCasedWordsDefaultSeparator()
     {
-        $string   = 'underscore_separated_words';
-        $filter   = new UnderscoreToSeparatorFilter();
+        $string = 'underscore_separated_words';
+        $filter = new UnderscoreToSeparatorFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -30,8 +30,8 @@ class UnderscoreToSeparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSeparatesCamelCasedWordsProvidedSeparator()
     {
-        $string   = 'underscore_separated_words';
-        $filter   = new UnderscoreToSeparatorFilter(':=:');
+        $string = 'underscore_separated_words';
+        $filter = new UnderscoreToSeparatorFilter(':=:');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

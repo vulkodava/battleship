@@ -14,7 +14,7 @@ class CloseIcon extends AbstractHelper
 {
 
     const TYPE_BUTTON = 'button';
-    const TYPE_ANCOR  = 'a';
+    const TYPE_ANCOR = 'a';
 
     /**
      * Invoke CloseIcon

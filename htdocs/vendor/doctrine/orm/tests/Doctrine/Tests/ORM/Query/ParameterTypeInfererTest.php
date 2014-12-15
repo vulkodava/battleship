@@ -30,16 +30,16 @@ class ParameterTypeInfererTest extends \Doctrine\Tests\OrmTestCase
 
     public function providerParameterTypeInferer()
     {
-         return array(
-            array(1,                 Type::INTEGER),
-            array("bar",             PDO::PARAM_STR),
-            array("1",               PDO::PARAM_STR),
-            array(new \DateTime,     Type::DATETIME),
-            array(array(2),          Connection::PARAM_INT_ARRAY),
-            array(array("foo"),      Connection::PARAM_STR_ARRAY),
-            array(array("1","2"),    Connection::PARAM_STR_ARRAY),
-            array(array(),           Connection::PARAM_STR_ARRAY),
-            array(true,              Type::BOOLEAN),
+        return array(
+            array(1, Type::INTEGER),
+            array("bar", PDO::PARAM_STR),
+            array("1", PDO::PARAM_STR),
+            array(new \DateTime, Type::DATETIME),
+            array(array(2), Connection::PARAM_INT_ARRAY),
+            array(array("foo"), Connection::PARAM_STR_ARRAY),
+            array(array("1", "2"), Connection::PARAM_STR_ARRAY),
+            array(array(), Connection::PARAM_STR_ARRAY),
+            array(true, Type::BOOLEAN),
         );
     }
 

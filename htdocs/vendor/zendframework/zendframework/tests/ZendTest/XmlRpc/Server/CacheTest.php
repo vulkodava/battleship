@@ -18,12 +18,14 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Server object
+     *
      * @var Server
      */
     protected $_server;
 
     /**
      * Local file for caching
+     *
      * @var string
      */
     protected $_file;

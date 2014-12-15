@@ -91,17 +91,17 @@ class RarTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter  = new RarCompression(
+        $filter = new RarCompression(
             array(
-                'archive'  => dirname(__DIR__) . '/_files/compressed.rar',
-                'target'   => dirname(__DIR__) . '/_files/zipextracted.txt',
+                'archive' => dirname(__DIR__) . '/_files/compressed.rar',
+                'target' => dirname(__DIR__) . '/_files/zipextracted.txt',
                 'callback' => array(__CLASS__, 'rarCompress')
             )
         );
 
         $content = $filter->compress('compress me');
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-                            . DIRECTORY_SEPARATOR . 'compressed.rar', $content);
+            . DIRECTORY_SEPARATOR . 'compressed.rar', $content);
 
         $content = $filter->decompress($content);
         $this->assertTrue($content);
@@ -119,10 +119,10 @@ class RarTest extends \PHPUnit_Framework_TestCase
         $filter = new RarCompression();
         $this->assertEquals(
             array(
-                'archive'  => null,
+                'archive' => null,
                 'callback' => null,
                 'password' => null,
-                'target'   => '.',
+                'target' => '.',
             ),
             $filter->getOptions()
         );
@@ -222,10 +222,10 @@ class RarTest extends \PHPUnit_Framework_TestCase
      */
     public function testRarCompressFile()
     {
-        $filter  = new RarCompression(
+        $filter = new RarCompression(
             array(
-                'archive'  => dirname(__DIR__) . '/_files/compressed.rar',
-                'target'   => dirname(__DIR__) . '/_files/zipextracted.txt',
+                'archive' => dirname(__DIR__) . '/_files/compressed.rar',
+                'target' => dirname(__DIR__) . '/_files/zipextracted.txt',
                 'callback' => array(__CLASS__, 'rarCompress')
             )
         );
@@ -233,7 +233,7 @@ class RarTest extends \PHPUnit_Framework_TestCase
 
         $content = $filter->compress(dirname(__DIR__) . '/_files/zipextracted.txt');
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-                            . DIRECTORY_SEPARATOR . 'compressed.rar', $content);
+            . DIRECTORY_SEPARATOR . 'compressed.rar', $content);
 
         $content = $filter->decompress($content);
         $this->assertTrue($content);
@@ -248,28 +248,28 @@ class RarTest extends \PHPUnit_Framework_TestCase
      */
     public function testRarCompressDirectory()
     {
-        $filter  = new RarCompression(
+        $filter = new RarCompression(
             array(
-                'archive'  => dirname(__DIR__) . '/_files/compressed.rar',
-                'target'   => dirname(__DIR__) . '/_files/_compress',
+                'archive' => dirname(__DIR__) . '/_files/compressed.rar',
+                'target' => dirname(__DIR__) . '/_files/_compress',
                 'callback' => array(__CLASS__, 'rarCompress')
             )
         );
         $content = $filter->compress(dirname(__DIR__) . '/_files/Compress');
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-                            . DIRECTORY_SEPARATOR . 'compressed.rar', $content);
+            . DIRECTORY_SEPARATOR . 'compressed.rar', $content);
 
         mkdir(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . '_compress');
         $content = $filter->decompress($content);
         $this->assertTrue($content);
 
         $base = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-              . DIRECTORY_SEPARATOR . '_compress' . DIRECTORY_SEPARATOR . 'Compress' . DIRECTORY_SEPARATOR;
+            . DIRECTORY_SEPARATOR . '_compress' . DIRECTORY_SEPARATOR . 'Compress' . DIRECTORY_SEPARATOR;
         $this->assertTrue(file_exists($base));
         $this->assertTrue(file_exists($base . 'zipextracted.txt'));
         $this->assertTrue(file_exists($base . 'First' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
         $this->assertTrue(file_exists($base . 'First' . DIRECTORY_SEPARATOR .
-                          'Second' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
+            'Second' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
         $content = file_get_contents(dirname(__DIR__) . '/_files/Compress/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }

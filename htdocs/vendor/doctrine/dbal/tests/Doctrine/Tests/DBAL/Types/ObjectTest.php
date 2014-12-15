@@ -36,7 +36,7 @@ class ObjectTest extends \Doctrine\Tests\DbalTestCase
 
     public function testConversionFailure()
     {
-        error_reporting( (E_ALL | E_STRICT) - \E_NOTICE );
+        error_reporting((E_ALL | E_STRICT) - \E_NOTICE);
         $this->setExpectedException('Doctrine\DBAL\Types\ConversionException');
         $this->_type->convertToPHPValue('abcdefg', $this->_platform);
     }

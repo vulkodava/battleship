@@ -83,6 +83,7 @@ class WindowsAnsicon extends Posix
         } else {
             $height = AbstractAdapter::getHeight();
         }
+
         return $height;
     }
 
@@ -114,7 +115,7 @@ class WindowsAnsicon extends Posix
         }
 
         if (preg_match('/Code page\:\s+(\d+)/', $this->modeResult, $matches)) {
-            return (int) $matches[1] == 65001;
+            return (int)$matches[1] == 65001;
         }
 
         return false;
@@ -165,7 +166,6 @@ class WindowsAnsicon extends Posix
     /**
      * Get charset currently in use by this adapter.
      *
-
      * @return CharsetInterface $charset
      */
     public function getCharset()
@@ -259,7 +259,7 @@ class WindowsAnsicon extends Posix
             $result = $return = null;
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                . '[int[]] $mask = '.join(',', $asciiMask).';'
+                . '[int[]] $mask = ' . join(',', $asciiMask) . ';'
                 . 'do {'
                 . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
                 . '} while ( !($mask -contains $key) );'

@@ -2,9 +2,9 @@
 /**
  * Zend Developer Tools for Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/ZendDeveloperTools for the canonical source repository
+ * @link      http://github.com/zendframework/ZendDeveloperTools for the canonical source repository
  * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendDeveloperTools\Listener;
@@ -20,7 +20,7 @@ use ZendDeveloperTools\Profiler;
  * Listens to defined events to allow event-level collection of statistics.
  *
  * @author Mark Garrett <mark@moderndeveloperllc.com>
- * @since 0.0.3
+ * @since  0.0.3
  */
 class EventLoggingListenerAggregate implements SharedListenerAggregateInterface
 {
@@ -38,7 +38,7 @@ class EventLoggingListenerAggregate implements SharedListenerAggregateInterface
      * Constructor.
      *
      * @param \ZendDeveloperTools\Collector\EventCollectorInterface[] $collectors
-     * @param string[]                                                $identifiers
+     * @param string[] $identifiers
      */
     public function __construct(array $collectors, array $identifiers)
     {
@@ -50,7 +50,7 @@ class EventLoggingListenerAggregate implements SharedListenerAggregateInterface
         );
         $this->identifiers = array_values(array_map(
             function ($identifier) {
-                return (string) $identifier;
+                return (string)$identifier;
             },
             $identifiers
         ));
@@ -61,7 +61,7 @@ class EventLoggingListenerAggregate implements SharedListenerAggregateInterface
      */
     public function attachShared(SharedEventManagerInterface $events)
     {
-        $events->attach($this->identifiers, '*', array($this,'onCollectEvent'), Profiler::PRIORITY_EVENT_COLLECTOR);
+        $events->attach($this->identifiers, '*', array($this, 'onCollectEvent'), Profiler::PRIORITY_EVENT_COLLECTOR);
     }
 
     /**

@@ -19,7 +19,7 @@ class DDC1250Test extends \Doctrine\Tests\OrmFunctionalTestCase
             $this->_schemaTool->createSchema(array(
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\\DDC1250ClientHistory'),
             ));
-        } catch(\PDOException $e) {
+        } catch (\PDOException $e) {
 
         }
     }
@@ -31,7 +31,7 @@ class DDC1250Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $c1->declinedClientsHistory = $c2;
         $c1->declinedBy = $c2;
         $c2->declinedBy = $c1;
-        $c2->declinedClientsHistory= $c1;
+        $c2->declinedClientsHistory = $c1;
 
         $this->_em->persist($c1);
         $this->_em->persist($c2);
@@ -39,7 +39,7 @@ class DDC1250Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->clear();
 
         $history = $this->_em->createQuery('SELECT h FROM ' . __NAMESPACE__ . '\\DDC1250ClientHistory h WHERE h.id = ?1')
-                  ->setParameter(1, $c2->id)->getSingleResult();
+            ->setParameter(1, $c2->id)->getSingleResult();
 
         $this->assertInstanceOf(__NAMESPACE__ . '\\DDC1250ClientHistory', $history);
     }
@@ -67,30 +67,30 @@ class DDC1250ClientHistory
 
 /**
  *
-Entities\ClientsHistory:
-type: entity
-table: clients_history
-fields:
-id:
-id: true
-type: integer
-unsigned: false
-nullable: false
-generator:
-strategy: IDENTITY
-[...skiped...]
-oneToOne:
-declinedClientsHistory:
-targetEntity: Entities\ClientsHistory
-joinColumn:
-name: declined_clients_history_id
-referencedColumnName: id
-inversedBy: declinedBy
-declinedBy:
-targetEntity: Entities\ClientsHistory
-mappedBy: declinedClientsHistory
-lifecycleCallbacks: { }
-repositoryClass: Entities\ClientsHistoryRepository
+ * Entities\ClientsHistory:
+ * type: entity
+ * table: clients_history
+ * fields:
+ * id:
+ * id: true
+ * type: integer
+ * unsigned: false
+ * nullable: false
+ * generator:
+ * strategy: IDENTITY
+ * [...skiped...]
+ * oneToOne:
+ * declinedClientsHistory:
+ * targetEntity: Entities\ClientsHistory
+ * joinColumn:
+ * name: declined_clients_history_id
+ * referencedColumnName: id
+ * inversedBy: declinedBy
+ * declinedBy:
+ * targetEntity: Entities\ClientsHistory
+ * mappedBy: declinedClientsHistory
+ * lifecycleCallbacks: { }
+ * repositoryClass: Entities\ClientsHistoryRepository
 
 
  */

@@ -34,7 +34,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
             }
 
             $query->setHint(Query::HINT_FORCE_PARTIAL_LOAD, true)
-                  ->useQueryCache(false);
+                ->useQueryCache(false);
 
             foreach ($queryHints AS $name => $value) {
                 $query->setHint($name, $value);
@@ -50,7 +50,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
 
             $query->free();
         } catch (\Exception $e) {
-            $this->fail($e->getMessage() ."\n".$e->getTraceAsString());
+            $this->fail($e->getMessage() . "\n" . $e->getTraceAsString());
         }
     }
 
@@ -73,7 +73,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
         }
 
         $query->setHint(Query::HINT_FORCE_PARTIAL_LOAD, true)
-              ->useQueryCache(false);
+            ->useQueryCache(false);
 
         foreach ($queryHints AS $name => $value) {
             $query->setHint($name, $value);
@@ -233,6 +233,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
             'SELECT f0_.id AS id0, f0_.username AS username1 FROM forum_users f0_ ORDER BY f0_.id ASC'
         );
     }
+
     public function testSupportsOrderByDesc()
     {
         $this->assertSqlGeneration(
@@ -690,8 +691,8 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
     public function testExistsExpressionInWhereCorrelatedSubqueryAssocCondition()
     {
         $this->assertSqlGeneration(
-            // DQL
-            // The result of this query consists of all employees whose spouses are also employees.
+        // DQL
+        // The result of this query consists of all employees whose spouses are also employees.
             'SELECT DISTINCT emp FROM Doctrine\Tests\Models\CMS\CmsEmployee emp
                 WHERE EXISTS (
                     SELECT spouseEmp
@@ -699,17 +700,17 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
                     WHERE spouseEmp = emp.spouse)',
             // SQL
             'SELECT DISTINCT c0_.id AS id0, c0_.name AS name1 FROM cms_employees c0_'
-                . ' WHERE EXISTS ('
-                    . 'SELECT c1_.id FROM cms_employees c1_ WHERE c1_.id = c0_.spouse_id'
-                    . ')'
+            . ' WHERE EXISTS ('
+            . 'SELECT c1_.id FROM cms_employees c1_ WHERE c1_.id = c0_.spouse_id'
+            . ')'
         );
     }
 
     public function testExistsExpressionWithSimpleSelectReturningScalar()
     {
         $this->assertSqlGeneration(
-            // DQL
-            // The result of this query consists of all employees whose spouses are also employees.
+        // DQL
+        // The result of this query consists of all employees whose spouses are also employees.
             'SELECT DISTINCT emp FROM Doctrine\Tests\Models\CMS\CmsEmployee emp
                 WHERE EXISTS (
                     SELECT 1
@@ -717,9 +718,9 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
                     WHERE spouseEmp = emp.spouse)',
             // SQL
             'SELECT DISTINCT c0_.id AS id0, c0_.name AS name1 FROM cms_employees c0_'
-                . ' WHERE EXISTS ('
-                    . 'SELECT 1 AS sclr2 FROM cms_employees c1_ WHERE c1_.id = c0_.spouse_id'
-                    . ')'
+            . ' WHERE EXISTS ('
+            . 'SELECT 1 AS sclr2 FROM cms_employees c1_ WHERE c1_.id = c0_.spouse_id'
+            . ')'
         );
     }
 
@@ -922,17 +923,17 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
     public function testStringFunctionNotLikeExpression()
     {
         $this->assertSqlGeneration(
-                "SELECT u.name FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE LOWER(u.name) NOT LIKE '%foo OR bar%'",
-                "SELECT c0_.name AS name0 FROM cms_users c0_ WHERE LOWER(c0_.name) NOT LIKE '%foo OR bar%'"
+            "SELECT u.name FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE LOWER(u.name) NOT LIKE '%foo OR bar%'",
+            "SELECT c0_.name AS name0 FROM cms_users c0_ WHERE LOWER(c0_.name) NOT LIKE '%foo OR bar%'"
         );
 
         $this->assertSqlGeneration(
-                "SELECT u.name FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE UPPER(LOWER(u.name)) NOT LIKE UPPER(LOWER(:str))",
-                "SELECT c0_.name AS name0 FROM cms_users c0_ WHERE UPPER(LOWER(c0_.name)) NOT LIKE UPPER(LOWER(?))"
+            "SELECT u.name FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE UPPER(LOWER(u.name)) NOT LIKE UPPER(LOWER(:str))",
+            "SELECT c0_.name AS name0 FROM cms_users c0_ WHERE UPPER(LOWER(c0_.name)) NOT LIKE UPPER(LOWER(?))"
         );
         $this->assertSqlGeneration(
-                "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u LEFT JOIN u.articles a WITH a.topic NOT LIKE u.name",
-                "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 FROM cms_users c0_ LEFT JOIN cms_articles c1_ ON c0_.id = c1_.user_id AND (c1_.topic NOT LIKE c0_.name)"
+            "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u LEFT JOIN u.articles a WITH a.topic NOT LIKE u.name",
+            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 FROM cms_users c0_ LEFT JOIN cms_articles c1_ ON c0_.id = c1_.user_id AND (c1_.topic NOT LIKE c0_.name)"
         );
     }
 
@@ -943,7 +944,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
     {
         $this->assertSqlGeneration(
             "SELECT r, l FROM Doctrine\Tests\Models\Routing\RoutingRoute r JOIN r.legs l",
-            "SELECT r0_.id AS id0, r1_.id AS id1, r1_.departureDate AS departureDate2, r1_.arrivalDate AS arrivalDate3 FROM RoutingRoute r0_ INNER JOIN RoutingRouteLegs r2_ ON r0_.id = r2_.route_id INNER JOIN RoutingLeg r1_ ON r1_.id = r2_.leg_id ".
+            "SELECT r0_.id AS id0, r1_.id AS id1, r1_.departureDate AS departureDate2, r1_.arrivalDate AS arrivalDate3 FROM RoutingRoute r0_ INNER JOIN RoutingRouteLegs r2_ ON r0_.id = r2_.route_id INNER JOIN RoutingLeg r1_ ON r1_.id = r2_.leg_id " .
             "ORDER BY r1_.departureDate ASC"
         );
     }
@@ -968,7 +969,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
 
         $this->assertSqlGeneration(
             "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.username = 'gblanco'",
-            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 ".
+            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 " .
             "FROM cms_users c0_ WHERE c0_.username = 'gblanco' FOR UPDATE",
             array(Query::HINT_LOCK_MODE => \Doctrine\DBAL\LockMode::PESSIMISTIC_WRITE)
         );
@@ -984,10 +985,10 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
 
         $this->assertSqlGeneration(
             "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.username = 'gblanco'",
-            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 ".
+            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 " .
             "FROM cms_users c0_ WHERE c0_.username = 'gblanco' FOR SHARE",
             array(Query::HINT_LOCK_MODE => \Doctrine\DBAL\LockMode::PESSIMISTIC_READ)
-                );
+        );
     }
 
     /**
@@ -998,10 +999,10 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
     {
         $this->assertSqlGeneration(
             "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.username = 'gblanco'",
-            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 ".
+            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 " .
             "FROM cms_users c0_ WHERE c0_.username = 'gblanco'",
             array(Query::HINT_LOCK_MODE => \Doctrine\DBAL\LockMode::NONE)
-                );
+        );
     }
 
     /**
@@ -1025,7 +1026,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
 
         $this->assertSqlGeneration(
             "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.username = 'gblanco'",
-            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 ".
+            "SELECT c0_.id AS id0, c0_.status AS status1, c0_.username AS username2, c0_.name AS name3 " .
             "FROM cms_users c0_ WHERE c0_.username = 'gblanco' LOCK IN SHARE MODE",
             array(Query::HINT_LOCK_MODE => \Doctrine\DBAL\LockMode::PESSIMISTIC_READ)
         );
@@ -1041,7 +1042,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
 
         $this->assertSqlGeneration(
             "SELECT u FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.username = 'gblanco'",
-            "SELECT c0_.id AS ID0, c0_.status AS STATUS1, c0_.username AS USERNAME2, c0_.name AS NAME3 ".
+            "SELECT c0_.id AS ID0, c0_.status AS STATUS1, c0_.username AS USERNAME2, c0_.name AS NAME3 " .
             "FROM cms_users c0_ WHERE c0_.username = 'gblanco' FOR UPDATE",
             array(Query::HINT_LOCK_MODE => \Doctrine\DBAL\LockMode::PESSIMISTIC_READ)
         );
@@ -1518,7 +1519,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
     public function testAliasDoesNotExceedPlatformDefinedLength()
     {
         $this->assertSqlGeneration(
-            'SELECT m FROM ' . __NAMESPACE__ .  '\\DDC1384Model m',
+            'SELECT m FROM ' . __NAMESPACE__ . '\\DDC1384Model m',
             "SELECT d0_.aVeryLongIdentifierThatShouldBeShortenedByTheSQLWalker_fooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo AS fooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo0 FROM DDC1384Model d0_"
         );
     }
@@ -1534,6 +1535,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
             'SELECT c0_.name AS name0 FROM company_employees c1_ INNER JOIN company_persons c0_ ON c1_.id = c0_.id'
         );
     }
+
     /**
      * @group DDC-1435
      */
@@ -1561,7 +1563,7 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
         );
     }
 
-     /**
+    /**
      * @group DDC-1430
      */
     public function testGroupByAllFieldsWhenObjectHasForeignKeys()
@@ -1884,9 +1886,9 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
         );
     }
 
-   /**
-    * @group DDC-1845
-    */
+    /**
+     * @group DDC-1845
+     */
     public function testQuotedWalkJoinVariableDeclaration()
     {
         $this->assertSqlGeneration(
@@ -1920,9 +1922,9 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
         );
     }
 
-   /**
-    * @group DDC-2208
-    */
+    /**
+     * @group DDC-2208
+     */
     public function testCaseThenParameterArithmeticExpression()
     {
         $this->assertSqlGeneration(
@@ -1942,8 +1944,8 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
     }
 
     /**
-    * @group DDC-2268
-    */
+     * @group DDC-2268
+     */
     public function testCaseThenFunction()
     {
         $this->assertSqlGeneration(
@@ -1967,43 +1969,43 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
      */
     public function testSupportsMoreThanTwoParametersInConcatFunction()
     {
-    	$connMock    = $this->_em->getConnection();
-    	$orgPlatform = $connMock->getDatabasePlatform();
+        $connMock = $this->_em->getConnection();
+        $orgPlatform = $connMock->getDatabasePlatform();
 
-    	$connMock->setDatabasePlatform(new \Doctrine\DBAL\Platforms\MySqlPlatform);
-    	$this->assertSqlGeneration(
+        $connMock->setDatabasePlatform(new \Doctrine\DBAL\Platforms\MySqlPlatform);
+        $this->assertSqlGeneration(
             "SELECT u.id FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE CONCAT(u.name, u.status, 's') = ?1",
             "SELECT c0_.id AS id0 FROM cms_users c0_ WHERE CONCAT(c0_.name, c0_.status, 's') = ?"
-    	);
-    	$this->assertSqlGeneration(
+        );
+        $this->assertSqlGeneration(
             "SELECT CONCAT(u.id, u.name, u.status) FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.id = ?1",
             "SELECT CONCAT(c0_.id, c0_.name, c0_.status) AS sclr0 FROM cms_users c0_ WHERE c0_.id = ?"
-    	);
+        );
 
-    	$connMock->setDatabasePlatform(new \Doctrine\DBAL\Platforms\PostgreSqlPlatform);
-    	$this->assertSqlGeneration(
+        $connMock->setDatabasePlatform(new \Doctrine\DBAL\Platforms\PostgreSqlPlatform);
+        $this->assertSqlGeneration(
             "SELECT u.id FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE CONCAT(u.name, u.status, 's') = ?1",
             "SELECT c0_.id AS id0 FROM cms_users c0_ WHERE c0_.name || c0_.status || 's' = ?"
-    	);
-    	$this->assertSqlGeneration(
+        );
+        $this->assertSqlGeneration(
             "SELECT CONCAT(u.id, u.name, u.status) FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.id = ?1",
             "SELECT c0_.id || c0_.name || c0_.status AS sclr0 FROM cms_users c0_ WHERE c0_.id = ?"
-    	);
+        );
 
-    	$connMock->setDatabasePlatform(new \Doctrine\DBAL\Platforms\SQLServerPlatform());
-    	$this->assertSqlGeneration(
+        $connMock->setDatabasePlatform(new \Doctrine\DBAL\Platforms\SQLServerPlatform());
+        $this->assertSqlGeneration(
             "SELECT u.id FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE CONCAT(u.name, u.status, 's') = ?1",
             "SELECT c0_.id AS id0 FROM cms_users c0_ WHERE (c0_.name + c0_.status + 's') = ?"
-    	);
-    	$this->assertSqlGeneration(
+        );
+        $this->assertSqlGeneration(
             "SELECT CONCAT(u.id, u.name, u.status) FROM Doctrine\Tests\Models\CMS\CmsUser u WHERE u.id = ?1",
             "SELECT (c0_.id + c0_.name + c0_.status) AS sclr0 FROM cms_users c0_ WHERE c0_.id = ?"
-    	);
+        );
 
-    	$connMock->setDatabasePlatform($orgPlatform);
+        $connMock->setDatabasePlatform($orgPlatform);
     }
 
-     /**
+    /**
      * @group DDC-2188
      */
     public function testArithmeticPriority()
@@ -2025,8 +2027,8 @@ class SelectSqlGenerationTest extends \Doctrine\Tests\OrmTestCase
     }
 
     /**
-    * @group DDC-2475
-    */
+     * @group DDC-2475
+     */
     public function testOrderByClauseShouldReplaceOrderByRelationMapping()
     {
         $this->assertSqlGeneration(
@@ -2181,6 +2183,7 @@ class MyAbsFunction extends \Doctrine\ORM\Query\AST\Functions\FunctionNode
         $parser->match(\Doctrine\ORM\Query\Lexer::T_CLOSE_PARENTHESIS);
     }
 }
+
 /**
  * @Entity
  */

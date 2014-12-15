@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -43,7 +43,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->serviceLocator  = $locator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
+        $this->serviceLocator = $locator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
         $this->authorize = $authorize = $this->getMock('BjyAuthorize\\Service\\Authorize', array(), array(), '', false);
         $this->controllerGuard = new Controller(array(), $this->serviceLocator);
 
@@ -80,14 +80,14 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider controllersRulesProvider
      *
-     * @covers \BjyAuthorize\Guard\Controller::__construct
-     * @covers \BjyAuthorize\Guard\Controller::getResources
-     * @covers \BjyAuthorize\Guard\Controller::getRules
+     * @covers       \BjyAuthorize\Guard\Controller::__construct
+     * @covers       \BjyAuthorize\Guard\Controller::getResources
+     * @covers       \BjyAuthorize\Guard\Controller::getRules
      *
-     * @param array     $rule
-     * @param int       $expectedCount
-     * @param string    $resource
-     * @param array     $roles
+     * @param array $rule
+     * @param int $expectedCount
+     * @param string $resource
+     * @param array $roles
      */
     public function testGetResourcesGetRules($rule, $expectedCount, $resource, $roles)
     {
@@ -238,10 +238,10 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     private function createMvcEvent($controller = null, $action = null, $method = null)
     {
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
-        $application  = $this->getMock('Zend\\Mvc\\Application', array(), array(), '', false);
-        $event        = $this->getMock('Zend\\Mvc\\MvcEvent');
-        $routeMatch   = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
-        $request      = $this->getMock('Zend\\Http\\Request');
+        $application = $this->getMock('Zend\\Mvc\\Application', array(), array(), '', false);
+        $event = $this->getMock('Zend\\Mvc\\MvcEvent');
+        $routeMatch = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
+        $request = $this->getMock('Zend\\Http\\Request');
 
         $event->expects($this->any())->method('getRouteMatch')->will($this->returnValue($routeMatch));
         $event->expects($this->any())->method('getRequest')->will($this->returnValue($request));
@@ -282,8 +282,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             array(
                 array(
                     'controller' => 'test-controller',
-                    'action'     => 'test-action',
-                    'roles'      => array(
+                    'action' => 'test-action',
+                    'roles' => array(
                         'admin',
                         'user',
                     ),
@@ -295,7 +295,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             array(
                 array(
                     'controller' => 'test2-controller',
-                    'roles'      => array(
+                    'roles' => array(
                         'admin2',
                         'user2',
                     ),
@@ -307,8 +307,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             array(
                 array(
                     'controller' => 'test3-controller',
-                    'action'     => 'test3-action',
-                    'roles'      => 'admin3'
+                    'action' => 'test3-action',
+                    'roles' => 'admin3'
                 ),
                 1,
                 'controller/test3-controller:test3-action',
@@ -317,11 +317,11 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             array(
                 array(
                     'controller' => 'test4-controller',
-                    'action'     => array(
+                    'action' => array(
                         'test4-action',
                         'test5-action',
                     ),
-                    'roles'      => array(
+                    'roles' => array(
                         'admin4',
                         'user3',
                     ),
@@ -333,11 +333,11 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             array(
                 array(
                     'controller' => 'test4-controller',
-                    'action'     => array(
+                    'action' => array(
                         'test4-action',
                         'test5-action',
                     ),
-                    'roles'      => array(
+                    'roles' => array(
                         'admin4',
                         'user3',
                     ),
@@ -349,8 +349,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             array(
                 array(
                     'controller' => 'test5-controller',
-                    'action'     => null,
-                    'roles'      => 'user4'
+                    'action' => null,
+                    'roles' => 'user4'
                 ),
                 1,
                 'controller/test5-controller',
@@ -362,8 +362,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase
                         'test6-controller',
                         'test7-controller',
                     ),
-                    'action'     => null,
-                    'roles'      => 'user5'
+                    'action' => null,
+                    'roles' => 'user5'
                 ),
                 2,
                 'controller/test6-controller',
@@ -375,8 +375,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase
                         'test6-controller',
                         'test7-controller',
                     ),
-                    'action'     => null,
-                    'roles'      => 'user5'
+                    'action' => null,
+                    'roles' => 'user5'
                 ),
                 2,
                 'controller/test7-controller',
@@ -388,11 +388,11 @@ class ControllerTest extends PHPUnit_Framework_TestCase
                         'test6-controller',
                         'test7-controller',
                     ),
-                    'action'     => array(
+                    'action' => array(
                         'test6-action',
                         'test7-action',
                     ),
-                    'roles'      => array(
+                    'roles' => array(
                         'admin5',
                         'user6',
                     ),
@@ -407,11 +407,11 @@ class ControllerTest extends PHPUnit_Framework_TestCase
                         'test6-controller',
                         'test7-controller',
                     ),
-                    'action'     => array(
+                    'action' => array(
                         'test6-action',
                         'test7-action',
                     ),
-                    'roles'      => array(
+                    'roles' => array(
                         'admin5',
                         'user6',
                     ),

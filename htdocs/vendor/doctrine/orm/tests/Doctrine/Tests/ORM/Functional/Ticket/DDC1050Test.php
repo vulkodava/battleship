@@ -3,6 +3,7 @@
 namespace Doctrine\Tests\ORM\Functional\Ticket;
 
 use Doctrine\Common\Collections\ArrayCollection;
+
 require_once __DIR__ . '/../../../TestInit.php';
 
 /**
@@ -22,7 +23,7 @@ class DDC1050Test extends \Doctrine\Tests\OrmFunctionalTestCase
         for ($i = 2; $i < 10000; ++$i) {
             $user = new \Doctrine\Tests\Models\CMS\CmsUser();
             $user->status = 'developer';
-            $user->username = 'jwage'+$i;
+            $user->username = 'jwage' + $i;
             $user->name = 'Jonathan';
             $this->_em->persist($user);
         }

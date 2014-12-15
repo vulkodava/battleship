@@ -133,10 +133,10 @@ class GearmanLockTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->gearman->runTasks();
 
         $this->assertTrue($this->maxRunTime > $forTime,
-            "Because of locking this tests should have run at least " . $forTime . " seconds, ".
+            "Because of locking this tests should have run at least " . $forTime . " seconds, " .
             "but only did for " . $this->maxRunTime . " seconds.");
         $this->assertTrue($this->maxRunTime < $notLongerThan,
-            "The longest task should not run longer than " . $notLongerThan . " seconds, ".
+            "The longest task should not run longer than " . $notLongerThan . " seconds, " .
             "but did for " . $this->maxRunTime . " seconds."
         );
     }

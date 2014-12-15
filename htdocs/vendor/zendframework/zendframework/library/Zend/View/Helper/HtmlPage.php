@@ -19,7 +19,7 @@ class HtmlPage extends AbstractHtmlElement
     /**
      * Object classid
      */
-    const ATTRIB_CLASSID  = 'clsid:25336920-03F9-11CF-8FD0-00AA00686F13';
+    const ATTRIB_CLASSID = 'clsid:25336920-03F9-11CF-8FD0-00AA00686F13';
 
     /**
      * Default attributes
@@ -32,8 +32,8 @@ class HtmlPage extends AbstractHtmlElement
      * Output a html object tag
      *
      * @param  string $data    The html url
-     * @param  array  $attribs Attribs for the object tag
-     * @param  array  $params  Params for in the object tag
+     * @param  array $attribs  Attribs for the object tag
+     * @param  array $params   Params for in the object tag
      * @param  string $content Alternative content
      * @return string
      */
@@ -46,6 +46,7 @@ class HtmlPage extends AbstractHtmlElement
         $params = array_merge(array('data' => $data), $params);
 
         $htmlObject = $this->getView()->plugin('htmlObject');
+
         return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

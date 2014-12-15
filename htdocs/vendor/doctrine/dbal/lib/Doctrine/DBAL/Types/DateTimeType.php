@@ -63,7 +63,7 @@ class DateTimeType extends Type
         }
 
         $val = \DateTime::createFromFormat($platform->getDateTimeFormatString(), $value);
-        if ( ! $val) {
+        if (!$val) {
             throw ConversionException::conversionFailedFormat($value, $this->getName(), $platform->getDateTimeFormatString());
         }
 

@@ -14,6 +14,7 @@ use Zend\Permissions\Acl\Role;
 class User implements Role\RoleInterface
 {
     public $role = 'guest';
+
     public function getRoleId()
     {
         return $this->role;

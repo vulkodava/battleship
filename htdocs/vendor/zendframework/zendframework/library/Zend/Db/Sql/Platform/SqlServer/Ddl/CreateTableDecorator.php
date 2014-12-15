@@ -27,6 +27,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     public function setSubject($subject)
     {
         $this->createTable = $subject;
+
         return $this;
     }
 
@@ -40,6 +41,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
         foreach (get_object_vars($this->createTable) as $name => $value) {
             $this->{$name} = $value;
         }
+
         return parent::getSqlString($platform);
     }
 
@@ -56,6 +58,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
             $table = '';
         }
         $ret[] = $adapterPlatform->quoteIdentifier($table . ltrim($this->table, '#'));
+
         return $ret;
     }
 }

@@ -30,7 +30,7 @@ class SnappyTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter  = new SnappyCompression();
+        $filter = new SnappyCompression();
 
         $content = $filter->compress('compress me');
         $this->assertNotEquals('compress me', $content);

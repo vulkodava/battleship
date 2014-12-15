@@ -35,16 +35,17 @@ class ProxyAdapterTest extends SocketTest
     protected function setUp()
     {
         if (defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY') &&
-              TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY) {
+            TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY
+        ) {
             list($host, $port) = explode(':', TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY, 2);
 
-            if (! $host) {
+            if (!$host) {
                 $this->markTestSkipped('No valid proxy host name or address specified.');
             }
 
             $this->host = $host;
 
-            $port = (int) $port;
+            $port = (int)$port;
             if ($port == 0) {
                 $port = 8080;
             } else {
@@ -58,18 +59,20 @@ class ProxyAdapterTest extends SocketTest
             $user = '';
             $pass = '';
             if (defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER') &&
-                TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER) {
+                TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER
+            ) {
                 $user = TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER;
             }
 
             if (defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS') &&
-                TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS) {
+                TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS
+            ) {
                 $pass = TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS;
             }
 
 
             $this->config = array(
-                'adapter'    => '\Zend\Http\Client\Adapter\Proxy',
+                'adapter' => '\Zend\Http\Client\Adapter\Proxy',
                 'proxy_host' => $host,
                 'proxy_port' => $port,
                 'proxy_user' => $user,
@@ -112,8 +115,8 @@ class ProxyAdapterTest extends SocketTest
     public function testDefaultConfig()
     {
         $config = $this->_adapter->getConfig();
-        $this->assertEquals(TRUE, $config['sslverifypeer']);
-        $this->assertEquals(FALSE, $config['sslallowselfsigned']);
+        $this->assertEquals(true, $config['sslverifypeer']);
+        $this->assertEquals(false, $config['sslallowselfsigned']);
     }
 
     /**

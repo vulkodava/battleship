@@ -34,7 +34,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testShouldAcceptAnyCallableOnConstructor()
     {
         $itemsCallback = function () {
-            return range(1,  10);
+            return range(1, 10);
         };
         $countCallback = 'rand';
         $adapter = new Callback($itemsCallback, $countCallback);
@@ -45,11 +45,12 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testMustRunItemCallbackToGetItems()
     {
-        $data = range(1,  10);
+        $data = range(1, 10);
         $itemsCallback = function () use ($data) {
             return $data;
         };
-        $countCallback = function () {};
+        $countCallback = function () {
+        };
         $adapter = new Callback($itemsCallback, $countCallback);
 
         $this->assertSame($data, $adapter->getItems(0, 10));
@@ -61,7 +62,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $itemsCallback = function ($offset, $itemCountPerPage) {
             return range($offset, $itemCountPerPage);
         };
-        $countCallback = function () {};
+        $countCallback = function () {
+        };
         $adapter = new Callback($itemsCallback, $countCallback);
 
         $this->assertSame($data, $adapter->getItems(0, 3));
@@ -70,7 +72,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testMustRunCountCallbackToCount()
     {
         $count = 1988;
-        $itemsCallback = function () {};
+        $itemsCallback = function () {
+        };
         $countCallback = function () use ($count) {
             return $count;
         };

@@ -43,7 +43,7 @@ class ArithmeticFactor extends Node
     public $sign;
 
     /**
-     * @param mixed     $arithmeticPrimary
+     * @param mixed $arithmeticPrimary
      * @param null|bool $sign
      */
     public function __construct($arithmeticPrimary, $sign = null)

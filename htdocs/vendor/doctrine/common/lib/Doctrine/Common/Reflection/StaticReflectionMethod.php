@@ -40,7 +40,7 @@ class StaticReflectionMethod extends ReflectionMethod
 
     /**
      * @param StaticReflectionParser $staticReflectionParser
-     * @param string                 $methodName
+     * @param string $methodName
      */
     public function __construct(StaticReflectionParser $staticReflectionParser, $methodName)
     {

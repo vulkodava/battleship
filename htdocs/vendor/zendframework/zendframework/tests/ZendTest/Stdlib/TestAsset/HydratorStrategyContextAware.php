@@ -19,12 +19,14 @@ class HydratorStrategyContextAware extends DefaultStrategy
     public function extract($value, $object = null)
     {
         $this->object = $object;
+
         return $value;
     }
 
     public function hydrate($value, $data = null)
     {
         $this->data = $data;
+
         return $value;
     }
 }

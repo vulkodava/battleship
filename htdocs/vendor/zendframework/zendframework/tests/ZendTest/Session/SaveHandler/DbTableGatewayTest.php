@@ -59,7 +59,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
         $this->options = new DbTableGatewayOptions(array(
             'nameColumn' => 'name',
-            'idColumn'   => 'id',
+            'idColumn' => 'id',
             'dataColumn' => 'data',
             'modifiedColumn' => 'modified',
             'lifetimeColumn' => 'lifetime',

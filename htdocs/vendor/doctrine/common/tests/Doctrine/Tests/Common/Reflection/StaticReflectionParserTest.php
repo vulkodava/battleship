@@ -45,31 +45,33 @@ class StaticReflectionParserTest extends DoctrineTestCase
         $dummyParentClassName = 'Doctrine\\Tests\\Common\\Reflection\\Dummies\\NoParent';
         foreach (array(false, true) as $classAnnotationOptimize) {
             $data[] = array(
-              $classAnnotationOptimize, $noParentClassName, $noParentClassName,
+                $classAnnotationOptimize, $noParentClassName, $noParentClassName,
             );
             $data[] = array(
-              $classAnnotationOptimize, 'Doctrine\\Tests\\Common\\Reflection\\FullyClassifiedParent', $noParentClassName,
+                $classAnnotationOptimize, 'Doctrine\\Tests\\Common\\Reflection\\FullyClassifiedParent', $noParentClassName,
             );
             $data[] = array(
-              $classAnnotationOptimize, 'Doctrine\\Tests\\Common\\Reflection\\SameNamespaceParent', $noParentClassName,
+                $classAnnotationOptimize, 'Doctrine\\Tests\\Common\\Reflection\\SameNamespaceParent', $noParentClassName,
             );
             $data[] = array(
-              $classAnnotationOptimize, 'Doctrine\\Tests\\Common\\Reflection\\DeeperNamespaceParent', $dummyParentClassName,
+                $classAnnotationOptimize, 'Doctrine\\Tests\\Common\\Reflection\\DeeperNamespaceParent', $dummyParentClassName,
             );
             $data[] = array(
-              $classAnnotationOptimize, 'Doctrine\\Tests\\Common\\Reflection\\UseParent', $dummyParentClassName,
+                $classAnnotationOptimize, 'Doctrine\\Tests\\Common\\Reflection\\UseParent', $dummyParentClassName,
             );
         }
+
         return $data;
     }
 
     /**
      * @dataProvider classAnnotationOptimize
      */
-    public function testClassAnnotationOptimizedParsing($classAnnotationOptimize) {
+    public function testClassAnnotationOptimizedParsing($classAnnotationOptimize)
+    {
         $testsRoot = substr(__DIR__, 0, -strlen(__NAMESPACE__) - 1);
         $paths = array(
-          'Doctrine\\Tests' => array($testsRoot),
+            'Doctrine\\Tests' => array($testsRoot),
         );
         $staticReflectionParser = new StaticReflectionParser('Doctrine\\Tests\\Common\\Reflection\\ExampleAnnotationClass', new Psr0FindFile($paths), $classAnnotationOptimize);
         $expectedDocComment = '/**

@@ -62,9 +62,9 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->proxyLoader = $loader      = $this->getMock('stdClass', array('load'), array(), '', false);
-        $this->initializerCallbackMock    = $this->getMock('stdClass', array('__invoke'));
-        $identifier                       = $this->identifier;
+        $this->proxyLoader = $loader = $this->getMock('stdClass', array('load'), array(), '', false);
+        $this->initializerCallbackMock = $this->getMock('stdClass', array('__invoke'));
+        $identifier = $this->identifier;
         $this->lazyLoadableObjectMetadata = $metadata = new LazyLoadableObjectClassMetadata();
 
         // emulating what should happen in a proxy factory
@@ -299,6 +299,7 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
             ->will($this->returnCallback(function ($id, LazyLoadableObject $lazyObject) {
                 // setting a value to verify that the persister can actually set something in the object
                 $lazyObject->publicAssociation = $id['publicIdentifierField'] . '-test';
+
                 return true;
             }));
         $this->lazyObject->__setInitializer($this->getSuggestedInitializerImplementation());
@@ -325,14 +326,14 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
             ->expects($this->exactly(2))
             ->method('load')
             ->with(array(
-                'publicIdentifierField'    => 'publicIdentifierFieldValue',
+                'publicIdentifierField' => 'publicIdentifierFieldValue',
                 'protectedIdentifierField' => 'protectedIdentifierFieldValue',
             ))
             ->will($this->returnCallback(function () {
                 $blueprint = new LazyLoadableObject();
                 $blueprint->publicPersistentField = 'checked-persistent-field';
-                $blueprint->publicAssociation     = 'checked-association-field';
-                $blueprint->publicTransientField  = 'checked-transient-field';
+                $blueprint->publicAssociation = 'checked-association-field';
+                $blueprint->publicTransientField = 'checked-transient-field';
 
                 return $blueprint;
             }));
@@ -443,8 +444,8 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
         $this->lazyObject->__setInitializer($this->getSuggestedInitializerImplementation());
         $this->lazyObject->__load();
 
-        $serialized   = serialize($this->lazyObject);
-        $reflClass    = $this->lazyLoadableObjectMetadata->getReflectionClass();
+        $serialized = serialize($this->lazyObject);
+        $reflClass = $this->lazyLoadableObjectMetadata->getReflectionClass();
         /* @var $unserialized LazyLoadableObject|Proxy */
         $unserialized = unserialize($serialized);
 
@@ -597,7 +598,8 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
      * @param  callable $callable
      * @return \Closure
      */
-    public function getClosure($callable) {
+    public function getClosure($callable)
+    {
         return function () use ($callable) {
             call_user_func_array($callable, func_get_args());
         };
@@ -606,8 +608,9 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
     /**
      * Configures the current initializer callback mock with provided matcher params
      *
-     * @param int $expectedCallCount the number of invocations to be expected. If a value< 0 is provided, `any` is used
-     * @param array $callParamsMatch an ordered array of parameters to be expected
+     * @param int $expectedCallCount    the number of invocations to be expected. If a value< 0 is provided, `any` is
+     *                                  used
+     * @param array $callParamsMatch    an ordered array of parameters to be expected
      * @param callable $callbackClosure a return callback closure
      *
      * @return \PHPUnit_Framework_MockObject_MockObject|
@@ -616,9 +619,10 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
         $expectedCallCount = 0,
         array $callParamsMatch = null,
         \Closure $callbackClosure = null
-    ) {
+    )
+    {
         if (!$expectedCallCount) {
-            $invocationCountMatcher = $this->exactly((int) $expectedCallCount);
+            $invocationCountMatcher = $this->exactly((int)$expectedCallCount);
         } else {
             $invocationCountMatcher = $expectedCallCount < 0 ? $this->any() : $this->exactly($expectedCallCount);
         }
@@ -645,7 +649,7 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
     public function setProxyValue($property, $value)
     {
         $reflectionProperty = new \ReflectionProperty($this->lazyObject, $property);
-        $initializer        = $this->lazyObject->__getInitializer();
+        $initializer = $this->lazyObject->__getInitializer();
 
         // disabling initializer since setting `publicPersistentField` triggers `__set`/`__get`
         $this->lazyObject->__setInitializer(null);
@@ -661,7 +665,7 @@ class ProxyLogicTest extends PHPUnit_Framework_TestCase
      */
     protected function getSuggestedInitializerImplementation()
     {
-        $loader     = $this->proxyLoader;
+        $loader = $this->proxyLoader;
         $identifier = $this->identifier;
 
         return function (LazyLoadableObject $proxy) use ($loader, $identifier) {

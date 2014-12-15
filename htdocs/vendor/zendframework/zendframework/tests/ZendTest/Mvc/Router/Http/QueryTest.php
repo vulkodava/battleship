@@ -57,9 +57,9 @@ class QueryTest extends TestCase
 
     /**
      * @param        Query $route
-     * @param        string   $path
-     * @param        integer  $offset
-     * @param        array    $params
+     * @param        string $path
+     * @param        integer $offset
+     * @param        array $params
      */
     public function testMatching(Query $route, $path, $offset, array $params = null)
     {
@@ -71,10 +71,10 @@ class QueryTest extends TestCase
 
     /**
      * @param        Query $route
-     * @param        string   $path
-     * @param        integer  $offset
-     * @param        array    $params
-     * @param        boolean  $skipAssembling
+     * @param        string $path
+     * @param        integer $offset
+     * @param        array $params
+     * @param        boolean $skipAssembling
      */
     public function testAssembling(Query $route, $path, $offset, array $params = null, $skipAssembling = false)
     {
@@ -95,9 +95,9 @@ class QueryTest extends TestCase
 
     public function testNoMatchWithoutUriMethod()
     {
-        $route   = new Query();
+        $route = new Query();
         $request = new BaseRequest();
-        $match   = $route->match($request);
+        $match = $route->match($request);
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
         $this->assertEquals(array(), $match->getParams());
     }

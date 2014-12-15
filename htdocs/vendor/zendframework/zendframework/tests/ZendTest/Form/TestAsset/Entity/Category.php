@@ -28,6 +28,7 @@ class Category
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -46,6 +47,7 @@ class Category
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 

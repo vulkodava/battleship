@@ -64,7 +64,7 @@ class Headers implements Countable, Iterator
      */
     public static function fromString($string, $EOL = self::EOL)
     {
-        $headers     = new static();
+        $headers = new static();
         $currentLine = '';
 
         // iterate the header lines, some might be continuations
@@ -93,6 +93,7 @@ class Headers implements Countable, Iterator
         if ($currentLine) {
             $headers->addHeaderLine($currentLine);
         }
+
         return $headers;
     }
 
@@ -105,6 +106,7 @@ class Headers implements Countable, Iterator
     public function setPluginClassLoader(PluginClassLocator $pluginClassLoader)
     {
         $this->pluginClassLoader = $pluginClassLoader;
+
         return $this;
     }
 
@@ -118,6 +120,7 @@ class Headers implements Countable, Iterator
         if ($this->pluginClassLoader === null) {
             $this->pluginClassLoader = new Header\HeaderLoader();
         }
+
         return $this->pluginClassLoader;
     }
 
@@ -133,6 +136,7 @@ class Headers implements Countable, Iterator
         foreach ($this as $header) {
             $header->setEncoding($encoding);
         }
+
         return $this;
     }
 
@@ -230,6 +234,7 @@ class Headers implements Countable, Iterator
         if ($this->getEncoding() !== 'ASCII') {
             $header->setEncoding($this->getEncoding());
         }
+
         return $this;
     }
 
@@ -253,6 +258,7 @@ class Headers implements Countable, Iterator
                 unset ($this->headersKeys[$index]);
                 unset ($this->headers[$index]);
             }
+
             return true;
         }
 
@@ -269,6 +275,7 @@ class Headers implements Countable, Iterator
     public function clearHeaders()
     {
         $this->headers = $this->headersKeys = array();
+
         return $this;
     }
 
@@ -302,7 +309,7 @@ class Headers implements Countable, Iterator
                 } else {
                     return $results[0];
                 }
-                //fall-trough
+            //fall-trough
             default:
                 return new ArrayIterator($results);
         }
@@ -317,6 +324,7 @@ class Headers implements Countable, Iterator
     public function has($name)
     {
         $name = $this->normalizeFieldName($name);
+
         return in_array($name, $this->headersKeys);
     }
 
@@ -369,6 +377,7 @@ class Headers implements Countable, Iterator
         if ($current instanceof Header\GenericHeader) {
             $current = $this->lazyLoadHeader(key($this->headers));
         }
+
         return $current;
     }
 
@@ -424,6 +433,7 @@ class Headers implements Countable, Iterator
                 $headers[$header->getFieldName()] = $header->getFieldValue();
             }
         }
+
         return $headers;
     }
 
@@ -437,6 +447,7 @@ class Headers implements Countable, Iterator
         foreach ($this as $item) {
             // $item should now be loaded
         }
+
         return true;
     }
 
@@ -453,7 +464,7 @@ class Headers implements Countable, Iterator
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
 
         $encoding = $current->getEncoding();
-        $headers  = $class::fromString($current->toString());
+        $headers = $class::fromString($current->toString());
         if (is_array($headers)) {
             $current = array_shift($headers);
             $current->setEncoding($encoding);
@@ -461,14 +472,16 @@ class Headers implements Countable, Iterator
             foreach ($headers as $header) {
                 $header->setEncoding($encoding);
                 $this->headersKeys[] = $key;
-                $this->headers[]     = $header;
+                $this->headers[] = $header;
             }
+
             return $current;
         }
 
         $current = $headers;
         $current->setEncoding($encoding);
         $this->headers[$index] = $current;
+
         return $current;
     }
 

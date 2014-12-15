@@ -37,7 +37,7 @@ class AssignedGenerator extends AbstractIdGenerator
      * Returns the identifier assigned to the given entity.
      *
      * @param EntityManager $em
-     * @param object        $entity
+     * @param object $entity
      *
      * @return mixed
      *
@@ -47,19 +47,19 @@ class AssignedGenerator extends AbstractIdGenerator
      */
     public function generate(EntityManager $em, $entity)
     {
-        $class      = $em->getClassMetadata(get_class($entity));
-        $idFields   = $class->getIdentifierFieldNames();
+        $class = $em->getClassMetadata(get_class($entity));
+        $idFields = $class->getIdentifierFieldNames();
         $identifier = array();
 
         foreach ($idFields as $idField) {
             $value = $class->getFieldValue($entity, $idField);
 
-            if ( ! isset($value)) {
+            if (!isset($value)) {
                 throw ORMException::entityMissingAssignedIdForField($entity, $idField);
             }
 
             if (isset($class->associationMappings[$idField])) {
-                if ( ! $em->getUnitOfWork()->isInIdentityMap($value)) {
+                if (!$em->getUnitOfWork()->isInIdentityMap($value)) {
                     throw ORMException::entityMissingForeignAssignedId($entity, $value);
                 }
 

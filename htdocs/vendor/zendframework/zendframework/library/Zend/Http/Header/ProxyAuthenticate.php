@@ -64,6 +64,7 @@ class ProxyAuthenticate implements MultipleHeaderInterface
             }
             $strings[] = $header->toString();
         }
+
         return implode("\r\n", $strings);
     }
 }

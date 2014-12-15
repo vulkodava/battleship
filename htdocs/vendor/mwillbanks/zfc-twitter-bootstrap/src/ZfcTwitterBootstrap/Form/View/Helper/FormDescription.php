@@ -31,7 +31,7 @@ class FormDescription extends AbstractHelper
      */
     public function setBlockWrapper($blockWrapper)
     {
-        $this->blockWrapper = (string) $blockWrapper;
+        $this->blockWrapper = (string)$blockWrapper;
 
         return $this;
     }
@@ -54,7 +54,7 @@ class FormDescription extends AbstractHelper
      */
     public function setInlineWrapper($inlineWrapper)
     {
-        $this->inlineWrapper = (string) $inlineWrapper;
+        $this->inlineWrapper = (string)$inlineWrapper;
 
         return $this;
     }
@@ -73,8 +73,8 @@ class FormDescription extends AbstractHelper
      * Render
      *
      * @param  \Zend\Form\ElementInterface $element
-     * @param  string                      $blockWrapper
-     * @param  string                      $inlineWrapper
+     * @param  string $blockWrapper
+     * @param  string $inlineWrapper
      * @return string
      */
     public function render(ElementInterface $element, $blockWrapper = null, $inlineWrapper = null)
@@ -97,8 +97,8 @@ class FormDescription extends AbstractHelper
      * Magical Invoke Method
      *
      * @param  \Zend\Form\ElementInterface $elemnet
-     * @param  string                      $blockWrapper
-     * @param  string                      $invokeWrapper
+     * @param  string $blockWrapper
+     * @param  string $invokeWrapper
      * @return string|self
      */
     public function __invoke(ElementInterface $element = null, $blockWrapper = null, $inlineWrapper = null)

@@ -39,7 +39,7 @@ buildModulePhar('PharModuleExplicit');
 function buildModulePhar($name, $format = Phar::PHAR, $compression = Phar::NONE, $executable = true, $mode = 'normal')
 {
     echo "Building {$name}...\t";
-    $glob = glob($name.'.*');
+    $glob = glob($name . '.*');
     if (count($glob) > 0) {
         foreach ($glob as $file) {
             if (!is_dir($file)) {

@@ -218,7 +218,7 @@ abstract class AbstractPlatform
      */
     public function getVarcharTypeDeclarationSQL(array $field)
     {
-        if ( !isset($field['length'])) {
+        if (!isset($field['length'])) {
             $field['length'] = $this->getVarcharDefaultLength();
         }
 
@@ -324,7 +324,7 @@ abstract class AbstractPlatform
         $dbType = strtolower($dbType);
 
         if (!isset($this->doctrineTypeMapping[$dbType])) {
-            throw new \Doctrine\DBAL\DBALException("Unknown database type ".$dbType." requested, " . get_class($this) . " may not support it.");
+            throw new \Doctrine\DBAL\DBALException("Unknown database type " . $dbType . " requested, " . get_class($this) . " may not support it.");
         }
 
         return $this->doctrineTypeMapping[$dbType];
@@ -617,7 +617,7 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL snippet to round a numeric field to the number of decimals specified.
      *
-     * @param string  $column
+     * @param string $column
      * @param integer $decimals
      *
      * @return string
@@ -643,8 +643,8 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL snippet to trim a string.
      *
-     * @param string         $str  The expression to apply the trim to.
-     * @param integer        $pos  The position of the trim (leading/trailing/both).
+     * @param string $str          The expression to apply the trim to.
+     * @param integer $pos         The position of the trim (leading/trailing/both).
      * @param string|boolean $char The char to trim, has to be quoted already. Defaults to space.
      *
      * @return string
@@ -656,15 +656,15 @@ abstract class AbstractPlatform
 
         switch ($pos) {
             case self::TRIM_LEADING:
-                $posStr = 'LEADING '.$trimChar;
+                $posStr = 'LEADING ' . $trimChar;
                 break;
 
             case self::TRIM_TRAILING:
-                $posStr = 'TRAILING '.$trimChar;
+                $posStr = 'TRAILING ' . $trimChar;
                 break;
 
             case self::TRIM_BOTH:
-                $posStr = 'BOTH '.$trimChar;
+                $posStr = 'BOTH ' . $trimChar;
                 break;
         }
 
@@ -724,8 +724,8 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL snippet to get the position of the first occurrence of substring $substr in string $str.
      *
-     * @param string          $str      Literal string.
-     * @param string          $substr   Literal string to find.
+     * @param string $str               Literal string.
+     * @param string $substr            Literal string to find.
      * @param integer|boolean $startPos Position to start at, beginning of string by default.
      *
      * @return string
@@ -754,8 +754,8 @@ abstract class AbstractPlatform
      *
      * SQLite only supports the 2 parameter variant of this function.
      *
-     * @param string       $value  An sql string literal or column name/alias.
-     * @param integer      $from   Where to start the substring portion.
+     * @param string $value        An sql string literal or column name/alias.
+     * @param integer $from        Where to start the substring portion.
      * @param integer|null $length The substring portion length.
      *
      * @return string
@@ -778,7 +778,7 @@ abstract class AbstractPlatform
      */
     public function getConcatExpression()
     {
-        return join(' || ' , func_get_args());
+        return join(' || ', func_get_args());
     }
 
     /**
@@ -809,7 +809,7 @@ abstract class AbstractPlatform
      * must contain a logical expression or an array with logical expressions.
      * These expressions will be matched against the first parameter.
      *
-     * @param string          $column The value that should be matched against.
+     * @param string $column          The value that should be matched against.
      * @param string|string[] $values The values that will be matched against $column.
      *
      * @return string The logical expression.
@@ -818,7 +818,7 @@ abstract class AbstractPlatform
      */
     public function getInExpression($column, $values)
     {
-        if ( ! is_array($values)) {
+        if (!is_array($values)) {
             $values = array($values);
         }
 
@@ -873,7 +873,7 @@ abstract class AbstractPlatform
      */
     public function getBetweenExpression($expression, $value1, $value2)
     {
-        return $expression . ' BETWEEN ' .$value1 . ' AND ' . $value2;
+        return $expression . ' BETWEEN ' . $value1 . ' AND ' . $value2;
     }
 
     /**
@@ -942,7 +942,7 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL to add the number of given days to a date.
      *
-     * @param string  $date
+     * @param string $date
      * @param integer $days
      *
      * @return string
@@ -957,7 +957,7 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL to subtract the number of given days to a date.
      *
-     * @param string  $date
+     * @param string $date
      * @param integer $days
      *
      * @return string
@@ -972,7 +972,7 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL to add the number of given months to a date.
      *
-     * @param string  $date
+     * @param string $date
      * @param integer $months
      *
      * @return string
@@ -987,7 +987,7 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL to subtract the number of given months to a date.
      *
-     * @param string  $date
+     * @param string $date
      * @param integer $months
      *
      * @return string
@@ -1027,7 +1027,7 @@ abstract class AbstractPlatform
 
     /**
      * Returns the FOR UPDATE expression.
-     * 
+     *
      * @return string
      */
     public function getForUpdateSQL()
@@ -1036,9 +1036,10 @@ abstract class AbstractPlatform
     }
 
     /**
-     * Honors that some SQL vendors such as MsSql use table hints for locking instead of the ANSI SQL FOR UPDATE specification.
+     * Honors that some SQL vendors such as MsSql use table hints for locking instead of the ANSI SQL FOR UPDATE
+     * specification.
      *
-     * @param string       $fromClause The FROM clause to append the hint for the given lock mode to.
+     * @param string $fromClause       The FROM clause to append the hint for the given lock mode to.
      * @param integer|null $lockMode   One of the Doctrine\DBAL\LockMode::* constants. If null is given, nothing will
      *                                 be appended to the FROM clause.
      *
@@ -1101,7 +1102,7 @@ abstract class AbstractPlatform
 
         if ($table instanceof Table) {
             $table = $table->getQuotedName($this);
-        } else if(!is_string($table)) {
+        } else if (!is_string($table)) {
             throw new \InvalidArgumentException('getDropTableSQL() expects $table parameter to be string or \Doctrine\DBAL\Schema\Table.');
         }
 
@@ -1143,7 +1144,7 @@ abstract class AbstractPlatform
     {
         if ($index instanceof Index) {
             $index = $index->getQuotedName($this);
-        } else if(!is_string($index)) {
+        } else if (!is_string($index)) {
             throw new \InvalidArgumentException('AbstractPlatform::getDropIndexSQL() expects $index parameter to be string or \Doctrine\DBAL\Schema\Index.');
         }
 
@@ -1154,7 +1155,7 @@ abstract class AbstractPlatform
      * Returns the SQL to drop a constraint.
      *
      * @param \Doctrine\DBAL\Schema\Constraint|string $constraint
-     * @param \Doctrine\DBAL\Schema\Table|string      $table
+     * @param \Doctrine\DBAL\Schema\Table|string $table
      *
      * @return string
      */
@@ -1173,9 +1174,9 @@ abstract class AbstractPlatform
 
     /**
      * Returns the SQL to drop a foreign key.
-     * 
+     *
      * @param \Doctrine\DBAL\Schema\ForeignKeyConstraint|string $foreignKey
-     * @param \Doctrine\DBAL\Schema\Table|string                $table
+     * @param \Doctrine\DBAL\Schema\Table|string $table
      *
      * @return string
      */
@@ -1196,8 +1197,8 @@ abstract class AbstractPlatform
      * Returns the SQL statement(s) to create a table with the specified name, columns and constraints
      * on this platform.
      *
-     * @param \Doctrine\DBAL\Schema\Table   $table
-     * @param integer                       $createFlags
+     * @param \Doctrine\DBAL\Schema\Table $table
+     * @param integer $createFlags
      *
      * @return array The sequence of SQL statements.
      *
@@ -1206,7 +1207,7 @@ abstract class AbstractPlatform
      */
     public function getCreateTableSQL(Table $table, $createFlags = self::CREATE_INDEXES)
     {
-        if ( ! is_int($createFlags)) {
+        if (!is_int($createFlags)) {
             throw new \InvalidArgumentException("Second argument of AbstractPlatform::getCreateTableSQL() has to be integer.");
         }
 
@@ -1220,11 +1221,11 @@ abstract class AbstractPlatform
         $options['indexes'] = array();
         $options['primary'] = array();
 
-        if (($createFlags&self::CREATE_INDEXES) > 0) {
+        if (($createFlags & self::CREATE_INDEXES) > 0) {
             foreach ($table->getIndexes() as $index) {
                 /* @var $index Index */
                 if ($index->isPrimary()) {
-                    $options['primary']       = $index->getQuotedColumns($this);
+                    $options['primary'] = $index->getQuotedColumns($this);
                     $options['primary_index'] = $index;
                 } else {
                     $options['indexes'][$index->getName()] = $index;
@@ -1265,7 +1266,7 @@ abstract class AbstractPlatform
             $columns[$columnData['name']] = $columnData;
         }
 
-        if (($createFlags&self::CREATE_FOREIGNKEYS) > 0) {
+        if (($createFlags & self::CREATE_FOREIGNKEYS) > 0) {
             $options['foreignKeys'] = array();
             foreach ($table->getForeignKeys() as $fkConstraint) {
                 $options['foreignKeys'][] = $fkConstraint;
@@ -1309,8 +1310,8 @@ abstract class AbstractPlatform
      * Returns the SQL used to create a table.
      *
      * @param string $tableName
-     * @param array  $columns
-     * @param array  $options
+     * @param array $columns
+     * @param array $options
      *
      * @return array
      */
@@ -1318,18 +1319,18 @@ abstract class AbstractPlatform
     {
         $columnListSql = $this->getColumnDeclarationListSQL($columns);
 
-        if (isset($options['uniqueConstraints']) && ! empty($options['uniqueConstraints'])) {
+        if (isset($options['uniqueConstraints']) && !empty($options['uniqueConstraints'])) {
             foreach ($options['uniqueConstraints'] as $name => $definition) {
                 $columnListSql .= ', ' . $this->getUniqueConstraintDeclarationSQL($name, $definition);
             }
         }
 
-        if (isset($options['primary']) && ! empty($options['primary'])) {
+        if (isset($options['primary']) && !empty($options['primary'])) {
             $columnListSql .= ', PRIMARY KEY(' . implode(', ', array_unique(array_values($options['primary']))) . ')';
         }
 
-        if (isset($options['indexes']) && ! empty($options['indexes'])) {
-            foreach($options['indexes'] as $index => $definition) {
+        if (isset($options['indexes']) && !empty($options['indexes'])) {
+            foreach ($options['indexes'] as $index => $definition) {
                 $columnListSql .= ', ' . $this->getIndexDeclarationSQL($index, $definition);
             }
         }
@@ -1337,7 +1338,7 @@ abstract class AbstractPlatform
         $query = 'CREATE TABLE ' . $tableName . ' (' . $columnListSql;
 
         $check = $this->getCheckDeclarationSQL($columns);
-        if ( ! empty($check)) {
+        if (!empty($check)) {
             $query .= ', ' . $check;
         }
         $query .= ')';
@@ -1345,7 +1346,7 @@ abstract class AbstractPlatform
         $sql[] = $query;
 
         if (isset($options['foreignKeys'])) {
-            foreach ((array) $options['foreignKeys'] as $definition) {
+            foreach ((array)$options['foreignKeys'] as $definition) {
                 $sql[] = $this->getCreateForeignKeySQL($definition, $tableName);
             }
         }
@@ -1392,7 +1393,7 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL to create a constraint on a table on this platform.
      *
-     * @param \Doctrine\DBAL\Schema\Constraint   $constraint
+     * @param \Doctrine\DBAL\Schema\Constraint $constraint
      * @param \Doctrine\DBAL\Schema\Table|string $table
      *
      * @return string
@@ -1407,11 +1408,11 @@ abstract class AbstractPlatform
 
         $query = 'ALTER TABLE ' . $table . ' ADD CONSTRAINT ' . $constraint->getQuotedName($this);
 
-        $columnList = '('. implode(', ', $constraint->getQuotedColumns($this)) . ')';
+        $columnList = '(' . implode(', ', $constraint->getQuotedColumns($this)) . ')';
 
         $referencesClause = '';
         if ($constraint instanceof Index) {
-            if($constraint->isPrimary()) {
+            if ($constraint->isPrimary()) {
                 $query .= ' PRIMARY KEY';
             } elseif ($constraint->isUnique()) {
                 $query .= ' UNIQUE';
@@ -1426,7 +1427,7 @@ abstract class AbstractPlatform
             $referencesClause = ' REFERENCES ' . $constraint->getQuotedForeignTableName($this) .
                 ' (' . implode(', ', $constraint->getQuotedForeignColumns($this)) . ')';
         }
-        $query .= ' '.$columnList.$referencesClause;
+        $query .= ' ' . $columnList . $referencesClause;
 
         return $query;
     }
@@ -1434,7 +1435,7 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL to create an index on a table on this platform.
      *
-     * @param \Doctrine\DBAL\Schema\Index        $index
+     * @param \Doctrine\DBAL\Schema\Index $index
      * @param \Doctrine\DBAL\Schema\Table|string $table The name of the table on which the index is to be created.
      *
      * @return string
@@ -1478,7 +1479,7 @@ abstract class AbstractPlatform
     /**
      * Returns the SQL to create an unnamed primary key constraint.
      *
-     * @param \Doctrine\DBAL\Schema\Index        $index
+     * @param \Doctrine\DBAL\Schema\Index $index
      * @param \Doctrine\DBAL\Schema\Table|string $table
      *
      * @return string
@@ -1523,14 +1524,15 @@ abstract class AbstractPlatform
     {
         $c = $this->getIdentifierQuoteCharacter();
 
-        return $c . str_replace($c, $c.$c, $str) . $c;
+        return $c . str_replace($c, $c . $c, $str) . $c;
     }
 
     /**
      * Returns the SQL to create a new foreign key.
      *
      * @param \Doctrine\DBAL\Schema\ForeignKeyConstraint $foreignKey The foreign key constraint.
-     * @param \Doctrine\DBAL\Schema\Table|string         $table      The name of the table on which the foreign key is to be created.
+     * @param \Doctrine\DBAL\Schema\Table|string $table              The name of the table on which the foreign key is
+     *                                                               to be created.
      *
      * @return string
      */
@@ -1562,9 +1564,9 @@ abstract class AbstractPlatform
     }
 
     /**
-     * @param \Doctrine\DBAL\Schema\Column    $column
+     * @param \Doctrine\DBAL\Schema\Column $column
      * @param \Doctrine\DBAL\Schema\TableDiff $diff
-     * @param array                           $columnSql
+     * @param array $columnSql
      *
      * @return boolean
      */
@@ -1574,7 +1576,7 @@ abstract class AbstractPlatform
             return false;
         }
 
-        if ( ! $this->_eventManager->hasListeners(Events::onSchemaAlterTableAddColumn)) {
+        if (!$this->_eventManager->hasListeners(Events::onSchemaAlterTableAddColumn)) {
             return false;
         }
 
@@ -1587,9 +1589,9 @@ abstract class AbstractPlatform
     }
 
     /**
-     * @param \Doctrine\DBAL\Schema\Column    $column
+     * @param \Doctrine\DBAL\Schema\Column $column
      * @param \Doctrine\DBAL\Schema\TableDiff $diff
-     * @param array                           $columnSql
+     * @param array $columnSql
      *
      * @return boolean
      */
@@ -1599,7 +1601,7 @@ abstract class AbstractPlatform
             return false;
         }
 
-        if ( ! $this->_eventManager->hasListeners(Events::onSchemaAlterTableRemoveColumn)) {
+        if (!$this->_eventManager->hasListeners(Events::onSchemaAlterTableRemoveColumn)) {
             return false;
         }
 
@@ -1613,8 +1615,8 @@ abstract class AbstractPlatform
 
     /**
      * @param \Doctrine\DBAL\Schema\ColumnDiff $columnDiff
-     * @param \Doctrine\DBAL\Schema\TableDiff  $diff
-     * @param array                            $columnSql
+     * @param \Doctrine\DBAL\Schema\TableDiff $diff
+     * @param array $columnSql
      *
      * @return boolean
      */
@@ -1624,7 +1626,7 @@ abstract class AbstractPlatform
             return false;
         }
 
-        if ( ! $this->_eventManager->hasListeners(Events::onSchemaAlterTableChangeColumn)) {
+        if (!$this->_eventManager->hasListeners(Events::onSchemaAlterTableChangeColumn)) {
             return false;
         }
 
@@ -1637,10 +1639,10 @@ abstract class AbstractPlatform
     }
 
     /**
-     * @param string                          $oldColumnName
-     * @param \Doctrine\DBAL\Schema\Column    $column
+     * @param string $oldColumnName
+     * @param \Doctrine\DBAL\Schema\Column $column
      * @param \Doctrine\DBAL\Schema\TableDiff $diff
-     * @param array                           $columnSql
+     * @param array $columnSql
      *
      * @return boolean
      */
@@ -1650,7 +1652,7 @@ abstract class AbstractPlatform
             return false;
         }
 
-        if ( ! $this->_eventManager->hasListeners(Events::onSchemaAlterTableRenameColumn)) {
+        if (!$this->_eventManager->hasListeners(Events::onSchemaAlterTableRenameColumn)) {
             return false;
         }
 
@@ -1664,7 +1666,7 @@ abstract class AbstractPlatform
 
     /**
      * @param \Doctrine\DBAL\Schema\TableDiff $diff
-     * @param array                           $sql
+     * @param array $sql
      *
      * @return boolean
      */
@@ -1674,7 +1676,7 @@ abstract class AbstractPlatform
             return false;
         }
 
-        if ( ! $this->_eventManager->hasListeners(Events::onSchemaAlterTable)) {
+        if (!$this->_eventManager->hasListeners(Events::onSchemaAlterTable)) {
             return false;
         }
 
@@ -1801,7 +1803,7 @@ abstract class AbstractPlatform
      * field to be used in statements like CREATE TABLE.
      *
      * @param string $name  The name the field to be declared.
-     * @param array  $field An associative array with the name of the properties
+     * @param array $field  An associative array with the name of the properties
      *                      of the field being declared as array indexes. Currently, the types
      *                      of supported field properties are as follows:
      *
@@ -1837,18 +1839,18 @@ abstract class AbstractPlatform
             $default = $this->getDefaultValueDeclarationSQL($field);
 
             $charset = (isset($field['charset']) && $field['charset']) ?
-                    ' ' . $this->getColumnCharsetDeclarationSQL($field['charset']) : '';
+                ' ' . $this->getColumnCharsetDeclarationSQL($field['charset']) : '';
 
             $collation = (isset($field['collation']) && $field['collation']) ?
-                    ' ' . $this->getColumnCollationDeclarationSQL($field['collation']) : '';
+                ' ' . $this->getColumnCollationDeclarationSQL($field['collation']) : '';
 
             $notnull = (isset($field['notnull']) && $field['notnull']) ? ' NOT NULL' : '';
 
             $unique = (isset($field['unique']) && $field['unique']) ?
-                    ' ' . $this->getUniqueFieldDeclarationSQL() : '';
+                ' ' . $this->getUniqueFieldDeclarationSQL() : '';
 
             $check = (isset($field['check']) && $field['check']) ?
-                    ' ' . $field['check'] : '';
+                ' ' . $field['check'] : '';
 
             $typeDecl = $field['type']->getSqlDeclaration($field, $this);
             $columnDef = $typeDecl . $charset . $default . $notnull . $unique . $check . $collation;
@@ -1870,9 +1872,9 @@ abstract class AbstractPlatform
      */
     public function getDecimalTypeDeclarationSQL(array $columnDef)
     {
-        $columnDef['precision'] = ( ! isset($columnDef['precision']) || empty($columnDef['precision']))
+        $columnDef['precision'] = (!isset($columnDef['precision']) || empty($columnDef['precision']))
             ? 10 : $columnDef['precision'];
-        $columnDef['scale'] = ( ! isset($columnDef['scale']) || empty($columnDef['scale']))
+        $columnDef['scale'] = (!isset($columnDef['scale']) || empty($columnDef['scale']))
             ? 0 : $columnDef['scale'];
 
         return 'NUMERIC(' . $columnDef['precision'] . ', ' . $columnDef['scale'] . ')';
@@ -1891,17 +1893,17 @@ abstract class AbstractPlatform
         $default = empty($field['notnull']) ? ' DEFAULT NULL' : '';
 
         if (isset($field['default'])) {
-            $default = " DEFAULT '".$field['default']."'";
+            $default = " DEFAULT '" . $field['default'] . "'";
             if (isset($field['type'])) {
                 if (in_array((string)$field['type'], array("Integer", "BigInteger", "SmallInteger"))) {
-                    $default = " DEFAULT ".$field['default'];
+                    $default = " DEFAULT " . $field['default'];
                 } else if ((string)$field['type'] == 'DateTime' && $field['default'] == $this->getCurrentTimestampSQL()) {
-                    $default = " DEFAULT ".$this->getCurrentTimestampSQL();
+                    $default = " DEFAULT " . $this->getCurrentTimestampSQL();
                 } else if ((string)$field['type'] == 'Time' && $field['default'] == $this->getCurrentTimeSQL()) {
-                    $default = " DEFAULT ".$this->getCurrentTimeSQL();
+                    $default = " DEFAULT " . $this->getCurrentTimeSQL();
                 } else if ((string)$field['type'] == 'Date' && $field['default'] == $this->getCurrentDateSQL()) {
-                    $default = " DEFAULT ".$this->getCurrentDateSQL();
-                } else if ((string) $field['type'] == 'Boolean') {
+                    $default = " DEFAULT " . $this->getCurrentDateSQL();
+                } else if ((string)$field['type'] == 'Boolean') {
                     $default = " DEFAULT '" . $this->convertBooleans($field['default']) . "'";
                 }
             }
@@ -1942,8 +1944,8 @@ abstract class AbstractPlatform
      * Obtains DBMS specific SQL code portion needed to set a unique
      * constraint declaration to be used in statements like CREATE TABLE.
      *
-     * @param string                       $name  The name of the unique constraint.
-     * @param \Doctrine\DBAL\Schema\Index  $index The index definition.
+     * @param string $name                       The name of the unique constraint.
+     * @param \Doctrine\DBAL\Schema\Index $index The index definition.
      *
      * @return string DBMS specific SQL code portion needed to set a constraint.
      *
@@ -1958,16 +1960,16 @@ abstract class AbstractPlatform
         }
 
         return 'CONSTRAINT ' . $name . ' UNIQUE ('
-             . $this->getIndexFieldDeclarationListSQL($columns)
-             . ')';
+        . $this->getIndexFieldDeclarationListSQL($columns)
+        . ')';
     }
 
     /**
      * Obtains DBMS specific SQL code portion needed to set an index
      * declaration to be used in statements like CREATE TABLE.
      *
-     * @param string                       $name  The name of the index.
-     * @param \Doctrine\DBAL\Schema\Index  $index The index definition.
+     * @param string $name                       The name of the index.
+     * @param \Doctrine\DBAL\Schema\Index $index The index definition.
      *
      * @return string DBMS specific SQL code portion needed to set an index.
      *
@@ -1982,8 +1984,8 @@ abstract class AbstractPlatform
         }
 
         return $this->getCreateIndexSQLFlags($index) . 'INDEX ' . $name . ' ('
-             . $this->getIndexFieldDeclarationListSQL($columns)
-             . ')';
+        . $this->getIndexFieldDeclarationListSQL($columns)
+        . ')';
     }
 
     /**
@@ -2065,7 +2067,7 @@ abstract class AbstractPlatform
      */
     public function getForeignKeyDeclarationSQL(ForeignKeyConstraint $foreignKey)
     {
-        $sql  = $this->getForeignKeyBaseDeclarationSQL($foreignKey);
+        $sql = $this->getForeignKeyBaseDeclarationSQL($foreignKey);
         $sql .= $this->getAdvancedForeignKeyOptionsSQL($foreignKey);
 
         return $sql;
@@ -2145,9 +2147,9 @@ abstract class AbstractPlatform
         }
 
         $sql .= implode(', ', $foreignKey->getQuotedLocalColumns($this))
-              . ') REFERENCES '
-              . $foreignKey->getQuotedForeignTableName($this) . ' ('
-              . implode(', ', $foreignKey->getQuotedForeignColumns($this)) . ')';
+            . ') REFERENCES '
+            . $foreignKey->getQuotedForeignTableName($this) . ' ('
+            . implode(', ', $foreignKey->getQuotedForeignColumns($this)) . ')';
 
         return $sql;
     }
@@ -2228,11 +2230,11 @@ abstract class AbstractPlatform
         if (is_array($item)) {
             foreach ($item as $k => $value) {
                 if (is_bool($value)) {
-                    $item[$k] = (int) $value;
+                    $item[$k] = (int)$value;
                 }
             }
         } elseif (is_bool($item)) {
-            $item = (int) $item;
+            $item = (int)$item;
         }
 
         return $item;
@@ -2357,7 +2359,7 @@ abstract class AbstractPlatform
     }
 
     /**
-     * @param string      $table
+     * @param string $table
      * @param string|null $database
      *
      * @return string
@@ -2843,7 +2845,7 @@ abstract class AbstractPlatform
     /**
      * Adds an driver-specific LIMIT clause to the query.
      *
-     * @param string       $query
+     * @param string $query
      * @param integer|null $limit
      * @param integer|null $offset
      *
@@ -2863,7 +2865,7 @@ abstract class AbstractPlatform
             if ($offset < 0) {
                 throw new DBALException("LIMIT argument offset=$offset is not valid");
             }
-            if ($offset > 0 && ! $this->supportsLimitOffset()) {
+            if ($offset > 0 && !$this->supportsLimitOffset()) {
                 throw new DBALException(sprintf("Platform %s does not support offset values in limit queries.", $this->getName()));
             }
         }
@@ -2874,7 +2876,7 @@ abstract class AbstractPlatform
     /**
      * Adds an driver-specific LIMIT clause to the query.
      *
-     * @param string  $query
+     * @param string $query
      * @param integer|null $limit
      * @param integer|null $offset
      *
@@ -2957,14 +2959,14 @@ abstract class AbstractPlatform
      * Cascade is not supported on many platforms but would optionally cascade the truncate by
      * following the foreign keys.
      *
-     * @param string  $tableName
+     * @param string $tableName
      * @param boolean $cascade
      *
      * @return string
      */
     public function getTruncateTableSQL($tableName, $cascade = false)
     {
-        return 'TRUNCATE '.$tableName;
+        return 'TRUNCATE ' . $tableName;
     }
 
     /**
@@ -3029,7 +3031,7 @@ abstract class AbstractPlatform
 
         $class = $this->getReservedKeywordsClass();
         $keywords = new $class;
-        if ( ! $keywords instanceof \Doctrine\DBAL\Platforms\Keywords\KeywordList) {
+        if (!$keywords instanceof \Doctrine\DBAL\Platforms\Keywords\KeywordList) {
             throw DBALException::notSupported(__METHOD__);
         }
 

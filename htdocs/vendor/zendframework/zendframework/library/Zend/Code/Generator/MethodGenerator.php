@@ -139,7 +139,8 @@ class MethodGenerator extends AbstractMemberGenerator
         $flags = self::FLAG_PUBLIC,
         $body = null,
         $docBlock = null
-    ) {
+    )
+    {
         if ($name) {
             $this->setName($name);
         }
@@ -209,6 +210,7 @@ class MethodGenerator extends AbstractMemberGenerator
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 

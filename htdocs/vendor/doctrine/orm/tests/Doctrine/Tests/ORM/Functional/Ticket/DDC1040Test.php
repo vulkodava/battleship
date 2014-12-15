@@ -5,6 +5,7 @@ namespace Doctrine\Tests\ORM\Functional\Ticket;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Tests\Models\CMS\CmsArticle;
 use Doctrine\Tests\Models\CMS\CmsUser;
+
 require_once __DIR__ . '/../../../TestInit.php';
 
 /**
@@ -36,19 +37,19 @@ class DDC1040Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $dql = "SELECT a FROM Doctrine\Tests\Models\CMS\CmsArticle a WHERE a.user = :author";
         $this->_em->createQuery($dql)
-                  ->setParameter('author', $user)
-                  ->getResult();
+            ->setParameter('author', $user)
+            ->getResult();
 
         $dql = "SELECT a FROM Doctrine\Tests\Models\CMS\CmsArticle a WHERE a.user = :author AND a.user = :author";
         $this->_em->createQuery($dql)
-                  ->setParameter('author', $user)
-                  ->getResult();
+            ->setParameter('author', $user)
+            ->getResult();
 
         $dql = "SELECT a FROM Doctrine\Tests\Models\CMS\CmsArticle a WHERE a.topic = :topic AND a.user = :author AND a.user = :author";
         $farticle = $this->_em->createQuery($dql)
-                  ->setParameter('author', $user)
-                  ->setParameter('topic', 'This is John Galt speaking!')
-                  ->getSingleResult();
+            ->setParameter('author', $user)
+            ->setParameter('topic', 'This is John Galt speaking!')
+            ->getSingleResult();
 
         $this->assertSame($article, $farticle);
     }
@@ -71,10 +72,10 @@ class DDC1040Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $dql = "SELECT a FROM Doctrine\Tests\Models\CMS\CmsArticle a WHERE a.topic = ?1 AND a.user = ?2 AND a.user = ?3";
         $farticle = $this->_em->createQuery($dql)
-                  ->setParameter(1, 'This is John Galt speaking!')
-                  ->setParameter(2, $user)
-                  ->setParameter(3, $user)
-                  ->getSingleResult();
+            ->setParameter(1, 'This is John Galt speaking!')
+            ->setParameter(2, $user)
+            ->setParameter(3, $user)
+            ->getSingleResult();
 
         $this->assertSame($article, $farticle);
     }

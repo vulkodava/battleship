@@ -19,8 +19,8 @@ class MySqlPlatformTest extends AbstractPlatformTestCase
 
     public function testModifyLimitQueryWitoutLimit()
     {
-        $sql = $this->_platform->modifyLimitQuery('SELECT n FROM Foo', null , 10);
-        $this->assertEquals('SELECT n FROM Foo LIMIT 18446744073709551615 OFFSET 10',$sql);
+        $sql = $this->_platform->modifyLimitQuery('SELECT n FROM Foo', null, 10);
+        $this->assertEquals('SELECT n FROM Foo LIMIT 18446744073709551615 OFFSET 10', $sql);
     }
 
     public function testGenerateMixedCaseTableCreate()
@@ -97,12 +97,12 @@ class MySqlPlatformTest extends AbstractPlatformTestCase
         $this->assertEquals(
             'INT AUTO_INCREMENT',
             $this->_platform->getIntegerTypeDeclarationSQL(array('autoincrement' => true)
-        ));
+            ));
         $this->assertEquals(
             'INT AUTO_INCREMENT',
             $this->_platform->getIntegerTypeDeclarationSQL(
                 array('autoincrement' => true, 'primary' => true)
-        ));
+            ));
     }
 
     public function testGeneratesTypeDeclarationForStrings()
@@ -111,7 +111,7 @@ class MySqlPlatformTest extends AbstractPlatformTestCase
             'CHAR(10)',
             $this->_platform->getVarcharTypeDeclarationSQL(
                 array('length' => 10, 'fixed' => true)
-        ));
+            ));
         $this->assertEquals(
             'VARCHAR(50)',
             $this->_platform->getVarcharTypeDeclarationSQL(array('length' => 50)),
@@ -307,7 +307,7 @@ class MySqlPlatformTest extends AbstractPlatformTestCase
         $table->addIndex(array('id'), 'idx_id');
 
         $comparator = new Comparator();
-        $diffTable  = clone $table;
+        $diffTable = clone $table;
 
         $diffTable->dropIndex('idx_id');
         $diffTable->setPrimaryKey(array('id'));
@@ -374,7 +374,7 @@ class MySqlPlatformTest extends AbstractPlatformTestCase
         $sql = $this->_platform->getAlterTableSQL($diff);
 
         $this->assertEquals(array(
-	        "ALTER TABLE mytable DROP PRIMARY KEY",
+            "ALTER TABLE mytable DROP PRIMARY KEY",
             "ALTER TABLE mytable ADD PRIMARY KEY (foo)",
         ), $sql);
     }

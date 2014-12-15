@@ -26,6 +26,7 @@ class Locator implements ServiceLocatorInterface
         }
 
         $service = call_user_func_array($this->services[$name], $params);
+
         return $service;
     }
 

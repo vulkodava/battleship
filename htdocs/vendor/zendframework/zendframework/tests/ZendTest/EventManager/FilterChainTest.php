@@ -32,13 +32,13 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testSubscribeShouldReturnCallbackHandler()
     {
-        $handle = $this->filterchain->attach(array( $this, __METHOD__ ));
+        $handle = $this->filterchain->attach(array($this, __METHOD__));
         $this->assertTrue($handle instanceof CallbackHandler);
     }
 
     public function testSubscribeShouldAddCallbackHandlerToFilters()
     {
-        $handler  = $this->filterchain->attach(array($this, __METHOD__));
+        $handler = $this->filterchain->attach(array($this, __METHOD__));
         $handlers = $this->filterchain->getFilters();
         $this->assertEquals(1, count($handlers));
         $this->assertTrue($handlers->contains($handler));
@@ -46,7 +46,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testDetachShouldRemoveCallbackHandlerFromFilters()
     {
-        $handle = $this->filterchain->attach(array( $this, __METHOD__ ));
+        $handle = $this->filterchain->attach(array($this, __METHOD__));
         $handles = $this->filterchain->getFilters();
         $this->assertTrue($handles->contains($handle));
         $this->filterchain->detach($handle);
@@ -56,9 +56,9 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testDetachShouldReturnFalseIfCallbackHandlerDoesNotExist()
     {
-        $handle1 = $this->filterchain->attach(array( $this, __METHOD__ ));
+        $handle1 = $this->filterchain->attach(array($this, __METHOD__));
         $this->filterchain->clearFilters();
-        $handle2 = $this->filterchain->attach(array( $this, 'handleTestTopic' ));
+        $handle2 = $this->filterchain->attach(array($this, 'handleTestTopic'));
         $this->assertFalse($this->filterchain->detach($handle1));
     }
 
@@ -74,11 +74,13 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
-            $return =  $chain->next($context, $params, $chain);
+            $return = $chain->next($context, $params, $chain);
+
             return $return;
         });
         $this->filterchain->attach(function ($context, array $params) {
             $string = isset($params['string']) ? $params['string'] : '';
+
             return str_rot13($string);
         });
         $value = $this->filterchain->run($this, array('string' => ' foo '));
@@ -87,8 +89,8 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterIsPassedContextAndArguments()
     {
-        $this->filterchain->attach(array( $this, 'filterTestCallback1' ));
-        $obj = (object) array('foo' => 'bar', 'bar' => 'baz');
+        $this->filterchain->attach(array($this, 'filterTestCallback1'));
+        $obj = (object)array('foo' => 'bar', 'bar' => 'baz');
         $value = $this->filterchain->run($this, array('object' => $obj));
         $this->assertEquals('filtered', $value);
         $this->assertEquals('filterTestCallback1', $this->message);
@@ -107,14 +109,17 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
             if (isset($params['string'])) {
                 $params['string'] = trim($params['string']);
             }
+
             return $chain->next($context, $params, $chain);
         }, 10000);
         $this->filterchain->attach(function ($context, array $params) {
             $string = isset($params['string']) ? $params['string'] : '';
+
             return str_rot13($string);
         }, 1000);
         $this->filterchain->attach(function ($context, $params, $chain) {
             $string = isset($params['string']) ? $params['string'] : '';
+
             return hash('md5', $string);
         }, 100);
         $value = $this->filterchain->run($this, array('string' => ' foo '));
@@ -132,6 +137,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         if (isset($params['object']) && is_object($params['object'])) {
             $params['object']->foo = 'foobarbaz';
         }
+
         return 'filtered';
     }
 

@@ -105,9 +105,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function testAddWriterWithPriority()
     {
         $writer1 = $this->logger->writerPlugin('mock');
-        $this->logger->addWriter($writer1,1);
+        $this->logger->addWriter($writer1, 1);
         $writer2 = $this->logger->writerPlugin('null');
-        $this->logger->addWriter($writer2,2);
+        $this->logger->addWriter($writer2, 2);
         $writers = $this->logger->getWriters();
 
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
@@ -120,9 +120,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function testAddWithSamePriority()
     {
         $writer1 = $this->logger->writerPlugin('mock');
-        $this->logger->addWriter($writer1,1);
+        $this->logger->addWriter($writer1, 1);
         $writer2 = $this->logger->writerPlugin('null');
-        $this->logger->addWriter($writer2,1);
+        $this->logger->addWriter($writer2, 1);
         $writers = $this->logger->getWriters();
 
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
@@ -182,7 +182,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('priority', array('priority' => Logger::INFO)),
-            array('regex', array( 'regex' => '/[0-9]+/' )),
+            array('regex', array('regex' => '/[0-9]+/')),
             array('validator', array('validator' => new DigitsFilter)),
         );
     }
@@ -268,10 +268,10 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function testOptionsWithMock()
     {
         $options = array('writers' => array(
-                             'first_writer' => array(
-                                 'name'     => 'mock',
-                             )
-                        ));
+            'first_writer' => array(
+                'name' => 'mock',
+            )
+        ));
         $logger = new Logger($options);
 
         $writers = $logger->getWriters()->toArray();
@@ -282,14 +282,14 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function testOptionsWithWriterOptions()
     {
         $options = array('writers' => array(
-                              array(
-                                 'name'     => 'stream',
-                                 'options'  => array(
-                                     'stream' => 'php://output',
-                                     'log_separator' => 'foo'
-                                 ),
-                              )
-                         ));
+            array(
+                'name' => 'stream',
+                'options' => array(
+                    'stream' => 'php://output',
+                    'log_separator' => 'foo'
+                ),
+            )
+        ));
         $logger = new Logger($options);
 
         $writers = $logger->getWriters()->toArray();
@@ -361,7 +361,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Logger::registerExceptionHandler($this->logger));
 
         // get the internal exception handler
-        $exceptionHandler = set_exception_handler(function ($e) {});
+        $exceptionHandler = set_exception_handler(function ($e) {
+            });
         set_exception_handler($exceptionHandler);
 
         // reset the exception handler
@@ -373,13 +374,13 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         // check logged messages
         $expectedEvents = array(
-            array('priority' => Logger::ERR,    'message' => 'previos',     'file' => __FILE__),
-            array('priority' => Logger::ERR,    'message' => 'error',       'file' => __FILE__),
+            array('priority' => Logger::ERR, 'message' => 'previos', 'file' => __FILE__),
+            array('priority' => Logger::ERR, 'message' => 'error', 'file' => __FILE__),
             array('priority' => Logger::NOTICE, 'message' => 'user notice', 'file' => __FILE__),
         );
         for ($i = 0; $i < count($expectedEvents); $i++) {
             $expectedEvent = $expectedEvents[$i];
-            $event         = $writer->events[$i];
+            $event = $writer->events[$i];
 
             $this->assertEquals($expectedEvent['priority'], $event['priority'], 'Unexpected priority');
             $this->assertEquals($expectedEvent['message'], $event['message'], 'Unexpected message');
@@ -393,8 +394,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'writers' => array(
                 array(
-                    'name'     => 'stream',
-                    'options'  => array(
+                    'name' => 'stream',
+                    'options' => array(
                         'stream' => $stream
                     ),
                 ),
@@ -411,9 +412,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
      */
     public function testErrorHandlerWithStreamWriter()
     {
-        $options      = array('errorhandler' => true);
-        $logger       = new Logger($options);
-        $stream       = fopen('php://memory', 'w+');
+        $options = array('errorhandler' => true);
+        $logger = new Logger($options);
+        $stream = fopen('php://memory', 'w+');
         $streamWriter = new StreamWriter($stream);
 
         // error handler does not like this feature so turn it off

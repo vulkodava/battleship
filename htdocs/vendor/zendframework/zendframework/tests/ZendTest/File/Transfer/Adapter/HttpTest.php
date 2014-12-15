@@ -174,7 +174,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($adapter->receive('exe'));
         $this->assertEquals(
             array('exe_0_' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file1.txt',
-                  'exe_1_' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file2.txt'),
+                'exe_1_' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'file2.txt'),
             $adapter->getFileName('exe', false));
     }
 
@@ -197,28 +197,28 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         $_GET['progress_key'] = 'mykey';
         $status = HttpTestMockAdapter::getProgress();
         $this->assertEquals(array(
-            'total'   => 100,
+            'total' => 100,
             'current' => 100,
-            'rate'    => 10,
-            'id'      => 'mykey',
-            'done'    => false,
+            'rate' => 10,
+            'id' => 'mykey',
+            'done' => false,
             'message' => '100B - 100B'
-            ), $status);
+        ), $status);
 
         $this->adapter->switchApcToUP();
         $status = HttpTestMockAdapter::getProgress($status);
         $this->assertEquals(array(
-            'total'          => 100,
-            'bytes_total'    => 100,
-            'current'        => 100,
+            'total' => 100,
+            'bytes_total' => 100,
+            'current' => 100,
             'bytes_uploaded' => 100,
-            'rate'           => 10,
-            'speed_average'  => 10,
-            'cancel_upload'  => true,
-            'message'        => 'The upload has been canceled',
-            'done'           => true,
-            'id'             => 'mykey'
-            ), $status);
+            'rate' => 10,
+            'speed_average' => 10,
+            'cancel_upload' => true,
+            'message' => 'The upload has been canceled',
+            'done' => true,
+            'id' => 'mykey'
+        ), $status);
     }
 
     public function testUploadProgressAdapter()

@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -27,7 +27,7 @@ abstract class BaseProvidersServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config    = $serviceLocator->get('BjyAuthorize\Config');
+        $config = $serviceLocator->get('BjyAuthorize\Config');
         $providers = array();
 
         foreach ($config[static::PROVIDER_SETTING] as $providerName => $providerConfig) {

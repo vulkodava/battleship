@@ -70,9 +70,9 @@ class DoctrinePaginator implements AdapterInterface
     public function getItems($offset, $itemCountPerPage)
     {
         $this->paginator
-             ->getQuery()
-             ->setFirstResult($offset)
-             ->setMaxResults($itemCountPerPage);
+            ->getQuery()
+            ->setFirstResult($offset)
+            ->setMaxResults($itemCountPerPage);
 
         return $this->paginator->getIterator();
     }

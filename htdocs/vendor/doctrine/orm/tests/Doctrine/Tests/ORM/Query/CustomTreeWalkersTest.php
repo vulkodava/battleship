@@ -42,7 +42,7 @@ class CustomTreeWalkersTest extends \Doctrine\Tests\OrmTestCase
     {
         $query = $this->_em->createQuery($dqlToBeTested);
         $query->setHint(Query::HINT_CUSTOM_TREE_WALKERS, $treeWalkers)
-              ->useQueryCache(false);
+            ->useQueryCache(false);
 
         if ($outputWalker) {
             $query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, $outputWalker);
@@ -142,7 +142,7 @@ class CustomTreeWalker extends Query\TreeWalkerAdapter
             $condExpr = $whereClause->conditionalExpression;
 
             // Since Phase 1 AST optimizations were included, we need to re-add the ConditionalExpression
-            if ( ! ($condExpr instanceof Query\AST\ConditionalExpression)) {
+            if (!($condExpr instanceof Query\AST\ConditionalExpression)) {
                 $condExpr = new Query\AST\ConditionalExpression(array($condExpr));
 
                 $whereClause->conditionalExpression = $condExpr;
@@ -165,7 +165,7 @@ class CustomTreeWalker extends Query\TreeWalkerAdapter
                 $singleTerm = $selectStatement->whereClause->conditionalExpression->conditionalTerms[0];
 
                 // Since Phase 1 AST optimizations were included, we need to re-add the ConditionalExpression
-                if ( ! ($singleTerm instanceof Query\AST\ConditionalTerm)) {
+                if (!($singleTerm instanceof Query\AST\ConditionalTerm)) {
                     $singleTerm = new Query\AST\ConditionalTerm(array($singleTerm));
 
                     $selectStatement->whereClause->conditionalExpression->conditionalTerms[0] = $singleTerm;

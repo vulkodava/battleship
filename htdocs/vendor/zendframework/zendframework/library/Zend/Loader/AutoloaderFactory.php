@@ -131,6 +131,7 @@ abstract class AutoloaderFactory
             require_once 'Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf('Autoloader class "%s" not loaded', $class));
         }
+
         return static::$loaders[$class];
     }
 
@@ -163,6 +164,7 @@ abstract class AutoloaderFactory
         $autoloader = static::$loaders[$autoloaderClass];
         spl_autoload_unregister(array($autoloader, 'autoload'));
         unset(static::$loaders[$autoloaderClass]);
+
         return true;
     }
 
@@ -189,14 +191,15 @@ abstract class AutoloaderFactory
         }
         $loader = new StandardAutoloader();
         static::$standardAutoloader = $loader;
+
         return static::$standardAutoloader;
     }
 
     /**
      * Checks if the object has this class as one of its parents
      *
-     * @see https://bugs.php.net/bug.php?id=53727
-     * @see https://github.com/zendframework/zf2/pull/1807
+     * @see        https://bugs.php.net/bug.php?id=53727
+     * @see        https://github.com/zendframework/zf2/pull/1807
      *
      * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *

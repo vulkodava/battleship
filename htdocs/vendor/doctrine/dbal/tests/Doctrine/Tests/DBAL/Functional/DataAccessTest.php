@@ -149,8 +149,8 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $paramInt = 1;
         $paramStr = 'foo';
 
-        $sql = "SELECT test_int, test_string FROM " . $this->_conn->quoteIdentifier($table) . " ".
-               "WHERE test_int = " . $this->_conn->quote($paramInt) . " AND test_string = " . $this->_conn->quote($paramStr);
+        $sql = "SELECT test_int, test_string FROM " . $this->_conn->quoteIdentifier($table) . " " .
+            "WHERE test_int = " . $this->_conn->quote($paramInt) . " AND test_string = " . $this->_conn->quote($paramStr);
         $stmt = $this->_conn->prepare($sql);
         $this->assertInstanceOf('Doctrine\DBAL\Statement', $stmt);
     }
@@ -203,9 +203,9 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
         $row = array_change_key_case($row, \CASE_LOWER);
         $this->assertEquals(1, $row['test_int']);
-        $this->assertEquals($datetimeString, $row['test_datetime']);        
+        $this->assertEquals($datetimeString, $row['test_datetime']);
     }
-    
+
     /**
      * @group DBAL-209
      * @expectedException \Doctrine\DBAL\DBALException
@@ -291,8 +291,8 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
         $sql = 'INSERT INTO fetch_table (test_int, test_string, test_datetime) VALUES (?, ?, ?)';
         $affectedRows = $this->_conn->executeUpdate($sql,
-            array(1 => 50,              2 => 'foo',             3 => $datetime),
-            array(1 => PDO::PARAM_INT,  2 => PDO::PARAM_STR,    3 => Type::DATETIME)
+            array(1 => 50, 2 => 'foo', 3 => $datetime),
+            array(1 => PDO::PARAM_INT, 2 => PDO::PARAM_STR, 3 => Type::DATETIME)
         );
 
         $this->assertEquals(1, $affectedRows);
@@ -347,18 +347,18 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
     {
         $p = $this->_conn->getDatabasePlatform();
         $sql = 'SELECT ';
-        $sql .= $p->getDateDiffExpression('test_datetime', $p->getCurrentTimestampSQL()) .' AS diff, ';
-        $sql .= $p->getDateAddDaysExpression('test_datetime', 10) .' AS add_days, ';
-        $sql .= $p->getDateSubDaysExpression('test_datetime', 10) .' AS sub_days, ';
-        $sql .= $p->getDateAddMonthExpression('test_datetime', 2) .' AS add_month, ';
-        $sql .= $p->getDateSubMonthExpression('test_datetime', 2) .' AS sub_month ';
+        $sql .= $p->getDateDiffExpression('test_datetime', $p->getCurrentTimestampSQL()) . ' AS diff, ';
+        $sql .= $p->getDateAddDaysExpression('test_datetime', 10) . ' AS add_days, ';
+        $sql .= $p->getDateSubDaysExpression('test_datetime', 10) . ' AS sub_days, ';
+        $sql .= $p->getDateAddMonthExpression('test_datetime', 2) . ' AS add_month, ';
+        $sql .= $p->getDateSubMonthExpression('test_datetime', 2) . ' AS sub_month ';
         $sql .= 'FROM fetch_table';
 
         $row = $this->_conn->fetchAssoc($sql);
         $row = array_change_key_case($row, CASE_LOWER);
 
-        $diff = floor( (strtotime('2010-01-01')-time()) / 3600 / 24);
-        $this->assertEquals($diff, (int)$row['diff'], "Date difference should be approx. ".$diff." days.", 1);
+        $diff = floor((strtotime('2010-01-01') - time()) / 3600 / 24);
+        $this->assertEquals($diff, (int)$row['diff'], "Date difference should be approx. " . $diff . " days.", 1);
         $this->assertEquals('2010-01-11', date('Y-m-d', strtotime($row['add_days'])), "Adding date should end up on 2010-01-11");
         $this->assertEquals('2009-12-22', date('Y-m-d', strtotime($row['sub_days'])), "Subtracting date should end up on 2009-12-22");
         $this->assertEquals('2010-03-01', date('Y-m-d', strtotime($row['add_month'])), "Adding month should end up on 2010-03-01");
@@ -380,29 +380,29 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
     {
         $this->_conn->executeQuery('DELETE FROM fetch_table')->execute();
         $platform = $this->_conn->getDatabasePlatform();
-        $bitmap   = array();
+        $bitmap = array();
 
         for ($i = 2; $i < 9; $i = $i + 2) {
             $bitmap[$i] = array(
-                'bit_or'    => ($i | 2),
-                'bit_and'   => ($i & 2)
+                'bit_or' => ($i | 2),
+                'bit_and' => ($i & 2)
             );
             $this->_conn->insert('fetch_table', array(
-                'test_int'      => $i,
-                'test_string'   => json_encode($bitmap[$i]),
+                'test_int' => $i,
+                'test_string' => json_encode($bitmap[$i]),
                 'test_datetime' => '2010-01-01 10:10:10'
             ));
         }
 
-        $sql[]  = 'SELECT ';
-        $sql[]  = 'test_int, ';
-        $sql[]  = 'test_string, ';
-        $sql[]  = $platform->getBitOrComparisonExpression('test_int', 2) . ' AS bit_or, ';
-        $sql[]  = $platform->getBitAndComparisonExpression('test_int', 2) . ' AS bit_and ';
-        $sql[]  = 'FROM fetch_table';
+        $sql[] = 'SELECT ';
+        $sql[] = 'test_int, ';
+        $sql[] = 'test_string, ';
+        $sql[] = $platform->getBitOrComparisonExpression('test_int', 2) . ' AS bit_or, ';
+        $sql[] = $platform->getBitAndComparisonExpression('test_int', 2) . ' AS bit_and ';
+        $sql[] = 'FROM fetch_table';
 
-        $stmt   = $this->_conn->executeQuery(implode(PHP_EOL, $sql));
-        $data   = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->_conn->executeQuery(implode(PHP_EOL, $sql));
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
         $this->assertEquals(4, count($data));
@@ -431,7 +431,9 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $stmt->setFetchMode(\PDO::FETCH_NUM);
 
         $row = array_keys($stmt->fetch());
-        $this->assertEquals(0, count( array_filter($row, function($v) { return ! is_numeric($v); })), "should be no non-numerical elements in the result.");
+        $this->assertEquals(0, count(array_filter($row, function ($v) {
+                        return !is_numeric($v);
+                    })), "should be no non-numerical elements in the result.");
     }
 
     /**
@@ -442,17 +444,17 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $this->skipOci8AndMysqli();
         $this->setupFixture();
 
-        $sql    = "SELECT test_int, test_string, test_datetime FROM fetch_table";
-        $stmt   = $this->_conn->prepare($sql);
+        $sql = "SELECT test_int, test_string, test_datetime FROM fetch_table";
+        $stmt = $this->_conn->prepare($sql);
         $stmt->execute();
 
         $results = $stmt->fetchAll(
             \PDO::FETCH_CLASS,
-            __NAMESPACE__.'\\MyFetchClass'
+            __NAMESPACE__ . '\\MyFetchClass'
         );
 
         $this->assertEquals(1, count($results));
-        $this->assertInstanceOf(__NAMESPACE__.'\\MyFetchClass', $results[0]);
+        $this->assertInstanceOf(__NAMESPACE__ . '\\MyFetchClass', $results[0]);
 
         $this->assertEquals(1, $results[0]->test_int);
         $this->assertEquals('foo', $results[0]->test_string);
@@ -491,7 +493,7 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
         $results = $stmt->fetchAll();
 
         $this->assertEquals(1, count($results));
-        $this->assertInstanceOf(__NAMESPACE__.'\\MyFetchClass', $results[0]);
+        $this->assertInstanceOf(__NAMESPACE__ . '\\MyFetchClass', $results[0]);
 
         $this->assertEquals(1, $results[0]->test_int);
         $this->assertEquals('foo', $results[0]->test_string);
@@ -516,7 +518,7 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
         }
 
         $this->assertEquals(1, count($results));
-        $this->assertInstanceOf(__NAMESPACE__.'\\MyFetchClass', $results[0]);
+        $this->assertInstanceOf(__NAMESPACE__ . '\\MyFetchClass', $results[0]);
 
         $this->assertEquals(1, $results[0]->test_int);
         $this->assertEquals('foo', $results[0]->test_string);
@@ -564,15 +566,15 @@ class DataAccessTest extends \Doctrine\Tests\DbalFunctionalTestCase
     {
         $this->_conn->executeQuery('DELETE FROM fetch_table')->execute();
         $this->_conn->insert('fetch_table', array(
-            'test_int'      => 1,
-            'test_string'   => 'foo',
+            'test_int' => 1,
+            'test_string' => 'foo',
             'test_datetime' => '2010-01-01 10:10:10'
         ));
     }
 
     private function skipOci8AndMysqli()
     {
-        if (isset($GLOBALS['db_type']) && $GLOBALS['db_type'] == "oci8")  {
+        if (isset($GLOBALS['db_type']) && $GLOBALS['db_type'] == "oci8") {
             $this->markTestSkipped("Not supported by OCI8");
         }
         if ('mysqli' == $this->_conn->getDriver()->getName()) {

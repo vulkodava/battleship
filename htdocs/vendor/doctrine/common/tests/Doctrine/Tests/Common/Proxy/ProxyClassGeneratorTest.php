@@ -54,7 +54,7 @@ class ProxyClassGeneratorTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->metadata       = new LazyLoadableObjectClassMetadata();
+        $this->metadata = new LazyLoadableObjectClassMetadata();
         $this->proxyGenerator = new ProxyGenerator(__DIR__ . '/generated', __NAMESPACE__ . 'Proxy', true);
 
         if (class_exists($this->proxyClass, false)) {
@@ -120,6 +120,7 @@ class ProxyClassGeneratorTest extends PHPUnit_Framework_TestCase
 
     /**
      * Check that the proxy doesn't serialize static properties (in __sleep() method)
+     *
      * @group DCOM-212
      */
     public function testClassWithStaticPropertyProxyGeneration()
@@ -172,7 +173,7 @@ class ProxyClassGeneratorTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(
             'Doctrine\Common\Proxy\Exception\UnexpectedValueException',
             'The type hint of parameter "foo" in method "invalidTypeHintMethod"'
-                .' in class "' . $className . '" is invalid.'
+            . ' in class "' . $className . '" is invalid.'
         );
         $proxyGenerator->generateProxyClass($metadata);
     }

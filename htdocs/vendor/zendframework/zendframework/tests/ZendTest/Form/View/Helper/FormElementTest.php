@@ -30,7 +30,7 @@ class FormElementTest extends TestCase
 
         $this->renderer = new PhpRenderer;
         $helpers = $this->renderer->getHelperPluginManager();
-        $config  = new HelperConfig();
+        $config = new HelperConfig();
         $config->configureServiceManager($helpers);
 
         $this->helper->setView($this->renderer);
@@ -83,7 +83,7 @@ class FormElementTest extends TestCase
         $element->setAttribute('type', $type);
         $element->setAttribute('options', array('option' => 'value'));
         $element->setAttribute('src', 'http://zend.com/img.png');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertContains('<input', $markup);
         $this->assertContains('type="' . $type . '"', $markup);
@@ -100,7 +100,7 @@ class FormElementTest extends TestCase
 
     /**
      * @dataProvider getMultiElements
-     * @group multi
+     * @group        multi
      */
     public function testRendersMultiElementsAsExpected($type, $inputType, $additionalMarkup)
     {
@@ -123,7 +123,7 @@ class FormElementTest extends TestCase
             'value3' => 'last',
         ));
         $element->setAttribute('value', 'value2');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, '<' . $inputType), $markup);
         $this->assertContains($additionalMarkup, $markup);
@@ -146,7 +146,7 @@ class FormElementTest extends TestCase
 
     public function testRendersCsrfAsExpected()
     {
-        $element   = new Element\Csrf('foo');
+        $element = new Element\Csrf('foo');
         $inputSpec = $element->getInputSpecification();
         $hash = '';
 
@@ -161,7 +161,7 @@ class FormElementTest extends TestCase
             }
         }
 
-        $markup    = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertRegexp('#<input[^>]*(type="hidden")#', $markup);
         $this->assertRegexp('#<input[^>]*(value="' . $hash . '")#', $markup);
@@ -172,7 +172,7 @@ class FormElementTest extends TestCase
         $element = new Element('foo');
         $element->setAttribute('type', 'textarea');
         $element->setAttribute('value', 'Initial content');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertContains('<textarea', $markup);
         $this->assertContains('>Initial content<', $markup);
@@ -183,7 +183,7 @@ class FormElementTest extends TestCase
         $element = new Element\Collection();
         $element->setLabel('foo');
 
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertContains('<legend>foo</legend>', $markup);
     }
 
@@ -191,7 +191,7 @@ class FormElementTest extends TestCase
     {
         $element = new Element\Button('foo');
         $element->setLabel('My Button');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertContains('<button', $markup);
         $this->assertContains('>My Button<', $markup);

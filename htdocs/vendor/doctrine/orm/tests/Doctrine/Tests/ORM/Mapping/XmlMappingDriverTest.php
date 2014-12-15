@@ -36,8 +36,8 @@ class XmlMappingDriverTest extends AbstractMappingDriverTest
 
     public function testIdentifierWithAssociationKey()
     {
-        $driver  = $this->_loadDriver();
-        $em      = $this->_getTestEntityManager();
+        $driver = $this->_loadDriver();
+        $em = $this->_getTestEntityManager();
         $factory = new \Doctrine\ORM\Mapping\ClassMetadataFactory();
 
         $em->getConfiguration()->setMetadataDriverImpl($driver);
@@ -53,10 +53,11 @@ class XmlMappingDriverTest extends AbstractMappingDriverTest
     }
 
     /**
-     * @group DDC-1468
+     * @group                    DDC-1468
      *
      * @expectedException Doctrine\Common\Persistence\Mapping\MappingException
-     * @expectedExceptionMessage Invalid mapping file 'Doctrine.Tests.Models.Generic.SerializationModel.dcm.xml' for class 'Doctrine\Tests\Models\Generic\SerializationModel'.
+     * @expectedExceptionMessage Invalid mapping file 'Doctrine.Tests.Models.Generic.SerializationModel.dcm.xml' for
+     *                           class 'Doctrine\Tests\Models\Generic\SerializationModel'.
      */
     public function testInvalidMappingFileException()
     {
@@ -66,12 +67,12 @@ class XmlMappingDriverTest extends AbstractMappingDriverTest
     /**
      * @param string $xmlMappingFile
      * @dataProvider dataValidSchema
-     * @group DDC-2429
+     * @group        DDC-2429
      */
     public function testValidateXmlSchema($xmlMappingFile)
     {
-        $xsdSchemaFile  = __DIR__ . '/../../../../../doctrine-mapping.xsd';
-        $dom            = new \DOMDocument('UTF-8');
+        $xsdSchemaFile = __DIR__ . '/../../../../../doctrine-mapping.xsd';
+        $dom = new \DOMDocument('UTF-8');
 
         $dom->load($xmlMappingFile);
 
@@ -80,24 +81,25 @@ class XmlMappingDriverTest extends AbstractMappingDriverTest
 
     static public function dataValidSchema()
     {
-        $list    = glob(__DIR__ . '/xml/*.xml');
+        $list = glob(__DIR__ . '/xml/*.xml');
         $invalid = array(
             'Doctrine.Tests.Models.DDC889.DDC889Class.dcm'
         );
 
-        $list = array_filter($list, function($item) use ($invalid){
-            return ! in_array(pathinfo($item, PATHINFO_FILENAME), $invalid);
+        $list = array_filter($list, function ($item) use ($invalid) {
+            return !in_array(pathinfo($item, PATHINFO_FILENAME), $invalid);
         });
 
-        return array_map(function($item){
+        return array_map(function ($item) {
             return array($item);
         }, $list);
     }
 
     /**
-     * @group DDC-889
+     * @group                    DDC-889
      * @expectedException Doctrine\Common\Persistence\Mapping\MappingException
-     * @expectedExceptionMessage Invalid mapping file 'Doctrine.Tests.Models.DDC889.DDC889Class.dcm.xml' for class 'Doctrine\Tests\Models\DDC889\DDC889Class'.
+     * @expectedExceptionMessage Invalid mapping file 'Doctrine.Tests.Models.DDC889.DDC889Class.dcm.xml' for class
+     *                           'Doctrine\Tests\Models\DDC889\DDC889Class'.
      */
     public function testinvalidEntityOrMappedSuperClassShouldMentionParentClasses()
     {
@@ -110,6 +112,14 @@ class CTI
     public $id;
 }
 
-class CTIFoo extends CTI {}
-class CTIBar extends CTI {}
-class CTIBaz extends CTI {}
+class CTIFoo extends CTI
+{
+}
+
+class CTIBar extends CTI
+{
+}
+
+class CTIBaz extends CTI
+{
+}

@@ -19,8 +19,12 @@
                 <method>factory</method>
             </constructor_callback>
             <params>
-                <struct><__reference>struct</__reference></struct>
-                <params><foo>bar</foo></params>
+                <struct>
+                    <__reference>struct</__reference>
+                </struct>
+                <params>
+                    <foo>bar</foo>
+                </params>
             </params>
             <param_map>
                 <struct>0</struct>
@@ -32,7 +36,11 @@
             <methods>
                 <method>
                     <name>setObject</name>
-                    <params><params><__reference>params</__reference></params></params>
+                    <params>
+                        <params>
+                            <__reference>params</__reference>
+                        </params>
+                    </params>
                 </method>
             </methods>
         </definitions>

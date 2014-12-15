@@ -27,11 +27,11 @@ class ZfcUserIdentityTest extends \PHPUnit_Framework_TestCase
     public function testInvokeWithIdentity()
     {
         $this->authService->expects($this->once())
-                          ->method('hasIdentity')
-                          ->will($this->returnValue(true));
+            ->method('hasIdentity')
+            ->will($this->returnValue(true));
         $this->authService->expects($this->once())
-                          ->method('getIdentity')
-                          ->will($this->returnValue('zfcUser'));
+            ->method('getIdentity')
+            ->will($this->returnValue('zfcUser'));
 
         $result = $this->helper->__invoke();
 
@@ -44,8 +44,8 @@ class ZfcUserIdentityTest extends \PHPUnit_Framework_TestCase
     public function testInvokeWithoutIdentity()
     {
         $this->authService->expects($this->once())
-                          ->method('hasIdentity')
-                          ->will($this->returnValue(false));
+            ->method('hasIdentity')
+            ->will($this->returnValue(false));
 
         $result = $this->helper->__invoke();
 

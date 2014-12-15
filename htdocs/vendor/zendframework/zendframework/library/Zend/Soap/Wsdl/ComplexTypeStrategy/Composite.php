@@ -17,18 +17,21 @@ class Composite implements ComplexTypeStrategy
 {
     /**
      * Typemap of Complex Type => Strategy pairs.
+     *
      * @var array
      */
     protected $typeMap = array();
 
     /**
      * Default Strategy of this composite
+     *
      * @var string|ComplexTypeStrategy
      */
     protected $defaultStrategy;
 
     /**
      * Context WSDL file that this composite serves
+     *
      * @var Wsdl|null
      */
     protected $context;
@@ -42,7 +45,8 @@ class Composite implements ComplexTypeStrategy
     public function __construct(
         array $typeMap = array(),
         $defaultStrategy = 'Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType'
-    ) {
+    )
+    {
         foreach ($typeMap as $type => $strategy) {
             $this->connectTypeToStrategy($type, $strategy);
         }
@@ -64,6 +68,7 @@ class Composite implements ComplexTypeStrategy
             throw new Exception\InvalidArgumentException('Invalid type given to Composite Type Map.');
         }
         $this->typeMap[$type] = $strategy;
+
         return $this;
     }
 
@@ -85,6 +90,7 @@ class Composite implements ComplexTypeStrategy
             );
         }
         $this->defaultStrategy = $strategy;
+
         return $strategy;
     }
 
@@ -127,6 +133,7 @@ class Composite implements ComplexTypeStrategy
     public function setContext(Wsdl $context)
     {
         $this->context = $context;
+
         return $this;
     }
 

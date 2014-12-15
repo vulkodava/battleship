@@ -21,7 +21,7 @@ class DDC522Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC522Cart'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC522ForeignKeyTest')
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
@@ -45,8 +45,8 @@ class DDC522Test extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $this->_em->clear();
 
-        $r = $this->_em->createQuery("select ca,c from ".get_class($cart)." ca join ca.customer c")
-                ->getResult();
+        $r = $this->_em->createQuery("select ca,c from " . get_class($cart) . " ca join ca.customer c")
+            ->getResult();
 
         $this->assertInstanceOf(__NAMESPACE__ . '\DDC522Cart', $r[0]);
         $this->assertInstanceOf(__NAMESPACE__ . '\DDC522Customer', $r[0]->customer);
@@ -85,7 +85,8 @@ class DDC522Test extends \Doctrine\Tests\OrmFunctionalTestCase
 }
 
 /** @Entity */
-class DDC522Customer {
+class DDC522Customer
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     public $id;
     /** @Column */
@@ -95,7 +96,8 @@ class DDC522Customer {
 }
 
 /** @Entity */
-class DDC522Cart {
+class DDC522Cart
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     public $id;
     /** @Column(type="integer") */
@@ -108,7 +110,8 @@ class DDC522Cart {
 }
 
 /** @Entity */
-class DDC522ForeignKeyTest {
+class DDC522ForeignKeyTest
+{
     /** @Id @Column(type="integer") @GeneratedValue */
     public $id;
     /** @Column(type="integer", name="cart_id", nullable=true) */

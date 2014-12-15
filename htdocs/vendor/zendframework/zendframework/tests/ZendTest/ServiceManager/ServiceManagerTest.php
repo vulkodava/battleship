@@ -263,7 +263,7 @@ class ServiceManagerTest extends TestCase
     {
         $parent = new ServiceManager();
         $parent->setService('foo', 'bar');
-        $child  = new ServiceManager();
+        $child = new ServiceManager();
         $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_PARENT);
         $this->assertEquals('bar', $child->get('foo'));
     }
@@ -271,7 +271,7 @@ class ServiceManagerTest extends TestCase
     public function testCanRetrieveFromChildPeeringManager()
     {
         $parent = new ServiceManager();
-        $child  = new ServiceManager();
+        $child = new ServiceManager();
         $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_CHILD);
         $child->setService('foo', 'bar');
         $this->assertEquals('bar', $parent->get('foo'));
@@ -283,7 +283,7 @@ class ServiceManagerTest extends TestCase
         $parent->setFactory('foo', function ($sm) {
             return 'bar';
         });
-        $child  = new ServiceManager();
+        $child = new ServiceManager();
         $child->setFactory('foo', function ($sm) {
             return 'baz';
         });
@@ -315,7 +315,9 @@ class ServiceManagerTest extends TestCase
      */
     public function testCreateWithCallableFactory()
     {
-        $this->serviceManager->setFactory('foo', function () { return new TestAsset\Foo; });
+        $this->serviceManager->setFactory('foo', function () {
+                return new TestAsset\Foo;
+            });
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
     }
 
@@ -576,8 +578,8 @@ class ServiceManagerTest extends TestCase
     {
         $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
         $this->serviceManager->setFactory('bar', function ($sm) {
-                return new Bar(array('a'));
-            });
+            return new Bar(array('a'));
+        });
         $this->serviceManager->setAllowOverride(false);
         // should throw an exception because 'foo' already exists in the service manager
         $this->serviceManager->setAlias('foo', 'bar');
@@ -815,7 +817,7 @@ class ServiceManagerTest extends TestCase
      */
     public function testCanGetAliasedServicesFromPeeringServiceManagers()
     {
-        $service   = new \stdClass();
+        $service = new \stdClass();
         $peeringSm = new ServiceManager();
 
         $peeringSm->setService('actual-service-name', $service);
@@ -1037,6 +1039,7 @@ class ServiceManagerTest extends TestCase
             $this->fail('Expected exception was not raised');
         } catch (Exception\ServiceNotCreatedException $expected) {
             $this->assertRegExp('/invalid factory/', $expected->getMessage());
+
             return;
         }
     }
@@ -1052,6 +1055,7 @@ class ServiceManagerTest extends TestCase
             $this->fail('Expected exception was not raised');
         } catch (Exception\ServiceNotCreatedException $expected) {
             $this->assertRegExp('/invalid factory/', $expected->getMessage());
+
             return;
         }
     }
@@ -1063,10 +1067,13 @@ class ServiceManagerTest extends TestCase
 
         $delegatorFactoryCallback = function ($serviceManager, $cName, $rName, $callback) use ($delegator) {
             $delegator->real = call_user_func($callback);
+
             return $delegator;
         };
 
-        $this->serviceManager->setFactory('foo-service', function () use ($realService) { return $realService; } );
+        $this->serviceManager->setFactory('foo-service', function () use ($realService) {
+                return $realService;
+            });
         $this->serviceManager->addDelegator('foo-service', $delegatorFactoryCallback);
 
         $service = $this->serviceManager->create('foo-service');
@@ -1159,7 +1166,8 @@ class ServiceManagerTest extends TestCase
             array(1),
             array(1.2),
             array(array()),
-            array(function () {}),
+            array(function () {
+            }),
             array(false),
             array(new \stdClass()),
             array(tmpfile())

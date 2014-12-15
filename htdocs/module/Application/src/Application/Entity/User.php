@@ -7,10 +7,13 @@
  */
 
 namespace Application\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /** @ORM\Entity */
-class User {
+class User
+{
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -34,35 +37,51 @@ class User {
 
     // getters/setters
 
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
+
         return true;
     }
-    public function getId() {
+
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setFullName($fullName) {
+    public function setFullName($fullName)
+    {
         $this->fullName = $fullName;
+
         return true;
     }
-    public function getFullName() {
+
+    public function getFullName()
+    {
         return $this->fullName;
     }
 
-    public function setAddress($address) {
+    public function setAddress($address)
+    {
         $this->address = $address;
+
         return true;
     }
-    public function getAddress() {
+
+    public function getAddress()
+    {
         return $this->address;
     }
 
-    public function setProjects($projects) {
+    public function setProjects($projects)
+    {
         $this->projects = $projects;
+
         return true;
     }
-    public function getProjects() {
+
+    public function getProjects()
+    {
         return $this->projects;
     }
 }

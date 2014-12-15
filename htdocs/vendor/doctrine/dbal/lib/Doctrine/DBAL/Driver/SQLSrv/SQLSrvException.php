@@ -31,9 +31,9 @@ class SQLSrvException extends \Doctrine\DBAL\DBALException
         $errors = sqlsrv_errors(SQLSRV_ERR_ERRORS);
         $message = "";
         foreach ($errors as $error) {
-            $message .= "SQLSTATE [".$error['SQLSTATE'].", ".$error['code']."]: ". $error['message']."\n";
+            $message .= "SQLSTATE [" . $error['SQLSTATE'] . ", " . $error['code'] . "]: " . $error['message'] . "\n";
         }
-        if ( ! $message) {
+        if (!$message) {
             $message = "SQL Server error occurred but no error message was retrieved from driver.";
         }
 

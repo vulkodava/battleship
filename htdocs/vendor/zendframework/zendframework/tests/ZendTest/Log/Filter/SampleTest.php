@@ -33,7 +33,7 @@ class SampleTest extends \PHPUnit_Framework_TestCase
 
         // Since sampling is a random process, let's test several times.
         $ret = false;
-        for ($i = 0; $i < 100; $i ++) {
+        for ($i = 0; $i < 100; $i++) {
             if ($filter->filter(array())) {
                 break;
                 $ret = true;
@@ -50,8 +50,8 @@ class SampleTest extends \PHPUnit_Framework_TestCase
 
         // Since sampling is a random process, let's test several times.
         $ret = true;
-        for ($i = 0; $i < 100; $i ++) {
-            if (! $filter->filter(array())) {
+        for ($i = 0; $i < 100; $i++) {
+            if (!$filter->filter(array())) {
                 break;
                 $ret = false;
             }

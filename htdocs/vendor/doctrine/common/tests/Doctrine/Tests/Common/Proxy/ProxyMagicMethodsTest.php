@@ -68,9 +68,9 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
     public function testInheritedMagicGet()
     {
         $proxyClassName = $this->generateProxyClass(__NAMESPACE__ . '\\MagicGetClass');
-        $proxy          = new $proxyClassName(
+        $proxy = new $proxyClassName(
             function (Proxy $proxy, $method, $params) use (&$counter) {
-                if ( ! in_array($params[0], array('publicField', 'test', 'notDefined'))) {
+                if (!in_array($params[0], array('publicField', 'test', 'notDefined'))) {
                     throw new \InvalidArgumentException('Unexpected access to field "' . $params[0] . '"');
                 }
 
@@ -79,7 +79,7 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
                 $proxy->__setInitializer(null);
 
                 $proxy->publicField = 'modifiedPublicField';
-                $counter            += 1;
+                $counter += 1;
 
                 $proxy->__setInitializer($initializer);
 
@@ -99,11 +99,11 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
      */
     public function testInheritedMagicGetByRef()
     {
-        $proxyClassName    = $this->generateProxyClass(__NAMESPACE__ . '\\MagicGetByRefClass');
+        $proxyClassName = $this->generateProxyClass(__NAMESPACE__ . '\\MagicGetByRefClass');
         /* @var $proxy \Doctrine\Tests\Common\Proxy\MagicGetByRefClass */
-        $proxy             = new $proxyClassName();
+        $proxy = new $proxyClassName();
         $proxy->valueField = 123;
-        $value             = & $proxy->__get('value');
+        $value = &$proxy->__get('value');
 
         $this->assertSame(123, $value);
 
@@ -119,9 +119,9 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
     public function testInheritedMagicSet()
     {
         $proxyClassName = $this->generateProxyClass(__NAMESPACE__ . '\\MagicSetClass');
-        $proxy          = new $proxyClassName(
-            function (Proxy  $proxy, $method, $params) use (&$counter) {
-                if ( ! in_array($params[0], array('publicField', 'test', 'notDefined'))) {
+        $proxy = new $proxyClassName(
+            function (Proxy $proxy, $method, $params) use (&$counter) {
+                if (!in_array($params[0], array('publicField', 'test', 'notDefined'))) {
                     throw new \InvalidArgumentException('Unexpected access to field "' . $params[0] . '"');
                 }
 
@@ -148,12 +148,12 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
     public function testInheritedMagicSleep()
     {
         $proxyClassName = $this->generateProxyClass(__NAMESPACE__ . '\\MagicSleepClass');
-        $proxy          = new $proxyClassName();
+        $proxy = new $proxyClassName();
 
         $this->assertSame('defaultValue', $proxy->serializedField);
         $this->assertSame('defaultValue', $proxy->nonSerializedField);
 
-        $proxy->serializedField    = 'changedValue';
+        $proxy->serializedField = 'changedValue';
         $proxy->nonSerializedField = 'changedValue';
 
         $unserialized = unserialize(serialize($proxy));
@@ -165,12 +165,12 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
     public function testInheritedMagicWakeup()
     {
         $proxyClassName = $this->generateProxyClass(__NAMESPACE__ . '\\MagicWakeupClass');
-        $proxy          = new $proxyClassName();
+        $proxy = new $proxyClassName();
 
         $this->assertSame('defaultValue', $proxy->wakeupValue);
 
         $proxy->wakeupValue = 'changedValue';
-        $unserialized       = unserialize(serialize($proxy));
+        $unserialized = unserialize(serialize($proxy));
 
         $this->assertSame('newWakeupValue', $unserialized->wakeupValue, '"__wakeup" was called');
 
@@ -186,14 +186,14 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
     public function testInheritedMagicIsset()
     {
         $proxyClassName = $this->generateProxyClass(__NAMESPACE__ . '\\MagicIssetClass');
-        $proxy          = new $proxyClassName(function (Proxy $proxy, $method, $params) use (&$counter) {
+        $proxy = new $proxyClassName(function (Proxy $proxy, $method, $params) use (&$counter) {
             if (in_array($params[0], array('publicField', 'test', 'nonExisting'))) {
                 $initializer = $proxy->__getInitializer();
 
                 $proxy->__setInitializer(null);
 
                 $proxy->publicField = 'modifiedPublicField';
-                $counter            += 1;
+                $counter += 1;
 
                 $proxy->__setInitializer($initializer);
 
@@ -216,7 +216,7 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
     public function testInheritedMagicClone()
     {
         $proxyClassName = $this->generateProxyClass(__NAMESPACE__ . '\\MagicCloneClass');
-        $proxy          = new $proxyClassName(
+        $proxy = new $proxyClassName(
             null,
             function ($proxy) {
                 $proxy->cloned = true;
@@ -237,7 +237,7 @@ class ProxyMagicMethodsTest extends PHPUnit_Framework_TestCase
     {
         $proxyClassName = $this->generateProxyClass(__NAMESPACE__ . '\\SerializedClass');
         /* @var $proxy SerializedClass */
-        $proxy          = new $proxyClassName();
+        $proxy = new $proxyClassName();
 
         $proxy->setFoo(1);
         $proxy->setBar(2);

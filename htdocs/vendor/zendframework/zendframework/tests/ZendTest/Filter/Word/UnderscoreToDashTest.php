@@ -20,8 +20,8 @@ class UnderscoreToDashTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesCamelCasedWordsWithDashes()
     {
-        $string   = 'underscore_separated_words';
-        $filter   = new UnderscoreToDashFilter();
+        $string = 'underscore_separated_words';
+        $filter = new UnderscoreToDashFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

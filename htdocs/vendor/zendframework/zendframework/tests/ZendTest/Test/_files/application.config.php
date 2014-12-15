@@ -10,10 +10,10 @@ return array(
     ),
     'module_listener_options' => array(
         'config_cache_enabled' => true,
-        'cache_dir'            => $cacheDir,
-        'config_cache_key'     => 'phpunit',
-        'config_static_paths'  => array(),
-        'module_paths'         => array(
+        'cache_dir' => $cacheDir,
+        'config_cache_key' => 'phpunit',
+        'config_static_paths' => array(),
+        'module_paths' => array(
             'Baz' => __DIR__ . '/Baz/',
         ),
     ),

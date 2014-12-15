@@ -96,7 +96,7 @@ abstract class Type
      * Converts a value from its PHP representation to its database representation
      * of this type.
      *
-     * @param mixed                                     $value    The value to convert.
+     * @param mixed $value                                        The value to convert.
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform The currently used database platform.
      *
      * @return mixed The database representation of the value.
@@ -110,7 +110,7 @@ abstract class Type
      * Converts a value from its database representation to its PHP representation
      * of this type.
      *
-     * @param mixed                                     $value    The value to convert.
+     * @param mixed $value                                        The value to convert.
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform The currently used database platform.
      *
      * @return mixed The PHP representation of the value.
@@ -137,8 +137,8 @@ abstract class Type
     /**
      * Gets the SQL declaration snippet for a field of this type.
      *
-     * @param array                                     $fieldDeclaration The field declaration.
-     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform         The currently used database platform.
+     * @param array $fieldDeclaration                             The field declaration.
+     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform The currently used database platform.
      *
      * @return string
      */
@@ -165,8 +165,8 @@ abstract class Type
      */
     public static function getType($name)
     {
-        if ( ! isset(self::$_typeObjects[$name])) {
-            if ( ! isset(self::$_typesMap[$name])) {
+        if (!isset(self::$_typeObjects[$name])) {
+            if (!isset(self::$_typesMap[$name])) {
                 throw DBALException::unknownColumnType($name);
             }
             self::$_typeObjects[$name] = new self::$_typesMap[$name]();
@@ -218,7 +218,7 @@ abstract class Type
      */
     public static function overrideType($name, $className)
     {
-        if ( ! isset(self::$_typesMap[$name])) {
+        if (!isset(self::$_typesMap[$name])) {
             throw DBALException::typeNotFound($name);
         }
 
@@ -287,7 +287,7 @@ abstract class Type
     /**
      * Modifies the SQL expression (identifier, parameter) to convert to a database value.
      *
-     * @param string                                    $sqlExpr
+     * @param string $sqlExpr
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      *
      * @return string
@@ -300,7 +300,7 @@ abstract class Type
     /**
      * Modifies the SQL expression (identifier, parameter) to convert to a PHP value.
      *
-     * @param string                                    $sqlExpr
+     * @param string $sqlExpr
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      *
      * @return string

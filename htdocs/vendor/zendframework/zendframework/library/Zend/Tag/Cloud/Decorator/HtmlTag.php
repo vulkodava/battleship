@@ -85,6 +85,7 @@ class HtmlTag extends AbstractTag
         }
 
         $this->classList = $classList;
+
         return $this;
     }
 
@@ -113,8 +114,9 @@ class HtmlTag extends AbstractTag
             throw new InvalidArgumentException('Invalid fontsize unit specified');
         }
 
-        $this->fontSizeUnit = (string) $fontSizeUnit;
+        $this->fontSizeUnit = (string)$fontSizeUnit;
         $this->setClassList(null);
+
         return $this;
     }
 
@@ -127,7 +129,8 @@ class HtmlTag extends AbstractTag
     {
         return $this->fontSizeUnit;
     }
-     /**
+
+    /**
      * Set the HTML tags surrounding the <a> element
      *
      * @param  array $htmlTags
@@ -136,6 +139,7 @@ class HtmlTag extends AbstractTag
     public function setHTMLTags(array $htmlTags)
     {
         $this->htmlTags = $htmlTags;
+
         return $this;
     }
 
@@ -162,8 +166,9 @@ class HtmlTag extends AbstractTag
             throw new InvalidArgumentException('Fontsize must be numeric');
         }
 
-        $this->maxFontSize = (int) $maxFontSize;
+        $this->maxFontSize = (int)$maxFontSize;
         $this->setClassList(null);
+
         return $this;
     }
 
@@ -190,8 +195,9 @@ class HtmlTag extends AbstractTag
             throw new InvalidArgumentException('Fontsize must be numeric');
         }
 
-        $this->minFontSize = (int) $minFontSize;
+        $this->minFontSize = (int)$minFontSize;
         $this->setClassList(null);
+
         return $this;
     }
 
@@ -236,8 +242,8 @@ class HtmlTag extends AbstractTag
                 $attribute = sprintf('class="%s"', $escaper->escapeHtmlAttr($tag->getParam('weightValue')));
             }
 
-            $tagHTML  = sprintf('<a href="%s" %s>%s</a>', $escaper->escapeHtml($tag->getParam('url')), $attribute, $escaper->escapeHtml($tag->getTitle()));
-            $tagHTML  = $this->wrapTag($tagHTML);
+            $tagHTML = sprintf('<a href="%s" %s>%s</a>', $escaper->escapeHtml($tag->getParam('url')), $attribute, $escaper->escapeHtml($tag->getTitle()));
+            $tagHTML = $this->wrapTag($tagHTML);
             $result[] = $tagHTML;
         }
 

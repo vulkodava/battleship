@@ -22,7 +22,7 @@ namespace Doctrine\DBAL\Driver\SQLSrv;
 /**
  * SQL Server implementation for the Connection interface.
  *
- * @since 2.3
+ * @since  2.3
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
 class SQLSrvConnection implements \Doctrine\DBAL\Driver\Connection
@@ -39,18 +39,18 @@ class SQLSrvConnection implements \Doctrine\DBAL\Driver\Connection
 
     /**
      * @param string $serverName
-     * @param array  $connectionOptions
+     * @param array $connectionOptions
      *
      * @throws \Doctrine\DBAL\Driver\SQLSrv\SQLSrvException
      */
     public function __construct($serverName, $connectionOptions)
     {
-        if ( ! sqlsrv_configure('WarningsReturnAsErrors', 0)) {
+        if (!sqlsrv_configure('WarningsReturnAsErrors', 0)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
 
         $this->conn = sqlsrv_connect($serverName, $connectionOptions);
-        if ( ! $this->conn) {
+        if (!$this->conn) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
         $this->lastInsertId = new LastInsertId();
@@ -81,7 +81,7 @@ class SQLSrvConnection implements \Doctrine\DBAL\Driver\Connection
      * {@inheritDoc}
      * @license New BSD, code from Zend Framework
      */
-    public function quote($value, $type=\PDO::PARAM_STR)
+    public function quote($value, $type = \PDO::PARAM_STR)
     {
         if (is_int($value)) {
             return $value;
@@ -109,7 +109,7 @@ class SQLSrvConnection implements \Doctrine\DBAL\Driver\Connection
     public function lastInsertId($name = null)
     {
         if ($name !== null) {
-            $sql = "SELECT IDENT_CURRENT(".$this->quote($name).") AS LastInsertId";
+            $sql = "SELECT IDENT_CURRENT(" . $this->quote($name) . ") AS LastInsertId";
             $stmt = $this->prepare($sql);
             $stmt->execute();
 
@@ -124,7 +124,7 @@ class SQLSrvConnection implements \Doctrine\DBAL\Driver\Connection
      */
     public function beginTransaction()
     {
-        if ( ! sqlsrv_begin_transaction($this->conn)) {
+        if (!sqlsrv_begin_transaction($this->conn)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
     }
@@ -134,7 +134,7 @@ class SQLSrvConnection implements \Doctrine\DBAL\Driver\Connection
      */
     public function commit()
     {
-        if ( ! sqlsrv_commit($this->conn)) {
+        if (!sqlsrv_commit($this->conn)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
     }
@@ -144,7 +144,7 @@ class SQLSrvConnection implements \Doctrine\DBAL\Driver\Connection
      */
     public function rollBack()
     {
-        if ( ! sqlsrv_rollback($this->conn)) {
+        if (!sqlsrv_rollback($this->conn)) {
             throw SQLSrvException::fromSqlSrvErrors();
         }
     }

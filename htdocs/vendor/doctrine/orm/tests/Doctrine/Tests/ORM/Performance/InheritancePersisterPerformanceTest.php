@@ -8,7 +8,7 @@ use Doctrine\ORM\Query;
 require_once __DIR__ . '/../../TestInit.php';
 
 /**
-* @group performance
+ * @group performance
  */
 class InheritancePersisterPerformanceTest extends \Doctrine\Tests\OrmFunctionalTestCase
 {

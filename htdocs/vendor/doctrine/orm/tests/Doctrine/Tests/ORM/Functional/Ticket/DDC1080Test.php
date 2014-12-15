@@ -143,6 +143,7 @@ class DDC1080Foo
     }
 
 }
+
 /**
  * @Entity
  * @Table(name="bar")
@@ -266,6 +267,7 @@ class DDC1080FooBar
     public function setFoo($foo)
     {
         $this->_foo = $foo;
+
         return $this;
     }
 
@@ -288,6 +290,7 @@ class DDC1080FooBar
     public function setBar($bar)
     {
         $this->_bar = $bar;
+
         return $this;
     }
 
@@ -310,6 +313,7 @@ class DDC1080FooBar
     public function setOrderNr($orderNr)
     {
         $this->_orderNr = $orderNr;
+
         return $this;
     }
 

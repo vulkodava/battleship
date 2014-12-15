@@ -16,6 +16,7 @@ class Upca extends Ean13
 {
     /**
      * Default options for Postnet barcode
+     *
      * @return void
      */
     protected function getDefaultOptions()
@@ -27,20 +28,23 @@ class Upca extends Ean13
 
     /**
      * Width of the barcode (in pixels)
+     *
      * @return int
      */
     protected function calculateBarcodeWidth()
     {
-        $quietZone       = $this->getQuietZone();
-        $startCharacter  = (3 * $this->barThinWidth) * $this->factor;
+        $quietZone = $this->getQuietZone();
+        $startCharacter = (3 * $this->barThinWidth) * $this->factor;
         $middleCharacter = (5 * $this->barThinWidth) * $this->factor;
-        $stopCharacter   = (3 * $this->barThinWidth) * $this->factor;
-        $encodedData     = (7 * $this->barThinWidth) * $this->factor * 12;
+        $stopCharacter = (3 * $this->barThinWidth) * $this->factor;
+        $encodedData = (7 * $this->barThinWidth) * $this->factor * 12;
+
         return $quietZone + $startCharacter + $middleCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
-        /**
+    /**
      * Prepare array to draw barcode
+     *
      * @return array
      */
     protected function prepareBarcode()
@@ -94,11 +98,13 @@ class Upca extends Ean13
         $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
         $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
         $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+
         return $barcodeTable;
     }
 
     /**
      * Partial function to draw text
+     *
      * @return void
      */
     protected function drawText()
@@ -107,7 +113,7 @@ class Upca extends Ean13
             $text = $this->getTextToDisplay();
             $characterWidth = (7 * $this->barThinWidth) * $this->factor;
             $leftPosition = $this->getQuietZone() - $characterWidth;
-            for ($i = 0; $i < $this->barcodeLength; $i ++) {
+            for ($i = 0; $i < $this->barcodeLength; $i++) {
                 $fontSize = $this->fontSize;
                 if ($i == 0 || $i == 11) {
                     $fontSize *= 0.8;
@@ -117,12 +123,12 @@ class Upca extends Ean13
                     $fontSize * $this->factor,
                     $this->rotate(
                         $leftPosition,
-                        (int) $this->withBorder * 2 + $this->factor * ($this->barHeight + $fontSize) + 1
+                        (int)$this->withBorder * 2 + $this->factor * ($this->barHeight + $fontSize) + 1
                     ),
                     $this->font,
                     $this->foreColor,
                     'left',
-                    - $this->orientation
+                    -$this->orientation
                 );
                 switch ($i) {
                     case 0:

@@ -23,12 +23,12 @@ namespace Doctrine\ORM\Query;
  * Encapsulates the resulting components from a DQL query parsing process that
  * can be serialized.
  *
- * @author      Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @author      Janne Vanhala <jpvanhal@cc.hut.fi>
- * @author		Roman Borschel <roman@code-factory.org>
- * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @link        http://www.doctrine-project.org
- * @since       2.0
+ * @author        Guilherme Blanco <guilhermeblanco@hotmail.com>
+ * @author        Janne Vanhala <jpvanhal@cc.hut.fi>
+ * @author        Roman Borschel <roman@code-factory.org>
+ * @license       http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @link          http://www.doctrine-project.org
+ * @since         2.0
  */
 class ParserResult
 {
@@ -112,7 +112,7 @@ class ParserResult
      * several SQL parameter positions.
      *
      * @param string|integer $dqlPosition
-     * @param integer        $sqlPosition
+     * @param integer $sqlPosition
      *
      * @return void
      */

@@ -10,7 +10,7 @@ use Doctrine\Tests\Models\CMS\CmsUser;
  * Description of InsertPerformanceTest
  *
  * @author robo
- * @group performance
+ * @group  performance
  */
 class UnitOfWorkPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
 {
@@ -25,7 +25,7 @@ class UnitOfWorkPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         $n = 100;
 
         $users = array();
-        for ($i=1; $i<=$n; ++$i) {
+        for ($i = 1; $i <= $n; ++$i) {
             $user = new CmsUser;
             $user->status = 'user';
             $user->username = 'user' . $i;
@@ -46,6 +46,6 @@ class UnitOfWorkPerformanceTest extends \Doctrine\Tests\OrmPerformanceTestCase
         $this->_em->flush();
         $e = microtime(true);
 
-        echo ' Compute ChangeSet '.$n.' objects in ' . ($e - $s) . ' seconds' . PHP_EOL;
+        echo ' Compute ChangeSet ' . $n . ' objects in ' . ($e - $s) . ' seconds' . PHP_EOL;
     }
 }

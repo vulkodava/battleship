@@ -16,7 +16,7 @@ use Zend\Authentication\Storage\Chain,
 use PHPUnit_Framework_TestCase as TestCase;
 
 /**
-  * @group      Zend_Auth
+ * @group      Zend_Auth
  */
 class ChainTest extends TestCase
 {
@@ -130,7 +130,7 @@ class ChainTest extends TestCase
     }
 
     /**
-     * @param  mixed            $identity
+     * @param  mixed $identity
      * @return StorageInterface
      */
     protected function storageFactory($identity = null)

@@ -37,9 +37,9 @@ class ModuleLoaderListenerTest extends TestCase
     public function testModuleLoaderListenerFunctionsAsAggregateListenerEnabledCache()
     {
         $options = new ListenerOptions(array(
-            'cache_dir'                => $this->tmpdir,
+            'cache_dir' => $this->tmpdir,
             'module_map_cache_enabled' => true,
-            'module_map_cache_key'     => 'foo',
+            'module_map_cache_key' => 'foo',
         ));
 
         $moduleLoaderListener = new ModuleLoaderListener($options);
@@ -73,8 +73,8 @@ class ModuleLoaderListenerTest extends TestCase
     public function testModuleLoaderListenerFunctionsAsAggregateListenerHasCache()
     {
         $options = new ListenerOptions(array(
-            'cache_dir'                => $this->tmpdir,
-            'module_map_cache_key'     => 'foo',
+            'cache_dir' => $this->tmpdir,
+            'module_map_cache_key' => 'foo',
             'module_map_cache_enabled' => true,
         ));
 

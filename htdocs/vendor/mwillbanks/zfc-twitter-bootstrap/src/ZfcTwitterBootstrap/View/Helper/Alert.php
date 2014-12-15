@@ -16,7 +16,7 @@ class Alert extends AbstractHelper
     /**
      * @var string
      */
-     protected $format = <<<FORMAT
+    protected $format = <<<FORMAT
 <div class="alert %s"><button type="button" class="close" data-dismiss="alert">&times;</button>%s</div>
 FORMAT;
 
@@ -24,7 +24,7 @@ FORMAT;
      * Display an Informational Alert
      *
      * @param  string $alert
-     * @param  bool   $isBlock
+     * @param  bool $isBlock
      * @return string
      */
     public function info($alert, $isBlock = false)
@@ -36,7 +36,7 @@ FORMAT;
      * Display an Error Alert
      *
      * @param  string $alert
-     * @param  bool   $isBlock
+     * @param  bool $isBlock
      * @return string
      */
     public function error($alert, $isBlock = false)
@@ -48,7 +48,7 @@ FORMAT;
      * Display a Success Alert
      *
      * @param  string $alert
-     * @param  bool   $isBlock
+     * @param  bool $isBlock
      * @return string
      */
     public function success($alert, $isBlock = false)
@@ -60,7 +60,7 @@ FORMAT;
      * Display a Warning Alert
      *
      * @param  string $alert
-     * @param  bool   $isBlock
+     * @param  bool $isBlock
      * @return string
      */
     public function warning($alert, $isBlock = false)
@@ -72,7 +72,7 @@ FORMAT;
      * Render an Alert
      *
      * @param  string $alert
-     * @param  bool   $isBlock
+     * @param  bool $isBlock
      * @param  string $class
      * @return string
      */
@@ -89,9 +89,9 @@ FORMAT;
     /**
      * Invoke Alert
      *
-     * @param  string      $alert
-     * @param  bool        $isBlock
-     * @param  string      $class
+     * @param  string $alert
+     * @param  bool $isBlock
+     * @param  string $class
      * @return string|self
      */
     public function __invoke($alert = null, $isBlock = false, $class = '')

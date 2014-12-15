@@ -25,9 +25,9 @@ class ZendDbRoleProviderServiceFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateService()
     {
-        $factory          = new ZendDbRoleProviderServiceFactory();
-        $serviceLocator   = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
-        $config           = array(
+        $factory = new ZendDbRoleProviderServiceFactory();
+        $serviceLocator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
+        $config = array(
             'role_providers' => array(
                 'BjyAuthorize\Provider\Role\ZendDb' => array(),
             ),

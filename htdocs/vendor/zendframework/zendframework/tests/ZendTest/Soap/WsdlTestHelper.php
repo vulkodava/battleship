@@ -1,11 +1,11 @@
 <?php
 /**
-* Zend Framework (http://framework.zend.com/)
-*
-* @link      http://github.com/zendframework/zf2 for the canonical source repository
-* @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
-* @license   http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
 
 namespace ZendTest\Soap;
 
@@ -15,11 +15,11 @@ use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface;
 
 
 /**
-* Zend_Soap_Server
-*
-* @group      Zend_Soap
-* @group      Zend_Soap_Wsdl
-**/
+ * Zend_Soap_Server
+ *
+ * @group      Zend_Soap
+ * @group      Zend_Soap_Wsdl
+ **/
 class WsdlTestHelper extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -80,12 +80,12 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
         $this->xpath = new \DOMXPath($obj);
         $this->xpath->registerNamespace('unittest', Wsdl::WSDL_NS_URI);
 
-        $this->xpath->registerNamespace('tns',      $documentNamespace);
-        $this->xpath->registerNamespace('soap',     Wsdl::SOAP_11_NS_URI);
-        $this->xpath->registerNamespace('soap12',   Wsdl::SOAP_12_NS_URI);
-        $this->xpath->registerNamespace('xsd',      Wsdl::XSD_NS_URI);
+        $this->xpath->registerNamespace('tns', $documentNamespace);
+        $this->xpath->registerNamespace('soap', Wsdl::SOAP_11_NS_URI);
+        $this->xpath->registerNamespace('soap12', Wsdl::SOAP_12_NS_URI);
+        $this->xpath->registerNamespace('xsd', Wsdl::XSD_NS_URI);
         $this->xpath->registerNamespace('soap-enc', Wsdl::SOAP_ENC_URI);
-        $this->xpath->registerNamespace('wsdl',     Wsdl::WSDL_NS_URI);
+        $this->xpath->registerNamespace('wsdl', Wsdl::WSDL_NS_URI);
 
         return $obj;
     }

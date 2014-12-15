@@ -40,6 +40,7 @@ class Mysql implements PlatformInterface
             || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql')
         ) {
             $this->resource = $driver;
+
             return $this;
         }
 
@@ -89,6 +90,7 @@ class Mysql implements PlatformInterface
         if (is_array($identifierChain)) {
             $identifierChain = implode('`.`', $identifierChain);
         }
+
         return '`' . $identifierChain . '`';
     }
 
@@ -121,8 +123,9 @@ class Mysql implements PlatformInterface
         }
         trigger_error(
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-                . 'can introduce security vulnerabilities in a production environment.'
+            . 'can introduce security vulnerabilities in a production environment.'
         );
+
         return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
@@ -145,6 +148,7 @@ class Mysql implements PlatformInterface
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
+
         return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
@@ -164,6 +168,7 @@ class Mysql implements PlatformInterface
         do {
             $valueList[key($valueList)] = $this->quoteValue($value);
         } while ($value = next($valueList));
+
         return implode(', ', $valueList);
     }
 
@@ -209,6 +214,7 @@ class Mysql implements PlatformInterface
                     $parts[$i] = '`' . str_replace('`', '``', $part) . '`';
             }
         }
+
         return implode('', $parts);
     }
 }

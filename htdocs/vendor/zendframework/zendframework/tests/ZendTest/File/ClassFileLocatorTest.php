@@ -143,8 +143,8 @@ class ClassFileLocatorTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Only applies to PHP >=5.5');
         }
 
-        foreach (new ClassFileLocator(__DIR__ .'/TestAsset') as $file) {
-            if (! preg_match('/ClassNameResolutionCompatibility\.php$/', $file->getFilename())) {
+        foreach (new ClassFileLocator(__DIR__ . '/TestAsset') as $file) {
+            if (!preg_match('/ClassNameResolutionCompatibility\.php$/', $file->getFilename())) {
                 continue;
             }
             $this->assertCount(1, $file->getClasses());

@@ -133,27 +133,27 @@ abstract class CompanyContract
     static public function loadMetadata(\Doctrine\ORM\Mapping\ClassMetadataInfo $metadata)
     {
         $metadata->setInheritanceType(\Doctrine\ORM\Mapping\ClassMetadata::INHERITANCE_TYPE_JOINED);
-        $metadata->setTableName( 'company_contracts');
+        $metadata->setTableName('company_contracts');
         $metadata->setDiscriminatorColumn(array(
             'name' => 'discr',
             'type' => 'string',
         ));
 
         $metadata->mapField(array(
-            'id'        => true,
-            'name'      => 'id',
+            'id' => true,
+            'name' => 'id',
             'fieldName' => 'id',
         ));
 
         $metadata->mapField(array(
-            'type'      => 'boolean',
-            'name'      => 'completed',
+            'type' => 'boolean',
+            'name' => 'completed',
             'fieldName' => 'completed',
         ));
 
         $metadata->setDiscriminatorMap(array(
-            "fix"       => "CompanyFixContract",
-            "flexible"  => "CompanyFlexContract",
+            "fix" => "CompanyFixContract",
+            "flexible" => "CompanyFlexContract",
             "flexultra" => "CompanyFlexUltraContract"
         ));
 

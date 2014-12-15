@@ -70,6 +70,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
+
         return $this;
     }
 
@@ -91,6 +92,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
+
         return $this;
     }
 
@@ -116,6 +118,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
     public function registerResultPrototype(Result $result)
     {
         $this->resultPrototype = $result;
+
         return $this;
     }
 
@@ -176,6 +179,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
         }
 
         $statement->initialize($this->connection->getResource());
+
         return $statement;
     }
 
@@ -189,6 +193,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue());
+
         return $result;
     }
 
@@ -206,7 +211,7 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
      * Format parameter name
      *
      * @param string $name
-     * @param mixed  $type
+     * @param mixed $type
      * @return string
      */
     public function formatParameterName($name, $type = null)

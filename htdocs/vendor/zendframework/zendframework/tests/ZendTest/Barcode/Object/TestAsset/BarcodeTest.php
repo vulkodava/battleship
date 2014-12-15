@@ -21,7 +21,8 @@ class BarcodeTest extends \Zend\Barcode\Object\AbstractObject
     }
 
     public function validateText($value)
-    {}
+    {
+    }
 
     protected function prepareBarcode()
     {
@@ -29,7 +30,8 @@ class BarcodeTest extends \Zend\Barcode\Object\AbstractObject
     }
 
     protected function checkSpecificParams()
-    {}
+    {
+    }
 
     public function addTestInstruction(array $instruction)
     {

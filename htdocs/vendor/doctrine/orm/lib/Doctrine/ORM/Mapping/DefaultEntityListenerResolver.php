@@ -54,7 +54,7 @@ class DefaultEntityListenerResolver implements EntityListenerResolver
      */
     public function register($object)
     {
-        if ( ! is_object($object)) {
+        if (!is_object($object)) {
             throw new \InvalidArgumentException(sprintf('An object was expected, but got "%s".', gettype($object)));
         }
 
@@ -67,7 +67,7 @@ class DefaultEntityListenerResolver implements EntityListenerResolver
     public function resolve($className)
     {
         if (isset($this->instances[$className = trim($className, '\\')])) {
-           return $this->instances[$className];
+            return $this->instances[$className];
         }
 
         return $this->instances[$className] = new $className();

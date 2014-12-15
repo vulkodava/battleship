@@ -23,7 +23,7 @@ namespace Doctrine\ORM\Query\AST;
  * WhenClause ::= "WHEN" ConditionalExpression "THEN" ScalarExpression
  *
  * @since   2.2
- * 
+ *
  * @link    www.doctrine-project.org
  * @author  Benjamin Eberlei <kontakt@beberlei.de>
  * @author  Guilherme Blanco <guilhermeblanco@hotmail.com>
@@ -44,7 +44,7 @@ class WhenClause extends Node
 
     /**
      * @param ConditionalExpression $caseConditionExpression
-     * @param mixed                 $thenScalarExpression
+     * @param mixed $thenScalarExpression
      */
     public function __construct($caseConditionExpression, $thenScalarExpression)
     {

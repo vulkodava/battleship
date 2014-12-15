@@ -42,6 +42,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     {
         $tagManager = new TagManager();
         $tagManager->initializeDefaultTags();
+
         return $tagManager->createTagFromReflection($reflectionTag);
     }
 
@@ -60,6 +61,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     public function setVariableName($variableName)
     {
         $this->variableName = ltrim($variableName, '$');
+
         return $this;
     }
 

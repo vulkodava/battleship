@@ -18,6 +18,7 @@ class MemcacheOptions extends AdapterOptions
 {
     /**
      * The namespace separator
+     *
      * @var string
      */
     protected $namespaceSeparator = ':';
@@ -53,7 +54,7 @@ class MemcacheOptions extends AdapterOptions
      */
     public function setNamespace($namespace)
     {
-        $namespace = (string) $namespace;
+        $namespace = (string)$namespace;
 
         if (128 < strlen($namespace)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -73,11 +74,12 @@ class MemcacheOptions extends AdapterOptions
      */
     public function setNamespaceSeparator($namespaceSeparator)
     {
-        $namespaceSeparator = (string) $namespaceSeparator;
+        $namespaceSeparator = (string)$namespaceSeparator;
         if ($this->namespaceSeparator !== $namespaceSeparator) {
             $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
             $this->namespaceSeparator = $namespaceSeparator;
         }
+
         return $this;
     }
 
@@ -103,6 +105,7 @@ class MemcacheOptions extends AdapterOptions
             $this->triggerOptionEvent('resource_manager', $resourceManager);
             $this->resourceManager = $resourceManager;
         }
+
         return $this;
     }
 
@@ -116,6 +119,7 @@ class MemcacheOptions extends AdapterOptions
         if (!$this->resourceManager) {
             $this->resourceManager = new MemcacheResourceManager();
         }
+
         return $this->resourceManager;
     }
 
@@ -137,11 +141,12 @@ class MemcacheOptions extends AdapterOptions
      */
     public function setResourceId($resourceId)
     {
-        $resourceId = (string) $resourceId;
+        $resourceId = (string)$resourceId;
         if ($this->resourceId !== $resourceId) {
             $this->triggerOptionEvent('resource_id', $resourceId);
             $this->resourceId = $resourceId;
         }
+
         return $this;
     }
 
@@ -163,11 +168,12 @@ class MemcacheOptions extends AdapterOptions
      */
     public function setCompression($compression)
     {
-        $compression = (bool) $compression;
+        $compression = (bool)$compression;
         if ($this->compression !== $compression) {
             $this->triggerOptionEvent('compression', $compression);
             $this->compression = $compression;
         }
+
         return $this;
     }
 
@@ -181,6 +187,7 @@ class MemcacheOptions extends AdapterOptions
     public function setServers($servers)
     {
         $this->getResourceManager()->addServers($this->getResourceId(), $servers);
+
         return $this;
     }
 
@@ -203,6 +210,7 @@ class MemcacheOptions extends AdapterOptions
     public function setAutoCompressThreshold($threshold)
     {
         $this->getResourceManager()->setAutoCompressThreshold($this->getResourceId(), $threshold);
+
         return $this;
     }
 
@@ -225,6 +233,7 @@ class MemcacheOptions extends AdapterOptions
     public function setAutoCompressMinSavings($minSavings)
     {
         $this->getResourceManager()->setAutoCompressMinSavings($this->getResourceId(), $minSavings);
+
         return $this;
     }
 
@@ -247,6 +256,7 @@ class MemcacheOptions extends AdapterOptions
     public function setServerDefaults(array $serverDefaults)
     {
         $this->getResourceManager()->setServerDefaults($this->getResourceId(), $serverDefaults);
+
         return $this;
     }
 
@@ -269,6 +279,7 @@ class MemcacheOptions extends AdapterOptions
     public function setFailureCallback($callback)
     {
         $this->getResourceManager()->setFailureCallback($this->getResourceId(), $callback);
+
         return $this;
     }
 

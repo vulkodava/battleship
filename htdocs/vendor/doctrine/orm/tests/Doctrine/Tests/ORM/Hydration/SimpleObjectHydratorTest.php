@@ -10,10 +10,11 @@ require_once __DIR__ . '/../../TestInit.php';
 class SimpleObjectHydratorTest extends HydrationTestCase
 {
     /**
-     * @group DDC-1470
+     * @group                    DDC-1470
      *
      * @expectedException \Doctrine\ORM\Internal\Hydration\HydrationException
-     * @expectedExceptionMessage The discriminator column "discr" is missing for "Doctrine\Tests\Models\Company\CompanyPerson" using the DQL alias "p".
+     * @expectedExceptionMessage The discriminator column "discr" is missing for
+     *                           "Doctrine\Tests\Models\Company\CompanyPerson" using the DQL alias "p".
      */
     public function testMissingDiscriminatorColumnException()
     {
@@ -24,14 +25,14 @@ class SimpleObjectHydratorTest extends HydrationTestCase
         $rsm->addMetaResult('p ', 'discr', 'discr');
         $rsm->setDiscriminatorColumn('p', 'discr');
         $resultSet = array(
-              array(
-                  'u__id'   => '1',
-                  'u__name' => 'Fabio B. Silva'
-              ),
-         );
+            array(
+                'u__id' => '1',
+                'u__name' => 'Fabio B. Silva'
+            ),
+        );
 
-        $stmt       = new HydratorMockStatement($resultSet);
-        $hydrator   = new \Doctrine\ORM\Internal\Hydration\SimpleObjectHydrator($this->_em);
+        $stmt = new HydratorMockStatement($resultSet);
+        $hydrator = new \Doctrine\ORM\Internal\Hydration\SimpleObjectHydrator($this->_em);
         $hydrator->hydrateAll($stmt, $rsm);
     }
 
@@ -43,7 +44,7 @@ class SimpleObjectHydratorTest extends HydrationTestCase
         $rsm->addFieldResult('a', 'a__city', 'city');
         $resultSet = array(
             array(
-                'a__id'   => '1',
+                'a__id' => '1',
                 'a__city' => 'Cracow',
                 'doctrine_rownum' => '1'
             ),
@@ -53,17 +54,18 @@ class SimpleObjectHydratorTest extends HydrationTestCase
         $expectedEntity->id = 1;
         $expectedEntity->city = 'Cracow';
 
-        $stmt       = new HydratorMockStatement($resultSet);
-        $hydrator   = new \Doctrine\ORM\Internal\Hydration\SimpleObjectHydrator($this->_em);
+        $stmt = new HydratorMockStatement($resultSet);
+        $hydrator = new \Doctrine\ORM\Internal\Hydration\SimpleObjectHydrator($this->_em);
         $result = $hydrator->hydrateAll($stmt, $rsm);
         $this->assertEquals($result[0], $expectedEntity);
     }
 
     /**
-     * @group DDC-3076
+     * @group                    DDC-3076
      *
      * @expectedException \Doctrine\ORM\Internal\Hydration\HydrationException
-     * @expectedExceptionMessage The discriminator value "subworker" is invalid. It must be one of "person", "manager", "employee".
+     * @expectedExceptionMessage The discriminator value "subworker" is invalid. It must be one of "person", "manager",
+     *                           "employee".
      */
     public function testInvalidDiscriminatorValueException()
     {
@@ -77,15 +79,15 @@ class SimpleObjectHydratorTest extends HydrationTestCase
         $rsm->setDiscriminatorColumn('p', 'discr');
 
         $resultSet = array(
-              array(
-                  'p__id'   => '1',
-                  'p__name' => 'Fabio B. Silva',
-                  'discr'   => 'subworker'
-              ),
-         );
+            array(
+                'p__id' => '1',
+                'p__name' => 'Fabio B. Silva',
+                'discr' => 'subworker'
+            ),
+        );
 
-        $stmt       = new HydratorMockStatement($resultSet);
-        $hydrator   = new \Doctrine\ORM\Internal\Hydration\SimpleObjectHydrator($this->_em);
+        $stmt = new HydratorMockStatement($resultSet);
+        $hydrator = new \Doctrine\ORM\Internal\Hydration\SimpleObjectHydrator($this->_em);
         $hydrator->hydrateAll($stmt, $rsm);
     }
 }

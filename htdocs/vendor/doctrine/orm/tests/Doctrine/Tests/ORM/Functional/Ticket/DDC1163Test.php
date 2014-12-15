@@ -62,7 +62,7 @@ class DDC1163Test extends \Doctrine\Tests\OrmFunctionalTestCase
         /* @var $proxyHolder ProxyHolder */
         $proxyHolder = $this->_em->find(__NAMESPACE__ . '\\DDC1163ProxyHolder', $this->proxyHolderId);
 
-        $this->assertInstanceOf(__NAMESPACE__.'\\DDC1163SpecialProduct', $proxyHolder->getSpecialProduct());
+        $this->assertInstanceOf(__NAMESPACE__ . '\\DDC1163SpecialProduct', $proxyHolder->getSpecialProduct());
     }
 
     private function setPropertyAndAssignTagToSpecialProduct()
@@ -70,14 +70,14 @@ class DDC1163Test extends \Doctrine\Tests\OrmFunctionalTestCase
         /* @var $specialProduct SpecialProduct */
         $specialProduct = $this->_em->find(__NAMESPACE__ . '\\DDC1163SpecialProduct', $this->productId);
 
-        $this->assertInstanceOf(__NAMESPACE__.'\\DDC1163SpecialProduct', $specialProduct);
+        $this->assertInstanceOf(__NAMESPACE__ . '\\DDC1163SpecialProduct', $specialProduct);
         $this->assertInstanceOf('Doctrine\ORM\Proxy\Proxy', $specialProduct);
 
         $specialProduct->setSubclassProperty('foobar');
 
         // this screams violation of law of demeter ;)
         $this->assertEquals(
-            __NAMESPACE__.'\\DDC1163SpecialProduct',
+            __NAMESPACE__ . '\\DDC1163SpecialProduct',
             $this->_em->getUnitOfWork()->getEntityPersister(get_class($specialProduct))->getClassMetadata()->name
         );
 

@@ -26,6 +26,7 @@ class WaitingAbstractFactory implements AbstractFactoryInterface
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $this->canCreateCallCount++;
+
         return $requestedName === $this->waitingService;
     }
 
@@ -37,6 +38,7 @@ class WaitingAbstractFactory implements AbstractFactoryInterface
         if ($this->createNullService) {
             return null;
         }
+
         return new stdClass;
     }
 }

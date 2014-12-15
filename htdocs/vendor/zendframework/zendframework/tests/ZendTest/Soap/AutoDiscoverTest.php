@@ -61,12 +61,12 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      *
      *
      * @param \Zend\Soap\Wsdl $wsdl
-     * @param null            $documentNamespace
+     * @param null $documentNamespace
      */
     public function bindWsdl(Wsdl $wsdl, $documentNamespace = null)
     {
-        $this->dom                     = new \DOMDocument();
-        $this->dom->formatOutput       = true;
+        $this->dom = new \DOMDocument();
+        $this->dom->formatOutput = true;
         $this->dom->preserveWhiteSpace = false;
 
         $this->dom->loadXML($wsdl->toXML());
@@ -311,25 +311,25 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]',
+                . $i . '"]',
                 'Invalid func' . $i . ' operation definition'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/wsdl:documentation',
+                . $i . '"]/wsdl:documentation',
                 'Invalid func' . $i . ' port definition - documentation node'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/wsdl:input[@message="tns:testFunc' . $i . 'In"]',
+                . $i . '"]/wsdl:input[@message="tns:testFunc' . $i . 'In"]',
                 'Invalid func' . $i . ' port definition - input node'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/wsdl:output[@message="tns:testFunc' . $i . 'Out"]',
+                . $i . '"]/wsdl:output[@message="tns:testFunc' . $i . 'Out"]',
                 'Invalid func' . $i . ' port definition - output node'
             );
         }
@@ -362,14 +362,14 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         for ($i = 1; $i <= 4; $i++) {
             $this->assertSpecificNodeNumberInXPath(
                 1,
-                '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'. $i . '"]',
+                '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc' . $i . '"]',
                 'Invalid func' . $i . ' operation binding definition'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/soap:operation[@soapAction="' . $this->defaultServiceUri .
-                    '#testFunc' . $i . '"]',
+                . $i . '"]/soap:operation[@soapAction="' . $this->defaultServiceUri .
+                '#testFunc' . $i . '"]',
                 'Invalid func' . $i . ' operation action binding definition'
             );
         }
@@ -380,9 +380,9 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $nodes = $this->xpath->query($xpath);
         $this->assertAttributesOfNodes(
             array(
-                 "use"           => "encoded",
-                 "encodingStyle" => "http://schemas.xmlsoap.org/soap/encoding/",
-                 "namespace"     => "http://localhost/MyService.php"
+                "use" => "encoded",
+                "encodingStyle" => "http://schemas.xmlsoap.org/soap/encoding/",
+                "namespace" => "http://localhost/MyService.php"
             ), $nodes
         );
 
@@ -392,13 +392,13 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSpecificNodeNumberInXPath(
             1, '//wsdl:service[@name="MyServiceService"]/'
-                . 'wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]',
+            . 'wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]',
             'Invalid service port definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1, '//wsdl:service[@name="MyServiceService"]/'
-                . 'wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]/soap:address[@location="'
-                . $this->defaultServiceUri . '"]',
+            . 'wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]/soap:address[@location="'
+            . $this->defaultServiceUri . '"]',
             'Invalid service address definition'
         );
 
@@ -470,8 +470,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     public function testSetClassWithDifferentStyles()
     {
         $this->server->setBindingStyle(
-            array('style'     => 'document',
-                  'transport' => $this->defaultServiceUri)
+            array('style' => 'document',
+                'transport' => $this->defaultServiceUri)
         );
         $this->server->setOperationBodyStyle(
             array('use' => 'literal', 'namespace' => $this->defaultServiceUri)
@@ -498,13 +498,13 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $nodes = $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema/xsd:element[@name="testFunc1Response"]/'
-                .'xsd:complexType/xsd:sequence/xsd:element',
+            . 'xsd:complexType/xsd:sequence/xsd:element',
             'Test func1 return element is invalid'
         );
         $this->assertAttributesOfNodes(
             array(
-                 'name' => "testFunc1Result",
-                 'type' => "xsd:string",
+                'name' => "testFunc1Result",
+                'type' => "xsd:string",
             ), $nodes
         );
 
@@ -521,26 +521,26 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $nodes = $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema/xsd:element[@name="testFunc2"]/xsd:complexType/'
-                .'xsd:sequence/xsd:element',
+            . 'xsd:sequence/xsd:element',
             'Test func2 does not have children'
         );
         $this->assertAttributesOfNodes(
             array(
-                 'name' => "who",
-                 'type' => "xsd:string",
+                'name' => "who",
+                'type' => "xsd:string",
             ), $nodes
         );
 
         $nodes = $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema/xsd:element[@name="testFunc2Response"]/'
-                .'xsd:complexType/xsd:sequence/xsd:element',
+            . 'xsd:complexType/xsd:sequence/xsd:element',
             'Test func2 return element is invalid'
         );
         $this->assertAttributesOfNodes(
             array(
-                 'name' => "testFunc2Result",
-                 'type' => "xsd:string",
+                'name' => "testFunc2Result",
+                'type' => "xsd:string",
             ), $nodes
         );
 
@@ -557,32 +557,32 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             2,
             '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3"]/xsd:complexType/'
-                .'xsd:sequence/xsd:element',
+            . 'xsd:sequence/xsd:element',
             'Test func3 does not have children'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3"]/xsd:complexType/'
-                .'xsd:sequence/xsd:element[@name="who" and @type="xsd:string"]',
+            . 'xsd:sequence/xsd:element[@name="who" and @type="xsd:string"]',
             'Test func3 does not have children'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3"]/xsd:complexType/'
-                .'xsd:sequence/xsd:element[@name="when" and @type="xsd:int"]',
+            . 'xsd:sequence/xsd:element[@name="when" and @type="xsd:int"]',
             'Test func3 does not have children'
         );
 
         $nodes = $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3Response"]/'
-                .'xsd:complexType/xsd:sequence/xsd:element',
+            . 'xsd:complexType/xsd:sequence/xsd:element',
             'Test func3 return element is invalid'
         );
         $this->assertAttributesOfNodes(
             array(
-                 'name' => "testFunc3Result",
-                 'type' => "xsd:string",
+                'name' => "testFunc3Result",
+                'type' => "xsd:string",
             ), $nodes
         );
 
@@ -605,13 +605,13 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $nodes = $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema/xsd:element[@name="testFunc4Response"]/'
-                .'xsd:complexType/xsd:sequence/xsd:element',
+            . 'xsd:complexType/xsd:sequence/xsd:element',
             'Test func1 return element is invalid'
         );
         $this->assertAttributesOfNodes(
             array(
-                 'name' => "testFunc4Result",
-                 'type' => "xsd:string",
+                'name' => "testFunc4Result",
+                'type' => "xsd:string",
             ), $nodes
         );
 
@@ -620,26 +620,26 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
             $this->assertSpecificNodeNumberInXPath(
                 3,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/*',
+                . $i . '"]/*',
                 'Missing test func' . $i . ' port definition'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/wsdl:documentation',
+                . $i . '"]/wsdl:documentation',
                 'Missing test func' . $i . ' port documentation'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/wsdl:input[@message="tns:testFunc' . $i . 'In"]',
+                . $i . '"]/wsdl:input[@message="tns:testFunc' . $i . 'In"]',
                 'Missing test func' . $i . ' port input message'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/wsdl:output[@message="tns:testFunc' . $i
-                    . 'Out"]',
+                . $i . '"]/wsdl:output[@message="tns:testFunc' . $i
+                . 'Out"]',
                 'Missing test func' . $i . ' port output message'
             );
         }
@@ -649,30 +649,30 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
             $this->assertSpecificNodeNumberInXPath(
                 3,
                 '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/*',
+                . $i . '"]/*',
                 'Missing test func' . $i . ' binding definition'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'
-                    . $i . '"]/soap:operation[@soapAction="'
-                    . $this->defaultServiceUri . '#testFunc' . $i . '"]',
+                . $i . '"]/soap:operation[@soapAction="'
+                . $this->defaultServiceUri . '#testFunc' . $i . '"]',
                 'Missing test func' . $i . ' binding operation definition'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'
-                    . $i
-                    . '"]/wsdl:input/soap:body[@use="literal" and @namespace="'
-                    . $this->defaultServiceUri . '"]',
+                . $i
+                . '"]/wsdl:input/soap:body[@use="literal" and @namespace="'
+                . $this->defaultServiceUri . '"]',
                 'Missing test func' . $i . ' binding input message'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'
-                    . $i
-                    . '"]/wsdl:output/soap:body[@use="literal" and @namespace="'
-                    . $this->defaultServiceUri . '"]',
+                . $i
+                . '"]/wsdl:output/soap:body[@use="literal" and @namespace="'
+                . $this->defaultServiceUri . '"]',
                 'Missing test func' . $i . ' binding input message'
             );
         }
@@ -681,20 +681,20 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort"'
-                . ' and @binding="tns:MyServiceBinding"]/soap:address[@location="'
-                . $this->defaultServiceUri . '"]'
+            . ' and @binding="tns:MyServiceBinding"]/soap:address[@location="'
+            . $this->defaultServiceUri . '"]'
         );
 
 
         for ($i = 1; $i <= 4; $i++) {
             $this->assertSpecificNodeNumberInXPath(
                 1, '//wsdl:message[@name="testFunc' . $i
-                    . 'In"]/wsdl:part[@name="parameters" and @element="tns:testFunc' . $i . '"]',
+                . 'In"]/wsdl:part[@name="parameters" and @element="tns:testFunc' . $i . '"]',
                 'Missing test testFunc' . $i . ' input message definition'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1, '//wsdl:message[@name="testFunc' . $i
-                    . 'Out"]/wsdl:part[@name="parameters" and @element="tns:testFunc' . $i . 'Response"]',
+                . 'Out"]/wsdl:part[@name="parameters" and @element="tns:testFunc' . $i . 'Response"]',
                 'Missing test testFunc' . $i . ' output message definition'
             );
         }
@@ -776,36 +776,36 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]',
+            . 'wsdl:operation[@name="TestFunc"]',
             'Missing service binding definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . ' soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]',
+            . ' soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]',
             'Missing service binding transport definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . ' wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'
-                . $this->defaultServiceUri . '#TestFunc"]',
+            . ' wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'
+            . $this->defaultServiceUri . '#TestFunc"]',
             'Missing service operation action definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="encoded" '
-                . 'and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="'
-                . $this->defaultServiceUri . '"]',
+            . 'wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="encoded" '
+            . 'and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="'
+            . $this->defaultServiceUri . '"]',
             'Missing operation input body definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="encoded"'
-                . 'and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="'
-                . $this->defaultServiceUri . '"]',
+            . 'wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="encoded"'
+            . 'and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="'
+            . $this->defaultServiceUri . '"]',
             'Missing operation input body definition'
         );
 
@@ -813,8 +813,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort"'
-                . ' and @binding="tns:MyServiceBinding"]/soap:address[@location="'
-                . $this->defaultServiceUri . '"]',
+            . ' and @binding="tns:MyServiceBinding"]/soap:address[@location="'
+            . $this->defaultServiceUri . '"]',
             'Missing service port definition'
         );
 
@@ -838,8 +838,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     public function testAddFunctionSimpleWithDifferentStyle()
     {
         $this->server->setBindingStyle(
-            array('style'     => 'document',
-                  'transport' => $this->defaultServiceUri)
+            array('style' => 'document',
+                'transport' => $this->defaultServiceUri)
         );
         $this->server->setOperationBodyStyle(
             array('use' => 'literal', 'namespace' => $this->defaultServiceUri)
@@ -851,21 +851,21 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema[@targetNamespace="'
-                . $this->defaultServiceUri . '"]', 'Missing service port definition'
+            . $this->defaultServiceUri . '"]', 'Missing service port definition'
         );
 
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema[@targetNamespace="' . $this->defaultServiceUri
-                . '"]/xsd:element[@name="TestFunc"]/xsd:complexType/xsd:sequence/'
-                . 'xsd:element[@name="who" and @type="xsd:string"]',
+            . '"]/xsd:element[@name="TestFunc"]/xsd:complexType/xsd:sequence/'
+            . 'xsd:element[@name="who" and @type="xsd:string"]',
             'Missing complex type definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
-                '//wsdl:types/xsd:schema[@targetNamespace="' . $this->defaultServiceUri
-                . '"]/xsd:element[@name="TestFuncResponse"]/xsd:complexType/xsd:sequence'
-                . '/xsd:element[@name="TestFuncResult" and @type="xsd:string"]',
+            '//wsdl:types/xsd:schema[@targetNamespace="' . $this->defaultServiceUri
+            . '"]/xsd:element[@name="TestFuncResponse"]/xsd:complexType/xsd:sequence'
+            . '/xsd:element[@name="TestFuncResult" and @type="xsd:string"]',
             'Missing complex type definition'
         );
 
@@ -895,34 +895,34 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]',
+            . 'wsdl:operation[@name="TestFunc"]',
             'Missing service binding definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'soap:binding[@style="document" and @transport="' . $this->defaultServiceUri . '"]',
+            . 'soap:binding[@style="document" and @transport="' . $this->defaultServiceUri . '"]',
             'Missing service binding transport definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'
-                . $this->defaultServiceUri . '#TestFunc"]',
+            . 'wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'
+            . $this->defaultServiceUri . '#TestFunc"]',
             'Missing service operation action definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="literal" and @namespace="'
-                . $this->defaultServiceUri . '"]',
+            . 'wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="literal" and @namespace="'
+            . $this->defaultServiceUri . '"]',
             'Missing operation input body definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="literal" and @namespace="'
-                . $this->defaultServiceUri . '"]',
+            . 'wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="literal" and @namespace="'
+            . $this->defaultServiceUri . '"]',
             'Missing operation input body definition'
         );
 
@@ -930,8 +930,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort"'
-                . ' and @binding="tns:MyServiceBinding"]/soap:address[@location="'
-                . $this->defaultServiceUri . '"]',
+            . ' and @binding="tns:MyServiceBinding"]/soap:address[@location="'
+            . $this->defaultServiceUri . '"]',
             'Missing service port definition'
         );
 
@@ -974,19 +974,19 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/'
-                . 'wsdl:documentation',
+            . 'wsdl:documentation',
             'Missing service port definition documentation'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/'
-                . 'wsdl:input',
+            . 'wsdl:input',
             'Missing service port definition input message'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/'
-                . 'wsdl:output',
+            . 'wsdl:output',
             'Missing service port definition input message'
         );
 
@@ -994,36 +994,36 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]',
+            . 'wsdl:operation[@name="TestFunc"]',
             'Missing service binding definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]',
+            . 'soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]',
             'Missing service binding transport definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'
-                . $this->defaultServiceUri . '#TestFunc"]',
+            . 'wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'
+            . $this->defaultServiceUri . '#TestFunc"]',
             'Missing service operation action definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="encoded"'
-                . ' and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" '
-                . 'and @namespace="http://localhost/MyService.php"]',
+            . 'wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="encoded"'
+            . ' and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" '
+            . 'and @namespace="http://localhost/MyService.php"]',
             'Missing operation input body definition'
         );
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="encoded"'
-                . 'and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and'
-                . '@namespace="http://localhost/MyService.php"]',
+            . 'wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="encoded"'
+            . 'and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and'
+            . '@namespace="http://localhost/MyService.php"]',
             'Missing operation input body definition'
         );
 
@@ -1031,8 +1031,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort"'
-                . 'and @binding="tns:MyServiceBinding"]/soap:address[@location="'
-                . $this->defaultServiceUri . '"]',
+            . 'and @binding="tns:MyServiceBinding"]/soap:address[@location="'
+            . $this->defaultServiceUri . '"]',
             'Missing service port definition'
         );
 
@@ -1076,7 +1076,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                . 'soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]',
+            . 'soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]',
             'Missing service port definition'
         );
 
@@ -1084,8 +1084,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort"'
-                . ' and @binding="tns:MyServiceBinding"]/soap:address[@location="'
-                . $this->defaultServiceUri . '"]',
+            . ' and @binding="tns:MyServiceBinding"]/soap:address[@location="'
+            . $this->defaultServiceUri . '"]',
             'Missing service port definition'
         );
 
@@ -1093,38 +1093,38 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc'
-                    . $i . '"]',
+                . $i . '"]',
                 'Missing service port definition for TestFunc' . $i . ''
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc'
-                    . $i . '"]/wsdl:documentation',
+                . $i . '"]/wsdl:documentation',
                 'Missing service port definition documentation for TestFunc'
-                    . $i . ''
+                . $i . ''
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc'
-                    . $i . '"]/wsdl:input[@message="tns:TestFunc' . $i . 'In"]',
+                . $i . '"]/wsdl:input[@message="tns:TestFunc' . $i . 'In"]',
                 'Missing service port definition input message for TestFunc'
-                    . $i . ''
+                . $i . ''
             );
 
 
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                    . 'wsdl:operation[@name="TestFunc' . $i . '"]/soap:operation[@soapAction="'
-                    . $this->defaultServiceUri . '#TestFunc' . $i . '"]',
+                . 'wsdl:operation[@name="TestFunc' . $i . '"]/soap:operation[@soapAction="'
+                . $this->defaultServiceUri . '#TestFunc' . $i . '"]',
                 'Missing service operation action definition'
             );
             $this->assertSpecificNodeNumberInXPath(
                 1,
                 '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/'
-                    . 'wsdl:operation[@name="TestFunc' . $i . '"]/wsdl:input/soap:body'
-                    . '[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"'
-                    . ' and @namespace="' . $this->defaultServiceUri . '"]',
+                . 'wsdl:operation[@name="TestFunc' . $i . '"]/wsdl:input/soap:body'
+                . '[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"'
+                . ' and @namespace="' . $this->defaultServiceUri . '"]',
                 'Missing operation input for TestFunc' . $i . ' body definition'
             );
 
@@ -1133,21 +1133,21 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 $this->assertSpecificNodeNumberInXPath(
                     1,
                     '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc'
-                        . $i . '"]/wsdl:output[@message="tns:TestFunc' . $i
-                        . 'Out"]',
+                    . $i . '"]/wsdl:output[@message="tns:TestFunc' . $i
+                    . 'Out"]',
                     'Missing service port definition input message for TestFunc'
-                        . $i . ''
+                    . $i . ''
                 );
 
 
                 $this->assertSpecificNodeNumberInXPath(
                     1,
                     '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]'
-                        . '/wsdl:operation[@name="TestFunc'. $i . '"]/wsdl:output/soap:body'
-                        . '[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"'
-                        . ' and @namespace="' . $this->defaultServiceUri . '"]',
+                    . '/wsdl:operation[@name="TestFunc' . $i . '"]/wsdl:output/soap:body'
+                    . '[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"'
+                    . ' and @namespace="' . $this->defaultServiceUri . '"]',
                     'Missing operation input for TestFunc' . $i
-                        . ' body definition'
+                    . ' body definition'
                 );
 
 
@@ -1168,7 +1168,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-4117
+     * @group        ZF-4117
      *
      * @dataProvider dataProviderValidUris
      */
@@ -1204,20 +1204,21 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-4117
+     * @group        ZF-4117
      * @dataProvider dataProviderValidUris
      */
     public function testChangingWsdlUriAfterGenerationIsPossible(
         $uri, $expectedUri
-    ) {
+    )
+    {
         $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         $wsdl = $this->server->generate();
         $wsdl->setUri($uri);
 
         $this->assertEquals(
             $expectedUri, $wsdl->toDomDocument()->documentElement->getAttribute(
-                            'targetNamespace'
-                        )
+                'targetNamespace'
+            )
         );
 
         $this->assertValidWSDL($wsdl->toDomDocument());
@@ -1231,20 +1232,20 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('http://example.com/service.php',
-                  'http://example.com/service.php'),
+                'http://example.com/service.php'),
             array('http://example.com/?a=b&amp;b=c',
-                  'http://example.com/?a=b&amp;b=c'),
+                'http://example.com/?a=b&amp;b=c'),
             array('http://example.com/?a=b&b=c',
-                  'http://example.com/?a=b&amp;b=c'),
+                'http://example.com/?a=b&amp;b=c'),
             array('urn:uuid:550e8400-e29b-41d4-a716-446655440000',
-                  'urn:uuid:550e8400-e29b-41d4-a716-446655440000'),
+                'urn:uuid:550e8400-e29b-41d4-a716-446655440000'),
             array('urn:acme:servicenamespace', 'urn:acme:servicenamespace'),
             array(new Uri('http://example.com/service.php'),
-                  'http://example.com/service.php'),
+                'http://example.com/service.php'),
             array(new Uri('http://example.com/?a=b&amp;b=c'),
-                  'http://example.com/?a=b&amp;b=c'),
+                'http://example.com/?a=b&amp;b=c'),
             array(new Uri('http://example.com/?a=b&b=c'),
-                  'http://example.com/?a=b&amp;b=c'),
+                'http://example.com/?a=b&amp;b=c'),
         );
     }
 
@@ -1253,8 +1254,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      * @group ZF-4125
      *
      */
-    public function testUsingClassWithMethodsWithMultipleDefaultParameterValues(
-    ) {
+    public function testUsingClassWithMethodsWithMultipleDefaultParameterValues()
+    {
         $this->server->setClass(
             '\ZendTest\Soap\TestAsset\TestFixingMultiplePrototypes'
         );
@@ -1318,8 +1319,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-5604
      */
-    public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArrayComplex(
-    ) {
+    public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArrayComplex()
+    {
         $this->server->setComplexTypeStrategy(
             new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex
         );
@@ -1342,8 +1343,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-5430
      */
-    public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArraySequence(
-    ) {
+    public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArraySequence()
+    {
         $this->server->setComplexTypeStrategy(
             new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence
         );
@@ -1433,7 +1434,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertSpecificNodeNumberInXPath(
             1,
             '//wsdl:types/xsd:schema/xsd:complexType[@name="Recursion"]/xsd:all/'
-                . 'xsd:element[@name="recursion" and @type="tns:Recursion"]'
+            . 'xsd:element[@name="recursion" and @type="tns:Recursion"]'
         );
 
 
@@ -1458,7 +1459,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param int    $n
+     * @param int $n
      * @param string $xpath
      * @param string $msg
      *

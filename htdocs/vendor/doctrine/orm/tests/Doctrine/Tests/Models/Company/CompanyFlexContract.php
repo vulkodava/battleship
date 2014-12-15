@@ -93,6 +93,7 @@ class CompanyFlexContract extends CompanyContract
     {
         $this->pricePerHour = $pricePerHour;
     }
+
     public function getManagers()
     {
         return $this->managers;
@@ -111,14 +112,14 @@ class CompanyFlexContract extends CompanyContract
     static public function loadMetadata(\Doctrine\ORM\Mapping\ClassMetadataInfo $metadata)
     {
         $metadata->mapField(array(
-            'type'      => 'integer',
-            'name'      => 'hoursWorked',
+            'type' => 'integer',
+            'name' => 'hoursWorked',
             'fieldName' => 'hoursWorked',
         ));
 
         $metadata->mapField(array(
-            'type'      => 'integer',
-            'name'      => 'pricePerHour',
+            'type' => 'integer',
+            'name' => 'pricePerHour',
             'fieldName' => 'pricePerHour',
         ));
     }

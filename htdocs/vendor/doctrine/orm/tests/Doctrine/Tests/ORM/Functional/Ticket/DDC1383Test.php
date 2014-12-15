@@ -1,6 +1,7 @@
 <?php
 
 namespace Doctrine\Tests\ORM\Functional\Ticket;
+
 use Doctrine\ORM\UnitOfWork;
 
 require_once __DIR__ . '/../../../TestInit.php';
@@ -19,35 +20,36 @@ class DDC1383Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC1383AbstractEntity'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC1383Entity'),
             ));
-        } catch(\Exception $ignored) {}
+        } catch (\Exception $ignored) {
+        }
     }
 
     public function testFailingCase()
     {
-		$parent = new DDC1383Entity();
-		$child = new DDC1383Entity();
+        $parent = new DDC1383Entity();
+        $child = new DDC1383Entity();
 
-		$child->setReference($parent);
+        $child->setReference($parent);
 
-		$this->_em->persist($parent);
-		$this->_em->persist($child);
+        $this->_em->persist($parent);
+        $this->_em->persist($child);
 
-		$id = $child->getId();
+        $id = $child->getId();
 
-		$this->_em->flush();
-		$this->_em->clear();
+        $this->_em->flush();
+        $this->_em->clear();
 
-		// Try merging the parent entity
-		$child = $this->_em->merge($child);
-		$parent = $child->getReference();
+        // Try merging the parent entity
+        $child = $this->_em->merge($child);
+        $parent = $child->getReference();
 
-		// Parent is not instance of the abstract class
-		self::assertTrue($parent instanceof DDC1383AbstractEntity,
-				"Entity class is " . get_class($parent) . ', "DDC1383AbstractEntity" was expected');
+        // Parent is not instance of the abstract class
+        self::assertTrue($parent instanceof DDC1383AbstractEntity,
+            "Entity class is " . get_class($parent) . ', "DDC1383AbstractEntity" was expected');
 
-		// Parent is NOT instance of entity
-		self::assertTrue($parent instanceof DDC1383Entity,
-				"Entity class is " . get_class($parent) . ', "DDC1383Entity" was expected');
+        // Parent is NOT instance of entity
+        self::assertTrue($parent instanceof DDC1383Entity,
+            "Entity class is " . get_class($parent) . ', "DDC1383Entity" was expected');
     }
 }
 
@@ -59,22 +61,22 @@ class DDC1383Test extends \Doctrine\Tests\OrmFunctionalTestCase
  */
 abstract class DDC1383AbstractEntity
 {
-	/**
-	 * @Id
-	 * @Column(type="integer")
-	 * @GeneratedValue
-	 */
-	protected $id;
+    /**
+     * @Id
+     * @Column(type="integer")
+     * @GeneratedValue
+     */
+    protected $id;
 
-	public function getId()
-	{
-		return $this->id;
-	}
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 }
 
 /**
@@ -82,18 +84,18 @@ abstract class DDC1383AbstractEntity
  */
 class DDC1383Entity extends DDC1383AbstractEntity
 {
-	/**
-	 * @ManyToOne(targetEntity="DDC1383AbstractEntity")
-	 */
-	protected $reference;
+    /**
+     * @ManyToOne(targetEntity="DDC1383AbstractEntity")
+     */
+    protected $reference;
 
-	public function getReference()
-	{
-		return $this->reference;
-	}
+    public function getReference()
+    {
+        return $this->reference;
+    }
 
-	public function setReference(DDC1383AbstractEntity $reference)
-	{
-		$this->reference = $reference;
-	}
+    public function setReference(DDC1383AbstractEntity $reference)
+    {
+        $this->reference = $reference;
+    }
 }

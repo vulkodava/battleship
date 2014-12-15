@@ -39,6 +39,7 @@ class HelperConfig implements ConfigInterface
                 $config = new \Zend\ServiceManager\Config($config['navigation_helpers']);
                 $config->configureServiceManager($helper->getPluginManager());
             }
+
             return $helper;
         });
     }

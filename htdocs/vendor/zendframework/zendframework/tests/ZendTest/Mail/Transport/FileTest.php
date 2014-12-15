@@ -30,7 +30,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $fileOptions = new FileOptions(array(
             'path' => $this->tempDir,
         ));
-        $this->transport  = new File($fileOptions);
+        $this->transport = new File($fileOptions);
     }
 
     public function tearDown()
@@ -50,18 +50,19 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message();
         $message->addTo('zf-devteam@zend.com', 'ZF DevTeam')
-                ->addCc('matthew@zend.com')
-                ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
-                ->addFrom(array(
-                    'zf-devteam@zend.com',
-                    'Matthew' => 'matthew@zend.com',
-                ))
-                ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
-                ->setSubject('Testing Zend\Mail\Transport\Sendmail')
-                ->setBody('This is only a test.');
+            ->addCc('matthew@zend.com')
+            ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
+            ->addFrom(array(
+                'zf-devteam@zend.com',
+                'Matthew' => 'matthew@zend.com',
+            ))
+            ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
+            ->setSubject('Testing Zend\Mail\Transport\Sendmail')
+            ->setBody('This is only a test.');
         $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
+
         return $message;
     }
 

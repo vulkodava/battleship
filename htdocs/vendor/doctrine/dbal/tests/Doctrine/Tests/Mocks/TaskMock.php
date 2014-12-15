@@ -25,6 +25,7 @@ use Doctrine\Common\Cli\AbstractNamespace;
 
 /**
  * TaskMock used for testing the CLI interface.
+ *
  * @author Nils Adermann <naderman@naderman.de>
  */
 class TaskMock extends \Doctrine\Common\Cli\Tasks\AbstractTask

@@ -40,7 +40,7 @@ class Test
      */
     public function setPassword($password)
     {
-        $this->password = (string) $password;
+        $this->password = (string)$password;
     }
 
     /**
@@ -56,7 +56,7 @@ class Test
      */
     public function setUsername($username)
     {
-        $this->username = (string) $username;
+        $this->username = (string)$username;
     }
 
     /**
@@ -74,6 +74,6 @@ class Test
      */
     public function __toString()
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 }

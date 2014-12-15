@@ -60,7 +60,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      */
     public function setDisplayNotFoundReason($displayNotFoundReason)
     {
-        $this->displayNotFoundReason = (bool) $displayNotFoundReason;
+        $this->displayNotFoundReason = (bool)$displayNotFoundReason;
+
         return $this;
     }
 
@@ -93,7 +94,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         }
 
         $response = $e->getResponse();
-        $request  = $e->getRequest();
+        $request = $e->getRequest();
 
         switch ($error) {
             case Application::ERROR_CONTROLLER_NOT_FOUND:
@@ -155,8 +156,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         $usage = $this->getConsoleUsage($console, $scriptName, $mm);
 
         // Inject the text into view
-        $result  = $banner ? rtrim($banner, "\r\n")        : '';
-        $result .= $usage  ? "\n\n" . trim($usage, "\r\n") : '';
+        $result = $banner ? rtrim($banner, "\r\n") : '';
+        $result .= $usage ? "\n\n" . trim($usage, "\r\n") : '';
         $result .= "\n"; // to ensure we output a final newline
         $result .= $this->reportNotFoundReason($e);
         $model->setResult($result);
@@ -170,7 +171,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      * modules.
      *
      * @param ModuleManagerInterface $moduleManager
-     * @param ConsoleAdapter         $console
+     * @param ConsoleAdapter $console
      * @return string
      */
     protected function getConsoleBanner(ConsoleAdapter $console, ModuleManagerInterface $moduleManager = null)
@@ -210,14 +211,15 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         /*
          * Join the banners by a newline character
          */
+
         return implode("\n", $banners);
     }
 
     /**
      * Build Console usage information by querying currently loaded modules.
      *
-     * @param ConsoleAdapter         $console
-     * @param string                 $scriptName
+     * @param ConsoleAdapter $console
+     * @param string $scriptName
      * @param ModuleManagerInterface $moduleManager
      * @return string
      * @throws RuntimeException
@@ -226,7 +228,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         ConsoleAdapter $console,
         $scriptName,
         ModuleManagerInterface $moduleManager = null
-    ) {
+    )
+    {
         /*
          * Loop through all loaded modules and collect usage info
          */
@@ -275,8 +278,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         /*
          * Transform arrays in usage info into columns, otherwise join everything together
          */
-        $result    = '';
-        $table     = false;
+        $result = '';
+        $table = false;
         $tableCols = 0;
         $tableType = 0;
         foreach ($usageInfo as $moduleName => $usage) {
@@ -302,9 +305,9 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
                     if (($tableCols !== 2 || $tableType != 1) && $table !== false) {
                         // render last table
                         $result .= $this->renderTable($table, $tableCols, $console->getWidth());
-                        $table   = false;
+                        $table = false;
 
-                            // add extra newline for clarity
+                        // add extra newline for clarity
                         $result .= "\n";
                     }
 
@@ -313,7 +316,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
 
                     $tableCols = 2;
                     $tableType = 1;
-                    $table[]   = array($a, $b);
+                    $table[] = array($a, $b);
                     continue;
                 }
 
@@ -324,7 +327,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
                     if ((count($b) != $tableCols || $tableType != 2) && $table !== false) {
                         // render last table
                         $result .= $this->renderTable($table, $tableCols, $console->getWidth());
-                        $table   = false;
+                        $table = false;
 
                         // add extra newline for clarity
                         $result .= "\n";
@@ -332,7 +335,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
 
                     $tableCols = count($b);
                     $tableType = 2;
-                    $table[]   = $b;
+                    $table[] = $b;
                     continue;
                 }
 
@@ -342,14 +345,14 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
                 if ($table !== false) {
                     // render last table
                     $result .= $this->renderTable($table, $tableCols, $console->getWidth());
-                    $table   = false;
+                    $table = false;
 
                     // add extra newline for clarity
                     $result .= "\n";
                 }
 
                 $tableType = 0;
-                $result   .= $b . "\n";
+                $result .= $b . "\n";
             }
         }
 
@@ -371,18 +374,19 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      */
     protected function renderTable($data, $cols, $consoleWidth)
     {
-        $result  = '';
+        $result = '';
         $padding = 2;
 
 
         // If there is only 1 column, just concatenate it
         if ($cols == 1) {
             foreach ($data as $row) {
-                if (! isset($row[0])) {
+                if (!isset($row[0])) {
                     continue;
                 }
                 $result .= $row[0] . "\n";
             }
+
             return $result;
         }
 
@@ -394,7 +398,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         for ($x = 1; $x <= $cols; $x += 1) {
             $maxW[$x] = 0;
             foreach ($data as $row) {
-                $maxW[$x] = max($maxW[$x], $strWrapper->strlen($row[$x-1]) + $padding * 2);
+                $maxW[$x] = max($maxW[$x], $strWrapper->strlen($row[$x - 1]) + $padding * 2);
             }
         }
 
@@ -412,6 +416,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
             foreach ($data as $row) {
                 $result .= implode("    ", $row) . "\n";
             }
+
             return $result;
         }
 
@@ -421,8 +426,8 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
          * (minus 1 character to prevent double wrapping at the edge of the
          * screen).
          */
-        $maxW[$cols] = $consoleWidth - $width -1;
-        $table       = new Table\Table();
+        $maxW[$cols] = $consoleWidth - $width - 1;
+        $table = new Table\Table();
         $table->setColumnWidths($maxW);
         $table->setDecorator(new Table\Decorator\Blank());
         $table->setPadding(2);
@@ -450,19 +455,20 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
             return '';
         }
 
-        $reason    = (isset($this->reason) && !empty($this->reason)) ? $this->reason : 'unknown';
-        $reasons   = array(
+        $reason = (isset($this->reason) && !empty($this->reason)) ? $this->reason : 'unknown';
+        $reasons = array(
             Application::ERROR_CONTROLLER_NOT_FOUND => 'Could not match to a controller',
-            Application::ERROR_CONTROLLER_INVALID   => 'Invalid controller specified',
-            Application::ERROR_ROUTER_NO_MATCH      => 'Invalid arguments or no arguments provided',
-            'unknown'                               => 'Unknown',
+            Application::ERROR_CONTROLLER_INVALID => 'Invalid controller specified',
+            Application::ERROR_ROUTER_NO_MATCH => 'Invalid arguments or no arguments provided',
+            'unknown' => 'Unknown',
         );
         $report = sprintf("\nReason for failure: %s\n", $reasons[$reason]);
 
         while ($exception instanceof \Exception) {
-            $report   .= sprintf("Exception: %s\nTrace:\n%s\n", $exception->getMessage(), $exception->getTraceAsString());
+            $report .= sprintf("Exception: %s\nTrace:\n%s\n", $exception->getMessage(), $exception->getTraceAsString());
             $exception = $exception->getPrevious();
         }
+
         return $report;
     }
 }

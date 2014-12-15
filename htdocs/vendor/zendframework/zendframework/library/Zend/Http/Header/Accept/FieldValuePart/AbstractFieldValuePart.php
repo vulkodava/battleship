@@ -19,12 +19,14 @@ abstract class AbstractFieldValuePart
 {
     /**
      * Internal object used for value retrieval
+     *
      * @var object
      */
     private $internalValues;
 
     /**
      * A Field Value Part this Field Value Part matched against.
+     *
      * @var AbstractFieldValuePart
      */
     protected $matchedAgainst;
@@ -47,6 +49,7 @@ abstract class AbstractFieldValuePart
     public function setMatchedAgainst(AbstractFieldValuePart $matchedAgainst)
     {
         $this->matchedAgainst = $matchedAgainst;
+
         return $this;
     }
 
@@ -82,7 +85,7 @@ abstract class AbstractFieldValuePart
      */
     public function getPriority()
     {
-        return (float) $this->getInternalValues()->priority;
+        return (float)$this->getInternalValues()->priority;
     }
 
     /**
@@ -90,7 +93,7 @@ abstract class AbstractFieldValuePart
      */
     public function getParams()
     {
-        return (object) $this->getInternalValues()->params;
+        return (object)$this->getInternalValues()->params;
     }
 
     /**

@@ -50,6 +50,7 @@ class Prototype
     public function setReturnType($returnType)
     {
         $this->returnType = $returnType;
+
         return $this;
     }
 
@@ -78,10 +79,11 @@ class Prototype
             }
         } else {
             $parameter = new Parameter(array(
-                'type' => (string) $parameter,
+                'type' => (string)$parameter,
             ));
             $this->parameters[] = $parameter;
         }
+
         return $this;
     }
 
@@ -96,6 +98,7 @@ class Prototype
         foreach ($parameters as $parameter) {
             $this->addParameter($parameter);
         }
+
         return $this;
     }
 
@@ -107,9 +110,10 @@ class Prototype
      */
     public function setParameters(array $parameters)
     {
-        $this->parameters       = array();
+        $this->parameters = array();
         $this->parameterNameMap = array();
         $this->addParameters($parameters);
+
         return $this;
     }
 
@@ -124,6 +128,7 @@ class Prototype
         foreach ($this->parameters as $parameter) {
             $types[] = $parameter->getType();
         }
+
         return $types;
     }
 
@@ -154,6 +159,7 @@ class Prototype
         if (array_key_exists($index, $this->parameters)) {
             return $this->parameters[$index];
         }
+
         return null;
     }
 
@@ -171,6 +177,7 @@ class Prototype
                 $this->$method($value);
             }
         }
+
         return $this;
     }
 

@@ -102,13 +102,14 @@ class UniqueObject extends ObjectExists
         }
 
         $expectedIdentifiers = $this->getExpectedIdentifiers($context);
-        $foundIdentifiers    = $this->getFoundIdentifiers($match);
+        $foundIdentifiers = $this->getFoundIdentifiers($match);
 
         if (count(array_diff_assoc($expectedIdentifiers, $foundIdentifiers)) == 0) {
             return true;
         }
 
         $this->error(self::ERROR_OBJECT_NOT_UNIQUE, $value);
+
         return false;
     }
 
@@ -122,8 +123,8 @@ class UniqueObject extends ObjectExists
     protected function getFoundIdentifiers($match)
     {
         return $this->objectManager
-                    ->getClassMetadata($this->objectRepository->getClassName())
-                    ->getIdentifierValues($match);
+            ->getClassMetadata($this->objectRepository->getClassName())
+            ->getIdentifierValues($match);
     }
 
     /**
@@ -150,6 +151,7 @@ class UniqueObject extends ObjectExists
 
             $result[$identifierField] = $context[$identifierField];
         }
+
         return $result;
     }
 
@@ -160,7 +162,7 @@ class UniqueObject extends ObjectExists
     protected function getIdentifiers()
     {
         return $this->objectManager
-                    ->getClassMetadata($this->objectRepository->getClassName())
-                    ->getIdentifierFieldNames();
+            ->getClassMetadata($this->objectRepository->getClassName())
+            ->getIdentifierFieldNames();
     }
 }

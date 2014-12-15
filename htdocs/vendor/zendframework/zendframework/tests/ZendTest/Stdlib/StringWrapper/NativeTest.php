@@ -26,6 +26,7 @@ class NativeTest extends CommonStringWrapperTest
 
         $wrapper = new Native();
         $wrapper->setEncoding($encoding, $convertEncoding);
+
         return $wrapper;
     }
 }

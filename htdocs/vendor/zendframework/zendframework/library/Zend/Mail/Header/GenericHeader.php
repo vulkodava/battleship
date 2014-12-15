@@ -36,6 +36,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         if ($decodedLine != $headerLine) {
             $header->setEncoding('UTF-8');
         }
+
         return $header;
     }
 
@@ -99,6 +100,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         }
 
         $this->fieldName = $fieldName;
+
         return $this;
     }
 
@@ -115,13 +117,14 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
      */
     public function setFieldValue($fieldValue)
     {
-        $fieldValue = (string) $fieldValue;
+        $fieldValue = (string)$fieldValue;
 
         if (empty($fieldValue) || preg_match('/^\s+$/', $fieldValue)) {
             $fieldValue = '';
         }
 
         $this->fieldValue = $fieldValue;
+
         return $this;
     }
 
@@ -137,6 +140,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -147,7 +151,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
 
     public function toString()
     {
-        $name  = $this->getFieldName();
+        $name = $this->getFieldName();
         $value = $this->getFieldValue(HeaderInterface::FORMAT_ENCODED);
 
         return $name . ': ' . $value;

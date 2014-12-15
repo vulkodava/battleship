@@ -30,7 +30,7 @@ use Doctrine\DBAL\Schema\Table;
  * The SQLServerPlatform provides the behavior, features and SQL dialect of the
  * Microsoft SQL Server database platform.
  *
- * @since 2.0
+ * @since  2.0
  * @author Roman Borschel <roman@code-factory.org>
  * @author Jonathan H. Wage <jonwage@gmail.com>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
@@ -242,7 +242,7 @@ class SQLServerPlatform extends AbstractPlatform
         }
 
         if (isset($options['foreignKeys'])) {
-            foreach ((array) $options['foreignKeys'] as $definition) {
+            foreach ((array)$options['foreignKeys'] as $definition) {
                 $sql[] = $this->getCreateForeignKeySQL($definition, $tableName);
             }
         }
@@ -259,14 +259,15 @@ class SQLServerPlatform extends AbstractPlatform
         if ($index->hasFlag('nonclustered')) {
             $flags = ' NONCLUSTERED';
         }
+
         return 'ALTER TABLE ' . $table . ' ADD PRIMARY KEY' . $flags . ' (' . $this->getIndexFieldDeclarationListSQL($index->getQuotedColumns($this)) . ')';
     }
 
     /**
      * Returns the SQL snippet for declaring a default constraint.
      *
-     * @param string $table  Name of the table to return the default constraint declaration for.
-     * @param array  $column Column definition.
+     * @param string $table Name of the table to return the default constraint declaration for.
+     * @param array $column Column definition.
      *
      * @return string
      *
@@ -274,7 +275,7 @@ class SQLServerPlatform extends AbstractPlatform
      */
     public function getDefaultConstraintDeclarationSQL($table, array $column)
     {
-        if ( ! isset($column['default'])) {
+        if (!isset($column['default'])) {
             throw new \InvalidArgumentException("Incomplete column definition. 'default' required.");
         }
 
@@ -333,7 +334,7 @@ class SQLServerPlatform extends AbstractPlatform
     /**
      * Extend unique key constraint with required filters
      *
-     * @param string                      $sql
+     * @param string $sql
      * @param \Doctrine\DBAL\Schema\Index $index
      *
      * @return string
@@ -404,7 +405,7 @@ class SQLServerPlatform extends AbstractPlatform
             }
 
             $queryParts[] = 'ALTER COLUMN ' .
-                    $this->getColumnDeclarationSQL($column->getQuotedName($this), $columnDef);
+                $this->getColumnDeclarationSQL($column->getQuotedName($this), $columnDef);
 
             if ($columnDefaultHasChanged && isset($columnDef['default'])) {
                 $columnDef['name'] = $column->getQuotedName($this);
@@ -417,7 +418,7 @@ class SQLServerPlatform extends AbstractPlatform
                 continue;
             }
 
-            $sql[] = "sp_RENAME '". $diff->name. ".". $oldColumnName . "' , '".$column->getQuotedName($this)."', 'COLUMN'";
+            $sql[] = "sp_RENAME '" . $diff->name . "." . $oldColumnName . "' , '" . $column->getQuotedName($this) . "', 'COLUMN'";
 
             $columnDef = $column->toArray();
 
@@ -431,7 +432,7 @@ class SQLServerPlatform extends AbstractPlatform
             }
 
             $queryParts[] = 'ALTER COLUMN ' .
-                    $this->getColumnDeclarationSQL($column->getQuotedName($this), $columnDef);
+                $this->getColumnDeclarationSQL($column->getQuotedName($this), $columnDef);
 
             /**
              * Readd default constraint for the new column name.
@@ -621,7 +622,7 @@ class SQLServerPlatform extends AbstractPlatform
      */
     public function getTrimExpression($str, $pos = self::TRIM_UNSPECIFIED, $char = false)
     {
-        if ( ! $char) {
+        if (!$char) {
             switch ($pos) {
                 case self::TRIM_LEADING:
                     $trimFn = 'LTRIM';
@@ -639,13 +640,13 @@ class SQLServerPlatform extends AbstractPlatform
         }
 
         /** Original query used to get those expressions
-          declare @c varchar(100) = 'xxxBarxxx', @trim_char char(1) = 'x';
-          declare @pat varchar(10) = '%[^' + @trim_char + ']%';
-          select @c as string
-          , @trim_char as trim_char
-          , stuff(@c, 1, patindex(@pat, @c) - 1, null) as trim_leading
-          , reverse(stuff(reverse(@c), 1, patindex(@pat, reverse(@c)) - 1, null)) as trim_trailing
-          , reverse(stuff(reverse(stuff(@c, 1, patindex(@pat, @c) - 1, null)), 1, patindex(@pat, reverse(stuff(@c, 1, patindex(@pat, @c) - 1, null))) - 1, null)) as trim_both;
+         * declare @c varchar(100) = 'xxxBarxxx', @trim_char char(1) = 'x';
+         * declare @pat varchar(10) = '%[^' + @trim_char + ']%';
+         * select @c as string
+         * , @trim_char as trim_char
+         * , stuff(@c, 1, patindex(@pat, @c) - 1, null) as trim_leading
+         * , reverse(stuff(reverse(@c), 1, patindex(@pat, reverse(@c)) - 1, null)) as trim_trailing
+         * , reverse(stuff(reverse(stuff(@c, 1, patindex(@pat, @c) - 1, null)), 1, patindex(@pat, reverse(stuff(@c, 1, patindex(@pat, @c) - 1, null))) - 1, null)) as trim_both;
          */
         $pattern = "'%[^' + $char + ']%'";
 
@@ -803,16 +804,16 @@ class SQLServerPlatform extends AbstractPlatform
             return $query;
         }
 
-        $start   = $offset + 1;
-        $end     = $offset + $limit;
+        $start = $offset + 1;
+        $end = $offset + $limit;
         $orderBy = stristr($query, 'ORDER BY');
-        $query   = preg_replace('/\s+ORDER\s+BY\s+([^\)]*)/', '', $query); //Remove ORDER BY from $query
-        $format  = 'SELECT * FROM (%s) AS doctrine_tbl WHERE doctrine_rownum BETWEEN %d AND %d';
+        $query = preg_replace('/\s+ORDER\s+BY\s+([^\)]*)/', '', $query); //Remove ORDER BY from $query
+        $format = 'SELECT * FROM (%s) AS doctrine_tbl WHERE doctrine_rownum BETWEEN %d AND %d';
 
         // Pattern to match "main" SELECT ... FROM clause (including nested parentheses in select list).
         $selectFromPattern = '/^(\s*SELECT\s+(?:\((?>[^()]+)|(?:R)*\)|[^(])+)\sFROM\s/i';
 
-        if ( ! $orderBy) {
+        if (!$orderBy) {
             //Replace only "main" FROM with OVER to prevent changing FROM also in subqueries.
             $query = preg_replace(
                 $selectFromPattern,
@@ -825,8 +826,8 @@ class SQLServerPlatform extends AbstractPlatform
         }
 
         //Clear ORDER BY
-        $orderBy        = preg_replace('/ORDER\s+BY\s+([^\)]*)(.*)/', '$1', $orderBy);
-        $orderByParts   = explode(',', $orderBy);
+        $orderBy = preg_replace('/ORDER\s+BY\s+([^\)]*)(.*)/', '$1', $orderBy);
+        $orderByParts = explode(',', $orderBy);
         $orderbyColumns = array();
 
         //Split ORDER BY into parts
@@ -834,21 +835,21 @@ class SQLServerPlatform extends AbstractPlatform
 
             if (preg_match('/(([^\s]*)\.)?([^\.\s]*)\s*(ASC|DESC)?/i', trim($part), $matches)) {
                 $orderbyColumns[] = array(
-                    'column'    => $matches[3],
-                    'hasTable'  => ( ! empty($matches[2])),
-                    'sort'      => isset($matches[4]) ? $matches[4] : null,
-                    'table'     => empty($matches[2]) ? '[^\.\s]*' : $matches[2]
+                    'column' => $matches[3],
+                    'hasTable' => (!empty($matches[2])),
+                    'sort' => isset($matches[4]) ? $matches[4] : null,
+                    'table' => empty($matches[2]) ? '[^\.\s]*' : $matches[2]
                 );
             }
         }
 
         //Find alias for each colum used in ORDER BY
-        if ( ! empty($orderbyColumns)) {
+        if (!empty($orderbyColumns)) {
             foreach ($orderbyColumns as $column) {
 
-                $pattern    = sprintf('/%s\.(%s)\s*(AS)?\s*([^,\s\)]*)/i', $column['table'], $column['column']);
+                $pattern = sprintf('/%s\.(%s)\s*(AS)?\s*([^,\s\)]*)/i', $column['table'], $column['column']);
                 $overColumn = preg_match($pattern, $query, $matches)
-                    ? ($column['hasTable'] ? $column['table']  . '.' : '') . $column['column'] 
+                    ? ($column['hasTable'] ? $column['table'] . '.' : '') . $column['column']
                     : $column['column'];
 
                 if (isset($column['sort'])) {
@@ -860,7 +861,7 @@ class SQLServerPlatform extends AbstractPlatform
         }
 
         //Replace only first occurrence of FROM with $over to prevent changing FROM also in subqueries.
-        $over  = 'ORDER BY ' . implode(', ', $overColumns);
+        $over = 'ORDER BY ' . implode(', ', $overColumns);
         $query = preg_replace($selectFromPattern, "$1, ROW_NUMBER() OVER ($over) AS doctrine_rownum FROM ", $query, 1);
 
         return sprintf($format, $query, $start, $end);
@@ -1056,7 +1057,7 @@ class SQLServerPlatform extends AbstractPlatform
      */
     public function getTruncateTableSQL($tableName, $cascade = false)
     {
-        return 'TRUNCATE TABLE '.$tableName;
+        return 'TRUNCATE TABLE ' . $tableName;
     }
 
     /**
@@ -1072,23 +1073,23 @@ class SQLServerPlatform extends AbstractPlatform
      */
     public function getDefaultValueDeclarationSQL($field)
     {
-        if ( ! isset($field['default'])) {
+        if (!isset($field['default'])) {
             return empty($field['notnull']) ? ' NULL' : '';
         }
 
-        if ( ! isset($field['type'])) {
+        if (!isset($field['type'])) {
             return " DEFAULT '" . $field['default'] . "'";
         }
 
-        if (in_array((string) $field['type'], array('Integer', 'BigInteger', 'SmallInteger'))) {
+        if (in_array((string)$field['type'], array('Integer', 'BigInteger', 'SmallInteger'))) {
             return " DEFAULT " . $field['default'];
         }
 
-        if ((string) $field['type'] == 'DateTime' && $field['default'] == $this->getCurrentTimestampSQL()) {
+        if ((string)$field['type'] == 'DateTime' && $field['default'] == $this->getCurrentTimestampSQL()) {
             return " DEFAULT " . $this->getCurrentTimestampSQL();
         }
 
-        if ((string) $field['type'] == 'Boolean') {
+        if ((string)$field['type'] == 'Boolean') {
             return " DEFAULT '" . $this->convertBooleans($field['default']) . "'";
         }
 

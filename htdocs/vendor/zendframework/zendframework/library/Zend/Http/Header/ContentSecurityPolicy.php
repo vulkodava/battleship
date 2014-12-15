@@ -58,7 +58,7 @@ class ContentSecurityPolicy implements HeaderInterface
      *
      * Reverses http://www.w3.org/TR/CSP/#parsing-1
      *
-     * @param string $name The directive name.
+     * @param string $name   The directive name.
      * @param array $sources The source list.
      * @return self
      * @throws Exception\InvalidArgumentException If the name is not a valid directive name.
@@ -69,7 +69,7 @@ class ContentSecurityPolicy implements HeaderInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a valid directive name; received "%s"',
                 __METHOD__,
-                (string) $name
+                (string)$name
             ));
         }
         if (empty($sources)) {
@@ -77,6 +77,7 @@ class ContentSecurityPolicy implements HeaderInterface
         } else {
             $this->directives[$name] = implode(' ', $sources);
         }
+
         return $this;
     }
 
@@ -111,6 +112,7 @@ class ContentSecurityPolicy implements HeaderInterface
                 }
             }
         }
+
         return $header;
     }
 
@@ -135,6 +137,7 @@ class ContentSecurityPolicy implements HeaderInterface
         foreach ($this->directives as $name => $value) {
             $directives[] = sprintf('%s %s;', $name, $value);
         }
+
         return implode(' ', $directives);
     }
 

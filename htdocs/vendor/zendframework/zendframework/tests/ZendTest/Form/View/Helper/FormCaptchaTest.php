@@ -16,10 +16,10 @@ use Zend\Form\View\Helper\FormCaptcha as FormCaptchaHelper;
 
 class FormCaptchaTest extends CommonTestCase
 {
-    protected $publicKey  = TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY;
+    protected $publicKey = TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY;
     protected $privateKey = TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY;
-    protected $testDir    = null;
-    protected $tmpDir     = null;
+    protected $testDir = null;
+    protected $tmpDir = null;
 
     public function setUp()
     {
@@ -123,8 +123,8 @@ class FormCaptchaTest extends CommonTestCase
 
         $captcha = new Captcha\Image(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-            'imgDir'       => $this->testDir,
-            'font'         => __DIR__. '/Captcha/_files/Vera.ttf',
+            'imgDir' => $this->testDir,
+            'font' => __DIR__ . '/Captcha/_files/Vera.ttf',
         ));
         $element = $this->getElement();
         $element->setCaptcha($captcha);

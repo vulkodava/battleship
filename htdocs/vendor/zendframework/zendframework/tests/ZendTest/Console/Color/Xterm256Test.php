@@ -20,12 +20,12 @@ class Xterm256Test extends \PHPUnit_Framework_TestCase
     public function invalidHexCodes()
     {
         return array(
-            'too-long'                       => array('FFFFFF0'),
+            'too-long' => array('FFFFFF0'),
             'too-long-and-char-out-of-range' => array('ABCDEFG'),
-            'too-long-digits'                => array('01048212'),
-            'too-long-and-invalid-enc'       => array('ééààööüü'),
-            'char-out-of-range'              => array('FF00GG'),
-            'null'                           => array(null),
+            'too-long-digits' => array('01048212'),
+            'too-long-and-invalid-enc' => array('ééààööüü'),
+            'char-out-of-range' => array('FF00GG'),
+            'null' => array(null),
         );
     }
 
@@ -35,15 +35,15 @@ class Xterm256Test extends \PHPUnit_Framework_TestCase
     public function testWrongHexCodeInputs($hex)
     {
         $color = Xterm256::calculate($hex);
-        $r     = new ReflectionClass($color);
-        $code  = $r->getStaticPropertyValue('color');
+        $r = new ReflectionClass($color);
+        $code = $r->getStaticPropertyValue('color');
         $this->assertNull($code);
     }
 
     public function approximateHexCodes()
     {
         return array(
-            'sixteen'         => array('000100', 16),
+            'sixteen' => array('000100', 16),
             'one-ninety-nine' => array('FF33A0', 199),
         );
     }
@@ -54,7 +54,7 @@ class Xterm256Test extends \PHPUnit_Framework_TestCase
     public function testApproximateHexCodeInputs($hex, $gcode)
     {
         $color = Xterm256::calculate($hex);
-        $r     = new ReflectionClass($color);
+        $r = new ReflectionClass($color);
         $gcode = sprintf('%%s;5;%s', $gcode);
         $this->assertEquals($gcode, $r->getStaticPropertyValue('color'));
     }
@@ -311,7 +311,7 @@ class Xterm256Test extends \PHPUnit_Framework_TestCase
     public function testExactHexCodeInputs($hex, $gcode)
     {
         $color = Xterm256::calculate($hex);
-        $r     = new ReflectionClass($color);
+        $r = new ReflectionClass($color);
         $gcode = sprintf('%%s;5;%s', $gcode);
         $this->assertEquals($gcode, $r->getStaticPropertyValue('color'));
     }

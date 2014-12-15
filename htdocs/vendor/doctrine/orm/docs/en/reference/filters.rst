@@ -87,7 +87,7 @@ object.
     $filter = $em->getFilters()->disable("locale");
 
 .. warning::
-    Disabling and enabling filters has no effect on managed entities. If you
+Disabling and enabling filters has no effect on managed entities. If you
     want to refresh or reload an object after having modified a filter or the
     FilterCollection, then you should clear the EntityManager and re-fetch your
     entities, having the new rules for filtering applied.

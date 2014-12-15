@@ -34,7 +34,7 @@ abstract class FeedFactory
 
         foreach ($data as $key => $value) {
             // Setters
-            $key    = static::convertKey($key);
+            $key = static::convertKey($key);
             $method = 'set' . $key;
             if (method_exists($feed, $method)) {
                 switch ($method) {
@@ -75,6 +75,7 @@ abstract class FeedFactory
     protected static function convertKey($key)
     {
         $key = str_replace('_', '', strtolower($key));
+
         return $key;
     }
 
@@ -114,7 +115,7 @@ abstract class FeedFactory
             // Use case 2: iterate item and populate entry
             $entry = $feed->createEntry();
             foreach ($data as $key => $value) {
-                $key    = static::convertKey($key);
+                $key = static::convertKey($key);
                 $method = 'set' . $key;
                 if (!method_exists($entry, $method)) {
                     continue;

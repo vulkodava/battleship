@@ -60,7 +60,8 @@ class RsaOptions extends AbstractOptions
     public function setPrivateKey(Rsa\PrivateKey $key)
     {
         $this->privateKey = $key;
-        $this->publicKey  = $this->privateKey->getPublicKey();
+        $this->publicKey = $this->privateKey->getPublicKey();
+
         return $this;
     }
 
@@ -83,6 +84,7 @@ class RsaOptions extends AbstractOptions
     public function setPublicKey(Rsa\PublicKey $key)
     {
         $this->publicKey = $key;
+
         return $this;
     }
 
@@ -104,7 +106,8 @@ class RsaOptions extends AbstractOptions
      */
     public function setPassPhrase($phrase)
     {
-        $this->passPhrase = (string) $phrase;
+        $this->passPhrase = (string)$phrase;
+
         return $this;
     }
 
@@ -137,6 +140,7 @@ class RsaOptions extends AbstractOptions
 
         $this->hashAlgorithm = strtolower($hash);
         $this->opensslSignatureAlgorithm = constant('OPENSSL_ALGO_' . $hashUpper);
+
         return $this;
     }
 
@@ -155,6 +159,7 @@ class RsaOptions extends AbstractOptions
         if (!isset($this->opensslSignatureAlgorithm)) {
             $this->opensslSignatureAlgorithm = constant('OPENSSL_ALGO_' . strtoupper($this->hashAlgorithm));
         }
+
         return $this->opensslSignatureAlgorithm;
     }
 
@@ -166,7 +171,8 @@ class RsaOptions extends AbstractOptions
      */
     public function setBinaryOutput($value)
     {
-        $this->binaryOutput = (bool) $value;
+        $this->binaryOutput = (bool)$value;
+
         return $this;
     }
 
@@ -193,7 +199,7 @@ class RsaOptions extends AbstractOptions
             array(
                 'private_key_type' => OPENSSL_KEYTYPE_RSA,
                 'private_key_bits' => Rsa\PrivateKey::DEFAULT_KEY_SIZE,
-                'digest_alg'       => $this->getHashAlgorithm()
+                'digest_alg' => $this->getHashAlgorithm()
             ),
             $opensslConfig
         );
@@ -208,16 +214,16 @@ class RsaOptions extends AbstractOptions
 
         // export key
         $passPhrase = $this->getPassPhrase();
-        $result     = openssl_pkey_export($resource, $private, $passPhrase, $opensslConfig);
+        $result = openssl_pkey_export($resource, $private, $passPhrase, $opensslConfig);
         if (false === $result) {
             throw new Exception\RuntimeException(
                 'Can not export key; openssl ' . openssl_error_string()
             );
         }
 
-        $details          = openssl_pkey_get_details($resource);
+        $details = openssl_pkey_get_details($resource);
         $this->privateKey = new Rsa\PrivateKey($private, $passPhrase);
-        $this->publicKey  = new Rsa\PublicKey($details['key']);
+        $this->publicKey = new Rsa\PublicKey($details['key']);
 
         return $this;
     }

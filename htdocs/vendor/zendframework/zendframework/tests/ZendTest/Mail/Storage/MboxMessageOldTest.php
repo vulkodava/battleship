@@ -18,6 +18,7 @@ class MboxOldMessage extends Storage\Mbox
 {
     /**
      * used message class
+     *
      * @var string
      */
     protected $_messageClass = 'Zend\Mail\Storage\Message';
@@ -51,6 +52,7 @@ class MboxMessageOldTest extends \PHPUnit_Framework_TestCase
             closedir($dh);
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
+
                 return;
             }
         }
@@ -74,15 +76,15 @@ class MboxMessageOldTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Simple Message', $subject);
     }
 
-/*
-    public function testFetchTopBody()
-    {
-        $mail = new MboxOldMessage(array('filename' => $this->_mboxFile));
+    /*
+        public function testFetchTopBody()
+        {
+            $mail = new MboxOldMessage(array('filename' => $this->_mboxFile));
 
-        $content = $mail->getHeader(3, 1)->getContent();
-        $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
-    }
-*/
+            $content = $mail->getHeader(3, 1)->getContent();
+            $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
+        }
+    */
 
     public function testFetchMessageHeader()
     {
@@ -97,7 +99,7 @@ class MboxMessageOldTest extends \PHPUnit_Framework_TestCase
         $mail = new MboxOldMessage(array('filename' => $this->_mboxFile));
 
         $content = $mail->getMessage(3)->getContent();
-        list($content, ) = explode("\n", $content, 2);
+        list($content,) = explode("\n", $content, 2);
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
 

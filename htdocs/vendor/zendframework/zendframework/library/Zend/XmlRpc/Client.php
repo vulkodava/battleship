@@ -19,6 +19,7 @@ class Client implements ServerClient
 {
     /**
      * Full address of the XML-RPC service
+     *
      * @var string
      * @example http://time.xmlrpc.com/RPC2
      */
@@ -26,36 +27,42 @@ class Client implements ServerClient
 
     /**
      * HTTP Client to use for requests
+     *
      * @var \Zend\Http\Client
      */
     protected $httpClient = null;
 
     /**
      * Introspection object
+     *
      * @var \Zend\XmlRpc\Client\ServerIntrospection
      */
     protected $introspector = null;
 
     /**
      * Request of the last method call
+     *
      * @var \Zend\XmlRpc\Request
      */
     protected $lastRequest = null;
 
     /**
      * Response received from the last method call
+     *
      * @var \Zend\XmlRpc\Response
      */
     protected $lastResponse = null;
 
     /**
      * Proxy object for more convenient method calls
+     *
      * @var array of Zend\XmlRpc\Client\ServerProxy
      */
     protected $proxyCache = array();
 
     /**
      * Flag for skipping system lookup
+     *
      * @var bool
      */
     protected $skipSystemLookup = false;
@@ -63,8 +70,8 @@ class Client implements ServerClient
     /**
      * Create a new XML-RPC client to a remote server
      *
-     * @param  string $server      Full address of the XML-RPC service
-     *                             (e.g. http://time.xmlrpc.com/RPC2)
+     * @param  string $server                Full address of the XML-RPC service
+     *                                       (e.g. http://time.xmlrpc.com/RPC2)
      * @param  \Zend\Http\Client $httpClient HTTP Client to use for requests
      */
     public function __construct($server, Http\Client $httpClient = null)
@@ -75,7 +82,7 @@ class Client implements ServerClient
             $this->httpClient = $httpClient;
         }
 
-        $this->introspector  = new Client\ServerIntrospection($this);
+        $this->introspector = new Client\ServerIntrospection($this);
         $this->serverAddress = $server;
     }
 
@@ -151,7 +158,7 @@ class Client implements ServerClient
     /**
      * Returns a proxy object for more convenient method calls
      *
-     * @param string $namespace  Namespace to proxy or empty string for none
+     * @param string $namespace Namespace to proxy or empty string for none
      * @return \Zend\XmlRpc\Client\ServerProxy
      */
     public function getProxy($namespace = '')
@@ -160,6 +167,7 @@ class Client implements ServerClient
             $proxy = new Client\ServerProxy($this, $namespace);
             $this->proxyCache[$namespace] = $proxy;
         }
+
         return $this->proxyCache[$namespace];
     }
 
@@ -171,7 +179,8 @@ class Client implements ServerClient
      */
     public function setSkipSystemLookup($flag = true)
     {
-        $this->skipSystemLookup = (bool) $flag;
+        $this->skipSystemLookup = (bool)$flag;
+
         return $this;
     }
 
@@ -205,7 +214,7 @@ class Client implements ServerClient
             ini_set('default_charset', 'UTF-8');
         }
 
-        $http        = $this->getHttpClient();
+        $http = $this->getHttpClient();
         $httpRequest = $http->getRequest();
         if ($httpRequest->getUriString() === null) {
             $http->setUri($this->serverAddress);
@@ -247,7 +256,7 @@ class Client implements ServerClient
      * Send an XML-RPC request to the service (for a specific method)
      *
      * @param  string $method Name of the method we want to call
-     * @param  array $params Array of parameters for the method
+     * @param  array $params  Array of parameters for the method
      * @return mixed
      * @throws \Zend\XmlRpc\Client\Exception\FaultException
      */

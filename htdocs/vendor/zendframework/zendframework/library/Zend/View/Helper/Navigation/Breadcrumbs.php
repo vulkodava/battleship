@@ -109,7 +109,7 @@ class Breadcrumbs extends AbstractHelper
         } else {
             /** @var \Zend\View\Helper\EscapeHtml $escaper */
             $escaper = $this->view->plugin('escapeHtml');
-            $html    = $escaper(
+            $html = $escaper(
                 $this->translate($active->getLabel(), $active->getTextDomain())
             );
         }
@@ -141,14 +141,14 @@ class Breadcrumbs extends AbstractHelper
      * so in the script it will be available in <code>$this->container</code>.
      *
      * @param  AbstractContainer $container [optional] container to pass to view script.
-     *                              Default is to use the container registered
-     *                              in the helper.
-     * @param  string|array $partial [optional] partial view script to use.
-     *                               Default is to use the partial registered
-     *                               in the helper.  If an array is given, it
-     *                               is expected to contain two values; the
-     *                               partial view script to use, and the module
-     *                               where the script can be found.
+     *                                      Default is to use the container registered
+     *                                      in the helper.
+     * @param  string|array $partial        [optional] partial view script to use.
+     *                                      Default is to use the partial registered
+     *                                      in the helper.  If an array is given, it
+     *                                      is expected to contain two values; the
+     *                                      partial view script to use, and the module
+     *                                      where the script can be found.
      * @throws Exception\RuntimeException if no partial provided
      * @throws Exception\InvalidArgumentException if partial is invalid array
      * @return string               helper output
@@ -203,8 +203,8 @@ class Breadcrumbs extends AbstractHelper
             if (count($partial) != 2) {
                 throw new Exception\InvalidArgumentException(
                     'Unable to render menu: A view partial supplied as '
-                    .  'an array must contain two values: partial view '
-                    .  'script and module where script can be found'
+                    . 'an array must contain two values: partial view '
+                    . 'script and module where script can be found'
                 );
             }
 
@@ -222,7 +222,8 @@ class Breadcrumbs extends AbstractHelper
      */
     public function setLinkLast($linkLast)
     {
-        $this->linkLast = (bool) $linkLast;
+        $this->linkLast = (bool)$linkLast;
+
         return $this;
     }
 

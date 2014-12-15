@@ -20,11 +20,12 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Column();
         $this->assertSame($column, $column->setName('foo'));
+
         return $column;
     }
 
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Column::getName
+     * @covers  Zend\Db\Sql\Ddl\Column\Column::getName
      * @depends testSetName
      */
     public function testGetName(Column $column)
@@ -39,11 +40,12 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Column;
         $this->assertSame($column, $column->setNullable(true));
+
         return $column;
     }
 
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Column::isNullable
+     * @covers  Zend\Db\Sql\Ddl\Column\Column::isNullable
      * @depends testSetNullable
      */
     public function testIsNullable(Column $column)
@@ -60,11 +62,12 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Column;
         $this->assertSame($column, $column->setDefault('foo bar'));
+
         return $column;
     }
 
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Column::getDefault
+     * @covers  Zend\Db\Sql\Ddl\Column\Column::getDefault
      * @depends testSetDefault
      */
     public function testGetDefault(Column $column)
@@ -79,6 +82,7 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Column;
         $this->assertSame($column, $column->setOptions(array('autoincrement' => true)));
+
         return $column;
     }
 
@@ -92,7 +96,7 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Column::getOptions
+     * @covers  Zend\Db\Sql\Ddl\Column\Column::getOptions
      * @depends testSetOptions
      */
     public function testGetOptions(Column $column)

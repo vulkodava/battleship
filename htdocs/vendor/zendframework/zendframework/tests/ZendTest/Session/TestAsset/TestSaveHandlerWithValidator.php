@@ -19,7 +19,8 @@ class TestSaveHandlerWithValidator implements SaveHandler
     }
 
     public function close()
-    {}
+    {
+    }
 
     public function read($id)
     {
@@ -27,11 +28,14 @@ class TestSaveHandlerWithValidator implements SaveHandler
     }
 
     public function write($id, $data)
-    {}
+    {
+    }
 
     public function destroy($id)
-    {}
+    {
+    }
 
     public function gc($maxlifetime)
-    {}
+    {
+    }
 }

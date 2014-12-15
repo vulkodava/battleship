@@ -47,8 +47,8 @@ class IdentificationVariableDeclaration extends Node
 
     /**
      * @param RangeVariableDeclaration|null $rangeVariableDecl
-     * @param IndexBy|null                  $indexBy
-     * @param array                         $joins
+     * @param IndexBy|null $indexBy
+     * @param array $joins
      */
     public function __construct($rangeVariableDecl, $indexBy, array $joins)
     {

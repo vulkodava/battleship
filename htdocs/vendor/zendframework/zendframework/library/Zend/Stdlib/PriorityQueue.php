@@ -27,12 +27,13 @@ use Serializable;
  */
 class PriorityQueue implements Countable, IteratorAggregate, Serializable
 {
-    const EXTR_DATA     = 0x00000001;
+    const EXTR_DATA = 0x00000001;
     const EXTR_PRIORITY = 0x00000002;
-    const EXTR_BOTH     = 0x00000003;
+    const EXTR_BOTH = 0x00000003;
 
     /**
      * Inner queue class to use for iteration
+     *
      * @var string
      */
     protected $queueClass = 'Zend\Stdlib\SplPriorityQueue';
@@ -40,12 +41,14 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
     /**
      * Actual items aggregated in the priority queue. Each item is an array
      * with keys "data" and "priority".
+     *
      * @var array
      */
-    protected $items      = array();
+    protected $items = array();
 
     /**
      * Inner queue object
+     *
      * @var SplPriorityQueue
      */
     protected $queue;
@@ -61,12 +64,13 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      */
     public function insert($data, $priority = 1)
     {
-        $priority = (int) $priority;
+        $priority = (int)$priority;
         $this->items[] = array(
-            'data'     => $data,
+            'data' => $data,
             'priority' => $priority,
         );
         $this->getQueue()->insert($data, $priority);
+
         return $this;
     }
 
@@ -105,8 +109,10 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
                     $queue->insert($item['data'], $item['priority']);
                 }
             }
+
             return true;
         }
+
         return false;
     }
 
@@ -165,6 +171,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
     public function getIterator()
     {
         $queue = $this->getQueue();
+
         return clone $queue;
     }
 
@@ -232,7 +239,8 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      */
     public function setInternalQueueClass($class)
     {
-        $this->queueClass = (string) $class;
+        $this->queueClass = (string)$class;
+
         return $this;
     }
 
@@ -249,6 +257,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
                 return true;
             }
         }
+
         return false;
     }
 
@@ -265,6 +274,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
                 return true;
             }
         }
+
         return false;
     }
 
@@ -285,6 +295,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
                 ));
             }
         }
+
         return $this->queue;
     }
 

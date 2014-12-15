@@ -120,16 +120,16 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function testFormatNoInfiniteLoopOnSelfReferencingArrayValues()
     {
-        $datetime  = new DateTime();
+        $datetime = new DateTime();
         $formatter = new BaseFormatter();
 
         $selfRefArr = array();
-        $selfRefArr['selfRefArr'] = & $selfRefArr;
+        $selfRefArr['selfRefArr'] = &$selfRefArr;
 
         $event = array(
             'timestamp' => $datetime,
-            'priority'  => 1,
-            'message'   => 'tottakai',
+            'priority' => 1,
+            'message' => 'tottakai',
             'extra' => array(
                 'selfRefArr' => $selfRefArr,
             ),
@@ -138,8 +138,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         if (version_compare(PHP_VERSION, '5.5', 'lt')) {
             $outputExpected = array(
                 'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
-                'priority'  => 1,
-                'message'   => 'tottakai',
+                'priority' => 1,
+                'message' => 'tottakai',
                 'extra' => array(
                     'selfRefArr' => '{"selfRefArr":{"selfRefArr":null}}',
                 ),
@@ -147,8 +147,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         } else {
             $outputExpected = array(
                 'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
-                'priority'  => 1,
-                'message'   => 'tottakai',
+                'priority' => 1,
+                'message' => 'tottakai',
                 'extra' => array(
                     'selfRefArr' => '',
                 ),
@@ -163,12 +163,12 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $formatter = new BaseFormatter();
 
         $event = array(
-            'message'   => 'Hi',
-            'extra'     => '',
+            'message' => 'Hi',
+            'extra' => '',
         );
         $outputExpected = array(
             'message' => 'Hi',
-            'extra'   =>  '',
+            'extra' => '',
         );
 
         $this->assertEquals($outputExpected, $formatter->format($event));

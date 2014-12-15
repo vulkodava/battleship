@@ -40,7 +40,7 @@ class MetadataFilter extends \FilterIterator implements \Countable
     /**
      * Filter Metadatas by one or more filter options.
      *
-     * @param array        $metadatas
+     * @param array $metadatas
      * @param array|string $filter
      *
      * @return array
@@ -54,11 +54,11 @@ class MetadataFilter extends \FilterIterator implements \Countable
 
     /**
      * @param \ArrayIterator $metadata
-     * @param array|string   $filter
+     * @param array|string $filter
      */
     public function __construct(\ArrayIterator $metadata, $filter)
     {
-        $this->filter = (array) $filter;
+        $this->filter = (array)$filter;
 
         parent::__construct($metadata);
     }

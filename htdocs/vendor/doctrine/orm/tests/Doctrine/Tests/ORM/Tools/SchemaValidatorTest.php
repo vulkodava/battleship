@@ -251,7 +251,7 @@ class DDC1649One
  */
 class DDC1649Two
 {
-    /** @Id @ManyToOne(targetEntity="DDC1649One")@JoinColumn(name="id", referencedColumnName="id")  */
+    /** @Id @ManyToOne(targetEntity="DDC1649One")@JoinColumn(name="id", referencedColumnName="id") */
     public $one;
 }
 

@@ -254,7 +254,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $resolver = new TemplateMapResolver(array(
             'layout' => __DIR__ . '/_templates/layout.phtml',
-            'block'  => __DIR__ . '/_templates/block.phtml',
+            'block' => __DIR__ . '/_templates/block.phtml',
         ));
         $this->renderer->setResolver($resolver);
 
@@ -321,7 +321,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $model->setTemplate('empty');
 
         $content = $this->renderer->render($model);
-        $helper  = $this->renderer->plugin('view_model');
+        $helper = $this->renderer->plugin('view_model');
         $this->assertTrue($helper->hasCurrent());
         $this->assertSame($model, $helper->getCurrent());
     }
@@ -369,7 +369,9 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
             'invalid' => $template,
         ));
 
-        set_error_handler(function ($errno, $errstr) { return true; }, E_WARNING);
+        set_error_handler(function ($errno, $errstr) {
+                return true;
+            }, E_WARNING);
 
         $this->renderer->setResolver($resolver);
 
@@ -411,7 +413,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $model = new ViewModel();
         $model->setTemplate('template');
-        $vars  = $model->getVariables();
+        $vars = $model->getVariables();
         $vars['foo'] = 'BAR-BAZ-BAT';
 
         $resolver = new TemplateMapResolver(array(

@@ -57,8 +57,8 @@ class Autoloader
     /**
      * Registers and returns autoloader callback for the given proxy dir and namespace.
      *
-     * @param string        $proxyDir
-     * @param string        $proxyNamespace
+     * @param string $proxyDir
+     * @param string $proxyNamespace
      * @param callable|null $notFoundCallback Invoked when the proxy file is not found.
      *
      * @return \Closure
@@ -69,7 +69,7 @@ class Autoloader
     {
         $proxyNamespace = ltrim($proxyNamespace, '\\');
 
-        if ( ! (null === $notFoundCallback || is_callable($notFoundCallback))) {
+        if (!(null === $notFoundCallback || is_callable($notFoundCallback))) {
             throw InvalidArgumentException::invalidClassNotFoundCallback($notFoundCallback);
         }
 
@@ -77,7 +77,7 @@ class Autoloader
             if (0 === strpos($className, $proxyNamespace)) {
                 $file = Autoloader::resolveFile($proxyDir, $proxyNamespace, $className);
 
-                if ($notFoundCallback && ! file_exists($file)) {
+                if ($notFoundCallback && !file_exists($file)) {
                     call_user_func($notFoundCallback, $proxyDir, $proxyNamespace, $className);
                 }
 

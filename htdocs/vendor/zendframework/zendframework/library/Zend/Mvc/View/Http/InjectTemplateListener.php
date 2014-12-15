@@ -72,7 +72,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
 
         $template = $this->mapController($controller);
         if (!$template) {
-            $module     = $this->deriveModuleNamespace($controller);
+            $module = $this->deriveModuleNamespace($controller);
 
             if ($namespace = $routeMatch->getParam(ModuleRouteListener::MODULE_NAMESPACE)) {
                 $controllerSubNs = $this->deriveControllerSubNamespace($namespace);
@@ -86,15 +86,15 @@ class InjectTemplateListener extends AbstractListenerAggregate
             }
 
             $controller = $this->deriveControllerClass($controller);
-            $template   = $this->inflectName($module);
+            $template = $this->inflectName($module);
 
             if (!empty($template)) {
                 $template .= '/';
             }
-            $template  .= $this->inflectName($controller);
+            $template .= $this->inflectName($controller);
         }
 
-        $action     = $routeMatch->getParam('action');
+        $action = $routeMatch->getParam('action');
         if (null !== $action) {
             $template .= '/' . $this->inflectName($action);
         }
@@ -111,6 +111,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
     {
         krsort($map);
         $this->controllerMap = $map;
+
         return $this;
     }
 
@@ -153,6 +154,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
             //inflect CamelCase to dash
             return $this->inflectName($template);
         }
+
         return false;
     }
 
@@ -168,6 +170,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
             $this->inflector = new CamelCaseToDashFilter();
         }
         $name = $this->inflector->filter($name);
+
         return strtolower($name);
     }
 
@@ -183,6 +186,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
             return '';
         }
         $module = substr($controller, 0, strpos($controller, '\\'));
+
         return $module;
     }
 
@@ -202,6 +206,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
         if (empty($subNsArray)) {
             return '';
         }
+
         return implode('/', $subNsArray);
     }
 

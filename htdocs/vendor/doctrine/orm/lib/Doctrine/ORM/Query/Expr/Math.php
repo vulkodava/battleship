@@ -48,14 +48,14 @@ class Math
     /**
      * Creates a mathematical expression with the given arguments.
      *
-     * @param mixed  $leftExpr
+     * @param mixed $leftExpr
      * @param string $operator
-     * @param mixed  $rightExpr
+     * @param mixed $rightExpr
      */
     public function __construct($leftExpr, $operator, $rightExpr)
     {
-        $this->leftExpr  = $leftExpr;
-        $this->operator  = $operator;
+        $this->leftExpr = $leftExpr;
+        $this->operator = $operator;
         $this->rightExpr = $rightExpr;
     }
 
@@ -89,14 +89,14 @@ class Math
     public function __toString()
     {
         // Adjusting Left Expression
-        $leftExpr = (string) $this->leftExpr;
+        $leftExpr = (string)$this->leftExpr;
 
         if ($this->leftExpr instanceof Math) {
             $leftExpr = '(' . $leftExpr . ')';
         }
 
         // Adjusting Right Expression
-        $rightExpr = (string) $this->rightExpr;
+        $rightExpr = (string)$this->rightExpr;
 
         if ($this->rightExpr instanceof Math) {
             $rightExpr = '(' . $rightExpr . ')';

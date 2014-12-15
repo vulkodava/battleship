@@ -65,7 +65,7 @@ class Module implements
     {
         $events = $manager->getEventManager();
         // Initialize logger collector once the profiler is initialized itself
-        $events->attach('profiler_init', function() use ($manager) {
+        $events->attach('profiler_init', function () use ($manager) {
             $manager->getEvent()->getParam('ServiceManager')->get('doctrine.sql_logger_collector.orm_default');
         });
     }
@@ -90,11 +90,11 @@ class Module implements
     public function onBootstrap(EventInterface $e)
     {
         /* @var $app \Zend\Mvc\ApplicationInterface */
-        $app    = $e->getTarget();
+        $app = $e->getTarget();
         $events = $app->getEventManager()->getSharedManager();
 
         // Attach to helper set event and load the entity manager helper.
-        $events->attach('doctrine', 'loadCli.post', function(EventInterface $e) {
+        $events->attach('doctrine', 'loadCli.post', function (EventInterface $e) {
             /* @var $cli \Symfony\Component\Console\Application */
             $cli = $e->getTarget();
 

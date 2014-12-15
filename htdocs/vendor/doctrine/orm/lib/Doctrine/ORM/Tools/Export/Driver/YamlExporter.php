@@ -106,14 +106,14 @@ class YamlExporter extends AbstractExporter
             $fieldMappings[$name] = $fieldMapping;
         }
 
-        if ( ! $metadata->isIdentifierComposite && $idGeneratorType = $this->_getIdGeneratorTypeString($metadata->generatorType)) {
+        if (!$metadata->isIdentifierComposite && $idGeneratorType = $this->_getIdGeneratorTypeString($metadata->generatorType)) {
             $ids[$metadata->getSingleIdentifierFieldName()]['generator']['strategy'] = $idGeneratorType;
         }
 
         $array['id'] = $ids;
 
         if ($fieldMappings) {
-            if ( ! isset($array['fields'])) {
+            if (!isset($array['fields'])) {
                 $array['fields'] = array();
             }
             $array['fields'] = array_merge($array['fields'], $fieldMappings);
@@ -147,7 +147,7 @@ class YamlExporter extends AbstractExporter
 
             $associationMappingArray = array(
                 'targetEntity' => $associationMapping['targetEntity'],
-                'cascade'     => $cascade,
+                'cascade' => $cascade,
             );
 
             if (isset($mapping['id']) && $mapping['id'] === true) {
@@ -167,9 +167,9 @@ class YamlExporter extends AbstractExporter
                 }
 
                 $oneToOneMappingArray = array(
-                    'mappedBy'      => $associationMapping['mappedBy'],
-                    'inversedBy'    => $associationMapping['inversedBy'],
-                    'joinColumns'   => $newJoinColumns,
+                    'mappedBy' => $associationMapping['mappedBy'],
+                    'inversedBy' => $associationMapping['inversedBy'],
+                    'joinColumns' => $newJoinColumns,
                     'orphanRemoval' => $associationMapping['orphanRemoval'],
                 );
 
@@ -182,20 +182,20 @@ class YamlExporter extends AbstractExporter
                 }
             } elseif ($associationMapping['type'] == ClassMetadataInfo::ONE_TO_MANY) {
                 $oneToManyMappingArray = array(
-                    'mappedBy'      => $associationMapping['mappedBy'],
-                    'inversedBy'    => $associationMapping['inversedBy'],
+                    'mappedBy' => $associationMapping['mappedBy'],
+                    'inversedBy' => $associationMapping['inversedBy'],
                     'orphanRemoval' => $associationMapping['orphanRemoval'],
-                    'orderBy'       => isset($associationMapping['orderBy']) ? $associationMapping['orderBy'] : null
+                    'orderBy' => isset($associationMapping['orderBy']) ? $associationMapping['orderBy'] : null
                 );
 
                 $associationMappingArray = array_merge($associationMappingArray, $oneToManyMappingArray);
                 $array['oneToMany'][$name] = $associationMappingArray;
             } elseif ($associationMapping['type'] == ClassMetadataInfo::MANY_TO_MANY) {
                 $manyToManyMappingArray = array(
-                    'mappedBy'   => $associationMapping['mappedBy'],
+                    'mappedBy' => $associationMapping['mappedBy'],
                     'inversedBy' => $associationMapping['inversedBy'],
-                    'joinTable'  => isset($associationMapping['joinTable']) ? $associationMapping['joinTable'] : null,
-                    'orderBy'    => isset($associationMapping['orderBy']) ? $associationMapping['orderBy'] : null
+                    'joinTable' => isset($associationMapping['joinTable']) ? $associationMapping['joinTable'] : null,
+                    'orderBy' => isset($associationMapping['orderBy']) ? $associationMapping['orderBy'] : null
                 );
 
                 $associationMappingArray = array_merge($associationMappingArray, $manyToManyMappingArray);

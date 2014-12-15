@@ -15,7 +15,8 @@ class DDC599Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC599Subitem'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC599Child'),
             ));
-        } catch (\Exception $ignored) {}
+        } catch (\Exception $ignored) {
+        }
     }
 
     public function testCascadeRemoveOnInheritanceHierarchy()

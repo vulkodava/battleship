@@ -54,7 +54,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\Sql\Delete::where
      *
-     * @todo REMOVE THIS IN 3.x
+     * @todo   REMOVE THIS IN 3.x
      */
     public function testWhere()
     {
@@ -177,7 +177,6 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $deleteIgnore->prepareStatement($mockAdapter, $mockStatement);
 
 
-
         // with TableIdentifier
         $deleteIgnore = new DeleteIgnore();
 
@@ -220,6 +219,6 @@ class DeleteIgnore extends Delete
 
     protected $specifications = array(
         self::SPECIFICATION_DELETE => 'DELETE IGNORE FROM %1$s',
-        self::SPECIFICATION_WHERE  => 'WHERE %1$s',
+        self::SPECIFICATION_WHERE => 'WHERE %1$s',
     );
 }

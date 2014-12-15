@@ -5,6 +5,7 @@ namespace Doctrine\Tests\ORM\Functional\Ticket;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Tests\Models\CMS\CmsArticle;
 use Doctrine\Tests\Models\CMS\CmsUser;
+
 require_once __DIR__ . '/../../../TestInit.php';
 
 /**
@@ -21,7 +22,7 @@ class DDC1461Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC1461TwitterAccount'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC1461User')
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
@@ -60,7 +61,8 @@ class DDC1461User
     public $id;
 
     /**
-     * @OneToOne(targetEntity="DDC1461TwitterAccount", orphanRemoval=true, fetch="EAGER", cascade = {"persist"}, inversedBy="user")
+     * @OneToOne(targetEntity="DDC1461TwitterAccount", orphanRemoval=true, fetch="EAGER", cascade = {"persist"},
+     *                                                 inversedBy="user")
      * @var TwitterAccount
      */
     public $twitterAccount;

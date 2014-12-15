@@ -85,8 +85,8 @@ class HttpResponse
      */
     public function setHeader($name, $value, $replace = false)
     {
-        $name  = $this->_normalizeHeader($name);
-        $value = (string) $value;
+        $name = $this->_normalizeHeader($name);
+        $value = (string)$value;
         if ($replace) {
             foreach ($this->headers as $key => $header) {
                 if ($name == $header['name']) {
@@ -95,8 +95,8 @@ class HttpResponse
             }
         }
         $this->headers[] = array(
-            'name'    => $name,
-            'value'   => $value,
+            'name' => $name,
+            'value' => $value,
             'replace' => $replace,
         );
 
@@ -142,6 +142,7 @@ class HttpResponse
         if ($ok && $throw) {
             throw new Exception\RuntimeException('Cannot send headers; headers already sent in ' . $file . ', line ' . $line);
         }
+
         return !$ok;
     }
 
@@ -156,9 +157,10 @@ class HttpResponse
     {
         if (!is_int($code) || (100 > $code) || (599 < $code)) {
             throw new Exception\InvalidArgumentException('Invalid HTTP response'
-            . ' code:' . $code);
+                . ' code:' . $code);
         }
         $this->statusCode = $code;
+
         return $this;
     }
 
@@ -180,8 +182,9 @@ class HttpResponse
      */
     public function setContent($content)
     {
-        $this->content = (string) $content;
+        $this->content = (string)$content;
         $this->setHeader('content-length', strlen($content));
+
         return $this;
     }
 
@@ -203,9 +206,10 @@ class HttpResponse
      */
     protected function _normalizeHeader($name)
     {
-        $filtered = str_replace(array('-', '_'), ' ', (string) $name);
+        $filtered = str_replace(array('-', '_'), ' ', (string)$name);
         $filtered = ucwords(strtolower($filtered));
         $filtered = str_replace(' ', '-', $filtered);
+
         return $filtered;
     }
 }

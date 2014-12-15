@@ -24,6 +24,7 @@ class Feed extends Extension\AbstractFeed
             $dayPopular = null;
         }
         $this->data['dayPopular'] = $dayPopular;
+
         return $this->data['dayPopular'];
     }
 

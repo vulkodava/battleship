@@ -56,7 +56,7 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
             'baz',
             'bat',
         );
-        $test     = $this->queue->toArray();
+        $test = $this->queue->toArray();
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 
@@ -68,7 +68,7 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
             2,
             1,
         );
-        $test     = $this->queue->toArray(PriorityQueue::EXTR_PRIORITY);
+        $test = $this->queue->toArray(PriorityQueue::EXTR_PRIORITY);
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 
@@ -80,7 +80,7 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
             array('data' => 'baz', 'priority' => 2),
             array('data' => 'bat', 'priority' => 1),
         );
-        $test     = $this->queue->toArray(PriorityQueue::EXTR_BOTH);
+        $test = $this->queue->toArray(PriorityQueue::EXTR_BOTH);
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 
@@ -122,7 +122,7 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
 
     public function testCloningAlsoClonesQueue()
     {
-        $foo  = new \stdClass();
+        $foo = new \stdClass();
         $foo->name = 'bar';
 
         $queue = new PriorityQueue();

@@ -82,7 +82,7 @@ class NamingStrategyTest extends \Doctrine\Tests\OrmTestCase
 
     /**
      * Data Provider for NamingStrategy#propertyToColumnName
-     * 
+     *
      * @return array
      */
     static public function dataPropertyToColumnName()
@@ -114,7 +114,7 @@ class NamingStrategyTest extends \Doctrine\Tests\OrmTestCase
             ),
         );
     }
-    
+
     /**
      * @dataProvider dataPropertyToColumnName
      *

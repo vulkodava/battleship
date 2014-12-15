@@ -24,12 +24,14 @@ class Http extends XmlRpcRequest
 {
     /**
      * Array of headers
+     *
      * @var array
      */
     protected $headers;
 
     /**
      * Raw XML as received via request
+     *
      * @var string
      */
     protected $xml;
@@ -49,6 +51,7 @@ class Http extends XmlRpcRequest
         ErrorHandler::stop();
         if (!$xml) {
             $this->fault = new Fault(630);
+
             return;
         }
 

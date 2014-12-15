@@ -108,7 +108,7 @@ class AbstractFeed
     /**
      * Set the copyright entry
      *
-     * @param  string      $copyright
+     * @param  string $copyright
      * @throws Exception\InvalidArgumentException
      * @return AbstractFeed
      */
@@ -137,7 +137,7 @@ class AbstractFeed
             $date = new DateTime('@' . $date);
         } elseif (!$date instanceof DateTime) {
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
-                                                         . ' passed as parameter');
+                . ' passed as parameter');
         }
         $this->data['dateCreated'] = $date;
 
@@ -159,7 +159,7 @@ class AbstractFeed
             $date = new DateTime('@' . $date);
         } elseif (!$date instanceof DateTime) {
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
-                                                         . ' passed as parameter');
+                . ' passed as parameter');
         }
         $this->data['dateModified'] = $date;
 
@@ -181,7 +181,7 @@ class AbstractFeed
             $date = new DateTime('@' . $date);
         } elseif (!$date instanceof DateTime) {
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
-                                                         . ' passed as parameter');
+                . ' passed as parameter');
         }
         $this->data['lastBuildDate'] = $date;
 
@@ -302,8 +302,10 @@ class AbstractFeed
             } else {
                 $nvalid = $validator->isValid('info@' . $matches['name']);
             }
+
             return $dvalid && $nvalid;
         }
+
         return false;
     }
 
@@ -323,7 +325,7 @@ class AbstractFeed
             || !Uri::factory($data['uri'])->isValid()
         ) {
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter \'uri\''
-            . ' must be a non-empty string and valid URI/IRI');
+                . ' must be a non-empty string and valid URI/IRI');
         }
         $this->data['image'] = $data;
 
@@ -430,7 +432,7 @@ class AbstractFeed
     {
         if (empty($url) || !is_string($url) || !Uri::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "url" array value'
-            . ' must be a non-empty string and valid URI/IRI');
+                . ' must be a non-empty string and valid URI/IRI');
         }
         $this->data['baseUrl'] = $url;
 
@@ -448,7 +450,7 @@ class AbstractFeed
     {
         if (empty($url) || !is_string($url) || !Uri::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "url" array value'
-            . ' must be a non-empty string and valid URI/IRI');
+                . ' must be a non-empty string and valid URI/IRI');
         }
         if (!isset($this->data['hubs'])) {
             $this->data['hubs'] = array();
@@ -484,8 +486,8 @@ class AbstractFeed
     {
         if (!isset($category['term'])) {
             throw new Exception\InvalidArgumentException('Each category must be an array and '
-            . 'contain at least a "term" element containing the machine '
-            . ' readable category name');
+                . 'contain at least a "term" element containing the machine '
+                . ' readable category name');
         }
         if (isset($category['scheme'])) {
             if (empty($category['scheme'])
@@ -493,7 +495,7 @@ class AbstractFeed
                 || !Uri::factory($category['scheme'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('The Atom scheme or RSS domain of'
-                . ' a category must be a valid URI');
+                    . ' a category must be a valid URI');
             }
         }
         if (!isset($this->data['categories'])) {
@@ -544,6 +546,7 @@ class AbstractFeed
         if (!array_key_exists('authors', $this->data)) {
             return null;
         }
+
         return $this->data['authors'];
     }
 
@@ -557,6 +560,7 @@ class AbstractFeed
         if (!array_key_exists('copyright', $this->data)) {
             return null;
         }
+
         return $this->data['copyright'];
     }
 
@@ -570,6 +574,7 @@ class AbstractFeed
         if (!array_key_exists('dateCreated', $this->data)) {
             return null;
         }
+
         return $this->data['dateCreated'];
     }
 
@@ -583,6 +588,7 @@ class AbstractFeed
         if (!array_key_exists('dateModified', $this->data)) {
             return null;
         }
+
         return $this->data['dateModified'];
     }
 
@@ -596,6 +602,7 @@ class AbstractFeed
         if (!array_key_exists('lastBuildDate', $this->data)) {
             return null;
         }
+
         return $this->data['lastBuildDate'];
     }
 
@@ -609,6 +616,7 @@ class AbstractFeed
         if (!array_key_exists('description', $this->data)) {
             return null;
         }
+
         return $this->data['description'];
     }
 
@@ -622,6 +630,7 @@ class AbstractFeed
         if (!array_key_exists('generator', $this->data)) {
             return null;
         }
+
         return $this->data['generator'];
     }
 
@@ -635,6 +644,7 @@ class AbstractFeed
         if (!array_key_exists('id', $this->data)) {
             return null;
         }
+
         return $this->data['id'];
     }
 
@@ -648,6 +658,7 @@ class AbstractFeed
         if (!array_key_exists('image', $this->data)) {
             return null;
         }
+
         return $this->data['image'];
     }
 
@@ -661,6 +672,7 @@ class AbstractFeed
         if (!array_key_exists('language', $this->data)) {
             return null;
         }
+
         return $this->data['language'];
     }
 
@@ -674,6 +686,7 @@ class AbstractFeed
         if (!array_key_exists('link', $this->data)) {
             return null;
         }
+
         return $this->data['link'];
     }
 
@@ -687,6 +700,7 @@ class AbstractFeed
         if (!array_key_exists('feedLinks', $this->data)) {
             return null;
         }
+
         return $this->data['feedLinks'];
     }
 
@@ -700,6 +714,7 @@ class AbstractFeed
         if (!array_key_exists('title', $this->data)) {
             return null;
         }
+
         return $this->data['title'];
     }
 
@@ -713,6 +728,7 @@ class AbstractFeed
         if (!array_key_exists('encoding', $this->data)) {
             return 'UTF-8';
         }
+
         return $this->data['encoding'];
     }
 
@@ -726,6 +742,7 @@ class AbstractFeed
         if (!array_key_exists('baseUrl', $this->data)) {
             return null;
         }
+
         return $this->data['baseUrl'];
     }
 
@@ -739,6 +756,7 @@ class AbstractFeed
         if (!array_key_exists('hubs', $this->data)) {
             return null;
         }
+
         return $this->data['hubs'];
     }
 
@@ -752,6 +770,7 @@ class AbstractFeed
         if (!array_key_exists('categories', $this->data)) {
             return null;
         }
+
         return $this->data['categories'];
     }
 
@@ -776,6 +795,7 @@ class AbstractFeed
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -800,6 +820,7 @@ class AbstractFeed
         if (isset($this->data[$name])) {
             unset($this->data[$name]);
         }
+
         return $this;
     }
 
@@ -832,9 +853,9 @@ class AbstractFeed
      */
     protected function _loadExtensions()
     {
-        $all     = Writer::getExtensions();
+        $all = Writer::getExtensions();
         $manager = Writer::getExtensionManager();
-        $exts    = $all['feed'];
+        $exts = $all['feed'];
         foreach ($exts as $ext) {
             if (!$manager->has($ext)) {
                 throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));

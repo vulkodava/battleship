@@ -21,7 +21,7 @@ interface EventCollectorInterface
      * Collects event-level information
      *
      * @param string $id
-     * @param Event  $event
+     * @param Event $event
      */
     public function collectEvent($id, Event $event);
 }

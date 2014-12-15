@@ -8,8 +8,8 @@ class Module
 {
     public function onBootstrap($e)
     {
-        $app     = $e->getParam('application');
-        $sm      = $app->getServiceManager();
+        $app = $e->getParam('application');
+        $sm = $app->getServiceManager();
         $options = $sm->get('zfcuser_module_options');
 
         // Add the default entity driver only if specified in configuration
@@ -42,6 +42,7 @@ class Module
             'factories' => array(
                 'zfcuser_module_options' => function ($sm) {
                     $config = $sm->get('Configuration');
+
                     return new Options\ModuleOptions(isset($config['zfcuser']) ? $config['zfcuser'] : array());
                 },
                 'zfcuser_user_mapper' => function ($sm) {

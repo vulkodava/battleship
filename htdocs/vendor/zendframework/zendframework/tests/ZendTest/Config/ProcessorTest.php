@@ -174,7 +174,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     {
         $processor = new TokenProcessor();
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot use ' . gettype(array()) . ' as token name.');
+            'Cannot use ' . gettype(array()) . ' as token name.');
         $processor->addToken(array(), 'bar');
     }
 
@@ -194,7 +194,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor->addToken('BARETOKEN', 'some replaced value');
 
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot process config because it is read-only');
+            'Cannot process config because it is read-only');
         $processor->process($config);
     }
 
@@ -278,8 +278,8 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
                 'trueBoolKey' => true,
                 'falseBoolKey' => false,
                 'intKey' => 123,
-                'floatKey' => (float) 123.456,
-                'doubleKey' => (double) 456.789,
+                'floatKey' => (float)123.456,
+                'doubleKey' => (double)456.789,
             ),
             true
         );
@@ -291,8 +291,8 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(true, $config['trueBoolKey']);
         $this->assertSame(false, $config['falseBoolKey']);
         $this->assertSame(123, $config['intKey']);
-        $this->assertSame((float) 123.456, $config['floatKey']);
-        $this->assertSame((double) 456.789, $config['doubleKey']);
+        $this->assertSame((float)123.456, $config['floatKey']);
+        $this->assertSame((double)456.789, $config['doubleKey']);
     }
 
     /**
@@ -306,8 +306,8 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
                 'trueBoolKey' => true,
                 'falseBoolKey' => false,
                 'intKey' => 123,
-                'floatKey' => (float) 123.456,
-                'doubleKey' => (double) 456.789,
+                'floatKey' => (float)123.456,
+                'doubleKey' => (double)456.789,
             ),
             true
         );
@@ -329,7 +329,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
      */
     public function testIgnoresEmptyStringReplacement()
     {
-        $config    = new Config(array('foo' => 'bar'), true);
+        $config = new Config(array('foo' => 'bar'), true);
         $processor = new TokenProcessor(array('' => 'invalid'));
 
         $processor->process($config);
@@ -401,10 +401,10 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ext/intl not enabled');
         }
 
-        $config     = new Config($this->translatorData, true);
+        $config = new Config($this->translatorData, true);
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
-        $processor  = new TranslatorProcessor($translator);
+        $processor = new TranslatorProcessor($translator);
 
         $processor->process($config);
 
@@ -423,22 +423,22 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\I18n\Exception\ExtensionNotLoadedException',
             'Zend\I18n\Translator component requires the intl PHP extension');
 
-        $config     = new Config($this->translatorData, true);
+        $config = new Config($this->translatorData, true);
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
-        $processor  = new TranslatorProcessor($translator);
+        $processor = new TranslatorProcessor($translator);
 
         $processor->process($config);
     }
 
     public function testTranslatorReadOnly()
     {
-        $config     = new Config($this->translatorData, false);
+        $config = new Config($this->translatorData, false);
         $translator = new Translator();
-        $processor  = new TranslatorProcessor($translator);
+        $processor = new TranslatorProcessor($translator);
 
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot process config because it is read-only');
+            'Cannot process config because it is read-only');
         $processor->process($config);
     }
 
@@ -450,7 +450,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
-        $processor  = new TranslatorProcessor($translator);
+        $processor = new TranslatorProcessor($translator);
 
         $this->assertEquals('ein Hund', $processor->processValue('one dog'));
     }
@@ -466,7 +466,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
-        $processor  = new TranslatorProcessor($translator);
+        $processor = new TranslatorProcessor($translator);
 
         $this->assertEquals('ein Hund', $processor->processValue('one dog'));
     }
@@ -491,7 +491,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $processor = new FilterProcessor($filter);
 
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot process config because it is read-only');
+            'Cannot process config because it is read-only');
         $processor->process($config);
     }
 
@@ -540,7 +540,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $queue->insert($lowerProcessor);
 
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException',
-                                    'Cannot process config because it is read-only');
+            'Cannot process config because it is read-only');
         $queue->process($config);
     }
 
@@ -558,7 +558,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $queue->insert($upperProcessor);
         $queue->insert($lowerProcessor);
 
-        $data ='TeSt';
+        $data = 'TeSt';
         $this->assertEquals('test', $queue->processValue($data));
     }
 

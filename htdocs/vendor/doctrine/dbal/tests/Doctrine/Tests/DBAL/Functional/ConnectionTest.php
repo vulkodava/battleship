@@ -110,7 +110,7 @@ class ConnectionTest extends \Doctrine\Tests\DbalFunctionalTestCase
         try {
             $this->_conn->setNestTransactionsWithSavepoints(true);
             $this->fail('An exception should have been thrown by chaning the nesting transaction behavior within an transaction.');
-        } catch(ConnectionException $e) {
+        } catch (ConnectionException $e) {
             $this->_conn->rollBack();
         }
     }
@@ -192,7 +192,7 @@ class ConnectionTest extends \Doctrine\Tests\DbalFunctionalTestCase
     public function testTransactionalWithException()
     {
         try {
-            $this->_conn->transactional(function($conn) {
+            $this->_conn->transactional(function ($conn) {
                 $conn->executeQuery($conn->getDatabasePlatform()->getDummySelectSQL());
                 throw new \RuntimeException("Ooops!");
             });
@@ -203,7 +203,7 @@ class ConnectionTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
     public function testTransactional()
     {
-        $this->_conn->transactional(function($conn) {
+        $this->_conn->transactional(function ($conn) {
             /* @var $conn Connection */
             $conn->executeQuery($conn->getDatabasePlatform()->getDummySelectSQL());
         });

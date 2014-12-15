@@ -23,7 +23,7 @@ class DDC2660Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC2660Customer'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC2660CustomerOrder')
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return;
         }
 
@@ -50,7 +50,7 @@ class DDC2660Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $rsm = new ResultSetMappingBuilder($this->_getEntityManager());
         $rsm->addRootEntityFromClassMetadata(__NAMESPACE__ . '\DDC2660CustomerOrder', 'c');
 
-        $query  = $this->_em->createNativeQuery($sql, $rsm);
+        $query = $this->_em->createNativeQuery($sql, $rsm);
         $result = $query->getResult();
 
         $this->assertCount(5, $result);
@@ -68,7 +68,7 @@ class DDC2660Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $rsm = new ResultSetMappingBuilder($this->_getEntityManager());
         $rsm->addRootEntityFromClassMetadata(__NAMESPACE__ . '\DDC2660CustomerOrder', 'c');
 
-        $query  = $this->_em->createNativeQuery($sql, $rsm);
+        $query = $this->_em->createNativeQuery($sql, $rsm);
         $result = $query->getResult();
 
         $this->assertCount(5, $result);
@@ -79,6 +79,7 @@ class DDC2660Test extends \Doctrine\Tests\OrmFunctionalTestCase
         }
     }
 }
+
 /**
  * @Entity @Table(name="ddc_2660_product")
  */
@@ -115,7 +116,7 @@ class DDC2660CustomerOrder
 
     public function __construct(DDC2660Product $product, DDC2660Customer $customer, $name)
     {
-        $this->product  = $product;
+        $this->product = $product;
         $this->customer = $customer;
         $this->name = $name;
     }

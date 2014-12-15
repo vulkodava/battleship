@@ -38,6 +38,7 @@ class ConstructedNavigationFactory extends AbstractNavigationFactory
         if (null === $this->pages) {
             $this->pages = $this->preparePages($serviceLocator, $this->getPagesFromConfig($this->config));
         }
+
         return $this->pages;
     }
 

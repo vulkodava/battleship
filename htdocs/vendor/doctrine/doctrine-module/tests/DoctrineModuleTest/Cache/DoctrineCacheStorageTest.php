@@ -33,7 +33,7 @@ use Zend\Stdlib\ErrorHandler;
  * @license MIT
  * @link    http://www.doctrine-project.org/
  * @author  Marco Pivetta <ocramius@gmail.com>
- * @todo extend \ZendTest\Cache\Storage\CommonAdapterTest instead
+ * @todo    extend \ZendTest\Cache\Storage\CommonAdapterTest instead
  */
 class DoctrineCacheStorageTest extends PHPUnit_Framework_TestCase
 {
@@ -420,20 +420,20 @@ class DoctrineCacheStorageTest extends PHPUnit_Framework_TestCase
     {
         // write "key" to default namespace
         $this->_options->setNamespace('defaultns1');
-        $this->assertTrue( $this->_storage->setItem('key', 'defaultns1') );
+        $this->assertTrue($this->_storage->setItem('key', 'defaultns1'));
 
         // write "key" to an other default namespace
         $this->_options->setNamespace('defaultns2');
-        $this->assertTrue( $this->_storage->setItem('key', 'defaultns2') );
+        $this->assertTrue($this->_storage->setItem('key', 'defaultns2'));
 
         // test value of defaultns2
         $this->assertTrue($this->_storage->hasItem('key'));
-        $this->assertEquals('defaultns2', $this->_storage->getItem('key') );
+        $this->assertEquals('defaultns2', $this->_storage->getItem('key'));
 
         // test value of defaultns1
         $this->_options->setNamespace('defaultns1');
         $this->assertTrue($this->_storage->hasItem('key'));
-        $this->assertEquals('defaultns1', $this->_storage->getItem('key') );
+        $this->assertEquals('defaultns1', $this->_storage->getItem('key'));
 
         // remove item of defaultns1
         $this->_options->setNamespace('defaultns1');
@@ -458,7 +458,7 @@ class DoctrineCacheStorageTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array(), $this->_storage->setItems($items));
 
         $this->_options->setNamespace('defaultns2');
-        $this->assertSame(array(),  $this->_storage->hasItems(array_keys($items)));
+        $this->assertSame(array(), $this->_storage->hasItems(array_keys($items)));
 
         $this->_options->setNamespace('defaultns1');
         $rs = $this->_storage->getItems(array_keys($items));
@@ -499,13 +499,13 @@ class DoctrineCacheStorageTest extends PHPUnit_Framework_TestCase
         $capabilities = $this->_storage->getCapabilities();
 
         $types = array(
-            'NULL'     => null,
-            'boolean'  => true,
-            'integer'  => 12345,
-            'double'   => 123.45,
-            'string'   => 'string', // already tested
-            'array'    => array('one', 'tow' => 'two', 'three' => array('four' => 'four')),
-            'object'   => new \stdClass(),
+            'NULL' => null,
+            'boolean' => true,
+            'integer' => 12345,
+            'double' => 123.45,
+            'string' => 'string', // already tested
+            'array' => array('one', 'tow' => 'two', 'three' => array('four' => 'four')),
+            'object' => new \stdClass(),
             'resource' => fopen(__FILE__, 'r'),
         );
         $types['object']->one = 'one';
@@ -621,7 +621,7 @@ class DoctrineCacheStorageTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->_storage->setItem('key', 'value'));
 
-        $success  = null;
+        $success = null;
         $casToken = null;
         $this->assertEquals('value', $this->_storage->getItem('key', $success, $casToken));
         $this->assertNotNull($casToken);

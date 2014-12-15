@@ -16,24 +16,28 @@ class InstanceManager /* implements InstanceManagerInterface */
 {
     /**
      * Array of shared instances
+     *
      * @var array
      */
     protected $sharedInstances = array();
 
     /**
      * Array of shared instances with params
+     *
      * @var array
      */
     protected $sharedInstancesWithParams = array('hashShort' => array(), 'hashLong' => array());
 
     /**
      * Array of class aliases
+     *
      * @var array key: alias, value: class
      */
     protected $aliases = array();
 
     /**
      * The template to use for housing configuration information
+     *
      * @var array
      */
     protected $configurationTemplate = array(
@@ -55,18 +59,21 @@ class InstanceManager /* implements InstanceManagerInterface */
 
     /**
      * An array of instance configuration data
+     *
      * @var array
      */
     protected $configurations = array();
 
     /**
      * An array of globally preferred implementations for interfaces/abstracts
+     *
      * @var array
      */
     protected $typePreferences = array();
 
     /**
      * Does this instance manager have this shared instance
+     *
      * @param  string $classOrAlias
      * @return bool
      */
@@ -86,8 +93,8 @@ class InstanceManager /* implements InstanceManagerInterface */
     /**
      * Add shared instance
      *
-     * @param  object                             $instance
-     * @param  string                             $classOrAlias
+     * @param  object $instance
+     * @param  string $classOrAlias
      * @throws Exception\InvalidArgumentException
      */
     public function addSharedInstance($instance, $classOrAlias)
@@ -102,9 +109,9 @@ class InstanceManager /* implements InstanceManagerInterface */
     /**
      * hasSharedInstanceWithParameters()
      *
-     * @param  string      $classOrAlias
-     * @param  array       $params
-     * @param  bool        $returnFastHashLookupKey
+     * @param  string $classOrAlias
+     * @param  array $params
+     * @param  bool $returnFastHashLookupKey
      * @return bool|string
      */
     public function hasSharedInstanceWithParameters($classOrAlias, array $params, $returnFastHashLookupKey = false)
@@ -126,7 +133,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      *
      * @param  object $instance
      * @param  string $classOrAlias
-     * @param  array  $params
+     * @param  array $params
      * @return void
      */
     public function addSharedInstanceWithParameters($instance, $classOrAlias, array $params)
@@ -136,7 +143,8 @@ class InstanceManager /* implements InstanceManagerInterface */
         $hashValue = $this->createHashForValues($classOrAlias, $params);
 
         if (!isset($this->sharedInstancesWithParams[$hashKey])
-            || !is_array($this->sharedInstancesWithParams[$hashKey])) {
+            || !is_array($this->sharedInstancesWithParams[$hashKey])
+        ) {
             $this->sharedInstancesWithParams[$hashKey] = array();
         }
 
@@ -147,9 +155,9 @@ class InstanceManager /* implements InstanceManagerInterface */
     /**
      * Retrieves an instance by its name and the parameters stored at its instantiation
      *
-     * @param  string      $classOrAlias
-     * @param  array       $params
-     * @param  bool|null   $fastHashFromHasLookup
+     * @param  string $classOrAlias
+     * @param  array $params
+     * @param  bool|null $fastHashFromHasLookup
      * @return object|bool false if no instance was found
      */
     public function getSharedInstanceWithParameters($classOrAlias, array $params, $fastHashFromHasLookup = null)
@@ -218,7 +226,7 @@ class InstanceManager /* implements InstanceManagerInterface */
     }
 
     /**
-     * @param  string                     $alias
+     * @param  string $alias
      * @return string|bool
      * @throws Exception\RuntimeException
      */
@@ -247,9 +255,9 @@ class InstanceManager /* implements InstanceManagerInterface */
      * Add alias
      *
      * @throws Exception\InvalidArgumentException
-     * @param  string                             $alias
-     * @param  string                             $class
-     * @param  array                              $parameters
+     * @param  string $alias
+     * @param  string $class
+     * @param  array $parameters
      * @return void
      */
     public function addAlias($alias, $class, array $parameters = array())
@@ -288,8 +296,8 @@ class InstanceManager /* implements InstanceManagerInterface */
      * Sets configuration for a single alias/class
      *
      * @param string $aliasOrClass
-     * @param array  $configuration
-     * @param bool   $append
+     * @param array $configuration
+     * @param bool $append
      */
     public function setConfig($aliasOrClass, array $configuration, $append = false)
     {
@@ -301,7 +309,7 @@ class InstanceManager /* implements InstanceManagerInterface */
         $configuration = array(
             'parameters' => isset($configuration['parameters']) ? $configuration['parameters'] : array(),
             'injections' => isset($configuration['injections']) ? $configuration['injections'] : array(),
-            'shared'     => isset($configuration['shared'])     ? $configuration['shared']     : true
+            'shared' => isset($configuration['shared']) ? $configuration['shared'] : true
         );
         $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
     }
@@ -344,7 +352,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      *    setConfig($type, array('parameters' => array(...)), true);
      *
      * @param  string $aliasOrClass Alias or Class
-     * @param  array  $parameters   Multi-dim array of parameters and their values
+     * @param  array $parameters    Multi-dim array of parameters and their values
      * @return void
      */
     public function setParameters($aliasOrClass, array $parameters)
@@ -357,7 +365,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      *    setConfig($type, array('injections' => array(...)), true);
      *
      * @param  string $aliasOrClass Alias or Class
-     * @param  array  $injections   Multi-dim array of methods and their parameters
+     * @param  array $injections    Multi-dim array of methods and their parameters
      * @return void
      */
     public function setInjections($aliasOrClass, array $injections)
@@ -369,12 +377,12 @@ class InstanceManager /* implements InstanceManagerInterface */
      * Set shared
      *
      * @param  string $aliasOrClass
-     * @param  bool   $isShared
+     * @param  bool $isShared
      * @return void
      */
     public function setShared($aliasOrClass, $isShared)
     {
-        $this->setConfig($aliasOrClass, array('shared' => (bool) $isShared), true);
+        $this->setConfig($aliasOrClass, array('shared' => (bool)$isShared), true);
     }
 
     /**
@@ -393,8 +401,8 @@ class InstanceManager /* implements InstanceManagerInterface */
     /**
      * Set type preference
      *
-     * @param  string          $interfaceOrAbstract
-     * @param  array           $preferredImplementations
+     * @param  string $interfaceOrAbstract
+     * @param  array $preferredImplementations
      * @return InstanceManager
      */
     public function setTypePreference($interfaceOrAbstract, array $preferredImplementations)
@@ -457,8 +465,8 @@ class InstanceManager /* implements InstanceManagerInterface */
     /**
      * Removes a previously set type preference
      *
-     * @param  string    $interfaceOrAbstract
-     * @param  string    $preferredType
+     * @param  string $interfaceOrAbstract
+     * @param  string $preferredType
      * @return bool|self
      */
     public function removeTypePreference($interfaceOrAbstract, $preferredType)
@@ -473,7 +481,7 @@ class InstanceManager /* implements InstanceManagerInterface */
     }
 
     /**
-     * @param  string   $classOrAlias
+     * @param  string $classOrAlias
      * @param  string[] $paramKeys
      * @return string
      */
@@ -484,7 +492,7 @@ class InstanceManager /* implements InstanceManagerInterface */
 
     /**
      * @param  string $classOrAlias
-     * @param  array  $paramValues
+     * @param  array $paramValues
      * @return string
      */
     protected function createHashForValues($classOrAlias, $paramValues)

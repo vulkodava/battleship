@@ -11,27 +11,30 @@ namespace Zend\Json\Server;
 
 class Error
 {
-    const ERROR_PARSE           = -32700;
+    const ERROR_PARSE = -32700;
     const ERROR_INVALID_REQUEST = -32600;
-    const ERROR_INVALID_METHOD  = -32601;
-    const ERROR_INVALID_PARAMS  = -32602;
-    const ERROR_INTERNAL        = -32603;
-    const ERROR_OTHER           = -32000;
+    const ERROR_INVALID_METHOD = -32601;
+    const ERROR_INVALID_PARAMS = -32602;
+    const ERROR_INTERNAL = -32603;
+    const ERROR_OTHER = -32000;
 
     /**
      * Current code
+     *
      * @var int
      */
     protected $code = self::ERROR_OTHER;
 
     /**
      * Error data
+     *
      * @var mixed
      */
     protected $data;
 
     /**
      * Error message
+     *
      * @var string
      */
     protected $message;
@@ -46,8 +49,8 @@ class Error
     public function __construct($message = null, $code = self::ERROR_OTHER, $data = null)
     {
         $this->setMessage($message)
-             ->setCode($code)
-             ->setData($data);
+            ->setCode($code)
+            ->setData($data);
     }
 
     /**
@@ -68,7 +71,7 @@ class Error
             return $this;
         }
 
-        $code = (int) $code;
+        $code = (int)$code;
 
         if (0 === $code) {
             $this->code = self::ERROR_OTHER;
@@ -101,7 +104,8 @@ class Error
             return $this;
         }
 
-        $this->message = (string) $message;
+        $this->message = (string)$message;
+
         return $this;
     }
 
@@ -124,6 +128,7 @@ class Error
     public function setData($data)
     {
         $this->data = $data;
+
         return $this;
     }
 
@@ -145,9 +150,9 @@ class Error
     public function toArray()
     {
         return array(
-            'code'    => $this->getCode(),
+            'code' => $this->getCode(),
             'message' => $this->getMessage(),
-            'data'    => $this->getData(),
+            'data' => $this->getData(),
         );
     }
 

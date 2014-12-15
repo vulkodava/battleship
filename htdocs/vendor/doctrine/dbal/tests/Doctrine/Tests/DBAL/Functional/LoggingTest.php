@@ -10,10 +10,10 @@ class LoggingTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
         $logMock = $this->getMock('Doctrine\DBAL\Logging\SQLLogger');
         $logMock->expects($this->at(0))
-                ->method('startQuery')
-                ->with($this->equalTo($sql), $this->equalTo(array()), $this->equalTo(array()));
+            ->method('startQuery')
+            ->with($this->equalTo($sql), $this->equalTo(array()), $this->equalTo(array()));
         $logMock->expects($this->at(1))
-                ->method('stopQuery');
+            ->method('stopQuery');
         $this->_conn->getConfiguration()->setSQLLogger($logMock);
         $this->_conn->executeQuery($sql, array());
     }
@@ -26,10 +26,10 @@ class LoggingTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
         $logMock = $this->getMock('Doctrine\DBAL\Logging\SQLLogger');
         $logMock->expects($this->at(0))
-                ->method('startQuery')
-                ->with($this->equalTo($sql), $this->equalTo(array()), $this->equalTo(array()));
+            ->method('startQuery')
+            ->with($this->equalTo($sql), $this->equalTo(array()), $this->equalTo(array()));
         $logMock->expects($this->at(1))
-                ->method('stopQuery');
+            ->method('stopQuery');
         $this->_conn->getConfiguration()->setSQLLogger($logMock);
         $this->_conn->executeUpdate($sql, array());
     }
@@ -40,10 +40,10 @@ class LoggingTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
         $logMock = $this->getMock('Doctrine\DBAL\Logging\SQLLogger');
         $logMock->expects($this->once())
-                ->method('startQuery')
-                ->with($this->equalTo($sql), $this->equalTo(array()));
+            ->method('startQuery')
+            ->with($this->equalTo($sql), $this->equalTo(array()));
         $logMock->expects($this->at(1))
-                ->method('stopQuery');
+            ->method('stopQuery');
         $this->_conn->getConfiguration()->setSQLLogger($logMock);
 
         $stmt = $this->_conn->prepare($sql);

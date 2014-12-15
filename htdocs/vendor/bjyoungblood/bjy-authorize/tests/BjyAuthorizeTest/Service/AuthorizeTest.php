@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -27,8 +27,8 @@ class AuthorizeTest extends PHPUnit_Framework_TestCase
         $acl = $this->getMock('Zend\Permissions\Acl\Acl');
 
         $cache = $this->getMockBuilder('Zend\Cache\Storage\Adapter\Filesystem')
-                      ->disableOriginalConstructor()
-                      ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $cache
             ->expects($this->once())
@@ -62,8 +62,8 @@ class AuthorizeTest extends PHPUnit_Framework_TestCase
     public function testLoadWritesAclToCacheIfCacheIsEnabledButAclIsNotStoredInCache()
     {
         $cache = $this->getMockBuilder('Zend\Cache\Storage\Adapter\Filesystem')
-                      ->disableOriginalConstructor()
-                      ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $cache->expects($this->once())->method('getItem');
         $cache->expects($this->once())->method('setItem');

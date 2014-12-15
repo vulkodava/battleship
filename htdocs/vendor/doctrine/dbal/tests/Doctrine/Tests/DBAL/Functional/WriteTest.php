@@ -1,6 +1,7 @@
 <?php
 
 namespace Doctrine\Tests\DBAL\Functional;
+
 use Doctrine\DBAL\Types\Type;
 use PDO;
 
@@ -21,7 +22,7 @@ class WriteTest extends \Doctrine\Tests\DbalFunctionalTestCase
             foreach ($this->_conn->getDatabasePlatform()->getCreateTableSQL($table) AS $sql) {
                 $this->_conn->executeQuery($sql);
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
         $this->_conn->executeUpdate('DELETE FROM write_table');
@@ -136,7 +137,7 @@ class WriteTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
     public function testLastInsertId()
     {
-        if ( ! $this->_conn->getDatabasePlatform()->prefersIdentityColumns()) {
+        if (!$this->_conn->getDatabasePlatform()->prefersIdentityColumns()) {
             $this->markTestSkipped('Test only works on platforms with identity columns.');
         }
 
@@ -149,18 +150,18 @@ class WriteTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
     public function testLastInsertIdSequence()
     {
-        if ( ! $this->_conn->getDatabasePlatform()->supportsSequences()) {
+        if (!$this->_conn->getDatabasePlatform()->supportsSequences()) {
             $this->markTestSkipped('Test only works on platforms with sequences.');
         }
 
         $sequence = new \Doctrine\DBAL\Schema\Sequence('write_table_id_seq');
         try {
             $this->_conn->getSchemaManager()->createSequence($sequence);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
 
         $sequences = $this->_conn->getSchemaManager()->listSequences();
-        $this->assertEquals(1, count(array_filter($sequences, function($sequence) {
+        $this->assertEquals(1, count(array_filter($sequences, function ($sequence) {
             return strtolower($sequence->getName()) === 'write_table_id_seq';
         })));
 
@@ -175,11 +176,11 @@ class WriteTest extends \Doctrine\Tests\DbalFunctionalTestCase
 
     public function testLastInsertIdNoSequenceGiven()
     {
-        if ( ! $this->_conn->getDatabasePlatform()->supportsSequences()) {
+        if (!$this->_conn->getDatabasePlatform()->supportsSequences()) {
             $this->markTestSkipped('Test only works on platforms with sequences.');
         }
 
-        $this->assertFalse($this->_conn->lastInsertId( null ));
+        $this->assertFalse($this->_conn->lastInsertId(null));
 
     }
 

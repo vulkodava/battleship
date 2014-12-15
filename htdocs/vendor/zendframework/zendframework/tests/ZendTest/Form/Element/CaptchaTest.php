@@ -38,7 +38,7 @@ class CaptchaTest extends TestCase
 
         // by array
         $captcha = array(
-            'class'   => 'dumb',
+            'class' => 'dumb',
             'options' => array(
                 'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
             )
@@ -48,9 +48,9 @@ class CaptchaTest extends TestCase
 
         // by traversable
         $captcha = new ArrayObject(array(
-            'class'   => 'dumb',
+            'class' => 'dumb',
             'options' => array(
-                    'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
+                'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
             )
         ));
         $element->setCaptcha($captcha);
@@ -78,11 +78,11 @@ class CaptchaTest extends TestCase
     {
         $factory = new Factory();
         $element = $factory->createElement(array(
-            'type'       => 'Zend\Form\Element\Captcha',
-            'name'       => 'foo',
-            'options'    => array(
+            'type' => 'Zend\Form\Element\Captcha',
+            'name' => 'foo',
+            'options' => array(
                 'captcha' => array(
-                    'class'   => 'dumb',
+                    'class' => 'dumb',
                     'options' => array(
                         'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
                     )
@@ -116,7 +116,7 @@ class CaptchaTest extends TestCase
     {
         $options = new TestAsset\IteratorAggregate(new ArrayIterator(array(
             'captcha' => array(
-                'class'   => 'dumb',
+                'class' => 'dumb',
                 'options' => array(
                     'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
                 ),

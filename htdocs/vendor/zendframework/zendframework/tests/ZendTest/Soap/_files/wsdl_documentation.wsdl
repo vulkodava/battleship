@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://framework.zend.com/my_script.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" name="Zend_Soap_Server_TestClass" targetNamespace="http://framework.zend.com/my_script.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://framework.zend.com/my_script.php"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" name="Zend_Soap_Server_TestClass"
+             targetNamespace="http://framework.zend.com/my_script.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
     <wsdl:documentation>Definitions</wsdl:documentation>
 
     <portType name="Zend_Soap_Server_TestClassPort">

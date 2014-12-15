@@ -20,11 +20,11 @@ if (isset($_GET['uploadId'])) {
     $loader = new StandardAutoloader(array('autoregister_zf' => true));
     $loader->register();
 
-    $data          = uploadprogress_get_info($_GET['uploadId']);
-    $bytesTotal    = ($data === null ? 0 : $data['bytes_total']);
+    $data = uploadprogress_get_info($_GET['uploadId']);
+    $bytesTotal = ($data === null ? 0 : $data['bytes_total']);
     $bytesUploaded = ($data === null ? 0 : $data['bytes_uploaded']);
 
-    $adapter     = new JsPull();
+    $adapter = new JsPull();
     $progressBar = new ProgressBar($adapter, 0, $bytesTotal, 'uploadProgress');
 
     if ($bytesTotal === $bytesUploaded) {
@@ -106,8 +106,7 @@ if (isset($_GET['uploadId'])) {
         }
     </style>
     <script type="text/javascript">
-        function makeRequest(url)
-        {
+        function makeRequest(url) {
             var httpRequest;
 
             if (window.XMLHttpRequest) {
@@ -139,18 +138,15 @@ if (isset($_GET['uploadId'])) {
 
         }
 
-        function observeProgress()
-        {
+        function observeProgress() {
             setTimeout("getProgress()", 1500);
         }
 
-        function getProgress()
-        {
+        function getProgress() {
             makeRequest('Upload.php?uploadId=' + document.getElementById('uploadId').value);
         }
 
-        function evalProgress(httpRequest)
-        {
+        function evalProgress(httpRequest) {
             try {
                 if (httpRequest.readyState == 4) {
                     if (httpRequest.status == 200) {
@@ -171,16 +167,14 @@ if (isset($_GET['uploadId'])) {
             }
         }
 
-        function update(data)
-        {
+        function update(data) {
             document.getElementById('pg-percent').style.width = data.percent + '%';
 
             document.getElementById('pg-text-1').innerHTML = data.timeRemaining + ' seconds remaining';
             document.getElementById('pg-text-2').innerHTML = data.timeRemaining + ' seconds remaining';
         }
 
-        function finish()
-        {
+        function finish() {
             document.getElementById('pg-percent').style.width = '100%';
 
             document.getElementById('pg-text-1').innerHTML = 'Upload done';
@@ -189,25 +183,25 @@ if (isset($_GET['uploadId'])) {
     </script>
 </head>
 <body>
-    <form enctype="multipart/form-data" method="post" action="Upload.php" target="uploadTarget"
-          onsubmit="observeProgress();">
-        <input type="hidden" name="UPLOAD_IDENTIFIER" id="uploadId" value="<?php echo md5(uniqid(rand())); ?>"/>
-        <input type="file" name="file"/>
-        <input type="submit" value="Upload!"/>
-    </form>
-    <iframe name="uploadTarget"></iframe>
+<form enctype="multipart/form-data" method="post" action="Upload.php" target="uploadTarget"
+      onsubmit="observeProgress();">
+    <input type="hidden" name="UPLOAD_IDENTIFIER" id="uploadId" value="<?php echo md5(uniqid(rand())); ?>"/>
+    <input type="file" name="file"/>
+    <input type="submit" value="Upload!"/>
+</form>
+<iframe name="uploadTarget"></iframe>
 
-    <div id="progressbar">
-        <div class="pg-progressbar">
-            <div class="pg-progress" id="pg-percent">
-                <div class="pg-progressstyle"></div>
-                <div class="pg-invertedtext" id="pg-text-1"></div>
-            </div>
-            <div class="pg-text" id="pg-text-2"></div>
+<div id="progressbar">
+    <div class="pg-progressbar">
+        <div class="pg-progress" id="pg-percent">
+            <div class="pg-progressstyle"></div>
+            <div class="pg-invertedtext" id="pg-text-1"></div>
         </div>
+        <div class="pg-text" id="pg-text-2"></div>
     </div>
-    <div id="progressBar">
-        <div id="progressDone"></div>
-    </div>
+</div>
+<div id="progressBar">
+    <div id="progressDone"></div>
+</div>
 </body>
 </html>

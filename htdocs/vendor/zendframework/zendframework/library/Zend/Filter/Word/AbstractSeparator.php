@@ -46,6 +46,7 @@ abstract class AbstractSeparator extends AbstractFilter
             throw new Exception\InvalidArgumentException('"' . $separator . '" is not a valid separator.');
         }
         $this->separator = $separator;
+
         return $this;
     }
 

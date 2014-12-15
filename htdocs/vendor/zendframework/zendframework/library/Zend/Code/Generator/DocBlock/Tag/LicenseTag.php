@@ -49,6 +49,7 @@ class LicenseTag extends AbstractGenerator implements TagInterface
     {
         $tagManager = new TagManager();
         $tagManager->initializeDefaultTags();
+
         return $tagManager->createTagFromReflection($reflectionTag);
     }
 
@@ -67,6 +68,7 @@ class LicenseTag extends AbstractGenerator implements TagInterface
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -85,6 +87,7 @@ class LicenseTag extends AbstractGenerator implements TagInterface
     public function setLicenseName($name)
     {
         $this->licenseName = $name;
+
         return $this;
     }
 

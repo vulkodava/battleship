@@ -30,9 +30,9 @@ class FormButtonTest extends CommonTestCase
     public function testPassingArrayToOpenTagRendersAttributes()
     {
         $attributes = array(
-            'name'  => 'my-button',
+            'name' => 'my-button',
             'class' => 'email-button',
-            'type'  => 'button',
+            'type' => 'button',
         );
         $markup = $this->helper->openTag($attributes);
 
@@ -71,7 +71,7 @@ class FormButtonTest extends CommonTestCase
     public function testGeneratesSubmitTypeWhenProvidedAnElementWithNoTypeAttribute()
     {
         $element = new Element('foo');
-        $markup  = $this->helper->openTag($element);
+        $markup = $this->helper->openTag($element);
         $this->assertContains('<button ', $markup);
         $this->assertContains('type="submit"', $markup);
     }
@@ -80,7 +80,7 @@ class FormButtonTest extends CommonTestCase
     {
         $element = new Element('foo');
         $element->setAttribute('type', 'button');
-        $markup  = $this->helper->openTag($element);
+        $markup = $this->helper->openTag($element);
         $this->assertContains('<button ', $markup);
         $this->assertContains('type="button"', $markup);
     }
@@ -106,7 +106,7 @@ class FormButtonTest extends CommonTestCase
     {
         $element = new Element('foo');
         $element->setAttribute('type', $type);
-        $markup   = $this->helper->openTag($element);
+        $markup = $this->helper->openTag($element);
         $expected = sprintf('type="%s"', $type);
         $this->$assertion($expected, $markup);
     }
@@ -150,37 +150,38 @@ class FormButtonTest extends CommonTestCase
     {
         $element = new Element('foo');
         $element->setAttributes(array(
-            'accept'             => 'value',
-            'alt'                => 'value',
-            'autocomplete'       => 'on',
-            'autofocus'          => 'autofocus',
-            'checked'            => 'checked',
-            'dirname'            => 'value',
-            'disabled'           => 'disabled',
-            'form'               => 'value',
-            'formaction'         => 'value',
-            'formenctype'        => 'value',
-            'formmethod'         => 'value',
-            'formnovalidate'     => 'value',
-            'formtarget'         => 'value',
-            'height'             => 'value',
-            'id'                 => 'value',
-            'list'               => 'value',
-            'max'                => 'value',
-            'maxlength'          => 'value',
-            'min'                => 'value',
-            'multiple'           => 'multiple',
-            'name'               => 'value',
-            'pattern'            => 'value',
-            'placeholder'        => 'value',
-            'readonly'           => 'readonly',
-            'required'           => 'required',
-            'size'               => 'value',
-            'src'                => 'value',
-            'step'               => 'value',
-            'width'              => 'value',
+            'accept' => 'value',
+            'alt' => 'value',
+            'autocomplete' => 'on',
+            'autofocus' => 'autofocus',
+            'checked' => 'checked',
+            'dirname' => 'value',
+            'disabled' => 'disabled',
+            'form' => 'value',
+            'formaction' => 'value',
+            'formenctype' => 'value',
+            'formmethod' => 'value',
+            'formnovalidate' => 'value',
+            'formtarget' => 'value',
+            'height' => 'value',
+            'id' => 'value',
+            'list' => 'value',
+            'max' => 'value',
+            'maxlength' => 'value',
+            'min' => 'value',
+            'multiple' => 'multiple',
+            'name' => 'value',
+            'pattern' => 'value',
+            'placeholder' => 'value',
+            'readonly' => 'readonly',
+            'required' => 'required',
+            'size' => 'value',
+            'src' => 'value',
+            'step' => 'value',
+            'width' => 'value',
         ));
         $element->setValue('value');
+
         return $element;
     }
 
@@ -191,13 +192,13 @@ class FormButtonTest extends CommonTestCase
     {
         $element = $this->getCompleteElement();
         $element->setLabel('{button_content}');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         switch ($attribute) {
             case 'value':
-                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                $expect = sprintf('%s="%s"', $attribute, $element->getValue());
                 break;
             default:
-                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                $expect = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
                 break;
         }
         $this->$assertion($expect, $markup);
@@ -243,7 +244,7 @@ class FormButtonTest extends CommonTestCase
     public function testInvokeProxiesToRender()
     {
         $element = new Element('foo');
-        $markup  = $this->helper->__invoke($element, '{button_content}');
+        $markup = $this->helper->__invoke($element, '{button_content}');
         $this->assertContains('<button', $markup);
         $this->assertContains('name="foo"', $markup);
         $this->assertContains('>{button_content}<', $markup);

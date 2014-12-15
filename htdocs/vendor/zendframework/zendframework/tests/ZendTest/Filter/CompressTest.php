@@ -37,9 +37,9 @@ class CompressTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter  = new CompressFilter('bz2');
+        $filter = new CompressFilter('bz2');
 
-        $text     = 'compress me';
+        $text = 'compress me';
         $compressed = $filter($text);
         $this->assertNotEquals($text, $compressed);
 
@@ -58,7 +58,7 @@ class CompressTest extends \PHPUnit_Framework_TestCase
             'adapter' => 'bz2',
             'options' => array(
                 'blocksize' => 6,
-                'archive'   => 'test.txt',
+                'archive' => 'test.txt',
             )
         ));
 
@@ -82,10 +82,10 @@ class CompressTest extends \PHPUnit_Framework_TestCase
         $filter = new CompressFilter('bz2');
         $filter->setAdapterOptions(array(
             'blocksize' => 6,
-            'archive'   => 'test.txt',
+            'archive' => 'test.txt',
         ));
         $this->assertEquals(
-            array('blocksize' => 6, 'archive'   => 'test.txt'),
+            array('blocksize' => 6, 'archive' => 'test.txt'),
             $filter->getAdapterOptions()
         );
         $adapter = $filter->getAdapter();
@@ -130,14 +130,14 @@ class CompressTest extends \PHPUnit_Framework_TestCase
      */
     public function testCompressToFile()
     {
-        $filter   = new CompressFilter('bz2');
+        $filter = new CompressFilter('bz2');
         $archive = __DIR__ . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
         $content = $filter('compress me');
         $this->assertTrue($content);
 
-        $filter2  = new CompressFilter('bz2');
+        $filter2 = new CompressFilter('bz2');
         $content2 = $filter2->decompress($archive);
         $this->assertEquals('compress me', $content2);
 
@@ -199,14 +199,14 @@ class CompressTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecompressArchive()
     {
-        $filter   = new CompressFilter('bz2');
+        $filter = new CompressFilter('bz2');
         $archive = __DIR__ . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
         $content = $filter('compress me');
         $this->assertTrue($content);
 
-        $filter2  = new CompressFilter('bz2');
+        $filter2 = new CompressFilter('bz2');
         $content2 = $filter2->decompress($archive);
         $this->assertEquals('compress me', $content2);
     }
@@ -242,7 +242,7 @@ class CompressTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnUnfiltered($input)
     {
-        $filter  = new CompressFilter('bz2');
+        $filter = new CompressFilter('bz2');
 
         $this->assertEquals($input, $filter($input));
     }

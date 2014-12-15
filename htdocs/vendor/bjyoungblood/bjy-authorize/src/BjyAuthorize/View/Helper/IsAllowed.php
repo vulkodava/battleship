@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -32,7 +32,7 @@ class IsAllowed extends AbstractHelper
     }
 
     /**
-     * @param mixed      $resource
+     * @param mixed $resource
      * @param mixed|null $privilege
      *
      * @return bool

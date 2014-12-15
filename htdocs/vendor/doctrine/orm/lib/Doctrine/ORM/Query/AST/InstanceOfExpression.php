@@ -20,8 +20,8 @@
 namespace Doctrine\ORM\Query\AST;
 
 /**
- * InstanceOfExpression ::= IdentificationVariable ["NOT"] "INSTANCE" ["OF"] (InstanceOfParameter | "(" InstanceOfParameter {"," InstanceOfParameter}* ")")
- * InstanceOfParameter  ::= AbstractSchemaName | InputParameter
+ * InstanceOfExpression ::= IdentificationVariable ["NOT"] "INSTANCE" ["OF"] (InstanceOfParameter | "("
+ * InstanceOfParameter {"," InstanceOfParameter}* ")") InstanceOfParameter  ::= AbstractSchemaName | InputParameter
  *
  * @link    www.doctrine-project.org
  * @since   2.0

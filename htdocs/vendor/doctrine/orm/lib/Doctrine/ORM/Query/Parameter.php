@@ -52,9 +52,9 @@ class Parameter
     /**
      * Constructor.
      *
-     * @param string $name  Parameter name
-     * @param mixed  $value Parameter value
-     * @param mixed  $type  Parameter type
+     * @param string $name Parameter name
+     * @param mixed $value Parameter value
+     * @param mixed $type  Parameter type
      */
     public function __construct($name, $value, $type = null)
     {
@@ -102,6 +102,6 @@ class Parameter
     public function setValue($value, $type = null)
     {
         $this->value = $value;
-        $this->type  = $type ?: ParameterTypeInferer::inferType($value);
+        $this->type = $type ?: ParameterTypeInferer::inferType($value);
     }
 }

@@ -29,7 +29,7 @@ use Doctrine\ORM\ORMException;
 class ToolsException extends ORMException
 {
     /**
-     * @param string     $sql
+     * @param string $sql
      * @param \Exception $e
      *
      * @return ToolsException

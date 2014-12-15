@@ -51,9 +51,9 @@ class QueryExpressionVisitorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param CriteriaComparison     $criteriaExpr
+     * @param CriteriaComparison $criteriaExpr
      * @param QueryComparison|string $queryExpr
-     * @param Parameter              $parameter
+     * @param Parameter $parameter
      *
      * @dataProvider comparisonData
      */

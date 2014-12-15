@@ -17,7 +17,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-if  (
+if (
     !($loader = @include __DIR__ . '/../vendor/autoload.php')
     && !($loader = @include __DIR__ . '/../../../autoload.php')
 ) {

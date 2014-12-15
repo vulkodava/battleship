@@ -40,12 +40,12 @@ class NewObjectExpression extends Node
 
     /**
      * @param string $className
-     * @param array  $args
+     * @param array $args
      */
     public function __construct($className, array $args)
     {
         $this->className = $className;
-        $this->args      = $args;
+        $this->args = $args;
     }
 
     /**

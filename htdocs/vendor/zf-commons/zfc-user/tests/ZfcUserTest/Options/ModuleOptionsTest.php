@@ -366,7 +366,7 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
     public function testSetGetFormCaptchaOptions()
     {
         $expected = array(
-            'class'   => 'someClass',
+            'class' => 'someClass',
             'options' => array(
                 'anOption' => 3,
             ),
@@ -381,11 +381,11 @@ class ModuleOptionsTest extends \PHPUnit_Framework_TestCase
     public function testGetFormCaptchaOptions()
     {
         $expected = array(
-            'class'   => 'figlet',
+            'class' => 'figlet',
             'options' => array(
-                'wordLen'    => 5,
+                'wordLen' => 5,
                 'expiration' => 300,
-                'timeout'    => 300,
+                'timeout' => 300,
             ),
         );
         $this->assertEquals($expected, $this->options->getFormCaptchaOptions());

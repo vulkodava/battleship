@@ -56,7 +56,8 @@ abstract class AbstractCollectionStrategy implements StrategyInterface
      */
     public function setCollectionName($collectionName)
     {
-        $this->collectionName = (string) $collectionName;
+        $this->collectionName = (string)$collectionName;
+
         return $this;
     }
 
@@ -79,6 +80,7 @@ abstract class AbstractCollectionStrategy implements StrategyInterface
     public function setClassMetadata(ClassMetadata $classMetadata)
     {
         $this->metadata = $classMetadata;
+
         return $this;
     }
 
@@ -108,6 +110,7 @@ abstract class AbstractCollectionStrategy implements StrategyInterface
         }
 
         $this->object = $object;
+
         return $this;
     }
 
@@ -158,8 +161,8 @@ abstract class AbstractCollectionStrategy implements StrategyInterface
      */
     protected function getCollectionFromObjectByReference()
     {
-        $object       = $this->getObject();
-        $refl         = $this->getClassMetadata()->getReflectionClass();
+        $object = $this->getObject();
+        $refl = $this->getClassMetadata()->getReflectionClass();
         $reflProperty = $refl->getProperty($this->getCollectionName());
 
         $reflProperty->setAccessible(true);

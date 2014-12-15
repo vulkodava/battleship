@@ -62,10 +62,10 @@ class NavigationTest extends AbstractTest
 
         $accepted = $this->_helper->accept(
             new \Zend\Navigation\Page\Uri(array(
-                'resource'  => 'unknownresource',
-                'privilege' => 'someprivilege'
-            ),
-            false)
+                    'resource' => 'unknownresource',
+                    'privilege' => 'someprivilege'
+                ),
+                false)
         );
 
         $this->assertEquals($accepted, false);
@@ -118,11 +118,11 @@ class NavigationTest extends AbstractTest
 
         // result
         $expected = array(
-            'menu'        => '',
+            'menu' => '',
             'breadcrumbs' => ''
         );
         $actual = array(
-            'menu'        => $this->_helper->render(),
+            'menu' => $this->_helper->render(),
             'breadcrumbs' => $this->_helper->breadcrumbs()->render()
         );
 
@@ -140,18 +140,18 @@ class NavigationTest extends AbstractTest
 
     public function testServiceManagerIsUsedToRetrieveContainer()
     {
-        $container      = new Container;
+        $container = new Container;
         $serviceManager = new ServiceManager;
         $serviceManager->setService('navigation', $container);
 
-        $pluginManager  = new View\HelperPluginManager;
+        $pluginManager = new View\HelperPluginManager;
         $pluginManager->setServiceLocator($serviceManager);
 
         $this->_helper->setServiceLocator($pluginManager);
         $this->_helper->setContainer('navigation');
 
         $expected = $this->_helper->getContainer();
-        $actual   = $container;
+        $actual = $container;
         $this->assertEquals($expected, $actual);
     }
 
@@ -305,7 +305,7 @@ class NavigationTest extends AbstractTest
         try {
             $this->_helper->setRole(1337);
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend\View\Exception\InvalidArgumentException was not thrown');
+                'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
@@ -316,7 +316,7 @@ class NavigationTest extends AbstractTest
         try {
             $this->_helper->setRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend\View\Exception\InvalidArgumentException was not thrown');
+                'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
@@ -357,7 +357,7 @@ class NavigationTest extends AbstractTest
         try {
             Navigation\AbstractHelper::setDefaultRole(1337);
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend\View\Exception\InvalidArgumentException was not thrown');
+                'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
@@ -368,13 +368,14 @@ class NavigationTest extends AbstractTest
         try {
             Navigation\AbstractHelper::setDefaultRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend\View\Exception\InvalidArgumentException was not thrown');
+                'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
     }
 
     private $_errorMessage;
+
     public function toStringErrorHandler($code, $msg, $file, $line, array $c)
     {
         $this->_errorMessage = $msg;
@@ -397,24 +398,24 @@ class NavigationTest extends AbstractTest
         $container = new \Zend\Navigation\Navigation(array(
             array(
                 'label' => 'Page 1',
-                'id'    => 'p1',
-                'uri'   => 'p1'
+                'id' => 'p1',
+                'uri' => 'p1'
             ),
             array(
                 'label' => 'Page 2',
-                'id'    => 'p2',
-                'uri'   => 'p2'
+                'id' => 'p2',
+                'uri' => 'p2'
             )
         ));
 
         $expected = '<ul class="navigation">' . $nl
-                  . '    <li>' . $nl
-                  . '        <a id="menu-p1" href="p1">Page 1</a>' . $nl
-                  . '    </li>' . $nl
-                  . '    <li>' . $nl
-                  . '        <a id="menu-p2" href="p2">Page 2</a>' . $nl
-                  . '    </li>' . $nl
-                  . '</ul>';
+            . '    <li>' . $nl
+            . '        <a id="menu-p1" href="p1">Page 1</a>' . $nl
+            . '    </li>' . $nl
+            . '    <li>' . $nl
+            . '        <a id="menu-p2" href="p2">Page 2</a>' . $nl
+            . '    </li>' . $nl
+            . '</ul>';
 
         $actual = $this->_helper->render($container);
 
@@ -429,13 +430,13 @@ class NavigationTest extends AbstractTest
         $container = new \Zend\Navigation\Navigation(array(
             array(
                 'label' => 'Page 1',
-                'id'    => 'p1',
-                'uri'   => 'p1'
+                'id' => 'p1',
+                'uri' => 'p1'
             ),
             array(
-                'label'   => 'Page 2',
-                'id'      => 'p2',
-                'uri'     => 'p2',
+                'label' => 'Page 2',
+                'id' => 'p2',
+                'uri' => 'p2',
                 'visible' => false
             )
         ));
@@ -453,7 +454,7 @@ class NavigationTest extends AbstractTest
 
     public function testMultipleNavigations()
     {
-        $sm   = new ServiceManager();
+        $sm = new ServiceManager();
         $nav1 = new Container();
         $nav2 = new Container();
         $sm->setService('nav1', $nav1);
@@ -462,13 +463,13 @@ class NavigationTest extends AbstractTest
         $helper = new Navigation();
         $helper->setServiceLocator($sm);
 
-        $menu     = $helper('nav1')->menu();
-        $actual   = spl_object_hash($nav1);
+        $menu = $helper('nav1')->menu();
+        $actual = spl_object_hash($nav1);
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
 
-        $menu     = $helper('nav2')->menu();
-        $actual   = spl_object_hash($nav2);
+        $menu = $helper('nav2')->menu();
+        $actual = spl_object_hash($nav2);
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
     }
@@ -478,7 +479,7 @@ class NavigationTest extends AbstractTest
      */
     public function testMultipleNavigationsWithDifferentHelpersAndDifferentContainers()
     {
-        $sm   = new ServiceManager();
+        $sm = new ServiceManager();
         $nav1 = new Container();
         $nav2 = new Container();
         $sm->setService('nav1', $nav1);
@@ -487,17 +488,17 @@ class NavigationTest extends AbstractTest
         $helper = new Navigation();
         $helper->setServiceLocator($sm);
 
-        $menu     = $helper('nav1')->menu();
-        $actual   = spl_object_hash($nav1);
+        $menu = $helper('nav1')->menu();
+        $actual = spl_object_hash($nav1);
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
 
         $breadcrumbs = $helper('nav2')->breadcrumbs();
-        $actual      = spl_object_hash($nav2);
-        $expected    = spl_object_hash($breadcrumbs->getContainer());
+        $actual = spl_object_hash($nav2);
+        $expected = spl_object_hash($breadcrumbs->getContainer());
         $this->assertEquals($expected, $actual);
 
-        $links    = $helper()->links();
+        $links = $helper()->links();
         $expected = spl_object_hash($links->getContainer());
         $this->assertEquals($expected, $actual);
     }
@@ -507,7 +508,7 @@ class NavigationTest extends AbstractTest
      */
     public function testMultipleNavigationsWithDifferentHelpersAndSameContainer()
     {
-        $sm   = new ServiceManager();
+        $sm = new ServiceManager();
         $nav1 = new Container();
         $sm->setService('nav1', $nav1);
 
@@ -515,16 +516,16 @@ class NavigationTest extends AbstractTest
         $helper->setServiceLocator($sm);
 
         // Tests
-        $menu     = $helper('nav1')->menu();
-        $actual   = spl_object_hash($nav1);
+        $menu = $helper('nav1')->menu();
+        $actual = spl_object_hash($nav1);
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
 
         $breadcrumbs = $helper('nav1')->breadcrumbs();
-        $expected    = spl_object_hash($breadcrumbs->getContainer());
+        $expected = spl_object_hash($breadcrumbs->getContainer());
         $this->assertEquals($expected, $actual);
 
-        $links    = $helper()->links();
+        $links = $helper()->links();
         $expected = spl_object_hash($links->getContainer());
         $this->assertEquals($expected, $actual);
     }
@@ -534,7 +535,7 @@ class NavigationTest extends AbstractTest
      */
     public function testMultipleNavigationsWithSameHelperAndSameContainer()
     {
-        $sm   = new ServiceManager();
+        $sm = new ServiceManager();
         $nav1 = new Container();
         $sm->setService('nav1', $nav1);
 
@@ -542,16 +543,16 @@ class NavigationTest extends AbstractTest
         $helper->setServiceLocator($sm);
 
         // Test
-        $menu     = $helper('nav1')->menu();
-        $actual   = spl_object_hash($nav1);
+        $menu = $helper('nav1')->menu();
+        $actual = spl_object_hash($nav1);
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
 
-        $menu     = $helper('nav1')->menu();
+        $menu = $helper('nav1')->menu();
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
 
-        $menu    = $helper()->menu();
+        $menu = $helper()->menu();
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
     }
@@ -570,6 +571,7 @@ class NavigationTest extends AbstractTest
 
     /**
      * Returns the contens of the expected $file, normalizes newlines
+     *
      * @param  string $file
      * @return string
      */

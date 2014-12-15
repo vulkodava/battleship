@@ -48,7 +48,7 @@ class MappingCollectorTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->metadataFactory = $this->getMock('Doctrine\\Common\\Persistence\\Mapping\\ClassMetadataFactory');
-        $this->collector       = new MappingCollector($this->metadataFactory, 'test-collector');
+        $this->collector = new MappingCollector($this->metadataFactory, 'test-collector');
     }
 
     /**

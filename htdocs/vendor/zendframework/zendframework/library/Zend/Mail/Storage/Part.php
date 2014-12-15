@@ -18,48 +18,56 @@ class Part implements RecursiveIterator, Part\PartInterface
 {
     /**
      * Headers of the part
+     *
      * @var Headers|null
      */
     protected $headers;
 
     /**
      * raw part body
+     *
      * @var null|string
      */
     protected $content;
 
     /**
      * toplines as fetched with headers
+     *
      * @var string
      */
     protected $topLines = '';
 
     /**
      * parts of multipart message
+     *
      * @var array
      */
     protected $parts = array();
 
     /**
      * count of parts of a multipart message
+     *
      * @var null|int
      */
     protected $countParts;
 
     /**
      * current position of iterator
+     *
      * @var int
      */
     protected $iterationPos = 1;
 
     /**
      * mail handler, if late fetch is active
+     *
      * @var null|AbstractStorage
      */
     protected $mail;
 
     /**
      * message number for mail handler
+     *
      * @var int
      */
     protected $messageNum = 0;
@@ -76,7 +84,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      * - content    content as string
      * - strict     strictly parse raw content
      *
-     * @param   array $params  full message with or without headers
+     * @param   array $params full message with or without headers
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(array $params)
@@ -89,7 +97,7 @@ class Part implements RecursiveIterator, Part\PartInterface
                 throw new Exception\InvalidArgumentException('need a message id with a handler');
             }
 
-            $this->mail       = $params['handler'];
+            $this->mail = $params['handler'];
             $this->messageNum = $params['id'];
         }
 
@@ -251,6 +259,7 @@ class Part implements RecursiveIterator, Part\PartInterface
         $this->_cacheContent();
 
         $this->countParts = count($this->parts);
+
         return $this->countParts;
     }
 
@@ -307,7 +316,7 @@ class Part implements RecursiveIterator, Part\PartInterface
                     $return = '';
                     foreach ($header as $h) {
                         $return .= $h->getFieldValue(HeaderInterface::FORMAT_RAW)
-                                 . Mime\Mime::LINEEND;
+                            . Mime\Mime::LINEEND;
                     }
                     $return = trim($return, Mime\Mime::LINEEND);
                 }
@@ -398,6 +407,7 @@ class Part implements RecursiveIterator, Part\PartInterface
     public function hasChildren()
     {
         $current = $this->current();
+
         return $current && $current instanceof Part && $current->isMultipart();
     }
 
@@ -421,6 +431,7 @@ class Part implements RecursiveIterator, Part\PartInterface
         if ($this->countParts === null) {
             $this->countParts();
         }
+
         return $this->iterationPos && $this->iterationPos <= $this->countParts;
     }
 

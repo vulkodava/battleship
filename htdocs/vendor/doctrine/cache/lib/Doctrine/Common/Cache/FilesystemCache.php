@@ -39,18 +39,18 @@ class FilesystemCache extends FileCache
      */
     protected function doFetch($id)
     {
-        $data     = '';
+        $data = '';
         $lifetime = -1;
         $filename = $this->getFilename($id);
 
-        if ( ! is_file($filename)) {
+        if (!is_file($filename)) {
             return false;
         }
 
         $resource = fopen($filename, "r");
 
         if (false !== ($line = fgets($resource))) {
-            $lifetime = (integer) $line;
+            $lifetime = (integer)$line;
         }
 
         if ($lifetime !== 0 && $lifetime < time()) {
@@ -76,14 +76,14 @@ class FilesystemCache extends FileCache
         $lifetime = -1;
         $filename = $this->getFilename($id);
 
-        if ( ! is_file($filename)) {
+        if (!is_file($filename)) {
             return false;
         }
 
         $resource = fopen($filename, "r");
 
         if (false !== ($line = fgets($resource))) {
-            $lifetime = (integer) $line;
+            $lifetime = (integer)$line;
         }
 
         fclose($resource);
@@ -100,15 +100,15 @@ class FilesystemCache extends FileCache
             $lifeTime = time() + $lifeTime;
         }
 
-        $data       = serialize($data);
-        $filename   = $this->getFilename($id);
-        $filepath   = pathinfo($filename, PATHINFO_DIRNAME);
+        $data = serialize($data);
+        $filename = $this->getFilename($id);
+        $filepath = pathinfo($filename, PATHINFO_DIRNAME);
 
-        if ( ! is_dir($filepath)) {
+        if (!is_dir($filepath)) {
             if (false === @mkdir($filepath, 0777, true) && !is_dir($filepath)) {
                 return false;
             }
-        } elseif ( ! is_writable($filepath)) {
+        } elseif (!is_writable($filepath)) {
             return false;
         }
 

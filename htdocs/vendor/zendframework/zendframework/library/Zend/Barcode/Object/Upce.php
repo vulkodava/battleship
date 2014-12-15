@@ -18,31 +18,32 @@ class Upce extends Ean13
 {
     protected $parities = array(
         0 => array(
-            0 => array('B','B','B','A','A','A'),
-            1 => array('B','B','A','B','A','A'),
-            2 => array('B','B','A','A','B','A'),
-            3 => array('B','B','A','A','A','B'),
-            4 => array('B','A','B','B','A','A'),
-            5 => array('B','A','A','B','B','A'),
-            6 => array('B','A','A','A','B','B'),
-            7 => array('B','A','B','A','B','A'),
-            8 => array('B','A','B','A','A','B'),
-            9 => array('B','A','A','B','A','B')),
+            0 => array('B', 'B', 'B', 'A', 'A', 'A'),
+            1 => array('B', 'B', 'A', 'B', 'A', 'A'),
+            2 => array('B', 'B', 'A', 'A', 'B', 'A'),
+            3 => array('B', 'B', 'A', 'A', 'A', 'B'),
+            4 => array('B', 'A', 'B', 'B', 'A', 'A'),
+            5 => array('B', 'A', 'A', 'B', 'B', 'A'),
+            6 => array('B', 'A', 'A', 'A', 'B', 'B'),
+            7 => array('B', 'A', 'B', 'A', 'B', 'A'),
+            8 => array('B', 'A', 'B', 'A', 'A', 'B'),
+            9 => array('B', 'A', 'A', 'B', 'A', 'B')),
         1 => array(
-            0 => array('A','A','A','B','B','B'),
-            1 => array('A','A','B','A','B','B'),
-            2 => array('A','A','B','B','A','B'),
-            3 => array('A','A','B','B','B','A'),
-            4 => array('A','B','A','A','B','B'),
-            5 => array('A','B','B','A','A','B'),
-            6 => array('A','B','B','B','A','A'),
-            7 => array('A','B','A','B','A','B'),
-            8 => array('A','B','A','B','B','A'),
-            9 => array('A','B','B','A','B','A'))
+            0 => array('A', 'A', 'A', 'B', 'B', 'B'),
+            1 => array('A', 'A', 'B', 'A', 'B', 'B'),
+            2 => array('A', 'A', 'B', 'B', 'A', 'B'),
+            3 => array('A', 'A', 'B', 'B', 'B', 'A'),
+            4 => array('A', 'B', 'A', 'A', 'B', 'B'),
+            5 => array('A', 'B', 'B', 'A', 'A', 'B'),
+            6 => array('A', 'B', 'B', 'B', 'A', 'A'),
+            7 => array('A', 'B', 'A', 'B', 'A', 'B'),
+            8 => array('A', 'B', 'A', 'B', 'B', 'A'),
+            9 => array('A', 'B', 'B', 'A', 'B', 'A'))
     );
 
     /**
      * Default options for Postnet barcode
+     *
      * @return void
      */
     protected function getDefaultOptions()
@@ -54,6 +55,7 @@ class Upce extends Ean13
 
     /**
      * Retrieve text to encode
+     *
      * @return string
      */
     public function getText()
@@ -62,24 +64,28 @@ class Upce extends Ean13
         if ($text[0] != 1) {
             $text[0] = 0;
         }
+
         return $text;
     }
 
     /**
      * Width of the barcode (in pixels)
+     *
      * @return int
      */
     protected function calculateBarcodeWidth()
     {
-        $quietZone       = $this->getQuietZone();
-        $startCharacter  = (3 * $this->barThinWidth) * $this->factor;
-        $stopCharacter   = (6 * $this->barThinWidth) * $this->factor;
-        $encodedData     = (7 * $this->barThinWidth) * $this->factor * 6;
+        $quietZone = $this->getQuietZone();
+        $startCharacter = (3 * $this->barThinWidth) * $this->factor;
+        $stopCharacter = (6 * $this->barThinWidth) * $this->factor;
+        $encodedData = (7 * $this->barThinWidth) * $this->factor * 6;
+
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
     /**
      * Prepare array to draw barcode
+     *
      * @return array
      */
     protected function prepareBarcode()
@@ -114,11 +120,13 @@ class Upce extends Ean13
         $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
         $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
         $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+
         return $barcodeTable;
     }
 
     /**
      * Partial function to draw text
+     *
      * @return void
      */
     protected function drawText()
@@ -127,7 +135,7 @@ class Upce extends Ean13
             $text = $this->getTextToDisplay();
             $characterWidth = (7 * $this->barThinWidth) * $this->factor;
             $leftPosition = $this->getQuietZone() - $characterWidth;
-            for ($i = 0; $i < $this->barcodeLength; $i ++) {
+            for ($i = 0; $i < $this->barcodeLength; $i++) {
                 $fontSize = $this->fontSize;
                 if ($i == 0 || $i == 7) {
                     $fontSize *= 0.8;
@@ -137,12 +145,12 @@ class Upce extends Ean13
                     $fontSize * $this->factor,
                     $this->rotate(
                         $leftPosition,
-                        (int) $this->withBorder * 2 + $this->factor * ($this->barHeight + $fontSize) + 1
+                        (int)$this->withBorder * 2 + $this->factor * ($this->barHeight + $fontSize) + 1
                     ),
                     $this->font,
                     $this->foreColor,
                     'left',
-                    - $this->orientation
+                    -$this->orientation
                 );
                 switch ($i) {
                     case 0:
@@ -164,13 +172,13 @@ class Upce extends Ean13
      * (to suppress checksum character substitution)
      *
      * @param string $value
-     * @param array  $options
+     * @param array $options
      * @throws Exception\BarcodeValidationException
      */
     protected function validateSpecificText($value, $options = array())
     {
         $validator = new BarcodeValidator(array(
-            'adapter'  => 'upce',
+            'adapter' => 'upce',
             'checksum' => false,
         ));
 
@@ -194,6 +202,7 @@ class Upce extends Ean13
         if ($text[0] != 1) {
             $text[0] = 0;
         }
+
         return parent::getChecksum($text);
     }
 }

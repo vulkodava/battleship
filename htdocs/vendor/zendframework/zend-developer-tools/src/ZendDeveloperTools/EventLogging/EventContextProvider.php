@@ -23,7 +23,7 @@ class EventContextProvider implements EventContextInterface
 
     /**
      * @param EventInterface $event (Optional) The event to provide context to. The event must be set either here or
-     * with {@see setEvent()} before any other methods can be used.
+     *                              with {@see setEvent()} before any other methods can be used.
      */
     public function __construct(EventInterface $event = null)
     {
@@ -66,7 +66,8 @@ class EventContextProvider implements EventContextInterface
     public function getEventTarget()
     {
         $event = $this->getEvent();
-        return (is_object($event->getTarget())) ? get_class($event->getTarget()) : (string) $event->getTarget();
+
+        return (is_object($event->getTarget())) ? get_class($event->getTarget()) : (string)$event->getTarget();
     }
 
     /**

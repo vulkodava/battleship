@@ -27,7 +27,7 @@ class DDC1685Test extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->persist($articleDetails);
         $this->_em->flush();
 
-        $dql   = "SELECT ad FROM Doctrine\Tests\Models\DDC117\DDC117ArticleDetails ad";
+        $dql = "SELECT ad FROM Doctrine\Tests\Models\DDC117\DDC117ArticleDetails ad";
         $query = $this->_em->createQuery($dql);
 
         $this->paginator = new Paginator($query);

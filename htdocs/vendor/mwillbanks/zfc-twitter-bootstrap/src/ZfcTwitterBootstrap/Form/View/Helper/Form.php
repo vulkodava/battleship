@@ -135,8 +135,8 @@ class Form extends AbstractHelper
         }
 
         return '<fieldset id="fieldset-' . $id . '" class="' . $class . '">'
-            . $label
-            . $this->render($fieldset)
-            . '</fieldset>';
+        . $label
+        . $this->render($fieldset)
+        . '</fieldset>';
     }
 }

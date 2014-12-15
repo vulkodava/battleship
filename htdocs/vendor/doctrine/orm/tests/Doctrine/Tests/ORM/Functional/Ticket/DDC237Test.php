@@ -43,8 +43,8 @@ class DDC237Test extends \Doctrine\Tests\OrmFunctionalTestCase
         // proxy for Y is in identity map
 
         $z2 = $this->_em->createQuery('select z,y from ' . get_class($z) . ' z join z.y y where z.id = ?1')
-                ->setParameter(1, $z->id)
-                ->getSingleResult();
+            ->setParameter(1, $z->id)
+            ->getSingleResult();
         $this->assertInstanceOf('Doctrine\ORM\Proxy\Proxy', $z2->y);
         $this->assertTrue($z2->y->__isInitialized__);
         $this->assertEquals('Y', $z2->y->data);

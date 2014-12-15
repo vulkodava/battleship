@@ -37,12 +37,12 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
             array(1, 100, false, false, array(0, 1, 100, 101)),
             array('a', 'z', true, true, array('a', 'b', 'y', 'z')),
             array('a', 'z', false, false, array('!', 'a', 'z'))
-            );
+        );
         foreach ($valuesExpected as $element) {
             $validator = new Between(array('min' => $element[0], 'max' => $element[1], 'inclusive' => $element[2]));
             foreach ($element[4] as $input) {
                 $this->assertEquals($element[3], $validator->isValid($input),
-                'Failed values: ' . $input . ":" . implode("\n", $validator->getMessages()));
+                    'Failed values: ' . $input . ":" . implode("\n", $validator->getMessages()));
             }
         }
     }
@@ -95,13 +95,13 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Between(array('min' => 1, 'max' => 10));
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+            'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = new Between(array('min' => 1, 'max' => 10));
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
-                                     'messageVariables', $validator);
+            'messageVariables', $validator);
     }
 }

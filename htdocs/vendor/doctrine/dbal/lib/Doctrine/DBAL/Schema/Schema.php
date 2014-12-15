@@ -70,11 +70,11 @@ class Schema extends AbstractAsset
     protected $_schemaConfig = false;
 
     /**
-     * @param \Doctrine\DBAL\Schema\Table[]      $tables
-     * @param \Doctrine\DBAL\Schema\Sequence[]   $sequences
+     * @param \Doctrine\DBAL\Schema\Table[] $tables
+     * @param \Doctrine\DBAL\Schema\Sequence[] $sequences
      * @param \Doctrine\DBAL\Schema\SchemaConfig $schemaConfig
      */
-    public function __construct(array $tables=array(), array $sequences=array(), SchemaConfig $schemaConfig=null)
+    public function __construct(array $tables = array(), array $sequences = array(), SchemaConfig $schemaConfig = null)
     {
         if ($schemaConfig == null) {
             $schemaConfig = new SchemaConfig();
@@ -109,7 +109,7 @@ class Schema extends AbstractAsset
     protected function _addTable(Table $table)
     {
         $tableName = $table->getFullQualifiedName($this->getName());
-        if(isset($this->_tables[$tableName])) {
+        if (isset($this->_tables[$tableName])) {
             throw SchemaException::tableAlreadyExists($tableName);
         }
 
@@ -223,7 +223,7 @@ class Schema extends AbstractAsset
     public function getSequence($sequenceName)
     {
         $sequenceName = $this->getFullQualifiedAssetName($sequenceName);
-        if(!$this->hasSequence($sequenceName)) {
+        if (!$this->hasSequence($sequenceName)) {
             throw SchemaException::sequenceDoesNotExist($sequenceName);
         }
 
@@ -295,13 +295,13 @@ class Schema extends AbstractAsset
     /**
      * Creates a new sequence.
      *
-     * @param string  $sequenceName
+     * @param string $sequenceName
      * @param integer $allocationSize
      * @param integer $initialValue
      *
      * @return \Doctrine\DBAL\Schema\Sequence
      */
-    public function createSequence($sequenceName, $allocationSize=1, $initialValue=1)
+    public function createSequence($sequenceName, $allocationSize = 1, $initialValue = 1)
     {
         $seq = new Sequence($sequenceName, $allocationSize, $initialValue);
         $this->_addSequence($seq);
@@ -353,7 +353,7 @@ class Schema extends AbstractAsset
     }
 
     /**
-     * @param \Doctrine\DBAL\Schema\Schema              $toSchema
+     * @param \Doctrine\DBAL\Schema\Schema $toSchema
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      *
      * @return array
@@ -367,7 +367,7 @@ class Schema extends AbstractAsset
     }
 
     /**
-     * @param \Doctrine\DBAL\Schema\Schema              $fromSchema
+     * @param \Doctrine\DBAL\Schema\Schema $fromSchema
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      *
      * @return array

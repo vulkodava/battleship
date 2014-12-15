@@ -27,9 +27,9 @@ class PartTest extends TestCase
 
         return new Part(
             array(
-                'type'    => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/foo',
+                    'route' => '/foo',
                     'defaults' => array(
                         'controller' => 'foo'
                     )
@@ -39,27 +39,27 @@ class PartTest extends TestCase
             $routePlugins,
             array(
                 'bar' => array(
-                    'type'    => 'Zend\Mvc\Router\Http\Literal',
+                    'type' => 'Zend\Mvc\Router\Http\Literal',
                     'options' => array(
-                        'route'    => '/bar',
+                        'route' => '/bar',
                         'defaults' => array(
                             'controller' => 'bar'
                         )
                     )
                 ),
                 'baz' => array(
-                    'type'    => 'Zend\Mvc\Router\Http\Literal',
+                    'type' => 'Zend\Mvc\Router\Http\Literal',
                     'options' => array(
                         'route' => '/baz'
                     ),
                     'child_routes' => array(
                         'bat' => array(
-                            'type'    => 'Zend\Mvc\Router\Http\Segment',
+                            'type' => 'Zend\Mvc\Router\Http\Segment',
                             'options' => array(
                                 'route' => '/:controller'
                             ),
                             'may_terminate' => true,
-                            'child_routes'  => array(
+                            'child_routes' => array(
                                 'wildcard' => array(
                                     'type' => 'Zend\Mvc\Router\Http\Wildcard'
                                 )
@@ -68,23 +68,23 @@ class PartTest extends TestCase
                     )
                 ),
                 'bat' => array(
-                    'type'    => 'Zend\Mvc\Router\Http\Segment',
+                    'type' => 'Zend\Mvc\Router\Http\Segment',
                     'options' => array(
-                        'route'    => '/bat[/:foo]',
+                        'route' => '/bat[/:foo]',
                         'defaults' => array(
                             'foo' => 'bar'
                         )
                     ),
                     'may_terminate' => true,
-                    'child_routes'  => array(
+                    'child_routes' => array(
                         'literal' => array(
-                            'type'   => 'Zend\Mvc\Router\Http\Literal',
+                            'type' => 'Zend\Mvc\Router\Http\Literal',
                             'options' => array(
                                 'route' => '/bar'
                             )
                         ),
                         'optional' => array(
-                            'type'   => 'Zend\Mvc\Router\Http\Segment',
+                            'type' => 'Zend\Mvc\Router\Http\Segment',
                             'options' => array(
                                 'route' => '/bat[/:bar]'
                             )
@@ -230,9 +230,9 @@ class PartTest extends TestCase
                 null,
                 'wildcard',
                 array(
-                        'controller' => 'fo-fo',
-                        'action' => 'index',
-                        'param1' => 'value1'
+                    'controller' => 'fo-fo',
+                    'action' => 'index',
+                    'param1' => 'value1'
                 )
             ),
             /*
@@ -252,11 +252,11 @@ class PartTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Part    $route
-     * @param        string  $path
+     * @param        Part $route
+     * @param        string $path
      * @param        integer $offset
-     * @param        string  $routeName
-     * @param        array   $params
+     * @param        string $routeName
+     * @param        array $params
      */
     public function testMatching(Part $route, $path, $offset, $routeName, array $params = null)
     {
@@ -283,11 +283,11 @@ class PartTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Part    $route
-     * @param        string  $path
+     * @param        Part $route
+     * @param        string $path
      * @param        integer $offset
-     * @param        string  $routeName
-     * @param        array   $params
+     * @param        string $routeName
+     * @param        array $params
      */
     public function testAssembling(Part $route, $path, $offset, $routeName, array $params = null)
     {
@@ -320,7 +320,7 @@ class PartTest extends TestCase
 
     public function testNoMatchWithoutUriMethod()
     {
-        $route   = self::getRoute();
+        $route = self::getRoute();
         $request = new BaseRequest();
 
         $this->assertNull($route->match($request));
@@ -340,11 +340,11 @@ class PartTest extends TestCase
         $tester->testFactory(
             'Zend\Mvc\Router\Http\Part',
             array(
-                'route'         => 'Missing "route" in options array',
+                'route' => 'Missing "route" in options array',
                 'route_plugins' => 'Missing "route_plugins" in options array'
             ),
             array(
-                'route'         => new \Zend\Mvc\Router\Http\Literal('/foo'),
+                'route' => new \Zend\Mvc\Router\Http\Literal('/foo'),
                 'route_plugins' => new RoutePluginManager()
             )
         );
@@ -357,30 +357,30 @@ class PartTest extends TestCase
     {
         $children = new ArrayObject(array(
             'create' => array(
-                'type'    => 'Literal',
+                'type' => 'Literal',
                 'options' => array(
                     'route' => 'create',
                     'defaults' => array(
                         'controller' => 'user-admin',
-                        'action'     => 'edit',
+                        'action' => 'edit',
                     ),
                 ),
             ),
         ));
         $options = array(
-            'route'        => array(
+            'route' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/admin/users',
                     'defaults' => array(
                         'controller' => 'Admin\UserController',
-                        'action'     => 'index',
+                        'action' => 'index',
                     ),
                 ),
             ),
             'route_plugins' => new RoutePluginManager(),
             'may_terminate' => true,
-            'child_routes'  => $children,
+            'child_routes' => $children,
         );
 
         $route = Part::factory($options);
@@ -399,13 +399,13 @@ class PartTest extends TestCase
                     'route' => '/resource',
                     'defaults' => array(
                         'controller' => 'ResourceController',
-                        'action'     => 'resource',
+                        'action' => 'resource',
                     ),
                 ),
             ),
             'route_plugins' => new RoutePluginManager(),
             'may_terminate' => true,
-            'child_routes'  => array(
+            'child_routes' => array(
                 'child' => array(
                     'type' => 'Zend\Mvc\Router\Http\Literal',
                     'options' => array(
@@ -442,7 +442,7 @@ class PartTest extends TestCase
                     'route' => '/resource',
                     'defaults' => array(
                         'controller' => 'ResourceController',
-                        'action'     => 'resource',
+                        'action' => 'resource',
                     ),
                 ),
             ),

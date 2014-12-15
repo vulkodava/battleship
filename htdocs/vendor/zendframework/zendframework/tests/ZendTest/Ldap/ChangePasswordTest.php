@@ -16,7 +16,6 @@ use Zend\Ldap\Node;
 /**
  * @group      Zend_Ldap
  */
-
 class ChangePasswordTest extends AbstractOnlineTestCase
 {
     public function testAddNewUserWithPasswordOpenLDAP()
@@ -27,8 +26,8 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
-        $dn       = $this->createDn('uid=newuser,');
-        $data     = array();
+        $dn = $this->createDn('uid=newuser,');
+        $data = array();
         $password = 'pa$$w0rd';
         Ldap\Attribute::setAttribute($data, 'uid', 'newuser', false);
         Ldap\Attribute::setAttribute($data, 'objectClass', 'account', true);
@@ -61,8 +60,8 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
-        $dn       = $this->createDn('uid=newuser,');
-        $data     = array();
+        $dn = $this->createDn('uid=newuser,');
+        $data = array();
         $password = 'pa$$w0rd';
         Ldap\Attribute::setAttribute($data, 'uid', 'newuser', false);
         Ldap\Attribute::setAttribute($data, 'objectClass', 'account', true);
@@ -77,7 +76,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             $this->getLDAP()->bind($dn, $password);
 
             $newPasswd = 'newpasswd';
-            $newData   = array();
+            $newData = array();
             Ldap\Attribute::setPassword($newData, $newPasswd,
                 Ldap\Attribute::PASSWORD_HASH_SHA, 'userPassword'
             );
@@ -89,7 +88,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             } catch (Exception\LdapException $zle) {
                 $message = $zle->getMessage();
                 $this->assertTrue(strstr($message, 'Invalid credentials')
-                        || strstr($message, 'Server is unwilling to perform')
+                    || strstr($message, 'Server is unwilling to perform')
                 );
             }
 
@@ -118,8 +117,8 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             $this->markTestSkipped('Test can only be run on an SSL or TLS secured connection');
         }
 
-        $dn       = $this->createDn('cn=New User,');
-        $data     = array();
+        $dn = $this->createDn('cn=New User,');
+        $data = array();
         $password = 'pa$$w0rd';
         Ldap\Attribute::setAttribute($data, 'cn', 'New User', false);
         Ldap\Attribute::setAttribute($data, 'displayName', 'New User', false);
@@ -160,8 +159,8 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             $this->markTestSkipped('Test can only be run on an SSL or TLS secured connection');
         }
 
-        $dn       = $this->createDn('cn=New User,');
-        $data     = array();
+        $dn = $this->createDn('cn=New User,');
+        $data = array();
         $password = 'pa$$w0rd';
         Ldap\Attribute::setAttribute($data, 'cn', 'New User', false);
         Ldap\Attribute::setAttribute($data, 'displayName', 'New User', false);
@@ -180,7 +179,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             $this->getLDAP()->bind($dn, $password);
 
             $newPasswd = 'newpasswd';
-            $newData   = array();
+            $newData = array();
             Ldap\Attribute::setPassword($newData, $newPasswd, Ldap\Attribute::PASSWORD_UNICODEPWD);
             $this->getLDAP()->update($dn, $newData);
 
@@ -190,7 +189,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             } catch (Exception\LdapException $zle) {
                 $message = $zle->getMessage();
                 $this->assertTrue(strstr($message, 'Invalid credentials')
-                        || strstr($message, 'Server is unwilling to perform')
+                    || strstr($message, 'Server is unwilling to perform')
                 );
             }
 

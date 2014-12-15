@@ -100,6 +100,7 @@ class Json implements ReaderInterface
                 $data = array_replace_recursive($data, $reader->fromFile($this->directory . '/' . $value));
             }
         }
+
         return $data;
     }
 }

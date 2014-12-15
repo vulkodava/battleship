@@ -109,7 +109,8 @@ class Request extends HttpRequest
      */
     public function setCookies($cookie)
     {
-        $this->getHeaders()->addHeader(new Cookie((array) $cookie));
+        $this->getHeaders()->addHeader(new Cookie((array)$cookie));
+
         return $this;
     }
 
@@ -122,6 +123,7 @@ class Request extends HttpRequest
     public function setRequestUri($requestUri)
     {
         $this->requestUri = $requestUri;
+
         return $this;
     }
 
@@ -135,6 +137,7 @@ class Request extends HttpRequest
         if ($this->requestUri === null) {
             $this->requestUri = $this->detectRequestUri();
         }
+
         return $this->requestUri;
     }
 
@@ -147,6 +150,7 @@ class Request extends HttpRequest
     public function setBaseUrl($baseUrl)
     {
         $this->baseUrl = rtrim($baseUrl, '/');
+
         return $this;
     }
 
@@ -160,6 +164,7 @@ class Request extends HttpRequest
         if ($this->baseUrl === null) {
             $this->setBaseUrl($this->detectBaseUrl());
         }
+
         return $this->baseUrl;
     }
 
@@ -172,6 +177,7 @@ class Request extends HttpRequest
     public function setBasePath($basePath)
     {
         $this->basePath = rtrim($basePath, '/');
+
         return $this;
     }
 
@@ -269,12 +275,12 @@ class Request extends HttpRequest
             // works for regname, IPv4 & IPv6
             if (preg_match('|\:(\d+)$|', $host, $matches)) {
                 $host = substr($host, 0, -1 * (strlen($matches[1]) + 1));
-                $port = (int) $matches[1];
+                $port = (int)$matches[1];
             }
 
             // set up a validator that check if the hostname is legal (not spoofed)
             $hostnameValidator = new HostnameValidator(array(
-                'allow'       => HostnameValidator::ALLOW_ALL,
+                'allow' => HostnameValidator::ALLOW_ALL,
                 'useIdnCheck' => false,
                 'useTldCheck' => false,
             ));
@@ -288,13 +294,13 @@ class Request extends HttpRequest
         if (!$host && isset($this->serverParams['SERVER_NAME'])) {
             $host = $this->serverParams['SERVER_NAME'];
             if (isset($this->serverParams['SERVER_PORT'])) {
-                $port = (int) $this->serverParams['SERVER_PORT'];
+                $port = (int)$this->serverParams['SERVER_PORT'];
             }
             // Check for missinterpreted IPv6-Address
             // Reported at least for Safari on Windows
             if (isset($this->serverParams['SERVER_ADDR']) && preg_match('/^\[[0-9a-fA-F\:]+\]$/', $host)) {
                 $host = '[' . $this->serverParams['SERVER_ADDR'] . ']';
-                if ($port . ']' == substr($host, strrpos($host, ':')+1)) {
+                if ($port . ']' == substr($host, strrpos($host, ':') + 1)) {
                     // The last digit of the IPv6-Address has been taken as port
                     // Unset the port so the default port can be used
                     $port = null;
@@ -325,8 +331,8 @@ class Request extends HttpRequest
     /**
      * Return the parameter container responsible for server parameters or a single parameter value.
      *
-     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-     * @param mixed|null            $default         Default value to use when the parameter is missing.
+     * @param string|null $name   Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null $default Default value to use when the parameter is missing.
      * @see http://www.faqs.org/rfcs/rfc3875.html
      * @return \Zend\Stdlib\ParametersInterface|mixed
      */
@@ -353,14 +359,16 @@ class Request extends HttpRequest
     public function setEnv(ParametersInterface $env)
     {
         $this->envParams = $env;
+
         return $this;
     }
 
     /**
      * Return the parameter container responsible for env parameters or a single parameter value.
      *
-     * @param string|null           $name            Parameter name to retrieve, or null to get the whole container.
-     * @param mixed|null            $default         Default value to use when the parameter is missing.     * @return \Zend\Stdlib\ParametersInterface
+     * @param string|null $name   Parameter name to retrieve, or null to get the whole container.
+     * @param mixed|null $default Default value to use when the parameter is missing.     * @return
+     *                            \Zend\Stdlib\ParametersInterface
      * @return \Zend\Stdlib\ParametersInterface|mixed
      */
     public function getEnv($name = null, $default = null)
@@ -402,9 +410,9 @@ class Request extends HttpRequest
     }
 
     /**
-     * @param array        $array
-     * @param string       $paramName
-     * @param int|string   $index
+     * @param array $array
+     * @param string $paramName
+     * @param int|string $index
      * @param string|array $value
      */
     protected function mapPhpFileParam(&$array, $paramName, $index, $value)
@@ -429,7 +437,7 @@ class Request extends HttpRequest
     protected function detectRequestUri()
     {
         $requestUri = null;
-        $server     = $this->getServer();
+        $server = $this->getServer();
 
         // Check this first so IIS will catch.
         $httpXRewriteUrl = $server->get('HTTP_X_REWRITE_URL');
@@ -446,7 +454,7 @@ class Request extends HttpRequest
         // IIS7 with URL Rewrite: make sure we get the unencoded url
         // (double slash problem).
         $iisUrlRewritten = $server->get('IIS_WasUrlRewritten');
-        $unencodedUrl    = $server->get('UNENCODED_URL', '');
+        $unencodedUrl = $server->get('UNENCODED_URL', '');
         if ('1' == $iisUrlRewritten && '' !== $unencodedUrl) {
             return $unencodedUrl;
         }
@@ -468,6 +476,7 @@ class Request extends HttpRequest
             if ($queryString !== '') {
                 $origPathInfo .= '?' . $queryString;
             }
+
             return $origPathInfo;
         }
 
@@ -485,9 +494,9 @@ class Request extends HttpRequest
      */
     protected function detectBaseUrl()
     {
-        $filename       = $this->getServer()->get('SCRIPT_FILENAME', '');
-        $scriptName     = $this->getServer()->get('SCRIPT_NAME');
-        $phpSelf        = $this->getServer()->get('PHP_SELF');
+        $filename = $this->getServer()->get('SCRIPT_FILENAME', '');
+        $scriptName = $this->getServer()->get('SCRIPT_NAME');
+        $phpSelf = $this->getServer()->get('PHP_SELF');
         $origScriptName = $this->getServer()->get('ORIG_SCRIPT_NAME');
 
         if ($scriptName !== null && basename($scriptName) === $filename) {
@@ -501,10 +510,10 @@ class Request extends HttpRequest
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
 
-            $baseUrl  = '/';
+            $baseUrl = '/';
             $basename = basename($filename);
             if ($basename) {
-                $path     = ($phpSelf ? trim($phpSelf, '/') : '');
+                $path = ($phpSelf ? trim($phpSelf, '/') : '');
                 $baseUrl .= substr($path, 0, strpos($path, $basename)) . $basename;
             }
         }
@@ -558,7 +567,7 @@ class Request extends HttpRequest
     protected function detectBasePath()
     {
         $filename = basename($this->getServer()->get('SCRIPT_FILENAME', ''));
-        $baseUrl  = $this->getBaseUrl();
+        $baseUrl = $this->getBaseUrl();
 
         // Empty base url detected
         if ($baseUrl === '') {

@@ -64,13 +64,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
             !defined(sprintf('DB_%s_PASSWORD', $upCase)) ||
             !defined(sprintf('DB_%s_SCHEMA', $upCase))
         ) {
-             return false;
+            return false;
         }
 
         try {
             $connection = array(
-                'driver'=>sprintf('Pdo_%s', ucfirst($driver)),
-                'dsn'=>constant(sprintf('DB_%s_DSN', $upCase))
+                'driver' => sprintf('Pdo_%s', ucfirst($driver)),
+                'dsn' => constant(sprintf('DB_%s_DSN', $upCase))
             );
             if (constant(sprintf('DB_%s_USERNAME', $upCase)) !== "") {
                 $connection['username'] = constant(sprintf('DB_%s_USERNAME', $upCase));
@@ -88,7 +88,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function setUpSqlDatabase($adapter, $schemaPath)
     {
-        $queryStack= array('DROP TABLE IF EXISTS user');
+        $queryStack = array('DROP TABLE IF EXISTS user');
         $queryStack = array_merge($queryStack, explode(';', file_get_contents($schemaPath)));
         $queryStack = array_merge($queryStack, explode(';', file_get_contents(__DIR__ . '/_files/user.sql')));
 
@@ -107,34 +107,34 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $this->mockedDbAdapterDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $this->mockedDbAdapterPlatform = $this->getMock('\Zend\Db\Adapter\Platform\PlatformInterface', array());
-        $this->mockedDbAdapterStatement= $this->getMock('\Zend\Db\Adapter\Driver\StatementInterface', array());
+        $this->mockedDbAdapterStatement = $this->getMock('\Zend\Db\Adapter\Driver\StatementInterface', array());
 
         $this->mockedDbAdapterPlatform->expects($this->any())
-                                      ->method('getName')
-                                      ->will($this->returnValue('null'));
+            ->method('getName')
+            ->will($this->returnValue('null'));
 
         $this->mockedDbAdapter = $this->getMockBuilder('\Zend\Db\Adapter\Adapter')
-                                      ->setConstructorArgs(array(
-                                          $this->mockedDbAdapterDriver,
-                                          $this->mockedDbAdapterPlatform
-                                      ))
-                                      ->getMock(array('getPlatform'));
+            ->setConstructorArgs(array(
+                $this->mockedDbAdapterDriver,
+                $this->mockedDbAdapterPlatform
+            ))
+            ->getMock(array('getPlatform'));
 
         $this->mockedDbAdapter->expects($this->any())
-                              ->method('getPlatform')
-                              ->will($this->returnValue($this->mockedDbAdapterPlatform));
+            ->method('getPlatform')
+            ->will($this->returnValue($this->mockedDbAdapterPlatform));
 
         $this->mockedDbSql = $this->getMockBuilder('\Zend\Db\Sql\Sql')
-                                  ->setConstructorArgs(array($this->mockedDbAdapter))
-                                  ->setMethods(array('prepareStatementForSqlObject'))
-                                  ->getMock();
+            ->setConstructorArgs(array($this->mockedDbAdapter))
+            ->setMethods(array('prepareStatementForSqlObject'))
+            ->getMock();
         $this->mockedDbSql->expects($this->any())
-                          ->method('prepareStatementForSqlObject')
-                          ->will($this->returnValue($this->mockedDbAdapterStatement));
+            ->method('prepareStatementForSqlObject')
+            ->will($this->returnValue($this->mockedDbAdapterStatement));
 
         $this->mockedDbSqlPlatform = $this->getMockBuilder('\Zend\Db\Sql\Platform\Platform')
-                                          ->setConstructorArgs(array($this->mockedDbAdapter))
-                                          ->getMock();
+            ->setConstructorArgs(array($this->mockedDbAdapter))
+            ->getMock();
     }
 
     /**
@@ -150,13 +150,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
             switch ($method) {
                 case 'getSelect':
                     $this->mapper->expects($this->once())
-                                 ->method('getSelect')
-                                 ->will($this->returnValue($this->mockedSelect));
+                        ->method('getSelect')
+                        ->will($this->returnValue($this->mockedSelect));
                     break;
                 case 'initialize':
                     $this->mapper->expects($this->once())
-                                 ->method('initialize')
-                                 ->will($this->returnValue(true));
+                        ->method('initialize')
+                        ->will($this->returnValue(true));
                     break;
             }
         }
@@ -173,21 +173,22 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $mapperMethods = count($mapperMethods)
             ? array_merge($mapperMethods, array('getSelect', 'select'))
-            : array('getSelect','select');
+            : array('getSelect', 'select');
 
         $this->setUpMockMapperInsert($mapperMethods);
 
         $this->mapper->expects($this->once())
-                     ->method('select')
-                     ->will($this->returnValue($this->mockedResultSet));
+            ->method('select')
+            ->will($this->returnValue($this->mockedResultSet));
 
         $mockedSelect = $this->mockedSelect;
         $this->mockedSelect->expects($this->once())
-                           ->method('where')
-                           ->will($this->returnCallback(function () use (&$returnMockedParams, $mockedSelect) {
-                               $returnMockedParams['whereArgs'] = func_get_args();
-                               return $mockedSelect;
-                           }));
+            ->method('where')
+            ->will($this->returnCallback(function () use (&$returnMockedParams, $mockedSelect) {
+                $returnMockedParams['whereArgs'] = func_get_args();
+
+                return $mockedSelect;
+            }));
 
         foreach ($eventListenerArray as $eventKey => $eventListener) {
             $this->mapper->getEventManager()->attach($eventKey, $eventListener);
@@ -210,8 +211,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $mockedParams =& $this->setUpMockedMapper($eventListener);
 
         $this->mockedResultSet->expects($this->once())
-             ->method('current')
-             ->will($this->returnValue($entityEqual));
+            ->method('current')
+            ->will($this->returnValue($entityEqual));
 
         $return = call_user_func_array(array($this->mapper, $methode), $args);
 
@@ -223,7 +224,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo Integration test for UserMapper
+     * @todo         Integration test for UserMapper
      * @dataProvider providerTestFindBy
      */
     public function testIntegrationFindBy($methode, $args, $expectedParams, $eventListener, $entityEqual)
@@ -301,12 +302,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
             /**
              *
              * @todo delete is currently protected
-
-            // delete
-            $result = $this->mapper->delete($entity->getId());
-
-            $this->assertNotEquals($baseEntity->getEmail(), $entityEqual->getEmail());
-            $this->assertEquals($entity->getEmail(), $entityEqual->getEmail());
+             *
+             * // delete
+             * $result = $this->mapper->delete($entity->getId());
+             *
+             * $this->assertNotEquals($baseEntity->getEmail(), $entityEqual->getEmail());
+             * $this->assertEquals($entity->getEmail(), $entityEqual->getEmail());
              */
         }
 
@@ -330,8 +331,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
                 'findByEmail',
                 array($user->getEmail()),
                 array(
-                    'whereArgs'=>array(
-                        array('email'=>$user->getEmail()),
+                    'whereArgs' => array(
+                        array('email' => $user->getEmail()),
                         'AND'
                     )
                 ),
@@ -342,8 +343,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
                 'findByUsername',
                 array($user->getUsername()),
                 array(
-                    'whereArgs'=>array(
-                        array('username'=>$user->getUsername()),
+                    'whereArgs' => array(
+                        array('username' => $user->getUsername()),
                         'AND'
                     )
                 ),
@@ -354,8 +355,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
                 'findById',
                 array($user->getId()),
                 array(
-                    'whereArgs'=>array(
-                        array('user_id'=>$user->getId()),
+                    'whereArgs' => array(
+                        array('user_id' => $user->getId()),
                         'AND'
                     )
                 ),

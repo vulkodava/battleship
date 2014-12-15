@@ -14,7 +14,7 @@ use Traversable;
 class PregReplace extends AbstractFilter
 {
     protected $options = array(
-        'pattern'     => null,
+        'pattern' => null,
         'replacement' => '',
     );
 
@@ -47,6 +47,7 @@ class PregReplace extends AbstractFilter
 
     /**
      * Set the regex pattern to search for
+     *
      * @see preg_replace()
      *
      * @param  string|array $pattern - same as the first argument of preg_replace
@@ -74,6 +75,7 @@ class PregReplace extends AbstractFilter
         }
 
         $this->options['pattern'] = $pattern;
+
         return $this;
     }
 
@@ -89,6 +91,7 @@ class PregReplace extends AbstractFilter
 
     /**
      * Set the replacement array/string
+     *
      * @see preg_replace()
      *
      * @param  array|string $replacement - same as the second argument of preg_replace
@@ -105,6 +108,7 @@ class PregReplace extends AbstractFilter
             ));
         }
         $this->options['replacement'] = $replacement;
+
         return $this;
     }
 

@@ -36,6 +36,7 @@ class Sendmail implements TransportInterface
 
     /**
      * error information
+     *
      * @var string
      */
     protected $errstr;
@@ -71,6 +72,7 @@ class Sendmail implements TransportInterface
     {
         if ($parameters === null || is_string($parameters)) {
             $this->parameters = $parameters;
+
             return $this;
         }
 
@@ -89,6 +91,7 @@ class Sendmail implements TransportInterface
         trim($string);
 
         $this->parameters = $string;
+
         return $this;
     }
 
@@ -111,6 +114,7 @@ class Sendmail implements TransportInterface
             ));
         }
         $this->callable = $callable;
+
         return $this;
     }
 
@@ -121,18 +125,18 @@ class Sendmail implements TransportInterface
      */
     public function send(Mail\Message $message)
     {
-        $to      = $this->prepareRecipients($message);
+        $to = $this->prepareRecipients($message);
         $subject = $this->prepareSubject($message);
-        $body    = $this->prepareBody($message);
+        $body = $this->prepareBody($message);
         $headers = $this->prepareHeaders($message);
-        $params  = $this->prepareParameters($message);
+        $params = $this->prepareParameters($message);
 
         // On *nix platforms, we need to replace \r\n with \n
         // sendmail is not an SMTP server, it is a unix command - it expects LF
         if (!$this->isWindowsOs()) {
-            $to      = str_replace("\r\n", "\n", $to);
+            $to = str_replace("\r\n", "\n", $to);
             $subject = str_replace("\r\n", "\n", $subject);
-            $body    = str_replace("\r\n", "\n", $body);
+            $body = str_replace("\r\n", "\n", $body);
             $headers = str_replace("\r\n", "\n", $headers);
         }
 
@@ -154,7 +158,7 @@ class Sendmail implements TransportInterface
             throw new Exception\RuntimeException('Invalid email; contains no "To" header');
         }
 
-        $to   = $headers->get('to');
+        $to = $headers->get('to');
         $list = $to->getAddressList();
         if (0 == count($list)) {
             throw new Exception\RuntimeException('Invalid "To" header; contains no addresses');
@@ -171,6 +175,7 @@ class Sendmail implements TransportInterface
             $addresses[] = $address->getEmail();
         }
         $addresses = implode(', ', $addresses);
+
         return $addresses;
     }
 
@@ -187,6 +192,7 @@ class Sendmail implements TransportInterface
             return null;
         }
         $header = $headers->get('subject');
+
         return $header->getFieldValue(HeaderInterface::FORMAT_ENCODED);
     }
 
@@ -206,6 +212,7 @@ class Sendmail implements TransportInterface
         // On windows, lines beginning with a full stop need to be fixed
         $text = $message->getBodyText();
         $text = str_replace("\n.", "\n..", $text);
+
         return $text;
     }
 
@@ -226,6 +233,7 @@ class Sendmail implements TransportInterface
         $headers = clone $message->getHeaders();
         $headers->removeHeader('To');
         $headers->removeHeader('Subject');
+
         return $headers->toString();
     }
 
@@ -244,19 +252,21 @@ class Sendmail implements TransportInterface
             return null;
         }
 
-        $parameters = (string) $this->parameters;
+        $parameters = (string)$this->parameters;
 
         $sender = $message->getSender();
         if ($sender instanceof AddressInterface) {
             $parameters .= ' -f' . $sender->getEmail();
+
             return $parameters;
         }
 
         $from = $message->getFrom();
         if (count($from)) {
             $from->rewind();
-            $sender      = $from->current();
+            $sender = $from->current();
             $parameters .= ' -f' . $sender->getEmail();
+
             return $parameters;
         }
 
@@ -295,16 +305,17 @@ class Sendmail implements TransportInterface
     /**
      * Temporary error handler for PHP native mail().
      *
-     * @param int    $errno
+     * @param int $errno
      * @param string $errstr
      * @param string $errfile
      * @param string $errline
-     * @param array  $errcontext
+     * @param array $errcontext
      * @return bool always true
      */
     public function handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {
         $this->errstr = $errstr;
+
         return true;
     }
 
@@ -318,6 +329,7 @@ class Sendmail implements TransportInterface
         if (!$this->operatingSystem) {
             $this->operatingSystem = strtoupper(substr(PHP_OS, 0, 3));
         }
+
         return ($this->operatingSystem == 'WIN');
     }
 }

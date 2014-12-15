@@ -29,6 +29,7 @@ class FormRadioTest extends CommonTestCase
             'value3' => 'This is the third label',
         );
         $element->setValueOptions($options);
+
         return $element;
     }
 
@@ -38,15 +39,16 @@ class FormRadioTest extends CommonTestCase
         $options = array(
             'value1' => 'This is the first label',
             1 => array(
-                'value'           => 'value2',
-                'label'           => 'This is the second label (overridden)',
-                'disabled'        => false,
+                'value' => 'value2',
+                'label' => 'This is the second label (overridden)',
+                'disabled' => false,
                 'label_attributes' => array('class' => 'label-class'),
-                'attributes'      => array('class' => 'input-class'),
+                'attributes' => array('class' => 'input-class'),
             ),
             'value3' => 'This is the third label',
         );
         $element->setValueOptions($options);
+
         return $element;
     }
 
@@ -54,7 +56,7 @@ class FormRadioTest extends CommonTestCase
     {
         $element = $this->getElement();
         $options = $element->getValueOptions();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, 'name="foo"'));
         $this->assertEquals(3, substr_count($markup, 'type="radio"'));
@@ -71,7 +73,7 @@ class FormRadioTest extends CommonTestCase
     {
         $element = $this->getElementWithOptionSpec();
         $options = $element->getValueOptions();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, 'name="foo'));
         $this->assertEquals(3, substr_count($markup, 'type="radio"'));
@@ -102,7 +104,7 @@ class FormRadioTest extends CommonTestCase
         $element->setUseHiddenElement(true);
         $element->setUncheckedValue('none');
         $options = $element->getValueOptions();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertEquals(4, substr_count($markup, 'name="foo'));
         $this->assertEquals(1, substr_count($markup, 'type="hidden"'));
@@ -121,7 +123,7 @@ class FormRadioTest extends CommonTestCase
     {
         $element = $this->getElement();
         $element->setAttribute('value', array('value1', 'value3'));
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertRegexp('#value="value1"\s+checked="checked"#', $markup);
         $this->assertNotRegexp('#value="value2"\s+checked="checked"#', $markup);
@@ -132,7 +134,7 @@ class FormRadioTest extends CommonTestCase
     {
         $element = $this->getElement();
         $this->helper->setSeparator('<br />');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertEquals(2, substr_count($markup, '<br />'));
     }
 
@@ -141,7 +143,7 @@ class FormRadioTest extends CommonTestCase
         $element = $this->getElement();
         $options = $element->getValueOptions();
         $this->helper->setLabelPosition(FormRadioHelper::LABEL_PREPEND);
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, 'name="foo"'));
         $this->assertEquals(3, substr_count($markup, 'type="radio"'));
@@ -157,7 +159,7 @@ class FormRadioTest extends CommonTestCase
     {
         $element = $this->getElement();
         $options = $element->getValueOptions();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertNotContains('checked', $markup);
     }
@@ -166,7 +168,7 @@ class FormRadioTest extends CommonTestCase
     {
         $element = $this->getElement();
 
-        $markup  = $this->helper
+        $markup = $this->helper
             ->setLabelAttributes(array('class' => 'radio'))
             ->render($element);
 
@@ -178,7 +180,7 @@ class FormRadioTest extends CommonTestCase
         $element = $this->getElement();
         $element->setLabelAttributes(array('class' => 'radio'));
 
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, '<label class="radio"'));
     }
@@ -187,7 +189,7 @@ class FormRadioTest extends CommonTestCase
     {
         $element = $this->getElement();
         $element->setAttribute('id', 'foo');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertTrue(1 >= substr_count($markup, 'id="foo"'));
     }
 
@@ -195,14 +197,14 @@ class FormRadioTest extends CommonTestCase
     {
         $element = $this->getElement();
         $element->setAttribute('id', 'foo');
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertEquals(1, substr_count($markup, 'id="foo"'));
     }
 
     public function testNameShouldNotHaveBracketsAppended()
     {
         $element = $this->getElement();
-        $markup  = $this->helper->render($element);
+        $markup = $this->helper->render($element);
         $this->assertNotContains('foo[]', $markup);
     }
 
@@ -219,8 +221,8 @@ class FormRadioTest extends CommonTestCase
 
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
         $mockTranslator->expects($this->exactly(1))
-        ->method('translate')
-        ->will($this->returnValue('translated content'));
+            ->method('translate')
+            ->will($this->returnValue('translated content'));
 
         $this->helper->setTranslator($mockTranslator);
         $this->assertTrue($this->helper->hasTranslator());

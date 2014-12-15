@@ -76,12 +76,12 @@ class ToolbarListener implements ListenerAggregateInterface
     /**
      * Constructor.
      *
-     * @param object  $viewRenderer
+     * @param object $viewRenderer
      * @param Options $options
      */
     public function __construct($viewRenderer, Options $options)
     {
-        $this->options  = $options;
+        $this->options = $options;
         $this->renderer = $viewRenderer;
     }
 
@@ -117,7 +117,7 @@ class ToolbarListener implements ListenerAggregateInterface
     public function onCollected(ProfilerEvent $event)
     {
         $application = $event->getApplication();
-        $request     = $application->getRequest();
+        $request = $application->getRequest();
 
         if ($request->isXmlHttpRequest()) {
             return;
@@ -145,26 +145,26 @@ class ToolbarListener implements ListenerAggregateInterface
      */
     protected function injectToolbar(ProfilerEvent $event)
     {
-        $entries     = $this->renderEntries($event);
-        $response    = $event->getApplication()->getResponse();
+        $entries = $this->renderEntries($event);
+        $response = $event->getApplication()->getResponse();
 
         $toolbarView = new ViewModel(array('entries' => $entries));
         $toolbarView->setTemplate('zend-developer-tools/toolbar/toolbar');
-        $toolbar     = $this->renderer->render($toolbarView);
+        $toolbar = $this->renderer->render($toolbarView);
 
-        $toolbarCss  = new ViewModel(array(
+        $toolbarCss = new ViewModel(array(
             'position' => $this->options->getToolbarPosition(),
         ));
         $toolbarCss->setTemplate('zend-developer-tools/toolbar/style');
-        $style       = $this->renderer->render($toolbarCss);
+        $style = $this->renderer->render($toolbarCss);
 
-        $toolbarJs  = new ViewModel();
+        $toolbarJs = new ViewModel();
         $toolbarJs->setTemplate('zend-developer-tools/toolbar/script');
-        $script       = $this->renderer->render($toolbarJs);
+        $script = $this->renderer->render($toolbarJs);
 
-        $injected    = preg_replace('/<\/body>/i', $toolbar . "\n</body>", $response->getBody(), 1);
-        $injected    = preg_replace('/<\/head>/i', $style . "\n</head>", $injected, 1);
-        $injected    = preg_replace('/<\/body>/i', $script . "\n</body>", $injected, 1);
+        $injected = preg_replace('/<\/body>/i', $toolbar . "\n</body>", $response->getBody(), 1);
+        $injected = preg_replace('/<\/head>/i', $style . "\n</head>", $injected, 1);
+        $injected = preg_replace('/<\/body>/i', $script . "\n</body>", $injected, 1);
 
         $response->setContent($injected);
     }
@@ -179,42 +179,42 @@ class ToolbarListener implements ListenerAggregateInterface
     protected function renderEntries(ProfilerEvent $event)
     {
         $entries = array();
-        $report  = $event->getReport();
+        $report = $event->getReport();
 
         list($isLatest, $latest) = $this->getLatestVersion(Version::VERSION);
-        
+
         if (false === ($pos = strpos(Version::VERSION, 'dev'))) {
             $docUri = sprintf(self::DOC_URI_PATTERN, substr(Version::VERSION, 0, 3));
         } else { // unreleased dev branch - compare minor part of versions
-            $partsCurrent       = explode('.', substr(Version::VERSION, 0, $pos));
+            $partsCurrent = explode('.', substr(Version::VERSION, 0, $pos));
             $partsLatestRelease = explode('.', $latest);
-            $docUri             = sprintf(
+            $docUri = sprintf(
                 self::DEV_DOC_URI_PATTERN,
                 current($partsLatestRelease) == $partsCurrent[1] ? 'latest' : 'develop'
             );
         }
 
         $zfEntry = new ViewModel(array(
-            'zf_version'  => Version::VERSION,
-            'is_latest'   => $isLatest,
-            'latest'      => $latest,
+            'zf_version' => Version::VERSION,
+            'is_latest' => $isLatest,
+            'latest' => $latest,
             'php_version' => phpversion(),
-            'has_intl'    => extension_loaded('intl'),
-            'doc_uri'     => $docUri,
-            'modules'     => $this->getModules($event),
+            'has_intl' => extension_loaded('intl'),
+            'doc_uri' => $docUri,
+            'modules' => $this->getModules($event),
         ));
         $zfEntry->setTemplate('zend-developer-tools/toolbar/zendframework');
 
-        $entries[]  = $this->renderer->render($zfEntry);
-        $errors     = array();
+        $entries[] = $this->renderer->render($zfEntry);
+        $errors = array();
         $collectors = $this->options->getCollectors();
-        $templates  = $this->options->getToolbarEntries();
+        $templates = $this->options->getToolbarEntries();
 
         foreach ($templates as $name => $template) {
             if (isset($collectors[$name])) {
                 try {
                     $collector = new ViewModel(array(
-                        'report'    => $report,
+                        'report' => $report,
                         'collector' => $report->getCollector($name),
                     ));
                     $collector->setTemplate($template);
@@ -228,7 +228,7 @@ class ToolbarListener implements ListenerAggregateInterface
         if (!empty($errors) || $report->hasErrors()) {
             $tmp = array();
             foreach ($errors as $name => $template) {
-                $cur   = sprintf('Unable to render toolbar template %s (%s).', $name, $template);
+                $cur = sprintf('Unable to render toolbar template %s (%s).', $name, $template);
                 $tmp[] = $cur;
                 $report->addError($cur);
             }
@@ -239,7 +239,7 @@ class ToolbarListener implements ListenerAggregateInterface
         }
 
         if ($report->hasErrors()) {
-            $errorTpl  = new ViewModel(array('errors' => $report->getErrors()));
+            $errorTpl = new ViewModel(array('errors' => $report->getErrors()));
             $errorTpl->setTemplate('zend-developer-tools/toolbar/error');
             $entries[] = $this->renderer->render($errorTpl);
         }
@@ -286,7 +286,7 @@ class ToolbarListener implements ListenerAggregateInterface
         }
 
         $isLatest = Version::isLatest();
-        $latest   = Version::getLatest();
+        $latest = Version::getLatest();
 
         file_put_contents(
             $cacheDir . '/ZDT_ZF_Version.cache',
@@ -309,7 +309,7 @@ class ToolbarListener implements ListenerAggregateInterface
 
         $serviceManager = $application->getServiceManager();
         /* @var $moduleManager \Zend\ModuleManager\ModuleManagerInterface */
-        $moduleManager  = $serviceManager->get('ModuleManager');
+        $moduleManager = $serviceManager->get('ModuleManager');
 
         return array_keys($moduleManager->getLoadedModules());
     }

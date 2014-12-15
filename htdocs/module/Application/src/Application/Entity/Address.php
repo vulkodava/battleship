@@ -7,9 +7,12 @@
  */
 
 namespace Application\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
+
 /** @ORM\Entity */
-class Address {
+class Address
+{
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -25,13 +28,15 @@ class Address {
 
     // getters/setters etc.
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     public function setId($id)
     {
         $this->id = $id;
+
         return true;
     }
 

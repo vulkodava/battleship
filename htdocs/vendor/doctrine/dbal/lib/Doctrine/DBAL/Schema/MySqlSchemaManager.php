@@ -60,11 +60,11 @@ class MySqlSchemaManager extends AbstractSchemaManager
     /**
      * {@inheritdoc}
      */
-    protected function _getPortableTableIndexesList($tableIndexes, $tableName=null)
+    protected function _getPortableTableIndexesList($tableIndexes, $tableName = null)
     {
-        foreach($tableIndexes as $k => $v) {
+        foreach ($tableIndexes as $k => $v) {
             $v = array_change_key_case($v, CASE_LOWER);
-            if($v['key_name'] == 'PRIMARY') {
+            if ($v['key_name'] == 'PRIMARY') {
                 $v['primary'] = true;
             } else {
                 $v['primary'] = false;
@@ -111,7 +111,7 @@ class MySqlSchemaManager extends AbstractSchemaManager
 
         $fixed = null;
 
-        if ( ! isset($tableColumn['name'])) {
+        if (!isset($tableColumn['name'])) {
             $tableColumn['name'] = '';
         }
 
@@ -135,7 +135,7 @@ class MySqlSchemaManager extends AbstractSchemaManager
             case 'real':
             case 'numeric':
             case 'decimal':
-                if(preg_match('([A-Za-z]+\(([0-9]+)\,([0-9]+)\))', $tableColumn['type'], $match)) {
+                if (preg_match('([A-Za-z]+\(([0-9]+)\,([0-9]+)\))', $tableColumn['type'], $match)) {
                     $precision = $match[1];
                     $scale = $match[2];
                     $length = null;
@@ -156,18 +156,18 @@ class MySqlSchemaManager extends AbstractSchemaManager
                 break;
         }
 
-        $length = ((int) $length == 0) ? null : (int) $length;
+        $length = ((int)$length == 0) ? null : (int)$length;
 
         $options = array(
-            'length'        => $length,
-            'unsigned'      => (bool) (strpos($tableColumn['type'], 'unsigned') !== false),
-            'fixed'         => (bool) $fixed,
-            'default'       => isset($tableColumn['default']) ? $tableColumn['default'] : null,
-            'notnull'       => (bool) ($tableColumn['null'] != 'YES'),
-            'scale'         => null,
-            'precision'     => null,
-            'autoincrement' => (bool) (strpos($tableColumn['extra'], 'auto_increment') !== false),
-            'comment'       => (isset($tableColumn['comment'])) ? $tableColumn['comment'] : null
+            'length' => $length,
+            'unsigned' => (bool)(strpos($tableColumn['type'], 'unsigned') !== false),
+            'fixed' => (bool)$fixed,
+            'default' => isset($tableColumn['default']) ? $tableColumn['default'] : null,
+            'notnull' => (bool)($tableColumn['null'] != 'YES'),
+            'scale' => null,
+            'precision' => null,
+            'autoincrement' => (bool)(strpos($tableColumn['extra'], 'auto_increment') !== false),
+            'comment' => (isset($tableColumn['comment'])) ? $tableColumn['comment'] : null
         );
 
         if ($scale !== null && $precision !== null) {
@@ -208,7 +208,7 @@ class MySqlSchemaManager extends AbstractSchemaManager
         }
 
         $result = array();
-        foreach($list as $constraint) {
+        foreach ($list as $constraint) {
             $result[] = new ForeignKeyConstraint(
                 array_values($constraint['local']), $constraint['foreignTable'],
                 array_values($constraint['foreign']), $constraint['name'],

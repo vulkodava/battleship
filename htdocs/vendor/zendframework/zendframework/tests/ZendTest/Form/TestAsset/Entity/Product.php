@@ -38,6 +38,7 @@ class Product
     public function setCategories(array $categories)
     {
         $this->categories = $categories;
+
         return $this;
     }
 
@@ -56,6 +57,7 @@ class Product
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -74,6 +76,7 @@ class Product
     public function setPrice($price)
     {
         $this->price = $price;
+
         return $this;
     }
 

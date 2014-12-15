@@ -24,7 +24,8 @@ use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\TableDiff;
 
 /**
- * Event Arguments used when SQL queries for removing table columns are generated inside Doctrine\DBAL\Platform\*Platform.
+ * Event Arguments used when SQL queries for removing table columns are generated inside
+ * Doctrine\DBAL\Platform\*Platform.
  *
  * @link   www.doctrine-project.org
  * @since  2.2
@@ -53,15 +54,15 @@ class SchemaAlterTableRemoveColumnEventArgs extends SchemaEventArgs
     private $_sql = array();
 
     /**
-     * @param \Doctrine\DBAL\Schema\Column              $column
-     * @param \Doctrine\DBAL\Schema\TableDiff           $tableDiff
+     * @param \Doctrine\DBAL\Schema\Column $column
+     * @param \Doctrine\DBAL\Schema\TableDiff $tableDiff
      * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
      */
     public function __construct(Column $column, TableDiff $tableDiff, AbstractPlatform $platform)
     {
-        $this->_column    = $column;
+        $this->_column = $column;
         $this->_tableDiff = $tableDiff;
-        $this->_platform  = $platform;
+        $this->_platform = $platform;
     }
 
     /**

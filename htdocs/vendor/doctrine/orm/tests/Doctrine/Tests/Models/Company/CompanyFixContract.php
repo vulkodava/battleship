@@ -31,8 +31,8 @@ class CompanyFixContract extends CompanyContract
     static public function loadMetadata(\Doctrine\ORM\Mapping\ClassMetadataInfo $metadata)
     {
         $metadata->mapField(array(
-            'type'      => 'integer',
-            'name'      => 'fixPrice',
+            'type' => 'integer',
+            'name' => 'fixPrice',
             'fieldName' => 'fixPrice',
         ));
     }

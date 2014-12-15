@@ -8,35 +8,38 @@ use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class User extends AbstractDbMapper implements UserInterface
 {
-    protected $tableName  = 'user';
+    protected $tableName = 'user';
 
     public function findByEmail($email)
     {
         $select = $this->getSelect()
-                       ->where(array('email' => $email));
+            ->where(array('email' => $email));
 
         $entity = $this->select($select)->current();
         $this->getEventManager()->trigger('find', $this, array('entity' => $entity));
+
         return $entity;
     }
 
     public function findByUsername($username)
     {
         $select = $this->getSelect()
-                       ->where(array('username' => $username));
+            ->where(array('username' => $username));
 
         $entity = $this->select($select)->current();
         $this->getEventManager()->trigger('find', $this, array('entity' => $entity));
+
         return $entity;
     }
 
     public function findById($id)
     {
         $select = $this->getSelect()
-                       ->where(array('user_id' => $id));
+            ->where(array('user_id' => $id));
 
         $entity = $this->select($select)->current();
         $this->getEventManager()->trigger('find', $this, array('entity' => $entity));
+
         return $entity;
     }
 
@@ -47,13 +50,14 @@ class User extends AbstractDbMapper implements UserInterface
 
     public function setTableName($tableName)
     {
-        $this->tableName=$tableName;
+        $this->tableName = $tableName;
     }
 
     public function insert($entity, $tableName = null, HydratorInterface $hydrator = null)
     {
         $result = parent::insert($entity, $tableName, $hydrator);
         $entity->setId($result->getGeneratedValue());
+
         return $result;
     }
 

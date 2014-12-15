@@ -38,7 +38,7 @@ class SequenceFeature extends AbstractFeature
     public function __construct($primaryKeyField, $sequenceName)
     {
         $this->primaryKeyField = $primaryKeyField;
-        $this->sequenceName    = $sequenceName;
+        $this->sequenceName = $sequenceName;
     }
 
     /**
@@ -52,6 +52,7 @@ class SequenceFeature extends AbstractFeature
         $key = array_search($this->primaryKeyField, $columns);
         if ($key !== false) {
             $this->sequenceValue = $values[$key];
+
             return $insert;
         }
 
@@ -60,7 +61,8 @@ class SequenceFeature extends AbstractFeature
             return $insert;
         }
 
-        $insert->values(array($this->primaryKeyField => $this->sequenceValue),  Insert::VALUES_MERGE);
+        $insert->values(array($this->primaryKeyField => $this->sequenceValue), Insert::VALUES_MERGE);
+
         return $insert;
     }
 
@@ -77,6 +79,7 @@ class SequenceFeature extends AbstractFeature
 
     /**
      * Generate a new value from the specified sequence in the database, and return it.
+     *
      * @return int
      */
     public function nextSequenceId()
@@ -100,11 +103,13 @@ class SequenceFeature extends AbstractFeature
         $result = $statement->execute();
         $sequence = $result->current();
         unset($statement, $result);
+
         return $sequence['nextval'];
     }
 
     /**
      * Return the most recent value from the specified sequence in the database.
+     *
      * @return int
      */
     public function lastSequenceId()
@@ -128,6 +133,7 @@ class SequenceFeature extends AbstractFeature
         $result = $statement->execute();
         $sequence = $result->current();
         unset($statement, $result);
+
         return $sequence['currval'];
     }
 }

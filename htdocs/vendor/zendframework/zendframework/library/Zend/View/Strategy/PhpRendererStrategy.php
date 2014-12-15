@@ -57,6 +57,7 @@ class PhpRendererStrategy extends AbstractListenerAggregate
     public function setContentPlaceholders(array $contentPlaceholders)
     {
         $this->contentPlaceholders = $contentPlaceholders;
+
         return $this;
     }
 
@@ -107,7 +108,7 @@ class PhpRendererStrategy extends AbstractListenerAggregate
             return;
         }
 
-        $result   = $e->getResult();
+        $result = $e->getResult();
         $response = $e->getResponse();
 
         // Set content
@@ -117,7 +118,7 @@ class PhpRendererStrategy extends AbstractListenerAggregate
             $placeholders = $renderer->plugin('placeholder');
             foreach ($this->contentPlaceholders as $placeholder) {
                 if ($placeholders->containerExists($placeholder)) {
-                    $result = (string) $placeholders->getContainer($placeholder);
+                    $result = (string)$placeholders->getContainer($placeholder);
                     break;
                 }
             }

@@ -20,7 +20,7 @@ class DDC992Test extends \Doctrine\Tests\OrmFunctionalTestCase
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC992Parent'),
                 $this->_em->getClassMetadata(__NAMESPACE__ . '\DDC992Child'),
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
@@ -119,8 +119,8 @@ class DDC992Role
     }
 
     /**
-     *  @Id  @Column(name="roleID", type="integer")
-     *  @GeneratedValue(strategy="AUTO")
+     * @Id  @Column(name="roleID", type="integer")
+     * @GeneratedValue(strategy="AUTO")
      */
     public $roleID;
     /**
@@ -140,7 +140,8 @@ class DDC992Role
      */
     public $extends;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->extends = new ArrayCollection;
         $this->extendedBy = new ArrayCollection;
     }

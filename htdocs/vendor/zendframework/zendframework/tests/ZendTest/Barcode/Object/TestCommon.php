@@ -23,7 +23,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     protected function loadInstructionsFile($fileName)
     {
-        return include_once (__DIR__ . "/TestAsset/$fileName.php");
+        return include_once(__DIR__ . "/TestAsset/$fileName.php");
     }
 
     public function setUp()
@@ -59,16 +59,16 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testConstructorWithArray()
     {
         $object = $this->getBarcodeObject(
-                array('barHeight' => 150 ,
-                        'unkownProperty' => 'aValue'));
+            array('barHeight' => 150,
+                'unkownProperty' => 'aValue'));
         $this->assertEquals(150, $object->getBarHeight());
     }
 
     public function testConstructorWithZendConfig()
     {
         $config = new Config\Config(
-                array('barHeight' => 150 ,
-                        'unkownProperty' => 'aValue'));
+            array('barHeight' => 150,
+                'unkownProperty' => 'aValue'));
         $object = $this->getBarcodeObject($config);
         $this->assertEquals(150, $object->getBarHeight());
     }
@@ -76,8 +76,8 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testSetOptions()
     {
         $this->object->setOptions(
-                array('barHeight' => 150 ,
-                        'unkownProperty' => 'aValue'));
+            array('barHeight' => 150,
+                'unkownProperty' => 'aValue'));
         $this->assertEquals(150, $this->object->getBarHeight());
     }
 
@@ -100,7 +100,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testNegativeBarHeight()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
-        $this->object->setBarHeight(- 1);
+        $this->object->setBarHeight(-1);
     }
 
     public function testBarThinWidth()
@@ -116,7 +116,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testNegativeBarThinWidth()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
-        $this->object->setBarThinWidth(- 1);
+        $this->object->setBarThinWidth(-1);
     }
 
     public function testBarThickWidth()
@@ -132,7 +132,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testNegativeBarThickWidth()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
-        $this->object->setBarThickWidth(- 1);
+        $this->object->setBarThickWidth(-1);
     }
 
     public function testFactor()
@@ -150,7 +150,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testNegativeFactor()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
-        $this->object->setFactor(- 1);
+        $this->object->setFactor(-1);
     }
 
     public function testForeColor()
@@ -164,7 +164,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testNegativeForeColor()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
-        $this->object->setForeColor(- 1);
+        $this->object->setForeColor(-1);
     }
 
     public function testTooHighForeColor()
@@ -184,7 +184,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testNegativeBackgroundColor()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
-        $this->object->setBackgroundColor(- 1);
+        $this->object->setBackgroundColor(-1);
     }
 
     public function testTooHighBackgroundColor()
@@ -266,16 +266,16 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testSetFontAsNumberForGdImage()
     {
-        if (! extension_loaded('gd')) {
+        if (!extension_loaded('gd')) {
             $this->markTestSkipped(
-                    'GD extension is required to run this test');
+                'GD extension is required to run this test');
         }
-        $gdFontSize = array(8 , 13 , 13 , 16 , 15);
-        for ($i = 1; $i <= 5; $i ++) {
+        $gdFontSize = array(8, 13, 13, 16, 15);
+        for ($i = 1; $i <= 5; $i++) {
             $this->object->setFont($i);
             $this->assertSame($i, $this->object->getFont());
             $this->assertSame($gdFontSize[$i - 1],
-                    $this->object->getFontSize());
+                $this->object->getFontSize());
         }
     }
 
@@ -307,7 +307,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         if (extension_loaded('gd')) {
             $this->markTestSkipped(
-                    'GD extension must not be loaded to run this test');
+                'GD extension must not be loaded to run this test');
         }
         $this->setExpectedException('\Zend\Barcode\Object\Exception\ExceptionInterface');
         $this->object->setFont(1);
@@ -321,9 +321,9 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testFontSizeWithoutEffectWithGdInternalFont()
     {
-        if (! extension_loaded('gd')) {
+        if (!extension_loaded('gd')) {
             $this->markTestSkipped(
-                    'GD extension is required to run this test');
+                'GD extension is required to run this test');
         }
         $this->object->setFont(1);
         $this->object->setFontSize(22);
@@ -346,12 +346,12 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testAddInstruction()
     {
         $object = new TestAsset\BarcodeTest();
-        $instructions = array('type' => 'text' , 'text' => 'text' , 'size' => 10 ,
-                'position' => array(5 , 5) ,
-                'font' => 'my_font.ttf' ,
-                'color' => '#123456' ,
-                'alignment' => 'center' ,
-                'orientation' => 45);
+        $instructions = array('type' => 'text', 'text' => 'text', 'size' => 10,
+            'position' => array(5, 5),
+            'font' => 'my_font.ttf',
+            'color' => '#123456',
+            'alignment' => 'center',
+            'orientation' => 45);
         $object->addTestInstruction($instructions);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
@@ -362,8 +362,8 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $points = array();
         $color = '#123456';
         $filled = false;
-        $instructions = array('type' => 'polygon' , 'points' => $points ,
-                'color' => $color , 'filled' => $filled);
+        $instructions = array('type' => 'polygon', 'points' => $points,
+            'color' => $color, 'filled' => $filled);
         $object->addTestPolygon($points, $color, $filled);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
@@ -375,8 +375,8 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $color = 123456;
         $object->setForeColor($color);
         $filled = false;
-        $instructions = array('type' => 'polygon' , 'points' => $points ,
-                'color' => $color , 'filled' => $filled);
+        $instructions = array('type' => 'polygon', 'points' => $points,
+            'color' => $color, 'filled' => $filled);
         $object->addTestPolygon($points, null, $filled);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
@@ -391,13 +391,13 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $color = '#123456';
         $alignment = 'right';
         $orientation = 45;
-        $instructions = array('type' => 'text' , 'text' => $text , 'size' => $size ,
-                'position' => $position ,
-                'font' => $font , 'color' => $color ,
-                'alignment' => $alignment ,
-                'orientation' => $orientation);
+        $instructions = array('type' => 'text', 'text' => $text, 'size' => $size,
+            'position' => $position,
+            'font' => $font, 'color' => $color,
+            'alignment' => $alignment,
+            'orientation' => $orientation);
         $object->addTestText($text, $size, $position, $font, $color, $alignment,
-                $orientation);
+            $orientation);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 
@@ -412,11 +412,11 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $object->setForeColor($color);
         $alignment = 'right';
         $orientation = 45;
-        $instructions = array('type' => 'text' , 'text' => $text , 'size' => $size ,
-                'position' => $position ,
-                'font' => $font , 'color' => $color ,
-                'alignment' => $alignment ,
-                'orientation' => $orientation);
+        $instructions = array('type' => 'text', 'text' => $text, 'size' => $size,
+            'position' => $position,
+            'font' => $font, 'color' => $color,
+            'alignment' => $alignment,
+            'orientation' => $orientation);
         $object->addTestText($text, $size, $position, $font, null, $alignment, $orientation);
         $this->assertSame(array($instructions), $object->getInstructions());
     }

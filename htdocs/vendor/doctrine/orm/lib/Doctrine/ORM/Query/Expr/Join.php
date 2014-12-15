@@ -30,11 +30,11 @@ namespace Doctrine\ORM\Query\Expr;
  */
 class Join
 {
-    const INNER_JOIN    = 'INNER';
-    const LEFT_JOIN     = 'LEFT';
+    const INNER_JOIN = 'INNER';
+    const LEFT_JOIN = 'LEFT';
 
-    const ON            = 'ON';
-    const WITH          = 'WITH';
+    const ON = 'ON';
+    const WITH = 'WITH';
 
     /**
      * @var string
@@ -67,8 +67,8 @@ class Join
     protected $indexBy;
 
     /**
-     * @param string      $joinType      The condition type constant. Either INNER_JOIN or LEFT_JOIN.
-     * @param string      $join          The relationship to join.
+     * @param string $joinType           The condition type constant. Either INNER_JOIN or LEFT_JOIN.
+     * @param string $join               The relationship to join.
      * @param string|null $alias         The alias of the join.
      * @param string|null $conditionType The condition type constant. Either ON or WITH.
      * @param string|null $condition     The condition for the join.
@@ -76,16 +76,16 @@ class Join
      */
     public function __construct($joinType, $join, $alias = null, $conditionType = null, $condition = null, $indexBy = null)
     {
-        $this->joinType       = $joinType;
-        $this->join           = $join;
-        $this->alias          = $alias;
-        $this->conditionType  = $conditionType;
-        $this->condition      = $condition;
-        $this->indexBy        = $indexBy;
+        $this->joinType = $joinType;
+        $this->join = $join;
+        $this->alias = $alias;
+        $this->conditionType = $conditionType;
+        $this->condition = $condition;
+        $this->indexBy = $indexBy;
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getJoinType()
     {
@@ -138,8 +138,8 @@ class Join
     public function __toString()
     {
         return strtoupper($this->joinType) . ' JOIN ' . $this->join
-             . ($this->alias ? ' ' . $this->alias : '')
-             . ($this->indexBy ? ' INDEX BY ' . $this->indexBy : '')
-             . ($this->condition ? ' ' . strtoupper($this->conditionType) . ' ' . $this->condition : '');
+        . ($this->alias ? ' ' . $this->alias : '')
+        . ($this->indexBy ? ' INDEX BY ' . $this->indexBy : '')
+        . ($this->condition ? ' ' . strtoupper($this->conditionType) . ' ' . $this->condition : '');
     }
 }

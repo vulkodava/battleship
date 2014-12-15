@@ -38,23 +38,25 @@ class PostRedirectGet extends AbstractPlugin
      * boolean false.
      *
      * @param  null|string $redirect
-     * @param  bool        $redirectToUrl
+     * @param  bool $redirectToUrl
      * @return \Zend\Http\Response|array|\Traversable|false
      */
     public function __invoke($redirect = null, $redirectToUrl = false)
     {
         $controller = $this->getController();
-        $request    = $controller->getRequest();
-        $container  = $this->getSessionContainer();
+        $request = $controller->getRequest();
+        $container = $this->getSessionContainer();
 
         if ($request->isPost()) {
             $container->setExpirationHops(1, 'post');
             $container->post = $request->getPost()->toArray();
+
             return $this->redirect($redirect, $redirectToUrl);
         } else {
             if (null !== $container->post) {
                 $post = $container->post;
                 unset($container->post);
+
                 return $post;
             }
 
@@ -70,6 +72,7 @@ class PostRedirectGet extends AbstractPlugin
         if (!isset($this->sessionContainer)) {
             $this->sessionContainer = new Container('prg_post1');
         }
+
         return $this->sessionContainer;
     }
 
@@ -80,22 +83,23 @@ class PostRedirectGet extends AbstractPlugin
     public function setSessionContainer(Container $container)
     {
         $this->sessionContainer = $container;
+
         return $this;
     }
 
     /**
      * TODO: Good candidate for traits method in PHP 5.4 with FilePostRedirectGet plugin
      *
-     * @param  string  $redirect
-     * @param  bool    $redirectToUrl
+     * @param  string $redirect
+     * @param  bool $redirectToUrl
      * @return \Zend\Http\Response
      * @throws \Zend\Mvc\Exception\RuntimeException
      */
     protected function redirect($redirect, $redirectToUrl)
     {
-        $controller         = $this->getController();
-        $params             = array();
-        $options            = array('query' => $controller->params()->fromQuery());
+        $controller = $this->getController();
+        $params = array();
+        $options = array('query' => $controller->params()->fromQuery());
         $reuseMatchedParams = false;
 
         if (null === $redirect) {
@@ -124,6 +128,7 @@ class PostRedirectGet extends AbstractPlugin
         if (false === $redirectToUrl) {
             $response = $redirector->toRoute($redirect, $params, $options, $reuseMatchedParams);
             $response->setStatusCode(303);
+
             return $response;
         }
 

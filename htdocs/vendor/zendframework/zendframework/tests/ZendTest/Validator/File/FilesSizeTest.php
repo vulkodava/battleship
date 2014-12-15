@@ -158,20 +158,20 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new File\FilesSize(array('min' => 9999, 'max' => 10000));
         $this->assertFalse($validator->isValid(array(
-            __DIR__ . '/_files/testsize.mo',
-            __DIR__ . '/_files/testsize.mo',
-            __DIR__ . '/_files/testsize2.mo'))
-            );
+                __DIR__ . '/_files/testsize.mo',
+                __DIR__ . '/_files/testsize.mo',
+                __DIR__ . '/_files/testsize2.mo'))
+        );
         $messages = $validator->getMessages();
         $this->assertContains('9.76kB', current($messages));
         $this->assertContains('1.55kB', current($messages));
 
         $validator = new File\FilesSize(array('min' => 9999, 'max' => 10000, 'useByteString' => false));
         $this->assertFalse($validator->isValid(array(
-            __DIR__ . '/_files/testsize.mo',
-            __DIR__ . '/_files/testsize.mo',
-            __DIR__ . '/_files/testsize2.mo'))
-            );
+                __DIR__ . '/_files/testsize.mo',
+                __DIR__ . '/_files/testsize.mo',
+                __DIR__ . '/_files/testsize2.mo'))
+        );
         $messages = $validator->getMessages();
         $this->assertContains('9999', current($messages));
         $this->assertContains('1588', current($messages));
@@ -192,11 +192,11 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(File\FilesSize::NOT_READABLE, $validator->getMessages());
 
         $filesArray = array(
-            'name'      => '',
-            'size'      => 0,
-            'tmp_name'  => '',
-            'error'     => UPLOAD_ERR_NO_FILE,
-            'type'      => '',
+            'name' => '',
+            'size' => 0,
+            'tmp_name' => '',
+            'error' => UPLOAD_ERR_NO_FILE,
+            'type' => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

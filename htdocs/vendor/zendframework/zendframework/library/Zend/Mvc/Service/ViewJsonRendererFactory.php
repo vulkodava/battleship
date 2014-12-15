@@ -24,6 +24,7 @@ class ViewJsonRendererFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $jsonRenderer = new JsonRenderer();
+
         return $jsonRenderer;
     }
 }
