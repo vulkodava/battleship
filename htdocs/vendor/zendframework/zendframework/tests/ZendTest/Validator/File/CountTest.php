@@ -30,7 +30,7 @@ class CountTest extends \PHPUnit_Framework_TestCase
             array(array('min' => 2, 'max' => 3), false, true, true, false),
             array(array('min' => 2), false, true, true, true),
             array(array('max' => 5), true, true, true, true),
-        );
+            );
 
         foreach ($valuesExpected as $element) {
             $validator = new File\Count($element[0]);

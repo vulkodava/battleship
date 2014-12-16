@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -39,7 +39,7 @@ class ObjectRepositoryProvider implements ProviderInterface
     public function getRoles()
     {
         $result = $this->objectRepository->findAll();
-        $roles = array();
+        $roles  = array();
 
         // Pass One: Build each object
         foreach ($result as $role) {

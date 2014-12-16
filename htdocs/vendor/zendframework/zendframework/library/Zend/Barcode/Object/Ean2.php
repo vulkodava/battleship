@@ -15,15 +15,14 @@ namespace Zend\Barcode\Object;
 class Ean2 extends Ean5
 {
     protected $parities = array(
-        0 => array('A', 'A'),
-        1 => array('A', 'B'),
-        2 => array('B', 'A'),
-        3 => array('B', 'B')
+        0 => array('A','A'),
+        1 => array('A','B'),
+        2 => array('B','A'),
+        3 => array('B','B')
     );
 
     /**
      * Default options for Ean2 barcode
-     *
      * @return void
      */
     protected function getDefaultOptions()
@@ -34,7 +33,6 @@ class Ean2 extends Ean5
     protected function getParity($i)
     {
         $modulo = $this->getText() % 4;
-
         return $this->parities[$modulo][$i];
     }
 }

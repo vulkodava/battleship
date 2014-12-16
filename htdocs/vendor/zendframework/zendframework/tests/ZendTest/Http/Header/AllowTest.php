@@ -43,14 +43,14 @@ class AllowTest extends \PHPUnit_Framework_TestCase
     {
         $methods = array(
             'OPTIONS' => false,
-            'GET' => true,
-            'HEAD' => false,
-            'POST' => true,
-            'PUT' => false,
-            'DELETE' => false,
-            'TRACE' => false,
+            'GET'     => true,
+            'HEAD'    => false,
+            'POST'    => true,
+            'PUT'     => false,
+            'DELETE'  => false,
+            'TRACE'   => false,
             'CONNECT' => false,
-            'PATCH' => false,
+            'PATCH'   => false,
         );
         $allowHeader = new Allow();
         $this->assertEquals($methods, $allowHeader->getAllMethods());

@@ -35,10 +35,10 @@ class FactoryTest extends TestCase
     public function testCanCreateElements()
     {
         $element = $this->factory->createElement(array(
-            'name' => 'foo',
+            'name'       => 'foo',
             'attributes' => array(
-                'type' => 'text',
-                'class' => 'foo-class',
+                'type'         => 'text',
+                'class'        => 'foo-class',
                 'data-js-type' => 'my.form.text',
             ),
         ));
@@ -52,11 +52,11 @@ class FactoryTest extends TestCase
     public function testCanCreateFieldsets()
     {
         $fieldset = $this->factory->createFieldset(array(
-            'name' => 'foo',
-            'object' => 'ZendTest\Form\TestAsset\Model',
+            'name'       => 'foo',
+            'object'     => 'ZendTest\Form\TestAsset\Model',
             'attributes' => array(
-                'type' => 'fieldset',
-                'class' => 'foo-class',
+                'type'         => 'fieldset',
+                'class'        => 'foo-class',
                 'data-js-type' => 'my.form.fieldset',
             ),
         ));
@@ -71,7 +71,7 @@ class FactoryTest extends TestCase
     public function testCanCreateFieldsetsWithElements()
     {
         $fieldset = $this->factory->createFieldset(array(
-            'name' => 'foo',
+            'name'       => 'foo',
             'elements' => array(
                 array(
                     'flags' => array(
@@ -102,7 +102,7 @@ class FactoryTest extends TestCase
                         'priority' => 10,
                     ),
                     'spec' => array(
-                        'name' => 'bat',
+                        'name'       => 'bat',
                         'attributes' => array(
                             'type' => 'textarea',
                             'content' => 'Type here...',
@@ -144,11 +144,11 @@ class FactoryTest extends TestCase
     public function testCanCreateNestedFieldsets()
     {
         $masterFieldset = $this->factory->createFieldset(array(
-            'name' => 'foo',
-            'fieldsets' => array(
+            'name'       => 'foo',
+            'fieldsets'  => array(
                 array(
                     'flags' => array('name' => 'bar'),
-                    'spec' => array(
+                    'spec'  => array(
                         'elements' => array(
                             array(
                                 'flags' => array(
@@ -179,7 +179,7 @@ class FactoryTest extends TestCase
                                     'priority' => 10,
                                 ),
                                 'spec' => array(
-                                    'name' => 'bat',
+                                    'name'       => 'bat',
                                     'attributes' => array(
                                         'type' => 'textarea',
                                         'content' => 'Type here...',
@@ -225,8 +225,8 @@ class FactoryTest extends TestCase
     public function testCanCreateForms()
     {
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
-            'object' => 'ZendTest\Form\TestAsset\Model',
+            'name'       => 'foo',
+            'object'     => 'ZendTest\Form\TestAsset\Model',
             'attributes' => array(
                 'method' => 'get',
             ),
@@ -240,7 +240,7 @@ class FactoryTest extends TestCase
     public function testCanCreateFormsWithNamedInputFilters()
     {
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'         => 'foo',
             'input_filter' => 'ZendTest\Form\TestAsset\InputFilter',
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
@@ -251,11 +251,11 @@ class FactoryTest extends TestCase
     public function testCanCreateFormsWithInputFilterSpecifications()
     {
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'         => 'foo',
             'input_filter' => array(
                 'foo' => array(
-                    'name' => 'foo',
-                    'required' => false,
+                    'name'       => 'foo',
+                    'required'   => false,
                     'validators' => array(
                         array(
                             'name' => 'not_empty',
@@ -271,7 +271,7 @@ class FactoryTest extends TestCase
                 ),
                 'bar' => array(
                     'allow_empty' => true,
-                    'filters' => array(
+                    'filters'     => array(
                         array(
                             'name' => 'string_trim',
                         ),
@@ -313,7 +313,7 @@ class FactoryTest extends TestCase
     {
         $filter = new TestAsset\InputFilter();
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'         => 'foo',
             'input_filter' => $filter,
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
@@ -324,7 +324,7 @@ class FactoryTest extends TestCase
     public function testCanCreateFormsAndSpecifyHydrator()
     {
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'     => 'foo',
             'hydrator' => 'Zend\Stdlib\Hydrator\ObjectProperty',
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
@@ -340,7 +340,7 @@ class FactoryTest extends TestCase
         $services->setService('HydratorManager', new HydratorPluginManager());
 
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'     => 'foo',
             'hydrator' => 'ObjectProperty',
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
@@ -379,7 +379,7 @@ class FactoryTest extends TestCase
     public function testCanCreateFormsAndSpecifyFactory()
     {
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'    => 'foo',
             'factory' => 'Zend\Form\Factory',
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
@@ -390,7 +390,7 @@ class FactoryTest extends TestCase
     public function testCanCreateFactoryFromArray()
     {
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'    => 'foo',
             'factory' => array(
                 'type' => 'Zend\Form\Factory',
             ),
@@ -405,7 +405,7 @@ class FactoryTest extends TestCase
     {
         $factory = new \Zend\Form\Factory();
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'    => 'foo',
             'factory' => $factory,
         ));
 
@@ -429,12 +429,12 @@ class FactoryTest extends TestCase
         $factory->setInputFilterFactory($inputFilterFactory);
 
         $form = $factory->createForm(array(
-            'name' => 'foo',
-            'factory' => $factory,
+            'name'         => 'foo',
+            'factory'      => $factory,
             'input_filter' => array(
                 'bar' => array(
-                    'name' => 'bar',
-                    'required' => true,
+                    'name'       => 'bar',
+                    'required'   => true,
                     'validators' => array(
                         array(
                             'name' => 'baz',
@@ -472,7 +472,7 @@ class FactoryTest extends TestCase
     public function testCanCreateFormWithHydratorAndInputFilterAndElementsAndFieldsets()
     {
         $form = $this->factory->createForm(array(
-            'name' => 'foo',
+            'name'       => 'foo',
             'elements' => array(
                 array(
                     'flags' => array(
@@ -503,7 +503,7 @@ class FactoryTest extends TestCase
                         'priority' => 10,
                     ),
                     'spec' => array(
-                        'name' => 'bat',
+                        'name'       => 'bat',
                         'attributes' => array(
                             'type' => 'textarea',
                             'content' => 'Type here...',
@@ -511,10 +511,10 @@ class FactoryTest extends TestCase
                     ),
                 ),
             ),
-            'fieldsets' => array(
+            'fieldsets'  => array(
                 array(
                     'flags' => array('name' => 'foobar'),
-                    'spec' => array(
+                    'spec'  => array(
                         'elements' => array(
                             array(
                                 'flags' => array(
@@ -545,7 +545,7 @@ class FactoryTest extends TestCase
                                     'priority' => 10,
                                 ),
                                 'spec' => array(
-                                    'name' => 'bat',
+                                    'name'       => 'bat',
                                     'attributes' => array(
                                         'type' => 'textarea',
                                         'content' => 'Type here...',
@@ -557,7 +557,7 @@ class FactoryTest extends TestCase
                 ),
             ),
             'input_filter' => 'ZendTest\Form\TestAsset\InputFilter',
-            'hydrator' => 'Zend\Stdlib\Hydrator\ObjectProperty',
+            'hydrator'     => 'Zend\Stdlib\Hydrator\ObjectProperty',
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
 
@@ -631,8 +631,8 @@ class FactoryTest extends TestCase
     public function testCanCreateFormUsingCreate()
     {
         $form = $this->factory->create(array(
-            'type' => 'Zend\Form\Form',
-            'name' => 'foo',
+            'type'       => 'Zend\Form\Form',
+            'name'       => 'foo',
             'attributes' => array(
                 'method' => 'get',
             ),
@@ -645,11 +645,11 @@ class FactoryTest extends TestCase
     public function testCanCreateFieldsetUsingCreate()
     {
         $fieldset = $this->factory->create(array(
-            'type' => 'Zend\Form\Fieldset',
-            'name' => 'foo',
+            'type'       => 'Zend\Form\Fieldset',
+            'name'       => 'foo',
             'attributes' => array(
-                'type' => 'fieldset',
-                'class' => 'foo-class',
+                'type'         => 'fieldset',
+                'class'        => 'foo-class',
                 'data-js-type' => 'my.form.fieldset',
             ),
         ));
@@ -663,10 +663,10 @@ class FactoryTest extends TestCase
     public function testCanCreateElementUsingCreate()
     {
         $element = $this->factory->create(array(
-            'name' => 'foo',
+            'name'       => 'foo',
             'attributes' => array(
-                'type' => 'text',
-                'class' => 'foo-class',
+                'type'         => 'text',
+                'class'        => 'foo-class',
                 'data-js-type' => 'my.form.text',
             ),
         ));

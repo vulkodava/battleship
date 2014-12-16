@@ -63,7 +63,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithHostAndHttpsOn()
     {
         $_SERVER['HTTP_HOST'] = 'example.com';
-        $_SERVER['HTTPS'] = 'on';
+        $_SERVER['HTTPS']     = 'on';
 
         $url = new Helper\ServerUrl();
         $this->assertEquals('https://example.com', $url->__invoke());
@@ -118,8 +118,8 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
 
     public function testServerUrlWithTrueParam()
     {
-        $_SERVER['HTTPS'] = 'off';
-        $_SERVER['HTTP_HOST'] = 'example.com';
+        $_SERVER['HTTPS']       = 'off';
+        $_SERVER['HTTP_HOST']   = 'example.com';
         $_SERVER['REQUEST_URI'] = '/foo.html';
 
         $url = new Helper\ServerUrl();
@@ -128,7 +128,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
 
     public function testServerUrlWithInteger()
     {
-        $_SERVER['HTTPS'] = 'off';
+        $_SERVER['HTTPS']     = 'off';
         $_SERVER['HTTP_HOST'] = 'example.com';
         $_SERVER['REQUEST_URI'] = '/foo.html';
 
@@ -138,7 +138,7 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
 
     public function testServerUrlWithObject()
     {
-        $_SERVER['HTTPS'] = 'off';
+        $_SERVER['HTTPS']     = 'off';
         $_SERVER['HTTP_HOST'] = 'example.com';
         $_SERVER['REQUEST_URI'] = '/foo.html';
 

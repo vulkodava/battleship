@@ -18,7 +18,7 @@ use Zend\Db\Adapter\Driver\Oci8\Oci8;
 class Oci8IntegrationTest extends AbstractIntegrationTest
 {
     /**
-     * @group  integration-oci8
+     * @group integration-oci8
      * @covers Zend\Db\Adapter\Driver\Oci8\Oci8::checkEnvironment
      */
     public function testCheckEnvironment()

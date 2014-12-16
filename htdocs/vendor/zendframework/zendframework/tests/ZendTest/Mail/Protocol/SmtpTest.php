@@ -26,7 +26,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->transport = new Smtp();
+        $this->transport  = new Smtp();
         $this->connection = new SmtpProtocolSpy();
         $this->transport->setConnection($this->connection);
     }
@@ -40,16 +40,17 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
             ->setHeaders($headers)
             ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
             ->setBody('testSendMailWithoutMinimalHeaders')
-            ->addTo('zf-devteam@zend.com', 'ZF DevTeam');
+            ->addTo('zf-devteam@zend.com', 'ZF DevTeam')
+        ;
         $expectedMessage = "EHLO localhost\r\n"
-            . "MAIL FROM:<ralph.schindler@zend.com>\r\n"
-            . "DATA\r\n"
-            . "Date: Sun, 10 Jun 2012 20:07:24 +0200\r\n"
-            . "Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
-            . "To: ZF DevTeam <zf-devteam@zend.com>\r\n"
-            . "\r\n"
-            . "testSendMailWithoutMinimalHeaders\r\n"
-            . ".\r\n";
+                           . "MAIL FROM:<ralph.schindler@zend.com>\r\n"
+                           . "DATA\r\n"
+                           . "Date: Sun, 10 Jun 2012 20:07:24 +0200\r\n"
+                           . "Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
+                           . "To: ZF DevTeam <zf-devteam@zend.com>\r\n"
+                           . "\r\n"
+                           . "testSendMailWithoutMinimalHeaders\r\n"
+                           . ".\r\n";
 
         $this->transport->send($message);
 
@@ -65,7 +66,8 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
             ->setHeaders($headers)
             ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
             ->setBody("This is a test\n.")
-            ->addTo('zf-devteam@zend.com', 'ZF DevTeam');
+            ->addTo('zf-devteam@zend.com', 'ZF DevTeam')
+        ;
         $expectedMessage = "EHLO localhost\r\n"
             . "MAIL FROM:<ralph.schindler@zend.com>\r\n"
             . "DATA\r\n"

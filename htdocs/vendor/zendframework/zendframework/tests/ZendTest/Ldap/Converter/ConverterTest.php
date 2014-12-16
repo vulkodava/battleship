@@ -21,9 +21,9 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
     public function testAsc2hex32()
     {
         $expected = '\00\01\02\03\04\05\06\07\08\09\0a\0b\0c\0d\0e\0f\10\11\12\13\14\15\16\17\18\19' .
-            '\1a\1b\1c\1d\1e\1f !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`' .
-            'abcdefghijklmnopqrstuvwxyz{|}~';
-        $str = '';
+                    '\1a\1b\1c\1d\1e\1f !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`' .
+                    'abcdefghijklmnopqrstuvwxyz{|}~';
+        $str      = '';
         for ($i = 0; $i < 127; $i++) {
             $str .= chr($i);
         }
@@ -38,8 +38,8 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
         }
 
         $str = '\00\01\02\03\04\05\06\07\08\09\0a\0b\0c\0d\0e\0f\10\11\12\13\14\15\16\17\18\19\1a\1b' .
-            '\1c\1d\1e\1f !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefg' .
-            'hijklmnopqrstuvwxyz{|}~';
+               '\1c\1d\1e\1f !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefg' .
+               'hijklmnopqrstuvwxyz{|}~';
         $this->assertEquals($expected, Converter::hex32ToAsc($str));
     }
 
@@ -55,24 +55,23 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
     public function toLdapDateTimeProvider()
     {
         $tz = new DateTimeZone('UTC');
-
         return array(
-            array(array('date' => 0,
-                'utc' => true), '19700101000000Z'),
-            array(array('date' => new DateTime('2010-05-12 13:14:45+0300', $tz),
-                'utc' => false), '20100512131445+0300'),
-            array(array('date' => new DateTime('2010-05-12 13:14:45+0300', $tz),
-                'utc' => true), '20100512101445Z'),
-            array(array('date' => '2010-05-12 13:14:45+0300',
-                'utc' => false), '20100512131445+0300'),
-            array(array('date' => '2010-05-12 13:14:45+0300',
-                'utc' => true), '20100512101445Z'),
-            array(array('date' => DateTime::createFromFormat(DateTime::ISO8601, '2010-05-12T13:14:45+0300'),
-                'utc' => true), '20100512101445Z'),
-            array(array('date' => DateTime::createFromFormat(DateTime::ISO8601, '2010-05-12T13:14:45+0300'),
-                'utc' => false), '20100512131445+0300'),
-            array(array('date' => date_timestamp_set(new DateTime(), 0),
-                'utc' => true), '19700101000000Z'),
+            array(array('date'=> 0,
+                        'utc' => true), '19700101000000Z'),
+            array(array('date'=> new DateTime('2010-05-12 13:14:45+0300', $tz),
+                        'utc' => false), '20100512131445+0300'),
+            array(array('date'=> new DateTime('2010-05-12 13:14:45+0300', $tz),
+                        'utc' => true), '20100512101445Z'),
+            array(array('date'=> '2010-05-12 13:14:45+0300',
+                        'utc' => false), '20100512131445+0300'),
+            array(array('date'=> '2010-05-12 13:14:45+0300',
+                        'utc' => true), '20100512101445Z'),
+            array(array('date'=> DateTime::createFromFormat(DateTime::ISO8601, '2010-05-12T13:14:45+0300'),
+                        'utc' => true), '20100512101445Z'),
+            array(array('date'=> DateTime::createFromFormat(DateTime::ISO8601, '2010-05-12T13:14:45+0300'),
+                        'utc' => false), '20100512131445+0300'),
+            array(array('date'=> date_timestamp_set(new DateTime(), 0),
+                        'utc' => true), '19700101000000Z'),
         );
     }
 
@@ -112,7 +111,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
             array('i:1;', 1),
             array(serialize(new DateTime('@0')), new DateTime('@0')),
             array('a:3:{i:0;s:4:"test";i:1;i:1;s:3:"foo";s:3:"bar";}', array('test', 1,
-                'foo' => 'bar')),
+                                                                             'foo'=> 'bar')),
         );
     }
 
@@ -128,15 +127,15 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null, array('value' => null,
-                'type' => 0)),
-            array('19700101000000Z', array('value' => 0,
-                'type' => 2)),
-            array('0', array('value' => 0,
-                'type' => 0)),
-            array('FALSE', array('value' => 0,
-                'type' => 1)),
-            array('19700101000000Z', array('value' => DateTime::createFromFormat(DateTime::ISO8601, '1970-01-01T00:00:00+0000'),
-                'type' => 0)),
+                              'type'  => 0)),
+            array('19700101000000Z', array('value'=> 0,
+                                           'type' => 2)),
+            array('0', array('value'=> 0,
+                             'type' => 0)),
+            array('FALSE', array('value'=> 0,
+                                 'type' => 1)),
+            array('19700101000000Z', array('value'=> DateTime::createFromFormat(DateTime::ISO8601, '1970-01-01T00:00:00+0000'),
+                                           'type' => 0)),
 
         );
     }
@@ -176,8 +175,8 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
      * @dataProvider fromLdapDateTimeProvider
      *
      * @param DateTime $expected
-     * @param string $convert
-     * @param  bool $utc
+     * @param string   $convert
+     * @param  bool  $utc
      * @return void
      */
     public function testFromLdapDateTime($expected, $convert, $utc)

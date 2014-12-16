@@ -24,7 +24,7 @@ interface ResolverInterface
      * @param  string $realm    Authentication Realm
      * @param  string $password Password (optional)
      * @return string|array|false User's shared secret as string if found in realm, or User's identity as array
-     *                          if resolved, false otherwise.
+     *         if resolved, false otherwise.
      */
     public function resolve($username, $realm, $password = null);
 }

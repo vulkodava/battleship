@@ -61,8 +61,7 @@ class RetryAfter extends AbstractDate
      */
     public function setDeltaSeconds($delta)
     {
-        $this->deltaSeconds = (int)$delta;
-
+        $this->deltaSeconds = (int) $delta;
         return $this;
     }
 

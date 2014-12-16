@@ -28,7 +28,6 @@ abstract class AbstractManager implements Manager
 
     /**
      * Default configuration class to use when no configuration provided
-     *
      * @var string
      */
     protected $defaultConfigClass = 'Zend\Session\Config\SessionConfig';
@@ -40,7 +39,6 @@ abstract class AbstractManager implements Manager
 
     /**
      * Default storage class to use when no storage provided
-     *
      * @var string
      */
     protected $defaultStorageClass = 'Zend\Session\Storage\SessionArrayStorage';
@@ -119,7 +117,6 @@ abstract class AbstractManager implements Manager
     public function setConfig(Config $config)
     {
         $this->config = $config;
-
         return $this;
     }
 
@@ -142,7 +139,6 @@ abstract class AbstractManager implements Manager
     public function setStorage(Storage $storage)
     {
         $this->storage = $storage;
-
         return $this;
     }
 
@@ -165,7 +161,6 @@ abstract class AbstractManager implements Manager
     public function setSaveHandler(SaveHandler $saveHandler)
     {
         $this->saveHandler = $saveHandler;
-
         return $this;
     }
 

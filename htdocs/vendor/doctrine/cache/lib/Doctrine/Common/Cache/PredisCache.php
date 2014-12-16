@@ -87,11 +87,11 @@ class PredisCache extends CacheProvider
         $info = $this->client->info();
 
         return array(
-            Cache::STATS_HITS => false,
-            Cache::STATS_MISSES => false,
-            Cache::STATS_UPTIME => $info['Server']['uptime_in_seconds'],
-            Cache::STATS_MEMORY_USAGE => $info['Memory']['used_memory'],
-            Cache::STATS_MEMORY_AVAILABLE => false
+            Cache::STATS_HITS              => false,
+            Cache::STATS_MISSES            => false,
+            Cache::STATS_UPTIME            => $info['Server']['uptime_in_seconds'],
+            Cache::STATS_MEMORY_USAGE      => $info['Memory']['used_memory'],
+            Cache::STATS_MEMORY_AVAILABLE  => false
         );
     }
 }

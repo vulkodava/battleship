@@ -74,7 +74,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Pdo $driver)
     {
         $this->driver = $driver;
-
         return $this;
     }
 
@@ -85,7 +84,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
-
         return $this;
     }
 
@@ -106,7 +104,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function initialize(\PDO $connectionResource)
     {
         $this->pdo = $connectionResource;
-
         return $this;
     }
 
@@ -119,7 +116,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setResource(\PDOStatement $pdoStatement)
     {
         $this->resource = $pdoStatement;
-
         return $this;
     }
 
@@ -142,7 +138,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
-
         return $this;
     }
 
@@ -163,7 +158,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
-
         return $this;
     }
 
@@ -259,7 +253,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource, $this);
-
         return $result;
     }
 
@@ -303,7 +296,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 
     /**
      * Perform a deep clone
-     *
      * @return Statement A cloned statement
      */
     public function __clone()

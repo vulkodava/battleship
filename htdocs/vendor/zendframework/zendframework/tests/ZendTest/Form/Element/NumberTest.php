@@ -44,9 +44,9 @@ class NumberTest extends TestCase
         $element = new NumberElement();
         $element->setAttributes(array(
             'inclusive' => true,
-            'min' => 5,
-            'max' => 10,
-            'step' => 1,
+            'min'       => 5,
+            'max'       => 10,
+            'step'      => 1,
         ));
 
         $inputSpec = $element->getInputSpecification();
@@ -85,7 +85,7 @@ class NumberTest extends TestCase
         $element = new NumberElement();
         $element->setAttributes(array(
             'inclusive' => false,
-            'min' => 5,
+            'min'       => 5,
         ));
 
         $inputSpec = $element->getInputSpecification();
@@ -101,7 +101,7 @@ class NumberTest extends TestCase
     {
         $element = new NumberElement();
         $element->setAttributes(array(
-            'min' => 5,
+            'min'       => 5,
         ));
 
         $inputSpec = $element->getInputSpecification();

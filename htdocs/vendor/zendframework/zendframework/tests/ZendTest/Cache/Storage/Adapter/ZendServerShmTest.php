@@ -25,7 +25,6 @@ class ZendServerShmTest extends CommonAdapterTest
 
         if (strtolower(PHP_SAPI) == 'cli') {
             $this->markTestSkipped('Zend Server SHM does not work in CLI environment');
-
             return;
         }
 

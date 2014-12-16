@@ -56,7 +56,7 @@ abstract class CacheProvider implements Cache
      */
     public function setNamespace($namespace)
     {
-        $this->namespace = (string)$namespace;
+        $this->namespace        = (string) $namespace;
         $this->namespaceVersion = null;
     }
 
@@ -128,7 +128,7 @@ abstract class CacheProvider implements Cache
     public function deleteAll()
     {
         $namespaceCacheKey = $this->getNamespaceCacheKey();
-        $namespaceVersion = $this->getNamespaceVersion() + 1;
+        $namespaceVersion  = $this->getNamespaceVersion() + 1;
 
         $this->namespaceVersion = $namespaceVersion;
 
@@ -144,7 +144,7 @@ abstract class CacheProvider implements Cache
      */
     private function getNamespacedId($id)
     {
-        $namespaceVersion = $this->getNamespaceVersion();
+        $namespaceVersion  = $this->getNamespaceVersion();
 
         return sprintf('%s[%s][%s]', $this->namespace, $id, $namespaceVersion);
     }
@@ -205,9 +205,9 @@ abstract class CacheProvider implements Cache
     /**
      * Puts data into the cache.
      *
-     * @param string $id         The cache id.
-     * @param string $data       The cache entry/data.
-     * @param int $lifeTime      The lifetime. If != 0, sets a specific lifetime for this
+     * @param string $id       The cache id.
+     * @param string $data     The cache entry/data.
+     * @param int    $lifeTime The lifetime. If != 0, sets a specific lifetime for this
      *                           cache entry (0 => infinite lifeTime).
      *
      * @return boolean TRUE if the entry was successfully stored in the cache, FALSE otherwise.

@@ -30,7 +30,7 @@ class FormUrlTest extends CommonTestCase
     public function testGeneratesUrlInputTagWithElement()
     {
         $element = new Element('foo');
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="url"', $markup);
     }
@@ -39,7 +39,7 @@ class FormUrlTest extends CommonTestCase
     {
         $element = new Element('foo');
         $element->setAttribute('type', 'email');
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="url"', $markup);
     }
@@ -47,35 +47,35 @@ class FormUrlTest extends CommonTestCase
     public function validAttributes()
     {
         return array(
-            array('name', 'assertContains'),
-            array('accept', 'assertNotContains'),
-            array('alt', 'assertNotContains'),
-            array('autocomplete', 'assertContains'),
-            array('autofocus', 'assertContains'),
-            array('checked', 'assertNotContains'),
-            array('dirname', 'assertNotContains'),
-            array('disabled', 'assertContains'),
-            array('form', 'assertContains'),
-            array('formaction', 'assertNotContains'),
-            array('formenctype', 'assertNotContains'),
-            array('formmethod', 'assertNotContains'),
+            array('name',           'assertContains'),
+            array('accept',         'assertNotContains'),
+            array('alt',            'assertNotContains'),
+            array('autocomplete',   'assertContains'),
+            array('autofocus',      'assertContains'),
+            array('checked',        'assertNotContains'),
+            array('dirname',        'assertNotContains'),
+            array('disabled',       'assertContains'),
+            array('form',           'assertContains'),
+            array('formaction',     'assertNotContains'),
+            array('formenctype',    'assertNotContains'),
+            array('formmethod',     'assertNotContains'),
             array('formnovalidate', 'assertNotContains'),
-            array('formtarget', 'assertNotContains'),
-            array('height', 'assertNotContains'),
-            array('list', 'assertContains'),
-            array('max', 'assertNotContains'),
-            array('maxlength', 'assertContains'),
-            array('min', 'assertNotContains'),
-            array('multiple', 'assertNotContains'),
-            array('pattern', 'assertContains'),
-            array('placeholder', 'assertContains'),
-            array('readonly', 'assertContains'),
-            array('required', 'assertContains'),
-            array('size', 'assertContains'),
-            array('src', 'assertNotContains'),
-            array('step', 'assertNotContains'),
-            array('value', 'assertContains'),
-            array('width', 'assertNotContains'),
+            array('formtarget',     'assertNotContains'),
+            array('height',         'assertNotContains'),
+            array('list',           'assertContains'),
+            array('max',            'assertNotContains'),
+            array('maxlength',      'assertContains'),
+            array('min',            'assertNotContains'),
+            array('multiple',       'assertNotContains'),
+            array('pattern',        'assertContains'),
+            array('placeholder',    'assertContains'),
+            array('readonly',       'assertContains'),
+            array('required',       'assertContains'),
+            array('size',           'assertContains'),
+            array('src',            'assertNotContains'),
+            array('step',           'assertNotContains'),
+            array('value',          'assertContains'),
+            array('width',          'assertNotContains'),
         );
     }
 
@@ -83,38 +83,37 @@ class FormUrlTest extends CommonTestCase
     {
         $element = new Element('foo');
         $element->setAttributes(array(
-            'accept' => 'value',
-            'alt' => 'value',
-            'autocomplete' => 'on',
-            'autofocus' => 'autofocus',
-            'checked' => 'checked',
-            'dirname' => 'value',
-            'disabled' => 'disabled',
-            'form' => 'value',
-            'formaction' => 'value',
-            'formenctype' => 'value',
-            'formmethod' => 'value',
-            'formnovalidate' => 'value',
-            'formtarget' => 'value',
-            'height' => 'value',
-            'id' => 'value',
-            'list' => 'value',
-            'max' => 'value',
-            'maxlength' => 'value',
-            'min' => 'value',
-            'multiple' => 'multiple',
-            'name' => 'value',
-            'pattern' => 'value',
-            'placeholder' => 'value',
-            'readonly' => 'readonly',
-            'required' => 'required',
-            'size' => 'value',
-            'src' => 'value',
-            'step' => 'value',
-            'width' => 'value',
+            'accept'             => 'value',
+            'alt'                => 'value',
+            'autocomplete'       => 'on',
+            'autofocus'          => 'autofocus',
+            'checked'            => 'checked',
+            'dirname'            => 'value',
+            'disabled'           => 'disabled',
+            'form'               => 'value',
+            'formaction'         => 'value',
+            'formenctype'        => 'value',
+            'formmethod'         => 'value',
+            'formnovalidate'     => 'value',
+            'formtarget'         => 'value',
+            'height'             => 'value',
+            'id'                 => 'value',
+            'list'               => 'value',
+            'max'                => 'value',
+            'maxlength'          => 'value',
+            'min'                => 'value',
+            'multiple'           => 'multiple',
+            'name'               => 'value',
+            'pattern'            => 'value',
+            'placeholder'        => 'value',
+            'readonly'           => 'readonly',
+            'required'           => 'required',
+            'size'               => 'value',
+            'src'                => 'value',
+            'step'               => 'value',
+            'width'              => 'value',
         ));
         $element->setValue('value');
-
         return $element;
     }
 
@@ -124,13 +123,13 @@ class FormUrlTest extends CommonTestCase
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
     {
         $element = $this->getCompleteElement();
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         switch ($attribute) {
             case 'value':
-                $expect = sprintf('%s="%s"', $attribute, $element->getValue());
+                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
                 break;
             default:
-                $expect = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
                 break;
         }
         $this->$assertion($expect, $markup);
@@ -139,7 +138,7 @@ class FormUrlTest extends CommonTestCase
     public function testInvokeProxiesToRender()
     {
         $element = new Element('foo');
-        $markup = $this->helper->__invoke($element);
+        $markup  = $this->helper->__invoke($element);
         $this->assertContains('<input', $markup);
         $this->assertContains('name="foo"', $markup);
         $this->assertContains('type="url"', $markup);

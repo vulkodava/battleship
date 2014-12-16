@@ -15,7 +15,7 @@ use Zend\Feed\Reader\Reader;
  * associated links within.
  */
 
-require_once dirname(dirname(dirname(__DIR__))) . '/library/Zend/Loader/StandardAutoloader.php';
+require_once dirname(dirname(dirname(__DIR__))).'/library/Zend/Loader/StandardAutoloader.php';
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
@@ -24,5 +24,5 @@ $rss = Reader::import('http://news.google.com/?output=rss');
 
 foreach ($rss as $item) {
     echo '<p>' . $item->getTitle() . '<br />', "\n";
-    echo $item->getLink() . '</p>';
+    echo $item->getLink()  . '</p>';
 }

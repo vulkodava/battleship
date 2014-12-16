@@ -169,13 +169,13 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $messages = $this->validator->getMessageTemplates();
         $this->assertEquals(
             array('fooMessage' => '%value% was passed',
-                'barMessage' => '%value% was wrong'), $messages);
+                  'barMessage' => '%value% was wrong'), $messages);
 
         $this->assertEquals(
             array(TestAsset\ConcreteValidator::FOO_MESSAGE => '%value% was passed',
-                TestAsset\ConcreteValidator::BAR_MESSAGE => '%value% was wrong'),
+                  TestAsset\ConcreteValidator::BAR_MESSAGE => '%value% was wrong'),
             $messages
-        );
+            );
     }
 
     public function testInvokeProxiesToIsValid()
@@ -278,10 +278,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno
-     * @param  string $errstr
-     * @param  string $errfile
+     * @param  string  $errstr
+     * @param  string  $errfile
      * @param  integer $errline
-     * @param  array $errcontext
+     * @param  array   $errcontext
      * @return void
      */
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)

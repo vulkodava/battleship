@@ -104,14 +104,12 @@ class EditUser extends Register
         array_walk($parts, function (&$val) {
             $val = ucfirst($val);
         });
-
         return (($set ? 'set' : 'get') . implode('', $parts));
     }
 
     public function setUserEditOptions(UserEditOptionsInterface $userEditOptions)
     {
         $this->userEditOptions = $userEditOptions;
-
         return $this;
     }
 

@@ -187,7 +187,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testShouldBeAbleToLoadRequestFromJSONString()
     {
         $options = $this->getOptions();
-        $json = Json\Json::encode($options);
+        $json    = Json\Json::encode($options);
         $this->request->loadJSON($json);
 
         $this->assertEquals('foo', $this->request->getMethod());
@@ -199,7 +199,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $options = $this->getOptions();
         $options['jsonrpc'] = '2.0';
-        $json = Json\Json::encode($options);
+        $json    = Json\Json::encode($options);
         $this->request->loadJSON($json);
         $this->assertEquals('2.0', $this->request->getVersion());
     }
@@ -208,7 +208,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $options = $this->getOptions();
         $this->request->setOptions($options);
-        $json = $this->request->toJSON();
+        $json    = $this->request->toJSON();
         $this->validateJSON($json, $options);
     }
 
@@ -216,7 +216,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $options = $this->getOptions();
         $this->request->setOptions($options);
-        $json = $this->request->__toString();
+        $json    = $this->request->__toString();
         $this->validateJSON($json, $options);
     }
 
@@ -245,7 +245,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 'four',
                 true,
             ),
-            'id' => 'foobar'
+            'id'     => 'foobar'
         );
     }
 

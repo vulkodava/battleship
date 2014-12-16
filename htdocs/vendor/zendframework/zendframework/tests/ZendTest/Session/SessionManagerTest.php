@@ -13,7 +13,7 @@ use Zend\Session\SessionManager;
 use Zend\Session;
 
 /**
- * @group               Zend_Session
+ * @group      Zend_Session
  * @preserveGlobalState disabled
  */
 class SessionManagerTest extends \PHPUnit_Framework_TestCase
@@ -30,7 +30,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->forceAutoloader();
-        $this->error = false;
+        $this->error   = false;
         $this->manager = new SessionManager();
     }
 
@@ -51,10 +51,8 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     {
         if (preg_match('/expires=([^;]+)/', $cookie, $matches)) {
             $ts = new \DateTime($matches[1]);
-
             return $ts;
         }
-
         return false;
     }
 
@@ -243,7 +241,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testSettingNameWhenAnActiveSessionExistsRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Cannot set session name after a session has already started');
+                                    'Cannot set session name after a session has already started');
         $this->manager->start();
         $this->manager->setName('foobar');
     }
@@ -263,11 +261,11 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->destroy();
         echo '';
         $headers = xdebug_get_headers();
-        $found = false;
-        $sName = $this->manager->getName();
+        $found  = false;
+        $sName  = $this->manager->getName();
         foreach ($headers as $header) {
             if (stristr($header, 'Set-Cookie:') && stristr($header, $sName)) {
-                $found = true;
+                $found  = true;
             }
         }
         $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
@@ -288,11 +286,11 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->destroy(array('send_expire_cookie' => false));
         echo '';
         $headers = xdebug_get_headers();
-        $found = false;
-        $sName = $this->manager->getName();
+        $found  = false;
+        $sName  = $this->manager->getName();
         foreach ($headers as $header) {
             if (stristr($header, 'Set-Cookie:') && stristr($header, $sName)) {
-                $found = true;
+                $found  = true;
             }
         }
         if ($found) {
@@ -405,11 +403,11 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $origId = $this->manager->getId();
         $this->manager->regenerateId();
         $headers = xdebug_get_headers();
-        $found = false;
-        $sName = $this->manager->getName();
+        $found  = false;
+        $sName  = $this->manager->getName();
         foreach ($headers as $header) {
             if (stristr($header, 'Set-Cookie:') && stristr($header, $sName)) {
-                $found = true;
+                $found  = true;
             }
         }
         $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
@@ -429,12 +427,12 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->start();
         $this->manager->rememberMe(18600);
         $headers = xdebug_get_headers();
-        $found = false;
-        $sName = $this->manager->getName();
-        $cookie = false;
+        $found   = false;
+        $sName   = $this->manager->getName();
+        $cookie  = false;
         foreach ($headers as $header) {
             if (stristr($header, 'Set-Cookie:') && stristr($header, $sName) && !stristr($header, '=deleted')) {
-                $found = true;
+                $found  = true;
                 $cookie = $header;
             }
         }
@@ -462,12 +460,12 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->start();
         $this->manager->rememberMe();
         $headers = xdebug_get_headers();
-        $found = false;
-        $sName = $this->manager->getName();
+        $found  = false;
+        $sName  = $this->manager->getName();
         $cookie = false;
         foreach ($headers as $header) {
             if (stristr($header, 'Set-Cookie:') && stristr($header, $sName) && !stristr($header, '=deleted')) {
-                $found = true;
+                $found  = true;
                 $cookie = $header;
             }
         }
@@ -495,11 +493,11 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->start();
         $this->manager->forgetMe();
         $headers = xdebug_get_headers();
-        $found = false;
-        $sName = $this->manager->getName();
+        $found  = false;
+        $sName  = $this->manager->getName();
         foreach ($headers as $header) {
             if (stristr($header, 'Set-Cookie:') && stristr($header, $sName) && !stristr($header, '=deleted')) {
-                $found = true;
+                $found  = true;
             }
         }
         $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));

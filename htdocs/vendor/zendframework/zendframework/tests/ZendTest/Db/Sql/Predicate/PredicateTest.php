@@ -161,10 +161,10 @@ class PredicateTest extends TestCase
     {
         $predicate = new Predicate();
         $predicate->isNull('foo.bar')
-            ->or
-            ->isNotNull('bar.baz')
-            ->and
-            ->equalTo('baz.bat', 'foo');
+                  ->or
+                  ->isNotNull('bar.baz')
+                  ->and
+                  ->equalTo('baz.bat', 'foo');
         $parts = $predicate->getExpressionData();
         $this->assertEquals(5, count($parts));
 
@@ -186,11 +186,11 @@ class PredicateTest extends TestCase
     {
         $predicate = new Predicate();
         $predicate->isNull('foo.bar')
-            ->nest()
-            ->isNotNull('bar.baz')
-            ->and
-            ->equalTo('baz.bat', 'foo')
-            ->unnest();
+                  ->nest()
+                  ->isNotNull('bar.baz')
+                  ->and
+                  ->equalTo('baz.bat', 'foo')
+                  ->unnest();
         $parts = $predicate->getExpressionData();
 
         $this->assertEquals(7, count($parts));

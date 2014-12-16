@@ -10,6 +10,46 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        return new ViewModel();
+    }
+
+    public function ajaxDoctrineAction()
+    {
+        $em = $this->getEntityManager();
+        $queryBuilder = $em->createQueryBuilder();
+
+        $queryBuilder->add('select', 'p , q')
+            ->add('from', '\ZfTable\Entity\Customer q')
+            ->leftJoin('q.product', 'p')
+
+        ;
+
+        $table = new TableExample\Doctrine();
+        $table->setAdapter($this->getDbAdapter())
+            ->setSource($queryBuilder)
+            ->setParamAdapter($this->getRequest()->getPost())
+        ;
+
+        return $this->htmlResponse($table->render());
+    }
+
+    public function ajaxBaseAction()
+    {
+        $table = new TableExample\Base();
+        $table->setAdapter($this->getDbAdapter())
+            ->setSource($this->getSource())
+            ->setParamAdapter($this->getRequest()->getPost())
+        ;
+        return $this->htmlResponse($table->render());
+    }
+
+    public function playAction()
+    {
+        return new ViewModel();
+    }
+
+    public function createGameAction()
+    {
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
@@ -36,11 +76,5 @@ class IndexController extends AbstractActionController
 
         $objectManager->persist($game);
         $objectManager->flush();
-        return new ViewModel();
-    }
-
-    public function playAction()
-    {
-        return new ViewModel();
     }
 }

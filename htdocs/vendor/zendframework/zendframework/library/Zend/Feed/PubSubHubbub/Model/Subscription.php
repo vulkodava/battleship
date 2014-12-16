@@ -50,12 +50,10 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
                 $data,
                 array('id' => $data['id'])
             );
-
             return false;
         }
 
         $this->db->insert($data);
-
         return true;
     }
 
@@ -70,13 +68,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
     {
         if (empty($key) || !is_string($key)) {
             throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
-                . ' of "' . $key . '" must be a non-empty string');
+                .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->db->select(array('id' => $key));
         if (count($result)) {
             return $result->current()->getArrayCopy();
         }
-
         return false;
     }
 
@@ -91,13 +88,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
     {
         if (empty($key) || !is_string($key)) {
             throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
-                . ' of "' . $key . '" must be a non-empty string');
+                .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->db->select(array('id' => $key));
         if (count($result)) {
             return true;
         }
-
         return false;
     }
 
@@ -114,10 +110,8 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
             $this->db->delete(
                 array('id' => $key)
             );
-
             return true;
         }
-
         return false;
     }
 
@@ -131,7 +125,6 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
         if (null === $this->now) {
             return new DateTime();
         }
-
         return $this->now;
     }
 
@@ -144,7 +137,6 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
     public function setNow(DateTime $now)
     {
         $this->now = $now;
-
         return $this;
     }
 }

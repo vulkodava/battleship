@@ -67,7 +67,6 @@ class Callback
                 $this->$method($value);
             }
         }
-
         return $this;
     }
 
@@ -83,7 +82,6 @@ class Callback
             $class = get_class($class);
         }
         $this->class = $class;
-
         return $this;
     }
 
@@ -105,9 +103,8 @@ class Callback
      */
     public function setFunction($function)
     {
-        $this->function = (string)$function;
+        $this->function = (string) $function;
         $this->setType('function');
-
         return $this;
     }
 
@@ -130,7 +127,6 @@ class Callback
     public function setMethod($method)
     {
         $this->method = $method;
-
         return $this;
     }
 
@@ -157,7 +153,6 @@ class Callback
             throw new Server\Exception\InvalidArgumentException('Invalid method callback type "' . $type . '" passed to ' . __CLASS__ . '::' . __METHOD__);
         }
         $this->type = $type;
-
         return $this;
     }
 
@@ -185,10 +180,9 @@ class Callback
         if ('function' == $type) {
             $array['function'] = $this->getFunction();
         } else {
-            $array['class'] = $this->getClass();
+            $array['class']  = $this->getClass();
             $array['method'] = $this->getMethod();
         }
-
         return $array;
     }
 }

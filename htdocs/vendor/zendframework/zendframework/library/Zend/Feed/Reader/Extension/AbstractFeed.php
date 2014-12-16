@@ -52,7 +52,6 @@ abstract class AbstractFeed
     public function setDomDocument(DOMDocument $dom)
     {
         $this->domDocument = $dom;
-
         return $this;
     }
 
@@ -74,7 +73,6 @@ abstract class AbstractFeed
     public function getEncoding()
     {
         $assumed = $this->getDomDocument()->encoding;
-
         return $assumed;
     }
 
@@ -87,7 +85,6 @@ abstract class AbstractFeed
     public function setType($type)
     {
         $this->data['type'] = $type;
-
         return $this;
     }
 
@@ -105,7 +102,6 @@ abstract class AbstractFeed
             $type = Reader\Reader::detectType($this->getDomDocument());
             $this->setType($type);
         }
-
         return $type;
     }
 
@@ -129,13 +125,11 @@ abstract class AbstractFeed
     {
         if (null === $xpath) {
             $this->xpath = null;
-
             return $this;
         }
 
         $this->xpath = $xpath;
         $this->registerNamespaces();
-
         return $this;
     }
 

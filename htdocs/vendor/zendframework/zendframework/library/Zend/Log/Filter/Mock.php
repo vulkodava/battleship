@@ -27,7 +27,6 @@ class Mock implements FilterInterface
     public function filter(array $event)
     {
         $this->events[] = $event;
-
         return true;
     }
 }

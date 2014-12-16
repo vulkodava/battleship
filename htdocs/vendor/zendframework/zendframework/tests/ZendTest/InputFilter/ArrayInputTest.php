@@ -154,7 +154,7 @@ class ArrayInputTest extends InputTest
         $input2 = new ArrayInput('bar');
         $input2->merge($input);
         $validatorChain = $input->getValidatorChain();
-        $filterChain = $input->getFilterChain();
+        $filterChain    = $input->getFilterChain();
 
         $this->assertEquals(array(' 123 '), $input2->getRawValue());
         $this->assertEquals(1, $validatorChain->count());

@@ -156,7 +156,7 @@ class Command
      * execute() method, you set the code to execute by passing
      * a Closure to the setCode() method.
      *
-     * @param InputInterface $input   An InputInterface instance
+     * @param InputInterface  $input  An InputInterface instance
      * @param OutputInterface $output An OutputInterface instance
      *
      * @return null|int null or 0 if everything went fine, or an error code
@@ -172,7 +172,7 @@ class Command
     /**
      * Interacts with the user.
      *
-     * @param InputInterface $input   An InputInterface instance
+     * @param InputInterface  $input  An InputInterface instance
      * @param OutputInterface $output An OutputInterface instance
      */
     protected function interact(InputInterface $input, OutputInterface $output)
@@ -185,7 +185,7 @@ class Command
      * This is mainly useful when a lot of commands extends one main command
      * where some things need to be initialized based on the input arguments and options.
      *
-     * @param InputInterface $input   An InputInterface instance
+     * @param InputInterface  $input  An InputInterface instance
      * @param OutputInterface $output An OutputInterface instance
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -199,7 +199,7 @@ class Command
      * setCode() method or by overriding the execute() method
      * in a sub-class.
      *
-     * @param InputInterface $input   An InputInterface instance
+     * @param InputInterface  $input  An InputInterface instance
      * @param OutputInterface $output An OutputInterface instance
      *
      * @return int The command exit code
@@ -252,7 +252,7 @@ class Command
             $statusCode = $this->execute($input, $output);
         }
 
-        return is_numeric($statusCode) ? (int)$statusCode : 0;
+        return is_numeric($statusCode) ? (int) $statusCode : 0;
     }
 
     /**
@@ -287,8 +287,7 @@ class Command
      *
      * This method is not part of public API and should not be used directly.
      *
-     * @param bool $mergeArgs Whether to merge or not the Application definition arguments to Command definition
-     *                        arguments
+     * @param bool $mergeArgs Whether to merge or not the Application definition arguments to Command definition arguments
      */
     public function mergeApplicationDefinition($mergeArgs = true)
     {
@@ -363,9 +362,9 @@ class Command
      * Adds an argument.
      *
      * @param string $name        The argument name
-     * @param int $mode           The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
+     * @param int    $mode        The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
      * @param string $description A description text
-     * @param mixed $default      The default value (for InputArgument::OPTIONAL mode only)
+     * @param mixed  $default     The default value (for InputArgument::OPTIONAL mode only)
      *
      * @return Command The current instance
      *
@@ -383,10 +382,9 @@ class Command
      *
      * @param string $name        The option name
      * @param string $shortcut    The shortcut (can be null)
-     * @param int $mode           The option mode: One of the InputOption::VALUE_* constants
+     * @param int    $mode        The option mode: One of the InputOption::VALUE_* constants
      * @param string $description A description text
-     * @param mixed $default      The default value (must be null for InputOption::VALUE_REQUIRED or
-     *                            InputOption::VALUE_NONE)
+     * @param mixed  $default     The default value (must be null for InputOption::VALUE_REQUIRED or InputOption::VALUE_NONE)
      *
      * @return Command The current instance
      *
@@ -527,7 +525,7 @@ class Command
         );
         $replacements = array(
             $name,
-            $_SERVER['PHP_SELF'] . ' ' . $name,
+            $_SERVER['PHP_SELF'].' '.$name,
         );
 
         return str_replace($placeholders, $replacements, $this->getHelp());

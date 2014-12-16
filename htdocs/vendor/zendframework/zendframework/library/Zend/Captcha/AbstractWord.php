@@ -22,10 +22,10 @@ abstract class AbstractWord extends AbstractAdapter
     /**#@+
      * @var array Character sets
      */
-    public static $V = array("a", "e", "i", "o", "u", "y");
-    public static $VN = array("a", "e", "i", "o", "u", "y", "2", "3", "4", "5", "6", "7", "8", "9");
-    public static $C = array("b", "c", "d", "f", "g", "h", "j", "k", "m", "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "z");
-    public static $CN = array("b", "c", "d", "f", "g", "h", "j", "k", "m", "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "z", "2", "3", "4", "5", "6", "7", "8", "9");
+    public static $V  = array("a", "e", "i", "o", "u", "y");
+    public static $VN = array("a", "e", "i", "o", "u", "y","2","3","4","5","6","7","8","9");
+    public static $C  = array("b","c","d","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","z");
+    public static $CN = array("b","c","d","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","z","2","3","4","5","6","7","8","9");
     /**#@-*/
 
     /**
@@ -88,19 +88,18 @@ abstract class AbstractWord extends AbstractAdapter
      * Error codes
      */
     const MISSING_VALUE = 'missingValue';
-    const MISSING_ID = 'missingID';
-    const BAD_CAPTCHA = 'badCaptcha';
+    const MISSING_ID    = 'missingID';
+    const BAD_CAPTCHA   = 'badCaptcha';
     /**#@-*/
 
     /**
      * Error messages
-     *
      * @var array
      */
     protected $messageTemplates = array(
         self::MISSING_VALUE => 'Empty captcha value',
-        self::MISSING_ID => 'Captcha ID field is missing',
-        self::BAD_CAPTCHA => 'Captcha value is wrong',
+        self::MISSING_ID    => 'Captcha ID field is missing',
+        self::BAD_CAPTCHA   => 'Captcha value is wrong',
     );
 
     /**
@@ -129,7 +128,6 @@ abstract class AbstractWord extends AbstractAdapter
     public function setSessionClass($sessionClass)
     {
         $this->sessionClass = $sessionClass;
-
         return $this;
     }
 
@@ -152,7 +150,6 @@ abstract class AbstractWord extends AbstractAdapter
     public function setWordlen($wordlen)
     {
         $this->wordlen = $wordlen;
-
         return $this;
     }
 
@@ -166,7 +163,6 @@ abstract class AbstractWord extends AbstractAdapter
         if (null === $this->id) {
             $this->setId($this->generateRandomId());
         }
-
         return $this->id;
     }
 
@@ -179,7 +175,6 @@ abstract class AbstractWord extends AbstractAdapter
     protected function setId($id)
     {
         $this->id = $id;
-
         return $this;
     }
 
@@ -191,8 +186,7 @@ abstract class AbstractWord extends AbstractAdapter
      */
     public function setTimeout($ttl)
     {
-        $this->timeout = (int)$ttl;
-
+        $this->timeout = (int) $ttl;
         return $this;
     }
 
@@ -215,7 +209,6 @@ abstract class AbstractWord extends AbstractAdapter
     public function setKeepSession($keepSession)
     {
         $this->keepSession = $keepSession;
-
         return $this;
     }
 
@@ -238,7 +231,6 @@ abstract class AbstractWord extends AbstractAdapter
     public function setUseNumbers($useNumbers)
     {
         $this->useNumbers = $useNumbers;
-
         return $this;
     }
 
@@ -259,7 +251,6 @@ abstract class AbstractWord extends AbstractAdapter
             $this->session->setExpirationHops(1, null);
             $this->session->setExpirationSeconds($this->getTimeout());
         }
-
         return $this->session;
     }
 
@@ -275,7 +266,6 @@ abstract class AbstractWord extends AbstractAdapter
         if ($session) {
             $this->keepSession = true;
         }
-
         return $this;
     }
 
@@ -287,10 +277,9 @@ abstract class AbstractWord extends AbstractAdapter
     public function getWord()
     {
         if (empty($this->word)) {
-            $session = $this->getSession();
-            $this->word = $session->word;
+            $session     = $this->getSession();
+            $this->word  = $session->word;
         }
-
         return $this->word;
     }
 
@@ -302,10 +291,9 @@ abstract class AbstractWord extends AbstractAdapter
      */
     protected function setWord($word)
     {
-        $session = $this->getSession();
+        $session       = $this->getSession();
         $session->word = $word;
-        $this->word = $word;
-
+        $this->word    = $word;
         return $this;
     }
 
@@ -316,16 +304,16 @@ abstract class AbstractWord extends AbstractAdapter
      */
     protected function generateWord()
     {
-        $word = '';
-        $wordLen = $this->getWordLen();
-        $vowels = $this->useNumbers ? static::$VN : static::$V;
+        $word       = '';
+        $wordLen    = $this->getWordLen();
+        $vowels     = $this->useNumbers ? static::$VN : static::$V;
         $consonants = $this->useNumbers ? static::$CN : static::$C;
 
-        for ($i = 0; $i < $wordLen; $i = $i + 2) {
+        for ($i=0; $i < $wordLen; $i = $i + 2) {
             // generate word with mix of vowels and consonants
             $consonant = $consonants[array_rand($consonants)];
-            $vowel = $vowels[array_rand($vowels)];
-            $word .= $consonant . $vowel;
+            $vowel     = $vowels[array_rand($vowels)];
+            $word     .= $consonant . $vowel;
         }
 
         if (strlen($word) > $wordLen) {
@@ -349,7 +337,6 @@ abstract class AbstractWord extends AbstractAdapter
         $this->setId($id);
         $word = $this->generateWord();
         $this->setWord($word);
-
         return $id;
     }
 
@@ -376,7 +363,6 @@ abstract class AbstractWord extends AbstractAdapter
         if (!is_array($value)) {
             if (!is_array($context)) {
                 $this->error(self::MISSING_VALUE);
-
                 return false;
             }
             $value = $context;
@@ -390,7 +376,6 @@ abstract class AbstractWord extends AbstractAdapter
 
         if (!isset($value['input'])) {
             $this->error(self::MISSING_VALUE);
-
             return false;
         }
         $input = strtolower($value['input']);
@@ -398,14 +383,12 @@ abstract class AbstractWord extends AbstractAdapter
 
         if (!isset($value['id'])) {
             $this->error(self::MISSING_ID);
-
             return false;
         }
 
         $this->id = $value['id'];
         if ($input !== $this->getWord()) {
             $this->error(self::BAD_CAPTCHA);
-
             return false;
         }
 

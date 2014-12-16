@@ -80,7 +80,6 @@ class Bcrypt implements PasswordInterface
         $salt64 = substr(str_replace('+', '.', base64_encode($salt)), 0, 22);
         /**
          * Check for security flaw in the bcrypt implementation used by crypt()
-         *
          * @see http://php.net/security/crypt_blowfish.php
          */
         $prefix = '$2y$';
@@ -88,7 +87,6 @@ class Bcrypt implements PasswordInterface
         if (strlen($hash) < 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
         }
-
         return $hash;
     }
 
@@ -106,7 +104,6 @@ class Bcrypt implements PasswordInterface
         if ($result === $hash) {
             return true;
         }
-
         return false;
     }
 
@@ -120,7 +117,7 @@ class Bcrypt implements PasswordInterface
     public function setCost($cost)
     {
         if (!empty($cost)) {
-            $cost = (int)$cost;
+            $cost = (int) $cost;
             if ($cost < 4 || $cost > 31) {
                 throw new Exception\InvalidArgumentException(
                     'The cost parameter of bcrypt must be in range 04-31'
@@ -128,7 +125,6 @@ class Bcrypt implements PasswordInterface
             }
             $this->cost = sprintf('%1$02d', $cost);
         }
-
         return $this;
     }
 
@@ -157,7 +153,6 @@ class Bcrypt implements PasswordInterface
             );
         }
         $this->salt = $salt;
-
         return $this;
     }
 

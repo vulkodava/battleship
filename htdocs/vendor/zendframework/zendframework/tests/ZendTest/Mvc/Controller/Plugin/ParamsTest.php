@@ -22,7 +22,7 @@ class ParamsTest extends TestCase
     public function setUp()
     {
         $this->request = new Request;
-        $event = new MvcEvent;
+        $event         = new MvcEvent;
 
         $event->setRequest($this->request);
         $event->setResponse(new Response());
@@ -134,11 +134,11 @@ class ParamsTest extends TestCase
     public function testFromFilesReturnsExpectedValue()
     {
         $file = array(
-            'name' => 'test.txt',
-            'type' => 'text/plain',
-            'size' => 0,
+            'name'     => 'test.txt',
+            'type'     => 'text/plain',
+            'size'     => 0,
             'tmp_name' => '/tmp/' . uniqid(),
-            'error' => UPLOAD_ERR_OK,
+            'error'    => UPLOAD_ERR_OK,
         );
         $this->request->getFiles()->set('test', $file);
         $this->controller->dispatch($this->request);
@@ -150,19 +150,19 @@ class ParamsTest extends TestCase
     public function testFromFilesReturnsAllIfEmpty()
     {
         $file = array(
-            'name' => 'test.txt',
-            'type' => 'text/plain',
-            'size' => 0,
+            'name'     => 'test.txt',
+            'type'     => 'text/plain',
+            'size'     => 0,
             'tmp_name' => '/tmp/' . uniqid(),
-            'error' => UPLOAD_ERR_OK,
+            'error'    => UPLOAD_ERR_OK,
         );
 
         $file2 = array(
-            'name' => 'file2.txt',
-            'type' => 'text/plain',
-            'size' => 1,
+            'name'     => 'file2.txt',
+            'type'     => 'text/plain',
+            'size'     => 1,
             'tmp_name' => '/tmp/' . uniqid(),
-            'error' => UPLOAD_ERR_OK,
+            'error'    => UPLOAD_ERR_OK,
         );
         $this->request->getFiles()->set('file', $file);
         $this->request->getFiles()->set('file2', $file2);

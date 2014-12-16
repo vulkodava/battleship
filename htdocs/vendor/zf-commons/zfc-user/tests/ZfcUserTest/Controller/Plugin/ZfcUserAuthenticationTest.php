@@ -46,23 +46,22 @@ class ZfcUserAuthenticationTest extends \PHPUnit_Framework_TestCase
         $callbackIndex = 0;
         $callback = function () use (&$callbackIndex) {
             $callbackIndex++;
-
-            return (bool)($callbackIndex % 2);
+            return (bool) ($callbackIndex % 2);
         };
 
         $this->mockedAuthenticationService->expects($this->any())
-            ->method('hasIdentity')
-            ->will($this->returnCallback($callback));
+                                          ->method('hasIdentity')
+                                          ->will($this->returnCallback($callback));
 
         $this->mockedAuthenticationService->expects($this->any())
-            ->method('getIdentity')
-            ->will($this->returnCallback($callback));
+                                          ->method('getIdentity')
+                                          ->will($this->returnCallback($callback));
 
         $this->assertTrue($this->SUT->hasIdentity());
         $this->assertFalse($this->SUT->hasIdentity());
         $this->assertTrue($this->SUT->hasIdentity());
 
-        $callbackIndex = 0;
+        $callbackIndex= 0;
 
         $this->assertTrue($this->SUT->getIdentity());
         $this->assertFalse($this->SUT->getIdentity());

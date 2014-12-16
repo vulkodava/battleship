@@ -77,7 +77,7 @@ class Publisher
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Array or Traversable object'
-                . 'expected, got ' . gettype($options));
+                                . 'expected, got ' . gettype($options));
         }
         if (array_key_exists('hubUrls', $options)) {
             $this->addHubUrls($options['hubUrls']);
@@ -88,7 +88,6 @@ class Publisher
         if (array_key_exists('parameters', $options)) {
             $this->setParameters($options['parameters']);
         }
-
         return $this;
     }
 
@@ -107,7 +106,6 @@ class Publisher
                 . 'URL');
         }
         $this->hubUrls[] = $url;
-
         return $this;
     }
 
@@ -122,7 +120,6 @@ class Publisher
         foreach ($urls as $url) {
             $this->addHubUrl($url);
         }
-
         return $this;
     }
 
@@ -139,7 +136,6 @@ class Publisher
         }
         $key = array_search($url, $this->hubUrls);
         unset($this->hubUrls[$key]);
-
         return $this;
     }
 
@@ -151,7 +147,6 @@ class Publisher
     public function getHubUrls()
     {
         $this->hubUrls = array_unique($this->hubUrls);
-
         return $this->hubUrls;
     }
 
@@ -170,7 +165,6 @@ class Publisher
                 . 'URL');
         }
         $this->updatedTopicUrls[] = $url;
-
         return $this;
     }
 
@@ -185,7 +179,6 @@ class Publisher
         foreach ($urls as $url) {
             $this->addUpdatedTopicUrl($url);
         }
-
         return $this;
     }
 
@@ -202,7 +195,6 @@ class Publisher
         }
         $key = array_search($url, $this->updatedTopicUrls);
         unset($this->updatedTopicUrls[$key]);
-
         return $this;
     }
 
@@ -214,7 +206,6 @@ class Publisher
     public function getUpdatedTopicUrls()
     {
         $this->updatedTopicUrls = array_unique($this->updatedTopicUrls);
-
         return $this->updatedTopicUrls;
     }
 
@@ -258,7 +249,7 @@ class Publisher
     public function notifyAll()
     {
         $client = $this->_getHttpClient();
-        $hubs = $this->getHubUrls();
+        $hubs   = $this->getHubUrls();
         if (empty($hubs)) {
             throw new Exception\RuntimeException('No Hub Server URLs'
                 . ' have been set so no notifications can be sent');
@@ -288,7 +279,6 @@ class Publisher
     {
         if (is_array($name)) {
             $this->setParameters($name);
-
             return $this;
         }
         if (empty($name) || !is_string($name)) {
@@ -297,7 +287,6 @@ class Publisher
         }
         if ($value === null) {
             $this->removeParameter($name);
-
             return $this;
         }
         if (empty($value) || (!is_string($value) && $value !== null)) {
@@ -305,7 +294,6 @@ class Publisher
                 . ' of "' . $value . '" must be a non-empty string');
         }
         $this->parameters[$name] = $value;
-
         return $this;
     }
 
@@ -320,7 +308,6 @@ class Publisher
         foreach ($parameters as $name => $value) {
             $this->setParameter($name, $value);
         }
-
         return $this;
     }
 
@@ -340,7 +327,6 @@ class Publisher
         if (array_key_exists($name, $this->parameters)) {
             unset($this->parameters[$name]);
         }
-
         return $this;
     }
 
@@ -390,9 +376,9 @@ class Publisher
         $client->setOptions(array(
             'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . Version::VERSION,
         ));
-        $params = array();
+        $params   = array();
         $params[] = 'hub.mode=publish';
-        $topics = $this->getUpdatedTopicUrls();
+        $topics   = $this->getUpdatedTopicUrls();
         if (empty($topics)) {
             throw new Exception\RuntimeException('No updated topic URLs'
                 . ' have been set');
@@ -406,7 +392,6 @@ class Publisher
         }
         $paramString = implode('&', $params);
         $client->setRawBody($paramString);
-
         return $client;
     }
 }

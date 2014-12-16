@@ -42,7 +42,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value = 'test';
+        $value    = 'test';
         $expected = igbinary_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -51,7 +51,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeFalse()
     {
-        $value = false;
+        $value    = false;
         $expected = igbinary_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -60,7 +60,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNull()
     {
-        $value = null;
+        $value    = null;
         $expected = igbinary_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -69,7 +69,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNumeric()
     {
-        $value = 100;
+        $value    = 100;
         $expected = igbinary_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -78,7 +78,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeObject()
     {
-        $value = new \stdClass();
+        $value    = new \stdClass();
         $expected = igbinary_serialize($value);
 
         $data = $this->adapter->serialize($value);
@@ -88,7 +88,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeString()
     {
         $expected = 'test';
-        $value = igbinary_serialize($expected);
+        $value    = igbinary_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -97,7 +97,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeFalse()
     {
         $expected = false;
-        $value = igbinary_serialize($expected);
+        $value    = igbinary_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -106,7 +106,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeNull()
     {
         $expected = null;
-        $value = igbinary_serialize($expected);
+        $value    = igbinary_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -115,7 +115,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeNumeric()
     {
         $expected = 100;
-        $value = igbinary_serialize($expected);
+        $value    = igbinary_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);
@@ -124,7 +124,7 @@ class IgBinaryTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeObject()
     {
         $expected = new \stdClass();
-        $value = igbinary_serialize($expected);
+        $value    = igbinary_serialize($expected);
 
         $data = $this->adapter->unserialize($value);
         $this->assertEquals($expected, $data);

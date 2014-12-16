@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -28,17 +28,17 @@ class ZendDb implements ProviderInterface
     /**
      * @var string
      */
-    protected $adapterName = 'bjyauthorize_zend_db_adapter';
+    protected $adapterName         = 'bjyauthorize_zend_db_adapter';
 
     /**
      * @var string
      */
-    protected $tableName = 'user_role';
+    protected $tableName           = 'user_role';
 
     /**
      * @var string
      */
-    protected $roleIdFieldName = 'role_id';
+    protected $roleIdFieldName     = 'role_id';
 
     /**
      * @var string
@@ -76,14 +76,14 @@ class ZendDb implements ProviderInterface
     public function getRoles()
     {
         /* @var $adapter \Zend\Db\Adapter\Adapter */
-        $adapter = $this->serviceLocator->get($this->adapterName);
+        $adapter      = $this->serviceLocator->get($this->adapterName);
         $tableGateway = new TableGateway($this->tableName, $adapter);
-        $sql = new Select;
+        $sql          = new Select;
 
         $sql->from($this->tableName);
 
         $rowset = $tableGateway->selectWith($sql);
-        $roles = array();
+        $roles  = array();
 
         // Pass One: Build each object
         foreach ($rowset as $row) {

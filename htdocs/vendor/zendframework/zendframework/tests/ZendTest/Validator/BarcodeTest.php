@@ -466,13 +466,13 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Barcode('code25');
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-            'messageTemplates', $validator);
+                                     'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = new Barcode('code25');
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
-            'messageVariables', $validator);
+                                     'messageVariables', $validator);
     }
 }

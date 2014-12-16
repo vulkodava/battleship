@@ -57,7 +57,7 @@ class ZfcUserLoginWidgetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers       ZfcUser\View\Helper\ZfcUserLoginWidget::__invoke
+     * @covers ZfcUser\View\Helper\ZfcUserLoginWidget::__invoke
      * @dataProvider providerTestInvokeWithRender
      */
     public function testInvokeWithRender($option, $expect)
@@ -68,12 +68,11 @@ class ZfcUserLoginWidgetTest extends \PHPUnit_Framework_TestCase
         $viewModel = null;
 
         $this->view->expects($this->at(0))
-            ->method('render')
-            ->will($this->returnCallback(function ($vm) use (&$viewModel) {
-                $viewModel = $vm;
-
-                return "test";
-            }));
+             ->method('render')
+             ->will($this->returnCallback(function ($vm) use (&$viewModel) {
+                 $viewModel = $vm;
+                 return "test";
+             }));
 
         $result = $this->helper->__invoke($option);
 

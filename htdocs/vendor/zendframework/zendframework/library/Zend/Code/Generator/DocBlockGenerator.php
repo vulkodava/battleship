@@ -105,7 +105,6 @@ class DocBlockGenerator extends AbstractGenerator
             static::$tagManager = new TagManager();
             static::$tagManager->initializeDefaultTags();
         }
-
         return static::$tagManager;
     }
 
@@ -134,7 +133,6 @@ class DocBlockGenerator extends AbstractGenerator
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
-
         return $this;
     }
 
@@ -153,7 +151,6 @@ class DocBlockGenerator extends AbstractGenerator
     public function setLongDescription($longDescription)
     {
         $this->longDescription = $longDescription;
-
         return $this;
     }
 
@@ -199,7 +196,6 @@ class DocBlockGenerator extends AbstractGenerator
         }
 
         $this->tags[] = $tag;
-
         return $this;
     }
 
@@ -217,8 +213,7 @@ class DocBlockGenerator extends AbstractGenerator
      */
     public function setWordWrap($value)
     {
-        $this->wordwrap = (bool)$value;
-
+        $this->wordwrap = (bool) $value;
         return $this;
     }
 
@@ -261,10 +256,10 @@ class DocBlockGenerator extends AbstractGenerator
      */
     protected function docCommentize($content)
     {
-        $indent = $this->getIndentation();
-        $output = $indent . '/**' . self::LINE_FEED;
+        $indent  = $this->getIndentation();
+        $output  = $indent . '/**' . self::LINE_FEED;
         $content = $this->getWordWrap() == true ? wordwrap($content, 80, self::LINE_FEED) : $content;
-        $lines = explode(self::LINE_FEED, $content);
+        $lines   = explode(self::LINE_FEED, $content);
         foreach ($lines as $line) {
             $output .= $indent . ' *';
             if ($line) {

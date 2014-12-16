@@ -15,7 +15,6 @@ class File extends Part\File implements MessageInterface
 {
     /**
      * flags for this message
-     *
      * @var array
      */
     protected $flags = array();

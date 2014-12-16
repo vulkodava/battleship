@@ -32,7 +32,7 @@ class NotExists extends Exists
      * Returns true if and only if the file does not exist in the set destinations
      *
      * @param  string|array $value Real file to check for existence
-     * @param  array $file         File data from \Zend\File\Transfer\Transfer (optional)
+     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
      * @return bool
      */
     public function isValid($value, $file = null)
@@ -40,7 +40,7 @@ class NotExists extends Exists
         if (is_string($value) && is_array($file)) {
             // Legacy Zend\Transfer API support
             $filename = $file['name'];
-            $file = $file['tmp_name'];
+            $file     = $file['tmp_name'];
             $this->setValue($filename);
         } elseif (is_array($value)) {
             if (!isset($value['tmp_name']) || !isset($value['name'])) {
@@ -48,11 +48,11 @@ class NotExists extends Exists
                     'Value array must be in $_FILES format'
                 );
             }
-            $file = $value['tmp_name'];
+            $file     = $value['tmp_name'];
             $filename = basename($file);
             $this->setValue($value['name']);
         } else {
-            $file = $value;
+            $file     = $value;
             $filename = basename($file);
             $this->setValue($filename);
         }
@@ -63,7 +63,6 @@ class NotExists extends Exists
             $check = true;
             if (file_exists($file)) {
                 $this->error(self::DOES_EXIST);
-
                 return false;
             }
         } else {
@@ -75,7 +74,6 @@ class NotExists extends Exists
                 $check = true;
                 if (file_exists($directory . DIRECTORY_SEPARATOR . $filename)) {
                     $this->error(self::DOES_EXIST);
-
                     return false;
                 }
             }
@@ -83,7 +81,6 @@ class NotExists extends Exists
 
         if (!$check) {
             $this->error(self::DOES_EXIST);
-
             return false;
         }
 

@@ -61,7 +61,7 @@ class StringLengthTest extends \PHPUnit_Framework_TestCase
             array(2, 3, false, array('a', 'abcd')),
             array(3, 3, true, array('äöü')),
             array(6, 6, true, array('Müller'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             $validator = new StringLength($element[0], $element[1]);
             foreach ($element[3] as $input) {
@@ -159,13 +159,13 @@ class StringLengthTest extends \PHPUnit_Framework_TestCase
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-            'messageTemplates', $validator);
+                                     'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
-            'messageVariables', $validator);
+                                     'messageVariables', $validator);
     }
 }

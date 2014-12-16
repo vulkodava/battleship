@@ -29,20 +29,20 @@ class RequestTest extends TestCase
     public function setUp()
     {
         $this->originalEnvironment = array(
-            'post' => $_POST,
-            'get' => $_GET,
+            'post'   => $_POST,
+            'get'    => $_GET,
             'cookie' => $_COOKIE,
             'server' => $_SERVER,
-            'env' => $_ENV,
-            'files' => $_FILES,
+            'env'    => $_ENV,
+            'files'  => $_FILES,
         );
 
-        $_POST = array();
-        $_GET = array();
+        $_POST   = array();
+        $_GET    = array();
         $_COOKIE = array();
         $_SERVER = array();
-        $_ENV = array();
-        $_FILES = array();
+        $_ENV    = array();
+        $_FILES  = array();
     }
 
     /**
@@ -50,12 +50,12 @@ class RequestTest extends TestCase
      */
     public function tearDown()
     {
-        $_POST = $this->originalEnvironment['post'];
-        $_GET = $this->originalEnvironment['get'];
+        $_POST   = $this->originalEnvironment['post'];
+        $_GET    = $this->originalEnvironment['get'];
         $_COOKIE = $this->originalEnvironment['cookie'];
         $_SERVER = $this->originalEnvironment['server'];
-        $_ENV = $this->originalEnvironment['env'];
-        $_FILES = $this->originalEnvironment['files'];
+        $_ENV    = $this->originalEnvironment['env'];
+        $_FILES  = $this->originalEnvironment['files'];
     }
 
     /**
@@ -66,10 +66,10 @@ class RequestTest extends TestCase
         return array(
             array(
                 array(
-                    'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
-                    'QUERY_URI' => 'var1=val1&var2=val2',
-                    'SCRIPT_NAME' => '/index.php',
-                    'PHP_SELF' => '/index.php/news/3',
+                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
+                    'QUERY_URI'       => 'var1=val1&var2=val2',
+                    'SCRIPT_NAME'     => '/index.php',
+                    'PHP_SELF'        => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
@@ -77,10 +77,10 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'REQUEST_URI' => '/public/index.php/news/3?var1=val1&var2=val2',
-                    'QUERY_URI' => 'var1=val1&var2=val2',
-                    'SCRIPT_NAME' => '/public/index.php',
-                    'PHP_SELF' => '/public/index.php/news/3',
+                    'REQUEST_URI'     => '/public/index.php/news/3?var1=val1&var2=val2',
+                    'QUERY_URI'       => 'var1=val1&var2=val2',
+                    'SCRIPT_NAME'     => '/public/index.php',
+                    'PHP_SELF'        => '/public/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/public/index.php',
                 ),
                 '/public/index.php',
@@ -88,9 +88,9 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
-                    'SCRIPT_NAME' => '/home.php',
-                    'PHP_SELF' => '/index.php/news/3',
+                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
+                    'SCRIPT_NAME'     => '/home.php',
+                    'PHP_SELF'        => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
@@ -98,19 +98,19 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
-                    'SCRIPT_NAME' => '/home.php',
-                    'PHP_SELF' => '/home.php',
+                    'REQUEST_URI'      => '/index.php/news/3?var1=val1&var2=val2',
+                    'SCRIPT_NAME'      => '/home.php',
+                    'PHP_SELF'         => '/home.php',
                     'ORIG_SCRIPT_NAME' => '/index.php',
-                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
+                    'SCRIPT_FILENAME'  => '/var/web/html/index.php',
                 ),
                 '/index.php',
                 ''
             ),
             array(
                 array(
-                    'REQUEST_URI' => '/index.php/news/3?var1=val1&var2=val2',
-                    'PHP_SELF' => '/index.php/news/3',
+                    'REQUEST_URI'     => '/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF'        => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
@@ -119,7 +119,17 @@ class RequestTest extends TestCase
             array(
                 array(
                     'HTTP_X_REWRITE_URL' => '/index.php/news/3?var1=val1&var2=val2',
-                    'PHP_SELF' => '/index.php/news/3',
+                    'PHP_SELF'           => '/index.php/news/3',
+                    'SCRIPT_FILENAME'    => '/var/web/html/index.php',
+                ),
+                '/index.php',
+                ''
+            ),
+            array(
+                array(
+                    'ORIG_PATH_INFO'  => '/index.php/news/3',
+                    'QUERY_STRING'    => 'var1=val1&var2=val2',
+                    'PHP_SELF'        => '/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/index.php',
@@ -127,18 +137,8 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'ORIG_PATH_INFO' => '/index.php/news/3',
-                    'QUERY_STRING' => 'var1=val1&var2=val2',
-                    'PHP_SELF' => '/index.php/news/3',
-                    'SCRIPT_FILENAME' => '/var/web/html/index.php',
-                ),
-                '/index.php',
-                ''
-            ),
-            array(
-                array(
-                    'REQUEST_URI' => '/article/archive?foo=index.php',
-                    'QUERY_STRING' => 'foo=index.php',
+                    'REQUEST_URI'     => '/article/archive?foo=index.php',
+                    'QUERY_STRING'    => 'foo=index.php',
                     'SCRIPT_FILENAME' => '/var/www/zftests/index.php',
                 ),
                 '',
@@ -146,8 +146,8 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'REQUEST_URI' => '/html/index.php/news/3?var1=val1&var2=val2',
-                    'PHP_SELF' => '/html/index.php/news/3',
+                    'REQUEST_URI'     => '/html/index.php/news/3?var1=val1&var2=val2',
+                    'PHP_SELF'        => '/html/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
@@ -155,8 +155,8 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'REQUEST_URI' => '/dir/action',
-                    'PHP_SELF' => '/dir/index.php',
+                    'REQUEST_URI'     => '/dir/action',
+                    'PHP_SELF'        => '/dir/index.php',
                     'SCRIPT_FILENAME' => '/var/web/dir/index.php',
                 ),
                 '/dir',
@@ -164,11 +164,11 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'SCRIPT_NAME' => '/~username/public/index.php',
-                    'REQUEST_URI' => '/~username/public/',
-                    'PHP_SELF' => '/~username/public/index.php',
+                    'SCRIPT_NAME'     => '/~username/public/index.php',
+                    'REQUEST_URI'     => '/~username/public/',
+                    'PHP_SELF'        => '/~username/public/index.php',
                     'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
-                    'ORIG_SCRIPT_NAME' => null
+                    'ORIG_SCRIPT_NAME'=> null
                 ),
                 '/~username/public',
                 '/~username/public'
@@ -176,19 +176,19 @@ class RequestTest extends TestCase
             // ZF2-206
             array(
                 array(
-                    'SCRIPT_NAME' => '/zf2tut/index.php',
-                    'REQUEST_URI' => '/zf2tut/',
-                    'PHP_SELF' => '/zf2tut/index.php',
+                    'SCRIPT_NAME'     => '/zf2tut/index.php',
+                    'REQUEST_URI'     => '/zf2tut/',
+                    'PHP_SELF'        => '/zf2tut/index.php',
                     'SCRIPT_FILENAME' => 'c:/ZF2Tutorial/public/index.php',
-                    'ORIG_SCRIPT_NAME' => null
+                    'ORIG_SCRIPT_NAME'=> null
                 ),
                 '/zf2tut',
                 '/zf2tut'
             ),
             array(
                 array(
-                    'REQUEST_URI' => '/html/index.php/news/3?var1=val1&var2=/index.php',
-                    'PHP_SELF' => '/html/index.php/news/3',
+                    'REQUEST_URI'     => '/html/index.php/news/3?var1=val1&var2=/index.php',
+                    'PHP_SELF'        => '/html/index.php/news/3',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
@@ -196,8 +196,8 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'REQUEST_URI' => '/html/index.php/news/index.php',
-                    'PHP_SELF' => '/html/index.php/news/index.php',
+                    'REQUEST_URI'     => '/html/index.php/news/index.php',
+                    'PHP_SELF'        => '/html/index.php/news/index.php',
                     'SCRIPT_FILENAME' => '/var/web/html/index.php',
                 ),
                 '/html/index.php',
@@ -219,7 +219,7 @@ class RequestTest extends TestCase
 
     /**
      * @dataProvider baseUrlAndPathProvider
-     * @param array $server
+     * @param array  $server
      * @param string $baseUrl
      * @param string $basePath
      */
@@ -228,7 +228,7 @@ class RequestTest extends TestCase
         $_SERVER = $server;
         $request = new Request();
 
-        $this->assertEquals($baseUrl, $request->getBaseUrl());
+        $this->assertEquals($baseUrl,  $request->getBaseUrl());
         $this->assertEquals($basePath, $request->getBasePath());
     }
 
@@ -240,49 +240,49 @@ class RequestTest extends TestCase
         return array(
             array(
                 array(
-                    'HTTP_USER_AGENT' => 'Dummy',
+                    'HTTP_USER_AGENT'     => 'Dummy',
                 ),
                 'User-Agent',
                 'Dummy'
             ),
             array(
                 array(
-                    'HTTP_CUSTOM_COUNT' => '0',
+                    'HTTP_CUSTOM_COUNT'     => '0',
                 ),
                 'Custom-Count',
                 '0'
             ),
             array(
                 array(
-                    'CONTENT_TYPE' => 'text/html',
+                    'CONTENT_TYPE'     => 'text/html',
                 ),
                 'Content-Type',
                 'text/html'
             ),
             array(
                 array(
-                    'CONTENT_LENGTH' => 0,
+                    'CONTENT_LENGTH'     => 0,
                 ),
                 'Content-Length',
                 0
             ),
             array(
                 array(
-                    'CONTENT_LENGTH' => 0,
+                    'CONTENT_LENGTH'     => 0,
                 ),
                 'Content-Length',
                 0
             ),
             array(
                 array(
-                    'CONTENT_LENGTH' => 12,
+                    'CONTENT_LENGTH'     => 12,
                 ),
                 'Content-Length',
                 12
             ),
             array(
                 array(
-                    'CONTENT_MD5' => md5('a'),
+                    'CONTENT_MD5'     => md5('a'),
                 ),
                 'Content-MD5',
                 md5('a')
@@ -292,7 +292,7 @@ class RequestTest extends TestCase
 
     /**
      * @dataProvider serverHeaderProvider
-     * @param array $server
+     * @param array  $server
      * @param string $name
      * @param string $value
      */
@@ -303,13 +303,13 @@ class RequestTest extends TestCase
 
         $header = $request->getHeaders()->get($name);
         $this->assertNotEquals($header, false);
-        $this->assertEquals($name, $header->getFieldName($value));
+        $this->assertEquals($name,  $header->getFieldName($value));
         $this->assertEquals($value, $header->getFieldValue($value));
     }
 
     /**
      * @dataProvider serverHeaderProvider
-     * @param array $server
+     * @param array  $server
      * @param string $name
      */
     public function testRequestStringHasCorrectHeaderName(array $server, $name)
@@ -375,7 +375,7 @@ class RequestTest extends TestCase
                 '80',
                 '/news',
             ),
-            // Test for broken $_SERVER implementation from Windows-Safari
+               // Test for broken $_SERVER implementation from Windows-Safari
             array(
                 array(
                     'SERVER_NAME' => '[1:2:3:4:5:6:]',
@@ -401,7 +401,7 @@ class RequestTest extends TestCase
                 array(
                     'SERVER_NAME' => 'test.example.com',
                     'SERVER_PORT' => '443',
-                    'HTTPS' => 'on',
+                    'HTTPS'       => 'on',
                     'REQUEST_URI' => 'https://test.example.com/news',
                 ),
                 'test.example.com',
@@ -437,7 +437,7 @@ class RequestTest extends TestCase
 
     /**
      * @dataProvider serverHostnameProvider
-     * @param array $server
+     * @param array  $server
      * @param string $name
      * @param string $value
      */
@@ -473,7 +473,7 @@ class RequestTest extends TestCase
             // single file
             array(
                 array(
-                    'file' => array(
+                    'file' => array (
                         'name' => 'test1.txt',
                         'type' => 'text/plain',
                         'tmp_name' => '/tmp/phpXXX',
@@ -482,7 +482,7 @@ class RequestTest extends TestCase
                     ),
                 ),
                 array(
-                    'file' => array(
+                    'file' => array (
                         'name' => 'test1.txt',
                         'type' => 'text/plain',
                         'tmp_name' => '/tmp/phpXXX',
@@ -496,31 +496,31 @@ class RequestTest extends TestCase
             // file[], file[]
             array(
                 array(
-                    'file' => array(
-                        'name' => array(
+                    'file' => array (
+                        'name' => array (
                             0 => 'test1.txt',
                             1 => 'test2.txt',
                         ),
-                        'type' => array(
+                        'type' => array (
                             0 => 'text/plain',
                             1 => 'text/plain',
                         ),
-                        'tmp_name' => array(
+                        'tmp_name' => array (
                             0 => '/tmp/phpXXX',
                             1 => '/tmp/phpXXX',
                         ),
-                        'error' => array(
+                        'error' => array (
                             0 => 0,
                             1 => 0,
                         ),
-                        'size' => array(
+                        'size' => array (
                             0 => 1,
                             1 => 1,
                         ),
                     ),
                 ),
                 array(
-                    'file' => array(
+                    'file' => array (
                         0 => array(
                             'name' => 'test1.txt',
                             'type' => 'text/plain',
@@ -543,31 +543,31 @@ class RequestTest extends TestCase
             // file[one], file[two]
             array(
                 array(
-                    'file' => array(
-                        'name' => array(
+                    'file' => array (
+                        'name' => array (
                             'one' => 'test1.txt',
                             'two' => 'test2.txt',
                         ),
-                        'type' => array(
+                        'type' => array (
                             'one' => 'text/plain',
                             'two' => 'text/plain',
                         ),
-                        'tmp_name' => array(
+                        'tmp_name' => array (
                             'one' => '/tmp/phpXXX',
                             'two' => '/tmp/phpXXX',
                         ),
-                        'error' => array(
+                        'error' => array (
                             'one' => 0,
                             'two' => 0,
                         ),
-                        'size' => array(
+                        'size' => array (
                             'one' => 1,
                             'two' => 1,
                         ),
-                    ),
+                      ),
                 ),
                 array(
-                    'file' => array(
+                    'file' => array (
                         'one' => array(
                             'name' => 'test1.txt',
                             'type' => 'text/plain',
@@ -589,14 +589,14 @@ class RequestTest extends TestCase
             // multilevel file name
             // file[], file[][], file[][][]
             array(
-                array(
-                    'file' => array(
-                        'name' => array(
+                array (
+                    'file' => array (
+                        'name' => array (
                             0 => 'test_0.txt',
-                            1 => array(
+                            1 => array (
                                 0 => 'test_10.txt',
                             ),
-                            2 => array(
+                            2 => array (
                                 0 => array(
                                     0 => 'test_200.txt',
                                 ),
@@ -613,12 +613,12 @@ class RequestTest extends TestCase
                                 ),
                             ),
                         ),
-                        'tmp_name' => array(
+                        'tmp_name' => array (
                             0 => '/tmp/phpXXX',
                             1 => array(
                                 0 => '/tmp/phpXXX',
                             ),
-                            2 => array(
+                            2 => array (
                                 0 => array(
                                     0 => '/tmp/phpXXX',
                                 ),
@@ -629,7 +629,7 @@ class RequestTest extends TestCase
                             1 => array(
                                 0 => 0,
                             ),
-                            2 => array(
+                            2 => array (
                                 0 => array(
                                     0 => 0,
                                 ),
@@ -736,7 +736,7 @@ class RequestTest extends TestCase
         $this->assertSame('bar', $request->getEnv('foo'));
 
         $headers = new Headers();
-        $h = new GenericHeader('foo', 'bar');
+        $h = new GenericHeader('foo','bar');
         $headers->addHeader($h);
 
         $request->setHeaders($headers);
@@ -751,7 +751,7 @@ class RequestTest extends TestCase
     public function testBaseurlFallsBackToRootPathIfScriptFilenameIsNotSet()
     {
         $request = new Request();
-        $server = $request->getServer();
+        $server  = $request->getServer();
         $server->set('SCRIPT_NAME', null);
         $server->set('PHP_SELF', null);
         $server->set('ORIG_SCRIPT_NAME', null);

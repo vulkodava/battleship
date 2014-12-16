@@ -33,7 +33,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ext/intl not enabled');
         }
 
-        $this->locale = Locale::getDefault();
+        $this->locale    = Locale::getDefault();
         $this->validator = new IntValidator();
     }
 
@@ -47,16 +47,16 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function intDataProvider()
     {
         return array(
-            array(1.00, true),
-            array(0.00, true),
-            array(0.01, false),
-            array(-0.1, false),
-            array(-1, true),
-            array('10', true),
-            array(1, true),
+            array(1.00,         true),
+            array(0.00,         true),
+            array(0.01,         false),
+            array(-0.1,         false),
+            array(-1,           true),
+            array('10',         true),
+            array(1,            true),
             array('not an int', false),
-            array(true, false),
-            array(false, false),
+            array(true,         false),
+            array(false,        false),
         );
     }
 
@@ -126,6 +126,6 @@ class IntTest extends \PHPUnit_Framework_TestCase
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-            'messageTemplates', $validator);
+                                     'messageTemplates', $validator);
     }
 }

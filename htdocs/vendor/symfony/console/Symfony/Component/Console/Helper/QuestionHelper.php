@@ -31,9 +31,9 @@ class QuestionHelper extends Helper
     /**
      * Asks a question to the user.
      *
-     * @param InputInterface $input   An InputInterface instance
-     * @param OutputInterface $output An OutputInterface instance
-     * @param Question $question      The question to ask
+     * @param InputInterface  $input    An InputInterface instance
+     * @param OutputInterface $output   An OutputInterface instance
+     * @param Question        $question The question to ask
      *
      * @return string The user answer
      *
@@ -100,7 +100,7 @@ class QuestionHelper extends Helper
      * This method is public for PHP 5.3 compatibility, it should be private.
      *
      * @param OutputInterface $output
-     * @param Question $question
+     * @param Question        $question
      *
      * @return bool|mixed|null|string
      *
@@ -115,7 +115,7 @@ class QuestionHelper extends Helper
         if ($question instanceof ChoiceQuestion) {
             $width = max(array_map('strlen', array_keys($question->getChoices())));
 
-            $messages = (array)$question->getQuestion();
+            $messages = (array) $question->getQuestion();
             foreach ($question->getChoices() as $key => $value) {
                 $messages[] = sprintf("  [<info>%-${width}s</info>] %s", $key, $value);
             }
@@ -164,7 +164,7 @@ class QuestionHelper extends Helper
      * Autocompletes a question.
      *
      * @param OutputInterface $output
-     * @param Question $question
+     * @param Question        $question
      *
      * @return string
      */
@@ -266,7 +266,7 @@ class QuestionHelper extends Helper
                 // Save cursor position
                 $output->write("\0337");
                 // Write highlighted text
-                $output->write('<hl>' . substr($matches[$ofs], $i) . '</hl>');
+                $output->write('<hl>'.substr($matches[$ofs], $i).'</hl>');
                 // Restore cursor position
                 $output->write("\0338");
             }
@@ -290,11 +290,11 @@ class QuestionHelper extends Helper
     private function getHiddenResponse(OutputInterface $output, $inputStream)
     {
         if (defined('PHP_WINDOWS_VERSION_BUILD')) {
-            $exe = __DIR__ . '/../Resources/bin/hiddeninput.exe';
+            $exe = __DIR__.'/../Resources/bin/hiddeninput.exe';
 
             // handle code running from a phar
             if ('phar:' === substr(__FILE__, 0, 5)) {
-                $tmpExe = sys_get_temp_dir() . '/hiddeninput.exe';
+                $tmpExe = sys_get_temp_dir().'/hiddeninput.exe';
                 copy($exe, $tmpExe);
                 $exe = $tmpExe;
             }
@@ -341,9 +341,9 @@ class QuestionHelper extends Helper
     /**
      * Validates an attempt.
      *
-     * @param callable $interviewer   A callable that will ask for a question and return the result
-     * @param OutputInterface $output An Output instance
-     * @param Question $question      A Question instance
+     * @param callable        $interviewer A callable that will ask for a question and return the result
+     * @param OutputInterface $output      An Output instance
+     * @param Question        $question    A Question instance
      *
      * @return string The validated response
      *
@@ -358,7 +358,7 @@ class QuestionHelper extends Helper
                 if (null !== $this->getHelperSet() && $this->getHelperSet()->has('formatter')) {
                     $message = $this->getHelperSet()->get('formatter')->formatBlock($error->getMessage(), 'error');
                 } else {
-                    $message = '<error>' . $error->getMessage() . '</error>';
+                    $message = '<error>'.$error->getMessage().'</error>';
                 }
 
                 $output->writeln($message);

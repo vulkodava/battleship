@@ -66,7 +66,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', $request->getFiles('foo'));
 
         $headers = new Headers();
-        $h = new GenericHeader('foo', 'bar');
+        $h = new GenericHeader('foo','bar');
         $headers->addHeader($h);
 
         $request->setHeaders($headers);
@@ -173,7 +173,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $request = new Request();
 
         $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException',
-            'Not valid or not supported HTTP version');
+                                    'Not valid or not supported HTTP version');
         $request->setVersion('1.2');
     }
 
@@ -257,7 +257,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
-
         return $return;
     }
 }

@@ -27,57 +27,57 @@ class AbstractAdapterTestMockAdapter extends Adapter\AbstractAdapter
         $testfile = __DIR__ . '/_files/test.txt';
         $this->files = array(
             'foo' => array(
-                'name' => 'foo.jpg',
-                'type' => 'image/jpeg',
-                'size' => 126976,
-                'tmp_name' => '/tmp/489127ba5c89c',
-                'options' => array('ignoreNoFile' => false, 'useByteString' => true, 'detectInfos' => true),
+                'name'      => 'foo.jpg',
+                'type'      => 'image/jpeg',
+                'size'      => 126976,
+                'tmp_name'  => '/tmp/489127ba5c89c',
+                'options'   => array('ignoreNoFile' => false, 'useByteString' => true, 'detectInfos' => true),
                 'validated' => false,
-                'received' => false,
-                'filtered' => false,
+                'received'  => false,
+                'filtered'  => false,
             ),
             'bar' => array(
-                'name' => 'bar.png',
-                'type' => 'image/png',
-                'size' => 91136,
+                'name'     => 'bar.png',
+                'type'     => 'image/png',
+                'size'     => 91136,
                 'tmp_name' => '/tmp/489128284b51f',
-                'options' => array('ignoreNoFile' => false, 'useByteString' => true),
+                'options'  => array('ignoreNoFile' => false, 'useByteString' => true),
                 'validated' => false,
-                'received' => false,
-                'filtered' => false,
+                'received'  => false,
+                'filtered'  => false,
             ),
             'baz' => array(
-                'name' => 'baz.text',
-                'type' => 'text/plain',
-                'size' => 1172,
+                'name'     => 'baz.text',
+                'type'     => 'text/plain',
+                'size'     => 1172,
                 'tmp_name' => $testfile,
-                'options' => array('ignoreNoFile' => false, 'useByteString' => true),
+                'options'  => array('ignoreNoFile' => false, 'useByteString' => true),
                 'validated' => false,
-                'received' => false,
-                'filtered' => false,
+                'received'  => false,
+                'filtered'  => false,
             ),
             'file_0_' => array(
-                'name' => 'foo.jpg',
-                'type' => 'image/jpeg',
-                'size' => 126976,
-                'tmp_name' => '/tmp/489127ba5c89c',
-                'options' => array('ignoreNoFile' => false, 'useByteString' => true),
+                'name'      => 'foo.jpg',
+                'type'      => 'image/jpeg',
+                'size'      => 126976,
+                'tmp_name'  => '/tmp/489127ba5c89c',
+                'options'   => array('ignoreNoFile' => false, 'useByteString' => true),
                 'validated' => false,
-                'received' => false,
-                'filtered' => false,
+                'received'  => false,
+                'filtered'  => false,
             ),
             'file_1_' => array(
-                'name' => 'baz.text',
-                'type' => 'text/plain',
-                'size' => 1172,
+                'name'     => 'baz.text',
+                'type'     => 'text/plain',
+                'size'     => 1172,
                 'tmp_name' => $testfile,
-                'options' => array('ignoreNoFile' => false, 'useByteString' => true),
+                'options'  => array('ignoreNoFile' => false, 'useByteString' => true),
                 'validated' => false,
-                'received' => false,
-                'filtered' => false,
+                'received'  => false,
+                'filtered'  => false,
             ),
             'file' => array(
-                'name' => 'foo.jpg',
+                'name'      => 'foo.jpg',
                 'multifiles' => array(0 => 'file_0_', 1 => 'file_1_')
             ),
         );
@@ -91,7 +91,6 @@ class AbstractAdapterTestMockAdapter extends Adapter\AbstractAdapter
     public function receive($options = null)
     {
         $this->received = true;
-
         return;
     }
 
@@ -134,14 +133,14 @@ class AbstractAdapterTestMockAdapter extends Adapter\AbstractAdapter
     {
         $this->files += array(
             'test' => array(
-                'name' => 'test.txt',
-                'type' => 'image/jpeg',
-                'size' => 0,
-                'tmp_name' => '',
-                'options' => array('ignoreNoFile' => true, 'useByteString' => true),
+                'name'      => 'test.txt',
+                'type'      => 'image/jpeg',
+                'size'      => 0,
+                'tmp_name'  => '',
+                'options'   => array('ignoreNoFile' => true, 'useByteString' => true),
                 'validated' => false,
-                'received' => false,
-                'filtered' => false,
+                'received'  => false,
+                'filtered'  => false,
             )
         );
     }

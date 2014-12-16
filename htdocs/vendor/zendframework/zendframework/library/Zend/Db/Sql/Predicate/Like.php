@@ -47,7 +47,6 @@ class Like implements PredicateInterface
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
-
         return $this;
     }
 
@@ -66,7 +65,6 @@ class Like implements PredicateInterface
     public function setLike($like)
     {
         $this->like = $like;
-
         return $this;
     }
 
@@ -85,7 +83,6 @@ class Like implements PredicateInterface
     public function setSpecification($specification)
     {
         $this->specification = $specification;
-
         return $this;
     }
 

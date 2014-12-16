@@ -46,7 +46,7 @@ class DigestTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->authenticate();
             $this->fail('Expected Zend_Auth_Adapter_Exception not thrown upon authentication attempt before setting '
-                . 'a required option');
+                      . 'a required option');
         } catch (Adapter\Exception\ExceptionInterface $e) {
             $this->assertContains('must be set before authentication', $e->getMessage());
         }
@@ -63,7 +63,7 @@ class DigestTest extends \PHPUnit_Framework_TestCase
         try {
             $adapter->authenticate();
             $this->fail('Expected Zend_Auth_Adapter_Exception not thrown upon authenticating against nonexistent '
-                . 'file');
+                      . 'file');
         } catch (Adapter\Exception\ExceptionInterface $e) {
             $this->assertContains('Cannot open', $e->getMessage());
         }
@@ -77,7 +77,7 @@ class DigestTest extends \PHPUnit_Framework_TestCase
     public function testUserExistsRealmNonexistent()
     {
         $filename = "$this->_filesPath/htdigest.1";
-        $realm = 'Nonexistent Realm';
+        $realm    = 'Nonexistent Realm';
         $username = 'someUser';
         $password = 'somePassword';
 
@@ -105,7 +105,7 @@ class DigestTest extends \PHPUnit_Framework_TestCase
     public function testUserNonexistentRealmExists()
     {
         $filename = "$this->_filesPath/htdigest.1";
-        $realm = 'Some Realm';
+        $realm    = 'Some Realm';
         $username = 'nonexistentUser';
         $password = 'somePassword';
 
@@ -133,7 +133,7 @@ class DigestTest extends \PHPUnit_Framework_TestCase
     public function testIncorrectPassword()
     {
         $filename = "$this->_filesPath/htdigest.1";
-        $realm = 'Some Realm';
+        $realm    = 'Some Realm';
         $username = 'someUser';
         $password = 'incorrectPassword';
 
@@ -161,7 +161,7 @@ class DigestTest extends \PHPUnit_Framework_TestCase
     public function testAuthenticationSuccess()
     {
         $filename = "$this->_filesPath/htdigest.1";
-        $realm = 'Some Realm';
+        $realm    = 'Some Realm';
         $username = 'someUser';
         $password = 'somePassword';
 

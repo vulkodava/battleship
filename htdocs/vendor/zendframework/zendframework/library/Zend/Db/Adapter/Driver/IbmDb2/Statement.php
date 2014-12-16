@@ -58,7 +58,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function initialize($resource)
     {
         $this->db2 = $resource;
-
         return $this;
     }
 
@@ -69,7 +68,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setDriver(IbmDb2 $driver)
     {
         $this->driver = $driver;
-
         return $this;
     }
 
@@ -80,7 +78,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
-
         return $this;
     }
 
@@ -101,7 +98,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
-
         return $this;
     }
 
@@ -124,7 +120,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
-
         return $this;
     }
 
@@ -183,7 +178,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->isPrepared = true;
-
         return $this;
     }
 
@@ -228,8 +222,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->profiler->profilerStart($this);
         }
 
-        set_error_handler(function () {
-            }, E_WARNING); // suppress warnings
+        set_error_handler(function () {}, E_WARNING); // suppress warnings
         $response = db2_execute($this->resource, $this->parameterContainer->getPositionalArray());
         restore_error_handler();
 
@@ -242,7 +235,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource);
-
         return $result;
     }
 }

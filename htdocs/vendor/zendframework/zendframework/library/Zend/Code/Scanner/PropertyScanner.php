@@ -17,8 +17,8 @@ class PropertyScanner implements ScannerInterface
 {
     const T_BOOLEAN = "boolean";
     const T_INTEGER = "int";
-    const T_STRING = "string";
-    const T_ARRAY = "array";
+    const T_STRING  = "string";
+    const T_ARRAY   = "array";
     const T_UNKNOWN = "unknown";
 
     /**
@@ -133,7 +133,6 @@ class PropertyScanner implements ScannerInterface
     public function getName()
     {
         $this->scan();
-
         return $this->name;
     }
 
@@ -151,7 +150,6 @@ class PropertyScanner implements ScannerInterface
     public function isPublic()
     {
         $this->scan();
-
         return $this->isPublic;
     }
 
@@ -161,7 +159,6 @@ class PropertyScanner implements ScannerInterface
     public function isPrivate()
     {
         $this->scan();
-
         return $this->isPrivate;
     }
 
@@ -171,7 +168,6 @@ class PropertyScanner implements ScannerInterface
     public function isProtected()
     {
         $this->scan();
-
         return $this->isProtected;
     }
 
@@ -181,7 +177,6 @@ class PropertyScanner implements ScannerInterface
     public function isStatic()
     {
         $this->scan();
-
         return $this->isStatic;
     }
 
@@ -191,7 +186,6 @@ class PropertyScanner implements ScannerInterface
     public function getValue()
     {
         $this->scan();
-
         return $this->value;
     }
 
@@ -201,7 +195,6 @@ class PropertyScanner implements ScannerInterface
     public function getDocComment()
     {
         $this->scan();
-
         return $this->docComment;
     }
 
@@ -224,7 +217,6 @@ class PropertyScanner implements ScannerInterface
     public function __toString()
     {
         $this->scan();
-
         return var_export($this, true);
     }
 
@@ -246,7 +238,7 @@ class PropertyScanner implements ScannerInterface
         /**
          * Variables & Setup
          */
-        $value = '';
+        $value            = '';
         $concatenateValue = false;
 
         $tokens = &$this->tokens;

@@ -30,8 +30,7 @@ abstract class AbstractFileLoader implements FileLoaderInterface
      */
     public function setUseIncludePath($flag = true)
     {
-        $this->useIncludePath = (bool)$flag;
-
+        $this->useIncludePath = (bool) $flag;
         return $this;
     }
 
@@ -61,10 +60,8 @@ abstract class AbstractFileLoader implements FileLoaderInterface
             if (!$this->useIncludePath()) {
                 return false;
             }
-
             return $this->resolveViaIncludePath($filename);
         }
-
         return $filename;
     }
 
@@ -80,7 +77,6 @@ abstract class AbstractFileLoader implements FileLoaderInterface
         if (!$resolvedIncludePath || !is_file($resolvedIncludePath) || !is_readable($resolvedIncludePath)) {
             return false;
         }
-
         return $resolvedIncludePath;
     }
 }

@@ -20,8 +20,8 @@ class SeparatorToCamelCaseTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesCamelCasedWordsWithSpacesByDefault()
     {
-        $string = 'camel cased words';
-        $filter = new SeparatorToCamelCaseFilter();
+        $string   = 'camel cased words';
+        $filter   = new SeparatorToCamelCaseFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -30,8 +30,8 @@ class SeparatorToCamelCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSeparatesCamelCasedWordsWithProvidedSeparator()
     {
-        $string = 'camel:-:cased:-:Words';
-        $filter = new SeparatorToCamelCaseFilter(':-:');
+        $string   = 'camel:-:cased:-:Words';
+        $filter   = new SeparatorToCamelCaseFilter(':-:');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -47,8 +47,8 @@ class SeparatorToCamelCaseTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Extension mbstring not available');
         }
 
-        $string = 'camel:-:cased:-:Words';
-        $filter = new SeparatorToCamelCaseFilter(':-:');
+        $string   = 'camel:-:cased:-:Words';
+        $filter   = new SeparatorToCamelCaseFilter(':-:');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -64,8 +64,8 @@ class SeparatorToCamelCaseTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Extension mbstring not available');
         }
 
-        $string = 'test šuma';
-        $filter = new SeparatorToCamelCaseFilter(' ');
+        $string   = 'test šuma';
+        $filter   = new SeparatorToCamelCaseFilter(' ');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

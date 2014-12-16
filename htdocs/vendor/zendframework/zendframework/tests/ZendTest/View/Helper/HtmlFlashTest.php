@@ -31,7 +31,7 @@ class HtmlFlashTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new View();
+        $this->view   = new View();
         $this->helper = new HtmlFlash();
         $this->helper->setView($this->view);
     }

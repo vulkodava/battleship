@@ -10,5 +10,4 @@
 namespace Foo;
 
 class Bar
-{
-}
+{}

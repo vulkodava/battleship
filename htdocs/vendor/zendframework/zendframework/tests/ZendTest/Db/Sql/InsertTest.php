@@ -115,7 +115,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Insert::values
-     * @group  ZF2-4926
+     * @group ZF2-4926
      */
     public function testEmptyArrayValues()
     {
@@ -178,10 +178,10 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $mockStatement = new \Zend\Db\Adapter\StatementContainer();
 
         $this->insert
-            ->into('foo')
-            ->columns(array('col1'))
-            ->select(new Select('bar'))
-            ->prepareStatement($mockAdapter, $mockStatement);
+                ->into('foo')
+                ->columns(array('col1'))
+                ->select(new Select('bar'))
+                ->prepareStatement($mockAdapter, $mockStatement);
 
         $this->assertEquals(
             'INSERT INTO "foo" ("col1") SELECT "bar".* FROM "bar"',

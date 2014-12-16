@@ -23,7 +23,6 @@ class Stdin extends XmlRpcRequest
 {
     /**
      * Raw XML as received via request
-     *
      * @var string
      */
     protected $xml;
@@ -41,7 +40,6 @@ class Stdin extends XmlRpcRequest
         $fh = fopen('php://stdin', 'r');
         if (!$fh) {
             $this->fault = new Fault(630);
-
             return;
         }
 

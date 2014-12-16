@@ -27,8 +27,8 @@ class ChoiceQuestion extends Question
      * Constructor.
      *
      * @param string $question The question to ask to the user
-     * @param array $choices   The list of available choices
-     * @param mixed $default   The default answer to return
+     * @param array  $choices  The list of available choices
+     * @param mixed  $default  The default answer to return
      */
     public function __construct($question, array $choices, $default = null)
     {

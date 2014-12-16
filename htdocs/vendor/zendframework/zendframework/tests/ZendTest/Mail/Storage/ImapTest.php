@@ -26,22 +26,21 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         if (!constant('TESTS_ZEND_MAIL_IMAP_ENABLED')) {
             $this->markTestSkipped('Zend_Mail IMAP tests are not enabled');
         }
-        $this->_params = array('host' => TESTS_ZEND_MAIL_IMAP_HOST,
-            'user' => TESTS_ZEND_MAIL_IMAP_USER,
-            'password' => TESTS_ZEND_MAIL_IMAP_PASSWORD);
+        $this->_params = array('host'     => TESTS_ZEND_MAIL_IMAP_HOST,
+                               'user'     => TESTS_ZEND_MAIL_IMAP_USER,
+                               'password' => TESTS_ZEND_MAIL_IMAP_PASSWORD);
         if (defined('TESTS_ZEND_MAIL_SERVER_TESTDIR') && TESTS_ZEND_MAIL_SERVER_TESTDIR) {
             if (!file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'inbox')
-                && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'INBOX')
-            ) {
+             && !file_exists(TESTS_ZEND_MAIL_SERVER_TESTDIR . DIRECTORY_SEPARATOR . 'INBOX')) {
                 $this->markTestSkipped('There is no file name "inbox" or "INBOX" in '
-                    . TESTS_ZEND_MAIL_SERVER_TESTDIR . '. I won\'t use it for testing. '
-                    . 'This is you safety net. If you think it is the right directory just '
-                    . 'create an empty file named INBOX or remove/deactived this message.');
+                                       . TESTS_ZEND_MAIL_SERVER_TESTDIR . '. I won\'t use it for testing. '
+                                       . 'This is you safety net. If you think it is the right directory just '
+                                       . 'create an empty file named INBOX or remove/deactived this message.');
             }
 
             $this->_cleanDir(TESTS_ZEND_MAIL_SERVER_TESTDIR);
             $this->_copyDir(__DIR__ . '/../_files/test.' . TESTS_ZEND_MAIL_SERVER_FORMAT,
-                TESTS_ZEND_MAIL_SERVER_TESTDIR);
+                            TESTS_ZEND_MAIL_SERVER_TESTDIR);
         }
     }
 
@@ -70,7 +69,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
             if ($entry == '.' || $entry == '..' || $entry == '.svn') {
                 continue;
             }
-            $fullname = $dir . DIRECTORY_SEPARATOR . $entry;
+            $fullname = $dir  . DIRECTORY_SEPARATOR . $entry;
             $destname = $dest . DIRECTORY_SEPARATOR . $entry;
             if (is_dir($fullname)) {
                 mkdir($destname);
@@ -184,17 +183,16 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Imap($this->_params);
         $mail->close();
     }
+/*
+    currently imap has no top
 
-    /*
-        currently imap has no top
+    public function testHasTop()
+    {
+        $mail = new Storage\Imap($this->_params);
 
-        public function testHasTop()
-        {
-            $mail = new Storage\Imap($this->_params);
-
-            $this->assertTrue($mail->hasTop);
-        }
-    */
+        $this->assertTrue($mail->hasTop);
+    }
+*/
     public function testHasCreate()
     {
         $mail = new Storage\Imap($this->_params);
@@ -242,17 +240,17 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Simple Message', $subject);
     }
 
-    /*
-        currently imap has no top
+/*
+    currently imap has no top
 
-        public function testFetchTopBody()
-        {
-            $mail = new Storage\Imap($this->_params);
+    public function testFetchTopBody()
+    {
+        $mail = new Storage\Imap($this->_params);
 
-            $content = $mail->getHeader(3, 1)->getContent();
-            $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
-        }
-    */
+        $content = $mail->getHeader(3, 1)->getContent();
+        $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
+    }
+*/
     public function testFetchMessageHeader()
     {
         $mail = new Storage\Imap($this->_params);
@@ -266,7 +264,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Imap($this->_params);
 
         $content = $mail->getMessage(3)->getContent();
-        list($content,) = explode("\n", $content, 2);
+        list($content, ) = explode("\n", $content, 2);
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
 
@@ -328,9 +326,9 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Imap($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume an order while iterating
-        $search_folders = array('subfolder' => 'subfolder',
-            'subfolder/test' => 'test',
-            'INBOX' => 'INBOX');
+        $search_folders = array('subfolder'      => 'subfolder',
+                                'subfolder/test' => 'test',
+                                'INBOX'          => 'INBOX');
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {

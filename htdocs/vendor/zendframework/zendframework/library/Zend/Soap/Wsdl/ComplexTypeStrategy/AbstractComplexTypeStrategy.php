@@ -18,7 +18,6 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
 {
     /**
      * Context object
-     *
      * @var Wsdl
      */
     protected $context;
@@ -53,10 +52,8 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
     {
         if (array_key_exists($phpType, $this->getContext()->getTypes())) {
             $soapTypes = $this->getContext()->getTypes();
-
             return $soapTypes[$phpType];
         }
-
         return null;
     }
 }

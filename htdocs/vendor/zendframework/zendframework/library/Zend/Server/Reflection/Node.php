@@ -16,21 +16,18 @@ class Node
 {
     /**
      * Node value
-     *
      * @var mixed
      */
     protected $value = null;
 
     /**
      * Array of child nodes (if any)
-     *
      * @var array
      */
     protected $children = array();
 
     /**
      * Parent node (if any)
-     *
      * @var \Zend\Server\Reflection\Node
      */
     protected $parent = null;
@@ -57,7 +54,7 @@ class Node
      *
      * @param \Zend\Server\Reflection\Node $node
      * @param  bool $new Whether or not the child node is newly created
-     *                   and should always be attached
+     * and should always be attached
      * @return void
      */
     public function setParent(Node $node, $new = false)
@@ -66,7 +63,6 @@ class Node
 
         if ($new) {
             $node->attachChild($this);
-
             return;
         }
     }

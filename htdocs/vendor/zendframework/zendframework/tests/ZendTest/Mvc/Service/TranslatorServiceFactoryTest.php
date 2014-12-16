@@ -68,7 +68,7 @@ class TranslatorServiceFactoryTest extends TestCase
 
         return array(
             'translator' => $translator->getTranslator(),
-            'services' => $this->services,
+            'services'   => $this->services,
         );
     }
 
@@ -119,7 +119,7 @@ class TranslatorServiceFactoryTest extends TestCase
     public function testSetsInstantiatedI18nTranslatorInstanceInServiceManager($dependencies)
     {
         $translator = $dependencies['translator'];
-        $services = $dependencies['services'];
+        $services   = $dependencies['services'];
         $this->assertTrue($services->has('Zend\I18n\Translator\TranslatorInterface'));
         $this->assertSame($translator, $services->get('Zend\I18n\Translator\TranslatorInterface'));
     }

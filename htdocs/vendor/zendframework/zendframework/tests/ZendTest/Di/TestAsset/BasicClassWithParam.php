@@ -11,7 +11,5 @@ namespace ZendTest\Di\TestAsset;
 
 class BasicClassWithParam
 {
-    public function __construct($foo)
-    {
-    }
+    public function __construct($foo) {}
 }

@@ -25,7 +25,6 @@ abstract class AbstractFilter
 
     /**
      * Returns a string representation of the filter.
-     *
      * @see toString()
      *
      * @return string
@@ -53,9 +52,8 @@ abstract class AbstractFilter
      */
     public function addAnd($filter)
     {
-        $fa = func_get_args();
+        $fa   = func_get_args();
         $args = array_merge(array($this), $fa);
-
         return new AndFilter($args);
     }
 
@@ -67,9 +65,8 @@ abstract class AbstractFilter
      */
     public function addOr($filter)
     {
-        $fa = func_get_args();
+        $fa   = func_get_args();
         $args = array_merge(array($this), $fa);
-
         return new OrFilter($args);
     }
 
@@ -79,7 +76,6 @@ abstract class AbstractFilter
      * Any control characters with an ACII code < 32 as well as the characters with special meaning in
      * LDAP filters "*", "(", ")", and "\" (the backslash) are converted into the representation of a
      * backslash followed by two hex digits representing the hexadecimal value of the character.
-     *
      * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
      * @link   http://pear.php.net/package/Net_LDAP2
      * @author Benedikt Hallinger <beni@php.net>
@@ -102,7 +98,6 @@ abstract class AbstractFilter
             }
             $values[$key] = $val;
         }
-
         return (count($values) == 1) ? $values[0] : $values;
     }
 
@@ -110,7 +105,6 @@ abstract class AbstractFilter
      * Undoes the conversion done by {@link escapeValue()}.
      *
      * Converts any sequences of a backslash followed by two hex digits into the corresponding character.
-     *
      * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
      * @link   http://pear.php.net/package/Net_LDAP2
      * @author Benedikt Hallinger <beni@php.net>
@@ -127,7 +121,6 @@ abstract class AbstractFilter
             // Translate hex code into ascii
             $values[$key] = Converter::hex32ToAsc($value);
         }
-
         return (count($values) == 1) ? $values[0] : $values;
     }
 }

@@ -19,7 +19,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Response object
-     *
      * @var Response
      */
     protected $_response;
@@ -103,9 +102,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $response = $dom->appendChild($dom->createElement('methodResponse'));
-        $params = $response->appendChild($dom->createElement('params'));
-        $param = $params->appendChild($dom->createElement('param'));
-        $value = $param->appendChild($dom->createElement('value'));
+        $params   = $response->appendChild($dom->createElement('params'));
+        $param    = $params->appendChild($dom->createElement('param'));
+        $value    = $param->appendChild($dom->createElement('value'));
         $value->appendChild($dom->createElement('string', 'Return value'));
 
         $xml = $dom->saveXml();
@@ -145,14 +144,14 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 EOD;
 
         $response = new Response();
-        $ret = $response->loadXml($rawResponse);
+        $ret      = $response->loadXml($rawResponse);
 
         $this->assertTrue($ret);
         $this->assertEquals(array(
             0 => array(
-                'id' => 1,
-                'name' => 'birdy num num!',
-                'description' => null,
+                'id'            => 1,
+                'name'          => 'birdy num num!',
+                'description'   => null,
             )
         ), $response->getReturnValue());
     }
@@ -171,7 +170,7 @@ EOD;
         $this->assertTrue($sx->params->param ? true : false);
         $this->assertTrue($sx->params->param->value ? true : false);
         $this->assertTrue($sx->params->param->value->string ? true : false);
-        $this->assertEquals('return value', (string)$sx->params->param->value->string);
+        $this->assertEquals('return value', (string) $sx->params->param->value->string);
     }
 
     /**

@@ -16,7 +16,7 @@ use ZendTest\Form\View\Helper\CommonTestCase;
 
 class ReCaptchaTest extends CommonTestCase
 {
-    protected $publicKey = TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY;
+    protected $publicKey  = TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY;
     protected $privateKey = TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY;
 
     public function setUp()
@@ -25,7 +25,7 @@ class ReCaptchaTest extends CommonTestCase
             $this->markTestSkipped('Enable TESTS_ZEND_FORM_RECAPTCHA_SUPPORT to test PDF render');
         }
 
-        $this->helper = new ReCaptchaHelper();
+        $this->helper  = new ReCaptchaHelper();
         $this->captcha = new ReCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
@@ -39,7 +39,6 @@ class ReCaptchaTest extends CommonTestCase
     {
         $element = new CaptchaElement('foo');
         $element->setCaptcha($this->captcha);
-
         return $element;
     }
 
@@ -54,7 +53,7 @@ class ReCaptchaTest extends CommonTestCase
     public function testRendersHiddenInputForChallengeField()
     {
         $element = $this->getElement();
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertRegExp('#(type="hidden").*?(name="' . $element->getName() . '\[recaptcha_challenge_field\]")#', $markup);
         $this->assertRegExp('#(type="hidden").*?(id="' . $element->getName() . '-challenge")#', $markup);
     }
@@ -62,7 +61,7 @@ class ReCaptchaTest extends CommonTestCase
     public function testRendersHiddenInputForResponseField()
     {
         $element = $this->getElement();
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertRegExp('#(type="hidden").*?(name="' . $element->getName() . '\[recaptcha_response_field\]")#', $markup);
         $this->assertRegExp('#(type="hidden").*?(id="' . $element->getName() . '-response")#', $markup);
     }
@@ -70,14 +69,14 @@ class ReCaptchaTest extends CommonTestCase
     public function testRendersReCaptchaMarkup()
     {
         $element = $this->getElement();
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertContains($this->captcha->getService()->getHtml($element->getName()), $markup);
     }
 
     public function testRendersJsEventScripts()
     {
         $element = $this->getElement();
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertContains('function zendBindEvent', $markup);
         $this->assertContains('document.getElementById("' . $element->getName() . '-challenge")', $markup);
         $this->assertContains('document.getElementById("' . $element->getName() . '-response")', $markup);

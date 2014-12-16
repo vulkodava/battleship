@@ -11,14 +11,14 @@ abstract class AbstractRecord extends AbstractValidator
      * Error constants
      */
     const ERROR_NO_RECORD_FOUND = 'noRecordFound';
-    const ERROR_RECORD_FOUND = 'recordFound';
+    const ERROR_RECORD_FOUND    = 'recordFound';
 
     /**
      * @var array Message templates
      */
     protected $messageTemplates = array(
         self::ERROR_NO_RECORD_FOUND => "No record matching the input was found",
-        self::ERROR_RECORD_FOUND => "A record matching the input was found",
+        self::ERROR_RECORD_FOUND    => "A record matching the input was found",
     );
 
     /**
@@ -65,7 +65,6 @@ abstract class AbstractRecord extends AbstractValidator
     public function setMapper(UserInterface $mapper)
     {
         $this->mapper = $mapper;
-
         return $this;
     }
 
@@ -87,7 +86,6 @@ abstract class AbstractRecord extends AbstractValidator
     public function setKey($key)
     {
         $this->key = $key;
-
         return $this;
     }
 

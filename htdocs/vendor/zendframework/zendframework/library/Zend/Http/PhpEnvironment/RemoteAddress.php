@@ -47,13 +47,12 @@ class RemoteAddress
      * This must be static method, since validators are recovered automatically
      * at session read, so this is the only way to switch setting.
      *
-     * @param  bool $useProxy Whether to check also proxied IP addresses.
+     * @param  bool  $useProxy Whether to check also proxied IP addresses.
      * @return RemoteAddress
      */
     public function setUseProxy($useProxy = true)
     {
         $this->useProxy = $useProxy;
-
         return $this;
     }
 
@@ -76,7 +75,6 @@ class RemoteAddress
     public function setTrustedProxies(array $trustedProxies)
     {
         $this->trustedProxies = $trustedProxies;
-
         return $this;
     }
 
@@ -89,7 +87,6 @@ class RemoteAddress
     public function setProxyHeader($header = 'X-Forwarded-For')
     {
         $this->proxyHeader = $this->normalizeProxyHeader($header);
-
         return $this;
     }
 
@@ -150,7 +147,6 @@ class RemoteAddress
         // as the originating IP.
         // @see http://en.wikipedia.org/wiki/X-Forwarded-For
         $ip = array_pop($ips);
-
         return $ip;
     }
 
@@ -170,7 +166,6 @@ class RemoteAddress
         if (0 !== strpos($header, 'HTTP_')) {
             $header = 'HTTP_' . $header;
         }
-
         return $header;
     }
 }

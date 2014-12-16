@@ -5,10 +5,10 @@ return array(
             'barroute' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route' => '/bar-test',
+                    'route'    => '/bar-test',
                     'defaults' => array(
                         'controller' => 'bar_index',
-                        'action' => 'unittests',
+                        'action'     => 'unittests',
                     ),
                 ),
             ),

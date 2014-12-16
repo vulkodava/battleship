@@ -59,7 +59,6 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         }
 
         $config = $serviceLocator->get('Config');
-
         return isset($config[$key]);
     }
 
@@ -80,13 +79,11 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         $key = $this->match($requestedName);
         if (isset($this->configs[$key])) {
             $this->configs[$requestedName] = $this->configs[$key];
-
             return $this->configs[$key];
         }
 
         $config = $serviceLocator->get('Config');
         $this->configs[$requestedName] = $this->configs[$key] = $config[$key];
-
         return $config;
     }
 
@@ -104,7 +101,6 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         $patterns = $this->getPatterns();
         array_unshift($patterns, $pattern);
         $this->setPatterns($patterns);
-
         return $this;
     }
 
@@ -146,7 +142,6 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         }
 
         $this->patterns = $patterns;
-
         return $this;
     }
 
@@ -158,7 +153,6 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         if (null === $this->patterns) {
             $this->setPatterns($this->defaultPatterns);
         }
-
         return $this->patterns;
     }
 
@@ -173,7 +167,6 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
                 return $matches[1];
             }
         }
-
         return null;
     }
 }

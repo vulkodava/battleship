@@ -40,7 +40,7 @@ class TranslatorTest extends TestCase
         }
 
         $this->originalLocale = Locale::getDefault();
-        $this->translator = new Translator();
+        $this->translator     = new Translator();
 
         Locale::setDefault('en_EN');
 
@@ -113,14 +113,14 @@ class TranslatorTest extends TestCase
             'locale' => 'de_DE',
             'translation_file_patterns' => array(
                 array(
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-de_DE.php'
+                    'pattern'  => 'translation-de_DE.php'
                 ),
             ),
             'translation_files' => array(
                 array(
-                    'type' => 'phparray',
+                    'type'     => 'phparray',
                     'filename' => $this->testFilesDir . '/testarray/translation-more-de_DE.php'
                 )
             )
@@ -277,8 +277,8 @@ class TranslatorTest extends TestCase
         $this->assertInstanceOf('Zend\EventManager\Event', $actualEvent);
         $this->assertEquals(
             array(
-                'message' => 'foo',
-                'locale' => 'baz',
+                'message'     => 'foo',
+                'locale'      => 'baz',
                 'text_domain' => 'bar',
             ),
             $actualEvent->getParams()
@@ -293,7 +293,7 @@ class TranslatorTest extends TestCase
 
     public function testListenerOnMissingTranslationEventCanReturnString()
     {
-        $trigger = null;
+        $trigger     = null;
         $doNotTriger = null;
 
         $this->translator->enableEventManager();
@@ -327,7 +327,7 @@ class TranslatorTest extends TestCase
         $this->assertInstanceOf('Zend\EventManager\Event', $actualEvent);
         $this->assertEquals(
             array(
-                'locale' => 'baz',
+                'locale'      => 'baz',
                 'text_domain' => 'bar',
             ),
             $actualEvent->getParams()
@@ -342,9 +342,9 @@ class TranslatorTest extends TestCase
 
     public function testListenerOnNoMessagesLoadedEventCanReturnTextDomainObject()
     {
-        $trigger = null;
+        $trigger      = null;
         $doNotTrigger = null;
-        $textDomain = new TextDomain(array(
+        $textDomain   = new TextDomain(array(
             'foo' => 'BOOYAH',
         ));
 

@@ -44,7 +44,6 @@ abstract class AbstractWriterTestCase extends TestCase
         if (empty($this->tmpfile)) {
             $this->tmpfile = tempnam(sys_get_temp_dir(), 'zend-config-writer');
         }
-
         return $this->tmpfile;
     }
 

@@ -124,10 +124,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $message = new Message(array('raw' => $raw));
 
         $this->assertEquals('test' . Mime\Mime::LINEEND . 'test2' . Mime\Mime::LINEEND . 'multipart',
-            $message->getHeader('subject', 'string'));
+                            $message->getHeader('subject', 'string'));
 
         $this->assertEquals(array('test', 'test2', 'multipart'),
-            $message->getHeader('subject', 'array'));
+                            $message->getHeader('subject', 'array'));
     }
 
     public function testContentTypeDecode()
@@ -135,7 +135,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $message = new Message(array('file' => $this->_file));
 
         $this->assertEquals(Mime\Decode::splitContentType($message->ContentType),
-            array('type' => 'multipart/alternative', 'boundary' => 'crazy-multipart'));
+                            array('type' => 'multipart/alternative', 'boundary' => 'crazy-multipart'));
     }
 
     public function testSplitEmptyMessage()
@@ -221,10 +221,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testSplitMessage()
     {
         $header = 'Test: test';
-        $body = 'body';
+        $body   = 'body';
         $newlines = array("\r\n", "\n\r", "\n", "\r");
 
-        $decoded_body = null; // "Declare" variable before first "read" usage to avoid IDEs warning
+        $decoded_body    = null; // "Declare" variable before first "read" usage to avoid IDEs warning
         $decoded_headers = null; // "Declare" variable before first "read" usage to avoid IDEs warning
 
         foreach ($newlines as $contentEOL) {
@@ -292,10 +292,10 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message(array('headers' => array('subject' => 'foo')));
 
-        $this->assertTrue($message->getHeaders()->has('subject'));
-        $this->assertTrue(isset($message->subject));
-        $this->assertTrue($message->getHeaders()->has('SuBject'));
-        $this->assertTrue(isset($message->suBjeCt));
+        $this->assertTrue( $message->getHeaders()->has('subject'));
+        $this->assertTrue( isset($message->subject) );
+        $this->assertTrue( $message->getHeaders()->has('SuBject'));
+        $this->assertTrue( isset($message->suBjeCt) );
         $this->assertFalse($message->getHeaders()->has('From'));
     }
 

@@ -34,7 +34,6 @@ class ViewTemplateMapResolverFactory implements FactoryInterface
                 $map = $config['template_map'];
             }
         }
-
         return new ViewResolver\TemplateMapResolver($map);
     }
 }

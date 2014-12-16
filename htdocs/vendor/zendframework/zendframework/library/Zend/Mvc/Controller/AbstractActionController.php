@@ -44,15 +44,14 @@ abstract class AbstractActionController extends AbstractController
      */
     public function notFoundAction()
     {
-        $response = $this->response;
-        $event = $this->getEvent();
+        $response   = $this->response;
+        $event      = $this->getEvent();
         $routeMatch = $event->getRouteMatch();
         $routeMatch->setParam('action', 'not-found');
 
         if ($response instanceof HttpResponse) {
             return $this->createHttpNotFoundModel($response);
         }
-
         return $this->createConsoleNotFoundModel($response);
     }
 
@@ -97,7 +96,6 @@ abstract class AbstractActionController extends AbstractController
     protected function createHttpNotFoundModel(HttpResponse $response)
     {
         $response->setStatusCode(404);
-
         return new ViewModel(array(
             'content' => 'Page not found',
         ));
@@ -114,7 +112,6 @@ abstract class AbstractActionController extends AbstractController
         $viewModel = new ConsoleModel();
         $viewModel->setErrorLevel(1);
         $viewModel->setResult('Page not found');
-
         return $viewModel;
     }
 }

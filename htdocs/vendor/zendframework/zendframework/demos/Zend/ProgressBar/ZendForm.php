@@ -101,7 +101,8 @@ if (isset($_GET['progress_key'])) {
         }
     </style>
     <script type="text/javascript">
-        function makeRequest(url) {
+        function makeRequest(url)
+        {
             var httpRequest;
 
             if (window.XMLHttpRequest) {
@@ -133,15 +134,18 @@ if (isset($_GET['progress_key'])) {
 
         }
 
-        function observeProgress() {
+        function observeProgress()
+        {
             setTimeout("getProgress()", 1500);
         }
 
-        function getProgress() {
+        function getProgress()
+        {
             makeRequest('ZendForm.php?progress_key=' + document.getElementById('progress_key').value);
         }
 
-        function evalProgress(httpRequest) {
+        function evalProgress(httpRequest)
+        {
             try {
                 if (httpRequest.readyState == 4) {
                     if (httpRequest.status == 200) {
@@ -162,14 +166,16 @@ if (isset($_GET['progress_key'])) {
             }
         }
 
-        function update(data) {
+        function update(data)
+        {
             document.getElementById('pg-percent').style.width = data.percent + '%';
 
             document.getElementById('pg-text-1').innerHTML = data.text;
             document.getElementById('pg-text-2').innerHTML = data.text;
         }
 
-        function finish() {
+        function finish()
+        {
             document.getElementById('pg-percent').style.width = '100%';
 
             document.getElementById('pg-text-1').innerHTML = 'Upload done';
@@ -179,30 +185,30 @@ if (isset($_GET['progress_key'])) {
 </head>
 <body>
 <?php
-$file = new Element\File('file');
+$file  = new Element\File('file');
 $file->setLabel('File');
 
-$progress_key = new Element\Hidden('progress_key');
+$progress_key  = new Element\Hidden('progress_key');
 $progress_key->setAttribute('id', 'progress_key');
 $progress_key->setValue(md5(uniqid(rand())));
 
-$submit = new Element\Submit('submit');
+$submit  = new Element\Submit('submit');
 $submit->setValue('Upload!');
 
 $form = new Form("ZendForm");
 $form->setAttributes(array(
-    'enctype' => 'multipart/form-data',
-    'action' => 'ZendForm.php',
-    'target' => 'uploadTarget',
+    'enctype'  => 'multipart/form-data',
+    'action'   => 'ZendForm.php',
+    'target'   => 'uploadTarget',
     'onsubmit' => 'observeProgress();'
 ));
 
 $form->prepare();
 
-$formhelper = new Helper\Form();
-$formfile = new Helper\FormFile();
-$formhidden = new Helper\FormHidden();
-$formsubmit = new Helper\FormSubmit();
+$formhelper   = new Helper\Form();
+$formfile     = new Helper\FormFile();
+$formhidden   = new Helper\FormHidden();
+$formsubmit   = new Helper\FormSubmit();
 
 echo $formhelper->openTag($form);
 echo $formhidden($progress_key);

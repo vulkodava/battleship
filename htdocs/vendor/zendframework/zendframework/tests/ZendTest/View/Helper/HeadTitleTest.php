@@ -103,8 +103,8 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     public function testRenderTitleEscapesSeparator()
     {
         $this->helper->__invoke('Foo')
-            ->__invoke('Bar')
-            ->setSeparator(' <br /> ');
+                     ->__invoke('Bar')
+                     ->setSeparator(' <br /> ');
         $string = $this->helper->renderTitle();
         $this->assertNotContains('<br />', $string);
         $this->assertContains('Foo', $string);
@@ -136,7 +136,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @issue ZF-2918
-     * @link  http://framework.zend.com/issues/browse/ZF-2918
+     * @link http://framework.zend.com/issues/browse/ZF-2918
      */
     public function testZF2918()
     {
@@ -149,7 +149,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @issue ZF-3577
-     * @link  http://framework.zend.com/issues/browse/ZF-3577
+     * @link http://framework.zend.com/issues/browse/ZF-3577
      */
     public function testZF3577()
     {
@@ -214,7 +214,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @group ZF-10284
+     *  @group ZF-10284
      */
     public function testReturnTypeDefaultAttachOrder()
     {

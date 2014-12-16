@@ -24,7 +24,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($hasValidation->filter('Bar::FoohasFoo'));
         $this->assertFalse($hasValidation->filter('hAsFoo'));
         $this->assertFalse($hasValidation->filter('Blubb::hAsFoo'));
-        $this->assertFalse($hasValidation->filter(get_class($this) . '::hAsFoo'));
+        $this->assertFalse($hasValidation->filter(get_class($this). '::hAsFoo'));
     }
 
     public function testGetValidation()
@@ -36,7 +36,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($hasValidation->filter('Foo::GetFooBar'));
         $this->assertFalse($hasValidation->filter('GETFoo'));
         $this->assertFalse($hasValidation->filter('Blubb::GETFoo'));
-        $this->assertFalse($hasValidation->filter(get_class($this) . '::GETFoo'));
+        $this->assertFalse($hasValidation->filter(get_class($this).'::GETFoo'));
     }
 
     public function testIsValidation()
@@ -48,6 +48,6 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($hasValidation->filter('Foo::IsFooBar'));
         $this->assertFalse($hasValidation->filter('ISFoo'));
         $this->assertFalse($hasValidation->filter('Bar::ISFoo'));
-        $this->assertFalse($hasValidation->filter(get_class($this) . '::ISFoo'));
+        $this->assertFalse($hasValidation->filter(get_class($this).'::ISFoo'));
     }
 }

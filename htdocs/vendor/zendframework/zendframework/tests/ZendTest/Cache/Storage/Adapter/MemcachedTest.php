@@ -26,7 +26,7 @@ class MemcachedTest extends CommonAdapterTest
             $this->markTestSkipped("Memcached extension is not loaded");
         }
 
-        $this->_options = new Cache\Storage\Adapter\MemcachedOptions(array(
+        $this->_options  = new Cache\Storage\Adapter\MemcachedOptions(array(
             'resource_id' => __CLASS__
         ));
 
@@ -175,14 +175,14 @@ class MemcachedTest extends CommonAdapterTest
 
         $memcached = new Cache\Storage\Adapter\Memcached($options);
         $this->assertEquals($memcached->getOptions()->getLibOptions(), array(
-            \Memcached::OPT_COMPRESSION => false
+                \Memcached::OPT_COMPRESSION => false
         ));
     }
 
     public function testOptionPersistentId()
     {
         $options = new Cache\Storage\Adapter\MemcachedOptions();
-        $resourceId = $options->getResourceId();
+        $resourceId      = $options->getResourceId();
         $resourceManager = $options->getResourceManager();
         $options->setPersistentId('testPersistentId');
 

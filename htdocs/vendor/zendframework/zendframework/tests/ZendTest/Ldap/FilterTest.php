@@ -19,14 +19,14 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterEscapeBasicOperation()
     {
-        $input = 'a*b(b)d\e/f';
+        $input    = 'a*b(b)d\e/f';
         $expected = 'a\2ab\28b\29d\5ce/f';
         $this->assertEquals($expected, Ldap\Filter::escapeValue($input));
     }
 
     public function testEscapeValues()
     {
-        $expected = 't\28e,s\29t\2av\5cal\1eue';
+        $expected  = 't\28e,s\29t\2av\5cal\1eue';
         $filterval = 't(e,s)t*v\\al' . chr(30) . 'ue';
         $this->assertEquals($expected, Ldap\Filter::escapeValue($filterval));
         $this->assertEquals($expected, Ldap\Filter::escapeValue(array($filterval)));
@@ -38,7 +38,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
     public function testUnescapeValues()
     {
-        $expected = 't(e,s)t*v\\al' . chr(30) . 'ue';
+        $expected  = 't(e,s)t*v\\al' . chr(30) . 'ue';
         $filterval = 't\28e,s\29t\2av\5cal\1eue';
         $this->assertEquals($expected, Ldap\Filter::unescapeValue($filterval));
         $this->assertEquals($expected, Ldap\Filter::unescapeValue(array($filterval)));
@@ -50,8 +50,8 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterValueUtf8()
     {
-        $filter = 'ÄÖÜäöüß€';
-        $escaped = Ldap\Filter::escapeValue($filter);
+        $filter    = 'ÄÖÜäöüß€';
+        $escaped   = Ldap\Filter::escapeValue($filter);
         $unescaped = Ldap\Filter::unescapeValue($escaped);
         $this->assertEquals($filter, $unescaped);
     }
@@ -87,7 +87,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testToStringImplementation()
     {
         $f1 = Ldap\Filter::ends('name', 'value');
-        $this->assertEquals($f1->toString(), (string)$f1);
+        $this->assertEquals($f1->toString(), (string) $f1);
     }
 
     public function testNegate()
@@ -106,7 +106,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testIllegalGroupingFilter()
     {
         $data = array('a', 'b', 5);
-        $f = new Filter\AndFilter($data);
+        $f    = new Filter\AndFilter($data);
     }
 
     public function testGroupingFilter()

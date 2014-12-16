@@ -40,7 +40,6 @@ class Encrypt extends AbstractFilter
 
     /**
      * Returns the name of the set adapter
-     *
      * @todo inconsitent: get adapter should return the adapter and not the name
      *
      * @return string
@@ -99,7 +98,7 @@ class Encrypt extends AbstractFilter
     /**
      * Calls adapter methods
      *
-     * @param string $method        Method to call
+     * @param string       $method  Method to call
      * @param string|array $options Options for this method
      * @return mixed
      * @throws Exception\BadMethodCallException

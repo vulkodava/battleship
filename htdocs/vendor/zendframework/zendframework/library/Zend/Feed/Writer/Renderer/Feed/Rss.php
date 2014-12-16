@@ -18,7 +18,7 @@ use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer\Version;
 
 /**
- */
+*/
 class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
@@ -88,7 +88,6 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             $imported = $this->dom->importNode($element, true);
             $channel->appendChild($imported);
         }
-
         return $this;
     }
 
@@ -122,13 +121,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     {
         if (!$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
-                . ' title element but a title has not been set';
+            . ' title element but a title has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
-
                 return;
             }
         }
@@ -151,13 +149,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     {
         if (!$this->getDataContainer()->getDescription()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
-                . ' description element but one has not been set';
+            . ' description element but one has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
-
                 return;
             }
         }
@@ -229,13 +226,12 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $value = $this->getDataContainer()->getLink();
         if (!$value) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
-                . ' link element but one has not been set';
+            . ' link element but one has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
-
                 return;
             }
         }
@@ -316,7 +312,6 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
-
                 return;
             }
         }
@@ -325,30 +320,29 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
             || !Uri::factory($image['link'])->isValid()
         ) {
             $message = 'Invalid parameter: parameter \'link\''
-                . ' must be a non-empty string and valid URI/IRI';
+            . ' must be a non-empty string and valid URI/IRI';
             $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
-
                 return;
             }
         }
 
-        $img = $dom->createElement('image');
+        $img   = $dom->createElement('image');
         $root->appendChild($img);
 
-        $url = $dom->createElement('url');
-        $text = $dom->createTextNode($image['uri']);
+        $url   = $dom->createElement('url');
+        $text  = $dom->createTextNode($image['uri']);
         $url->appendChild($text);
 
         $title = $dom->createElement('title');
-        $text = $dom->createTextNode($image['title']);
+        $text  = $dom->createTextNode($image['title']);
         $title->appendChild($text);
 
-        $link = $dom->createElement('link');
-        $text = $dom->createTextNode($image['link']);
+        $link  = $dom->createElement('link');
+        $text  = $dom->createTextNode($image['link']);
         $link->appendChild($text);
 
         $img->appendChild($url);
@@ -356,51 +350,48 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $img->appendChild($link);
 
         if (isset($image['height'])) {
-            if (!ctype_digit((string)$image['height']) || $image['height'] > 400) {
+            if (!ctype_digit((string) $image['height']) || $image['height'] > 400) {
                 $message = 'Invalid parameter: parameter \'height\''
-                    . ' must be an integer not exceeding 400';
+                         . ' must be an integer not exceeding 400';
                 $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->ignoreExceptions) {
                     throw $exception;
                 } else {
                     $this->exceptions[] = $exception;
-
                     return;
                 }
             }
             $height = $dom->createElement('height');
-            $text = $dom->createTextNode($image['height']);
+            $text   = $dom->createTextNode($image['height']);
             $height->appendChild($text);
             $img->appendChild($height);
         }
         if (isset($image['width'])) {
-            if (!ctype_digit((string)$image['width']) || $image['width'] > 144) {
+            if (!ctype_digit((string) $image['width']) || $image['width'] > 144) {
                 $message = 'Invalid parameter: parameter \'width\''
-                    . ' must be an integer not exceeding 144';
+                         . ' must be an integer not exceeding 144';
                 $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->ignoreExceptions) {
                     throw $exception;
                 } else {
                     $this->exceptions[] = $exception;
-
                     return;
                 }
             }
             $width = $dom->createElement('width');
-            $text = $dom->createTextNode($image['width']);
+            $text  = $dom->createTextNode($image['width']);
             $width->appendChild($text);
             $img->appendChild($width);
         }
         if (isset($image['description'])) {
             if (empty($image['description']) || !is_string($image['description'])) {
                 $message = 'Invalid parameter: parameter \'description\''
-                    . ' must be a non-empty string';
+                         . ' must be a non-empty string';
                 $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->ignoreExceptions) {
                     throw $exception;
                 } else {
                     $this->exceptions[] = $exception;
-
                     return;
                 }
             }

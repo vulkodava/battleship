@@ -141,7 +141,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
             'struct',
         );
         $this->prototype->setReturnType($return)
-            ->setParameters($params);
+                        ->setParameters($params);
         $test = $this->prototype->toArray();
         $this->assertEquals($return, $test['returnType']);
         $this->assertEquals($params, $test['parameters']);

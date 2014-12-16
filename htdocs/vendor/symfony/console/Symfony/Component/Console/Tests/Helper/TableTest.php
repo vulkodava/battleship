@@ -40,7 +40,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $table
             ->setHeaders($headers)
             ->setRows($rows)
-            ->setStyle($style);
+            ->setStyle($style)
+        ;
         $table->render();
 
         $this->assertEquals($expected, $this->getOutputContent($output));
@@ -55,7 +56,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $table
             ->setHeaders($headers)
             ->addRows($rows)
-            ->setStyle($style);
+            ->setStyle($style)
+        ;
         $table->render();
 
         $this->assertEquals($expected, $this->getOutputContent($output));
@@ -69,7 +71,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $table = new Table($output = $this->getOutputStream());
         $table
             ->setHeaders($headers)
-            ->setStyle($style);
+            ->setStyle($style)
+        ;
         foreach ($rows as $row) {
             $table->addRow($row);
         }
@@ -92,8 +95,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
                 array('ISBN', 'Title', 'Author'),
                 $books,
                 'default',
-                <<<TABLE
-                +---------------+--------------------------+------------------+
+<<<TABLE
++---------------+--------------------------+------------------+
 | ISBN          | Title                    | Author           |
 +---------------+--------------------------+------------------+
 | 99921-58-10-7 | Divine Comedy            | Dante Alighieri  |
@@ -108,8 +111,8 @@ TABLE
                 array('ISBN', 'Title', 'Author'),
                 $books,
                 'compact',
-                <<<TABLE
-                 ISBN          Title                    Author
+<<<TABLE
+ ISBN          Title                    Author           
  99921-58-10-7 Divine Comedy            Dante Alighieri  
  9971-5-0210-0 A Tale of Two Cities     Charles Dickens  
  960-425-059-0 The Lord of the Rings    J. R. R. Tolkien 
@@ -121,8 +124,8 @@ TABLE
                 array('ISBN', 'Title', 'Author'),
                 $books,
                 'borderless',
-                <<<TABLE
-                 =============== ========================== ==================
+<<<TABLE
+ =============== ========================== ================== 
   ISBN            Title                      Author            
  =============== ========================== ================== 
   99921-58-10-7   Divine Comedy              Dante Alighieri   
@@ -142,8 +145,8 @@ TABLE
                     array('80-902734-1-6', 'And Then There Were None', 'Agatha Christie'),
                 ),
                 'default',
-                <<<TABLE
-                +---------------+--------------------------+------------------+
+<<<TABLE
++---------------+--------------------------+------------------+
 | ISBN          | Title                    |                  |
 +---------------+--------------------------+------------------+
 | 99921-58-10-7 | Divine Comedy            | Dante Alighieri  |
@@ -163,8 +166,8 @@ TABLE
                     array('80-902734-1-6', 'And Then There Were None', 'Agatha Christie'),
                 ),
                 'default',
-                <<<TABLE
-                +---------------+--------------------------+------------------+
+<<<TABLE
++---------------+--------------------------+------------------+
 | 99921-58-10-7 | Divine Comedy            | Dante Alighieri  |
 | 9971-5-0210-0 |                          |                  |
 | 960-425-059-0 | The Lord of the Rings    | J. R. R. Tolkien |
@@ -182,8 +185,8 @@ TABLE
                     array("960-425-059-0", "The Lord of the Rings", "J. R. R.\nTolkien"),
                 ),
                 'default',
-                <<<TABLE
-                +---------------+----------------------------+-----------------+
+<<<TABLE
++---------------+----------------------------+-----------------+
 | ISBN          | Title                      | Author          |
 +---------------+----------------------------+-----------------+
 | 99921-58-10-7 | Divine                     | Dante Alighieri |
@@ -202,8 +205,8 @@ TABLE
                 array('ISBN', 'Title'),
                 array(),
                 'default',
-                <<<TABLE
-                +------+-------+
+<<<TABLE
++------+-------+
 | ISBN | Title |
 +------+-------+
 
@@ -222,8 +225,8 @@ TABLE
                     array('9971-5-0210-0', 'A Tale of Two Cities', '<info>Charles Dickens</>'),
                 ),
                 'default',
-                <<<TABLE
-                +---------------+----------------------+-----------------+
+<<<TABLE
++---------------+----------------------+-----------------+
 | ISBN          | Title                | Author          |
 +---------------+----------------------+-----------------+
 | 99921-58-10-7 | Divine Comedy        | Dante Alighieri |
@@ -239,8 +242,8 @@ TABLE
                     array('9971-5-0210-0', 'A Tale of Two Cities', 'Charles Dickens'),
                 ),
                 'default',
-                <<<TABLE
-                +----------------------------------+----------------------+-----------------+
+<<<TABLE
++----------------------------------+----------------------+-----------------+
 | ISBN                             | Title                | Author          |
 +----------------------------------+----------------------+-----------------+
 | <strong>99921-58-10-700</strong> | <f>Divine Com</f>    | Dante Alighieri |
@@ -262,12 +265,13 @@ TABLE
         $table
             ->setHeaders(array('■■'))
             ->setRows(array(array(1234)))
-            ->setStyle('default');
+            ->setStyle('default')
+        ;
         $table->render();
 
         $expected =
-            <<<TABLE
-            +------+
+<<<TABLE
++------+
 | ■■   |
 +------+
 | 1234 |
@@ -284,7 +288,8 @@ TABLE;
         $style
             ->setHorizontalBorderChar('.')
             ->setVerticalBorderChar('.')
-            ->setCrossingChar('.');
+            ->setCrossingChar('.')
+        ;
 
         Table::setStyleDefinition('dotfull', $style);
         $table = new Table($output = $this->getOutputStream());
@@ -295,8 +300,8 @@ TABLE;
         $table->render();
 
         $expected =
-            <<<TABLE
-            .......
+<<<TABLE
+.......
 . Foo .
 .......
 . Bar .
@@ -322,8 +327,8 @@ TABLE;
         $table->render();
 
         $expected =
-            <<<TABLE
-            +------+
+<<<TABLE
++------+
 | Foo  |
 +------+
 | Bar1 |

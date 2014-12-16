@@ -20,7 +20,6 @@ class DbTableGatewayFactory implements
 {
     /**
      * Adapter options
-     *
      * @var array
      */
     protected $creationOptions;

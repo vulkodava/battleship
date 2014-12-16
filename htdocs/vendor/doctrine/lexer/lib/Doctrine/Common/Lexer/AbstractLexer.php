@@ -89,7 +89,7 @@ abstract class AbstractLexer
      */
     public function setInput($input)
     {
-        $this->input = $input;
+        $this->input  = $input;
         $this->tokens = array();
 
         $this->reset();
@@ -132,7 +132,7 @@ abstract class AbstractLexer
     }
 
     /**
-     * Retrieve the original lexer's input until a given position.
+     * Retrieve the original lexer's input until a given position. 
      *
      * @param integer $position
      *
@@ -199,7 +199,7 @@ abstract class AbstractLexer
     /**
      * Checks if given value is identical to the given token.
      *
-     * @param mixed $value
+     * @param mixed   $value
      * @param integer $token
      *
      * @return boolean
@@ -232,7 +232,6 @@ abstract class AbstractLexer
     {
         $peek = $this->peek();
         $this->peek = 0;
-
         return $peek;
     }
 
@@ -247,7 +246,7 @@ abstract class AbstractLexer
     {
         static $regex;
 
-        if (!isset($regex)) {
+        if ( ! isset($regex)) {
             $regex = sprintf(
                 '/(%s)|%s/%s',
                 implode(')|(', $this->getCatchablePatterns()),
@@ -265,7 +264,7 @@ abstract class AbstractLexer
 
             $this->tokens[] = array(
                 'value' => $match[0],
-                'type' => $type,
+                'type'  => $type,
                 'position' => $match[1],
             );
         }

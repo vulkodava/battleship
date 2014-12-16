@@ -12,12 +12,7 @@ class DCOM55Test extends \PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \Doctrine\Common\Annotations\AnnotationException
-     * @expectedExceptionMessage [Semantical Error] The class "Doctrine\Tests\Common\Annotations\Fixtures\Controller"
-     *                           is not annotated with @Annotation. Are you sure this class can be used as annotation?
-     *                           If so, then you need to add @Annotation to the _class_ doc comment of
-     *                           "Doctrine\Tests\Common\Annotations\Fixtures\Controller". If it is indeed no
-     *                           annotation, then you need to add @IgnoreAnnotation("Controller") to the _class_ doc
-     *                           comment of class Doctrine\Tests\Common\Annotations\Ticket\Dummy.
+     * @expectedExceptionMessage [Semantical Error] The class "Doctrine\Tests\Common\Annotations\Fixtures\Controller" is not annotated with @Annotation. Are you sure this class can be used as annotation? If so, then you need to add @Annotation to the _class_ doc comment of "Doctrine\Tests\Common\Annotations\Fixtures\Controller". If it is indeed no annotation, then you need to add @IgnoreAnnotation("Controller") to the _class_ doc comment of class Doctrine\Tests\Common\Annotations\Ticket\Dummy.
      */
     public function testIssue()
     {
@@ -33,7 +28,7 @@ class DCOM55Test extends \PHPUnit_Framework_TestCase
         $annots = $reader->getClassAnnotations($class);
 
         $this->assertEquals(1, count($annots));
-        $this->assertInstanceOf(__NAMESPACE__ . '\\DCOM55Annotation', $annots[0]);
+        $this->assertInstanceOf(__NAMESPACE__.'\\DCOM55Annotation', $annots[0]);
     }
 
     public function testParseAnnotationDocblocks()

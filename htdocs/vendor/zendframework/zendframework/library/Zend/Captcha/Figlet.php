@@ -54,7 +54,6 @@ class Figlet extends AbstractWord
     public function generate()
     {
         $this->useNumbers = false;
-
         return parent::generate();
     }
 

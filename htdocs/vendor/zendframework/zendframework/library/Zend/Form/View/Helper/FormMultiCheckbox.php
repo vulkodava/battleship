@@ -16,7 +16,7 @@ use Zend\Form\LabelAwareInterface;
 
 class FormMultiCheckbox extends FormInput
 {
-    const LABEL_APPEND = 'append';
+    const LABEL_APPEND  = 'append';
     const LABEL_PREPEND = 'prepend';
 
     /**
@@ -74,7 +74,7 @@ class FormMultiCheckbox extends FormInput
      * Proxies to {@link render()}.
      *
      * @param  ElementInterface|null $element
-     * @param  null|string $labelPosition
+     * @param  null|string           $labelPosition
      * @return string|FormMultiCheckbox
      */
     public function __invoke(ElementInterface $element = null, $labelPosition = null)
@@ -117,10 +117,10 @@ class FormMultiCheckbox extends FormInput
             ));
         }
 
-        $attributes = $element->getAttributes();
+        $attributes         = $element->getAttributes();
         $attributes['name'] = $name;
         $attributes['type'] = $this->getInputType();
-        $selectedOptions = (array)$element->getValue();
+        $selectedOptions    = (array) $element->getValue();
 
         $rendered = $this->renderOptions($element, $options, $selectedOptions, $attributes);
 
@@ -140,19 +140,19 @@ class FormMultiCheckbox extends FormInput
      * Render options
      *
      * @param  MultiCheckboxElement $element
-     * @param  array $options
-     * @param  array $selectedOptions
-     * @param  array $attributes
+     * @param  array                $options
+     * @param  array                $selectedOptions
+     * @param  array                $attributes
      * @return string
      */
     protected function renderOptions(MultiCheckboxElement $element, array $options, array $selectedOptions, array $attributes)
     {
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-        $labelHelper = $this->getLabelHelper();
-        $labelClose = $labelHelper->closeTag();
-        $labelPosition = $this->getLabelPosition();
+        $labelHelper      = $this->getLabelHelper();
+        $labelClose       = $labelHelper->closeTag();
+        $labelPosition    = $this->getLabelPosition();
         $globalLabelAttributes = array();
-        $closingBracket = $this->getInlineClosingBracket();
+        $closingBracket   = $this->getInlineClosingBracket();
 
         if ($element instanceof LabelAwareInterface) {
             $globalLabelAttributes = $element->getLabelAttributes();
@@ -163,7 +163,7 @@ class FormMultiCheckbox extends FormInput
         }
 
         $combinedMarkup = array();
-        $count = 0;
+        $count          = 0;
 
         foreach ($options as $key => $optionSpec) {
             $count++;
@@ -171,12 +171,12 @@ class FormMultiCheckbox extends FormInput
                 unset($attributes['id']);
             }
 
-            $value = '';
-            $label = '';
+            $value           = '';
+            $label           = '';
             $inputAttributes = $attributes;
             $labelAttributes = $globalLabelAttributes;
-            $selected = isset($inputAttributes['selected']) && $inputAttributes['type'] != 'radio' && $inputAttributes['selected'] != false ? true : false;
-            $disabled = isset($inputAttributes['disabled']) && $inputAttributes['disabled'] != false ? true : false;
+            $selected        = isset($inputAttributes['selected']) && $inputAttributes['type'] != 'radio' && $inputAttributes['selected'] != false ? true : false;
+            $disabled        = isset($inputAttributes['disabled']) && $inputAttributes['disabled'] != false ? true : false;
 
             if (is_scalar($optionSpec)) {
                 $optionSpec = array(
@@ -210,8 +210,8 @@ class FormMultiCheckbox extends FormInput
                 $selected = true;
             }
 
-            $inputAttributes['value'] = $value;
-            $inputAttributes['checked'] = $selected;
+            $inputAttributes['value']    = $value;
+            $inputAttributes['checked']  = $selected;
             $inputAttributes['disabled'] = $disabled;
 
             $input = sprintf(
@@ -227,12 +227,12 @@ class FormMultiCheckbox extends FormInput
                 );
             }
 
-            if (!$element instanceof LabelAwareInterface || !$element->getLabelOption('disable_html_escape')) {
+            if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
                 $label = $escapeHtmlHelper($label);
             }
 
             $labelOpen = $labelHelper->openTag($labelAttributes);
-            $template = $labelOpen . '%s%s' . $labelClose;
+            $template  = $labelOpen . '%s%s' . $labelClose;
             switch ($labelPosition) {
                 case self::LABEL_PREPEND:
                     $markup = sprintf($template, $label, $input);
@@ -253,7 +253,7 @@ class FormMultiCheckbox extends FormInput
      * Render a hidden element for empty/unchecked value
      *
      * @param  MultiCheckboxElement $element
-     * @param  array $attributes
+     * @param  array                $attributes
      * @return string
      */
     protected function renderHiddenElement(MultiCheckboxElement $element, array $attributes)
@@ -265,7 +265,7 @@ class FormMultiCheckbox extends FormInput
             : $this->uncheckedValue;
 
         $hiddenAttributes = array(
-            'name' => $element->getName(),
+            'name'  => $element->getName(),
             'value' => $uncheckedValue,
         );
 
@@ -285,7 +285,6 @@ class FormMultiCheckbox extends FormInput
     public function setLabelAttributes($attributes)
     {
         $this->labelAttributes = $attributes;
-
         return $this;
     }
 
@@ -315,7 +314,7 @@ class FormMultiCheckbox extends FormInput
                 __METHOD__,
                 __CLASS__,
                 __CLASS__,
-                (string)$labelPosition
+                (string) $labelPosition
             ));
         }
         $this->labelPosition = $labelPosition;
@@ -341,8 +340,7 @@ class FormMultiCheckbox extends FormInput
      */
     public function setSeparator($separator)
     {
-        $this->separator = (string)$separator;
-
+        $this->separator = (string) $separator;
         return $this;
     }
 
@@ -365,8 +363,7 @@ class FormMultiCheckbox extends FormInput
      */
     public function setUseHiddenElement($useHiddenElement)
     {
-        $this->useHiddenElement = (bool)$useHiddenElement;
-
+        $this->useHiddenElement = (bool) $useHiddenElement;
         return $this;
     }
 
@@ -390,7 +387,6 @@ class FormMultiCheckbox extends FormInput
     public function setUncheckedValue($value)
     {
         $this->uncheckedValue = $value;
-
         return $this;
     }
 
@@ -430,7 +426,6 @@ class FormMultiCheckbox extends FormInput
                 __METHOD__
             ));
         }
-
         return $name . '[]';
     }
 

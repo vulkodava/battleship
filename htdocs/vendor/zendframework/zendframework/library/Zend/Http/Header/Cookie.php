@@ -33,7 +33,6 @@ class Cookie extends ArrayObject implements HeaderInterface
 
             $nvPairs[$setCookie->getName()] = $setCookie->getValue();
         }
-
         return new static($nvPairs);
     }
 
@@ -72,8 +71,7 @@ class Cookie extends ArrayObject implements HeaderInterface
 
     public function setEncodeValue($encodeValue)
     {
-        $this->encodeValue = (bool)$encodeValue;
-
+        $this->encodeValue = (bool) $encodeValue;
         return $this;
     }
 

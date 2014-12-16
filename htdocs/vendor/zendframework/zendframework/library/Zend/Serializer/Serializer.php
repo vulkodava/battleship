@@ -30,7 +30,7 @@ abstract class Serializer
     /**
      * Create a serializer adapter instance.
      *
-     * @param  string|Adapter $adapterName              Name of the adapter class
+     * @param  string|Adapter $adapterName Name of the adapter class
      * @param  array |\Traversable|null $adapterOptions Serializer options
      * @return Adapter
      */
@@ -64,7 +64,6 @@ abstract class Serializer
         if (static::$adapters === null) {
             static::$adapters = new AdapterPluginManager();
         }
-
         return static::$adapters;
     }
 
@@ -76,7 +75,6 @@ abstract class Serializer
     public static function resetAdapterPluginManager()
     {
         static::$adapters = new AdapterPluginManager();
-
         return static::$adapters;
     }
 
@@ -101,7 +99,6 @@ abstract class Serializer
         if (!static::$defaultAdapter instanceof Adapter) {
             static::setDefaultAdapter(static::$defaultAdapter);
         }
-
         return static::$defaultAdapter;
     }
 

@@ -34,7 +34,6 @@ class City
     public function setCountry(Country $country)
     {
         $this->country = $country;
-
         return $this;
     }
 
@@ -53,7 +52,6 @@ class City
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -72,7 +70,6 @@ class City
     public function setZipCode($zipCode)
     {
         $this->zipCode = $zipCode;
-
         return $this;
     }
 

@@ -130,7 +130,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->service->setTarget(123);
         $value = $this->service->getTarget();
         $this->assertTrue(is_string($value));
-        $this->assertEquals((string)123, $value);
+        $this->assertEquals((string) 123, $value);
     }
 
     public function testEnvelopeShouldBeJSONRpc1CompliantByDefault()
@@ -170,11 +170,11 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testParamsShouldAcceptArrayOfTypes()
     {
-        $type = array('integer', 'string');
+        $type   = array('integer', 'string');
         $this->service->addParam($type);
         $params = $this->service->getParams();
-        $param = array_shift($params);
-        $test = $param['type'];
+        $param  = array_shift($params);
+        $test   = $param['type'];
         $this->assertTrue(is_array($test));
         $this->assertEquals($type, $test);
     }
@@ -188,8 +188,8 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     public function testShouldBeAbleToOrderParams()
     {
         $this->service->addParam('integer', array(), 4)
-            ->addParam('string')
-            ->addParam('boolean', array(), 3);
+                      ->addParam('string')
+                      ->addParam('boolean', array(), 3);
         $params = $this->service->getParams();
 
         $this->assertEquals(3, count($params));
@@ -207,14 +207,14 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->service->addParam(
             'integer',
             array(
-                'name' => 'foo',
-                'optional' => false,
-                'default' => 1,
+                'name'        => 'foo',
+                'optional'    => false,
+                'default'     => 1,
                 'description' => 'Foo parameter',
             )
         );
         $params = $this->service->getParams();
-        $param = array_shift($params);
+        $param  = array_shift($params);
         $this->assertEquals('foo', $param['name']);
         $this->assertFalse($param['optional']);
         $this->assertEquals(1, $param['default']);
@@ -294,7 +294,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupSmdValidationObject();
         $json = $this->service->toJSON();
-        $smd = \Zend\Json\Json::decode($json, \Zend\Json\Json::TYPE_ARRAY);
+        $smd  = \Zend\Json\Json::decode($json, \Zend\Json\Json::TYPE_ARRAY);
 
         $this->assertTrue(array_key_exists('foo', $smd));
         $this->assertTrue(is_array($smd['foo']));
@@ -305,13 +305,13 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     public function setupSmdValidationObject()
     {
         $this->service->setName('foo')
-            ->setTransport('POST')
-            ->setTarget('/foo')
-            ->setEnvelope(Server\Smd::ENV_JSONRPC_2)
-            ->addParam('boolean')
-            ->addParam('array')
-            ->addParam('object')
-            ->setReturn('boolean');
+                      ->setTransport('POST')
+                      ->setTarget('/foo')
+                      ->setEnvelope(Server\Smd::ENV_JSONRPC_2)
+                      ->addParam('boolean')
+                      ->addParam('array')
+                      ->addParam('object')
+                      ->setReturn('boolean');
     }
 
     public function validateSmdArray(array $smd)

@@ -62,7 +62,7 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
 
         $this->table = $this->getMockForAbstractClass(
             'Zend\Db\TableGateway\AbstractTableGateway'
-        //array('getTable')
+            //array('getTable')
         );
         $tgReflection = new \ReflectionClass('Zend\Db\TableGateway\AbstractTableGateway');
         foreach ($tgReflection->getProperties() as $tgPropReflection) {
@@ -150,7 +150,7 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
         $mockSelect->expects($this->any())
             ->method('getRawState')
             ->will($this->returnValue(array(
-                    'table' => $this->table->getTable(),
+                'table' => $this->table->getTable(),
                 ))
             );
 

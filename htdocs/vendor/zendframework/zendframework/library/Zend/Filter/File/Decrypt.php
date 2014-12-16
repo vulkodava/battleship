@@ -43,7 +43,6 @@ class Decrypt extends Filter\Decrypt
     public function setFilename($filename = null)
     {
         $this->filename = $filename;
-
         return $this;
     }
 
@@ -72,7 +71,7 @@ class Decrypt extends Filter\Decrypt
 
             $isFileUpload = true;
             $uploadData = $value;
-            $value = $value['tmp_name'];
+            $value      = $value['tmp_name'];
         }
 
         if (!file_exists($value)) {
@@ -93,7 +92,7 @@ class Decrypt extends Filter\Decrypt
         }
 
         $decrypted = parent::filter($content);
-        $result = file_put_contents($this->filename, $decrypted);
+        $result    = file_put_contents($this->filename, $decrypted);
 
         if (!$result) {
             throw new Exception\RuntimeException("Problem while writing file '{$this->filename}'");
@@ -101,10 +100,8 @@ class Decrypt extends Filter\Decrypt
 
         if ($isFileUpload) {
             $uploadData['tmp_name'] = $this->filename;
-
             return $uploadData;
         }
-
         return $this->filename;
     }
 }

@@ -37,8 +37,8 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $attributes = array(
-            'type' => 'text',
-            'class' => 'text-element',
+            'type'     => 'text',
+            'class'    => 'text-element',
             'data-foo' => 'bar',
             'x-autocompletetype' => 'email'
         );
@@ -50,13 +50,13 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $attributes = array(
-            'type' => 'text',
-            'class' => 'text-element',
+            'type'     => 'text',
+            'class'    => 'text-element',
             'data-foo' => 'bar',
         );
         $attributesExtra = array(
             'data-foo' => 'baz',
-            'width' => 20,
+            'width'    => 20,
         );
         $element->setAttributes($attributes);
         $element->setAttributes($attributesExtra);
@@ -68,8 +68,8 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $attributes = array(
-            'type' => 'text',
-            'class' => 'text-element',
+            'type'     => 'text',
+            'class'    => 'text-element',
             'data-foo' => 'bar',
         );
         $element->setAttributes($attributes);
@@ -81,8 +81,8 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $attributes = array(
-            'type' => 'text',
-            'class' => 'text-element',
+            'type'     => 'text',
+            'class'    => 'text-element',
             'data-foo' => 'bar',
         );
         $element->setAttributes($attributes);
@@ -94,8 +94,8 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $attributes = array(
-            'type' => 'text',
-            'class' => 'text-element',
+            'type'     => 'text',
+            'class'    => 'text-element',
             'data-foo' => 'bar',
         );
         $element->setAttributes($attributes);
@@ -251,8 +251,8 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $options = array(
-            'foo' => 'bar',
-            'foo2' => 'baz'
+            'foo'     => 'bar',
+            'foo2'    => 'baz'
         );
         $element->setLabelOptions($options);
 
@@ -275,12 +275,12 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $options = array(
-            'foo' => 'bar',
-            'foo2' => 'baz'
+            'foo'     => 'bar',
+            'foo2'    => 'baz'
         );
         $optionsExtra = array(
-            'foo3' => 'bar2',
-            'foo2' => 'baz2'
+            'foo3'    => 'bar2',
+            'foo2'    => 'baz2'
         );
         $element->setLabelOptions($options);
         $element->setLabelOptions($optionsExtra);
@@ -296,8 +296,8 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $options = array(
-            'foo' => 'bar',
-            'foo2' => 'baz'
+            'foo'     => 'bar',
+            'foo2'    => 'baz'
         );
         $element->setLabelOptions($options);
         $element->clearLabelOptions();
@@ -308,8 +308,8 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $options = array(
-            'foo' => 'bar',
-            'foo2' => 'baz'
+            'foo'     => 'bar',
+            'foo2'    => 'baz'
         );
         $element->setLabelOptions($options);
         $element->removeLabelOption('foo2');
@@ -320,9 +320,9 @@ class ElementTest extends TestCase
     {
         $element = new Element();
         $options = array(
-            'foo' => 'bar',
-            'foo2' => 'baz',
-            'foo3' => 'bar2'
+            'foo'     => 'bar',
+            'foo2'    => 'baz',
+            'foo3'    => 'bar2'
         );
         $element->setLabelOptions($options);
         $element->removeLabelOptions(array('foo', 'foo2'));

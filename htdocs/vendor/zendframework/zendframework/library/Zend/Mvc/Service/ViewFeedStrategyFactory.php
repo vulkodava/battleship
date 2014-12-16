@@ -30,7 +30,6 @@ class ViewFeedStrategyFactory implements FactoryInterface
     {
         $feedRenderer = $serviceLocator->get('ViewFeedRenderer');
         $feedStrategy = new FeedStrategy($feedRenderer);
-
         return $feedStrategy;
     }
 }

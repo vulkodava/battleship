@@ -58,14 +58,14 @@ final class CachedReader implements Reader
      * Constructor.
      *
      * @param Reader $reader
-     * @param Cache $cache
-     * @param bool $debug
+     * @param Cache  $cache
+     * @param bool   $debug
      */
     public function __construct(Reader $reader, Cache $cache, $debug = false)
     {
         $this->delegate = $reader;
         $this->cache = $cache;
-        $this->debug = (boolean)$debug;
+        $this->debug = (boolean) $debug;
     }
 
     /**
@@ -107,7 +107,7 @@ final class CachedReader implements Reader
     public function getPropertyAnnotations(\ReflectionProperty $property)
     {
         $class = $property->getDeclaringClass();
-        $cacheKey = $class->getName() . '$' . $property->getName();
+        $cacheKey = $class->getName().'$'.$property->getName();
 
         if (isset($this->loadedAnnotations[$cacheKey])) {
             return $this->loadedAnnotations[$cacheKey];
@@ -141,7 +141,7 @@ final class CachedReader implements Reader
     public function getMethodAnnotations(\ReflectionMethod $method)
     {
         $class = $method->getDeclaringClass();
-        $cacheKey = $class->getName() . '#' . $method->getName();
+        $cacheKey = $class->getName().'#'.$method->getName();
 
         if (isset($this->loadedAnnotations[$cacheKey])) {
             return $this->loadedAnnotations[$cacheKey];
@@ -182,8 +182,8 @@ final class CachedReader implements Reader
     /**
      * Fetches a value from the cache.
      *
-     * @param string $rawCacheKey     The cache key.
-     * @param \ReflectionClass $class The related class.
+     * @param string           $rawCacheKey The cache key.
+     * @param \ReflectionClass $class       The related class.
      *
      * @return mixed The cached value or false when the value is not in cache.
      */
@@ -203,7 +203,7 @@ final class CachedReader implements Reader
      * Saves a value to the cache.
      *
      * @param string $rawCacheKey The cache key.
-     * @param mixed $value        The value.
+     * @param mixed  $value       The value.
      *
      * @return void
      */
@@ -212,14 +212,14 @@ final class CachedReader implements Reader
         $cacheKey = $rawCacheKey . self::$CACHE_SALT;
         $this->cache->save($cacheKey, $value);
         if ($this->debug) {
-            $this->cache->save('[C]' . $cacheKey, time());
+            $this->cache->save('[C]'.$cacheKey, time());
         }
     }
 
     /**
      * Checks if the cache is fresh.
      *
-     * @param string $cacheKey
+     * @param string           $cacheKey
      * @param \ReflectionClass $class
      *
      * @return boolean
@@ -230,6 +230,6 @@ final class CachedReader implements Reader
             return true;
         }
 
-        return $this->cache->fetch('[C]' . $cacheKey) >= filemtime($filename);
+        return $this->cache->fetch('[C]'.$cacheKey) >= filemtime($filename);
     }
 }

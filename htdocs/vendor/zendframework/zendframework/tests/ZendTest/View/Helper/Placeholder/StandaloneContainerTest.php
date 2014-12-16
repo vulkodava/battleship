@@ -135,7 +135,6 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
 class Foo extends \Zend\View\Helper\Placeholder\Container\AbstractStandalone
 {
     protected $_regKey = 'foo';
-
     public function direct()
     {
     }

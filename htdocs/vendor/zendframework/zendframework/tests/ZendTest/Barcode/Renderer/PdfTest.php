@@ -69,7 +69,6 @@ class PdfTest extends TestCommon
     {
         $pdf = new Pdf\PdfDocument();
         $pdf->pages[] = new Pdf\Page('500:300:');
-
         return $this->renderer->setResource($pdf);
     }
 

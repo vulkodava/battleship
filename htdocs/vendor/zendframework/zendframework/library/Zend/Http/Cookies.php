@@ -103,7 +103,7 @@ class Cookies extends Headers
 
         if ($cookie instanceof SetCookie) {
             $domain = $cookie->getDomain();
-            $path = $cookie->getPath();
+            $path   = $cookie->getPath();
             if (!isset($this->cookies[$domain])) {
                 $this->cookies[$domain] = array();
             }
@@ -145,7 +145,6 @@ class Cookies extends Headers
     public function getAllCookies($retAs = self::COOKIE_OBJECT)
     {
         $cookies = $this->_flattenCookiesArray($this->cookies, $retAs);
-
         return $cookies;
     }
 
@@ -154,10 +153,10 @@ class Cookies extends Headers
      * whether session cookies should be sent or not, and the time to consider as "now" when
      * checking cookie expiry time.
      *
-     * @param string|Uri\Uri $uri       URI to check against (secure, domain, path)
+     * @param string|Uri\Uri $uri URI to check against (secure, domain, path)
      * @param bool $matchSessionCookies Whether to send session cookies
-     * @param int $retAs                Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
-     * @param int $now                  Override the current time when checking for expiry time
+     * @param int $retAs Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
+     * @param int $now Override the current time when checking for expiry time
      * @throws Exception\InvalidArgumentException if invalid URI specified
      * @return array|string
      */
@@ -166,8 +165,7 @@ class Cookies extends Headers
         $matchSessionCookies = true,
         $retAs = self::COOKIE_OBJECT,
         $now = null
-    )
-    {
+    ) {
         if (is_string($uri)) {
             $uri = Uri\UriFactory::factory($uri, 'http');
         } elseif (!$uri instanceof Uri\Uri) {
@@ -201,8 +199,8 @@ class Cookies extends Headers
      * Get a specific cookie according to a URI and name
      *
      * @param Uri\Uri|string $uri The uri (domain and path) to match
-     * @param string $cookieName  The cookie's name
-     * @param int $retAs          Whether to return cookies as objects of \Zend\Http\Header\SetCookie or as strings
+     * @param string $cookieName The cookie's name
+     * @param int $retAs Whether to return cookies as objects of \Zend\Http\Header\SetCookie or as strings
      * @throws Exception\InvalidArgumentException if invalid URI specified or invalid $retAs value
      * @return SetCookie|string
      */
@@ -222,7 +220,7 @@ class Cookies extends Headers
         // Get correct cookie path
         $path = $uri->getPath();
         $path = substr($path, 0, strrpos($path, '/'));
-        if (!$path) {
+        if (! $path) {
             $path = '/';
         }
 
@@ -267,7 +265,6 @@ class Cookies extends Headers
                     $ret = array_merge($ret, $this->_flattenCookiesArray($item, $retAs));
                 }
             }
-
             return $ret;
         } elseif ($ptr instanceof SetCookie) {
             switch ($retAs) {
@@ -322,7 +319,7 @@ class Cookies extends Headers
         foreach ($domains as $dom => $pathsArray) {
             foreach (array_keys($pathsArray) as $cpath) {
                 if (SetCookie::matchCookiePath($cpath, $path)) {
-                    if (!isset($ret[$dom])) {
+                    if (! isset($ret[$dom])) {
                         $ret[$dom] = array();
                     }
 
@@ -340,7 +337,7 @@ class Cookies extends Headers
      * considered as the requested URI for setting default domain and path
      * of the cookie.
      *
-     * @param Response $response     HTTP Response object
+     * @param Response $response HTTP Response object
      * @param Uri\Uri|string $refUri The requested URI
      * @return Cookies
      * @todo Add the $uri functionality.
@@ -349,7 +346,6 @@ class Cookies extends Headers
     {
         $jar = new static();
         $jar->addCookiesFromResponse($response, $refUri);
-
         return $jar;
     }
 
@@ -371,7 +367,6 @@ class Cookies extends Headers
     public function reset()
     {
         $this->cookies = $this->rawCookies = array();
-
         return $this;
     }
 }

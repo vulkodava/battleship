@@ -27,7 +27,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->testText = 'safdsafsa�lg ��gd�� sd�jg�sdjg�ld�gksd�gj�sdfg�dsj�gjsd�gj�dfsjg�dsfj�djs�g kjhdkj '
-            . 'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
+                       . 'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
         $this->part = new Mime\Part($this->testText);
         $this->part->encoding = Mime\Mime::ENCODING_BASE64;
         $this->part->type = "text/plain";
@@ -40,11 +40,11 @@ class PartTest extends \PHPUnit_Framework_TestCase
     public function testHeaders()
     {
         $expectedHeaders = array('Content-Type: text/plain',
-            'Content-Transfer-Encoding: ' . Mime\Mime::ENCODING_BASE64,
-            'Content-Disposition: attachment',
-            'filename="test.txt"',
-            'charset=iso8859-1',
-            'Content-ID: <4711>');
+                                 'Content-Transfer-Encoding: ' . Mime\Mime::ENCODING_BASE64,
+                                 'Content-Disposition: attachment',
+                                 'filename="test.txt"',
+                                 'charset=iso8859-1',
+                                 'Content-ID: <4711>');
 
         $actual = $this->part->getHeaders();
 
@@ -74,7 +74,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $original = file_get_contents($testfile);
 
         // Test Base64
-        $fp = fopen($testfile, 'rb');
+        $fp = fopen($testfile,'rb');
         $this->assertTrue(is_resource($fp));
         $part = new Mime\Part($fp);
         $part->encoding = Mime\Mime::ENCODING_BASE64;
@@ -85,7 +85,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(base64_decode($encoded), $original);
 
         // test QuotedPrintable
-        $fp = fopen($testfile, 'rb');
+        $fp = fopen($testfile,'rb');
         $this->assertTrue(is_resource($fp));
         $part = new Mime\Part($fp);
         $part->encoding = Mime\Mime::ENCODING_QUOTEDPRINTABLE;
@@ -105,7 +105,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @link  https://github.com/zendframework/zf2/issues/5428
+     * @link https://github.com/zendframework/zf2/issues/5428
      * @group 5428
      */
     public function testContentEncodingWithStreamReadTwiceINaRow()
@@ -113,18 +113,18 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $testfile = realpath(__FILE__);
         $original = file_get_contents($testfile);
 
-        $fp = fopen($testfile, 'rb');
+        $fp = fopen($testfile,'rb');
         $part = new Mime\Part($fp);
         $part->encoding = Mime\Mime::ENCODING_BASE64;
-        $contentEncodedFirstTime = $part->getContent();
+        $contentEncodedFirstTime  = $part->getContent();
         $contentEncodedSecondTime = $part->getContent();
         $this->assertEquals($contentEncodedFirstTime, $contentEncodedSecondTime);
         fclose($fp);
 
-        $fp = fopen($testfile, 'rb');
+        $fp = fopen($testfile,'rb');
         $part = new Mime\Part($fp);
         $part->encoding = Mime\Mime::ENCODING_QUOTEDPRINTABLE;
-        $contentEncodedFirstTime = $part->getContent();
+        $contentEncodedFirstTime  = $part->getContent();
         $contentEncodedSecondTime = $part->getContent();
         $this->assertEquals($contentEncodedFirstTime, $contentEncodedSecondTime);
         fclose($fp);

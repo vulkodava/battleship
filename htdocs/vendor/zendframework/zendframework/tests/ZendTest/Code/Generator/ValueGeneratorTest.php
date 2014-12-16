@@ -12,8 +12,8 @@ namespace ZendTest\Code\Generator;
 use Zend\Code\Generator\ValueGenerator;
 
 /**
- * @group  Zend_Code_Generator
- * @group  Zend_Code_Generator_Php
+ * @group Zend_Code_Generator
+ * @group Zend_Code_Generator_Php
  *
  * @covers \Zend\Code\Generator\ValueGenerator
  */
@@ -141,7 +141,7 @@ EOS;
     }
 
     /**
-     * @group        6023
+     * @group 6023
      *
      * @dataProvider getEscapedParameters
      */

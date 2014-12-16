@@ -27,7 +27,6 @@ class InputFilter extends BaseInputFilter
     public function setFactory(Factory $factory)
     {
         $this->factory = $factory;
-
         return $this;
     }
 
@@ -43,7 +42,6 @@ class InputFilter extends BaseInputFilter
         if (null === $this->factory) {
             $this->setFactory(new Factory());
         }
-
         return $this->factory;
     }
 
@@ -62,7 +60,6 @@ class InputFilter extends BaseInputFilter
             $factory = $this->getFactory();
             $input = $factory->createInput($input);
         }
-
         return parent::add($input, $name);
     }
 }

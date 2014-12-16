@@ -45,7 +45,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         $authors = array();
-        $list = $this->getXpath()->query('//dc11:creator');
+        $list    = $this->getXpath()->query('//dc11:creator');
 
         if (!$list->length) {
             $list = $this->getXpath()->query('//dc10:creator');
@@ -265,7 +265,6 @@ class Feed extends Extension\AbstractFeed
         }
 
         $this->data['categories'] = $categoryCollection;
-
         return $this->data['categories'];
     }
 

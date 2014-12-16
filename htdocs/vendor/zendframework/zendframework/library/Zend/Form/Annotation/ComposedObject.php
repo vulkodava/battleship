@@ -31,7 +31,6 @@ class ComposedObject extends AbstractArrayOrStringAnnotation
         if (is_array($this->value)) {
             return $this->value['target_object'];
         }
-
         return $this->value;
     }
 

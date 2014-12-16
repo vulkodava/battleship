@@ -461,20 +461,20 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         // write "key" to default namespace
         $this->_options->setNamespace('defaultns1');
-        $this->assertTrue($this->_storage->setItem('key', 'defaultns1'));
+        $this->assertTrue( $this->_storage->setItem('key', 'defaultns1') );
 
         // write "key" to an other default namespace
         $this->_options->setNamespace('defaultns2');
-        $this->assertTrue($this->_storage->setItem('key', 'defaultns2'));
+        $this->assertTrue( $this->_storage->setItem('key', 'defaultns2') );
 
         // test value of defaultns2
         $this->assertTrue($this->_storage->hasItem('key'));
-        $this->assertEquals('defaultns2', $this->_storage->getItem('key'));
+        $this->assertEquals('defaultns2', $this->_storage->getItem('key') );
 
         // test value of defaultns1
         $this->_options->setNamespace('defaultns1');
         $this->assertTrue($this->_storage->hasItem('key'));
-        $this->assertEquals('defaultns1', $this->_storage->getItem('key'));
+        $this->assertEquals('defaultns1', $this->_storage->getItem('key') );
 
         // remove item of defaultns1
         $this->_options->setNamespace('defaultns1');
@@ -499,7 +499,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array(), $this->_storage->setItems($items));
 
         $this->_options->setNamespace('defaultns2');
-        $this->assertSame(array(), $this->_storage->hasItems(array_keys($items)));
+        $this->assertSame(array(),  $this->_storage->hasItems(array_keys($items)));
 
         $this->_options->setNamespace('defaultns1');
         $rs = $this->_storage->getItems(array_keys($items));
@@ -557,7 +557,6 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         if ($capabilities->getUseRequestTime()) {
             // Can't test much more if the request time will be used
             $this->assertEquals('value', $this->_storage->getItem('key'));
-
             return;
         }
 
@@ -634,13 +633,13 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $capabilities = $this->_storage->getCapabilities();
 
         $types = array(
-            'NULL' => null,
-            'boolean' => true,
-            'integer' => 12345,
-            'double' => 123.45,
-            'string' => 'string', // already tested
-            'array' => array('one', 'tow' => 'two', 'three' => array('four' => 'four')),
-            'object' => new \stdClass(),
+            'NULL'     => null,
+            'boolean'  => true,
+            'integer'  => 12345,
+            'double'   => 123.45,
+            'string'   => 'string', // already tested
+            'array'    => array('one', 'tow' => 'two', 'three' => array('four' => 'four')),
+            'object'   => new \stdClass(),
             'resource' => fopen(__FILE__, 'r'),
         );
         $types['object']->one = 'one';
@@ -756,7 +755,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->_storage->setItem('key', 'value'));
 
-        $success = null;
+        $success  = null;
         $casToken = null;
         $this->assertEquals('value', $this->_storage->getItem('key', $success, $casToken));
         $this->assertNotNull($casToken);
@@ -937,8 +936,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertSame(array(), $this->_storage->setItems(array(
-            'key1' => 'value1',
-            'key2' => 'value2',
+           'key1' => 'value1',
+           'key2' => 'value2',
         )));
 
         $this->assertTrue($this->_storage->flush());
@@ -1139,11 +1138,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * This will wait for a full second started
      * to reduce test failures on high load servers
-     *
      * @see https://github.com/zendframework/zf2/issues/5144
      */
     protected function waitForFullSecond()
     {
-        usleep((microtime(true) - time()) * 1000000);
+        usleep((microtime(true)-time()) * 1000000);
     }
 }

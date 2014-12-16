@@ -15,7 +15,7 @@ use Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter;
  * Unit tests for {@see \Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter}
  *
  * @covers \Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter
- * @group  Zend_Stdlib
+ * @group Zend_Stdlib
  */
 class OptionalParametersFilterTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,7 +36,7 @@ class OptionalParametersFilterTest extends \PHPUnit_Framework_TestCase
      * Verifies a list of methods against expected results
      *
      * @param string $method
-     * @param bool $expectedResult
+     * @param bool   $expectedResult
      *
      * @dataProvider methodProvider
      */
@@ -50,7 +50,7 @@ class OptionalParametersFilterTest extends \PHPUnit_Framework_TestCase
      * that the filter behaves consistently regardless of cache optimizations
      *
      * @param string $method
-     * @param bool $expectedResult
+     * @param bool   $expectedResult
      *
      * @dataProvider methodProvider
      */

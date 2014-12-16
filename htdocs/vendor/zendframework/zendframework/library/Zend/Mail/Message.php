@@ -48,8 +48,7 @@ class Message
         if (!$from instanceof AddressList) {
             return false;
         }
-
-        return (bool)count($from);
+        return (bool) count($from);
     }
 
     /**
@@ -62,7 +61,6 @@ class Message
     {
         $this->encoding = $encoding;
         $this->getHeaders()->setEncoding($encoding);
-
         return $this;
     }
 
@@ -86,7 +84,6 @@ class Message
     {
         $this->headers = $headers;
         $headers->setEncoding($this->getEncoding());
-
         return $this;
     }
 
@@ -104,7 +101,6 @@ class Message
             $date = Header\Date::fromString('Date: ' . date('r'));
             $this->headers->addHeader($date);
         }
-
         return $this->headers;
     }
 
@@ -118,7 +114,6 @@ class Message
     public function setFrom($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('from');
-
         return $this->addFrom($emailOrAddressList, $name);
     }
 
@@ -133,7 +128,6 @@ class Message
     {
         $addressList = $this->getFrom();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
-
         return $this;
     }
 
@@ -157,7 +151,6 @@ class Message
     public function setTo($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('to');
-
         return $this->addTo($emailOrAddressList, $name);
     }
 
@@ -174,7 +167,6 @@ class Message
     {
         $addressList = $this->getTo();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
-
         return $this;
     }
 
@@ -198,7 +190,6 @@ class Message
     public function setCc($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('cc');
-
         return $this->addCc($emailOrAddressList, $name);
     }
 
@@ -213,7 +204,6 @@ class Message
     {
         $addressList = $this->getCc();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
-
         return $this;
     }
 
@@ -237,7 +227,6 @@ class Message
     public function setBcc($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('bcc');
-
         return $this->addBcc($emailOrAddressList, $name);
     }
 
@@ -252,7 +241,6 @@ class Message
     {
         $addressList = $this->getBcc();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
-
         return $this;
     }
 
@@ -276,7 +264,6 @@ class Message
     public function setReplyTo($emailOrAddressList, $name = null)
     {
         $this->clearHeaderByName('reply-to');
-
         return $this->addReplyTo($emailOrAddressList, $name);
     }
 
@@ -293,7 +280,6 @@ class Message
     {
         $addressList = $this->getReplyTo();
         $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
-
         return $this;
     }
 
@@ -318,7 +304,6 @@ class Message
     {
         $header = $this->getHeaderByName('sender', __NAMESPACE__ . '\Header\Sender');
         $header->setAddress($emailOrAddress, $name);
-
         return $this;
     }
 
@@ -330,7 +315,6 @@ class Message
     public function getSender()
     {
         $header = $this->getHeaderByName('sender', __NAMESPACE__ . '\Header\Sender');
-
         return $header->getAddress();
     }
 
@@ -350,7 +334,6 @@ class Message
             $header = $headers->get('subject');
         }
         $header->setSubject($subject);
-
         return $this;
     }
 
@@ -366,7 +349,6 @@ class Message
             return null;
         }
         $header = $headers->get('subject');
-
         return $header->getFieldValue();
     }
 
@@ -409,11 +391,10 @@ class Message
 
         // Multipart content headers
         if ($this->body->isMultiPart()) {
-            $mime = $this->body->getMime();
+            $mime   = $this->body->getMime();
             $header = $this->getHeaderByName('content-type', __NAMESPACE__ . '\Header\ContentType');
             $header->setType('multipart/mixed');
             $header->addParameter('boundary', $mime->boundary());
-
             return $this;
         }
 
@@ -423,7 +404,6 @@ class Message
             $part = array_shift($parts);
             $headers->addHeaders($part->getHeadersArray());
         }
-
         return $this;
     }
 
@@ -448,7 +428,7 @@ class Message
             return $this->body->generateMessage(Headers::EOL);
         }
 
-        return (string)$this->body;
+        return (string) $this->body;
     }
 
     /**
@@ -469,7 +449,6 @@ class Message
             $header = new $headerClass();
             $headers->addHeader($header);
         }
-
         return $header;
     }
 
@@ -503,7 +482,6 @@ class Message
                 get_class($header)
             ));
         }
-
         return $header->getAddressList();
     }
 
@@ -524,12 +502,10 @@ class Message
             foreach ($emailOrAddressOrList as $address) {
                 $addressList->add($address);
             }
-
             return;
         }
         if (is_array($emailOrAddressOrList)) {
             $addressList->addMany($emailOrAddressOrList);
-
             return;
         }
         if (!is_string($emailOrAddressOrList) && !$emailOrAddressOrList instanceof Address\AddressInterface) {
@@ -550,10 +526,9 @@ class Message
     public function toString()
     {
         $headers = $this->getHeaders();
-
         return $headers->toString()
-        . Headers::EOL
-        . $this->getBodyText();
+               . Headers::EOL
+               . $this->getBodyText();
     }
 
     /**
@@ -574,7 +549,6 @@ class Message
         }
         $message->setHeaders($headers);
         $message->setBody($content);
-
         return $message;
     }
 }

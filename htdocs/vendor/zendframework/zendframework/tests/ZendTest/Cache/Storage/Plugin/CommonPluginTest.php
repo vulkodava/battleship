@@ -9,9 +9,9 @@
 
 namespace ZendTest\Cache\Storage\Plugin;
 
-    /**
-     * PHPUnit test case
-     */
+/**
+ * PHPUnit test case
+ */
 
 /**
  * @group      Zend_Cache

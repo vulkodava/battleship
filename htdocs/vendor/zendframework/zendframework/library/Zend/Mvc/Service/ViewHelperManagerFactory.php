@@ -67,7 +67,8 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
 
             $match = $serviceLocator->get('application')
                 ->getMvcEvent()
-                ->getRouteMatch();
+                ->getRouteMatch()
+            ;
 
             if ($match instanceof RouteMatch) {
                 $helper->setRouteMatch($match);
@@ -104,7 +105,6 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
             if (isset($config['doctype']) && $config['doctype']) {
                 $doctypeHelper->setDoctype($config['doctype']);
             }
-
             return $doctypeHelper;
         });
 

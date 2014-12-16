@@ -37,7 +37,7 @@ class LazyServiceFactoryTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Please install `ocramius/proxy-manager` to run these tests');
         }
 
-        $this->locator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
+        $this->locator      = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
         $this->proxyFactory = $this
             ->getMockBuilder('ProxyManager\\Factory\\LazyLoadingValueHolderFactory')
             ->disableOriginalConstructor()
@@ -47,9 +47,8 @@ class LazyServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateDelegatorWithRequestedName()
     {
         $instance = new \stdClass();
-        $callback = function () {
-        };
-        $factory = new LazyServiceFactory($this->proxyFactory, array('foo' => 'bar'));
+        $callback = function () {};
+        $factory  = new LazyServiceFactory($this->proxyFactory, array('foo' => 'bar'));
 
         $this
             ->proxyFactory
@@ -64,9 +63,8 @@ class LazyServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateDelegatorWithCanonicalName()
     {
         $instance = new \stdClass();
-        $callback = function () {
-        };
-        $factory = new LazyServiceFactory($this->proxyFactory, array('foo' => 'bar'));
+        $callback = function () {};
+        $factory  = new LazyServiceFactory($this->proxyFactory, array('foo' => 'bar'));
 
         $this
             ->proxyFactory
@@ -84,7 +82,6 @@ class LazyServiceFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Zend\\ServiceManager\\Exception\\InvalidServiceNameException');
 
-        $factory->createDelegatorWithName($this->locator, 'foo', 'baz', function () {
-            });
+        $factory->createDelegatorWithName($this->locator, 'foo', 'baz', function () {});
     }
 }

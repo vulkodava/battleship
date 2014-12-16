@@ -25,9 +25,9 @@ class ControllerGuardServiceFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateService()
     {
-        $factory = new ControllerGuardServiceFactory();
-        $serviceLocator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
-        $config = array(
+        $factory          = new ControllerGuardServiceFactory();
+        $serviceLocator   = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
+        $config           = array(
             'guards' => array(
                 'BjyAuthorize\\Guard\\Controller' => array(),
             ),

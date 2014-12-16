@@ -24,14 +24,14 @@ class SegmentTest extends TestCase
     {
         $translator = new Translator();
         $translator->setLocale('en-US');
-        $enLoader = new TestLoader();
-        $deLoader = new TestLoader();
+        $enLoader     = new TestLoader();
+        $deLoader     = new TestLoader();
         $domainLoader = new TestLoader();
-        $enLoader->textDomain = new TextDomain(array('fw' => 'framework'));
-        $deLoader->textDomain = new TextDomain(array('fw' => 'baukasten'));
+        $enLoader->textDomain     = new TextDomain(array('fw' => 'framework'));
+        $deLoader->textDomain     = new TextDomain(array('fw' => 'baukasten'));
         $domainLoader->textDomain = new TextDomain(array('fw' => 'fw-alternative'));
-        $translator->getPluginManager()->setService('test-en', $enLoader);
-        $translator->getPluginManager()->setService('test-de', $deLoader);
+        $translator->getPluginManager()->setService('test-en',     $enLoader);
+        $translator->getPluginManager()->setService('test-de',     $deLoader);
         $translator->getPluginManager()->setService('test-domain', $domainLoader);
         $translator->addTranslationFile('test-en', null, 'default', 'en-US');
         $translator->addTranslationFile('test-de', null, 'default', 'de-DE');
@@ -242,10 +242,10 @@ class SegmentTest extends TestCase
     /**
      * @dataProvider routeProvider
      * @param        Segment $route
-     * @param        string $path
+     * @param        string  $path
      * @param        integer $offset
-     * @param        array $params
-     * @param        array $options
+     * @param        array   $params
+     * @param        array   $options
      */
     public function testMatching(Segment $route, $path, $offset, array $params = null, array $options = array())
     {
@@ -271,10 +271,10 @@ class SegmentTest extends TestCase
     /**
      * @dataProvider routeProvider
      * @param        Segment $route
-     * @param        string $path
+     * @param        string  $path
      * @param        integer $offset
-     * @param        array $params
-     * @param        array $options
+     * @param        array   $params
+     * @param        array   $options
      */
     public function testAssembling(Segment $route, $path, $offset, array $params = null, array $options = array())
     {
@@ -327,7 +327,7 @@ class SegmentTest extends TestCase
 
     public function testNoMatchWithoutUriMethod()
     {
-        $route = new Segment('/foo');
+        $route   = new Segment('/foo');
         $request = new BaseRequest();
 
         $this->assertNull($route->match($request));
@@ -350,7 +350,7 @@ class SegmentTest extends TestCase
                 'route' => 'Missing "route" in options array'
             ),
             array(
-                'route' => '/:foo[/:bar{-}]',
+                'route'       => '/:foo[/:bar{-}]',
                 'constraints' => array('foo' => 'bar')
             )
         );
@@ -363,8 +363,8 @@ class SegmentTest extends TestCase
         $raw = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\\;\',.~!@$^&*()_+{}|:"<>';
         $request = new Request();
         $request->setUri('http://example.com/' . $raw);
-        $route = new Segment('/:foo');
-        $match = $route->match($request);
+        $route   = new Segment('/:foo');
+        $match   = $route->match($request);
 
         $this->assertSame($raw, $match->getParam('foo'));
     }
@@ -372,12 +372,12 @@ class SegmentTest extends TestCase
     public function testEncodedDecode()
     {
         // every character
-        $in = '%61%62%63%64%65%66%67%68%69%6a%6b%6c%6d%6e%6f%70%71%72%73%74%75%76%77%78%79%7a%41%42%43%44%45%46%47%48%49%4a%4b%4c%4d%4e%4f%50%51%52%53%54%55%56%57%58%59%5a%30%31%32%33%34%35%36%37%38%39%60%2d%3d%5b%5d%5c%3b%27%2c%2e%2f%7e%21%40%23%24%25%5e%26%2a%28%29%5f%2b%7b%7d%7c%3a%22%3c%3e%3f';
+        $in  = '%61%62%63%64%65%66%67%68%69%6a%6b%6c%6d%6e%6f%70%71%72%73%74%75%76%77%78%79%7a%41%42%43%44%45%46%47%48%49%4a%4b%4c%4d%4e%4f%50%51%52%53%54%55%56%57%58%59%5a%30%31%32%33%34%35%36%37%38%39%60%2d%3d%5b%5d%5c%3b%27%2c%2e%2f%7e%21%40%23%24%25%5e%26%2a%28%29%5f%2b%7b%7d%7c%3a%22%3c%3e%3f';
         $out = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\\;\',./~!@#$%^&*()_+{}|:"<>?';
         $request = new Request();
         $request->setUri('http://example.com/' . $in);
-        $route = new Segment('/:foo');
-        $match = $route->match($request);
+        $route   = new Segment('/:foo');
+        $match   = $route->match($request);
 
         $this->assertSame($out, $match->getParam('foo'));
     }
@@ -385,9 +385,9 @@ class SegmentTest extends TestCase
     public function testEncodeCache()
     {
         $params1 = array('p1' => 6.123, 'p2' => 7);
-        $uri1 = 'example.com/' . join('/', $params1);
+        $uri1 = 'example.com/'.join('/', $params1);
         $params2 = array('p1' => 6, 'p2' => 'test');
-        $uri2 = 'example.com/' . join('/', $params2);
+        $uri2 = 'example.com/'.join('/', $params2);
 
         $route = new Segment('example.com/:p1/:p2');
         $request = new Request();

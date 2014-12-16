@@ -77,7 +77,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container['foo'] = 'bar';
         $this->container['bar'] = 'baz';
         $expected = array('foo' => 'bar', 'bar' => 'baz');
-        $return = $this->container->getValue();
+        $return   = $this->container->getValue();
         $this->assertEquals($expected, $return);
     }
 
@@ -124,13 +124,13 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrependImplementsFluentInterface()
     {
-        $result = $this->container->prepend('test');
+        $result = $this->container->prepend( 'test' );
         $this->assertSame($this->container, $result);
     }
 
     public function testAppendImplementsFluentInterface()
     {
-        $result = $this->container->append('test');
+        $result = $this->container->append( 'test' );
         $this->assertSame($this->container, $result);
     }
 
@@ -139,7 +139,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetImplementsFluentInterface()
     {
-        $result = $this->container->set('test');
+        $result = $this->container->set( 'test' );
         $this->assertSame($this->container, $result);
     }
 
@@ -210,8 +210,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($originalCount + 1, count($this->container));
 
-        $value = $this->container->getValue();
-        $keys = array_keys($value);
+        $value     = $this->container->getValue();
+        $keys      = array_keys($value);
         $lastIndex = array_pop($keys);
         $this->assertEquals('foo', $value[$lastIndex - 1]);
         $this->assertContains('This is content intended for capture', $value[$lastIndex]);
@@ -231,8 +231,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($originalCount + 1, count($this->container));
 
-        $value = $this->container->getValue();
-        $keys = array_keys($value);
+        $value     = $this->container->getValue();
+        $keys      = array_keys($value);
         $lastIndex = array_pop($keys);
         $this->assertEquals('foo', $value[$lastIndex]);
         $this->assertContains('This is content intended for capture', $value[$lastIndex - 1]);
@@ -338,7 +338,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $this->container->set('foo');
         $this->container->setPrefix('<li>')
-            ->setPostfix('</li>');
+                        ->setPostfix('</li>');
         $value = $this->container->toString();
         $this->assertEquals('<li>foo</li>', $value);
     }
@@ -364,8 +364,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container[] = 'bar';
         $this->container[] = 'baz';
         $this->container->setPrefix('<ul><li>')
-            ->setSeparator('</li><li>')
-            ->setPostfix('</li></ul>');
+                        ->setSeparator('</li><li>')
+                        ->setPostfix('</li></ul>');
         $value = $this->container->toString();
         $this->assertEquals('<ul><li>foo</li><li>bar</li><li>baz</li></ul>', $value);
     }
@@ -379,9 +379,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container[] = 'bar';
         $this->container[] = 'baz';
         $this->container->setPrefix('<ul><li>')
-            ->setSeparator('</li>' . PHP_EOL . '<li>')
-            ->setPostfix('</li></ul>')
-            ->setIndent('    ');
+                        ->setSeparator('</li>' . PHP_EOL . '<li>')
+                        ->setPostfix('</li></ul>')
+                        ->setIndent('    ');
         $value = $this->container->toString();
         $expectedValue = '    <ul><li>foo</li>' . PHP_EOL . '    <li>bar</li>' . PHP_EOL . '    <li>baz</li></ul>';
         $this->assertEquals($expectedValue, $value);
@@ -396,8 +396,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->container[] = 'bar';
         $this->container[] = 'baz';
         $this->container->setPrefix('<ul><li>')
-            ->setSeparator('</li><li>')
-            ->setPostfix('</li></ul>');
+                        ->setSeparator('</li><li>')
+                        ->setPostfix('</li></ul>');
         $value = $this->container->__toString();
         $this->assertEquals('<ul><li>foo</li><li>bar</li><li>baz</li></ul>', $value);
     }
@@ -418,9 +418,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testIndentationIsHonored()
     {
         $this->container->setIndent(4)
-            ->setPrefix("<ul>\n    <li>")
-            ->setSeparator("</li>\n    <li>")
-            ->setPostfix("</li>\n</ul>");
+                        ->setPrefix("<ul>\n    <li>")
+                        ->setSeparator("</li>\n    <li>")
+                        ->setPostfix("</li>\n</ul>");
         $this->container->append('foo');
         $this->container->append('bar');
         $this->container->append('baz');

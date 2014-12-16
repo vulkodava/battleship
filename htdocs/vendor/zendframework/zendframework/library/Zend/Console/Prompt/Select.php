@@ -31,10 +31,10 @@ class Select extends Char
     /**
      * Ask the user to select one of pre-defined options
      *
-     * @param string $promptText The prompt text to display in console
-     * @param array $options     Allowed options
-     * @param bool $allowEmpty   Allow empty (no) selection?
-     * @param bool $echo         True to display selected option?
+     * @param string    $promptText     The prompt text to display in console
+     * @param array     $options        Allowed options
+     * @param bool      $allowEmpty     Allow empty (no) selection?
+     * @param bool      $echo           True to display selected option?
      * @throws Exception\BadMethodCallException if no options available
      */
     public function __construct(
@@ -42,8 +42,7 @@ class Select extends Char
         $options = array(),
         $allowEmpty = false,
         $echo = false
-    )
-    {
+    ) {
         if ($promptText !== null) {
             $this->setPromptText($promptText);
         }
@@ -87,9 +86,9 @@ class Select extends Char
 
         // Prepare other params for parent class
         $this->setAllowedChars($mask);
-        $oldPrompt = $this->promptText;
-        $oldEcho = $this->echo;
-        $this->echo = false;
+        $oldPrompt        = $this->promptText;
+        $oldEcho          = $this->echo;
+        $this->echo       = false;
         $this->promptText = null;
 
         // Retrieve a single character
@@ -97,7 +96,7 @@ class Select extends Char
 
         // Restore old params
         $this->promptText = $oldPrompt;
-        $this->echo = $oldEcho;
+        $this->echo       = $oldEcho;
 
         // Display selected option if echo is enabled
         if ($this->echo) {
@@ -109,7 +108,6 @@ class Select extends Char
         }
 
         $this->lastResponse = $response;
-
         return $response;
     }
 

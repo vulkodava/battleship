@@ -20,8 +20,8 @@ class CamelCaseToUnderscoreTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesCamelCasedWordsWithUnderscores()
     {
-        $string = 'CamelCasedWords';
-        $filter = new CamelCaseToUnderscoreFilter();
+        $string   = 'CamelCasedWords';
+        $filter   = new CamelCaseToUnderscoreFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -31,21 +31,21 @@ class CamelCaseToUnderscoreTest extends \PHPUnit_Framework_TestCase
     public function testFilterSeperatingNumbersToUnterscore()
     {
         $string = 'PaTitle';
-        $filter = new CamelCaseToUnderscoreFilter();
+        $filter   = new CamelCaseToUnderscoreFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Pa_Title', $filtered);
 
         $string = 'Pa2Title';
-        $filter = new CamelCaseToUnderscoreFilter();
+        $filter   = new CamelCaseToUnderscoreFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Pa2_Title', $filtered);
 
         $string = 'Pa2aTitle';
-        $filter = new CamelCaseToUnderscoreFilter();
+        $filter   = new CamelCaseToUnderscoreFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

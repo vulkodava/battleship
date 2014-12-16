@@ -34,7 +34,7 @@ class ArrayUtilsTest extends TestCase
             )),
             array(array(
                 -100 => 'foo',
-                100 => 'bar'
+                100  => 'bar'
             )),
             array(array(
                 1 => 0
@@ -91,10 +91,10 @@ class ArrayUtilsTest extends TestCase
             array(array(
                 'bar',
                 '1' => 'bar',
-                3 => 'baz'
+                 3  => 'baz'
             )),
             array(array(
-                -10000 => null,
+                -10000   => null,
                 '-10000' => null,
             )),
             array(array(
@@ -119,8 +119,8 @@ class ArrayUtilsTest extends TestCase
             )),
             array(array(
                 -100 => 'foo',
-                0 => 'bar',
-                100 => 'baz'
+                0    => 'bar',
+                100  => 'baz'
             )),
             array(array(
                 'foo',
@@ -146,9 +146,9 @@ class ArrayUtilsTest extends TestCase
             'merge-integer-and-string-keys' => array(
                 array(
                     'foo',
-                    3 => 'bar',
+                    3     => 'bar',
                     'baz' => 'baz',
-                    4 => array(
+                    4     => array(
                         'a',
                         1 => 'b',
                         'c',
@@ -162,16 +162,16 @@ class ArrayUtilsTest extends TestCase
                 ),
                 false,
                 array(
-                    0 => 'foo',
-                    3 => 'bar',
+                    0     => 'foo',
+                    3     => 'bar',
                     'baz' => 'baz',
-                    4 => array(
+                    4     => array(
                         'a',
                         1 => 'b',
                         'c',
                     ),
-                    5 => 'baz',
-                    6 => array(
+                    5     => 'baz',
+                    6     => array(
                         'd' => 'd',
                     ),
                 )
@@ -179,9 +179,9 @@ class ArrayUtilsTest extends TestCase
             'merge-integer-and-string-keys-preserve-numeric' => array(
                 array(
                     'foo',
-                    3 => 'bar',
+                    3     => 'bar',
                     'baz' => 'baz',
-                    4 => array(
+                    4     => array(
                         'a',
                         1 => 'b',
                         'c',
@@ -195,8 +195,8 @@ class ArrayUtilsTest extends TestCase
                 ),
                 true,
                 array(
-                    0 => 'baz',
-                    3 => 'bar',
+                    0     => 'baz',
+                    3     => 'bar',
                     'baz' => 'baz',
                     4 => array(
                         'a',
@@ -243,19 +243,19 @@ class ArrayUtilsTest extends TestCase
             'merge-with-null' => array(
                 array(
                     'foo' => null,
-                    null => 'rod',
+                    null  => 'rod',
                     'cat' => 'bar',
                     'god' => 'rad'
                 ),
                 array(
                     'foo' => 'baz',
-                    null => 'zad',
+                    null  => 'zad',
                     'god' => null
                 ),
                 false,
                 array(
                     'foo' => 'baz',
-                    null => 'zad',
+                    null  => 'zad',
                     'cat' => 'bar',
                     'god' => null
                 )
@@ -352,11 +352,11 @@ class ArrayUtilsTest extends TestCase
      */
     public function testInvalidArraysAlwaysReturnFalse($test)
     {
-        $this->assertFalse(ArrayUtils::hasStringKeys($test, false));
-        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, false));
-        $this->assertFalse(ArrayUtils::hasNumericKeys($test, false));
-        $this->assertFalse(ArrayUtils::isList($test, false));
-        $this->assertFalse(ArrayUtils::isHashTable($test, false));
+        $this->assertFalse(ArrayUtils::hasStringKeys($test, False));
+        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, False));
+        $this->assertFalse(ArrayUtils::hasNumericKeys($test, False));
+        $this->assertFalse(ArrayUtils::isList($test, False));
+        $this->assertFalse(ArrayUtils::isHashTable($test, False));
 
         $this->assertFalse(ArrayUtils::hasStringKeys($test, false));
         $this->assertFalse(ArrayUtils::hasIntegerKeys($test, false));

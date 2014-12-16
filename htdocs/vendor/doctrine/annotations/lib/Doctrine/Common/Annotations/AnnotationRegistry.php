@@ -69,7 +69,7 @@ final class AnnotationRegistry
      *
      * Loading of this namespaces will be done with a PSR-0 namespace loading algorithm.
      *
-     * @param string $namespace
+     * @param string            $namespace
      * @param string|array|null $dirs
      *
      * @return void
@@ -128,14 +128,12 @@ final class AnnotationRegistry
                 if ($dirs === null) {
                     if ($path = stream_resolve_include_path($file)) {
                         require $path;
-
                         return true;
                     }
                 } else {
-                    foreach ((array)$dirs AS $dir) {
+                    foreach((array)$dirs AS $dir) {
                         if (is_file($dir . DIRECTORY_SEPARATOR . $file)) {
                             require $dir . DIRECTORY_SEPARATOR . $file;
-
                             return true;
                         }
                     }
@@ -148,7 +146,6 @@ final class AnnotationRegistry
                 return true;
             }
         }
-
         return false;
     }
 }

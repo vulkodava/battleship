@@ -36,7 +36,7 @@ class ServiceListenerTest extends TestCase
         $this->services = new ServiceManager();
         $this->listener = new ServiceListener($this->services);
         $this->listener->addServiceManager($this->services, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
-        $this->event = new ModuleEvent();
+        $this->event    = new ModuleEvent();
         $this->configListener = new ConfigListener();
         $this->event->setConfigListener($this->configListener);
     }
@@ -68,8 +68,7 @@ class ServiceListenerTest extends TestCase
         return array(
             'invokables' => array(__CLASS__ => __CLASS__),
             'factories' => array(
-                'foo' => function ($sm) {
-                },
+                'foo' => function ($sm) { },
             ),
             'abstract_factories' => array(
                 new \Zend\ServiceManager\Di\DiAbstractServiceFactory(new \Zend\Di\Di()),
@@ -78,7 +77,7 @@ class ServiceListenerTest extends TestCase
                 'foo' => false,
                 'zendtestmodulemanagerlistenerservicelistenertest' => true,
             ),
-            'aliases' => array(
+            'aliases'  => array(
                 'bar' => 'foo',
             ),
         );

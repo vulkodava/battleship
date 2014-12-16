@@ -34,8 +34,8 @@ class EmailTest extends TestCase
     public function emailAttributesDataProvider()
     {
         return array(
-            // attributes               // expectedValidators
-            array(array('multiple' => true), array('Zend\Validator\Explode')),
+                  // attributes               // expectedValidators
+            array(array('multiple' => true),  array('Zend\Validator\Explode')),
             array(array('multiple' => false), array('Zend\Validator\Regex')),
         );
     }

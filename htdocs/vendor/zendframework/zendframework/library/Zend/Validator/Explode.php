@@ -54,7 +54,6 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
     public function setValueDelimiter($delimiter)
     {
         $this->valueDelimiter = $delimiter;
-
         return $this;
     }
 
@@ -119,7 +118,6 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
         }
 
         $this->validator = $validator;
-
         return $this;
     }
 
@@ -141,8 +139,7 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
      */
     public function setBreakOnFirstFailure($break)
     {
-        $this->breakOnFirstFailure = (bool)$break;
-
+        $this->breakOnFirstFailure = (bool) $break;
         return $this;
     }
 
@@ -182,8 +179,8 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
             // array when multiple values and a string for
             // single values (ie. MultiCheckbox form behavior)
             $values = (null !== $delimiter)
-                ? explode($this->valueDelimiter, $value)
-                : array($value);
+                      ? explode($this->valueDelimiter, $value)
+                      : array($value);
         } else {
             $values = array($value);
         }

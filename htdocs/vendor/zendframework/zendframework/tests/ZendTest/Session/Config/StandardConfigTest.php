@@ -39,7 +39,6 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
         $this->config->setSavePath(__DIR__);
         $this->assertEquals(__DIR__, $this->config->getSavePath());
     }
-
     // session.name
 
     public function testNameIsMutable()
@@ -236,7 +235,7 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function testUseCookiesIsMutable()
     {
         $this->config->setUseCookies(true);
-        $this->assertEquals(true, (bool)$this->config->getUseCookies());
+        $this->assertEquals(true, (bool) $this->config->getUseCookies());
     }
 
     // session.use_only_cookies
@@ -244,7 +243,7 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function testUseOnlyCookiesIsMutable()
     {
         $this->config->setUseOnlyCookies(true);
-        $this->assertEquals(true, (bool)$this->config->getUseOnlyCookies());
+        $this->assertEquals(true, (bool) $this->config->getUseOnlyCookies());
     }
 
     // session.referer_check
@@ -333,14 +332,14 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function testSettingInvalidCacheExpireRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Invalid cache_expire; must be numeric');
+                                    'Invalid cache_expire; must be numeric');
         $this->config->setCacheExpire('foobar_bogus');
     }
 
     public function testSettingInvalidCacheExpireRaisesException2()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Invalid cache_expire; must be a positive integer');
+                                    'Invalid cache_expire; must be a positive integer');
         $this->config->setCacheExpire(-1);
     }
 
@@ -349,7 +348,7 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function testUseTransSidIsMutable()
     {
         $this->config->setUseTransSid(true);
-        $this->assertEquals(true, (bool)$this->config->getUseTransSid());
+        $this->assertEquals(true, (bool) $this->config->getUseTransSid());
     }
 
     // session.hash_function
@@ -357,11 +356,10 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function hashFunctions()
     {
         $hashFunctions = array(0, 1) + hash_algos();
-        $provider = array();
+        $provider      = array();
         foreach ($hashFunctions as $function) {
             $provider[] = array($function);
         }
-
         return $provider;
     }
 
@@ -397,7 +395,7 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function testSettingInvalidHashBitsPerCharacterRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Invalid hash bits per character provided');
+                                    'Invalid hash bits per character provided');
         $this->config->setHashBitsPerCharacter('foobar_bogus');
     }
 
@@ -420,14 +418,14 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
     public function testSettingInvalidRememberMeSecondsRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Invalid remember_me_seconds; must be numeric');
+                                    'Invalid remember_me_seconds; must be numeric');
         $this->config->setRememberMeSeconds('foobar_bogus');
     }
 
     public function testSettingInvalidRememberMeSecondsRaisesException2()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Invalid remember_me_seconds; must be a positive integer');
+                                    'Invalid remember_me_seconds; must be a positive integer');
         $this->config->setRememberMeSeconds(-1);
     }
 

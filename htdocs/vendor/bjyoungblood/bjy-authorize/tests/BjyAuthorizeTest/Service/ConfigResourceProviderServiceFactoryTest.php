@@ -25,9 +25,9 @@ class ConfigResourceProviderServiceFactoryTest extends PHPUnit_Framework_TestCas
      */
     public function testCreateService()
     {
-        $factory = new ConfigResourceProviderServiceFactory();
-        $serviceLocator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
-        $config = array(
+        $factory          = new ConfigResourceProviderServiceFactory();
+        $serviceLocator   = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
+        $config           = array(
             'resource_providers' => array(
                 'BjyAuthorize\Provider\Resource\Config' => array(),
             ),

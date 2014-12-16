@@ -19,7 +19,7 @@ class SendResponseListenerTest extends TestCase
     {
         $listener = new SendResponseListener();
         $identifiers = $listener->getEventManager()->getIdentifiers();
-        $expected = array('Zend\Mvc\SendResponseListener');
+        $expected    = array('Zend\Mvc\SendResponseListener');
         $this->assertEquals($expected, array_values($identifiers));
     }
 

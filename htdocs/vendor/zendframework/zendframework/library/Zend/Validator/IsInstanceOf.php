@@ -87,7 +87,6 @@ class IsInstanceOf extends AbstractValidator
     public function setClassName($className)
     {
         $this->className = $className;
-
         return $this;
     }
 
@@ -103,7 +102,6 @@ class IsInstanceOf extends AbstractValidator
             return true;
         }
         $this->error(self::NOT_INSTANCE_OF);
-
         return false;
     }
 }

@@ -82,7 +82,6 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
-
         return $this;
     }
 
@@ -104,7 +103,6 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
-
         return $this;
     }
 
@@ -143,7 +141,6 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
             $feature->setDriver($this);
         }
         $this->features[$name] = $feature;
-
         return $this;
     }
 
@@ -160,7 +157,6 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
         } elseif ($driverName == 'oci') {
             $this->addFeature(null, new Feature\OracleRowCounter);
         }
-
         return $this;
     }
 
@@ -175,7 +171,6 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
         if (isset($this->features[$name])) {
             return $this->features[$name];
         }
-
         return false;
     }
 
@@ -255,7 +250,6 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
             }
             $statement->initialize($this->connection->getResource());
         }
-
         return $statement;
     }
 
@@ -272,22 +266,19 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
         // special feature, sqlite PDO counter
         if ($this->connection->getDriverName() == 'sqlite'
             && ($sqliteRowCounter = $this->getFeature('SqliteRowCounter'))
-            && $resource->columnCount() > 0
-        ) {
+            && $resource->columnCount() > 0) {
             $rowCount = $sqliteRowCounter->getRowCountClosure($context);
         }
 
         // special feature, oracle PDO counter
         if ($this->connection->getDriverName() == 'oci'
             && ($oracleRowCounter = $this->getFeature('OracleRowCounter'))
-            && $resource->columnCount() > 0
-        ) {
+            && $resource->columnCount() > 0) {
             $rowCount = $oracleRowCounter->getRowCountClosure($context);
         }
 
 
         $result->initialize($resource, $this->connection->getLastGeneratedValue(), $rowCount);
-
         return $result;
     }
 

@@ -17,11 +17,10 @@ use Zend\Db\Adapter\Platform\Mysql as MysqlPlatform;
 class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @testdox      integration test: Testing SelectDecorator will use Select an internal state to prepare a proper
-     *               limit/offset sql statement
-     * @covers       Zend\Db\Sql\Platform\Mysql\SelectDecorator::prepareStatement
-     * @covers       Zend\Db\Sql\Platform\Mysql\SelectDecorator::processLimit
-     * @covers       Zend\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
+     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare a proper limit/offset sql statement
+     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::prepareStatement
+     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::processLimit
+     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
      * @dataProvider dataProvider
      */
     public function testPrepareStatement(Select $select, $expectedSql, $expectedParams)
@@ -53,11 +52,10 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox      integration test: Testing SelectDecorator will use Select an internal state to prepare a proper
-     *               limit/offset sql statement
-     * @covers       Zend\Db\Sql\Platform\Mysql\SelectDecorator::getSqlString
-     * @covers       Zend\Db\Sql\Platform\Mysql\SelectDecorator::processLimit
-     * @covers       Zend\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
+     * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare a proper limit/offset sql statement
+     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::getSqlString
+     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::processLimit
+     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
      * @dataProvider dataProvider
      */
     public function testGetSqlString(Select $select, $notUsed, $notUsed, $expectedSql)

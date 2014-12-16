@@ -30,7 +30,7 @@ class Lastmod extends AbstractValidator
      *
      */
     const NOT_VALID = 'sitemapLastmodNotValid';
-    const INVALID = 'sitemapLastmodInvalid';
+    const INVALID   = 'sitemapLastmodInvalid';
 
     /**
      * Validation failure message template definitions
@@ -39,7 +39,7 @@ class Lastmod extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::NOT_VALID => "The input is not a valid sitemap lastmod",
-        self::INVALID => "Invalid type given. String expected",
+        self::INVALID   => "Invalid type given. String expected",
     );
 
     /**
@@ -47,14 +47,13 @@ class Lastmod extends AbstractValidator
      *
      * @link http://www.sitemaps.org/protocol.php#lastmoddef <lastmod>
      *
-     * @param  string $value value to validate
+     * @param  string  $value  value to validate
      * @return bool
      */
     public function isValid($value)
     {
         if (!is_string($value)) {
             $this->error(self::INVALID);
-
             return false;
         }
 
@@ -64,7 +63,6 @@ class Lastmod extends AbstractValidator
         ErrorHandler::stop();
         if ($result != 1) {
             $this->error(self::NOT_VALID);
-
             return false;
         }
 

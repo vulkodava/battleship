@@ -38,14 +38,14 @@ class FormatterHelper extends Helper
      * Formats a message as a block of text.
      *
      * @param string|array $messages The message to write in the block
-     * @param string $style          The style to apply to the whole block
-     * @param bool $large            Whether to return a large block
+     * @param string       $style    The style to apply to the whole block
+     * @param bool         $large    Whether to return a large block
      *
      * @return string The formatter message
      */
     public function formatBlock($messages, $style, $large = false)
     {
-        $messages = (array)$messages;
+        $messages = (array) $messages;
 
         $len = 0;
         $lines = array();
@@ -57,7 +57,7 @@ class FormatterHelper extends Helper
 
         $messages = $large ? array(str_repeat(' ', $len)) : array();
         foreach ($lines as $line) {
-            $messages[] = $line . str_repeat(' ', $len - $this->strlen($line));
+            $messages[] = $line.str_repeat(' ', $len - $this->strlen($line));
         }
         if ($large) {
             $messages[] = str_repeat(' ', $len);

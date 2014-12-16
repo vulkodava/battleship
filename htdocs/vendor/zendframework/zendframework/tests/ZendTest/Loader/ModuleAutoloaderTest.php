@@ -200,7 +200,7 @@ class ModuleAutoloaderTest extends TestCase
     {
         $loader = new ModuleAutoloader();
         $loader->setModuleClassMap(array(
-            'BarModule\Module' => __DIR__ . '/_files/BarModule/Module.php',
+            'BarModule\Module' =>     __DIR__ . '/_files/BarModule/Module.php',
             'PharModuleMap\Module' => __DIR__ . '/_files/PharModuleMap.phar',
         ));
         $loader->register();

@@ -42,7 +42,6 @@ class IsNull implements PredicateInterface
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
-
         return $this;
     }
 
@@ -65,7 +64,6 @@ class IsNull implements PredicateInterface
     public function setSpecification($specification)
     {
         $this->specification = $specification;
-
         return $this;
     }
 

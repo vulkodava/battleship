@@ -12,9 +12,9 @@ namespace ZendTest\Feed\Reader\Integration;
 use Zend\Feed\Reader;
 
 /**
- * @group Zend_Feed
- * @group Zend_Feed_Reader
- */
+* @group Zend_Feed
+* @group Zend_Feed_Reader
+*/
 class PodcastRss2Test extends \PHPUnit_Framework_TestCase
 {
     protected $feedSamplePath = null;
@@ -264,9 +264,9 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
         $entry = $feed->current();
 
         $expected = new \stdClass();
-        $expected->url = 'http://example.com/podcasts/everything/AllAboutEverythingEpisode3.m4a';
+        $expected->url    = 'http://example.com/podcasts/everything/AllAboutEverythingEpisode3.m4a';
         $expected->length = '8727310';
-        $expected->type = 'audio/x-m4a';
+        $expected->type   = 'audio/x-m4a';
 
         $this->assertEquals($expected, $entry->getEnclosure());
     }

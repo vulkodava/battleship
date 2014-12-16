@@ -69,7 +69,6 @@ class MimeVersion implements HeaderInterface
     public function setVersion($version)
     {
         $this->version = $version;
-
         return $this;
     }
 

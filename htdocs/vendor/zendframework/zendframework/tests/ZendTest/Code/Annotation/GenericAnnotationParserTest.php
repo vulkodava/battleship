@@ -28,7 +28,6 @@ class GenericAnnotationParserTest extends TestCase
             'content' => '(test content)',
             'raw' => '@' . __NAMESPACE__ . '\TestAsset\Foo(test content)',
         ));
-
         return $event;
     }
 
@@ -77,7 +76,7 @@ class GenericAnnotationParserTest extends TestCase
         $this->parser->setAlias(__NAMESPACE__ . '\TestAsset\Foo', get_class($bar));
 
         $event = $this->getFooEvent();
-        $test = $this->parser->onCreateAnnotation($event);
+        $test  = $this->parser->onCreateAnnotation($event);
         $this->assertInstanceOf(__NAMESPACE__ . '\TestAsset\Bar', $test);
         $this->assertNotSame($bar, $test);
         $this->assertEquals('test content', $test->content);

@@ -122,7 +122,7 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load a specific module by name.
      *
-     * @param  string|array $module
+     * @param  string|array               $module
      * @throws Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
@@ -174,7 +174,6 @@ class ModuleManager implements ModuleManagerInterface
 
     /**
      * Load a module with the name
-     *
      * @param  \Zend\EventManager\EventInterface $event
      * @return mixed                            module instance
      * @throws Exception\RuntimeException
@@ -199,7 +198,7 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Get an array of the loaded modules.
      *
-     * @param  bool $loadModules If true, load modules if they're not already
+     * @param  bool  $loadModules If true, load modules if they're not already
      * @return array An array of Module objects, keyed by module name
      */
     public function getLoadedModules($loadModules = false)
@@ -222,7 +221,6 @@ class ModuleManager implements ModuleManagerInterface
         if (!isset($this->loadedModules[$moduleName])) {
             return null;
         }
-
         return $this->loadedModules[$moduleName];
     }
 
@@ -256,7 +254,6 @@ class ModuleManager implements ModuleManagerInterface
                 )
             );
         }
-
         return $this;
     }
 
@@ -270,7 +267,6 @@ class ModuleManager implements ModuleManagerInterface
         if (!$this->event instanceof ModuleEvent) {
             $this->setEvent(new ModuleEvent);
         }
-
         return $this->event;
     }
 
@@ -283,7 +279,6 @@ class ModuleManager implements ModuleManagerInterface
     public function setEvent(ModuleEvent $event)
     {
         $this->event = $event;
-
         return $this;
     }
 
@@ -302,7 +297,6 @@ class ModuleManager implements ModuleManagerInterface
         ));
         $this->events = $events;
         $this->attachDefaultListeners();
-
         return $this;
     }
 
@@ -318,7 +312,6 @@ class ModuleManager implements ModuleManagerInterface
         if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
-
         return $this->events;
     }
 

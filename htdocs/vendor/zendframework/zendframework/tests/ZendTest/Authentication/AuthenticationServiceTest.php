@@ -81,7 +81,6 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         if ($adapter === null) {
             $adapter = new TestAsset\SuccessAdapter();
         }
-
         return $this->auth->authenticate($adapter);
     }
 }

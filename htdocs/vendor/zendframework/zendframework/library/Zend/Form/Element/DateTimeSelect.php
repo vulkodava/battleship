@@ -49,14 +49,14 @@ class DateTimeSelect extends DateSelect
     /**
      * Constructor. Add the hour, minute and second select elements
      *
-     * @param  null|int|string $name Optional name for the element
-     * @param  array $options        Optional options for the element
+     * @param  null|int|string  $name    Optional name for the element
+     * @param  array            $options Optional options for the element
      */
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name, $options);
 
-        $this->hourElement = new Select('hour');
+        $this->hourElement   = new Select('hour');
         $this->minuteElement = new Select('minute');
         $this->secondElement = new Select('second');
     }
@@ -127,7 +127,6 @@ class DateTimeSelect extends DateSelect
     public function setHourAttributes(array $hourAttributes)
     {
         $this->hourElement->setAttributes($hourAttributes);
-
         return $this;
     }
 
@@ -150,7 +149,6 @@ class DateTimeSelect extends DateSelect
     public function setMinuteAttributes(array $minuteAttributes)
     {
         $this->minuteElement->setAttributes($minuteAttributes);
-
         return $this;
     }
 
@@ -173,7 +171,6 @@ class DateTimeSelect extends DateSelect
     public function setSecondAttributes(array $secondAttributes)
     {
         $this->secondElement->setAttributes($secondAttributes);
-
         return $this;
     }
 
@@ -196,8 +193,7 @@ class DateTimeSelect extends DateSelect
      */
     public function setShouldShowSeconds($shouldShowSeconds)
     {
-        $this->shouldShowSeconds = (bool)$shouldShowSeconds;
-
+        $this->shouldShowSeconds = (bool) $shouldShowSeconds;
         return $this;
     }
 
@@ -230,10 +226,10 @@ class DateTimeSelect extends DateSelect
 
         if ($value instanceof PhpDateTime) {
             $value = array(
-                'year' => $value->format('Y'),
-                'month' => $value->format('m'),
-                'day' => $value->format('d'),
-                'hour' => $value->format('H'),
+                'year'   => $value->format('Y'),
+                'month'  => $value->format('m'),
+                'day'    => $value->format('d'),
+                'hour'   => $value->format('H'),
                 'minute' => $value->format('i'),
                 'second' => $value->format('s')
             );
@@ -310,7 +306,7 @@ class DateTimeSelect extends DateSelect
             'required' => false,
             'filters' => array(
                 array(
-                    'name' => 'Callback',
+                    'name'    => 'Callback',
                     'options' => array(
                         'callback' => function ($date) {
                             // Convert the date to a specific format
@@ -345,10 +341,10 @@ class DateTimeSelect extends DateSelect
      */
     public function __clone()
     {
-        $this->dayElement = clone $this->dayElement;
-        $this->monthElement = clone $this->monthElement;
-        $this->yearElement = clone $this->yearElement;
-        $this->hourElement = clone $this->hourElement;
+        $this->dayElement    = clone $this->dayElement;
+        $this->monthElement  = clone $this->monthElement;
+        $this->yearElement   = clone $this->yearElement;
+        $this->hourElement   = clone $this->hourElement;
         $this->minuteElement = clone $this->minuteElement;
         $this->secondElement = clone $this->secondElement;
     }

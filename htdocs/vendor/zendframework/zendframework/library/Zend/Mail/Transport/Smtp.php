@@ -64,7 +64,6 @@ class Smtp implements TransportInterface
     public function setOptions(SmtpOptions $options)
     {
         $this->options = $options;
-
         return $this;
     }
 
@@ -88,7 +87,6 @@ class Smtp implements TransportInterface
     public function setPluginManager(Protocol\SmtpPluginManager $plugins)
     {
         $this->plugins = $plugins;
-
         return $this;
     }
 
@@ -102,7 +100,6 @@ class Smtp implements TransportInterface
         if (null === $this->plugins) {
             $this->setPluginManager(new Protocol\SmtpPluginManager());
         }
-
         return $this->plugins;
     }
 
@@ -114,8 +111,7 @@ class Smtp implements TransportInterface
      */
     public function setAutoDisconnect($flag)
     {
-        $this->autoDisconnect = (bool)$flag;
-
+        $this->autoDisconnect = (bool) $flag;
         return $this;
     }
 
@@ -212,10 +208,10 @@ class Smtp implements TransportInterface
         }
 
         // Prepare message
-        $from = $this->prepareFromAddress($message);
+        $from       = $this->prepareFromAddress($message);
         $recipients = $this->prepareRecipients($message);
-        $headers = $this->prepareHeaders($message);
-        $body = $this->prepareBody($message);
+        $headers    = $this->prepareHeaders($message);
+        $body       = $this->prepareBody($message);
 
         if ((count($recipients) == 0) && (!empty($headers) || !empty($body))) {
             // Per RFC 2821 3.3 (page 18)
@@ -263,7 +259,6 @@ class Smtp implements TransportInterface
 
         $from->rewind();
         $sender = $from->current();
-
         return $sender->getEmail();
     }
 
@@ -286,7 +281,6 @@ class Smtp implements TransportInterface
             $recipients[] = $address->getEmail();
         }
         $recipients = array_unique($recipients);
-
         return $recipients;
     }
 
@@ -300,7 +294,6 @@ class Smtp implements TransportInterface
     {
         $headers = clone $message->getHeaders();
         $headers->removeHeader('Bcc');
-
         return $headers->toString();
     }
 
@@ -323,11 +316,11 @@ class Smtp implements TransportInterface
     protected function lazyLoadConnection()
     {
         // Check if authentication is required and determine required class
-        $options = $this->getOptions();
-        $config = $options->getConnectionConfig();
-        $config['host'] = $options->getHost();
-        $config['port'] = $options->getPort();
-        $connection = $this->plugin($options->getConnectionClass(), $config);
+        $options          = $this->getOptions();
+        $config           = $options->getConnectionConfig();
+        $config['host']   = $options->getHost();
+        $config['port']   = $options->getPort();
+        $connection       = $this->plugin($options->getConnectionClass(), $config);
         $this->connection = $connection;
 
         return $this->connect();

@@ -23,16 +23,16 @@ class Logger implements LoggerInterface
 {
     /**
      * @const int defined from the BSD Syslog message severities
-     * @link  http://tools.ietf.org/html/rfc3164
+     * @link http://tools.ietf.org/html/rfc3164
      */
-    const EMERG = 0;
-    const ALERT = 1;
-    const CRIT = 2;
-    const ERR = 3;
-    const WARN = 4;
+    const EMERG  = 0;
+    const ALERT  = 1;
+    const CRIT   = 2;
+    const ERR    = 3;
+    const WARN   = 4;
     const NOTICE = 5;
-    const INFO = 6;
-    const DEBUG = 7;
+    const INFO   = 6;
+    const DEBUG  = 7;
 
     /**
      * Map native PHP errors to priority
@@ -40,18 +40,18 @@ class Logger implements LoggerInterface
      * @var array
      */
     public static $errorPriorityMap = array(
-        E_NOTICE => self::NOTICE,
-        E_USER_NOTICE => self::NOTICE,
-        E_WARNING => self::WARN,
-        E_CORE_WARNING => self::WARN,
-        E_USER_WARNING => self::WARN,
-        E_ERROR => self::ERR,
-        E_USER_ERROR => self::ERR,
-        E_CORE_ERROR => self::ERR,
+        E_NOTICE            => self::NOTICE,
+        E_USER_NOTICE       => self::NOTICE,
+        E_WARNING           => self::WARN,
+        E_CORE_WARNING      => self::WARN,
+        E_USER_WARNING      => self::WARN,
+        E_ERROR             => self::ERR,
+        E_USER_ERROR        => self::ERR,
+        E_CORE_ERROR        => self::ERR,
         E_RECOVERABLE_ERROR => self::ERR,
-        E_STRICT => self::DEBUG,
-        E_DEPRECATED => self::DEBUG,
-        E_USER_DEPRECATED => self::DEBUG,
+        E_STRICT            => self::DEBUG,
+        E_DEPRECATED        => self::DEBUG,
+        E_USER_DEPRECATED   => self::DEBUG,
     );
 
     /**
@@ -81,14 +81,14 @@ class Logger implements LoggerInterface
      * @var array
      */
     protected $priorities = array(
-        self::EMERG => 'EMERG',
-        self::ALERT => 'ALERT',
-        self::CRIT => 'CRIT',
-        self::ERR => 'ERR',
-        self::WARN => 'WARN',
+        self::EMERG  => 'EMERG',
+        self::ALERT  => 'ALERT',
+        self::CRIT   => 'CRIT',
+        self::ERR    => 'ERR',
+        self::WARN   => 'WARN',
         self::NOTICE => 'NOTICE',
-        self::INFO => 'INFO',
-        self::DEBUG => 'DEBUG',
+        self::INFO   => 'INFO',
+        self::DEBUG  => 'DEBUG',
     );
 
     /**
@@ -133,7 +133,7 @@ class Logger implements LoggerInterface
      */
     public function __construct($options = null)
     {
-        $this->writers = new SplPriorityQueue();
+        $this->writers    = new SplPriorityQueue();
         $this->processors = new SplPriorityQueue();
 
         if ($options instanceof Traversable) {
@@ -168,7 +168,7 @@ class Logger implements LoggerInterface
                     throw new Exception\InvalidArgumentException('Options must contain a name for the writer');
                 }
 
-                $priority = (isset($writer['priority'])) ? $writer['priority'] : null;
+                $priority      = (isset($writer['priority'])) ? $writer['priority'] : null;
                 $writerOptions = (isset($writer['options'])) ? $writer['options'] : null;
 
                 $this->addWriter($writer['name'], $priority, $writerOptions);
@@ -181,8 +181,8 @@ class Logger implements LoggerInterface
                     throw new Exception\InvalidArgumentException('Options must contain a name for the processor');
                 }
 
-                $priority = (isset($processor['priority'])) ? $processor['priority'] : null;
-                $processorOptions = (isset($processor['options'])) ? $processor['options'] : null;
+                $priority         = (isset($processor['priority'])) ? $processor['priority'] : null;
+                $processorOptions = (isset($processor['options']))  ? $processor['options']  : null;
 
                 $this->addProcessor($processor['name'], $priority, $processorOptions);
             }
@@ -226,7 +226,6 @@ class Logger implements LoggerInterface
         if (null === $this->writerPlugins) {
             $this->setWriterPluginManager(new WriterPluginManager());
         }
-
         return $this->writerPlugins;
     }
 
@@ -251,7 +250,6 @@ class Logger implements LoggerInterface
         }
 
         $this->writerPlugins = $plugins;
-
         return $this;
     }
 
@@ -317,7 +315,6 @@ class Logger implements LoggerInterface
             }
         }
         $this->writers = $writers;
-
         return $this;
     }
 
@@ -331,7 +328,6 @@ class Logger implements LoggerInterface
         if (null === $this->processorPlugins) {
             $this->setProcessorPluginManager(new ProcessorPluginManager());
         }
-
         return $this->processorPlugins;
     }
 
@@ -356,7 +352,6 @@ class Logger implements LoggerInterface
         }
 
         $this->processorPlugins = $plugins;
-
         return $this;
     }
 
@@ -419,7 +414,7 @@ class Logger implements LoggerInterface
      */
     public function log($priority, $message, $extra = array())
     {
-        if (!is_int($priority) || ($priority < 0) || ($priority >= count($this->priorities))) {
+        if (!is_int($priority) || ($priority<0) || ($priority>=count($this->priorities))) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '$priority must be an integer > 0 and < %d; received %s',
                 count($this->priorities),
@@ -451,11 +446,11 @@ class Logger implements LoggerInterface
         }
 
         $event = array(
-            'timestamp' => $timestamp,
-            'priority' => (int)$priority,
+            'timestamp'    => $timestamp,
+            'priority'     => (int) $priority,
             'priorityName' => $this->priorities[$priority],
-            'message' => (string)$message,
-            'extra' => $extra,
+            'message'      => (string) $message,
+            'extra'        => $extra,
         );
 
         foreach ($this->processors->toArray() as $processor) {
@@ -554,7 +549,7 @@ class Logger implements LoggerInterface
      *
      * @link http://www.php.net/manual/function.set-error-handler.php
      * @param  Logger $logger
-     * @param  bool $continueNativeHandler
+     * @param  bool   $continueNativeHandler
      * @return mixed  Returns result of set_error_handler
      * @throws Exception\InvalidArgumentException if logger is null
      */
@@ -577,9 +572,9 @@ class Logger implements LoggerInterface
                     $priority = Logger::INFO;
                 }
                 $logger->log($priority, $message, array(
-                    'errno' => $level,
-                    'file' => $file,
-                    'line' => $line,
+                    'errno'   => $level,
+                    'file'    => $file,
+                    'line'    => $line,
                 ));
             }
 
@@ -587,7 +582,6 @@ class Logger implements LoggerInterface
         });
 
         static::$registeredErrorHandler = true;
-
         return $previous;
     }
 
@@ -632,7 +626,6 @@ class Logger implements LoggerInterface
         });
 
         static::$registeredFatalErrorShutdownFunction = true;
-
         return true;
     }
 
@@ -667,8 +660,8 @@ class Logger implements LoggerInterface
                 }
 
                 $extra = array(
-                    'file' => $exception->getFile(),
-                    'line' => $exception->getLine(),
+                    'file'  => $exception->getFile(),
+                    'line'  => $exception->getLine(),
                     'trace' => $exception->getTrace(),
                 );
                 if (isset($exception->xdebug_message)) {
@@ -677,8 +670,8 @@ class Logger implements LoggerInterface
 
                 $logMessages[] = array(
                     'priority' => $priority,
-                    'message' => $exception->getMessage(),
-                    'extra' => $extra,
+                    'message'  => $exception->getMessage(),
+                    'extra'    => $extra,
                 );
                 $exception = $exception->getPrevious();
             } while ($exception);
@@ -689,7 +682,6 @@ class Logger implements LoggerInterface
         });
 
         static::$registeredExceptionHandler = true;
-
         return true;
     }
 

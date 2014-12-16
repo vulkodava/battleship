@@ -14,7 +14,7 @@ use Doctrine\Tests\Common\Annotations\DummyJoinColumn;
  * annotation. Also make sure that @var \ is not concated to "@var\is".
  *
  * @author robo
- * @since  2.0
+ * @since 2.0
  * @DummyAnnotation(dummyValue="hello")
  */
 class DummyClass

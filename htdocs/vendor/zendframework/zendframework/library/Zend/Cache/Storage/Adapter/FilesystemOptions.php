@@ -146,7 +146,6 @@ class FilesystemOptions extends AdapterOptions
 
         $this->triggerOptionEvent('cache_dir', $cacheDir);
         $this->cacheDir = $cacheDir;
-
         return $this;
     }
 
@@ -172,10 +171,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setClearStatCache($clearStatCache)
     {
-        $clearStatCache = (bool)$clearStatCache;
+        $clearStatCache = (bool) $clearStatCache;
         $this->triggerOptionEvent('clear_stat_cache', $clearStatCache);
         $this->clearStatCache = $clearStatCache;
-
         return $this;
     }
 
@@ -198,7 +196,7 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setDirLevel($dirLevel)
     {
-        $dirLevel = (int)$dirLevel;
+        $dirLevel = (int) $dirLevel;
         if ($dirLevel < 0 || $dirLevel > 16) {
             throw new Exception\InvalidArgumentException(
                 "Directory level '{$dirLevel}' must be between 0 and 16"
@@ -206,7 +204,6 @@ class FilesystemOptions extends AdapterOptions
         }
         $this->triggerOptionEvent('dir_level', $dirLevel);
         $this->dirLevel = $dirLevel;
-
         return $this;
     }
 
@@ -225,8 +222,8 @@ class FilesystemOptions extends AdapterOptions
      *
      * @param false|string|int $dirPermission FALSE to disable explicit permission or an octal number
      * @return FilesystemOptions
-     * @see  setUmask
-     * @see  setFilePermission
+     * @see setUmask
+     * @see setFilePermission
      * @link http://php.net/manual/function.chmod.php
      */
     public function setDirPermission($dirPermission)
@@ -235,7 +232,7 @@ class FilesystemOptions extends AdapterOptions
             if (is_string($dirPermission)) {
                 $dirPermission = octdec($dirPermission);
             } else {
-                $dirPermission = (int)$dirPermission;
+                $dirPermission = (int) $dirPermission;
             }
 
             // validate
@@ -272,10 +269,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setFileLocking($fileLocking)
     {
-        $fileLocking = (bool)$fileLocking;
+        $fileLocking = (bool) $fileLocking;
         $this->triggerOptionEvent('file_locking', $fileLocking);
         $this->fileLocking = $fileLocking;
-
         return $this;
     }
 
@@ -294,8 +290,8 @@ class FilesystemOptions extends AdapterOptions
      *
      * @param false|string|int $filePermission FALSE to disable explicit permission or an octal number
      * @return FilesystemOptions
-     * @see  setUmask
-     * @see  setDirPermission
+     * @see setUmask
+     * @see setDirPermission
      * @link http://php.net/manual/function.chmod.php
      */
     public function setFilePermission($filePermission)
@@ -304,7 +300,7 @@ class FilesystemOptions extends AdapterOptions
             if (is_string($filePermission)) {
                 $filePermission = octdec($filePermission);
             } else {
-                $filePermission = (int)$filePermission;
+                $filePermission = (int) $filePermission;
             }
 
             // validate
@@ -345,10 +341,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setNamespaceSeparator($namespaceSeparator)
     {
-        $namespaceSeparator = (string)$namespaceSeparator;
+        $namespaceSeparator = (string) $namespaceSeparator;
         $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
         $this->namespaceSeparator = $namespaceSeparator;
-
         return $this;
     }
 
@@ -370,10 +365,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setNoAtime($noAtime)
     {
-        $noAtime = (bool)$noAtime;
+        $noAtime = (bool) $noAtime;
         $this->triggerOptionEvent('no_atime', $noAtime);
         $this->noAtime = $noAtime;
-
         return $this;
     }
 
@@ -395,10 +389,9 @@ class FilesystemOptions extends AdapterOptions
      */
     public function setNoCtime($noCtime)
     {
-        $noCtime = (bool)$noCtime;
+        $noCtime = (bool) $noCtime;
         $this->triggerOptionEvent('no_ctime', $noCtime);
         $this->noCtime = $noCtime;
-
         return $this;
     }
 
@@ -419,8 +412,8 @@ class FilesystemOptions extends AdapterOptions
      *
      * @param false|string|int $umask FALSE to disable umask or an octal number
      * @return FilesystemOptions
-     * @see  setFilePermission
-     * @see  setDirPermission
+     * @see setFilePermission
+     * @see setDirPermission
      * @link http://php.net/manual/function.umask.php
      * @link http://en.wikipedia.org/wiki/Umask
      */
@@ -430,7 +423,7 @@ class FilesystemOptions extends AdapterOptions
             if (is_string($umask)) {
                 $umask = octdec($umask);
             } else {
-                $umask = (int)$umask;
+                $umask = (int) $umask;
             }
 
             // validate

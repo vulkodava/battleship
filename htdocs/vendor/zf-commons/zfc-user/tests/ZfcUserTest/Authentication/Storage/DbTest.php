@@ -42,8 +42,8 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testIsEmpty()
     {
         $this->storage->expects($this->once())
-            ->method('isEmpty')
-            ->will($this->returnValue(true));
+                      ->method('isEmpty')
+                      ->will($this->returnValue(true));
 
         $this->db->setStorage($this->storage);
 
@@ -69,8 +69,8 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testReadWithoutResolvedEntitySetIdentityIntUserFound()
     {
         $this->storage->expects($this->once())
-            ->method('read')
-            ->will($this->returnValue(1));
+                      ->method('read')
+                      ->will($this->returnValue(1));
 
         $this->db->setStorage($this->storage);
 
@@ -78,9 +78,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $user->setUsername('zfcUser');
 
         $this->mapper->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->will($this->returnValue($user));
+                     ->method('findById')
+                     ->with(1)
+                     ->will($this->returnValue($user));
 
         $this->db->setMapper($this->mapper);
 
@@ -95,15 +95,15 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testReadWithoutResolvedEntitySetIdentityIntUserNotFound()
     {
         $this->storage->expects($this->once())
-            ->method('read')
-            ->will($this->returnValue(1));
+                      ->method('read')
+                      ->will($this->returnValue(1));
 
         $this->db->setStorage($this->storage);
 
         $this->mapper->expects($this->once())
-            ->method('findById')
-            ->with(1)
-            ->will($this->returnValue(false));
+                     ->method('findById')
+                     ->with(1)
+                     ->will($this->returnValue(false));
 
         $this->db->setMapper($this->mapper);
 
@@ -121,8 +121,8 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $user->setUsername('zfcUser');
 
         $this->storage->expects($this->once())
-            ->method('read')
-            ->will($this->returnValue($user));
+                      ->method('read')
+                      ->will($this->returnValue($user));
 
         $this->db->setStorage($this->storage);
 
@@ -141,8 +141,8 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $reflectionProperty->setAccessible(true);
 
         $this->storage->expects($this->once())
-            ->method('write')
-            ->with('zfcUser');
+                      ->method('write')
+                      ->with('zfcUser');
 
         $this->db->setStorage($this->storage);
 
@@ -177,9 +177,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
     {
         $sm = $this->getMock('Zend\ServiceManager\ServiceManager');
         $sm->expects($this->once())
-            ->method('get')
-            ->with('zfcuser_user_mapper')
-            ->will($this->returnValue($this->mapper));
+           ->method('get')
+           ->with('zfcuser_user_mapper')
+           ->will($this->returnValue($this->mapper));
 
         $this->db->setServiceManager($sm);
 

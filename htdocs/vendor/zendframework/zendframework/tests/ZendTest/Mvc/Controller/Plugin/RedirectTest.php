@@ -27,7 +27,7 @@ class RedirectTest extends TestCase
 
         $router = new SimpleRouteStack;
         $router->addRoute('home', LiteralRoute::factory(array(
-            'route' => '/',
+            'route'    => '/',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             ),
@@ -77,7 +77,7 @@ class RedirectTest extends TestCase
     public function testPluginWithoutControllerEventRaisesDomainException()
     {
         $controller = new SampleController();
-        $plugin = $controller->plugin('redirect');
+        $plugin     = $controller->plugin('redirect');
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose');
         $plugin->toRoute('home');
     }
@@ -85,7 +85,7 @@ class RedirectTest extends TestCase
     public function testPluginWithoutResponseInEventRaisesDomainException()
     {
         $controller = new SampleController();
-        $event = new MvcEvent();
+        $event      = new MvcEvent();
         $controller->setEvent($event);
         $plugin = $controller->plugin('redirect');
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'event compose');
@@ -95,7 +95,7 @@ class RedirectTest extends TestCase
     public function testRedirectToRouteWithoutRouterInEventRaisesDomainException()
     {
         $controller = new SampleController();
-        $event = new MvcEvent();
+        $event      = new MvcEvent();
         $event->setResponse($this->response);
         $controller->setEvent($event);
         $plugin = $controller->plugin('redirect');
@@ -115,7 +115,7 @@ class RedirectTest extends TestCase
         $routeMatch->setMatchedRouteName('home');
         $this->controller->getEvent()->setRouteMatch($routeMatch);
         $response = $this->plugin->toRoute();
-        $headers = $response->getHeaders();
+        $headers  = $response->getHeaders();
         $location = $headers->get('Location');
         $this->assertEquals('/', $location->getFieldValue());
     }
@@ -123,7 +123,7 @@ class RedirectTest extends TestCase
     public function testCanReuseMatchedParameters()
     {
         $this->router->addRoute('replace', SegmentRoute::factory(array(
-            'route' => '/:controller/:action',
+            'route'    => '/:controller/:action',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             ),
@@ -142,7 +142,7 @@ class RedirectTest extends TestCase
     public function testCanPassBooleanValueForThirdArgumentToAllowReusingRouteMatches()
     {
         $this->router->addRoute('replace', SegmentRoute::factory(array(
-            'route' => '/:controller/:action',
+            'route'    => '/:controller/:action',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             ),

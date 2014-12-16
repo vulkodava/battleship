@@ -205,7 +205,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     public function testConfigSetAsArray()
     {
         $config = array(
-            'timeout' => 500,
+            'timeout'    => 500,
             'someoption' => 'hasvalue'
         );
 
@@ -226,8 +226,8 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     public function testConfigSetAsZendConfig()
     {
         $config = new \Zend\Config\Config(array(
-            'timeout' => 400,
-            'nested' => array(
+            'timeout'  => 400,
+            'nested'   => array(
                 'item' => 'value',
             )
         ));
@@ -390,13 +390,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         $this->_client->setParameterPost(array(
             'test' => array(
-                'v0.1',
-                'v0.2',
-                'k1' => 'v1.0',
-                'k2' => array(
-                    'v2.1',
-                    'k2.1' => 'v2.1.0'
-                ))
+                        'v0.1',
+                        'v0.2',
+                        'k1' => 'v1.0',
+                        'k2' => array(
+                            'v2.1',
+                            'k2.1' => 'v2.1.0'
+                         ))
         ));
 
         $this->_client->setMethod('POST');
@@ -409,7 +409,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($expectedLines), count($gotLines));
 
         while (($expected = array_shift($expectedLines)) &&
-            ($got = array_shift($gotLines))) {
+               ($got = array_shift($gotLines))) {
             $expected = trim($expected);
             $got = trim($got);
             $this->assertRegExp("/^$expected$/", $got);
@@ -441,11 +441,11 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->send();
         $request = $this->_client->getLastRawRequest();
 
-        if (!preg_match('/^content-length:\s+(\d+)/mi', $request, $match)) {
+        if (! preg_match('/^content-length:\s+(\d+)/mi', $request, $match)) {
             $this->fail("Unable to find content-length header in request");
         }
 
-        $this->assertEquals(filesize($bodyFile), (int)$match[1]);
+        $this->assertEquals(filesize($bodyFile), (int) $match[1]);
     }
 
     /**
@@ -459,7 +459,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $url = 'http://www.example.com/';
-        $config = array(
+        $config = array (
             'outputstream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
         );
         $client = new HTTPClient($url, $config);
@@ -486,7 +486,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'Could not open temp file /path/to/bogus/file.ext');
 
         $url = 'http://www.example.com';
-        $config = array(
+        $config = array (
             'outputstream' => '/path/to/bogus/file.ext',
         );
         $client = new HTTPClient($url, $config);
@@ -506,7 +506,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         }
         $this->_client->addCookie('foo', 'bar=baz');
         $this->_client->send();
-        $cookieValue = 'Cookie: foo=' . urlencode('bar=baz');
+        $cookieValue = 'Cookie: foo='.urlencode('bar=baz');
         $this->assertContains($cookieValue, $this->_client->getLastRawRequest(),
             'Request is expected to contain the entire cookie "keyname=encoded_value"');
     }
@@ -585,17 +585,17 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 class MockClient extends HTTPClient
 {
     public $config = array(
-        'maxredirects' => 5,
+        'maxredirects'    => 5,
         'strictredirects' => false,
-        'useragent' => 'Zend_Http_Client',
-        'timeout' => 10,
-        'adapter' => 'Zend\\Http\\Client\\Adapter\\Socket',
-        'httpversion' => Request::VERSION_11,
-        'keepalive' => false,
-        'storeresponse' => true,
-        'strict' => true,
-        'outputstream' => false,
-        'encodecookies' => true,
+        'useragent'       => 'Zend_Http_Client',
+        'timeout'         => 10,
+        'adapter'         => 'Zend\\Http\\Client\\Adapter\\Socket',
+        'httpversion'     => Request::VERSION_11,
+        'keepalive'       => false,
+        'storeresponse'   => true,
+        'strict'          => true,
+        'outputstream'   => false,
+        'encodecookies'   => true,
     );
 }
 

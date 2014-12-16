@@ -48,7 +48,6 @@ class AddressList implements Countable, Iterator
         }
 
         $this->addresses[$email] = $emailOrAddress;
-
         return $this;
     }
 
@@ -77,7 +76,6 @@ class AddressList implements Countable, Iterator
                 ));
             }
         }
-
         return $this;
     }
 
@@ -92,7 +90,6 @@ class AddressList implements Countable, Iterator
         foreach ($addressList as $address) {
             $this->add($address);
         }
-
         return $this;
     }
 
@@ -105,7 +102,6 @@ class AddressList implements Countable, Iterator
     public function has($email)
     {
         $email = strtolower($email);
-
         return isset($this->addresses[$email]);
     }
 
@@ -139,7 +135,6 @@ class AddressList implements Countable, Iterator
         }
 
         unset($this->addresses[$email]);
-
         return true;
     }
 
@@ -205,7 +200,6 @@ class AddressList implements Countable, Iterator
     public function valid()
     {
         $key = key($this->addresses);
-
         return ($key !== null && $key !== false);
     }
 

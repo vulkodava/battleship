@@ -9,6 +9,7 @@
 
 return array(
     'default' => array(
-        'en_US' => array(),
+        'en_US' => array(
+        ),
     ),
 );

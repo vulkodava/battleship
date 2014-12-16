@@ -15,13 +15,13 @@ use Iterator;
 
 class ParameterContainer implements Iterator, ArrayAccess, Countable
 {
-    const TYPE_AUTO = 'auto';
-    const TYPE_NULL = 'null';
-    const TYPE_DOUBLE = 'double';
+    const TYPE_AUTO    = 'auto';
+    const TYPE_NULL    = 'null';
+    const TYPE_DOUBLE  = 'double';
     const TYPE_INTEGER = 'integer';
-    const TYPE_BINARY = 'binary';
-    const TYPE_STRING = 'string';
-    const TYPE_LOB = 'lob';
+    const TYPE_BINARY  = 'binary';
+    const TYPE_STRING  = 'string';
+    const TYPE_LOB     = 'lob';
 
     /**
      * Data
@@ -102,13 +102,13 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
                 $position = $name;
                 $name = $this->positions[$name];
             } else {
-                $name = (string)$name;
+                $name = (string) $name;
             }
         } elseif (is_string($name)) {
             // is a string:
             $position = array_key_exists($name, $this->data);
         } elseif ($name === null) {
-            $name = (string)count($this->data);
+            $name = (string) count($this->data);
         } else {
             throw new Exception\InvalidArgumentException('Keys must be string, integer or null');
         }
@@ -136,7 +136,6 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
             $name = $this->positions[$name];
         }
         unset($this->data[$name]);
-
         return $this;
     }
 
@@ -151,7 +150,6 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
         foreach ($data as $n => $v) {
             $this->offsetSet($n, $v);
         }
-
         return $this;
     }
 
@@ -184,7 +182,6 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
         if (!array_key_exists($name, $this->data)) {
             throw new Exception\InvalidArgumentException('Data does not exist for this name/position');
         }
-
         return $this->errata[$name];
     }
 
@@ -199,7 +196,6 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
         if (is_int($name)) {
             $name = $this->positions[$name];
         }
-
         return (isset($this->errata[$name]));
     }
 
@@ -333,7 +329,6 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
             }
             $this->offsetSet($key, $value);
         }
-
         return $this;
     }
 }

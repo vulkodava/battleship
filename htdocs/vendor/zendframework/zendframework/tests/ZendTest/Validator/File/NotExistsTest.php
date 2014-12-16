@@ -24,20 +24,19 @@ class NotExistsTest extends \PHPUnit_Framework_TestCase
     public function basicBehaviorDataProvider()
     {
         $testFile = __DIR__ . '/_files/testsize.mo';
-        $baseDir = dirname($testFile);
+        $baseDir  = dirname($testFile);
         $baseName = basename($testFile);
         $fileUpload = array(
             'tmp_name' => $testFile, 'name' => basename($testFile),
             'size' => 200, 'error' => 0, 'type' => 'text'
         );
-
         return array(
             //    Options, isValid Param, Expected value
-            array(dirname($baseDir), $baseName, true),
-            array($baseDir, $baseName, false),
-            array($baseDir, $testFile, false),
+            array(dirname($baseDir), $baseName,   true),
+            array($baseDir,          $baseName,   false),
+            array($baseDir,          $testFile,   false),
             array(dirname($baseDir), $fileUpload, true),
-            array($baseDir, $fileUpload, false),
+            array($baseDir,          $fileUpload, false),
         );
     }
 

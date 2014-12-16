@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -36,7 +36,7 @@ class RoleCollectorTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->identityProvider = $this->getMock('BjyAuthorize\\Provider\\Identity\\ProviderInterface');
-        $this->collector = new RoleCollector($this->identityProvider);
+        $this->collector        = new RoleCollector($this->identityProvider);
     }
 
     /**
@@ -47,7 +47,7 @@ class RoleCollectorTest extends PHPUnit_Framework_TestCase
      */
     public function testCollect()
     {
-        $role1 = $this->getMock('Zend\\Permissions\\Acl\\Role\\RoleInterface');
+        $role1    = $this->getMock('Zend\\Permissions\\Acl\\Role\\RoleInterface');
         $mvcEvent = $this->getMock('Zend\\Mvc\\MvcEvent');
 
         $role1->expects($this->any())->method('getRoleId')->will($this->returnValue('role1'));
@@ -59,9 +59,9 @@ class RoleCollectorTest extends PHPUnit_Framework_TestCase
             ->will(
                 $this->returnValue(
                     array(
-                        $role1,
-                        'role2',
-                        'key' => 'role3',
+                         $role1,
+                         'role2',
+                         'key' => 'role3',
                     )
                 )
             );
@@ -94,7 +94,7 @@ class RoleCollectorTest extends PHPUnit_Framework_TestCase
      */
     public function testTraversableCollect()
     {
-        $role1 = $this->getMock('Zend\\Permissions\\Acl\\Role\\RoleInterface');
+        $role1    = $this->getMock('Zend\\Permissions\\Acl\\Role\\RoleInterface');
         $mvcEvent = $this->getMock('Zend\\Mvc\\MvcEvent');
 
         $role1->expects($this->any())->method('getRoleId')->will($this->returnValue('role1'));

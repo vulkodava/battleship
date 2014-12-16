@@ -38,7 +38,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'STRING' => 'STRING',
             'ABC1@3' => 'ABC1@3',
-            'A b C' => 'A B C'
+            'A b C'  => 'A B C'
         );
 
         $enc = $filter->getEncryption();
@@ -78,14 +78,14 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'STRING' => 'STRING',
             'ABC1@3' => 'ABC1@3',
-            'A b C' => 'A B C'
+            'A b C'  => 'A B C'
         );
 
         $filter->setPublicKey(__DIR__ . '/_files/publickey.pem');
         $key = $filter->getPublicKey();
         $this->assertEquals(
             array(__DIR__ . '/_files/publickey.pem' =>
-                '-----BEGIN CERTIFICATE-----
+                  '-----BEGIN CERTIFICATE-----
 MIIC3jCCAkegAwIBAgIBADANBgkqhkiG9w0BAQQFADCBtDELMAkGA1UEBhMCTkwx
 FjAUBgNVBAgTDU5vb3JkLUhvbGxhbmQxEDAOBgNVBAcTB1phYW5kYW0xFzAVBgNV
 BAoTDk1vYmlsZWZpc2guY29tMR8wHQYDVQQLExZDZXJ0aWZpY2F0aW9uIFNlcnZp

@@ -33,7 +33,7 @@ class FileTest extends TestCase
         $formMock->expects($this->exactly(1))
             ->method('setAttribute')
             ->with($this->stringContains('enctype'),
-                $this->stringContains('multipart/form-data'));
+                   $this->stringContains('multipart/form-data'));
         $file->prepareElement($formMock);
     }
 }

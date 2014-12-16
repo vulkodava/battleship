@@ -96,8 +96,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testCallbackShouldSerializeToArray()
     {
         $this->callback->setClass('Foo')
-            ->setMethod('bar')
-            ->setType('instance');
+                       ->setMethod('bar')
+                       ->setType('instance');
         $test = $this->callback->toArray();
         $this->assertTrue(is_array($test));
         $this->assertEquals('Foo', $test['class']);
@@ -108,8 +108,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testConstructorShouldSetStateFromOptions()
     {
         $options = array(
-            'type' => 'static',
-            'class' => 'Foo',
+            'type'   => 'static',
+            'class'  => 'Foo',
             'method' => 'bar',
         );
         $callback = new Method\Callback($options);

@@ -57,19 +57,19 @@ class AdapterChainTest extends \PHPUnit_Framework_TestCase
     {
         $event = $this->getMock('ZfcUser\Authentication\Adapter\AdapterChainEvent');
         $event->expects($this->once())
-            ->method('getCode')
-            ->will($this->returnValue(123));
+              ->method('getCode')
+              ->will($this->returnValue(123));
         $event->expects($this->once())
-            ->method('getIdentity')
-            ->will($this->returnValue('identity'));
+              ->method('getIdentity')
+              ->will($this->returnValue('identity'));
         $event->expects($this->once())
-            ->method('getMessages')
-            ->will($this->returnValue(array()));
+              ->method('getMessages')
+              ->will($this->returnValue(array()));
 
         $this->eventManager->expects($this->once())
-            ->method('getListeners')
-            ->with($this->equalTo('authenticate'))
-            ->will($this->returnValue(array()));
+             ->method('getListeners')
+             ->with($this->equalTo('authenticate'))
+             ->will($this->returnValue(array()));
 
         $this->adapterChain->setEvent($event);
         $result = $this->adapterChain->authenticate();
@@ -86,28 +86,28 @@ class AdapterChainTest extends \PHPUnit_Framework_TestCase
     {
         $listeners = array();
 
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i=1; $i<=3; $i++) {
             $storage = $this->getMock('ZfcUser\Authentication\Storage\Db');
             $storage->expects($this->once())
-                ->method('clear');
+                    ->method('clear');
 
             $adapter = $this->getMock('ZfcUser\Authentication\Adapter\AbstractAdapter');
             $adapter->expects($this->once())
-                ->method('getStorage')
-                ->will($this->returnValue($storage));
+                    ->method('getStorage')
+                    ->will($this->returnValue($storage));
 
             $callback = $this->getMockBuilder('Zend\Stdlib\CallbackHandler')->disableOriginalConstructor()->getMock();
             $callback->expects($this->once())
-                ->method('getCallback')
-                ->will($this->returnValue(array($adapter)));
+                     ->method('getCallback')
+                     ->will($this->returnValue(array($adapter)));
 
             $listeners[] = $callback;
         }
 
         $this->eventManager->expects($this->once())
-            ->method('getListeners')
-            ->with($this->equalTo('authenticate'))
-            ->will($this->returnValue($listeners));
+             ->method('getListeners')
+             ->with($this->equalTo('authenticate'))
+             ->will($this->returnValue($listeners));
 
         $result = $this->adapterChain->resetAdapters();
 
@@ -138,7 +138,6 @@ class AdapterChainTest extends \PHPUnit_Framework_TestCase
                 if (call_user_func($callback, $responses->last())) {
                     $responses->setStopped(true);
                 }
-
                 return $responses;
             }));
 
@@ -164,10 +163,10 @@ class AdapterChainTest extends \PHPUnit_Framework_TestCase
      * Tests prepareForAuthentication when falls through events.
      *
      * @param mixed $identity
-     * @param bool $expected
+     * @param bool  $expected
      *
      * @dataProvider identityProvider
-     * @covers       ZfcUser\Authentication\Adapter\AdapterChain::prepareForAuthentication
+     * @covers ZfcUser\Authentication\Adapter\AdapterChain::prepareForAuthentication
      */
     public function testPrepareForAuthentication($identity, $expected)
     {
@@ -295,7 +294,7 @@ class AdapterChainTest extends \PHPUnit_Framework_TestCase
      * Test the logoutAdapters method.
      *
      * @depends testGetEventWithEventSet
-     * @covers  ZfcUser\Authentication\Adapter\AdapterChain::logoutAdapters
+     * @covers ZfcUser\Authentication\Adapter\AdapterChain::logoutAdapters
      */
     public function testLogoutAdapters()
     {

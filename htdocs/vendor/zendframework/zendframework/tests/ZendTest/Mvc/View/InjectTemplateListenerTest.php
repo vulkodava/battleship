@@ -25,9 +25,9 @@ class InjectTemplateListenerTest extends TestCase
             'MappedNs' => true,
             'ZendTest\MappedNs' => true,
         );
-        $this->listener = new InjectTemplateListener();
+        $this->listener   = new InjectTemplateListener();
         $this->listener->setControllerMap($controllerMap);
-        $this->event = new MvcEvent();
+        $this->event      = new MvcEvent();
         $this->routeMatch = new RouteMatch(array());
         $this->event->setRouteMatch($this->routeMatch);
     }
@@ -127,7 +127,7 @@ class InjectTemplateListenerTest extends TestCase
         $moduleRouteListener = new ModuleRouteListener;
         $moduleRouteListener->onRoute($this->event);
 
-        $model = new ViewModel();
+        $model  = new ViewModel();
         $this->event->setResult($model);
         $this->listener->injectTemplate($this->event);
 
@@ -142,7 +142,7 @@ class InjectTemplateListenerTest extends TestCase
         $moduleRouteListener = new ModuleRouteListener;
         $moduleRouteListener->onRoute($this->event);
 
-        $myViewModel = new ViewModel();
+        $myViewModel  = new ViewModel();
         $myController = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
 
         $this->event->setTarget($myController);
@@ -161,13 +161,13 @@ class InjectTemplateListenerTest extends TestCase
         $moduleRouteListener = new ModuleRouteListener;
         $moduleRouteListener->onRoute($this->event);
 
-        $myViewModel = new ViewModel();
+        $myViewModel  = new ViewModel();
         $this->event->setResult($myViewModel);
         $this->listener->injectTemplate($this->event);
 
         $template1 = $myViewModel->getTemplate();
 
-        $myViewModel = new ViewModel();
+        $myViewModel  = new ViewModel();
         $myController = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
 
         $this->event->setTarget($myController);
@@ -180,7 +180,7 @@ class InjectTemplateListenerTest extends TestCase
     public function testControllerMatchedByMapIsInflected()
     {
         $this->routeMatch->setParam('controller', 'MappedNs\SubNs\Controller\Sample');
-        $myViewModel = new ViewModel();
+        $myViewModel  = new ViewModel();
 
         $this->event->setResult($myViewModel);
         $this->listener->injectTemplate($this->event);
@@ -188,7 +188,7 @@ class InjectTemplateListenerTest extends TestCase
         $this->assertEquals('mapped-ns/sub-ns/sample', $myViewModel->getTemplate());
 
         $this->listener->setControllerMap(array('ZendTest' => true));
-        $myViewModel = new ViewModel();
+        $myViewModel  = new ViewModel();
         $myController = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
         $this->event->setTarget($myController);
         $this->event->setResult($myViewModel);
@@ -201,7 +201,7 @@ class InjectTemplateListenerTest extends TestCase
     public function testControllerNotMatchedByMapIsNotAffected()
     {
         $this->routeMatch->setParam('action', 'test');
-        $myViewModel = new ViewModel();
+        $myViewModel  = new ViewModel();
         $myController = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
 
         $this->event->setTarget($myController);
@@ -242,7 +242,7 @@ class InjectTemplateListenerTest extends TestCase
     public function testUsingNamespaceRouteParameterGivesSameResultAsFullControllerParameter()
     {
         $this->routeMatch->setParam('controller', 'MappedNs\Foo\Controller\Bar\Baz\Sample');
-        $myViewModel = new ViewModel();
+        $myViewModel  = new ViewModel();
 
         $this->event->setResult($myViewModel);
         $this->listener->injectTemplate($this->event);
@@ -255,7 +255,7 @@ class InjectTemplateListenerTest extends TestCase
         $moduleRouteListener = new ModuleRouteListener;
         $moduleRouteListener->onRoute($this->event);
 
-        $myViewModel = new ViewModel();
+        $myViewModel  = new ViewModel();
 
         $this->event->setResult($myViewModel);
         $this->listener->injectTemplate($this->event);
@@ -286,7 +286,7 @@ class InjectTemplateListenerTest extends TestCase
     public function testControllerMapMoreSpecificRuleMatchesFirst()
     {
         $this->listener->setControllerMap(array(
-            'Foo' => true,
+            'Foo'     => true,
             'Foo\Bar' => 'bar/baz',
         ));
         $template = $this->listener->mapController('Foo\Bar\Controller\IndexController');
@@ -294,7 +294,7 @@ class InjectTemplateListenerTest extends TestCase
 
         $this->listener->setControllerMap(array(
             'Foo\Bar' => 'bar/baz',
-            'Foo' => true,
+            'Foo'     => true,
         ));
         $template = $this->listener->mapController('Foo\Bar\Controller\IndexController');
         $this->assertEquals('bar/baz/index', $template);
@@ -308,7 +308,7 @@ class InjectTemplateListenerTest extends TestCase
 
         $expectedCallback = array($this->listener, 'injectTemplate');
         $expectedPriority = -90;
-        $found = false;
+        $found            = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
             if ($callback === $expectedCallback) {

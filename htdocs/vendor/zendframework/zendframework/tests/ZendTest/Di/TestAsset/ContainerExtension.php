@@ -17,7 +17,7 @@ class ContainerExtension extends ServiceLocator
     public $params;
 
     protected $map = array(
-        'foo' => 'getFoo',
+        'foo'    => 'getFoo',
         'params' => 'getParams',
     );
 
@@ -29,7 +29,6 @@ class ContainerExtension extends ServiceLocator
     public function getParams(array $params)
     {
         $this->params = $params;
-
         return $this->params;
     }
 }

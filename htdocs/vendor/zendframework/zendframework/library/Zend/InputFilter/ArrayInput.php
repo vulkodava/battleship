@@ -28,7 +28,6 @@ class ArrayInput extends Input
                 sprintf('Value must be an array, %s given.', gettype($value))
             );
         }
-
         return parent::setValue($value);
     }
 
@@ -42,7 +41,6 @@ class ArrayInput extends Input
         foreach ($this->value as $key => $value) {
             $result[$key] = $filter->filter($value);
         }
-
         return $result;
     }
 
@@ -54,8 +52,8 @@ class ArrayInput extends Input
     {
         $this->injectNotEmptyValidator();
         $validator = $this->getValidatorChain();
-        $values = $this->getValue();
-        $result = true;
+        $values    = $this->getValue();
+        $result    = true;
         foreach ($values as $value) {
             $result = $validator->isValid($value, $context);
             if (!$result) {

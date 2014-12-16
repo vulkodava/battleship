@@ -7,6 +7,4 @@ use Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
  * @Route("foo")
  * @Template
  */
-class AnnotationsTestsFixturesNonNamespacedClass
-{
-}
+class AnnotationsTestsFixturesNonNamespacedClass { }

@@ -64,7 +64,7 @@ class ModuleManagerTest extends TestCase
 
         $this->defaultListeners = new DefaultListenerAggregate(
             new ListenerOptions(array(
-                'module_paths' => array(
+                'module_paths'         => array(
                     realpath(__DIR__ . '/TestAsset'),
                 ),
             ))
@@ -97,14 +97,14 @@ class ModuleManagerTest extends TestCase
     {
         $moduleManager = new ModuleManager(array());
         $identifiers = $moduleManager->getEventManager()->getIdentifiers();
-        $expected = array('Zend\ModuleManager\ModuleManager', 'module_manager');
+        $expected    = array('Zend\ModuleManager\ModuleManager', 'module_manager');
         $this->assertEquals($expected, array_values($identifiers));
     }
 
     public function testCanLoadSomeModule()
     {
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager(array('SomeModule'), new EventManager);
+        $moduleManager  = new ModuleManager(array('SomeModule'), new EventManager);
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
@@ -116,7 +116,7 @@ class ModuleManagerTest extends TestCase
     public function testCanLoadMultipleModules()
     {
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager(array('BarModule', 'BazModule', 'SubModule\Sub'));
+        $moduleManager  = new ModuleManager(array('BarModule', 'BazModule', 'SubModule\Sub'));
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
@@ -162,7 +162,7 @@ class ModuleManagerTest extends TestCase
     public function testCanLoadModuleDuringTheLoadModuleEvent()
     {
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager(array('LoadOtherModule', 'BarModule'));
+        $moduleManager  = new ModuleManager(array('LoadOtherModule', 'BarModule'));
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
 
@@ -177,7 +177,7 @@ class ModuleManagerTest extends TestCase
     public function testLoadingModuleFromAnotherModuleDemonstratesAppropriateSideEffects()
     {
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager(array('LoadOtherModule', 'BarModule'));
+        $moduleManager  = new ModuleManager(array('LoadOtherModule', 'BarModule'));
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
 
@@ -193,7 +193,7 @@ class ModuleManagerTest extends TestCase
     public function testLoadingModuleFromAnotherModuleDoesNotInfiniteLoop()
     {
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager(array('LoadBarModule', 'LoadFooModule'));
+        $moduleManager  = new ModuleManager(array('LoadBarModule', 'LoadFooModule'));
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
 
@@ -208,9 +208,9 @@ class ModuleManagerTest extends TestCase
 
     public function testModuleIsMarkedAsLoadedWhenLoadModuleEventIsTriggered()
     {
-        $test = new stdClass;
+        $test          = new stdClass;
         $moduleManager = new ModuleManager(array('BarModule'));
-        $events = $moduleManager->getEventManager();
+        $events        = $moduleManager->getEventManager();
         $events->attachAggregate($this->defaultListeners);
         $events->attach(ModuleEvent::EVENT_LOAD_MODULE, function ($e) use ($test) {
             $test->modules = $e->getTarget()->getLoadedModules(false);
@@ -228,7 +228,7 @@ class ModuleManagerTest extends TestCase
         require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
         require_once __DIR__ . '/TestAsset/SubModule/Sub/Module.php';
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager(array(
+        $moduleManager  = new ModuleManager(array(
             'SomeModule' => new \SomeModule\Module(),
             'SubModule' => new \SubModule\Sub\Module(),
         ), new EventManager);
@@ -244,7 +244,7 @@ class ModuleManagerTest extends TestCase
     {
         require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager(array('SomeModule' => new \SomeModule\Module(), 'BarModule'), new EventManager);
+        $moduleManager  = new ModuleManager(array('SomeModule' => new \SomeModule\Module(), 'BarModule'), new EventManager);
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
@@ -257,7 +257,7 @@ class ModuleManagerTest extends TestCase
     {
         require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager(array(new \SomeModule\Module()), new EventManager);
+        $moduleManager  = new ModuleManager(array(new \SomeModule\Module()), new EventManager);
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $this->setExpectedException('Zend\ModuleManager\Exception\RuntimeException');
         $moduleManager->loadModules();

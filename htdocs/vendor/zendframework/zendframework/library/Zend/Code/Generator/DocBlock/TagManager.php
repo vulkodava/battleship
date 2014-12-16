@@ -64,7 +64,6 @@ class TagManager extends PrototypeClassFactory
                 }
             }
         }
-
         return $newTag;
     }
 }

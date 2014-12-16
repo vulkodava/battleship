@@ -25,7 +25,6 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
-     *
      * @var bool
      */
     protected $underscoreSeparatedKeys = true;
@@ -37,7 +36,6 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
     /**
      * Define if extract values will use camel case or name with underscore
-     *
      * @param bool|array $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
@@ -54,7 +52,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  array|Traversable $options
+     * @param  array|Traversable                 $options
      * @return ClassMethods
      * @throws Exception\InvalidArgumentException
      */
@@ -75,12 +73,12 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  bool $underscoreSeparatedKeys
+     * @param  bool      $underscoreSeparatedKeys
      * @return ClassMethods
      */
     public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
     {
-        $this->underscoreSeparatedKeys = (bool)$underscoreSeparatedKeys;
+        $this->underscoreSeparatedKeys = (bool) $underscoreSeparatedKeys;
 
         if ($this->underscoreSeparatedKeys) {
             $this->setNamingStrategy(new UnderscoreNamingStrategy);
@@ -104,7 +102,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
      *
      * Extracts the getter/setter of the given $object.
      *
-     * @param  object $object
+     * @param  object                           $object
      * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -131,9 +129,9 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         foreach ($methods as $method) {
             if (
-            !$filter->filter(
-                get_class($object) . '::' . $method
-            )
+                !$filter->filter(
+                    get_class($object) . '::' . $method
+                )
             ) {
                 continue;
             }
@@ -162,8 +160,8 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
      *
      * Hydrates an object by getter/setter methods of the object.
      *
-     * @param  array $data
-     * @param  object $object
+     * @param  array                            $data
+     * @param  object                           $object
      * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */

@@ -43,7 +43,7 @@ class ArrayObjectIterator implements \Iterator
     public function valid()
     {
         $key = key($this->var);
-        $var = ($key !== null && $key !== false);
+        $var = ($key !== NULL && $key !== FALSE);
 
         return $var;
     }

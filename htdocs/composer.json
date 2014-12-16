@@ -24,6 +24,11 @@
     "zf-commons/zfc-admin": "~0.2",
     "danielss89/zfc-user-admin": "dev-master",
     "bjyoungblood/bjy-authorize": "1.4.*",
-    "mwillbanks/zfc-twitter-bootstrap": "@dev"
+    "mwillbanks/zfc-twitter-bootstrap": "@dev",
+    "dudapiotr/zftable": "dev-master",
+    "rwoverdijk/assetmanager": "dev-master"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "1.5.*"
   }
 }

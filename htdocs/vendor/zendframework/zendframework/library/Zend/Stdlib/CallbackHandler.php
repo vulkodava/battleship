@@ -27,14 +27,12 @@ class CallbackHandler
 
     /**
      * Callback metadata, if any
-     *
      * @var array
      */
     protected $metadata;
 
     /**
      * PHP version is greater as 5.4rc1?
-     *
      * @var bool
      */
     protected static $isPhp54;
@@ -43,11 +41,11 @@ class CallbackHandler
      * Constructor
      *
      * @param  string|array|object|callable $callback PHP callback
-     * @param  array $metadata                        Callback metadata
+     * @param  array                        $metadata  Callback metadata
      */
     public function __construct($callback, array $metadata = array())
     {
-        $this->metadata = $metadata;
+        $this->metadata  = $metadata;
         $this->registerCallback($callback);
     }
 
@@ -98,7 +96,7 @@ class CallbackHandler
             $result = $this->validateStringCallbackFor54($callback);
 
             if ($result !== true && $argCount <= 3) {
-                $callback = $result;
+                $callback       = $result;
                 // Minor performance tweak, if the callback gets called more
                 // than once
                 $this->callback = $result;
@@ -112,13 +110,11 @@ class CallbackHandler
                 if (static::$isPhp54) {
                     return $callback();
                 }
-
                 return call_user_func($callback);
             case 1:
                 if (static::$isPhp54) {
                     return $callback(array_shift($args));
                 }
-
                 return call_user_func($callback, array_shift($args));
             case 2:
                 $arg1 = array_shift($args);
@@ -126,7 +122,6 @@ class CallbackHandler
                 if (static::$isPhp54) {
                     return $callback($arg1, $arg2);
                 }
-
                 return call_user_func($callback, $arg1, $arg2);
             case 3:
                 $arg1 = array_shift($args);
@@ -135,7 +130,6 @@ class CallbackHandler
                 if (static::$isPhp54) {
                     return $callback($arg1, $arg2, $arg3);
                 }
-
                 return call_user_func($callback, $arg1, $arg2, $arg3);
             default:
                 return call_user_func_array($callback, $args);
@@ -173,7 +167,6 @@ class CallbackHandler
         if (array_key_exists($name, $this->metadata)) {
             return $this->metadata[$name];
         }
-
         return null;
     }
 

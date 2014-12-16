@@ -22,11 +22,11 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
     public function testGetCurrentlyInProgress()
     {
         $progressData = array(
-            'total' => 1000,
-            'current' => 500,
-            'rate' => 0,
-            'message' => '',
-            'done' => false,
+            'total'    => 1000,
+            'current'  => 500,
+            'rate'     => 0,
+            'message'  => '',
+            'done'     => false,
         );
         $stub = $this->getMockForAbstractClass(
             'Zend\ProgressBar\Upload\AbstractUploadHandler'
@@ -35,7 +35,7 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('getUploadProgress')
             ->will($this->returnValue($progressData));
 
-        $progressData['id'] = '123';
+        $progressData['id']      = '123';
         $progressData['message'] = '500B - 1000B';
         $this->assertEquals($progressData, $stub->getProgress('123'));
     }
@@ -45,12 +45,12 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNoFileInProgress()
     {
-        $status = array(
-            'total' => 0,
-            'current' => 0,
-            'rate' => 0,
-            'message' => 'No upload in progress',
-            'done' => true
+        $status  = array(
+            'total'    => 0,
+            'current'  => 0,
+            'rate'     => 0,
+            'message'  => 'No upload in progress',
+            'done'     => true
         );
         $stub = $this->getMockForAbstractClass(
             'Zend\ProgressBar\Upload\AbstractUploadHandler'
@@ -68,25 +68,25 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(array(
-                'total' => 1000,
-                'current' => 200,
-                'rate' => 0,
-                'message' => '',
-                'done' => false,
+                'total'    => 1000,
+                'current'  => 200,
+                'rate'     => 0,
+                'message'  => '',
+                'done'     => false,
             )),
             array(array(
-                'total' => 1000,
-                'current' => 600,
-                'rate' => 300,
-                'message' => '',
-                'done' => false,
+                'total'    => 1000,
+                'current'  => 600,
+                'rate'     => 300,
+                'message'  => '',
+                'done'     => false,
             )),
             array(array(
-                'total' => 1000,
-                'current' => 1000,
-                'rate' => 500,
-                'message' => '',
-                'done' => true,
+                'total'    => 1000,
+                'current'  => 1000,
+                'rate'     => 500,
+                'message'  => '',
+                'done'     => true,
             )),
         );
     }
@@ -116,9 +116,9 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('getUploadProgress')
             ->will($this->returnValue($progressData));
         $stub->setOptions(array(
-            'session_namespace' => 'testSession',
-            'progress_adapter' => $adapterStub,
-        ));
+                               'session_namespace' => 'testSession',
+                               'progress_adapter'  => $adapterStub,
+                          ));
 
         $this->assertEquals('testSession', $stub->getSessionNamespace());
         $this->assertEquals($adapterStub, $stub->getProgressAdapter());
@@ -155,8 +155,8 @@ class AbstractUploadHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('getUploadProgress')
             ->will($this->returnValue($progressData));
         $stub->setOptions(array(
-            'session_namespace' => 'testSession',
-            'progress_adapter' => $progressBar,
+           'session_namespace' => 'testSession',
+           'progress_adapter'  => $progressBar,
         ));
 
         $this->assertEquals('testSession', $stub->getSessionNamespace());

@@ -21,11 +21,11 @@ class RequestIdTest extends \PHPUnit_Framework_TestCase
         $processor = new RequestId();
 
         $event = array(
-            'timestamp' => '',
-            'priority' => 1,
+            'timestamp'    => '',
+            'priority'     => 1,
             'priorityName' => 'ALERT',
-            'message' => 'foo',
-            'extra' => array(),
+            'message'      => 'foo',
+            'extra'        => array(),
         );
 
         $eventA = $processor->process($event);

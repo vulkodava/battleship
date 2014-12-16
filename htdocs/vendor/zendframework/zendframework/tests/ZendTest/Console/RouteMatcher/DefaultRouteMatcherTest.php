@@ -26,17 +26,17 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             // -- mandatory long flags
             'mandatory-long-flag-no-match' => array(
                 '--foo --bar',
-                array('a', 'b', '--baz'),
+                array('a','b','--baz'),
                 null
             ),
             'mandatory-long-flag-no-partial-match' => array(
                 '--foo --bar',
-                array('--foo', '--baz'),
+                array('--foo','--baz'),
                 null
             ),
             'mandatory-long-flag-match' => array(
                 '--foo --bar',
-                array('--foo', '--bar'),
+                array('--foo','--bar'),
                 array('foo' => true, 'bar' => true)
             ),
             'mandatory-long-flag-match-with-zero-value' => array(
@@ -46,12 +46,12 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'mandatory-long-flag-mixed-order-match' => array(
                 '--foo --bar',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array('foo' => true, 'bar' => true)
             ),
             'mandatory-long-flag-whitespace-in-definition' => array(
                 '      --foo   --bar ',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -85,27 +85,27 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             // -- mandatory short flags
             'mandatory-short-flag-no-match' => array(
                 '-f -b',
-                array('a', 'b', '-f'),
+                array('a','b','-f'),
                 null
             ),
             'mandatory-short-flag-no-partial-match' => array(
                 '-f -b',
-                array('-f', '-z'),
+                array('-f','-z'),
                 null
             ),
             'mandatory-short-flag-match' => array(
                 '-f -b',
-                array('-f', '-b'),
+                array('-f','-b'),
                 array('f' => true, 'b' => true)
             ),
             'mandatory-short-flag-mixed-order-match' => array(
                 '-f -b',
-                array('-b', '-f'),
+                array('-b','-f'),
                 array('f' => true, 'b' => true)
             ),
             'mandatory-short-flag-whitespace-in-definition' => array(
                 '      -f   -b ',
-                array('-b', '-f'),
+                array('-b','-f'),
                 array(
                     'f' => true,
                     'b' => true,
@@ -161,7 +161,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'optional-long-flag-match' => array(
                 '--foo [--bar]',
-                array('--foo', '--bar'),
+                array('--foo','--bar'),
                 array(
                     'foo' => true,
                     'bar' => true
@@ -192,7 +192,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 '--foo [--barBaz=]',
                 array('--foo', '--barBaz=4'),
                 array(
-                    'foo' => true,
+                    'foo'    => true,
                     'barBaz' => 4
                 )
             ),
@@ -214,12 +214,12 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'optional-long-flag-mixed-order-match' => array(
                 '--foo --bar',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array('foo' => true, 'bar' => true)
             ),
             'optional-long-flag-whitespace-in-definition' => array(
                 '      --foo   [--bar] ',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -228,7 +228,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'optional-long-flag-whitespace-in-definition2' => array(
                 '      --foo     [--bar      ] ',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -237,7 +237,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'optional-long-flag-whitespace-in-definition3' => array(
                 '      --foo   [   --bar     ] ',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -249,7 +249,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             // -- value flags
             'mandatory-value-flag-syntax-1' => array(
                 '--foo=s',
-                array('--foo', 'bar'),
+                array('--foo','bar'),
                 array(
                     'foo' => 'bar',
                     'bar' => null
@@ -257,7 +257,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'mandatory-value-flag-syntax-2' => array(
                 '--foo=',
-                array('--foo', 'bar'),
+                array('--foo','bar'),
                 array(
                     'foo' => 'bar',
                     'bar' => null
@@ -265,7 +265,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'mandatory-value-flag-syntax-3' => array(
                 '--foo=anystring',
-                array('--foo', 'bar'),
+                array('--foo','bar'),
                 array(
                     'foo' => 'bar',
                     'bar' => null
@@ -290,17 +290,17 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'mandatory-value-flag-space-complex-1' => array(
                 '--foo=',
-                array('--foo', 'SomeComplexValue=='),
+                array('--foo','SomeComplexValue=='),
                 array('foo' => 'SomeComplexValue==')
             ),
             'mandatory-value-flag-space-complex-2' => array(
                 '--foo=',
-                array('--foo', '...,</\/\\//""\'\'\'"\"'),
+                array('--foo','...,</\/\\//""\'\'\'"\"'),
                 array('foo' => '...,</\/\\//""\'\'\'"\"')
             ),
             'mandatory-value-flag-space-complex-3' => array(
                 '--foo=',
-                array('--foo', '===--'),
+                array('--foo','===--'),
                 array('foo' => '===--')
             ),
 
@@ -312,7 +312,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'mandatory-literal-match-2' => array(
                 'foo bar baz',
-                array('foo', 'bar', 'baz'),
+                array('foo','bar','baz'),
                 array('foo' => null, 'bar' => null, 'baz' => null, 'bazinga' => null)
             ),
             'mandatory-literal-mismatch' => array(
@@ -322,69 +322,69 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'mandatory-literal-order' => array(
                 'foo bar',
-                array('bar', 'foo'),
+                array('bar','foo'),
                 null
             ),
             'mandatory-literal-partial-mismatch' => array(
                 'foo bar baz',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 null
             ),
             'mandatory-literal-alternative-match-1' => array(
                 'foo ( bar | baz )',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 array('foo' => null, 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-alternative-match-2' => array(
                 'foo (bar|baz)',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 array('foo' => null, 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-alternative-match-3' => array(
                 'foo ( bar    |   baz )',
-                array('foo', 'baz'),
+                array('foo','baz'),
                 array('foo' => null, 'bar' => false, 'baz' => true)
             ),
             'mandatory-literal-alternative-mismatch' => array(
                 'foo ( bar |   baz )',
-                array('foo', 'bazinga'),
+                array('foo','bazinga'),
                 null
             ),
             'mandatory-literal-namedAlternative-match-1' => array(
                 'foo ( bar | baz ):altGroup',
-                array('foo', 'bar'),
-                array('foo' => null, 'altGroup' => 'bar', 'bar' => true, 'baz' => false)
+                array('foo','bar'),
+                array('foo' => null, 'altGroup'=>'bar', 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-namedAlternative-match-2' => array(
                 'foo ( bar |   baz   ):altGroup9',
-                array('foo', 'baz'),
-                array('foo' => null, 'altGroup9' => 'baz', 'bar' => false, 'baz' => true)
+                array('foo','baz'),
+                array('foo' => null, 'altGroup9'=>'baz', 'bar' => false, 'baz' => true)
             ),
             'mandatory-literal-namedAlternative-mismatch' => array(
                 'foo ( bar |   baz   ):altGroup9',
-                array('foo', 'bazinga'),
+                array('foo','bazinga'),
                 null
             ),
 
             // -- optional literal params
             'optional-literal-match' => array(
                 'foo [bar] [baz]',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 array('foo' => null, 'bar' => true, 'baz' => null)
             ),
             'optional-literal-mismatch' => array(
                 'foo [bar] [baz]',
-                array('baz', 'bar'),
+                array('baz','bar'),
                 null
             ),
             'optional-literal-shuffled-mismatch' => array(
                 'foo [bar] [baz]',
-                array('foo', 'baz', 'bar'),
+                array('foo','baz','bar'),
                 null
             ),
             'optional-literal-alternative-match' => array(
                 'foo [bar | baz]',
-                array('foo', 'baz'),
+                array('foo','baz'),
                 array('foo' => null, 'baz' => true, 'bar' => false)
             ),
             'optional-literal-alternative-mismatch' => array(
@@ -394,23 +394,23 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'optional-literal-namedAlternative-match-1' => array(
                 'foo [bar | baz]:altGroup1',
-                array('foo', 'baz'),
+                array('foo','baz'),
                 array('foo' => null, 'altGroup1' => 'baz', 'baz' => true, 'bar' => false)
             ),
             'optional-literal-namedAlternative-match-2' => array(
                 'foo [bar | baz | bazinga]:altGroup100',
-                array('foo', 'bazinga'),
+                array('foo','bazinga'),
                 array('foo' => null, 'altGroup100' => 'bazinga', 'bazinga' => true, 'baz' => false, 'bar' => false)
             ),
             'optional-literal-namedAlternative-match-3' => array(
                 'foo [ bar ]:altGroup100',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 array('foo' => null, 'altGroup100' => 'bar', 'bar' => true, 'baz' => null)
             ),
             'optional-literal-namedAlternative-mismatch' => array(
                 'foo [ bar | baz ]:altGroup9',
                 array('foo'),
-                array('foo' => null, 'altGroup9' => null, 'bar' => false, 'baz' => false)
+                array('foo' => null, 'altGroup9'=> null, 'bar' => false, 'baz' => false)
             ),
 
             // -- value params
@@ -432,7 +432,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'mandatory-value-param-mixed-with-literal' => array(
                 'a b <foo> c',
-                array('a', 'b', 'bar', 'c'),
+                array('a','b','bar','c'),
                 array(
                     'a' => null,
                     'b' => null,
@@ -443,27 +443,27 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'optional-value-param-1' => array(
                 'a b [<c>]',
-                array('a', 'b', 'bar'),
+                array('a','b','bar'),
                 array(
-                    'a' => null,
-                    'b' => null,
-                    'c' => 'bar',
+                    'a'   => null,
+                    'b'   => null,
+                    'c'   => 'bar',
                     'bar' => null,
                 ),
             ),
             'optional-value-param-2' => array(
                 'a b [<c>]',
-                array('a', 'b'),
+                array('a','b'),
                 array(
-                    'a' => null,
-                    'b' => null,
-                    'c' => null,
+                    'a'   => null,
+                    'b'   => null,
+                    'c'   => null,
                     'bar' => null,
                 ),
             ),
             'optional-value-param-3' => array(
                 'a b [<c>]',
-                array('a', 'b', '--c'),
+                array('a','b','--c'),
                 null
             ),
 
@@ -473,7 +473,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('--foo'),
                 array(
                     'foo' => true,
-                    'f' => false,
+                    'f'   => false,
                     'baz' => null,
                 )
             ),
@@ -482,40 +482,40 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('-f'),
                 array(
                     'foo' => false,
-                    'f' => true,
+                    'f'   => true,
                     'baz' => null,
                 )
             ),
             'optional-long-short-alternative-1' => array(
                 'a <b> [ --foo | -f ]',
-                array('a', 'bar'),
+                array('a','bar'),
                 array(
-                    'a' => null,
-                    'b' => 'bar',
+                    'a'   => null,
+                    'b'   => 'bar',
                     'foo' => false,
-                    'f' => false,
+                    'f'   => false,
                     'baz' => null,
                 )
             ),
             'optional-long-short-alternative-2' => array(
                 'a <b> [ --foo | -f ]',
-                array('a', 'bar', '-f'),
+                array('a','bar', '-f'),
                 array(
-                    'a' => null,
-                    'b' => 'bar',
+                    'a'   => null,
+                    'b'   => 'bar',
                     'foo' => false,
-                    'f' => true,
+                    'f'   => true,
                     'baz' => null,
                 )
             ),
             'optional-long-short-alternative-3' => array(
                 'a <b> [ --foo | -f ]',
-                array('a', '--foo', 'bar'),
+                array('a','--foo', 'bar'),
                 array(
-                    'a' => null,
-                    'b' => 'bar',
+                    'a'   => null,
+                    'b'   => 'bar',
                     'foo' => true,
-                    'f' => false,
+                    'f'   => false,
                     'baz' => null,
                 )
             ),
@@ -523,30 +523,30 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
 
             'mandatory-and-optional-value-params-with-flags-1' => array(
                 'a b <c> [<d>] [--eee|-e] [--fff|-f]',
-                array('a', 'b', 'foo', 'bar'),
+                array('a','b','foo','bar'),
                 array(
-                    'a' => null,
-                    'b' => null,
-                    'c' => 'foo',
-                    'd' => 'bar',
-                    'e' => false,
+                    'a'   => null,
+                    'b'   => null,
+                    'c'   => 'foo',
+                    'd'   => 'bar',
+                    'e'   => false,
                     'eee' => false,
                     'fff' => false,
-                    'f' => false,
+                    'f'   => false,
                 ),
             ),
             'mandatory-and-optional-value-params-with-flags-2' => array(
                 'a b <c> [<d>] [--eee|-e] [--fff|-f]',
-                array('a', 'b', '--eee', 'foo', 'bar'),
+                array('a','b','--eee', 'foo','bar'),
                 array(
-                    'a' => null,
-                    'b' => null,
-                    'c' => 'foo',
-                    'd' => 'bar',
-                    'e' => false,
+                    'a'   => null,
+                    'b'   => null,
+                    'c'   => 'foo',
+                    'd'   => 'bar',
+                    'e'   => false,
                     'eee' => true,
                     'fff' => false,
-                    'f' => false,
+                    'f'   => false,
                 ),
             ),
 
@@ -554,22 +554,22 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             // -- overflows
             'too-many-arguments1' => array(
                 'foo bar',
-                array('foo', 'bar', 'baz'),
+                array('foo','bar','baz'),
                 null
             ),
             'too-many-arguments2' => array(
                 'foo bar [baz]',
-                array('foo', 'bar', 'baz', 'woo'),
+                array('foo','bar','baz','woo'),
                 null,
             ),
             'too-many-arguments3' => array(
                 'foo bar [--baz]',
-                array('foo', 'bar', '--baz', 'woo'),
+                array('foo','bar','--baz','woo'),
                 null,
             ),
             'too-many-arguments4' => array(
                 'foo bar [--baz] woo',
-                array('foo', 'bar', 'woo'),
+                array('foo','bar','woo'),
                 array(
                     'foo' => null,
                     'bar' => null,
@@ -579,7 +579,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'too-many-arguments5' => array(
                 '--foo --bar [--baz] woo',
-                array('--bar', '--foo', 'woo'),
+                array('--bar','--foo','woo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -589,7 +589,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
             'too-many-arguments6' => array(
                 '--foo --bar [--baz]',
-                array('--bar', '--foo', 'woo'),
+                array('--bar','--foo','woo'),
                 null
             ),
 
@@ -682,7 +682,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             ),
 
             /**
-             * @bug  ZF2-4315
+             * @bug ZF2-4315
              * @link https://github.com/zendframework/zf2/issues/4315
              */
             'literal-with-dashes' => array(
@@ -690,10 +690,10 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('foo-bar-baz',),
                 array(
                     'foo-bar-baz' => null,
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
 
@@ -702,10 +702,10 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('foo-bar-baz'),
                 array(
                     'foo-bar-baz' => true,
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-with-dashes2' => array(
@@ -713,101 +713,101 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('foo'),
                 array(
                     'foo-bar-baz' => false,
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-alternative-with-dashes' => array(
                 '(foo-bar|foo-baz) [--bar=]',
                 array('foo-bar',),
                 array(
-                    'foo-bar' => true,
-                    'foo-baz' => false,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo-bar'     => true,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-alternative-with-dashes' => array(
                 '[foo-bar|foo-baz] [--bar=]',
                 array('foo-baz',),
                 array(
-                    'foo-bar' => false,
-                    'foo-baz' => true,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo-bar'     => false,
+                    'foo-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-alternative-with-dashes2' => array(
                 'foo [foo-bar|foo-baz] [--bar=]',
                 array('foo',),
                 array(
-                    'foo' => null,
-                    'foo-bar' => false,
-                    'foo-baz' => false,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'foo-bar'     => false,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-flag-with-dashes' => array(
                 'foo --bar-baz',
-                array('foo', '--bar-baz'),
+                array('foo','--bar-baz'),
                 array(
-                    'foo' => null,
-                    'bar-baz' => true,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-flag-with-dashes' => array(
                 'foo [--bar-baz]',
-                array('foo', '--bar-baz'),
+                array('foo','--bar-baz'),
                 array(
-                    'foo' => null,
-                    'bar-baz' => true,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-flag-with-dashes2' => array(
                 'foo [--bar-baz]',
                 array('foo'),
                 array(
-                    'foo' => null,
-                    'bar-baz' => false,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-flag-alternative-with-dashes' => array(
                 'foo [--foo-bar|--foo-baz]',
-                array('foo', '--foo-baz'),
+                array('foo','--foo-baz'),
                 array(
-                    'foo' => null,
-                    'foo-bar' => false,
-                    'foo-baz' => true,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'foo-bar'     => false,
+                    'foo-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-flag-alternative-with-dashes2' => array(
                 'foo [--foo-bar|--foo-baz]',
                 array('foo'),
                 array(
-                    'foo' => null,
-                    'foo-bar' => false,
-                    'foo-baz' => false,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'foo-bar'     => false,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'value-with-dashes' => array(
@@ -815,10 +815,10 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('abc',),
                 array(
                     'foo-bar-baz' => 'abc',
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
 
@@ -827,32 +827,32 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('abc'),
                 array(
                     'foo-bar-baz' => 'abc',
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'value-optional-with-dashes2' => array(
                 '[<foo-bar-baz>] [--bar=]',
-                array('--bar', 'abc'),
+                array('--bar','abc'),
                 array(
                     'foo-bar-baz' => null,
-                    'foo' => null,
-                    'bar' => 'abc',
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => 'abc',
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'value-optional-with-mixed-case' => array(
                 '[<mixedCaseParam>] [--bar=]',
-                array('aBc', '--bar', 'abc'),
+                array('aBc', '--bar','abc'),
                 array(
                     'mixedCaseParam' => 'aBc',
-                    'foo' => null,
-                    'bar' => 'abc',
-                    'baz' => null,
-                    'something' => null,
+                    'foo'            => null,
+                    'bar'            => 'abc',
+                    'baz'            => null,
+                    'something'      => null,
                 )
             ),
             'value-optional-with-upper-case' => array(
@@ -860,14 +860,14 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('aBc', '--bar', 'abc'),
                 array(
                     'UPPERCASEPARAM' => 'aBc',
-                    'foo' => null,
-                    'bar' => 'abc',
-                    'baz' => null,
-                    'something' => null,
+                    'foo'            => null,
+                    'bar'            => 'abc',
+                    'baz'            => null,
+                    'something'      => null,
                 )
             ),
             /**
-             * @bug  ZF2-5671
+             * @bug ZF2-5671
              * @link https://github.com/zendframework/zf2/issues/5671
              */
             'mandatory-literal-camel-case' => array(
@@ -910,9 +910,9 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        string $routeDefinition
-     * @param        array $arguments
-     * @param        array|null $params
+     * @param        string         $routeDefinition
+     * @param        array          $arguments
+     * @param        array|null     $params
      */
     public function testMatching($routeDefinition, array $arguments = array(), array $params = null)
     {
@@ -928,7 +928,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             foreach ($params as $key => $value) {
                 $this->assertEquals(
                     $value,
-                    isset($match[$key]) ? $match[$key] : null,
+                    isset($match[$key])?$match[$key]:null,
                     $value === null ? "Param $key is not present" : "Param $key is present and is equal to $value"
                 );
             }
@@ -1017,18 +1017,17 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider routeDefaultsProvider
-     * @param        string $routeDefinition
-     * @param        array $defaults
-     * @param        array $arguments
-     * @param        array|null $params
+     * @param        string         $routeDefinition
+     * @param        array          $defaults
+     * @param        array          $arguments
+     * @param        array|null     $params
      */
     public function testMatchingWithDefaults(
         $routeDefinition,
         array $defaults = array(),
         array $arguments = array(),
         array $params = null
-    )
-    {
+    ) {
         $route = new DefaultRouteMatcher($routeDefinition, array(), $defaults);
         $match = $route->match($arguments);
 
@@ -1040,7 +1039,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             foreach ($params as $key => $value) {
                 $this->assertSame(
                     $value,
-                    isset($match[$key]) ? $match[$key] : null,
+                    isset($match[$key])?$match[$key]:null,
                     $value === null ? "Param $key is not present" : "Param $key is present and is equal to '$value'"
                 );
             }
@@ -1054,7 +1053,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 '<numeric> <alpha>',
                 array(
                     'numeric' => '/^[0-9]+$/',
-                    'alpha' => '/^[a-zA-Z]+$/',
+                    'alpha'   => '/^[a-zA-Z]+$/',
                 ),
                 array('1234', 'test'),
                 true
@@ -1063,7 +1062,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 '<alpha> [<numeric>]',
                 array(
                     'numeric' => '/^[0-9]+$/',
-                    'alpha' => '/^[a-zA-Z]+$/',
+                    'alpha'   => '/^[a-zA-Z]+$/',
                 ),
                 array('test', '1234'),
                 true
@@ -1072,7 +1071,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 '<alpha> [<numeric>]',
                 array(
                     'numeric' => '/^[0-9]+$/',
-                    'alpha' => '/^[a-zA-Z]+$/',
+                    'alpha'   => '/^[a-zA-Z]+$/',
                 ),
                 array('test'),
                 true
@@ -1088,9 +1087,9 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             'failing-param' => array(
                 '<good1> <good2> <bad>',
                 array(
-                    'good1' => '/^[a-zA-Z]+$/',
-                    'good2' => '/^[a-zA-Z]+$/',
-                    'bad' => '/^[a-zA-Z]+$/',
+                    'good1'   => '/^[a-zA-Z]+$/',
+                    'good2'   => '/^[a-zA-Z]+$/',
+                    'bad'   => '/^[a-zA-Z]+$/',
                 ),
                 array('foo', 'bar', 'foo123bar'),
                 false
@@ -1098,8 +1097,8 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             'failing-optional-param' => array(
                 '<good> [<bad>]',
                 array(
-                    'good2' => '/^(foo|bar)$/',
-                    'bad' => '/^(foo|bar)$/',
+                    'good2'   => '/^(foo|bar)$/',
+                    'bad'   => '/^(foo|bar)$/',
                 ),
                 array('foo', 'baz'),
                 false
@@ -1118,17 +1117,16 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider routeConstraintsProvider
      * @param        string $routeDefinition
-     * @param        array $constraints
-     * @param        array $arguments
-     * @param        bool $shouldMatch
+     * @param        array  $constraints
+     * @param        array  $arguments
+     * @param        bool   $shouldMatch
      */
     public function testMatchingWithConstraints(
         $routeDefinition,
         array $constraints = array(),
         array $arguments = array(),
         $shouldMatch = true
-    )
-    {
+    ) {
         $route = new DefaultRouteMatcher($routeDefinition, $constraints);
         $match = $route->match($arguments);
 
@@ -1199,9 +1197,9 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider routeAliasesProvider
-     * @param        string $routeDefinition
-     * @param        array $aliases
-     * @param        array $arguments
+     * @param        string     $routeDefinition
+     * @param        array      $aliases
+     * @param        array      $arguments
      * @param        array|null $params
      */
     public function testMatchingWithAliases(
@@ -1209,8 +1207,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
         array $aliases = array(),
         array $arguments = array(),
         array $params = null
-    )
-    {
+    ) {
         $route = new DefaultRouteMatcher($routeDefinition, array(), array(), $aliases);
         $match = $route->match($arguments);
 
@@ -1222,7 +1219,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             foreach ($params as $key => $value) {
                 $this->assertEquals(
                     $value,
-                    isset($match[$key]) ? $match[$key] : null,
+                    isset($match[$key])?$match[$key]:null,
                     $value === null ? "Param $key is not present" : "Param $key is present and is equal to $value"
                 );
             }
@@ -1344,7 +1341,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
         foreach ($params as $key => $value) {
             $this->assertEquals(
                 $value,
-                isset($match[$key]) ? $match[$key] : null,
+                isset($match[$key])?$match[$key]:null,
                 $value === null ? "Param $key is not present" : "Param $key is present and is equal to $value"
             );
         }

@@ -31,7 +31,6 @@ class AdapterChainEvent extends Event
             $this->setMessages();
         }
         $this->setParam('identity', $identity);
-
         return $this;
     }
 
@@ -54,7 +53,6 @@ class AdapterChainEvent extends Event
     public function setCode($code = null)
     {
         $this->setParam('code', $code);
-
         return $this;
     }
 
@@ -77,7 +75,6 @@ class AdapterChainEvent extends Event
     public function setMessages($messages = array())
     {
         $this->setParam('messages', $messages);
-
         return $this;
     }
 
@@ -101,7 +98,6 @@ class AdapterChainEvent extends Event
     {
         $this->setParam('request', $request);
         $this->request = $request;
-
         return $this;
     }
 }

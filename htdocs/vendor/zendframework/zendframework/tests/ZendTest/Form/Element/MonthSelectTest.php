@@ -49,13 +49,13 @@ class MonthSelectTest extends TestCase
     {
         return array(
             //    value         expected
-            array('2012-01', true),
-            array('2012-12', true),
-            array('2012-13', false),
+            array('2012-01',    true),
+            array('2012-12',    true),
+            array('2012-13',    false),
             array('2012-12-01', false),
-            array('12-2012', false),
-            array('2012-1', true),
-            array('12-01', false),
+            array('12-2012',    false),
+            array('2012-1',     true),
+            array('12-01',      false),
         );
     }
 
@@ -73,7 +73,7 @@ class MonthSelectTest extends TestCase
 
     public function testCanSetMonthFromDateTime()
     {
-        $element = new MonthSelectElement();
+        $element  = new MonthSelectElement();
         $element->setValue(new DateTime('2012-09'));
 
         $this->assertEquals('2012', $element->getYearElement()->getValue());
@@ -82,7 +82,7 @@ class MonthSelectTest extends TestCase
 
     public function testCanGetValue()
     {
-        $element = new MonthSelectElement();
+        $element  = new MonthSelectElement();
         $element->setValue(new DateTime('2012-09'));
         $this->assertEquals('2012-09', $element->getValue());
     }

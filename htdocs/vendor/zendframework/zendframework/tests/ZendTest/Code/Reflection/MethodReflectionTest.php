@@ -18,7 +18,7 @@ use ZendTest\Code\Reflection\TestAsset\InjectableMethodReflection;
  */
 class MethodReflectionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testDeclaringClassReturn()
+   public function testDeclaringClassReturn()
     {
         $method = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp1');
         $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $method->getDeclaringClass());
@@ -88,7 +88,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'emptyFunction');
         $body = $reflectionMethod->getBody();
         $this->assertEquals(trim($body), "");
-
+        
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'visibility');
         $body = $reflectionMethod->getBody();
         $this->assertEquals(trim($body), "return 'visibility';");
@@ -140,7 +140,7 @@ CONTENTS;
         $contents = ' public function inline3() { return \'inline3\'; }';
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'inline3');
         $this->assertEquals($contents, $reflectionMethod->getContents(false));
-
+        
         $contents = <<<'CONTENTS'
     public function visibility()
     {
@@ -167,7 +167,7 @@ CONTENTS;
         $this->assertEquals($contents, $reflectionMethod->getContents(true));
         $this->assertEquals($contents, $reflectionMethod->getContents());
 
-        $contents = <<<'CONTENTS'
+                $contents = <<<'CONTENTS'
 /**
      * Awesome doc block
      */
@@ -188,22 +188,22 @@ CONTENTS;
             'return' => 'int',
             'arguments' => array(
                 'one' => array(
-                    'type' => 'int',
+                    'type'     => 'int',
                     'required' => true,
-                    'by_ref' => false,
-                    'default' => null,
+                    'by_ref'   => false,
+                    'default'  => null,
                 ),
                 'two' => array(
-                    'type' => 'int',
+                    'type'     => 'int',
                     'required' => false,
-                    'by_ref' => false,
-                    'default' => 2,
+                    'by_ref'   => false,
+                    'default'  => 2,
                 ),
                 'three' => array(
-                    'type' => 'string',
+                    'type'     => 'string',
                     'required' => false,
-                    'by_ref' => false,
-                    'default' => 'three',
+                    'by_ref'   => false,
+                    'default'  => 'three',
                 ),
             ),
         );
@@ -219,16 +219,16 @@ CONTENTS;
             'return' => 'mixed',
             'arguments' => array(
                 'param1' => array(
-                    'type' => '',
+                    'type'     => '',
                     'required' => true,
-                    'by_ref' => false,
-                    'default' => null,
+                    'by_ref'   => false,
+                    'default'  => null,
                 ),
                 'param2' => array(
-                    'type' => 'ZendTest\Code\Reflection\TestAsset\TestSampleClass',
+                    'type'     => 'ZendTest\Code\Reflection\TestAsset\TestSampleClass',
                     'required' => true,
-                    'by_ref' => false,
-                    'default' => null,
+                    'by_ref'   => false,
+                    'default'  => null,
                 ),
             ),
         );
@@ -244,16 +244,16 @@ CONTENTS;
             'return' => 'string',
             'arguments' => array(
                 'one' => array(
-                    'type' => 'int',
+                    'type'     => 'int',
                     'required' => true,
-                    'by_ref' => true,
-                    'default' => null,
+                    'by_ref'   => true,
+                    'default'  => null,
                 ),
                 'two' => array(
-                    'type' => 'int',
+                    'type'     => 'int',
                     'required' => true,
-                    'by_ref' => false,
-                    'default' => null,
+                    'by_ref'   => false,
+                    'default'  => null,
                 ),
             ),
         );
@@ -264,8 +264,8 @@ CONTENTS;
     public function testGetAnnotationsWithNoNameInformations()
     {
         $reflectionMethod = new InjectableMethodReflection(
-        // TestSampleClass5 has the annotations required to get to the
-        // right point in the getAnnotations method.
+            // TestSampleClass5 has the annotations required to get to the
+            // right point in the getAnnotations method.
             'ZendTest\Code\Reflection\TestAsset\TestSampleClass5',
             'doSomething'
         );
@@ -273,14 +273,14 @@ CONTENTS;
         $annotationManager = new \Zend\Code\Annotation\AnnotationManager();
 
         $fileScanner = $this->getMockBuilder('Zend\Code\Scanner\CachingFileScanner')
-            ->disableOriginalConstructor()
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->getMock();
 
         $reflectionMethod->setFileScanner($fileScanner);
 
         $fileScanner->expects($this->any())
-            ->method('getClassNameInformation')
-            ->will($this->returnValue(false));
+                    ->method('getClassNameInformation')
+                    ->will($this->returnValue(false));
 
         $this->assertFalse($reflectionMethod->getAnnotations($annotationManager));
     }
@@ -342,7 +342,7 @@ CONTENTS;
 
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'getCacheKey');
         $this->assertEquals($contents, $reflectionMethod->getContents(false));
-    }
+    }    
 
     /**
      * @group 6275

@@ -37,7 +37,6 @@ abstract class AbstractLocale extends AbstractFilter
     public function setLocale($locale = null)
     {
         $this->options['locale'] = $locale;
-
         return $this;
     }
 
@@ -51,7 +50,6 @@ abstract class AbstractLocale extends AbstractFilter
         if (!isset($this->options['locale'])) {
             $this->options['locale'] = Locale::getDefault();
         }
-
         return $this->options['locale'];
     }
 }

@@ -74,7 +74,6 @@ class File extends Uri
         }
 
         $url->setPath($path);
-
         return $url;
     }
 
@@ -97,7 +96,6 @@ class File extends Uri
         }
 
         $url->setPath($path);
-
         return $url;
     }
 }

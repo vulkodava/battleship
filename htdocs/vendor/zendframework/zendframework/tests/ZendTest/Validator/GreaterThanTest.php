@@ -85,14 +85,14 @@ class GreaterThanTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new GreaterThan(1);
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-            'messageTemplates', $validator);
+                                     'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = new GreaterThan(1);
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
-            'messageVariables', $validator);
+                                     'messageVariables', $validator);
     }
 
     public function testCorrectInclusiveMessageReturn()

@@ -28,8 +28,8 @@ class TestSampleClass5
      * It indeed is longer than 3 lines
      * now.
      *
-     * @param int $one      Description for one
-     * @param int           Description for two
+     * @param int $one Description for one
+     * @param int Description for two
      * @param string $three Description for three
      *                      which spans multiple lines
      * @return mixed Some return descr
@@ -42,8 +42,8 @@ class TestSampleClass5
     /**
      * Method ShortDescription
      *
-     * @param int $one      Description for one
-     * @param int           Description for two
+     * @param int $one Description for one
+     * @param int Description for two
      * @param string $three Description for three
      *                      which spans multiple lines
      * @return int

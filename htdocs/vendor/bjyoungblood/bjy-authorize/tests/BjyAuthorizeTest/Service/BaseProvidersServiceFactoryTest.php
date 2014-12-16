@@ -24,14 +24,14 @@ class BaseProvidersServiceFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateService()
     {
-        $factory = $this->getMockForAbstractClass('BjyAuthorize\\Service\\BaseProvidersServiceFactory');
+        $factory        = $this->getMockForAbstractClass('BjyAuthorize\\Service\\BaseProvidersServiceFactory');
         $serviceLocator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
-        $foo = $this->getMock('BjyAuthorize\\Provider\\Resource\\ProviderInterface');
-        $bar = $this->getMock('BjyAuthorize\\Provider\\Resource\\ProviderInterface');
-        $config = array(
+        $foo            = $this->getMock('BjyAuthorize\\Provider\\Resource\\ProviderInterface');
+        $bar            = $this->getMock('BjyAuthorize\\Provider\\Resource\\ProviderInterface');
+        $config         = array(
             'providers' => array(
-                'foo' => array(),
-                'bar' => array(),
+                'foo'                         => array(),
+                'bar'                         => array(),
                 __NAMESPACE__ . '\\MockProvider' => array('option' => 'value'),
             ),
         );

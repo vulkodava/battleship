@@ -50,7 +50,6 @@ class AcceptRanges implements HeaderInterface
     public function setRangeUnit($rangeUnit)
     {
         $this->rangeUnit = $rangeUnit;
-
         return $this;
     }
 

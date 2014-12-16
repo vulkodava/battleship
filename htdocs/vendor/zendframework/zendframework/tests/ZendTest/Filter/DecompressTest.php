@@ -37,9 +37,9 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter = new DecompressFilter('bz2');
+        $filter  = new DecompressFilter('bz2');
 
-        $text = 'compress me';
+        $text       = 'compress me';
         $compressed = $filter->compress($text);
         $this->assertNotEquals($text, $compressed);
 
@@ -54,14 +54,14 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
      */
     public function testCompressToFile()
     {
-        $filter = new DecompressFilter('bz2');
+        $filter   = new DecompressFilter('bz2');
         $archive = __DIR__ . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');
         $this->assertTrue($content);
 
-        $filter2 = new DecompressFilter('bz2');
+        $filter2  = new DecompressFilter('bz2');
         $content2 = $filter2($archive);
         $this->assertEquals('compress me', $content2);
 
@@ -78,28 +78,28 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecompressArchive()
     {
-        $filter = new DecompressFilter('bz2');
+        $filter   = new DecompressFilter('bz2');
         $archive = __DIR__ . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');
         $this->assertTrue($content);
 
-        $filter2 = new DecompressFilter('bz2');
+        $filter2  = new DecompressFilter('bz2');
         $content2 = $filter2($archive);
         $this->assertEquals('compress me', $content2);
     }
 
     public function testFilterMethodProxiesToDecompress()
     {
-        $filter = new DecompressFilter('bz2');
+        $filter   = new DecompressFilter('bz2');
         $archive = __DIR__ . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');
         $this->assertTrue($content);
 
-        $filter2 = new DecompressFilter('bz2');
+        $filter2  = new DecompressFilter('bz2');
         $content2 = $filter2->filter($archive);
         $this->assertEquals('compress me', $content2);
     }

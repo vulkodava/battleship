@@ -26,9 +26,8 @@ class TestClassCache
         ++static::$fooCounter;
         $args = func_get_args();
 
-        echo 'foobar_output(' . implode(', ', $args) . ') : ' . static::$fooCounter;
-
-        return 'foobar_return(' . implode(', ', $args) . ') : ' . static::$fooCounter;
+        echo 'foobar_output('.implode(', ', $args) . ') : ' . static::$fooCounter;
+        return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
     }
 
     public static function emptyMethod()
@@ -52,7 +51,7 @@ class ClassCacheTest extends CommonPatternTest
             'memory_limit' => 0
         ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
-            'class' => __NAMESPACE__ . '\TestClassCache',
+            'class'   => __NAMESPACE__ . '\TestClassCache',
             'storage' => $this->_storage,
         ));
         $this->_pattern = new Cache\Pattern\ClassCache();
@@ -88,7 +87,7 @@ class ClassCacheTest extends CommonPatternTest
         $args = array('arg1', 2, 3.33, null);
 
         $generatedKey = $this->_pattern->generateKey('emptyMethod', $args);
-        $usedKey = null;
+        $usedKey      = null;
         $this->_options->getStorage()->getEventManager()->attach('setItem.pre', function ($event) use (&$usedKey) {
             $params = $event->getParams();
             $usedKey = $params['key'];

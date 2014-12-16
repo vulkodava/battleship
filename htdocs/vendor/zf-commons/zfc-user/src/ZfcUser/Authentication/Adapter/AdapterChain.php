@@ -70,12 +70,10 @@ class AdapterChain extends EventProvider implements AdapterInterface
 
         if ($e->getIdentity()) {
             $this->getEventManager()->trigger('authenticate.success', $e);
-
             return true;
         }
 
         $this->getEventManager()->trigger('authenticate.fail', $e);
-
         return false;
     }
 
@@ -93,7 +91,6 @@ class AdapterChain extends EventProvider implements AdapterInterface
                 $listener[0]->getStorage()->clear();
             }
         }
-
         return $this;
     }
 
@@ -119,7 +116,6 @@ class AdapterChain extends EventProvider implements AdapterInterface
             $this->setEvent(new AdapterChainEvent);
             $this->event->setTarget($this);
         }
-
         return $this->event;
     }
 
@@ -139,7 +135,6 @@ class AdapterChain extends EventProvider implements AdapterInterface
             $e->setParams($eventParams);
         }
         $this->event = $e;
-
         return $this;
     }
 }

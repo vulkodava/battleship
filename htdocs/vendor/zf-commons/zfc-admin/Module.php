@@ -98,7 +98,7 @@ class Module implements
     public function onBootstrap(EventInterface $e)
     {
         $app = $e->getParam('application');
-        $em = $app->getEventManager();
+        $em  = $app->getEventManager();
 
         $em->attach(MvcEvent::EVENT_DISPATCH, array($this, 'selectLayoutBasedOnRoute'));
     }
@@ -111,15 +111,15 @@ class Module implements
      */
     public function selectLayoutBasedOnRoute(MvcEvent $e)
     {
-        $app = $e->getParam('application');
-        $sm = $app->getServiceManager();
+        $app    = $e->getParam('application');
+        $sm     = $app->getServiceManager();
         $config = $sm->get('config');
 
         if (false === $config['zfcadmin']['use_admin_layout']) {
             return;
         }
 
-        $match = $e->getRouteMatch();
+        $match      = $e->getRouteMatch();
         $controller = $e->getTarget();
         if (!$match instanceof RouteMatch
             || 0 !== strpos($match->getMatchedRouteName(), 'zfcadmin')
@@ -128,7 +128,7 @@ class Module implements
             return;
         }
 
-        $layout = $config['zfcadmin']['admin_layout_template'];
+        $layout     = $config['zfcadmin']['admin_layout_template'];
         $controller->layout($layout);
     }
 }

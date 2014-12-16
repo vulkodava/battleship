@@ -36,7 +36,7 @@ class RedisTest extends CommonAdapterTest
             $this->markTestSkipped("Redis extension is not loaded");
         }
 
-        $this->_options = new Cache\Storage\Adapter\RedisOptions(array(
+        $this->_options  = new Cache\Storage\Adapter\RedisOptions(array(
             'resource_id' => __CLASS__,
         ));
 
@@ -100,7 +100,7 @@ class RedisTest extends CommonAdapterTest
         $this->assertCount(
             3,
             $this->_storage->getItems(array_keys($expectedVals)),
-            'Multiple set/get items didnt save correct amount of rows'
+                'Multiple set/get items didnt save correct amount of rows'
         );
     }
 
@@ -150,7 +150,7 @@ class RedisTest extends CommonAdapterTest
         $redisResource = new RedisResource();
         $redisResource->connect($host, $port);
         $info = $redisResource->info();
-        $majorVersion = (int)$info['redis_version'];
+        $majorVersion = (int) $info['redis_version'];
 
         $this->assertEquals($majorVersion, $this->_options->getResourceManager()->getMajorVersion($this->_options->getResourceId()));
 
@@ -202,8 +202,8 @@ class RedisTest extends CommonAdapterTest
         $options = array('serializer', RedisResource::SERIALIZER_PHP);
         $this->_options->setLibOptions($options);
 
-        $value = array('value');
-        $key = 'key';
+        $value  = array('value');
+        $key    = 'key';
         //test if it's still possible to set/get item and if lib serializer works
         $this->_storage->setItem($key, $value);
         $this->assertEquals($value, $this->_storage->getItem($key), 'Redis should return an array, lib options were not set correctly');
@@ -222,8 +222,8 @@ class RedisTest extends CommonAdapterTest
         $this->_options->setLibOptions($options);
 
         $redis = new Cache\Storage\Adapter\Redis($this->_options);
-        $value = array('value');
-        $key = 'key';
+        $value  = array('value');
+        $key    = 'key';
         //test if it's still possible to set/get item and if lib serializer works
         $redis->setItem($key, $value);
         $this->assertEquals($value, $redis->getItem($key), 'Redis should return an array, lib options were not set correctly');

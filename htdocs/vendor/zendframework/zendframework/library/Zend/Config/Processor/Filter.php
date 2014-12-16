@@ -37,7 +37,6 @@ class Filter implements ProcessorInterface
     public function setFilter(ZendFilter $filter)
     {
         $this->filter = $filter;
-
         return $this;
     }
 

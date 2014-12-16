@@ -61,7 +61,7 @@ class Login extends ProvidesEventsForm
         $submitElement
             ->setLabel('Sign In')
             ->setAttributes(array(
-                'type' => 'submit',
+                'type'  => 'submit',
             ));
 
         $this->add($submitElement, array(
@@ -80,7 +80,6 @@ class Login extends ProvidesEventsForm
     public function setAuthenticationOptions(AuthenticationOptionsInterface $authOptions)
     {
         $this->authOptions = $authOptions;
-
         return $this;
     }
 

@@ -19,7 +19,6 @@ class BarAbstractFactory implements AbstractFactoryInterface
         if ($name != 'bar') {
             return false;
         }
-
         return true;
     }
 

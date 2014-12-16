@@ -29,15 +29,15 @@ class RiakCacheTest extends CacheTest
      */
     public function setUp()
     {
-        if (!extension_loaded('riak')) {
-            $this->markTestSkipped('The ' . __CLASS__ . ' requires the use of Riak');
+        if ( ! extension_loaded('riak')) {
+            $this->markTestSkipped('The ' . __CLASS__ .' requires the use of Riak');
         }
 
         try {
             $this->connection = new Connection('127.0.0.1', 8087);
-            $this->bucket = new Bucket($this->connection, 'test');
+            $this->bucket     = new Bucket($this->connection, 'test');
         } catch (Exception\RiakException $e) {
-            $this->markTestSkipped('The ' . __CLASS__ . ' requires the use of Riak');
+            $this->markTestSkipped('The ' . __CLASS__ .' requires the use of Riak');
         }
     }
 

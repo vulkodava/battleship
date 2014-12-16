@@ -22,14 +22,14 @@ class PhoneFieldset extends Fieldset
         parent::__construct('phones');
 
         $this->setHydrator(new ClassMethodsHydrator)
-            ->setObject(new Phone());
+             ->setObject(new Phone());
 
         $id = new Element\Hidden('id');
         $this->add($id);
 
         $number = new Element\Text('number');
         $number->setLabel('Number')
-            ->setAttribute('class', 'form-control');
+               ->setAttribute('class', 'form-control');
         $this->add($number);
     }
 }

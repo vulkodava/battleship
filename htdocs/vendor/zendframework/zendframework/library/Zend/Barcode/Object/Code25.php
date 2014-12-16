@@ -18,7 +18,6 @@ class Code25 extends AbstractObject
      * Coding map
      * - 0 = narrow bar
      * - 1 = wide bar
-     *
      * @var array
      */
     protected $codingMap = array(
@@ -36,24 +35,21 @@ class Code25 extends AbstractObject
 
     /**
      * Width of the barcode (in pixels)
-     *
      * @return int
      */
     protected function calculateBarcodeWidth()
     {
-        $quietZone = $this->getQuietZone();
-        $startCharacter = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
+        $quietZone       = $this->getQuietZone();
+        $startCharacter  = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
         $characterLength = (3 * $this->barThinWidth + 2 * $this->barThickWidth + 5 * $this->barThinWidth)
-            * $this->factor;
-        $encodedData = strlen($this->getText()) * $characterLength;
-        $stopCharacter = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
-
+                         * $this->factor;
+        $encodedData     = strlen($this->getText()) * $characterLength;
+        $stopCharacter   = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
     /**
      * Partial check of interleaved 2 of 5 barcode
-     *
      * @return void
      */
     protected function checkSpecificParams()
@@ -63,7 +59,6 @@ class Code25 extends AbstractObject
 
     /**
      * Prepare array to draw barcode
-     *
      * @return array
      */
     protected function prepareBarcode()
@@ -95,7 +90,6 @@ class Code25 extends AbstractObject
         $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
         $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
         $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
-
         return $barcodeTable;
     }
 
@@ -108,12 +102,12 @@ class Code25 extends AbstractObject
     public function getChecksum($text)
     {
         $this->checkText($text);
-        $factor = 3;
+        $factor   = 3;
         $checksum = 0;
 
-        for ($i = strlen($text); $i > 0; $i--) {
+        for ($i = strlen($text); $i > 0; $i --) {
             $checksum += intval($text{$i - 1}) * $factor;
-            $factor = 4 - $factor;
+            $factor    = 4 - $factor;
         }
 
         $checksum = (10 - ($checksum % 10)) % 10;

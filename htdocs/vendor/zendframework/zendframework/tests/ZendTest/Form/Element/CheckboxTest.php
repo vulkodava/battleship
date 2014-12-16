@@ -2,7 +2,7 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link       http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -112,10 +112,10 @@ class CheckboxTest extends TestCase
     {
         $element = new CheckboxElement();
         $element->setOptions(array(
-            'use_hidden_element' => true,
-            'unchecked_value' => 'foo',
-            'checked_value' => 'bar',
-        ));
+                                  'use_hidden_element' => true,
+                                  'unchecked_value' => 'foo',
+                                  'checked_value' => 'bar',
+                             ));
         $this->assertEquals(true, $element->getOption('use_hidden_element'));
         $this->assertEquals('foo', $element->getOption('unchecked_value'));
         $this->assertEquals('bar', $element->getOption('checked_value'));

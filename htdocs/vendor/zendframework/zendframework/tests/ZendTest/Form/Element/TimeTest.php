@@ -19,9 +19,9 @@ class TimeTest extends TestCase
         $element = new TimeElement('foo');
         $element->setAttributes(array(
             'inclusive' => true,
-            'min' => '00:00:00',
-            'max' => '00:01:00',
-            'step' => '60',
+            'min'       => '00:00:00',
+            'max'       => '00:01:00',
+            'step'      => '60',
         ));
 
         $inputSpec = $element->getInputSpecification();

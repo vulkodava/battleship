@@ -23,7 +23,7 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
         // As of PHP >= 5.3.11 and >= 5.4.1 the magic database format has changed.
         // http://doc.php.net/downloads/pdf/split/de/File-Information.pdf (page 11)
         if (version_compare(PHP_VERSION, '5.4', '>=')
-            && version_compare(PHP_VERSION, '5.4.1', '<')
+                && version_compare(PHP_VERSION, '5.4.1', '<')
         ) {
             return __DIR__ . '/_files/magic.lte.5.3.10.mime';
         }
@@ -41,19 +41,18 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
             'tmp_name' => $testFile, 'name' => basename($testFile),
             'size' => 200, 'error' => 0, 'type' => 'image/jpeg'
         );
-
         return array(
             //    Options, isValid Param, Expected value
-            array(null, $fileUpload, true),
-            array('jpeg', $fileUpload, true),
-            array('test/notype', $fileUpload, false),
-            array('image/gif, image/jpeg', $fileUpload, true),
+            array(null,                              $fileUpload, true),
+            array('jpeg',                            $fileUpload, true),
+            array('test/notype',                     $fileUpload, false),
+            array('image/gif, image/jpeg',           $fileUpload, true),
             array(array('image/vasa', 'image/jpeg'), $fileUpload, true),
-            array(array('image/jpeg', 'gif'), $fileUpload, true),
-            array(array('image/gif', 'gif'), $fileUpload, false),
-            array('image/jp', $fileUpload, false),
-            array('image/jpg2000', $fileUpload, false),
-            array('image/jpeg2000', $fileUpload, false),
+            array(array('image/jpeg', 'gif'),        $fileUpload, true),
+            array(array('image/gif', 'gif'),         $fileUpload, false),
+            array('image/jp',                        $fileUpload, false),
+            array('image/jpg2000',                   $fileUpload, false),
+            array('image/jpeg2000',                  $fileUpload, false),
         );
     }
 
@@ -154,11 +153,11 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
     public function testErrorMessages()
     {
         $files = array(
-            'name' => 'picture.jpg',
-            'type' => 'image/jpeg',
-            'size' => 200,
+            'name'     => 'picture.jpg',
+            'type'     => 'image/jpeg',
+            'size'     => 200,
             'tmp_name' => __DIR__ . '/_files/picture.jpg',
-            'error' => 0
+            'error'    => 0
         );
 
         $validator = new File\IsImage('test/notype');
@@ -178,7 +177,7 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
         $validator = new File\IsImage(array(
             'image/gif',
             'image/jpg',
-            'magicFile' => $magicFile,
+            'magicFile'   => $magicFile,
             'enableHeaderCheck' => true));
 
         $this->assertEquals($magicFile, $validator->getMagicFile());

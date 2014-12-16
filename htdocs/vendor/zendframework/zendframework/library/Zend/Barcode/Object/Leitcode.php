@@ -16,7 +16,6 @@ class Leitcode extends Identcode
 {
     /**
      * Default options for Leitcode barcode
-     *
      * @return void
      */
     protected function getDefaultOptions()
@@ -27,7 +26,6 @@ class Leitcode extends Identcode
 
     /**
      * Retrieve text to display
-     *
      * @return string
      */
     public function getTextToDisplay()

@@ -40,7 +40,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $this->httpAdapter = new TestAdapter();
         $this->httpClient = new HttpClient('http://foo',
-            array('adapter' => $this->httpAdapter));
+                                    array('adapter' => $this->httpAdapter));
 
         $this->jsonClient = new Client('http://foo');
         $this->jsonClient->setHttpClient($this->httpClient);
@@ -68,7 +68,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testSettingHttpClientViaConstructor()
     {
         $jsonClient = new Client('http://foo', $this->httpClient);
-        $httpClient = $jsonClient->getHttpClient();
+        $httpClient   = $jsonClient->getHttpClient();
         $this->assertSame($this->httpClient, $httpClient);
     }
 
@@ -97,7 +97,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->setServerResponseTo($expectedReturn);
         $this->assertSame($expectedReturn, $this->jsonClient->call($expectedMethod));
 
-        $request = $this->jsonClient->getLastRequest();
+        $request  = $this->jsonClient->getLastRequest();
         $response = $this->jsonClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
@@ -117,7 +117,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $actualReturn = $this->jsonClient->call($expectedMethod, $expectedParams);
         $this->assertSame($expectedReturn, $actualReturn);
 
-        $request = $this->jsonClient->getLastRequest();
+        $request  = $this->jsonClient->getLastRequest();
         $response = $this->jsonClient->getLastResponse();
 
         $this->assertSame($expectedMethod, $request->getMethod());
@@ -136,9 +136,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRpcMethodCallThrowsOnHttpFailure()
     {
-        $status = 404;
+        $status  = 404;
         $message = 'Not Found';
-        $body = 'oops';
+        $body    = 'oops';
 
         $response = $this->makeHttpResponseFrom($body, $status, $message);
         $this->httpAdapter->setResponse($response);
@@ -242,25 +242,22 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $json = $response->toJson();
 
         $response = $this->makeHttpResponseFrom($json);
-
         return $response;
     }
 
-    public function makeHttpResponseFrom($data, $status = 200, $message = 'OK')
+    public function makeHttpResponseFrom($data, $status=200, $message='OK')
     {
         $headers = array("HTTP/1.1 $status $message",
-            "Status: $status",
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($data)
-        );
-
+                         "Status: $status",
+                         'Content-Type: application/json',
+                         'Content-Length: ' . strlen($data)
+                         );
         return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
     }
 
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
-
         return HttpResponse::fromString($response);
     }
 

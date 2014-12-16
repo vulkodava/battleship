@@ -28,7 +28,6 @@ class Feed extends Extension\AbstractFeed
 
         if ($period === null) {
             $this->data[$name] = 'daily';
-
             return 'daily'; //Default specified by spec
         }
 
@@ -40,7 +39,7 @@ class Feed extends Extension\AbstractFeed
                 return $period;
             default:
                 throw new Reader\Exception\InvalidArgumentException("Feed specified invalid update period: '$period'."
-                    . " Must be one of hourly, daily, weekly or yearly"
+                    .  " Must be one of hourly, daily, weekly or yearly"
                 );
         }
     }
@@ -57,7 +56,6 @@ class Feed extends Extension\AbstractFeed
 
         if (!$freq || $freq < 1) {
             $this->data[$name] = 1;
-
             return 1;
         }
 
@@ -85,13 +83,13 @@ class Feed extends Extension\AbstractFeed
         switch ($period) {
             case 'yearly':
                 $ticks *= 52; //TODO: fix generalisation, how?
-            // no break
+                // no break
             case 'weekly':
                 $ticks *= 7;
-            // no break
+                // no break
             case 'daily':
                 $ticks *= 24;
-            // no break
+                // no break
             case 'hourly':
                 $ticks *= 3600;
                 break;
@@ -114,7 +112,6 @@ class Feed extends Extension\AbstractFeed
         if ($updateBase) {
             $date = DateTime::createFromFormat(DateTime::W3C, $updateBase);
         }
-
         return $date;
     }
 

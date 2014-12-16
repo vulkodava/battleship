@@ -32,7 +32,6 @@ class Module implements
     public function getConfig()
     {
         $this->getConfigCalled = true;
-
         return array(
             'listener' => 'test'
         );
@@ -41,7 +40,6 @@ class Module implements
     public function getAutoloaderConfig()
     {
         $this->getAutoloaderConfigCalled = true;
-
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(

@@ -1,3 +1,3 @@
-{
-  "bar": {"@include": "include-target.json"}
+{ 
+    "bar" : { "@include" : "include-target.json" }
 }

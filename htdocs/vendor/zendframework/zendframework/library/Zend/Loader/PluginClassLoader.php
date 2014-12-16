@@ -20,14 +20,12 @@ class PluginClassLoader implements PluginClassLocator
 {
     /**
      * List of plugin name => class name pairs
-     *
      * @var array
      */
     protected $plugins = array();
 
     /**
      * Static map allow global seeding of plugin loader
-     *
      * @var array
      */
     protected static $staticMap = array();
@@ -63,7 +61,6 @@ class PluginClassLoader implements PluginClassLocator
     {
         if (null === $map) {
             static::$staticMap = array();
-
             return;
         }
 
@@ -85,7 +82,6 @@ class PluginClassLoader implements PluginClassLocator
     public function registerPlugin($shortName, $className)
     {
         $this->plugins[strtolower($shortName)] = $className;
-
         return $this;
     }
 
@@ -156,7 +152,6 @@ class PluginClassLoader implements PluginClassLocator
         if (array_key_exists($lookup, $this->plugins)) {
             unset($this->plugins[$lookup]);
         }
-
         return $this;
     }
 
@@ -179,7 +174,6 @@ class PluginClassLoader implements PluginClassLocator
     public function isLoaded($name)
     {
         $lookup = strtolower($name);
-
         return isset($this->plugins[$lookup]);
     }
 
@@ -205,7 +199,6 @@ class PluginClassLoader implements PluginClassLocator
         if (!$this->isLoaded($name)) {
             return false;
         }
-
         return $this->plugins[strtolower($name)];
     }
 

@@ -60,8 +60,7 @@ class LocTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests invalid locations
-     *
-     * @todo         A change in the URI API has led to most of these now validating
+     * @todo A change in the URI API has led to most of these now validating
      * @dataProvider invalidLocs
      */
     public function testInvalidLocs($url)

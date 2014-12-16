@@ -101,7 +101,7 @@ class InputTest extends TestCase
         $input->setValue('');
         $input->isValid();
         $validators = $input->getValidatorChain()
-            ->getValidators();
+                                ->getValidators();
         $this->assertTrue(0 == count($validators));
     }
 
@@ -215,8 +215,8 @@ class InputTest extends TestCase
 
         $notEmptyMock = $this->getMock('Zend\Validator\NotEmpty', array('isValid'));
         $notEmptyMock->expects($this->exactly(1))
-            ->method('isValid')
-            ->will($this->returnValue(false));
+                     ->method('isValid')
+                     ->will($this->returnValue(false));
 
         $validatorChain = $this->input->getValidatorChain();
         $validatorChain->prependValidator($notEmptyMock);
@@ -239,7 +239,7 @@ class InputTest extends TestCase
         $input2 = new Input('bar');
         $input2->merge($input);
         $validatorChain = $input->getValidatorChain();
-        $filterChain = $input->getFilterChain();
+        $filterChain    = $input->getFilterChain();
 
         $this->assertEquals(' 123 ', $input2->getRawValue());
         $this->assertEquals(1, $validatorChain->count());
@@ -259,8 +259,8 @@ class InputTest extends TestCase
 
         $notEmptyMock = $this->getMock('Zend\Validator\NotEmpty', array('isValid'));
         $notEmptyMock->expects($this->exactly(1))
-            ->method('isValid')
-            ->will($this->returnValue(false));
+                     ->method('isValid')
+                     ->will($this->returnValue(false));
 
         $validatorChain = $this->input->getValidatorChain();
         $validatorChain->attach(new Validator\Digits());

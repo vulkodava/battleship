@@ -61,8 +61,8 @@ class AggregateResolverTest extends TestCase
             'baz' => 'bat',
         ));
         $resolver->attach($fooResolver)
-            ->attach($barResolver)
-            ->attach($bazResolver);
+                 ->attach($barResolver)
+                 ->attach($bazResolver);
 
         $test = $resolver->resolve('bar');
         $this->assertEquals('baz', $test);
@@ -81,7 +81,7 @@ class AggregateResolverTest extends TestCase
 
     public function testLastSuccessfulResolverIsNullWhenNoResolverSucceeds()
     {
-        $resolver = new Resolver\AggregateResolver();
+        $resolver    = new Resolver\AggregateResolver();
         $fooResolver = new Resolver\TemplateMapResolver(array(
             'foo' => 'bar',
         ));
@@ -111,8 +111,8 @@ class AggregateResolverTest extends TestCase
             'bar' => 'baz',
         ));
         $resolver->attach($fooResolver, -1)
-            ->attach($barResolver, 100)
-            ->attach($bazResolver);
+                 ->attach($barResolver, 100)
+                 ->attach($bazResolver);
 
         $test = $resolver->resolve('bar');
         $this->assertEquals('bar', $test);

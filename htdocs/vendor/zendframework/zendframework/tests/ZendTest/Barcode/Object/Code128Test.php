@@ -97,7 +97,7 @@ class Code128Test extends TestCommon
         $this->object->setStretchText(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_stretchtext_instructions');
+                'Code128_HI345678_stretchtext_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -107,7 +107,7 @@ class Code128Test extends TestCommon
         $this->object->setWithBorder(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_border_instructions');
+                'Code128_HI345678_border_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -117,7 +117,7 @@ class Code128Test extends TestCommon
         $this->object->setOrientation(60);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_oriented_instructions');
+                'Code128_HI345678_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -128,7 +128,7 @@ class Code128Test extends TestCommon
         $this->object->setStretchText(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_stretchtext_oriented_instructions');
+                'Code128_HI345678_stretchtext_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
@@ -139,7 +139,7 @@ class Code128Test extends TestCommon
         $this->object->setWithBorder(true);
         $this->object->draw();
         $instructions = $this->loadInstructionsFile(
-            'Code128_HI345678_border_oriented_instructions');
+                'Code128_HI345678_border_oriented_instructions');
         $this->assertEquals($instructions, $this->object->getInstructions());
     }
 }

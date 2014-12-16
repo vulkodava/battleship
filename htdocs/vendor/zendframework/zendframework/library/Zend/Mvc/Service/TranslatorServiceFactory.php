@@ -50,7 +50,6 @@ class TranslatorServiceFactory implements FactoryInterface
             ) {
                 $i18nTranslator = Translator::factory($config['translator']);
                 $serviceLocator->setService('Zend\I18n\Translator\TranslatorInterface', $i18nTranslator);
-
                 return new MvcTranslator($i18nTranslator);
             }
         }

@@ -26,7 +26,6 @@ class Collection extends Ldap\Collection
     {
         $node = Ldap\Node::fromArray($data, true);
         $node->attachLDAP($this->iterator->getLDAP());
-
         return $node;
     }
 

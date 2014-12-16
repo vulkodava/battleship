@@ -23,7 +23,7 @@ class DefaultIterator implements Iterator, Countable
 {
     const ATTRIBUTE_TO_LOWER = 1;
     const ATTRIBUTE_TO_UPPER = 2;
-    const ATTRIBUTE_NATIVE = 3;
+    const ATTRIBUTE_NATIVE   = 3;
 
     /**
      * LDAP Connection
@@ -64,14 +64,14 @@ class DefaultIterator implements Iterator, Countable
      * Constructor.
      *
      * @param  \Zend\Ldap\Ldap $ldap
-     * @param  resource $resultId
+     * @param  resource        $resultId
      * @throws \Zend\Ldap\Exception\LdapException if no entries was found.
      * @return DefaultIterator
      */
     public function __construct(Ldap\Ldap $ldap, $resultId)
     {
-        $this->ldap = $ldap;
-        $this->resultId = $resultId;
+        $this->ldap      = $ldap;
+        $this->resultId  = $resultId;
 
         $resource = $ldap->getResource();
         ErrorHandler::start();
@@ -97,13 +97,12 @@ class DefaultIterator implements Iterator, Countable
         $isClosed = false;
         if (is_resource($this->resultId)) {
             ErrorHandler::start();
-            $isClosed = ldap_free_result($this->resultId);
+            $isClosed       = ldap_free_result($this->resultId);
             ErrorHandler::stop();
 
             $this->resultId = null;
-            $this->current = null;
+            $this->current  = null;
         }
-
         return $isClosed;
     }
 
@@ -143,7 +142,7 @@ class DefaultIterator implements Iterator, Countable
                 $this->attributeNameTreatment = $attributeNameTreatment;
             }
         } else {
-            $attributeNameTreatment = (int)$attributeNameTreatment;
+            $attributeNameTreatment = (int) $attributeNameTreatment;
             switch ($attributeNameTreatment) {
                 case self::ATTRIBUTE_TO_LOWER:
                 case self::ATTRIBUTE_TO_UPPER:
@@ -196,7 +195,7 @@ class DefaultIterator implements Iterator, Countable
             return null;
         }
 
-        $entry = array('dn' => $this->key());
+        $entry         = array('dn' => $this->key());
         $berIdentifier = null;
 
         $resource = $this->ldap->getResource();
@@ -244,7 +243,6 @@ class DefaultIterator implements Iterator, Countable
             ErrorHandler::stop();
         }
         ksort($entry, SORT_LOCALE_STRING);
-
         return $entry;
     }
 

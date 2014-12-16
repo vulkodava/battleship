@@ -20,8 +20,8 @@ if (isset($_GET['progress'])) {
     $loader = new StandardAutoloader(array('autoregister_zf' => true));
     $loader->register();
 
-    $adapter = new JsPush(array('updateMethodName' => 'Zend_ProgressBar_Update',
-        'finishMethodName' => 'Zend_ProgressBar_Finish'));
+    $adapter     = new JsPush(array('updateMethodName' => 'Zend_ProgressBar_Update',
+                                    'finishMethodName' => 'Zend_ProgressBar_Finish'));
     $progressBar = new ProgressBar($adapter, 0, 100);
 
     for ($i = 1; $i <= 100; $i++) {
@@ -116,20 +116,23 @@ if (isset($_GET['progress'])) {
         }
     </style>
     <script type="text/javascript">
-        function startProgress() {
+        function startProgress()
+        {
             var iFrame = document.createElement('iframe');
             document.getElementsByTagName('body')[0].appendChild(iFrame);
             iFrame.src = 'JsPush.php?progress';
         }
 
-        function Zend_ProgressBar_Update(data) {
+        function Zend_ProgressBar_Update(data)
+        {
             document.getElementById('pg-percent').style.width = data.percent + '%';
 
             document.getElementById('pg-text-1').innerHTML = data.text;
             document.getElementById('pg-text-2').innerHTML = data.text;
         }
 
-        function Zend_ProgressBar_Finish() {
+        function Zend_ProgressBar_Finish()
+        {
             document.getElementById('pg-percent').style.width = '100%';
 
             document.getElementById('pg-text-1').innerHTML = 'Demo done';
@@ -138,17 +141,17 @@ if (isset($_GET['progress'])) {
     </script>
 </head>
 <body onload="startProgress();">
-<div id="progressbar">
-    <div class="pg-progressbar">
-        <div class="pg-progress" id="pg-percent">
-            <div class="pg-progressstyle"></div>
-            <div class="pg-invertedtext" id="pg-text-1"></div>
+    <div id="progressbar">
+        <div class="pg-progressbar">
+            <div class="pg-progress" id="pg-percent">
+                <div class="pg-progressstyle"></div>
+                <div class="pg-invertedtext" id="pg-text-1"></div>
+            </div>
+            <div class="pg-text" id="pg-text-2"></div>
         </div>
-        <div class="pg-text" id="pg-text-2"></div>
     </div>
-</div>
-<div id="progressBar">
-    <div id="progressDone"></div>
-</div>
+    <div id="progressBar">
+        <div id="progressDone"></div>
+    </div>
 </body>
 </html>

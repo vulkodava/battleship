@@ -60,7 +60,6 @@ class Expression implements ExpressionInterface
             throw new Exception\InvalidArgumentException('Supplied expression must be a string.');
         }
         $this->expression = $expression;
-
         return $this;
     }
 
@@ -83,7 +82,6 @@ class Expression implements ExpressionInterface
             throw new Exception\InvalidArgumentException('Expression parameters must be a scalar or array.');
         }
         $this->parameters = $parameters;
-
         return $this;
     }
 
@@ -102,7 +100,6 @@ class Expression implements ExpressionInterface
     public function setTypes(array $types)
     {
         $this->types = $types;
-
         return $this;
     }
 

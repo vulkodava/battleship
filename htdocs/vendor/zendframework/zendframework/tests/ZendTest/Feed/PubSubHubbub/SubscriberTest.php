@@ -112,7 +112,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
     public function testAddsParameter()
     {
         $this->subscriber->setParameter('foo', 'bar');
-        $this->assertEquals(array('foo' => 'bar'), $this->subscriber->getParameters());
+        $this->assertEquals(array('foo'=>'bar'), $this->subscriber->getParameters());
     }
 
     public function testAddsParametersFromArray()
@@ -293,8 +293,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         $stubMethods = array();
         foreach ($methods as $method) {
             if ($method->isPublic() || ($method->isProtected()
-                    && $method->isAbstract())
-            ) {
+                && $method->isAbstract())) {
                 $stubMethods[] = $method->getName();
             }
         }
@@ -305,7 +304,6 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
             str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
             false
         );
-
         return $mocked;
     }
 }

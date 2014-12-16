@@ -43,9 +43,9 @@ class MethodTest extends TestCase
      * @dataProvider routeProvider
      * @param    HttpMethod $route
      * @param    $verb
-     * @internal     param string $path
-     * @internal     param int $offset
-     * @internal     param bool $shouldMatch
+     * @internal param string $path
+     * @internal param int $offset
+     * @internal param bool $shouldMatch
      */
     public function testMatching(HttpMethod $route, $verb)
     {
@@ -59,7 +59,7 @@ class MethodTest extends TestCase
 
     public function testNoMatchWithoutVerb()
     {
-        $route = new HttpMethod('get');
+        $route   = new HttpMethod('get');
         $request = new BaseRequest();
 
         $this->assertNull($route->match($request));

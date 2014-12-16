@@ -27,7 +27,6 @@ class UserHydrator extends ClassMethods
         } else {
             unset($data['id']);
         }
-
         return $data;
     }
 
@@ -45,7 +44,6 @@ class UserHydrator extends ClassMethods
             throw new Exception\InvalidArgumentException('$object must be an instance of ZfcUser\Entity\UserInterface');
         }
         $data = $this->mapField('user_id', 'id', $data);
-
         return parent::hydrate($data, $object);
     }
 
@@ -53,7 +51,6 @@ class UserHydrator extends ClassMethods
     {
         $array[$keyTo] = $array[$keyFrom];
         unset($array[$keyFrom]);
-
         return $array;
     }
 }

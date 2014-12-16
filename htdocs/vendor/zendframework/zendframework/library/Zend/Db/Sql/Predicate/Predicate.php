@@ -35,7 +35,6 @@ class Predicate extends PredicateSet
         $predicateSet->setUnnest($this);
         $this->addPredicate($predicateSet, ($this->nextPredicateCombineOperator) ?: $this->defaultCombination);
         $this->nextPredicateCombineOperator = null;
-
         return $predicateSet;
     }
 
@@ -61,9 +60,8 @@ class Predicate extends PredicateSet
         if ($this->unnest == null) {
             throw new RuntimeException('Not nested');
         }
-        $unnset = $this->unnest;
+        $unnset       = $this->unnest;
         $this->unnest = null;
-
         return $unnset;
     }
 
@@ -74,7 +72,7 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
      * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
@@ -96,7 +94,7 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
      * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
@@ -118,7 +116,7 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
      * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
@@ -140,7 +138,7 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
      * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
@@ -162,7 +160,7 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
      * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
@@ -184,7 +182,7 @@ class Predicate extends PredicateSet
      *
      * @param  int|float|bool|string $left
      * @param  int|float|bool|string $right
-     * @param  string $leftType  TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
+     * @param  string $leftType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_IDENTIFIER {@see allowedTypes}
      * @param  string $rightType TYPE_IDENTIFIER or TYPE_VALUE by default TYPE_VALUE {@see allowedTypes}
      * @return Predicate
      */
@@ -218,7 +216,6 @@ class Predicate extends PredicateSet
 
         return $this;
     }
-
     /**
      * Create "notLike" predicate
      *
@@ -232,10 +229,9 @@ class Predicate extends PredicateSet
     {
         $this->addPredicate(
             new NotLike($identifier, $notLike),
-            ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
+            ($this->nextPredicateCombineOperator) ? : $this->defaultCombination
         );
         $this->nextPredicateCombineOperator = null;
-
         return $this;
     }
 
@@ -408,7 +404,6 @@ class Predicate extends PredicateSet
             case 'unnest':
                 return $this->unnest();
         }
-
         return $this;
     }
 }

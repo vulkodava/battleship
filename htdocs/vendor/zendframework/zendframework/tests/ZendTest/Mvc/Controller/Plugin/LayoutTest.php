@@ -19,7 +19,7 @@ class LayoutTest extends TestCase
 {
     public function setUp()
     {
-        $this->event = $event = new MvcEvent();
+        $this->event      = $event = new MvcEvent();
         $this->controller = new SampleController();
         $this->controller->setEvent($event);
 

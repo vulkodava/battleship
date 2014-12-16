@@ -32,7 +32,7 @@ class FormCollectionTest extends TestCase
 
         $this->renderer = new PhpRenderer;
         $helpers = $this->renderer->getHelperPluginManager();
-        $config = new HelperConfig();
+        $config  = new HelperConfig();
         $config->configureServiceManager($helpers);
 
         $this->helper->setView($this->renderer);
@@ -166,8 +166,8 @@ class FormCollectionTest extends TestCase
 
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
         $mockTranslator->expects($this->exactly(1))
-            ->method('translate')
-            ->will($this->returnValue('translated legend'));
+                       ->method('translate')
+                       ->will($this->returnValue('translated legend'));
 
         $this->helper->setTranslator($mockTranslator);
         $this->assertTrue($this->helper->hasTranslator());
@@ -211,7 +211,7 @@ class FormCollectionTest extends TestCase
     {
         $form = $this->getForm();
         $form->setAttributes(array(
-            'id' => 'foo-id',
+            'id'    => 'foo-id',
             'class' => 'foo',
         ));
         $html = $this->helper->render($form);

@@ -64,7 +64,6 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
         if ($this->statementPrototype instanceof Profiler\ProfilerAwareInterface) {
             $this->statementPrototype->setProfiler($profiler);
         }
-
         return $this;
     }
 
@@ -86,7 +85,6 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
-
         return $this;
     }
 
@@ -100,7 +98,6 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
-
         return $this;
     }
 
@@ -113,7 +110,6 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
-
         return $this;
     }
 
@@ -173,7 +169,6 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
                 throw new Exception\InvalidArgumentException('createStatement() only accepts an SQL string or a Sqlsrv resource');
             }
         }
-
         return $statement;
     }
 
@@ -185,7 +180,6 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         $result = clone $this->resultPrototype;
         $result->initialize($resource, $this->connection->getLastGeneratedValue());
-
         return $result;
     }
 
@@ -199,7 +193,7 @@ class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
 
     /**
      * @param string $name
-     * @param mixed $type
+     * @param mixed  $type
      * @return string
      */
     public function formatParameterName($name, $type = null)

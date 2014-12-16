@@ -101,7 +101,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     public function testHydratorReflection()
     {
         $hydrator = new Reflection;
-        $datas = $hydrator->extract($this->reflection);
+        $datas    = $hydrator->extract($this->reflection);
         $this->assertTrue(isset($datas['foo']));
         $this->assertEquals($datas['foo'], '1');
         $this->assertTrue(isset($datas['fooBar']));
@@ -169,12 +169,12 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($datas['HasBar'], true);
         $test = $hydrator->hydrate(
             array(
-                'FooBar' => 'foo',
-                'FooBarBaz' => 'bar',
-                'IsFoo' => false,
-                'IsBar' => false,
-                'HasFoo' => false,
-                'HasBar' => false,
+                    'FooBar' => 'foo',
+                    'FooBarBaz' => 'bar',
+                    'IsFoo' => false,
+                    'IsBar' => false,
+                    'HasFoo' => false,
+                    'HasBar' => false,
             ),
             $this->classMethodsTitleCase
         );
@@ -395,12 +395,11 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         );
 
         $hydrator->addFilter("foo", function ($property) {
-            if ($property == "foo") {
-                return false;
-            }
-
-            return true;
-        });
+                if ($property == "foo") {
+                    return false;
+                }
+                return true;
+            });
 
         $this->assertSame(
             array(
@@ -412,12 +411,11 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         );
 
         $hydrator->addFilter("len", function ($property) {
-            if (strlen($property) !== 3) {
-                return false;
-            }
-
-            return true;
-        }, FilterComposite::CONDITION_AND);
+                if (strlen($property) !== 3) {
+                    return false;
+                }
+                return true;
+            }, FilterComposite::CONDITION_AND);
 
         $this->assertSame(
             array(

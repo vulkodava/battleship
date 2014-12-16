@@ -48,7 +48,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
             )
         )));
 
-        $refl = new ReflectionClass($pluginManager);
+        $refl         = new ReflectionClass($pluginManager);
         $reflProperty = $refl->getProperty('factories');
         $reflProperty->setAccessible(true);
 

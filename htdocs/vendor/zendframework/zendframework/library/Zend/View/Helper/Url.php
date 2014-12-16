@@ -38,10 +38,10 @@ class Url extends AbstractHelper
      * Generates a url given the name of a route.
      *
      * @see    Zend\Mvc\Router\RouteInterface::assemble()
-     * @param  string $name               Name of the route
-     * @param  array $params              Parameters for the link
-     * @param  array|Traversable $options Options for the route
-     * @param  bool $reuseMatchedParams   Whether to reuse matched parameters
+     * @param  string               $name               Name of the route
+     * @param  array                $params             Parameters for the link
+     * @param  array|Traversable    $options            Options for the route
+     * @param  bool                 $reuseMatchedParams Whether to reuse matched parameters
      * @return string Url                         For the link href attribute
      * @throws Exception\RuntimeException         If no RouteStackInterface was provided
      * @throws Exception\RuntimeException         If no RouteMatch was provided
@@ -109,7 +109,6 @@ class Url extends AbstractHelper
     public function setRouter(RouteStackInterface $router)
     {
         $this->router = $router;
-
         return $this;
     }
 
@@ -122,7 +121,6 @@ class Url extends AbstractHelper
     public function setRouteMatch(RouteMatch $routeMatch)
     {
         $this->routeMatch = $routeMatch;
-
         return $this;
     }
 }

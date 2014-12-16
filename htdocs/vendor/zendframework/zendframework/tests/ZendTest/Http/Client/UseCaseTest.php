@@ -51,7 +51,7 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
      * @var array
      */
     protected $config = array(
-        'adapter' => 'Zend\Http\Client\Adapter\Socket'
+        'adapter'     => 'Zend\Http\Client\Adapter\Socket'
     );
 
     /**
@@ -63,7 +63,7 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
             && (TESTS_ZEND_HTTP_CLIENT_BASEURI != false)
         ) {
             $this->baseuri = TESTS_ZEND_HTTP_CLIENT_BASEURI;
-            $this->client = new HTTPClient($this->baseuri);
+            $this->client  = new HTTPClient($this->baseuri);
         } else {
             // Skip tests
             $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
@@ -82,7 +82,7 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
     public function testHttpGet()
     {
         $this->client->setMethod(Request::METHOD_GET);
-        $response = $this->client->send();
+        $response= $this->client->send();
         $this->assertTrue($response->isSuccess());
     }
 
@@ -94,11 +94,11 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestHttpGet()
     {
-        $client = new HTTPClient();
-        $request = new Request();
+        $client= new HTTPClient();
+        $request= new Request();
         $request->setUri($this->baseuri);
         $request->setMethod(Request::METHOD_GET);
-        $response = $client->send($request);
+        $response= $client->send($request);
         $this->assertTrue($response->isSuccess());
     }
 }

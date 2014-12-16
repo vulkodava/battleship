@@ -29,7 +29,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
         $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
 
         // Mock has result
-        $mockHasResultRow = new ArrayObject();
+        $mockHasResultRow      = new ArrayObject();
         $mockHasResultRow->one = 'one';
 
         $mockHasResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
@@ -122,7 +122,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testExcludeWithArray()
     {
         $validator = new NoRecordExists('users', 'field1', array('field' => 'id', 'value' => 1),
-            $this->getMockHasResult());
+                                        $this->getMockHasResult());
         $this->assertFalse($validator->isValid('value3'));
     }
 
@@ -135,7 +135,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testExcludeWithArrayNoRecord()
     {
         $validator = new NoRecordExists('users', 'field1', array('field' => 'id', 'value' => 1),
-            $this->getMockNoResult());
+                                        $this->getMockNoResult());
         $this->assertTrue($validator->isValid('nosuchvalue'));
     }
 
@@ -173,7 +173,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new NoRecordExists('users', 'field1', 'id != 1');
         $this->setExpectedException('Zend\Validator\Exception\RuntimeException',
-            'No database adapter present');
+                                    'No database adapter present');
         $validator->isValid('nosuchvalue');
     }
 
@@ -185,7 +185,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testWithSchema()
     {
         $validator = new NoRecordExists(array('table' => 'users', 'schema' => 'my'),
-            'field1', null, $this->getMockHasResult());
+                                        'field1', null, $this->getMockHasResult());
         $this->assertFalse($validator->isValid('value1'));
     }
 
@@ -197,14 +197,14 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     public function testWithSchemaNoResult()
     {
         $validator = new NoRecordExists(array('table' => 'users', 'schema' => 'my'),
-            'field1', null, $this->getMockNoResult());
+                                        'field1', null,  $this->getMockNoResult());
         $this->assertTrue($validator->isValid('value1'));
     }
 
     public function testEqualsMessageTemplates()
     {
-        $validator = new NoRecordExists('users', 'field1');
+        $validator  = new NoRecordExists('users', 'field1');
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-            'messageTemplates', $validator);
+                                     'messageTemplates', $validator);
     }
 }

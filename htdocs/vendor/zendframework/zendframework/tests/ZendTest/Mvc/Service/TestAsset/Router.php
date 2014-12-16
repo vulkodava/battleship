@@ -49,8 +49,8 @@ class Router implements RouteStackInterface
     /**
      * Add a route to the stack.
      *
-     * @param  string $name
-     * @param  mixed $route
+     * @param  string  $name
+     * @param  mixed   $route
      * @param  int $priority
      * @return RouteStackInterface
      */

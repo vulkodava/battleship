@@ -20,7 +20,6 @@ return array(
     'factories' => array(
         'zfcuseradmin_module_options' => function (ServiceLocatorInterface $sm) {
             $config = $sm->get('Config');
-
             return new Options\ModuleOptions(isset($config['zfcuseradmin']) ? $config['zfcuseradmin'] : array());
         },
         'zfcuseradmin_edituser_form' => function (ServiceLocatorInterface $sm) {
@@ -47,7 +46,6 @@ return array(
                 $filter->remove('passwordVerify');
             }
             $form->setInputFilter($filter);
-
             return $form;
         },
         'zfcuseradmin_createuser_form' => function (ServiceLocatorInterface $sm) {
@@ -71,7 +69,6 @@ return array(
                 $filter->remove('password')->remove('passwordVerify');
             }
             $form->setInputFilter($filter);
-
             return $form;
         },
         'zfcuser_user_mapper' => function (ServiceLocatorInterface $sm) {

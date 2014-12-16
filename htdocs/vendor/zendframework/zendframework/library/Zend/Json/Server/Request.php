@@ -12,56 +12,48 @@ namespace Zend\Json\Server;
 use Zend\Json;
 
 /**
- * @todo       Revised method regex to allow NS; however, should SMD be revised to strip PHP NS instead when attaching
- *             functions?
+ * @todo       Revised method regex to allow NS; however, should SMD be revised to strip PHP NS instead when attaching functions?
  */
 class Request
 {
     /**
      * Request ID
-     *
      * @var mixed
      */
     protected $id;
 
     /**
      * Flag
-     *
      * @var bool
      */
     protected $isMethodError = false;
 
     /**
      * Flag
-     *
      * @var bool
      */
     protected $isParseError = false;
 
     /**
      * Requested method
-     *
      * @var string
      */
     protected $method;
 
     /**
      * Regex for method
-     *
      * @var string
      */
     protected $methodRegex = '/^[a-z][a-z0-9\\\\_.]*$/i';
 
     /**
      * Request parameters
-     *
      * @var array
      */
     protected $params = array();
 
     /**
      * JSON-RPC version of request
-     *
      * @var string
      */
     protected $version = '1.0';
@@ -83,7 +75,6 @@ class Request
                 $this->setVersion($value);
             }
         }
-
         return $this;
     }
 
@@ -117,7 +108,6 @@ class Request
         foreach ($params as $key => $value) {
             $this->addParam($value, $key);
         }
-
         return $this;
     }
 
@@ -130,7 +120,6 @@ class Request
     public function setParams(array $params)
     {
         $this->params = array();
-
         return $this->addParams($params);
     }
 
@@ -172,7 +161,6 @@ class Request
         } else {
             $this->method = $name;
         }
-
         return $this;
     }
 
@@ -214,8 +202,7 @@ class Request
      */
     public function setId($name)
     {
-        $this->id = (string)$name;
-
+        $this->id = (string) $name;
         return $this;
     }
 
@@ -242,7 +229,6 @@ class Request
         } else {
             $this->version = '1.0';
         }
-
         return $this;
     }
 

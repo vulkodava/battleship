@@ -41,7 +41,6 @@ class OracleRowCounter extends AbstractFeature
         $result = $countStmt->execute();
         $countRow = $result->getResource()->fetch(\PDO::FETCH_ASSOC);
         unset($statement, $result);
-
         return $countRow['count'];
     }
 
@@ -59,7 +58,6 @@ class OracleRowCounter extends AbstractFeature
         $pdo = $this->driver->getConnection()->getResource();
         $result = $pdo->query($countSql);
         $countRow = $result->fetch(\PDO::FETCH_ASSOC);
-
         return $countRow['count'];
     }
 
@@ -70,7 +68,6 @@ class OracleRowCounter extends AbstractFeature
     public function getRowCountClosure($context)
     {
         $oracleRowCounter = $this;
-
         return function () use ($oracleRowCounter, $context) {
             /** @var $oracleRowCounter OracleRowCounter */
             return ($context instanceof Pdo\Statement)

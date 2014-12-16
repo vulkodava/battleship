@@ -71,10 +71,10 @@ class NumberFormat extends AbstractHelper
      * Format a number
      *
      * @param  int|float $number
-     * @param  int $formatStyle
-     * @param  int $formatType
-     * @param  string $locale
-     * @param  int $decimals
+     * @param  int       $formatStyle
+     * @param  int       $formatType
+     * @param  string    $locale
+     * @param  int       $decimals
      * @return string
      */
     public function __invoke(
@@ -83,8 +83,7 @@ class NumberFormat extends AbstractHelper
         $formatType = null,
         $locale = null,
         $decimals = null
-    )
-    {
+    ) {
         if (null === $locale) {
             $locale = $this->getLocale();
         }
@@ -123,8 +122,7 @@ class NumberFormat extends AbstractHelper
      */
     public function setFormatStyle($formatStyle)
     {
-        $this->formatStyle = (int)$formatStyle;
-
+        $this->formatStyle = (int) $formatStyle;
         return $this;
     }
 
@@ -150,8 +148,7 @@ class NumberFormat extends AbstractHelper
      */
     public function setFormatType($formatType)
     {
-        $this->formatType = (int)$formatType;
-
+        $this->formatType = (int) $formatType;
         return $this;
     }
 
@@ -165,7 +162,6 @@ class NumberFormat extends AbstractHelper
         if (null === $this->formatType) {
             $this->formatType = NumberFormatter::TYPE_DEFAULT;
         }
-
         return $this->formatType;
     }
 
@@ -178,7 +174,6 @@ class NumberFormat extends AbstractHelper
     public function setDecimals($decimals)
     {
         $this->decimals = $decimals;
-
         return $this;
     }
 
@@ -200,8 +195,7 @@ class NumberFormat extends AbstractHelper
      */
     public function setLocale($locale)
     {
-        $this->locale = (string)$locale;
-
+        $this->locale = (string) $locale;
         return $this;
     }
 

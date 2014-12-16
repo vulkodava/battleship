@@ -15,7 +15,7 @@ use Zend\Feed\Reader;
 use Zend\Feed\Reader\Feed;
 
 /**
- */
+*/
 class Source extends Feed\Atom
 {
     /**
@@ -25,7 +25,7 @@ class Source extends Feed\Atom
      *
      * @param DOMElement $source
      * @param string $xpathPrefix Passed from parent Entry object
-     * @param string $type        Nearly always Atom 1.0
+     * @param string $type Nearly always Atom 1.0
      */
     public function __construct(DOMElement $source, $xpathPrefix, $type = Reader\Reader::TYPE_ATOM_10)
     {

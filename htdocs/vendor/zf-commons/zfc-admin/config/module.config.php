@@ -47,7 +47,7 @@ return array(
         ),
     ),
     'zfcadmin' => array(
-        'use_admin_layout' => true,
+        'use_admin_layout'      => true,
         'admin_layout_template' => 'layout/admin',
     ),
 
@@ -60,10 +60,10 @@ return array(
             'zfcadmin' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route' => '/admin',
+                    'route'    => '/admin',
                     'defaults' => array(
                         'controller' => 'ZfcAdmin\Controller\AdminController',
-                        'action' => 'index',
+                        'action'     => 'index',
                     ),
                 ),
                 'may_terminate' => true,
@@ -71,6 +71,7 @@ return array(
         ),
     ),
 
+    
 
     'view_manager' => array(
         'template_path_stack' => array(

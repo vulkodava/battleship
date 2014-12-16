@@ -94,7 +94,6 @@ class HtmlEntities extends AbstractFilter
     public function setQuoteStyle($quoteStyle)
     {
         $this->quoteStyle = $quoteStyle;
-
         return $this;
     }
 
@@ -116,8 +115,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function setEncoding($value)
     {
-        $this->encoding = (string)$value;
-
+        $this->encoding = (string) $value;
         return $this;
     }
 
@@ -164,8 +162,7 @@ class HtmlEntities extends AbstractFilter
      */
     public function setDoubleQuote($doubleQuote)
     {
-        $this->doubleQuote = (bool)$doubleQuote;
-
+        $this->doubleQuote = (bool) $doubleQuote;
         return $this;
     }
 
@@ -186,21 +183,20 @@ class HtmlEntities extends AbstractFilter
         if (!is_scalar($value)) {
             return $value;
         }
-        $value = (string)$value;
+        $value = (string) $value;
 
         $filtered = htmlentities($value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
         if (strlen($value) && !strlen($filtered)) {
             if (!function_exists('iconv')) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
-            $enc = $this->getEncoding();
-            $value = iconv('', $this->getEncoding() . '//IGNORE', $value);
+            $enc      = $this->getEncoding();
+            $value    = iconv('', $this->getEncoding() . '//IGNORE', $value);
             $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
             if (!strlen($filtered)) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
         }
-
         return $filtered;
     }
 }

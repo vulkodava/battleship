@@ -57,13 +57,13 @@ class HmacTest extends \PHPUnit_Framework_TestCase
             array('what do ya want for nothing?', 'Jefe', '750c783e6ab0b503eaa86e310a5db738'),
             array(str_repeat("\xdd", 50), str_repeat("\xaa", 16), '56be34521d144c88dbb8c733f0e8b3f6'),
             array(str_repeat("\xcd", 50),
-                "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19",
-                '697eaf0aca3a3aea3a75164746ffaa79'),
+                  "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19",
+                  '697eaf0aca3a3aea3a75164746ffaa79'),
             array('Test With Truncation', str_repeat("\x0c", 16), '56461ef2342edc00f9bab995690efd4c'),
             array('Test Using Larger Than Block-Size Key - Hash Key First', str_repeat("\xaa", 80),
-                '6b1ab7fe4bd7bf8f0b62e6ce61b9d0cd'),
+                  '6b1ab7fe4bd7bf8f0b62e6ce61b9d0cd'),
             array('Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data',
-                str_repeat("\xaa", 80), '6f630fad67cda0ee1fb1f562db3aa53e'),
+                  str_repeat("\xaa", 80), '6f630fad67cda0ee1fb1f562db3aa53e'),
         );
     }
 
@@ -85,13 +85,13 @@ class HmacTest extends \PHPUnit_Framework_TestCase
             array('what do ya want for nothing?', 'Jefe', 'effcdf6ae5eb2fa2d27416d5f184df9c259a7c79'),
             array(str_repeat("\xdd", 50), str_repeat("\xaa", 20), '125d7342b9ac11cd91a39af48aa17b4f63f175d3'),
             array(str_repeat("\xcd", 50),
-                "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19",
-                '4c9007f4026250c6bc8414f9bf50c86c2d7235da'),
+                  "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19",
+                  '4c9007f4026250c6bc8414f9bf50c86c2d7235da'),
             array('Test With Truncation', str_repeat("\x0c", 20), '4c1a03424b55e07fe7f27be1d58bb9324a9a5a04'),
             array('Test Using Larger Than Block-Size Key - Hash Key First', str_repeat("\xaa", 80),
-                'aa4ae5e15272d00e95705637ce8a3b55ed402112'),
+                  'aa4ae5e15272d00e95705637ce8a3b55ed402112'),
             array('Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data',
-                str_repeat("\xaa", 80), 'e8e99d0f45237d786d6bbaa7965c7808bbff1a91'),
+                  str_repeat("\xaa", 80), 'e8e99d0f45237d786d6bbaa7965c7808bbff1a91'),
         );
     }
 
@@ -112,13 +112,13 @@ class HmacTest extends \PHPUnit_Framework_TestCase
             array('what do ya want for nothing?', 'Jefe', 'dda6c0213a485a9e24f4742064a7f033b43c4069'),
             array(str_repeat("\xdd", 50), str_repeat("\xaa", 20), 'b0b105360de759960ab4f35298e116e295d8e7c1'),
             array(str_repeat("\xcd", 50),
-                "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19",
-                'd5ca862f4d21d5e610e18b4cf1beb97a4365ecf4'),
+                  "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19",
+                  'd5ca862f4d21d5e610e18b4cf1beb97a4365ecf4'),
             array('Test With Truncation', str_repeat("\x0c", 20), '7619693978f91d90539ae786500ff3d8e0518e39'),
             array('Test Using Larger Than Block-Size Key - Hash Key First', str_repeat("\xaa", 80),
-                '6466ca07ac5eac29e1bd523e5ada7605b791fd8b'),
+                  '6466ca07ac5eac29e1bd523e5ada7605b791fd8b'),
             array('Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data',
-                str_repeat("\xaa", 80), '69ea60798d71616cce5fd0871e23754cd75d5a0a'),
+                  str_repeat("\xaa", 80), '69ea60798d71616cce5fd0871e23754cd75d5a0a'),
         );
     }
 
@@ -135,21 +135,21 @@ class HmacTest extends \PHPUnit_Framework_TestCase
     {
         Hmac::clearLastAlgorithmCache();
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-            'Provided key is null or empty');
+                                    'Provided key is null or empty');
         Hmac::compute(null, 'md5', 'test');
     }
 
     public function testNullHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-            'Hash algorithm is not supported on this PHP installation');
+                                    'Hash algorithm is not supported on this PHP installation');
         Hmac::compute('key', null, 'test');
     }
 
     public function testWrongHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-            'Hash algorithm is not supported on this PHP installation');
+                                    'Hash algorithm is not supported on this PHP installation');
         Hmac::compute('key', 'wrong', 'test');
     }
 

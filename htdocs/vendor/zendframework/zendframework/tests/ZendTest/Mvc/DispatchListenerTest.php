@@ -38,8 +38,8 @@ class DispatchListenerTest extends TestCase
             'modules' => array(),
             'module_listener_options' => array(
                 'config_cache_enabled' => false,
-                'cache_dir' => 'data/cache',
-                'module_paths' => array(),
+                'cache_dir'            => 'data/cache',
+                'module_paths'         => array(),
             ),
         );
         $config = function ($s) {
@@ -49,24 +49,24 @@ class DispatchListenerTest extends TestCase
             new ServiceManagerConfig(array(
                 'invokables' => array(
                     'DispatchListener' => 'Zend\Mvc\DispatchListener',
-                    'Request' => 'Zend\Http\PhpEnvironment\Request',
-                    'Response' => 'Zend\Http\PhpEnvironment\Response',
-                    'RouteListener' => 'Zend\Mvc\RouteListener',
-                    'ViewManager' => 'ZendTest\Mvc\TestAsset\MockViewManager',
+                    'Request'          => 'Zend\Http\PhpEnvironment\Request',
+                    'Response'         => 'Zend\Http\PhpEnvironment\Response',
+                    'RouteListener'    => 'Zend\Mvc\RouteListener',
+                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager',
                     'SendResponseListener' => 'ZendTest\Mvc\TestAsset\MockSendResponseListener'
                 ),
                 'factories' => array(
-                    'ControllerLoader' => 'Zend\Mvc\Service\ControllerLoaderFactory',
+                    'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
                     'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
-                    'RoutePluginManager' => 'Zend\Mvc\Service\RoutePluginManagerFactory',
-                    'Application' => 'Zend\Mvc\Service\ApplicationFactory',
-                    'HttpRouter' => 'Zend\Mvc\Service\RouterFactory',
-                    'Config' => $config,
+                    'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
+                    'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
+                    'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
+                    'Config'                  => $config,
                 ),
                 'aliases' => array(
-                    'Router' => 'HttpRouter',
-                    'Configuration' => 'Config',
-                    'ControllerManager' => 'ControllerLoader',
+                    'Router'                 => 'HttpRouter',
+                    'Configuration'          => 'Config',
+                    'ControllerManager'      => 'ControllerLoader',
                 ),
             ))
         );
@@ -80,12 +80,12 @@ class DispatchListenerTest extends TestCase
     public function setupPathController()
     {
         $request = $this->serviceManager->get('Request');
-        $uri = UriFactory::factory('http://example.local/path');
+        $uri     = UriFactory::factory('http://example.local/path');
         $request->setUri($uri);
 
         $router = $this->serviceManager->get('HttpRouter');
-        $route = Router\Http\Literal::factory(array(
-            'route' => '/path',
+        $route  = Router\Http\Literal::factory(array(
+            'route'    => '/path',
             'defaults' => array(
                 'controller' => 'path',
             ),

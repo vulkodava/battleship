@@ -11,15 +11,15 @@ class MemcacheCacheTest extends CacheTest
 
     public function setUp()
     {
-        if (!extension_loaded('memcache')) {
-            $this->markTestSkipped('The ' . __CLASS__ . ' requires the use of memcache');
+        if ( ! extension_loaded('memcache')) {
+            $this->markTestSkipped('The ' . __CLASS__ .' requires the use of memcache');
         }
 
         $this->memcache = new Memcache();
 
         if (@$this->memcache->connect('localhost', 11211) === false) {
             unset($this->memcache);
-            $this->markTestSkipped('The ' . __CLASS__ . ' cannot connect to memcache');
+            $this->markTestSkipped('The ' . __CLASS__ .' cannot connect to memcache');
         }
     }
 
@@ -49,7 +49,6 @@ class MemcacheCacheTest extends CacheTest
     {
         $driver = new MemcacheCache();
         $driver->setMemcache($this->memcache);
-
         return $driver;
     }
 }

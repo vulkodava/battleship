@@ -58,10 +58,10 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
 
         $this->filter = new AlnumFilter();
 
-        $this->locale = Locale::getDefault();
-        $language = Locale::getPrimaryLanguage($this->locale);
+        $this->locale               = Locale::getDefault();
+        $language                   = Locale::getPrimaryLanguage($this->locale);
         static::$meansEnglishAlphabet = in_array($language, array('ja'));
-        static::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        static::$unicodeEnabled       = (@preg_match('/\pL/u', 'a')) ? true : false;
     }
 
     /**
@@ -74,11 +74,11 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         if (!static::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
-                'abc123' => 'abc123',
+                'abc123'  => 'abc123',
                 'abc 123' => 'abc123',
-                'abcxyz' => 'abcxyz',
+                'abcxyz'  => 'abcxyz',
                 'AZ@#4.3' => 'AZ43',
-                '' => ''
+                ''        => ''
             );
         } elseif (static::$meansEnglishAlphabet) {
             // The Alphabet means english alphabet.
@@ -91,20 +91,20 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
              * The third  contains various multibyte or singebyte characters.
              */
             $valuesExpected = array(
-                'aＡBｂ3４5６' => 'aB35',
-                'z７ Ｙ8　x９' => 'z8x',
+                'aＡBｂ3４5６'  => 'aB35',
+                'z７ Ｙ8　x９'  => 'z8x',
                 '，s1.2r３#:q,' => 's12rq',
             );
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = array(
-                'abc123' => 'abc123',
-                'abc 123' => 'abc123',
-                'abcxyz' => 'abcxyz',
-                'če2t3ně' => 'če2t3ně',
-                'grz5e4gżółka' => 'grz5e4gżółka',
-                'Be3l5gië' => 'Be3l5gië',
-                '' => ''
+                'abc123'        => 'abc123',
+                'abc 123'       => 'abc123',
+                'abcxyz'        => 'abcxyz',
+                'če2t3ně'       => 'če2t3ně',
+                'grz5e4gżółka'  => 'grz5e4gżółka',
+                'Be3l5gië'      => 'Be3l5gië',
+                ''              => ''
             );
         }
 
@@ -126,30 +126,30 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         if (!static::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
-                'abc123' => 'abc123',
+                'abc123'  => 'abc123',
                 'abc 123' => 'abc 123',
-                'abcxyz' => 'abcxyz',
+                'abcxyz'  => 'abcxyz',
                 'AZ@#4.3' => 'AZ43',
-                '' => '',
-                "\n" => "\n",
-                " \t " => " \t "
+                ''        => '',
+                "\n"      => "\n",
+                " \t "    => " \t "
             );
         } elseif (static::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
                 'a B ４5' => 'a B 5',
-                'z3　x' => 'z3x'
+                'z3　x'   => 'z3x'
             );
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = array(
-                'abc123' => 'abc123',
-                'abc 123' => 'abc 123',
-                'abcxyz' => 'abcxyz',
-                'če2 t3ně' => 'če2 t3ně',
+                'abc123'        => 'abc123',
+                'abc 123'       => 'abc 123',
+                'abcxyz'        => 'abcxyz',
+                'če2 t3ně'      => 'če2 t3ně',
                 'gr z5e4gżółka' => 'gr z5e4gżółka',
-                'Be3l5 gië' => 'Be3l5 gië',
-                '' => '',
+                'Be3l5 gië'     => 'Be3l5 gië',
+                ''              => '',
             );
         }
 
@@ -164,11 +164,11 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         $filter = new AlnumFilter();
 
         $values = array(
-            'abc123' => 'abc123',
+            'abc123'  => 'abc123',
             'abc 123' => 'abc123',
-            'abcxyz' => 'abcxyz',
+            'abcxyz'  => 'abcxyz',
             'AZ@#4.3' => 'AZ43',
-            '' => ''
+            ''        => ''
         );
 
         $actual = $filter->filter(array_keys($values));
@@ -192,6 +192,6 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new AlnumFilter();
 
-        $this->assertEquals($input, $filter->filter($input));
+        $this->assertEquals($input,  $filter->filter($input));
     }
 }

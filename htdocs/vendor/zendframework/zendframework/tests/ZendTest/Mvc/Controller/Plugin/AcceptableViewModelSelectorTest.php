@@ -45,11 +45,11 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
             'Zend\View\Model\ViewModel' => '*/*'
         );
 
-        $header = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
+        $header   = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
         $this->request->getHeaders()->addHeader($header);
-        $plugin = $this->plugin;
+        $plugin   = $this->plugin;
         $plugin->setDefaultViewModelName('Zend\View\Model\FeedModel');
-        $result = $plugin($arr);
+        $result   = $plugin($arr);
 
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
         $this->assertNotInstanceOf('Zend\View\Model\FeedModel', $result); // Ensure the default wasn't selected
@@ -69,10 +69,10 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $header = Accept::fromString('Accept: text/plain');
+        $header   = Accept::fromString('Accept: text/plain');
         $this->request->getHeaders()->addHeader($header);
-        $plugin = $this->plugin;
-        $result = $plugin->getViewModelName($arr);
+        $plugin   = $this->plugin;
+        $result   = $plugin->getViewModelName($arr);
 
         $this->assertEquals('Zend\View\Model\ViewModel', $result); //   Default Default View Model Name
 
@@ -84,19 +84,19 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
     public function testSelectsViewModelBasedOnAcceptHeaderWhenInvokedAsFunctor()
     {
         $arr = array(
-            'Zend\View\Model\JsonModel' => array(
-                'application/json',
-                'application/javascript'
-            ),
-            'Zend\View\Model\FeedModel' => array(
-                'application/rss+xml',
-                'application/atom+xml'
-            ),
-            'Zend\View\Model\ViewModel' => '*/*'
+                'Zend\View\Model\JsonModel' => array(
+                        'application/json',
+                        'application/javascript'
+                ),
+                'Zend\View\Model\FeedModel' => array(
+                        'application/rss+xml',
+                        'application/atom+xml'
+                ),
+                'Zend\View\Model\ViewModel' => '*/*'
         );
 
-        $plugin = $this->plugin;
-        $header = Accept::fromString('Accept: application/rss+xml; version=0.2');
+        $plugin   = $this->plugin;
+        $header   = Accept::fromString('Accept: application/rss+xml; version=0.2');
         $this->request->getHeaders()->addHeader($header);
         $result = $plugin($arr);
 
@@ -107,18 +107,18 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
     public function testInvokeWithoutDefaultsReturnsNullWhenNoMatchesOccur()
     {
         $arr = array(
-            'Zend\View\Model\JsonModel' => array(
-                'application/json',
-                'application/javascript'
-            ),
-            'Zend\View\Model\FeedModel' => array(
-                'application/rss+xml',
-                'application/atom+xml'
-            ),
+                'Zend\View\Model\JsonModel' => array(
+                        'application/json',
+                        'application/javascript'
+                ),
+                'Zend\View\Model\FeedModel' => array(
+                        'application/rss+xml',
+                        'application/atom+xml'
+                ),
         );
 
-        $plugin = $this->plugin;
-        $header = Accept::fromString('Accept: text/html; version=0.2');
+        $plugin   = $this->plugin;
+        $header   = Accept::fromString('Accept: text/html; version=0.2');
         $this->request->getHeaders()->addHeader($header);
 
         $result = $plugin($arr, false);
@@ -127,12 +127,12 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testInvokeReturnsFieldValuePartOnMatchWhenReferenceProvided()
     {
-        $plugin = $this->plugin;
-        $header = Accept::fromString('Accept: text/html; version=0.2');
+        $plugin   = $this->plugin;
+        $header   = Accept::fromString('Accept: text/html; version=0.2');
         $this->request->getHeaders()->addHeader($header);
 
         $ref = null;
-        $result = $plugin(array('Zend\View\Model\ViewModel' => '*/*'), false, $ref);
+        $result = $plugin(array( 'Zend\View\Model\ViewModel' => '*/*'), false, $ref);
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
         $this->assertNotInstanceOf('Zend\View\Model\JsonModel', $result);
         $this->assertNotInstanceOf('Zend\View\Model\FeedModel', $result);
@@ -142,42 +142,42 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
     public function testGetViewModelNameWithoutDefaults()
     {
         $arr = array(
-            'Zend\View\Model\JsonModel' => array(
-                'application/json',
-                'application/javascript'
-            ),
-            'Zend\View\Model\FeedModel' => array(
-                'application/rss+xml',
-                'application/atom+xml'
-            ),
+                'Zend\View\Model\JsonModel' => array(
+                        'application/json',
+                        'application/javascript'
+                ),
+                'Zend\View\Model\FeedModel' => array(
+                        'application/rss+xml',
+                        'application/atom+xml'
+                ),
         );
 
-        $plugin = $this->plugin;
-        $header = Accept::fromString('Accept: text/html; version=0.2');
+        $plugin   = $this->plugin;
+        $header   = Accept::fromString('Accept: text/html; version=0.2');
         $this->request->getHeaders()->addHeader($header);
 
         $result = $plugin->getViewModelName($arr, false);
         $this->assertNull($result);
 
         $ref = null;
-        $result = $plugin->getViewModelName(array('Zend\View\Model\ViewModel' => '*/*'), false, $ref);
+        $result = $plugin->getViewModelName(array( 'Zend\View\Model\ViewModel' => '*/*'), false, $ref);
         $this->assertEquals('Zend\View\Model\ViewModel', $result);
         $this->assertInstanceOf('Zend\Http\Header\Accept\FieldValuePart\AcceptFieldValuePart', $ref);
     }
 
     public function testMatch()
     {
-        $plugin = $this->plugin;
-        $header = Accept::fromString('Accept: text/html; version=0.2');
+        $plugin   = $this->plugin;
+        $header   = Accept::fromString('Accept: text/html; version=0.2');
         $this->request->getHeaders()->addHeader($header);
 
-        $arr = array('Zend\View\Model\ViewModel' => '*/*');
+        $arr = array( 'Zend\View\Model\ViewModel' => '*/*');
         $plugin->setDefaultMatchAgainst($arr);
         $this->assertEquals($plugin->getDefaultMatchAgainst(), $arr);
         $result = $plugin->match();
         $this->assertInstanceOf(
-            'Zend\Http\Header\Accept\FieldValuePart\AcceptFieldValuePart',
-            $result
+                'Zend\Http\Header\Accept\FieldValuePart\AcceptFieldValuePart',
+                $result
         );
         $this->assertEquals($plugin->getDefaultMatchAgainst(), $arr);
     }
@@ -185,7 +185,7 @@ class AcceptableViewModelSelectorTest extends \PHPUnit_Framework_TestCase
     public function testInvalidModel()
     {
         $arr = array('DoesNotExist' => 'text/xml');
-        $header = Accept::fromString('Accept: */*');
+        $header   = Accept::fromString('Accept: */*');
         $this->request->getHeaders()->addHeader($header);
 
         $this->setExpectedException('\Zend\Mvc\Exception\InvalidArgumentException');

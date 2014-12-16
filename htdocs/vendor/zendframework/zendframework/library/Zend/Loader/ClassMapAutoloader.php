@@ -23,14 +23,12 @@ class ClassMapAutoloader implements SplAutoloader
 {
     /**
      * Registry of map files that have already been loaded
-     *
      * @var array
      */
     protected $mapsLoaded = array();
 
     /**
      * Class name/filename map
-     *
      * @var array
      */
     protected $map = array();
@@ -60,7 +58,6 @@ class ClassMapAutoloader implements SplAutoloader
     public function setOptions($options)
     {
         $this->registerAutoloadMaps($options);
-
         return $this;
     }
 
@@ -119,7 +116,6 @@ class ClassMapAutoloader implements SplAutoloader
         foreach ($locations as $location) {
             $this->registerAutoloadMap($location);
         }
-
         return $this;
     }
 
@@ -205,7 +201,7 @@ class ClassMapAutoloader implements SplAutoloader
             return;
         }
 
-        $prefixLength = 5 + strlen($match[1]);
+        $prefixLength  = 5 + strlen($match[1]);
         $parts = explode('/', str_replace(array('/', '\\'), '/', substr($path, $prefixLength)));
         $parts = array_values(array_filter($parts, function ($p) {
             return ($p !== '' && $p !== '.');
@@ -213,7 +209,7 @@ class ClassMapAutoloader implements SplAutoloader
 
         array_walk($parts, function ($value, $key) use (&$parts) {
             if ($value === '..') {
-                unset($parts[$key], $parts[$key - 1]);
+                unset($parts[$key], $parts[$key-1]);
                 $parts = array_values($parts);
             }
         });

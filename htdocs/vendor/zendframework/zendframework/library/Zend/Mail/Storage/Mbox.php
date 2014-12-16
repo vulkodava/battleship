@@ -15,35 +15,30 @@ class Mbox extends AbstractStorage
 {
     /**
      * file handle to mbox file
-     *
      * @var null|resource
      */
     protected $fh;
 
     /**
      * filename of mbox file for __wakeup
-     *
      * @var string
      */
     protected $filename;
 
     /**
      * modification date of mbox file for __wakeup
-     *
      * @var int
      */
     protected $filemtime;
 
     /**
      * start and end position of messages as array('start' => start, 'separator' => headersep, 'end' => end)
-     *
      * @var array
      */
     protected $positions;
 
     /**
      * used message class, change it in an extended class to extend the returned message class
-     *
      * @var string
      */
     protected $messageClass = '\Zend\Mail\Storage\Message\File';
@@ -62,14 +57,13 @@ class Mbox extends AbstractStorage
     /**
      * Get a list of messages with number and size
      *
-     * @param  int|null $id number of message or null for all messages
+     * @param  int|null $id  number of message or null for all messages
      * @return int|array size of given message of list with all messages as array(num => size)
      */
     public function getSize($id = 0)
     {
         if ($id) {
             $pos = $this->positions[$id - 1];
-
             return $pos['end'] - $pos['start'];
         }
 
@@ -108,13 +102,11 @@ class Mbox extends AbstractStorage
     {
         // TODO that's ugly, would be better to let the message class decide
         if (strtolower($this->messageClass) == '\zend\mail\storage\message\file'
-            || is_subclass_of($this->messageClass, '\Zend\Mail\Storage\Message\File')
-        ) {
+            || is_subclass_of($this->messageClass, '\Zend\Mail\Storage\Message\File')) {
             // TODO top/body lines
             $messagePos = $this->getPos($id);
-
             return new $this->messageClass(array('file' => $this->fh, 'startPos' => $messagePos['start'],
-                'endPos' => $messagePos['end']));
+                                                  'endPos' => $messagePos['end']));
         }
 
         $bodyLines = 0; // TODO: need a way to change that
@@ -148,7 +140,6 @@ class Mbox extends AbstractStorage
             throw new Exception\RuntimeException('not implemented');
         }
         $messagePos = $this->getPos($id);
-
         // TODO: toplines
         return stream_get_contents($this->fh, $messagePos['separator'] - $messagePos['start'], $messagePos['start']);
     }
@@ -169,7 +160,6 @@ class Mbox extends AbstractStorage
             throw new Exception\RuntimeException('not implemented');
         }
         $messagePos = $this->getPos($id);
-
         return stream_get_contents($this->fh, $messagePos['end'] - $messagePos['separator'], $messagePos['separator']);
     }
 
@@ -184,7 +174,7 @@ class Mbox extends AbstractStorage
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         if (!isset($params->filename)) {
@@ -192,7 +182,7 @@ class Mbox extends AbstractStorage
         }
 
         $this->openMboxFile($params->filename);
-        $this->has['top'] = true;
+        $this->has['top']      = true;
         $this->has['uniqueid'] = false;
     }
 
@@ -202,7 +192,7 @@ class Mbox extends AbstractStorage
      * if $file is a resource its file pointer is moved after the first line
      *
      * @param  resource|string $file stream resource of name of file
-     * @param  bool $fileIsString    file is string or resource
+     * @param  bool $fileIsString file is string or resource
      * @return bool file is mbox file
      */
     protected function isMboxFile($file, $fileIsString = true)
@@ -337,12 +327,10 @@ class Mbox extends AbstractStorage
         if ($id) {
             // check if id exists
             $this->getPos($id);
-
             return $id;
         }
 
         $range = range(1, $this->countMessages());
-
         return array_combine($range, $range);
     }
 
@@ -360,7 +348,6 @@ class Mbox extends AbstractStorage
     {
         // check if id exists
         $this->getPos($id);
-
         return $id;
     }
 
@@ -395,7 +382,7 @@ class Mbox extends AbstractStorage
         } else {
             ErrorHandler::start();
             $this->fh = fopen($this->filename, 'r');
-            $error = ErrorHandler::stop();
+            $error    = ErrorHandler::stop();
             if (!$this->fh) {
                 throw new Exception\RuntimeException('cannot open mbox file', 0, $error);
             }

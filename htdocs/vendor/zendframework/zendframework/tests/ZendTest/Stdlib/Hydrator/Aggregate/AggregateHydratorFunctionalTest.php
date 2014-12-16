@@ -78,7 +78,7 @@ class AggregateHydratorFunctionalTest extends PHPUnit_Framework_TestCase
         $this->hydrator->add($comparisonHydrator);
 
         $hydratedBlueprint = $comparisonHydrator->hydrate($data, $blueprint);
-        $hydrated = $this->hydrator->hydrate($data, $object);
+        $hydrated          = $this->hydrator->hydrate($data, $object);
 
         $this->assertEquals($hydratedBlueprint, $hydrated);
 
@@ -133,7 +133,7 @@ class AggregateHydratorFunctionalTest extends PHPUnit_Framework_TestCase
      */
     public function testStoppedPropagationInExtraction()
     {
-        $object = new ArrayObject(array('president' => 'Zaphod'));
+        $object   = new ArrayObject(array('president' => 'Zaphod'));
         $callback = function (ExtractEvent $event) {
             $event->setExtractedData(array('Ravenous Bugblatter Beast of Traal'));
             $event->stopPropagation();
@@ -151,7 +151,7 @@ class AggregateHydratorFunctionalTest extends PHPUnit_Framework_TestCase
      */
     public function testStoppedPropagationInHydration()
     {
-        $object = new ArrayObject();
+        $object        = new ArrayObject();
         $swappedObject = new stdClass();
         $callback = function (HydrateEvent $event) use ($swappedObject) {
             $event->setHydratedObject($swappedObject);

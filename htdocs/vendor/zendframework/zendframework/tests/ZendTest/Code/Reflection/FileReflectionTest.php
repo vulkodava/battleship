@@ -176,7 +176,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
             array('use' => 'Zend\Config', 'as' => 'ZendConfig'),
             array('use' => 'FooBar\Foo\Bar', 'as' => null),
             array('use' => 'One\Two\Three\Four\Five', 'as' => 'ottff')
-        );
+            );
         $this->assertSame($expected, $reflectionFile->getUses());
     }
 }

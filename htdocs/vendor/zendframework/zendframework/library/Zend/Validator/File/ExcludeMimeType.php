@@ -17,7 +17,7 @@ use Zend\Validator\Exception;
  */
 class ExcludeMimeType extends MimeType
 {
-    const FALSE_TYPE = 'fileExcludeMimeTypeFalse';
+    const FALSE_TYPE   = 'fileExcludeMimeTypeFalse';
     const NOT_DETECTED = 'fileExcludeMimeTypeNotDetected';
     const NOT_READABLE = 'fileExcludeMimeTypeNotReadable';
 
@@ -27,7 +27,7 @@ class ExcludeMimeType extends MimeType
      * mime types will not be accepted like "image/gif", "image/jpeg" and so on.
      *
      * @param  string|array $value Real file to check for mimetype
-     * @param  array $file         File data from \Zend\File\Transfer\Transfer (optional)
+     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
      * @return bool
      */
     public function isValid($value, $file = null)
@@ -36,18 +36,18 @@ class ExcludeMimeType extends MimeType
             // Legacy Zend\Transfer API support
             $filename = $file['name'];
             $filetype = $file['type'];
-            $file = $file['tmp_name'];
+            $file     = $file['tmp_name'];
         } elseif (is_array($value)) {
             if (!isset($value['tmp_name']) || !isset($value['name']) || !isset($value['type'])) {
                 throw new Exception\InvalidArgumentException(
                     'Value array must be in $_FILES format'
                 );
             }
-            $file = $value['tmp_name'];
+            $file     = $value['tmp_name'];
             $filename = $value['name'];
             $filetype = $value['type'];
         } else {
-            $file = $value;
+            $file     = $value;
             $filename = basename($file);
             $filetype = null;
         }
@@ -56,7 +56,6 @@ class ExcludeMimeType extends MimeType
         // Is file readable ?
         if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_READABLE);
-
             return false;
         }
 
@@ -82,14 +81,12 @@ class ExcludeMimeType extends MimeType
 
         if (empty($this->type)) {
             $this->error(self::NOT_DETECTED);
-
             return false;
         }
 
         $mimetype = $this->getMimeType(true);
         if (in_array($this->type, $mimetype)) {
             $this->error(self::FALSE_TYPE);
-
             return false;
         }
 
@@ -99,7 +96,6 @@ class ExcludeMimeType extends MimeType
         foreach ($mimetype as $mime) {
             if (in_array($mime, $types)) {
                 $this->error(self::FALSE_TYPE);
-
                 return false;
             }
         }

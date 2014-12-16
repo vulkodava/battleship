@@ -25,13 +25,13 @@ class Redirect extends AbstractPlugin
     /**
      * Generates a URL based on a route
      *
-     * @param  string $route            RouteInterface name
-     * @param  array $params            Parameters to use in url generation, if any
-     * @param  array $options           RouteInterface-specific options to use in url generation, if any
+     * @param  string $route RouteInterface name
+     * @param  array $params Parameters to use in url generation, if any
+     * @param  array $options RouteInterface-specific options to use in url generation, if any
      * @param  bool $reuseMatchedParams Whether to reuse matched parameters
      * @return Response
      * @throws Exception\DomainException if composed controller does not implement InjectApplicationEventInterface, or
-     *                                  router cannot be found in controller event
+     *         router cannot be found in controller event
      */
     public function toRoute($route = null, $params = array(), $options = array(), $reuseMatchedParams = false)
     {
@@ -62,7 +62,6 @@ class Redirect extends AbstractPlugin
         $response = $this->getResponse();
         $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
-
         return $response;
     }
 
@@ -88,13 +87,12 @@ class Redirect extends AbstractPlugin
             return $this->response;
         }
 
-        $event = $this->getEvent();
+        $event    = $this->getEvent();
         $response = $event->getResponse();
         if (!$response instanceof Response) {
             throw new Exception\DomainException('Redirect plugin requires event compose a response');
         }
         $this->response = $response;
-
         return $this->response;
     }
 
@@ -118,7 +116,7 @@ class Redirect extends AbstractPlugin
         $event = $controller->getEvent();
         if (!$event instanceof MvcEvent) {
             $params = $event->getParams();
-            $event = new MvcEvent();
+            $event  = new MvcEvent();
             $event->setParams($params);
         }
         $this->event = $event;

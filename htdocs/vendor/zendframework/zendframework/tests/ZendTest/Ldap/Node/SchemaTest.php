@@ -36,7 +36,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals($this->schema, $schema);
         $this->assertSame($this->schema, $schema);
 
-        $serial = serialize($this->schema);
+        $serial   = serialize($this->schema);
         $schemaUn = unserialize($serial);
         $this->assertEquals($this->schema, $schemaUn);
         $this->assertNotSame($this->schema, $schemaUn);
@@ -100,7 +100,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
-        $objectClasses = $this->schema->getObjectClasses();
+        $objectClasses  = $this->schema->getObjectClasses();
         $attributeTypes = $this->schema->getAttributeTypes();
 
         $this->assertArrayHasKey('organizationalUnit', $objectClasses);
@@ -110,11 +110,11 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals('2.5.6.5', $ou->getOid());
         $this->assertEquals(array('objectClass', 'ou'), $ou->getMustContain());
         $this->assertEquals(array('businessCategory', 'description', 'destinationIndicator',
-                'facsimileTelephoneNumber', 'internationaliSDNNumber', 'l',
-                'physicalDeliveryOfficeName', 'postOfficeBox', 'postalAddress', 'postalCode',
-                'preferredDeliveryMethod', 'registeredAddress', 'searchGuide', 'seeAlso', 'st',
-                'street', 'telephoneNumber', 'teletexTerminalIdentifier', 'telexNumber',
-                'userPassword', 'x121Address'), $ou->getMayContain()
+                                 'facsimileTelephoneNumber', 'internationaliSDNNumber', 'l',
+                                 'physicalDeliveryOfficeName', 'postOfficeBox', 'postalAddress', 'postalCode',
+                                 'preferredDeliveryMethod', 'registeredAddress', 'searchGuide', 'seeAlso', 'st',
+                                 'street', 'telephoneNumber', 'teletexTerminalIdentifier', 'telexNumber',
+                                 'userPassword', 'x121Address'), $ou->getMayContain()
         );
         $this->assertEquals('RFC2256: an organizational unit', $ou->getDescription());
         $this->assertEquals(\Zend\Ldap\Node\Schema::OBJECTCLASS_TYPE_STRUCTURAL, $ou->getType());
@@ -130,19 +130,19 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertFalse($ou->auxiliary);
         $this->assertEquals(array('ou'), $ou->must);
         $this->assertEquals(array('userPassword', 'searchGuide', 'seeAlso', 'businessCategory',
-                'x121Address', 'registeredAddress', 'destinationIndicator', 'preferredDeliveryMethod',
-                'telexNumber', 'teletexTerminalIdentifier', 'telephoneNumber',
-                'internationaliSDNNumber', 'facsimileTelephoneNumber', 'street', 'postOfficeBox',
-                'postalCode', 'postalAddress', 'physicalDeliveryOfficeName', 'st', 'l',
-                'description'), $ou->may
+                                 'x121Address', 'registeredAddress', 'destinationIndicator', 'preferredDeliveryMethod',
+                                 'telexNumber', 'teletexTerminalIdentifier', 'telephoneNumber',
+                                 'internationaliSDNNumber', 'facsimileTelephoneNumber', 'street', 'postOfficeBox',
+                                 'postalCode', 'postalAddress', 'physicalDeliveryOfficeName', 'st', 'l',
+                                 'description'), $ou->may
         );
         $this->assertEquals("( 2.5.6.5 NAME 'organizationalUnit' " .
-            "DESC 'RFC2256: an organizational unit' SUP top STRUCTURAL MUST ou " .
-            "MAY ( userPassword $ searchGuide $ seeAlso $ businessCategory $ x121Address $ " .
-            "registeredAddress $ destinationIndicator $ preferredDeliveryMethod $ telexNumber $ " .
-            "teletexTerminalIdentifier $ telephoneNumber $ internationaliSDNNumber $ " .
-            "facsimileTelephoneNumber $ street $ postOfficeBox $ postalCode $ postalAddress $ " .
-            "physicalDeliveryOfficeName $ st $ l $ description ) )", $ou->_string
+                "DESC 'RFC2256: an organizational unit' SUP top STRUCTURAL MUST ou " .
+                "MAY ( userPassword $ searchGuide $ seeAlso $ businessCategory $ x121Address $ " .
+                "registeredAddress $ destinationIndicator $ preferredDeliveryMethod $ telexNumber $ " .
+                "teletexTerminalIdentifier $ telephoneNumber $ internationaliSDNNumber $ " .
+                "facsimileTelephoneNumber $ street $ postOfficeBox $ postalCode $ postalAddress $ " .
+                "physicalDeliveryOfficeName $ st $ l $ description ) )", $ou->_string
         );
 
         $this->assertEquals(array(), $ou->aliases);
@@ -173,7 +173,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertFalse($ou->{'no-user-modification'});
         $this->assertEquals('userApplications', $ou->usage);
         $this->assertEquals("( 2.5.4.11 NAME ( 'ou' 'organizationalUnitName' ) " .
-            "DESC 'RFC2256: organizational unit this object belongs to' SUP name )", $ou->_string
+                "DESC 'RFC2256: organizational unit this object belongs to' SUP name )", $ou->_string
         );
         $this->assertEquals(array('organizationalUnitName'), $ou->aliases);
         $this->assertSame($attributeTypes['name'], $ou->_parents[0]);
@@ -187,7 +187,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
             $this->markTestSkipped('Test can only be run on an Active Directory server');
         }
 
-        $objectClasses = $this->schema->getObjectClasses();
+        $objectClasses  = $this->schema->getObjectClasses();
         $attributeTypes = $this->schema->getAttributeTypes();
     }
 
@@ -212,7 +212,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $attributeTypes = $this->schema->getAttributeTypes();
 
         $name = $attributeTypes['name'];
-        $cn = $attributeTypes['cn'];
+        $cn   = $attributeTypes['cn'];
 
         $this->assertEquals('2.5.4.41', $name->getOid());
         $this->assertEquals('2.5.4.3', $cn->getOid());
@@ -252,7 +252,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
             $this->markTestSkipped('This requires OpenLDAP core schema');
         }
 
-        $ca = $objectClasses['certificationAuthority'];
+        $ca  = $objectClasses['certificationAuthority'];
         $ca2 = $objectClasses['certificationAuthority-V2'];
 
         $this->assertEquals('2.5.6.16', $ca->getOid());
@@ -261,17 +261,17 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals(array('certificationAuthority'), $ca2->sup);
 
         $this->assertEquals(array('authorityRevocationList', 'certificateRevocationList',
-                'cACertificate'), $ca->must
+                                 'cACertificate'), $ca->must
         );
         $this->assertEquals(array('authorityRevocationList', 'cACertificate',
-                'certificateRevocationList', 'objectClass'), $ca->getMustContain()
+                                 'certificateRevocationList', 'objectClass'), $ca->getMustContain()
         );
         $this->assertEquals(array('crossCertificatePair'), $ca->may);
         $this->assertEquals(array('crossCertificatePair'), $ca->getMayContain());
 
         $this->assertEquals(array(), $ca2->must);
         $this->assertEquals(array('authorityRevocationList', 'cACertificate',
-                'certificateRevocationList', 'objectClass'), $ca2->getMustContain()
+                                 'certificateRevocationList', 'objectClass'), $ca2->getMustContain()
         );
         $this->assertEquals(array('deltaRevocationList'), $ca2->may);
         $this->assertEquals(array('crossCertificatePair', 'deltaRevocationList'),

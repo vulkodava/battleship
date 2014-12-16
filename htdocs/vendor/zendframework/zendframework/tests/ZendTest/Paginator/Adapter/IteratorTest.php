@@ -32,7 +32,6 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
         $iterator = new \ArrayIterator(range(1, 101));
         $this->adapter = new Adapter\Iterator($iterator);
     }
-
     /**
      * Cleans up the environment after running a test.
      */
@@ -87,7 +86,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
         $this->paginator = new Paginator(new Adapter\Iterator(new \ArrayIterator(array())));
         $items = $this->paginator->getCurrentItems();
 
-        foreach ($items as $item) ;
+        foreach ($items as $item);
     }
 
     /**
@@ -98,7 +97,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
         $items = $this->adapter->getItems(0, 1);
         $innerIterator = $items->getInnerIterator();
         $items = unserialize(serialize($items));
-        $this->assertTrue(($items->getInnerIterator() == $innerIterator), 'getItems has to be serializable to use caching');
+        $this->assertTrue( ($items->getInnerIterator() == $innerIterator), 'getItems has to be serializable to use caching');
     }
 
     /**

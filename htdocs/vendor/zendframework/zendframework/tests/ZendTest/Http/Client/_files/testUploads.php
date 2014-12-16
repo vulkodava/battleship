@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-if (!empty($_FILES)) {
+if (! empty($_FILES)) {
     foreach ($_FILES as $name => $file) {
         if (is_array($file['name'])) {
             foreach ($file['name'] as $k => $v) {

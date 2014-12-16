@@ -21,7 +21,6 @@ class PatternOptions extends AbstractOptions
      * Used by:
      * - ClassCache
      * - ObjectCache
-     *
      * @var bool
      */
     protected $cacheByDefault = true;
@@ -31,7 +30,6 @@ class PatternOptions extends AbstractOptions
      * - CallbackCache
      * - ClassCache
      * - ObjectCache
-     *
      * @var bool
      */
     protected $cacheOutput = true;
@@ -39,7 +37,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - ClassCache
-     *
      * @var null|string
      */
     protected $class;
@@ -47,7 +44,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - ClassCache
-     *
      * @var array
      */
     protected $classCacheMethods = array();
@@ -55,7 +51,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - ClassCache
-     *
      * @var array
      */
     protected $classNonCacheMethods = array();
@@ -63,7 +58,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - CaptureCache
-     *
      * @var false|int
      */
     protected $umask = false;
@@ -71,7 +65,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - CaptureCache
-     *
      * @var false|int
      */
     protected $dirPermission = 0700;
@@ -79,7 +72,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - CaptureCache
-     *
      * @var false|int
      */
     protected $filePermission = 0600;
@@ -87,7 +79,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - CaptureCache
-     *
      * @var bool
      */
     protected $fileLocking = true;
@@ -95,7 +86,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - CaptureCache
-     *
      * @var string
      */
     protected $indexFilename = 'index.html';
@@ -103,7 +93,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - ObjectCache
-     *
      * @var null|object
      */
     protected $object;
@@ -111,7 +100,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - ObjectCache
-     *
      * @var bool
      */
     protected $objectCacheMagicProperties = false;
@@ -119,7 +107,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - ObjectCache
-     *
      * @var array
      */
     protected $objectCacheMethods = array();
@@ -127,7 +114,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - ObjectCache
-     *
      * @var null|string
      */
     protected $objectKey;
@@ -135,7 +121,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - ObjectCache
-     *
      * @var array
      */
     protected $objectNonCacheMethods = array('__tostring');
@@ -143,7 +128,6 @@ class PatternOptions extends AbstractOptions
     /**
      * Used by:
      * - CaptureCache
-     *
      * @var null|string
      */
     protected $publicDir;
@@ -154,7 +138,6 @@ class PatternOptions extends AbstractOptions
      * - ClassCache
      * - ObjectCache
      * - OutputCache
-     *
      * @var null|Storage
      */
     protected $storage;
@@ -190,7 +173,6 @@ class PatternOptions extends AbstractOptions
     public function setCacheByDefault($cacheByDefault)
     {
         $this->cacheByDefault = $cacheByDefault;
-
         return $this;
     }
 
@@ -221,8 +203,7 @@ class PatternOptions extends AbstractOptions
      */
     public function setCacheOutput($cacheOutput)
     {
-        $this->cacheOutput = (bool)$cacheOutput;
-
+        $this->cacheOutput = (bool) $cacheOutput;
         return $this;
     }
 
@@ -257,7 +238,6 @@ class PatternOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException('Invalid classname provided; must be a string');
         }
         $this->class = $class;
-
         return $this;
     }
 
@@ -286,7 +266,6 @@ class PatternOptions extends AbstractOptions
     public function setClassCacheMethods(array $classCacheMethods)
     {
         $this->classCacheMethods = $this->recursiveStrtolower($classCacheMethods);
-
         return $this;
     }
 
@@ -315,7 +294,6 @@ class PatternOptions extends AbstractOptions
     public function setClassNonCacheMethods(array $classNonCacheMethods)
     {
         $this->classNonCacheMethods = $this->recursiveStrtolower($classNonCacheMethods);
-
         return $this;
     }
 
@@ -345,7 +323,7 @@ class PatternOptions extends AbstractOptions
             if (is_string($dirPermission)) {
                 $dirPermission = octdec($dirPermission);
             } else {
-                $dirPermission = (int)$dirPermission;
+                $dirPermission = (int) $dirPermission;
             }
 
             // validate
@@ -357,7 +335,6 @@ class PatternOptions extends AbstractOptions
         }
 
         $this->dirPermission = $dirPermission;
-
         return $this;
     }
 
@@ -387,7 +364,7 @@ class PatternOptions extends AbstractOptions
             if (is_string($umask)) {
                 $umask = octdec($umask);
             } else {
-                $umask = (int)$umask;
+                $umask = (int) $umask;
             }
 
             // validate
@@ -402,7 +379,6 @@ class PatternOptions extends AbstractOptions
         }
 
         $this->umask = $umask;
-
         return $this;
     }
 
@@ -430,8 +406,7 @@ class PatternOptions extends AbstractOptions
      */
     public function setFileLocking($fileLocking)
     {
-        $this->fileLocking = (bool)$fileLocking;
-
+        $this->fileLocking = (bool) $fileLocking;
         return $this;
     }
 
@@ -461,7 +436,7 @@ class PatternOptions extends AbstractOptions
             if (is_string($filePermission)) {
                 $filePermission = octdec($filePermission);
             } else {
-                $filePermission = (int)$filePermission;
+                $filePermission = (int) $filePermission;
             }
 
             // validate
@@ -477,7 +452,6 @@ class PatternOptions extends AbstractOptions
         }
 
         $this->filePermission = $filePermission;
-
         return $this;
     }
 
@@ -499,8 +473,7 @@ class PatternOptions extends AbstractOptions
      */
     public function setIndexFilename($indexFilename)
     {
-        $this->indexFilename = (string)$indexFilename;
-
+        $this->indexFilename = (string) $indexFilename;
         return $this;
     }
 
@@ -529,7 +502,6 @@ class PatternOptions extends AbstractOptions
             );
         }
         $this->object = $object;
-
         return $this;
     }
 
@@ -554,8 +526,7 @@ class PatternOptions extends AbstractOptions
      */
     public function setObjectCacheMagicProperties($objectCacheMagicProperties)
     {
-        $this->objectCacheMagicProperties = (bool)$objectCacheMagicProperties;
-
+        $this->objectCacheMagicProperties = (bool) $objectCacheMagicProperties;
         return $this;
     }
 
@@ -582,7 +553,6 @@ class PatternOptions extends AbstractOptions
     public function setObjectCacheMethods(array $objectCacheMethods)
     {
         $this->objectCacheMethods = $this->normalizeObjectMethods($objectCacheMethods);
-
         return $this;
     }
 
@@ -610,11 +580,10 @@ class PatternOptions extends AbstractOptions
     public function setObjectKey($objectKey)
     {
         if ($objectKey !== null) {
-            $this->objectKey = (string)$objectKey;
+            $this->objectKey = (string) $objectKey;
         } else {
             $this->objectKey = null;
         }
-
         return $this;
     }
 
@@ -631,7 +600,6 @@ class PatternOptions extends AbstractOptions
         if (!$this->objectKey) {
             return get_class($this->getObject());
         }
-
         return $this->objectKey;
     }
 
@@ -645,7 +613,6 @@ class PatternOptions extends AbstractOptions
     public function setObjectNonCacheMethods(array $objectNonCacheMethods)
     {
         $this->objectNonCacheMethods = $this->normalizeObjectMethods($objectNonCacheMethods);
-
         return $this;
     }
 
@@ -671,7 +638,7 @@ class PatternOptions extends AbstractOptions
      */
     public function setPublicDir($publicDir)
     {
-        $publicDir = (string)$publicDir;
+        $publicDir = (string) $publicDir;
 
         if (!is_dir($publicDir)) {
             throw new Exception\InvalidArgumentException(
@@ -688,7 +655,6 @@ class PatternOptions extends AbstractOptions
         }
 
         $this->publicDir = rtrim(realpath($publicDir), DIRECTORY_SEPARATOR);
-
         return $this;
     }
 
@@ -720,7 +686,6 @@ class PatternOptions extends AbstractOptions
     public function setStorage($storage)
     {
         $this->storage = $this->storageFactory($storage);
-
         return $this;
     }
 
@@ -764,14 +729,13 @@ class PatternOptions extends AbstractOptions
      */
     protected function normalizeObjectMethods(array $methods)
     {
-        $methods = $this->recursiveStrtolower($methods);
+        $methods   = $this->recursiveStrtolower($methods);
         $intersect = array_intersect(array('__set', '__get', '__unset', '__isset'), $methods);
         if (!empty($intersect)) {
             throw new Exception\InvalidArgumentException(
                 "Magic properties are handled by option 'cache_magic_properties'"
             );
         }
-
         return $methods;
     }
 

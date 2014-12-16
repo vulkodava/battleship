@@ -76,7 +76,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Pdo $driver)
     {
         $this->driver = $driver;
-
         return $this;
     }
 
@@ -87,7 +86,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
-
         return $this;
     }
 
@@ -144,7 +142,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 
     /**
      * Get the dsn string for this connection
-     *
      * @throws \Zend\Db\Adapter\Exception\RunTimeException
      * @return string
      */
@@ -189,7 +186,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if ($result instanceof \PDOStatement) {
             return $result->fetchColumn();
         }
-
         return false;
     }
 
@@ -203,7 +199,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     {
         $this->resource = $resource;
         $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
-
         return $this;
     }
 
@@ -217,7 +212,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if (!$this->isConnected()) {
             $this->connect();
         }
-
         return $this->resource;
     }
 
@@ -248,33 +242,33 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                     }
                     break;
                 case 'pdodriver':
-                    $pdoDriver = (string)$value;
+                    $pdoDriver = (string) $value;
                     break;
                 case 'user':
                 case 'username':
-                    $username = (string)$value;
+                    $username = (string) $value;
                     break;
                 case 'pass':
                 case 'password':
-                    $password = (string)$value;
+                    $password = (string) $value;
                     break;
                 case 'host':
                 case 'hostname':
-                    $hostname = (string)$value;
+                    $hostname = (string) $value;
                     break;
                 case 'port':
-                    $port = (int)$value;
+                    $port = (int) $value;
                     break;
                 case 'database':
                 case 'dbname':
-                    $database = (string)$value;
+                    $database = (string) $value;
                     break;
                 case 'charset':
-                    $charset = (string)$value;
+                    $charset    = (string) $value;
                     break;
                 case 'driver_options':
                 case 'options':
-                    $value = (array)$value;
+                    $value = (array) $value;
                     $options = array_diff_key($options, $value) + $value;
                     break;
                 default:
@@ -360,7 +354,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if ($this->isConnected()) {
             $this->resource = null;
         }
-
         return $this;
     }
 
@@ -376,7 +369,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
         $this->resource->beginTransaction();
         $this->inTransaction = true;
-
         return $this;
     }
 
@@ -403,7 +395,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 
         $this->resource->commit();
         $this->inTransaction = false;
-
         return $this;
     }
 
@@ -424,7 +415,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->resource->rollBack();
-
         return $this;
     }
 
@@ -457,7 +447,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($resultResource, $sql);
-
         return $result;
     }
 
@@ -474,7 +463,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $statement = $this->driver->createStatement($sql);
-
         return $statement;
     }
 
@@ -495,7 +483,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         } catch (\Exception $e) {
             // do nothing
         }
-
         return false;
     }
 }

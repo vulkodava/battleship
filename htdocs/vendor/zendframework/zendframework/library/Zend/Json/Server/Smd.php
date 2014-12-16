@@ -16,46 +16,40 @@ class Smd
 {
     const ENV_JSONRPC_1 = 'JSON-RPC-1.0';
     const ENV_JSONRPC_2 = 'JSON-RPC-2.0';
-    const SMD_VERSION = '2.0';
+    const SMD_VERSION   = '2.0';
 
     /**
      * Content type
-     *
      * @var string
      */
     protected $contentType = 'application/json';
 
     /**
      * Content type regex
-     *
      * @var string
      */
     protected $contentTypeRegex = '#[a-z]+/[a-z][a-z-]+#i';
 
     /**
      * Service description
-     *
      * @var string
      */
     protected $description;
 
     /**
      * Generate Dojo-compatible SMD
-     *
      * @var bool
      */
     protected $dojoCompatible = false;
 
     /**
      * Current envelope
-     *
      * @var string
      */
     protected $envelope = self::ENV_JSONRPC_1;
 
     /**
      * Allowed envelope types
-     *
      * @var array
      */
     protected $envelopeTypes = array(
@@ -65,35 +59,30 @@ class Smd
 
     /**
      * Service id
-     *
      * @var string
      */
     protected $id;
 
     /**
      * Services offered
-     *
      * @var array
      */
     protected $services = array();
 
     /**
      * Service target
-     *
      * @var string
      */
     protected $target;
 
     /**
      * Global transport
-     *
      * @var string
      */
     protected $transport = 'POST';
 
     /**
      * Allowed transport types
-     *
      * @var array
      */
     protected $transportTypes = array('POST');
@@ -112,7 +101,6 @@ class Smd
                 $this->$method($value);
             }
         }
-
         return $this;
     }
 
@@ -129,7 +117,6 @@ class Smd
             throw new InvalidArgumentException("Invalid transport '{$transport}' specified");
         }
         $this->transport = $transport;
-
         return $this;
     }
 
@@ -156,7 +143,6 @@ class Smd
             throw new InvalidArgumentException("Invalid envelope type '{$envelopeType}'");
         }
         $this->envelope = $envelopeType;
-
         return $this;
     }
 
@@ -184,7 +170,6 @@ class Smd
             throw new InvalidArgumentException("Invalid content type '{$type}' specified");
         }
         $this->contentType = $type;
-
         return $this;
     }
 
@@ -206,8 +191,7 @@ class Smd
      */
     public function setTarget($target)
     {
-        $this->target = (string)$target;
-
+        $this->target = (string) $target;
         return $this;
     }
 
@@ -229,8 +213,7 @@ class Smd
      */
     public function setId($id)
     {
-        $this->id = (string)$id;
-
+        $this->id = (string) $id;
         return $this->id;
     }
 
@@ -252,8 +235,7 @@ class Smd
      */
     public function setDescription($description)
     {
-        $this->description = (string)$description;
-
+        $this->description = (string) $description;
         return $this->description;
     }
 
@@ -275,8 +257,7 @@ class Smd
      */
     public function setDojoCompatible($flag)
     {
-        $this->dojoCompatible = (bool)$flag;
-
+        $this->dojoCompatible = (bool) $flag;
         return $this;
     }
 
@@ -313,7 +294,6 @@ class Smd
             throw new RuntimeException('Attempt to register a service already registered detected');
         }
         $this->services[$name] = $service;
-
         return $this;
     }
 
@@ -328,7 +308,6 @@ class Smd
         foreach ($services as $service) {
             $this->addService($service);
         }
-
         return $this;
     }
 
@@ -341,7 +320,6 @@ class Smd
     public function setServices(array $services)
     {
         $this->services = array();
-
         return $this->addServices($services);
     }
 
@@ -356,7 +334,6 @@ class Smd
         if (array_key_exists($name, $this->services)) {
             return $this->services[$name];
         }
-
         return false;
     }
 
@@ -380,10 +357,8 @@ class Smd
     {
         if (array_key_exists($name, $this->services)) {
             unset($this->services[$name]);
-
             return true;
         }
-
         return false;
     }
 
@@ -399,14 +374,14 @@ class Smd
         }
 
         $description = $this->getDescription();
-        $transport = $this->getTransport();
-        $envelope = $this->getEnvelope();
+        $transport   = $this->getTransport();
+        $envelope    = $this->getEnvelope();
         $contentType = $this->getContentType();
-        $SMDVersion = static::SMD_VERSION;
+        $SMDVersion  = static::SMD_VERSION;
         $service = compact('transport', 'envelope', 'contentType', 'SMDVersion', 'description');
 
         if (null !== ($target = $this->getTarget())) {
-            $service['target'] = $target;
+            $service['target']     = $target;
         }
         if (null !== ($id = $this->getId())) {
             $service['id'] = $id;
@@ -432,7 +407,7 @@ class Smd
      */
     public function toDojoArray()
     {
-        $SMDVersion = '.1';
+        $SMDVersion  = '.1';
         $serviceType = 'JSON-RPC';
         $service = compact('SMDVersion', 'serviceType');
 
@@ -443,7 +418,7 @@ class Smd
             $service['methods'] = array();
             foreach ($services as $name => $svc) {
                 $method = array(
-                    'name' => $name,
+                    'name'       => $name,
                     'serviceURL' => $target,
                 );
                 $params = array();

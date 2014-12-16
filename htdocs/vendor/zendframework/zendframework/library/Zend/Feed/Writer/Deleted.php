@@ -13,7 +13,7 @@ use DateTime;
 use Zend\Feed\Uri;
 
 /**
- */
+*/
 class Deleted
 {
     /**
@@ -59,7 +59,6 @@ class Deleted
         if (!array_key_exists('encoding', $this->data)) {
             return 'UTF-8';
         }
-
         return $this->data['encoding'];
     }
 
@@ -89,7 +88,6 @@ class Deleted
     public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -128,7 +126,6 @@ class Deleted
         if (!array_key_exists('reference', $this->data)) {
             return null;
         }
-
         return $this->data['reference'];
     }
 
@@ -147,7 +144,7 @@ class Deleted
             $date = new DateTime('@' . $date);
         } elseif (!$date instanceof DateTime) {
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
-                . ' passed as parameter');
+            . ' passed as parameter');
         }
         $this->data['when'] = $date;
 
@@ -162,7 +159,6 @@ class Deleted
         if (!array_key_exists('when', $this->data)) {
             return null;
         }
-
         return $this->data['when'];
     }
 
@@ -181,13 +177,13 @@ class Deleted
             || !is_string($by['name'])
         ) {
             throw new Exception\InvalidArgumentException('Invalid parameter: author array must include a'
-                . ' "name" key with a non-empty string value');
+            . ' "name" key with a non-empty string value');
         }
         $author['name'] = $by['name'];
         if (isset($by['email'])) {
             if (empty($by['email']) || !is_string($by['email'])) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "email" array'
-                    . ' value must be a non-empty string');
+                . ' value must be a non-empty string');
             }
             $author['email'] = $by['email'];
         }
@@ -197,7 +193,7 @@ class Deleted
                 || !Uri::factory($by['uri'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "uri" array value must'
-                    . ' be a non-empty string and valid URI/IRI');
+                 . ' be a non-empty string and valid URI/IRI');
             }
             $author['uri'] = $by['uri'];
         }
@@ -214,7 +210,6 @@ class Deleted
         if (!array_key_exists('by', $this->data)) {
             return null;
         }
-
         return $this->data['by'];
     }
 
@@ -225,7 +220,6 @@ class Deleted
     public function setComment($comment)
     {
         $this->data['comment'] = $comment;
-
         return $this;
     }
 
@@ -237,7 +231,6 @@ class Deleted
         if (!array_key_exists('comment', $this->data)) {
             return null;
         }
-
         return $this->data['comment'];
     }
 }

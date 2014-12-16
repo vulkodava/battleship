@@ -68,7 +68,6 @@ class SmtpOptions extends AbstractOptions
             ));
         }
         $this->name = $name;
-
         return $this;
     }
 
@@ -102,7 +101,6 @@ class SmtpOptions extends AbstractOptions
             ));
         }
         $this->connectionClass = $connectionClass;
-
         return $this;
     }
 
@@ -125,7 +123,6 @@ class SmtpOptions extends AbstractOptions
     public function setConnectionConfig(array $connectionConfig)
     {
         $this->connectionConfig = $connectionConfig;
-
         return $this;
     }
 
@@ -148,8 +145,7 @@ class SmtpOptions extends AbstractOptions
      */
     public function setHost($host)
     {
-        $this->host = (string)$host;
-
+        $this->host = (string) $host;
         return $this;
     }
 
@@ -172,7 +168,7 @@ class SmtpOptions extends AbstractOptions
      */
     public function setPort($port)
     {
-        $port = (int)$port;
+        $port = (int) $port;
         if ($port < 1) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Port must be greater than 1; received "%d"',
@@ -180,7 +176,6 @@ class SmtpOptions extends AbstractOptions
             ));
         }
         $this->port = $port;
-
         return $this;
     }
 }

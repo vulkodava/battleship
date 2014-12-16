@@ -16,7 +16,6 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * test object construction
-     *
      * @covers Zend\Db\Sql\Ddl\CreateTable::__construct
      */
     public function testObjectConstruction()
@@ -61,12 +60,11 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
         $ct = new CreateTable();
         $this->assertEquals('', $ct->getRawState('table'));
         $ct->setTable('test');
-
         return $ct;
     }
 
     /**
-     * @covers  Zend\Db\Sql\Ddl\CreateTable::getRawState
+     * @covers Zend\Db\Sql\Ddl\CreateTable::getRawState
      * @depends testSetTable
      */
     public function testRawStateViaTable(CreateTable $ct)
@@ -82,12 +80,11 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
         $column = $this->getMock('Zend\Db\Sql\Ddl\Column\ColumnInterface');
         $ct = new CreateTable;
         $this->assertSame($ct, $ct->addColumn($column));
-
         return $ct;
     }
 
     /**
-     * @covers  Zend\Db\Sql\Ddl\CreateTable::getRawState
+     * @covers Zend\Db\Sql\Ddl\CreateTable::getRawState
      * @depends testAddColumn
      */
     public function testRawStateViaColumn(CreateTable $ct)
@@ -106,12 +103,11 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
         $constraint = $this->getMock('Zend\Db\Sql\Ddl\Constraint\ConstraintInterface');
         $ct = new CreateTable;
         $this->assertSame($ct, $ct->addConstraint($constraint));
-
         return $ct;
     }
 
     /**
-     * @covers  Zend\Db\Sql\Ddl\CreateTable::getRawState
+     * @covers Zend\Db\Sql\Ddl\CreateTable::getRawState
      * @depends testAddConstraint
      */
     public function testRawStateViaConstraint(CreateTable $ct)

@@ -100,7 +100,6 @@ class ListenerOptions extends AbstractOptions
         }
 
         $this->modulePaths = $modulePaths;
-
         return $this;
     }
 
@@ -147,7 +146,6 @@ class ListenerOptions extends AbstractOptions
         }
 
         $this->configGlobPaths = $configGlobPaths;
-
         return $this;
     }
 
@@ -174,7 +172,6 @@ class ListenerOptions extends AbstractOptions
         }
 
         $this->configStaticPaths = $configStaticPaths;
-
         return $this;
     }
 
@@ -212,7 +209,6 @@ class ListenerOptions extends AbstractOptions
         }
 
         $this->extraConfig = $extraConfig;
-
         return $this;
     }
 
@@ -234,8 +230,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function setConfigCacheEnabled($enabled)
     {
-        $this->configCacheEnabled = (bool)$enabled;
-
+        $this->configCacheEnabled = (bool) $enabled;
         return $this;
     }
 
@@ -246,7 +241,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getConfigCacheKey()
     {
-        return (string)$this->configCacheKey;
+        return (string) $this->configCacheKey;
     }
 
     /**
@@ -258,7 +253,6 @@ class ListenerOptions extends AbstractOptions
     public function setConfigCacheKey($configCacheKey)
     {
         $this->configCacheKey = $configCacheKey;
-
         return $this;
     }
 
@@ -272,7 +266,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getConfigCacheFile()
     {
-        return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey() . '.php';
+        return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
     }
 
     /**
@@ -298,7 +292,6 @@ class ListenerOptions extends AbstractOptions
         } else {
             $this->cacheDir = static::normalizePath($cacheDir);
         }
-
         return $this;
     }
 
@@ -320,8 +313,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function setModuleMapCacheEnabled($enabled)
     {
-        $this->moduleMapCacheEnabled = (bool)$enabled;
-
+        $this->moduleMapCacheEnabled = (bool) $enabled;
         return $this;
     }
 
@@ -332,7 +324,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getModuleMapCacheKey()
     {
-        return (string)$this->moduleMapCacheKey;
+        return (string) $this->moduleMapCacheKey;
     }
 
     /**
@@ -344,7 +336,6 @@ class ListenerOptions extends AbstractOptions
     public function setModuleMapCacheKey($moduleMapCacheKey)
     {
         $this->moduleMapCacheKey = $moduleMapCacheKey;
-
         return $this;
     }
 
@@ -355,7 +346,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function getModuleMapCacheFile()
     {
-        return $this->getCacheDir() . '/module-classmap-cache.' . $this->getModuleMapCacheKey() . '.php';
+        return $this->getCacheDir() . '/module-classmap-cache.'.$this->getModuleMapCacheKey().'.php';
     }
 
     /**
@@ -377,7 +368,7 @@ class ListenerOptions extends AbstractOptions
      */
     public function setCheckDependencies($checkDependencies)
     {
-        $this->checkDependencies = (bool)$checkDependencies;
+        $this->checkDependencies = (bool) $checkDependencies;
 
         return $this;
     }
@@ -392,7 +383,6 @@ class ListenerOptions extends AbstractOptions
     {
         $path = rtrim($path, '/');
         $path = rtrim($path, '\\');
-
         return $path;
     }
 }

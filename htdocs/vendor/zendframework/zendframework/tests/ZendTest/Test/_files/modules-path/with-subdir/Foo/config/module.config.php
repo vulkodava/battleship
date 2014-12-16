@@ -5,10 +5,10 @@ return array(
             'fooroute' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route' => '/foo-test',
+                    'route'    => '/foo-test',
                     'defaults' => array(
                         'controller' => 'foo_index',
-                        'action' => 'unittests',
+                        'action'     => 'unittests',
                     ),
                 ),
             ),

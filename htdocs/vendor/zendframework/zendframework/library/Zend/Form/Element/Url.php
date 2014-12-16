@@ -42,7 +42,6 @@ class Url extends Element implements InputProviderInterface
                 'allowRelative' => false,
             ));
         }
-
         return $this->validator;
     }
 

@@ -58,8 +58,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
             'instance' => array(
                 'ZendTest\Di\TestAsset\BasicClass' => array(
                     'shared' => true,
+                    ),
                 ),
-            ),
         ));
         $di = new Di(null, null, $config);
         $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
@@ -181,10 +181,10 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $classdefB->setInstantiator('ZendTest\Di\TestAsset\CallbackClasses\B::factory');
         $classdefB->addMethod('factory', true);
         $classdefB->addMethodParameter('factory', 'c', array('type' => 'ZendTest\Di\TestAsset\CallbackClasses\C', 'required' => true));
-        $classdefB->addMethodParameter('factory', 'params', array('type' => 'Array', 'required' => false));
+        $classdefB->addMethodParameter('factory', 'params', array('type' => 'Array', 'required'=>false));
 
         $di = new Di($definitionList);
-        $b = $di->get('ZendTest\Di\TestAsset\CallbackClasses\B', array('params' => array('foo' => 'bar')));
+        $b = $di->get('ZendTest\Di\TestAsset\CallbackClasses\B', array('params'=>array('foo' => 'bar')));
         $this->assertInstanceOf('ZendTest\Di\TestAsset\CallbackClasses\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\CallbackClasses\C', $b->c);
         $this->assertEquals(array('foo' => 'bar'), $b->params);
@@ -380,7 +380,7 @@ class DiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo  Setter Injections is not automatic, find a way to test this logically
+     * @todo Setter Injections is not automatic, find a way to test this logically
      *
      * @group SetterInjection
      */
@@ -402,7 +402,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
      * Test for Circular Dependencies (case 1)
      *
      * A->B, B->A
-     *
      * @group CircularDependencyCheck
      */
     public function testNewInstanceThrowsExceptionOnBasicCircularDependency()
@@ -417,7 +416,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
      * Test for Circular Dependencies (case 2)
      *
      * C->D, D->E, E->C
-     *
      * @group CircularDependencyCheck
      */
     public function testNewInstanceThrowsExceptionOnThreeLevelCircularDependency()
@@ -435,7 +433,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
      * Test for Circular Dependencies (case 2)
      *
      * C->D, D->E, E->C
-     *
      * @group CircularDependencyCheck
      */
     public function testNewInstanceThrowsExceptionWhenEnteringInMiddleOfCircularDependency()
@@ -464,7 +461,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
      * Test for correctly identifying no Circular Dependencies (case 1)
      *
      * YC -> YB, YB -> YA
-     *
      * @group CircularDependencyCheck
      */
     public function testNoCircularDependencyDetectedIfWeGetIntermediaryClass()
@@ -481,7 +477,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
      * Test for correctly identifying no Circular Dependencies (case 2)
      *
      * YC -> YB, YB -> YA
-     *
      * @group CircularDependencyCheck
      */
     public function testNoCircularDependencyDetectedIfWeDontGetIntermediaryClass()
@@ -496,7 +491,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
      * Test for correctly identifying a Circular Dependency in aliases (case 3)
      *
      * YA -> YB, YB -> YA
-     *
      * @group CircularDependencyCheck
      */
     public function testCircularDependencyDetectedInAliases()
@@ -519,7 +513,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
      * Test for correctly identifying a Circular Dependency with a self referencing alias
      *
      * YA -> YA
-     *
      * @group CircularDependencyCheck
      */
     public function testCircularDependencyDetectedInSelfReferencingAlias()
@@ -544,7 +537,6 @@ class DiTest extends \PHPUnit_Framework_TestCase
      * Test for correctly identifying a Circular Dependency with mixture of classes and aliases
      *
      * Y -> YA, YA -> Y
-     *
      * @group CircularDependencyCheck
      */
     public function testCircularDependencyDetectedInMixtureOfAliasesAndClasses()
@@ -593,26 +585,26 @@ class DiTest extends \PHPUnit_Framework_TestCase
 
     public function testNewInstanceWillThrowAnClassNotFoundExceptionWhenClassIsAnInterface()
     {
-        $definitionArray = array(
+        $definitionArray = array (
             'ZendTest\Di\TestAsset\ConstructorInjection\D' => array(
                 'supertypes' => array(),
                 'instantiator' => '__construct',
                 'methods' => array('__construct' => 3),
                 'parameters' => array(
                     '__construct' =>
-                        array(
-                            'ZendTest\Di\TestAsset\ConstructorInjection\D::__construct:0' => array(
-                                0 => 'd',
-                                1 => 'ZendTest\Di\TestAsset\DummyInterface',
-                                2 => true,
-                                3 => null,
-                            ),
+                    array (
+                        'ZendTest\Di\TestAsset\ConstructorInjection\D::__construct:0' => array(
+                            0 => 'd',
+                            1 => 'ZendTest\Di\TestAsset\DummyInterface',
+                            2 => true,
+                            3 => NULL,
                         ),
+                    ),
                 ),
             ),
             'ZendTest\Di\TestAsset\DummyInterface' => array(
                 'supertypes' => array(),
-                'instantiator' => null,
+                'instantiator' => NULL,
                 'methods' => array(),
                 'parameters' => array(),
             ),
@@ -977,13 +969,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $retrievedInstanceClass = 'ZendTest\Di\TestAsset\ConstructorInjection\C';
 
         // Provide definitions for $retrievedInstanceClass, but not for $sharedInstanceClass.
-        $arrayDefinition = array($retrievedInstanceClass => array(
-            'supertypes' => array(),
+        $arrayDefinition = array($retrievedInstanceClass => array (
+            'supertypes' => array ( ),
             'instantiator' => '__construct',
-            'methods' => array('__construct' => true),
-            'parameters' => array('__construct' => array(
-                "$retrievedInstanceClass::__construct:0" => array('a', $sharedInstanceClass, true, null),
-                "$retrievedInstanceClass::__construct:1" => array('params', null, false, array()),
+            'methods' => array ('__construct' => true),
+            'parameters' => array ( '__construct' => array (
+                "$retrievedInstanceClass::__construct:0" => array ('a', $sharedInstanceClass, true, NULL),
+                "$retrievedInstanceClass::__construct:1" => array ('params', NULL, false, array()),
             )),
         ));
 
@@ -1002,8 +994,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
                 'class' => array(
                     'ZendTest\Di\TestAsset\AggregateClasses\AggregateItems' => array(
                         'addItem' => array(
-                            'item' => array('type' => 'ZendTest\Di\TestAsset\AggregateClasses\ItemInterface',
-                                'required' => true)
+                            'item' => array('type'=>'ZendTest\Di\TestAsset\AggregateClasses\ItemInterface',
+                                            'required'=>true)
                         )
                     )
                 )

@@ -49,7 +49,7 @@ class InputFilterTest extends TestCase
     /**
      * @covers \Zend\InputFilter\BaseInputFilter::getValue
      *
-     * @group  6028
+     * @group 6028
      */
     public function testGetValueReturnsArrayIfNestedInputFilters()
     {
@@ -60,7 +60,7 @@ class InputFilterTest extends TestCase
 
         $data = array(
             'people' => array(
-                'name' => 'Wanderson'
+                 'name' => 'Wanderson'
             )
         );
 

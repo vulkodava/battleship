@@ -47,12 +47,12 @@ class FormTest extends CommonTestCase
     {
         $form = new Form();
         $attributes = array(
-            'method' => 'post',
-            'action' => 'http://localhost/endpoint',
-            'class' => 'login',
-            'id' => 'form-login',
+            'method'  => 'post',
+            'action'  => 'http://localhost/endpoint',
+            'class'   => 'login',
+            'id'      => 'form-login',
             'enctype' => 'application/x-www-form-urlencoded',
-            'target' => '_self',
+            'target'  => '_self',
         );
         $form->setAttributes($attributes);
 
@@ -68,7 +68,7 @@ class FormTest extends CommonTestCase
     {
         $form = new Form();
         $attributes = array(
-            'name' => 'login-form',
+            'name'  => 'login-form',
         );
         $form->setAttributes($attributes);
 
@@ -80,7 +80,7 @@ class FormTest extends CommonTestCase
     public function testRender()
     {
         $form = new Form();
-        $attributes = array('name' => 'login-form');
+        $attributes = array('name'  => 'login-form');
         $form->setAttributes($attributes);
         $form->add(new CityFieldset());
         $form->add(new Submit('send'));

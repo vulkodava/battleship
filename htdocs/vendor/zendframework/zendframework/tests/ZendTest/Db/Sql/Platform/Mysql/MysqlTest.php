@@ -15,7 +15,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @testdox unit test / object test: Test Mysql object has Select proxy
-     * @covers  Zend\Db\Sql\Platform\Mysql\Mysql::__construct
+     * @covers Zend\Db\Sql\Platform\Mysql\Mysql::__construct
      */
     public function testConstruct()
     {

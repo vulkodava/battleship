@@ -30,7 +30,7 @@ class FileOptionsTest extends \PHPUnit_Framework_TestCase
     {
         $callback = $this->options->getCallback();
         $this->assertTrue(is_callable($callback));
-        $test = call_user_func($callback, '');
+        $test     = call_user_func($callback, '');
         $this->assertRegExp('#^ZendMail_\d+_\d+\.eml$#', $test);
     }
 
@@ -38,7 +38,7 @@ class FileOptionsTest extends \PHPUnit_Framework_TestCase
     {
         $original = $this->options->getPath();
         $this->options->setPath(__DIR__);
-        $test = $this->options->getPath();
+        $test     = $this->options->getPath();
         $this->assertNotEquals($original, $test);
         $this->assertEquals(__DIR__, $test);
     }
@@ -46,10 +46,9 @@ class FileOptionsTest extends \PHPUnit_Framework_TestCase
     public function testCallbackIsMutable()
     {
         $original = $this->options->getCallback();
-        $new = function ($transport) {
-        };
+        $new      = function ($transport) {};
         $this->options->setCallback($new);
-        $test = $this->options->getCallback();
+        $test     = $this->options->getCallback();
         $this->assertNotSame($original, $test);
         $this->assertSame($new, $test);
     }

@@ -81,7 +81,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     public function setFormFactory(Factory $formFactory)
     {
         $this->formFactory = $formFactory;
-
         return $this;
     }
 
@@ -100,7 +99,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         }
         $annotationManager->attach($parser);
         $this->annotationManager = $annotationManager;
-
         return $this;
     }
 
@@ -119,7 +117,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         $events->attach(new ElementAnnotationsListener());
         $events->attach(new FormAnnotationsListener());
         $this->events = $events;
-
         return $this;
     }
 
@@ -137,7 +134,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         }
 
         $this->formFactory = new Factory();
-
         return $this->formFactory;
     }
 
@@ -155,7 +151,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         }
 
         $this->setAnnotationManager(new AnnotationManager());
-
         return $this->annotationManager;
     }
 
@@ -169,7 +164,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         if (null === $this->events) {
             $this->setEventManager(new EventManager());
         }
-
         return $this->events;
     }
 
@@ -198,12 +192,12 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             }
         }
 
-        $this->entity = $entity;
+        $this->entity      = $entity;
         $annotationManager = $this->getAnnotationManager();
-        $formSpec = new ArrayObject();
-        $filterSpec = new ArrayObject();
+        $formSpec          = new ArrayObject();
+        $filterSpec        = new ArrayObject();
 
-        $reflection = new ClassReflection($entity);
+        $reflection  = new ClassReflection($entity);
         $annotations = $reflection->getAnnotations($annotationManager);
 
         if ($annotations instanceof AnnotationCollection) {
@@ -233,9 +227,8 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      */
     public function createForm($entity)
     {
-        $formSpec = ArrayUtils::iteratorToArray($this->getFormSpecification($entity));
+        $formSpec    = ArrayUtils::iteratorToArray($this->getFormSpecification($entity));
         $formFactory = $this->getFormFactory();
-
         return $formFactory->createForm($formSpec);
     }
 
@@ -262,18 +255,18 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      */
     protected function configureForm($annotations, $reflection, $formSpec, $filterSpec)
     {
-        $name = $this->discoverName($annotations, $reflection);
-        $formSpec['name'] = $name;
+        $name                   = $this->discoverName($annotations, $reflection);
+        $formSpec['name']       = $name;
         $formSpec['attributes'] = array();
-        $formSpec['elements'] = array();
-        $formSpec['fieldsets'] = array();
+        $formSpec['elements']   = array();
+        $formSpec['fieldsets']  = array();
 
         $events = $this->getEventManager();
         foreach ($annotations as $annotation) {
             $events->trigger(__FUNCTION__, $this, array(
                 'annotation' => $annotation,
-                'name' => $name,
-                'formSpec' => $formSpec,
+                'name'        => $name,
+                'formSpec'   => $formSpec,
                 'filterSpec' => $filterSpec,
             ));
         }
@@ -299,11 +292,11 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         }
 
         $events = $this->getEventManager();
-        $name = $this->discoverName($annotations, $reflection);
+        $name   = $this->discoverName($annotations, $reflection);
 
         $elementSpec = new ArrayObject(array(
             'flags' => array(),
-            'spec' => array(
+            'spec'  => array(
                 'name' => $name
             ),
         ));
@@ -313,11 +306,11 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
 
         $event = new Event();
         $event->setParams(array(
-            'name' => $name,
+            'name'        => $name,
             'elementSpec' => $elementSpec,
-            'inputSpec' => $inputSpec,
-            'formSpec' => $formSpec,
-            'filterSpec' => $filterSpec,
+            'inputSpec'   => $inputSpec,
+            'formSpec'    => $formSpec,
+            'filterSpec'  => $filterSpec,
         ));
         foreach ($annotations as $annotation) {
             $event->setParam('annotation', $annotation);
@@ -336,7 +329,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         }
 
         $elementSpec = $event->getParam('elementSpec');
-        $type = (isset($elementSpec['spec']['type']))
+        $type        = (isset($elementSpec['spec']['type']))
             ? $elementSpec['spec']['type']
             : 'Zend\Form\Element';
 
@@ -365,11 +358,10 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     {
         $results = $this->getEventManager()->trigger('discoverName', $this, array(
             'annotations' => $annotations,
-            'reflection' => $reflection,
+            'reflection'  => $reflection,
         ), function ($r) {
             return (is_string($r) && !empty($r));
         });
-
         return $results->last();
     }
 
@@ -386,15 +378,14 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         ), function ($r) {
             return (true === $r);
         });
-
-        return (bool)$results->last();
+        return (bool) $results->last();
     }
 
     /**
      * Checks if the object has this class as one of its parents
      *
-     * @see        https://bugs.php.net/bug.php?id=53727
-     * @see        https://github.com/zendframework/zf2/pull/1807
+     * @see https://bugs.php.net/bug.php?id=53727
+     * @see https://github.com/zendframework/zf2/pull/1807
      *
      * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *

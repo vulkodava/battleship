@@ -53,7 +53,6 @@ class Wddx extends AbstractAdapter
         }
 
         $this->options = $options;
-
         return $this;
     }
 
@@ -67,7 +66,6 @@ class Wddx extends AbstractAdapter
         if ($this->options === null) {
             $this->options = new WddxOptions();
         }
-
         return $this->options;
     }
 

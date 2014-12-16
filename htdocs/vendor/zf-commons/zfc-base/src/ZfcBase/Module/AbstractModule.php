@@ -17,14 +17,13 @@ abstract class AbstractModule implements
     protected $mergedConfig;
 
     abstract public function getDir();
-
     abstract public function getNamespace();
 
     public function init(ModuleManager $moduleManager)
     {
         $sharedManager = $moduleManager->getEventManager()->getSharedManager();
         $instance = $this;//TODO this will no be needed in PHP 5.4
-        $sharedManager->attach('Zend\Mvc\Application', 'bootstrap', function ($e) use ($instance, $moduleManager) {
+        $sharedManager->attach('Zend\Mvc\Application', 'bootstrap', function($e) use ($instance, $moduleManager) {
             $app = $e->getParam('application');
             $instance->setMergedConfig($app->getConfig());
             $instance->bootstrap($moduleManager, $app);
@@ -67,7 +66,7 @@ abstract class AbstractModule implements
     public function getOptions($namespace = 'options')
     {
         $config = $this->getMergedConfig();
-        if (empty($config[$this->getNamespace()][$namespace])) {
+        if(empty($config[$this->getNamespace()][$namespace])) {
             return array();
         }
 
@@ -113,7 +112,6 @@ abstract class AbstractModule implements
         $optionArr = explode('.', $option);
 
         $option = $this->getOptionFromArray($options, $optionArr, $default, $option);
-
         return $option;
     }
 
@@ -122,15 +120,15 @@ abstract class AbstractModule implements
         $currOption = array_shift($option);
         //we need this fix to accept both array/ZendConfig -- there is know problem with offsetExists() in PHP
         //if(array_key_exists($currOption, $options)) {
-        if (array_key_exists($currOption, $options) || ($options instanceof \Zend\Config\Config && $options->offsetExists($currOption))) {
-            if (count($option) >= 1) {
+        if(array_key_exists($currOption, $options) || ($options instanceof \Zend\Config\Config && $options->offsetExists($currOption))) {
+            if(count($option) >= 1) {
                 return $this->getOptionFromArray($options[$currOption], $option, $default, $origOption);
             }
 
             return $options[$currOption];
         }
 
-        if ($default !== null) {
+        if($default !== null) {
             return $default;
         }
 

@@ -33,7 +33,7 @@ class Part
      * The (unencoded) content of the Part as passed
      * as a string or stream
      *
-     * @param mixed $content String or Stream containing the content
+     * @param mixed $content  String or Stream containing the content
      */
     public function __construct($content)
     {
@@ -87,7 +87,7 @@ class Part
                     'convert.quoted-printable-encode',
                     STREAM_FILTER_READ,
                     array(
-                        'line-length' => 76,
+                        'line-length'      => 76,
                         'line-break-chars' => $EOL
                     )
                 );
@@ -97,7 +97,7 @@ class Part
                 }
                 break;
             case Mime::ENCODING_BASE64:
-                if (array_key_exists(Mime::ENCODING_BASE64, $this->filters)) {
+                if (array_key_exists(Mime::ENCODING_BASE64,$this->filters)) {
                     stream_filter_remove($this->filters[Mime::ENCODING_BASE64]);
                 }
                 $filter = stream_filter_append(
@@ -105,7 +105,7 @@ class Part
                     'convert.base64-encode',
                     STREAM_FILTER_READ,
                     array(
-                        'line-length' => 76,
+                        'line-length'      => 76,
                         'line-break-chars' => $EOL
                     )
                 );
@@ -116,7 +116,6 @@ class Part
                 break;
             default:
         }
-
         return $this->content;
     }
 
@@ -129,9 +128,9 @@ class Part
     public function getContent($EOL = Mime::LINEEND)
     {
         if ($this->isStream) {
-            $encodedStream = $this->getEncodedStream($EOL);
+            $encodedStream         = $this->getEncodedStream($EOL);
             $encodedStreamContents = stream_get_contents($encodedStream);
-            $streamMetaData = stream_get_meta_data($encodedStream);
+            $streamMetaData        = stream_get_meta_data($encodedStream);
 
             if (isset($streamMetaData['seekable']) && $streamMetaData['seekable']) {
                 rewind($encodedStream);
@@ -139,13 +138,11 @@ class Part
 
             return $encodedStreamContents;
         }
-
         return Mime::encode($this->content, $this->encoding, $EOL);
     }
 
     /**
      * Get the RAW unencoded content from this part
-     *
      * @return string
      */
     public function getRawContent()
@@ -153,7 +150,6 @@ class Part
         if ($this->isStream) {
             return stream_get_contents($this->content);
         }
-
         return $this->content;
     }
 
@@ -175,7 +171,7 @@ class Part
 
         if ($this->boundary) {
             $contentType .= ';' . $EOL
-                . " boundary=\"" . $this->boundary . '"';
+                          . " boundary=\"" . $this->boundary . '"';
         }
 
         $headers[] = array('Content-Type', $contentType);
@@ -185,7 +181,7 @@ class Part
         }
 
         if ($this->id) {
-            $headers[] = array('Content-ID', '<' . $this->id . '>');
+            $headers[]  = array('Content-ID', '<' . $this->id . '>');
         }
 
         if ($this->disposition) {

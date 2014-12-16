@@ -22,7 +22,7 @@ class RenderToPlaceholderTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_view = new View();
-        $this->_view->resolver()->addPath(__DIR__ . '/_files/scripts/');
+        $this->_view->resolver()->addPath(__DIR__.'/_files/scripts/');
     }
 
     public function testDefaultEmpty()

@@ -57,8 +57,8 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * @param  ServiceLocatorInterface $services
-     * @param  string $name
-     * @param  string $requestedName
+     * @param  string                  $name
+     * @param  string                  $requestedName
      * @return bool
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
@@ -69,20 +69,18 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
         }
 
         $containerName = $this->normalizeContainerName($requestedName);
-
         return array_key_exists($containerName, $config);
     }
 
     /**
      * @param  ServiceLocatorInterface $services
-     * @param  string $name
-     * @param  string $requestedName
+     * @param  string                  $name
+     * @param  string                  $requestedName
      * @return Container
      */
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
         $manager = $this->getSessionManager($services);
-
         return new Container($requestedName, $manager);
     }
 
@@ -100,14 +98,12 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 
         if (!$services->has('Config')) {
             $this->config = array();
-
             return $this->config;
         }
 
         $config = $services->get('Config');
         if (!isset($config[$this->configKey]) || !is_array($config[$this->configKey])) {
             $this->config = array();
-
             return $this->config;
         }
 

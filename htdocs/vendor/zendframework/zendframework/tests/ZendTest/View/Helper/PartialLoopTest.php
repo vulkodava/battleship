@@ -42,7 +42,7 @@ class PartialLoopTest extends TestCase
     public function setUp()
     {
         $this->basePath = __DIR__ . '/_files/modules';
-        $this->helper = new PartialLoop();
+        $this->helper   = new PartialLoop();
     }
 
     /**
@@ -371,7 +371,6 @@ class RecursiveIteratorTest implements Iterator
     public function addItem(Iterator $iterator)
     {
         $this->items[] = $iterator;
-
         return $this;
     }
 

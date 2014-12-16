@@ -138,10 +138,10 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     public function testCanBuildStyleTagsWithAttributes()
     {
         $this->helper->setStyle('a {}', array(
-            'lang' => 'us_en',
+            'lang'  => 'us_en',
             'title' => 'foo',
             'media' => 'projection',
-            'dir' => 'rtol',
+            'dir'   => 'rtol',
             'bogus' => 'unused'
         ));
         $value = $this->helper->getValue();
@@ -164,10 +164,10 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     public function testRenderedStyleTagsContainHtmlEscaping()
     {
         $this->helper->setStyle('a {}', array(
-            'lang' => 'us_en',
+            'lang'  => 'us_en',
             'title' => 'foo',
             'media' => 'screen',
-            'dir' => 'rtol',
+            'dir'   => 'rtol',
             'bogus' => 'unused'
         ));
         $value = $this->helper->toString();
@@ -177,7 +177,8 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderedStyleTagsContainsDefaultMedia()
     {
-        $this->helper->setStyle('a {}', array());
+        $this->helper->setStyle('a {}', array(
+        ));
         $value = $this->helper->toString();
         $this->assertRegexp('#<style [^>]*?media="screen"#', $value, $value);
     }
@@ -199,8 +200,8 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $style3 = 'a {}' . PHP_EOL . 'h2 {}';
 
         $this->helper->__invoke($style1, 'SET')
-            ->__invoke($style2, 'PREPEND')
-            ->__invoke($style3, 'APPEND');
+                     ->__invoke($style2, 'PREPEND')
+                     ->__invoke($style3, 'APPEND');
         $this->assertEquals(3, count($this->helper));
         $values = $this->helper->getArrayCopy();
         $this->assertTrue((strstr($values[0]->content, $style2)) ? true : false);
@@ -215,11 +216,11 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $style3 = 'div {}' . PHP_EOL . 'li {}';
 
         $this->helper->__invoke($style1, 'SET')
-            ->__invoke($style2, 'PREPEND')
-            ->__invoke($style3, 'APPEND');
+                     ->__invoke($style2, 'PREPEND')
+                     ->__invoke($style3, 'APPEND');
         $html = $this->helper->toString();
-        $doc = new \DOMDocument;
-        $dom = $doc->loadHtml($html);
+        $doc  = new \DOMDocument;
+        $dom  = $doc->loadHtml($html);
         $this->assertTrue(($dom !== false));
 
         $styles = substr_count($html, '<style type="text/css"');
@@ -395,15 +396,15 @@ a {
 
         $test = $this->helper->toString();
         $expected = '<style type="text/css" media="screen">' . PHP_EOL
-            . '<!--' . PHP_EOL
-            . $style2 . PHP_EOL
-            . '-->' . PHP_EOL
-            . '</style>' . PHP_EOL
-            . '<style type="text/css" media="screen">' . PHP_EOL
-            . '<!--' . PHP_EOL
-            . $style1 . PHP_EOL
-            . '-->' . PHP_EOL
-            . '</style>';
+                  . '<!--' . PHP_EOL
+                  . $style2 . PHP_EOL
+                  . '-->' . PHP_EOL
+                  . '</style>' . PHP_EOL
+                  . '<style type="text/css" media="screen">' . PHP_EOL
+                  . '<!--' . PHP_EOL
+                  . $style1 . PHP_EOL
+                  . '-->' . PHP_EOL
+                  . '</style>';
 
         $this->assertEquals($expected, $test);
     }

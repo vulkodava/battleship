@@ -32,7 +32,6 @@ abstract class AbstractPattern implements PatternInterface
         }
 
         $this->options = $options;
-
         return $this;
     }
 
@@ -46,7 +45,6 @@ abstract class AbstractPattern implements PatternInterface
         if (null === $this->options) {
             $this->setOptions(new PatternOptions());
         }
-
         return $this->options;
     }
 }

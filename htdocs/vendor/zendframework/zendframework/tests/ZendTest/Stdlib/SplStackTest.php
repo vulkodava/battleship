@@ -46,7 +46,7 @@ class SplStackTest extends \PHPUnit_Framework_TestCase
     public function testCanRetrieveQueueAsArray()
     {
         $expected = array('bat', 'baz', 'bar', 'foo');
-        $test = $this->stack->toArray();
+        $test     = $this->stack->toArray();
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 }

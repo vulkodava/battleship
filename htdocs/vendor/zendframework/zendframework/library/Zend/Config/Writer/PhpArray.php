@@ -37,8 +37,8 @@ class PhpArray extends AbstractWriter
         );
 
         return "<?php\n" .
-        "return " . $arraySyntax['open'] . "\n" . $this->processIndented($config, $arraySyntax) .
-        $arraySyntax['close'] . ";\n";
+               "return " . $arraySyntax['open'] . "\n" . $this->processIndented($config, $arraySyntax) .
+               $arraySyntax['close'] . ";\n";
     }
 
     /**
@@ -50,7 +50,6 @@ class PhpArray extends AbstractWriter
     public function setUseBracketArraySyntax($value)
     {
         $this->useBracketArraySyntax = $value;
-
         return $this;
     }
 
@@ -58,8 +57,8 @@ class PhpArray extends AbstractWriter
      * toFile(): defined by Writer interface.
      *
      * @see    WriterInterface::toFile()
-     * @param  string $filename
-     * @param  mixed $config
+     * @param  string  $filename
+     * @param  mixed   $config
      * @param  bool $exclusiveLock
      * @return void
      * @throws Exception\InvalidArgumentException
@@ -90,8 +89,8 @@ class PhpArray extends AbstractWriter
             // for Windows, paths are escaped.
             $dirname = str_replace('\\', '\\\\', dirname($filename));
 
-            $string = $this->toString($config);
-            $string = str_replace("'" . $dirname, "__DIR__ . '", $string);
+            $string  = $this->toString($config);
+            $string  = str_replace("'" . $dirname, "__DIR__ . '", $string);
 
             file_put_contents($filename, $string, $flags);
         } catch (\Exception $e) {
@@ -107,7 +106,7 @@ class PhpArray extends AbstractWriter
      *
      * @param  array $config
      * @param  array $arraySyntax
-     * @param  int $indentLevel
+     * @param  int   $indentLevel
      * @return string
      */
     protected function processIndented(array $config, array $arraySyntax, &$indentLevel = 1)
@@ -124,8 +123,8 @@ class PhpArray extends AbstractWriter
                 } else {
                     $indentLevel++;
                     $arrayString .= $arraySyntax['open'] . "\n"
-                        . $this->processIndented($value, $arraySyntax, $indentLevel)
-                        . str_repeat(self::INDENT_STRING, --$indentLevel) . $arraySyntax['close'] . ",\n";
+                                  . $this->processIndented($value, $arraySyntax, $indentLevel)
+                                  . str_repeat(self::INDENT_STRING, --$indentLevel) . $arraySyntax['close'] . ",\n";
                 }
             } elseif (is_object($value) || is_string($value)) {
                 $arrayString .= var_export($value, true) . ",\n";

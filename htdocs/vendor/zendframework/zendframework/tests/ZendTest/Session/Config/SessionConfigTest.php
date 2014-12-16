@@ -364,7 +364,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testCookieHttpOnlyDefaultsToIniSettings()
     {
-        $this->assertSame((bool)ini_get('session.cookie_httponly'), $this->config->getCookieHttpOnly());
+        $this->assertSame((bool) ini_get('session.cookie_httponly'), $this->config->getCookieHttpOnly());
     }
 
     public function testCookieHttpOnlyIsMutable()
@@ -385,42 +385,42 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testUseCookiesDefaultsToIniSettings()
     {
-        $this->assertSame((bool)ini_get('session.use_cookies'), $this->config->getUseCookies());
+        $this->assertSame((bool) ini_get('session.use_cookies'), $this->config->getUseCookies());
     }
 
     public function testUseCookiesIsMutable()
     {
         $value = ini_get('session.use_cookies') ? false : true;
         $this->config->setUseCookies($value);
-        $this->assertEquals($value, (bool)$this->config->getUseCookies());
+        $this->assertEquals($value, (bool) $this->config->getUseCookies());
     }
 
     public function testUseCookiesAltersIniSetting()
     {
         $value = ini_get('session.use_cookies') ? false : true;
         $this->config->setUseCookies($value);
-        $this->assertEquals($value, (bool)ini_get('session.use_cookies'));
+        $this->assertEquals($value, (bool) ini_get('session.use_cookies'));
     }
 
     // session.use_only_cookies
 
     public function testUseOnlyCookiesDefaultsToIniSettings()
     {
-        $this->assertSame((bool)ini_get('session.use_only_cookies'), $this->config->getUseOnlyCookies());
+        $this->assertSame((bool) ini_get('session.use_only_cookies'), $this->config->getUseOnlyCookies());
     }
 
     public function testUseOnlyCookiesIsMutable()
     {
         $value = ini_get('session.use_only_cookies') ? false : true;
         $this->config->setOption('use_only_cookies', $value);
-        $this->assertEquals($value, (bool)$this->config->getOption('use_only_cookies'));
+        $this->assertEquals($value, (bool) $this->config->getOption('use_only_cookies'));
     }
 
     public function testUseOnlyCookiesAltersIniSetting()
     {
         $value = ini_get('session.use_only_cookies') ? false : true;
         $this->config->setOption('use_only_cookies', $value);
-        $this->assertEquals($value, (bool)ini_get('session.use_only_cookies'));
+        $this->assertEquals($value, (bool) ini_get('session.use_only_cookies'));
     }
 
     // session.referer_check
@@ -501,14 +501,14 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     public function testSettingInvalidEntropyLengthRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Invalid entropy_length; must be numeric');
+                                    'Invalid entropy_length; must be numeric');
         $this->config->setEntropyLength('foobar_bogus');
     }
 
     public function testSettingInvalidEntropyLengthRaisesException2()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Invalid entropy_length; must be a positive integer or zero');
+                                    'Invalid entropy_length; must be a positive integer or zero');
         $this->config->setEntropyLength(-1);
     }
 
@@ -589,21 +589,21 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testUseTransSidDefaultsToIniSettings()
     {
-        $this->assertSame((bool)ini_get('session.use_trans_sid'), $this->config->getUseTransSid());
+        $this->assertSame((bool) ini_get('session.use_trans_sid'), $this->config->getUseTransSid());
     }
 
     public function testUseTransSidIsMutable()
     {
         $value = ini_get('session.use_trans_sid') ? false : true;
         $this->config->setOption('use_trans_sid', $value);
-        $this->assertEquals($value, (bool)$this->config->getOption('use_trans_sid'));
+        $this->assertEquals($value, (bool) $this->config->getOption('use_trans_sid'));
     }
 
     public function testUseTransSidAltersIniSetting()
     {
         $value = ini_get('session.use_trans_sid') ? false : true;
         $this->config->setOption('use_trans_sid', $value);
-        $this->assertEquals($value, (bool)ini_get('session.use_trans_sid'));
+        $this->assertEquals($value, (bool) ini_get('session.use_trans_sid'));
     }
 
     // session.hash_function
@@ -611,11 +611,10 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     public function hashFunctions()
     {
         $hashFunctions = array(0, 1) + hash_algos();
-        $provider = array();
+        $provider      = array();
         foreach ($hashFunctions as $function) {
             $provider[] = array($function);
         }
-
         return $provider;
     }
 
@@ -685,7 +684,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     public function testSettingInvalidHashBitsPerCharacterRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException',
-            'Invalid hash bits per character provided');
+                                    'Invalid hash bits per character provided');
         $this->config->setHashBitsPerCharacter('foobar_bogus');
     }
 

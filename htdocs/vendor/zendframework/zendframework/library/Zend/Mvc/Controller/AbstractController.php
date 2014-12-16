@@ -28,11 +28,9 @@ use Zend\Stdlib\ResponseInterface as Response;
  *
  * Convenience methods for pre-built plugins (@see __call):
  *
- * @method \Zend\View\Model\ModelInterface acceptableViewModelSelector(array $matchAgainst = null, bool $returnDefault
- *         = true, \Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart $resultReference = null)
+ * @method \Zend\View\Model\ModelInterface acceptableViewModelSelector(array $matchAgainst = null, bool $returnDefault = true, \Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart $resultReference = null)
  * @method bool|array|\Zend\Http\Response fileprg(\Zend\Form\Form $form, $redirect = null, $redirectToUrl = false)
- * @method bool|array|\Zend\Http\Response filePostRedirectGet(\Zend\Form\Form $form, $redirect = null, $redirectToUrl =
- *         false)
+ * @method bool|array|\Zend\Http\Response filePostRedirectGet(\Zend\Form\Form $form, $redirect = null, $redirectToUrl = false)
  * @method \Zend\Mvc\Controller\Plugin\FlashMessenger flashMessenger()
  * @method \Zend\Mvc\Controller\Plugin\Forward forward()
  * @method mixed|null identity()
@@ -110,8 +108,8 @@ abstract class AbstractController implements
 
         $e = $this->getEvent();
         $e->setRequest($request)
-            ->setResponse($response)
-            ->setTarget($this);
+          ->setResponse($response)
+          ->setTarget($this);
 
         $result = $this->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH, $e, function ($test) {
             return ($test instanceof Response);
@@ -257,7 +255,6 @@ abstract class AbstractController implements
         }
 
         $this->plugins->setController($this);
-
         return $this->plugins;
     }
 
@@ -278,7 +275,7 @@ abstract class AbstractController implements
     /**
      * Get plugin instance
      *
-     * @param  string $name        Name of plugin to return
+     * @param  string     $name    Name of plugin to return
      * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
      * @return mixed
      */
@@ -294,7 +291,7 @@ abstract class AbstractController implements
      * Otherwise, return the plugin instance.
      *
      * @param  string $method
-     * @param  array $params
+     * @param  array  $params
      * @return mixed
      */
     public function __call($method, $params)
@@ -326,10 +323,10 @@ abstract class AbstractController implements
      */
     public static function getMethodFromAction($action)
     {
-        $method = str_replace(array('.', '-', '_'), ' ', $action);
-        $method = ucwords($method);
-        $method = str_replace(' ', '', $method);
-        $method = lcfirst($method);
+        $method  = str_replace(array('.', '-', '_'), ' ', $action);
+        $method  = ucwords($method);
+        $method  = str_replace(' ', '', $method);
+        $method  = lcfirst($method);
         $method .= 'Action';
 
         return $method;

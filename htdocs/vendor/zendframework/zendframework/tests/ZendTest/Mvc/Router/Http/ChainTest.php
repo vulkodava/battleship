@@ -24,18 +24,18 @@ class ChainTest extends TestCase
         return new Chain(
             array(
                 array(
-                    'type' => 'Zend\Mvc\Router\Http\Segment',
+                    'type'    => 'Zend\Mvc\Router\Http\Segment',
                     'options' => array(
-                        'route' => '/:controller',
+                        'route'    => '/:controller',
                         'defaults' => array(
                             'controller' => 'foo',
                         ),
                     ),
                 ),
                 array(
-                    'type' => 'Zend\Mvc\Router\Http\Segment',
+                    'type'    => 'Zend\Mvc\Router\Http\Segment',
                     'options' => array(
-                        'route' => '/:bar',
+                        'route'    => '/:bar',
                         'defaults' => array(
                             'bar' => 'bar',
                         ),
@@ -58,7 +58,7 @@ class ChainTest extends TestCase
                 null,
                 array(
                     'controller' => 'foo',
-                    'bar' => 'bar',
+                    'bar'        => 'bar',
                 ),
             ),
             'offset-skips-beginning' => array(
@@ -67,7 +67,7 @@ class ChainTest extends TestCase
                 4,
                 array(
                     'controller' => 'foo',
-                    'bar' => 'bar',
+                    'bar'        => 'bar',
                 ),
             ),
             'parameters-are-used-only-once' => array(
@@ -84,10 +84,10 @@ class ChainTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Chain $route
-     * @param        string $path
+     * @param        Chain   $route
+     * @param        string  $path
      * @param        integer $offset
-     * @param        array $params
+     * @param        array   $params
      */
     public function testMatching(Chain $route, $path, $offset, array $params = null)
     {
@@ -112,11 +112,11 @@ class ChainTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Chain $route
-     * @param        string $path
+     * @param        Chain   $route
+     * @param        string  $path
      * @param        integer $offset
-     * @param        string $routeName
-     * @param        array $params
+     * @param        string  $routeName
+     * @param        array   $params
      */
     public function testAssembling(Chain $route, $path, $offset, array $params = null)
     {
@@ -140,11 +140,11 @@ class ChainTest extends TestCase
         $tester->testFactory(
             'Zend\Mvc\Router\Http\Chain',
             array(
-                'routes' => 'Missing "routes" in options array',
+                'routes'        => 'Missing "routes" in options array',
                 'route_plugins' => 'Missing "route_plugins" in options array',
             ),
             array(
-                'routes' => array(),
+                'routes'        => array(),
                 'route_plugins' => new RoutePluginManager(),
             )
         );

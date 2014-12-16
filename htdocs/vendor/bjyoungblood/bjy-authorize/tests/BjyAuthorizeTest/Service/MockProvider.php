@@ -28,12 +28,12 @@ class MockProvider
     public $serviceLocator;
 
     /**
-     * @param array $options
+     * @param array                                        $options
      * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
      */
     public function __construct(array $options, ServiceLocatorInterface $serviceLocator)
     {
-        $this->options = $options;
+        $this->options        = $options;
         $this->serviceLocator = $serviceLocator;
     }
 }

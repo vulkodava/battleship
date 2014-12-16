@@ -49,10 +49,10 @@ class UrlTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $router->addRoute('default', array(
-            'type' => 'Zend\Mvc\Router\Http\Segment',
-            'options' => array(
-                'route' => '/:controller[/:action]',
-            )
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/:controller[/:action]',
+                )
         ));
         $this->router = $router;
 
@@ -120,9 +120,9 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     public function testCanReuseMatchedParameters()
     {
         $this->router->addRoute('replace', array(
-            'type' => 'Zend\Mvc\Router\Http\Segment',
+            'type'    => 'Zend\Mvc\Router\Http\Segment',
             'options' => array(
-                'route' => '/:controller/:action',
+                'route'    => '/:controller/:action',
                 'defaults' => array(
                     'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
                 ),
@@ -142,7 +142,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
         $this->router->addRoute('replace', array(
             'type' => 'Zend\Mvc\Router\Http\Segment',
             'options' => array(
-                'route' => '/:controller/:action',
+                'route'    => '/:controller/:action',
                 'defaults' => array(
                     'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
                 ),
@@ -163,18 +163,18 @@ class UrlTest extends \PHPUnit_Framework_TestCase
         $router->addRoute('default', array(
             'type' => 'Zend\Mvc\Router\Http\Segment',
             'options' => array(
-                'route' => '/:controller/:action',
+                'route'    => '/:controller/:action',
                 'defaults' => array(
                     ModuleRouteListener::MODULE_NAMESPACE => 'ZendTest\Mvc\Controller\TestAsset',
                     'controller' => 'SampleController',
-                    'action' => 'Dash'
+                    'action'     => 'Dash'
                 )
             ),
             'child_routes' => array(
                 'wildcard' => array(
-                    'type' => 'Zend\Mvc\Router\Http\Wildcard',
+                    'type'    => 'Zend\Mvc\Router\Http\Wildcard',
                     'options' => array(
-                        'param_delimiter' => '=',
+                        'param_delimiter'     => '=',
                         'key_value_delimiter' => '%'
                     )
                 )
@@ -189,7 +189,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 
         $event = new MvcEvent();
         $event->setRouter($router)
-            ->setRouteMatch($routeMatch);
+              ->setRouteMatch($routeMatch);
 
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->onRoute($event);

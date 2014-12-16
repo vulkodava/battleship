@@ -71,7 +71,6 @@ class Int extends AbstractValidator
         if (null === $this->locale) {
             $this->locale = Locale::getDefault();
         }
-
         return $this->locale;
     }
 
@@ -84,7 +83,6 @@ class Int extends AbstractValidator
     public function setLocale($locale)
     {
         $this->locale = $locale;
-
         return $this;
     }
 
@@ -99,7 +97,6 @@ class Int extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
             $this->error(self::INVALID);
-
             return false;
         }
 
@@ -118,11 +115,10 @@ class Int extends AbstractValidator
         $parsedInt = $format->parse($value, NumberFormatter::TYPE_INT64);
         if (intl_is_failure($format->getErrorCode())) {
             $this->error(self::NOT_INT);
-
             return false;
         }
 
-        $decimalSep = $format->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+        $decimalSep  = $format->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
         $groupingSep = $format->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
 
         $valueFiltered = str_replace($groupingSep, '', $value);
@@ -130,7 +126,6 @@ class Int extends AbstractValidator
 
         if (strval($parsedInt) !== $valueFiltered) {
             $this->error(self::NOT_INT);
-
             return false;
         }
 

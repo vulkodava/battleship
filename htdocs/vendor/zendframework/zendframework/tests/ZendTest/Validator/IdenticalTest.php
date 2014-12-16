@@ -116,14 +116,14 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-            'messageTemplates', $validator);
+                                     'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
-            'messageVariables', $validator);
+                                     'messageVariables', $validator);
     }
 
     public function testValidatingStringTokenInContext()

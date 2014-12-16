@@ -178,7 +178,7 @@ class Response extends AbstractMessage implements ResponseInterface
 
         $response = new static();
 
-        $regex = '/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3})(?:[ ]+(?P<reason>.*))?$/';
+        $regex   = '/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3})(?:[ ]+(?P<reason>.*))?$/';
         $matches = array();
         if (!preg_match($regex, $firstLine, $matches)) {
             throw new Exception\InvalidArgumentException(
@@ -245,8 +245,7 @@ class Response extends AbstractMessage implements ResponseInterface
                 $code
             ));
         }
-        $this->statusCode = (int)$code;
-
+        $this->statusCode = (int) $code;
         return $this;
     }
 
@@ -277,8 +276,7 @@ class Response extends AbstractMessage implements ResponseInterface
             ));
         }
 
-        $this->statusCode = (int)$code;
-
+        $this->statusCode = (int) $code;
         return $this;
     }
 
@@ -289,7 +287,6 @@ class Response extends AbstractMessage implements ResponseInterface
     public function setReasonPhrase($reasonPhrase)
     {
         $this->reasonPhrase = trim($reasonPhrase);
-
         return $this;
     }
 
@@ -303,7 +300,6 @@ class Response extends AbstractMessage implements ResponseInterface
         if (null == $this->reasonPhrase and isset($this->recommendedReasonPhrases[$this->statusCode])) {
             return $this->recommendedReasonPhrases[$this->statusCode];
         }
-
         return $this->reasonPhrase;
     }
 
@@ -314,7 +310,7 @@ class Response extends AbstractMessage implements ResponseInterface
      */
     public function getBody()
     {
-        $body = (string)$this->getContent();
+        $body = (string) $this->getContent();
 
         $transferEncoding = $this->getHeaders()->get('Transfer-Encoding');
 
@@ -328,7 +324,7 @@ class Response extends AbstractMessage implements ResponseInterface
 
         if (!empty($contentEncoding)) {
             $contentEncoding = $contentEncoding->getFieldValue();
-            if ($contentEncoding == 'gzip') {
+            if ($contentEncoding =='gzip') {
                 $body = $this->decodeGzip($body);
             } elseif ($contentEncoding == 'deflate') {
                 $body = $this->decodeDeflate($body);
@@ -346,7 +342,6 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isClientError()
     {
         $code = $this->getStatusCode();
-
         return ($code < 500 && $code >= 400);
     }
 
@@ -368,7 +363,6 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isInformational()
     {
         $code = $this->getStatusCode();
-
         return ($code >= 100 && $code < 200);
     }
 
@@ -400,7 +394,6 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isServerError()
     {
         $code = $this->getStatusCode();
-
         return (500 <= $code && 600 > $code);
     }
 
@@ -412,7 +405,6 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isRedirect()
     {
         $code = $this->getStatusCode();
-
         return (300 <= $code && 400 > $code);
     }
 
@@ -424,7 +416,6 @@ class Response extends AbstractMessage implements ResponseInterface
     public function isSuccess()
     {
         $code = $this->getStatusCode();
-
         return (200 <= $code && 300 > $code);
     }
 
@@ -441,7 +432,6 @@ class Response extends AbstractMessage implements ResponseInterface
             $this->getStatusCode(),
             $this->getReasonPhrase()
         );
-
         return trim($status);
     }
 
@@ -452,11 +442,10 @@ class Response extends AbstractMessage implements ResponseInterface
      */
     public function toString()
     {
-        $str = $this->renderStatusLine() . "\r\n";
+        $str  = $this->renderStatusLine() . "\r\n";
         $str .= $this->getHeaders()->toString();
         $str .= "\r\n";
         $str .= $this->getContent();
-
         return $str;
     }
 
@@ -472,16 +461,16 @@ class Response extends AbstractMessage implements ResponseInterface
         $decBody = '';
 
         while (trim($body)) {
-            if (!preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
+            if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
                 throw new Exception\RuntimeException(
                     "Error parsing body - doesn't seem to be a chunked message"
                 );
             }
 
-            $length = hexdec(trim($m[1]));
-            $cut = strlen($m[0]);
+            $length   = hexdec(trim($m[1]));
+            $cut      = strlen($m[0]);
             $decBody .= substr($body, $cut, $length);
-            $body = substr($body, $cut + $length + 2);
+            $body     = substr($body, $cut + $length + 2);
         }
 
         return $decBody;
@@ -514,7 +503,6 @@ class Response extends AbstractMessage implements ResponseInterface
                 $test
             );
         }
-
         return $return;
     }
 
@@ -551,7 +539,6 @@ class Response extends AbstractMessage implements ResponseInterface
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
         }
-
         return gzinflate($body);
     }
 }

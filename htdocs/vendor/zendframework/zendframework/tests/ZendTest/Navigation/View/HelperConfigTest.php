@@ -40,7 +40,7 @@ class HelperConfigTest extends TestCase
         $this->serviceManager->setService('config', array('navigation_helpers' => array(
             'invokables' => array(
                 'menu' => $replacedMenuClass
-            )
+             )
         )));
         $this->helperConfig->configureServiceManager($this->pluginManager);
 

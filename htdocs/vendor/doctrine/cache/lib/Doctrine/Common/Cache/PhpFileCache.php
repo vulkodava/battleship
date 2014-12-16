@@ -29,7 +29,7 @@ class PhpFileCache extends FileCache
 {
     const EXTENSION = '.doctrinecache.php';
 
-    /**
+     /**
      * {@inheritdoc}
      */
     protected $extension = self::EXTENSION;
@@ -41,7 +41,7 @@ class PhpFileCache extends FileCache
     {
         $filename = $this->getFilename($id);
 
-        if (!is_file($filename)) {
+        if ( ! is_file($filename)) {
             return false;
         }
 
@@ -61,7 +61,7 @@ class PhpFileCache extends FileCache
     {
         $filename = $this->getFilename($id);
 
-        if (!is_file($filename)) {
+        if ( ! is_file($filename)) {
             return false;
         }
 
@@ -79,7 +79,7 @@ class PhpFileCache extends FileCache
             $lifeTime = time() + $lifeTime;
         }
 
-        if (is_object($data) && !method_exists($data, '__set_state')) {
+        if (is_object($data) && ! method_exists($data, '__set_state')) {
             throw new \InvalidArgumentException(
                 "Invalid argument given, PhpFileCache only allows objects that implement __set_state() " .
                 "and fully support var_export(). You can use the FilesystemCache to save arbitrary object " .
@@ -87,20 +87,20 @@ class PhpFileCache extends FileCache
             );
         }
 
-        $filename = $this->getFilename($id);
-        $filepath = pathinfo($filename, PATHINFO_DIRNAME);
+        $filename   = $this->getFilename($id);
+        $filepath   = pathinfo($filename, PATHINFO_DIRNAME);
 
-        if (!is_dir($filepath)) {
+        if ( ! is_dir($filepath)) {
             mkdir($filepath, 0777, true);
         }
 
         $value = array(
-            'lifetime' => $lifeTime,
-            'data' => $data
+            'lifetime'  => $lifeTime,
+            'data'      => $data
         );
 
-        $value = var_export($value, true);
-        $code = sprintf('<?php return %s;', $value);
+        $value  = var_export($value, true);
+        $code   = sprintf('<?php return %s;', $value);
 
         return file_put_contents($filename, $code) !== false;
     }

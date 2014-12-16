@@ -57,7 +57,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -68,7 +68,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -79,7 +79,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -90,7 +90,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -101,7 +101,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -112,7 +112,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */
@@ -133,7 +133,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $values
+     * @param mixed  $values
      *
      * @return Comparison
      */
@@ -144,7 +144,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $values
+     * @param mixed  $values
      *
      * @return Comparison
      */
@@ -155,7 +155,7 @@ class ExpressionBuilder
 
     /**
      * @param string $field
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Comparison
      */

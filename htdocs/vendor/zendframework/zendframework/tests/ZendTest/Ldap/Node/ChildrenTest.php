@@ -31,7 +31,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
 
     public function testGetChildrenOnAttachedNode()
     {
-        $node = $this->getLDAP()->getBaseNode();
+        $node     = $this->getLDAP()->getBaseNode();
         $children = $node->getChildren();
         $this->assertInstanceOf('Zend\Ldap\Node\ChildrenIterator', $children);
         $this->assertEquals(6, count($children));
@@ -125,7 +125,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals(2, count($children));
 
         $string = serialize($node);
-        $node2 = unserialize($string);
+        $node2  = unserialize($string);
 
         $children2 = $node2->getChildren();
         $this->assertTrue($node2->hasChildren());
@@ -140,7 +140,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $this->assertTrue($node->hasChildren());
         $string = serialize($node);
-        $node2 = unserialize($string);
+        $node2  = unserialize($string);
         $this->assertFalse($node2->hasChildren());
         $node2->attachLDAP($this->getLDAP());
         $this->assertTrue($node2->hasChildren());
@@ -148,7 +148,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
 
     public function testCascadingAttachAndDetach()
     {
-        $node = $this->getLDAP()->getBaseNode();
+        $node         = $this->getLDAP()->getBaseNode();
         $baseChildren = $node->getChildren();
         $nodeChildren = $baseChildren['ou=Node']->getChildren();
 

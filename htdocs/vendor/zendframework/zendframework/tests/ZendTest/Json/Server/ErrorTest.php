@@ -71,8 +71,8 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
     public function arbitraryErrorCodes()
     {
         return array(
-            '1000' => array(1000),
-            '404' => array(404),
+            '1000'  => array(1000),
+            '404'   => array(404),
             '-3000' => array(-3000),
         );
     }
@@ -95,7 +95,7 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
     {
         foreach (array(true, 2.0, 25) as $message) {
             $this->error->setMessage($message);
-            $this->assertEquals((string)$message, $this->error->getMessage());
+            $this->assertEquals((string) $message, $this->error->getMessage());
         }
     }
 
@@ -144,8 +144,8 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
     public function setupError()
     {
         $this->error->setCode(Server\Error::ERROR_OTHER)
-            ->setMessage('Unknown Error')
-            ->setData(array('foo' => 'bar'));
+                    ->setMessage('Unknown Error')
+                    ->setData(array('foo' => 'bar'));
     }
 
     public function validateArray($error)

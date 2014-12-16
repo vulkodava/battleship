@@ -60,7 +60,6 @@ class ViewEvent extends Event
     public function setModel(Model $model)
     {
         $this->model = $model;
-
         return $this;
     }
 
@@ -73,7 +72,6 @@ class ViewEvent extends Event
     public function setRequest(Request $request)
     {
         $this->request = $request;
-
         return $this;
     }
 
@@ -86,7 +84,6 @@ class ViewEvent extends Event
     public function setResponse(Response $response)
     {
         $this->response = $response;
-
         return $this;
     }
 
@@ -99,7 +96,6 @@ class ViewEvent extends Event
     public function setResult($result)
     {
         $this->result = $result;
-
         return $this;
     }
 
@@ -122,7 +118,6 @@ class ViewEvent extends Event
     public function setRenderer(Renderer $renderer)
     {
         $this->renderer = $renderer;
-
         return $this;
     }
 
@@ -198,13 +193,12 @@ class ViewEvent extends Event
      */
     public function getParams()
     {
-        $params = parent::getParams();
-        $params['model'] = $this->getModel();
+        $params             = parent::getParams();
+        $params['model']    = $this->getModel();
         $params['renderer'] = $this->getRenderer();
-        $params['request'] = $this->getRequest();
+        $params['request']  = $this->getRequest();
         $params['response'] = $this->getResponse();
-        $params['result'] = $this->getResult();
-
+        $params['result']   = $this->getResult();
         return $params;
     }
 
@@ -227,7 +221,6 @@ class ViewEvent extends Event
                 $this->$method($params[$param]);
             }
         }
-
         return $this;
     }
 
@@ -260,7 +253,6 @@ class ViewEvent extends Event
                 parent::setParam($name, $value);
                 break;
         }
-
         return $this;
     }
 }

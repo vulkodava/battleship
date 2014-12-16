@@ -41,7 +41,6 @@ abstract class AbstractAdapter implements AdapterInterface
         }
 
         $this->options = $options;
-
         return $this;
     }
 
@@ -55,7 +54,6 @@ abstract class AbstractAdapter implements AdapterInterface
         if ($this->options === null) {
             $this->options = new AdapterOptions();
         }
-
         return $this->options;
     }
 }

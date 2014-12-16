@@ -30,7 +30,6 @@ class NullTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->adapter = new Adapter\Null(101);
     }
-
     /**
      * Cleans up the environment after running a test.
      */

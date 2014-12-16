@@ -14,12 +14,11 @@ use DOMElement;
 use Zend\Feed\Writer;
 
 /**
- */
+*/
 class AbstractRenderer
 {
     /**
      * Extensions
-     *
      * @var array
      */
     protected $extensions = array();
@@ -125,7 +124,6 @@ class AbstractRenderer
     public function setEncoding($enc)
     {
         $this->encoding = $enc;
-
         return $this;
     }
 
@@ -152,7 +150,6 @@ class AbstractRenderer
             throw new Writer\Exception\InvalidArgumentException('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->ignoreExceptions = $bool;
-
         return $this;
     }
 

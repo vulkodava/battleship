@@ -8,7 +8,6 @@
  */
 
 namespace ZendTest\Soap;
-
 use Zend\Soap\Wsdl;
 
 use Zend\Uri\Uri;
@@ -23,19 +22,19 @@ class WsdlTest extends WsdlTestHelper
 {
     public function testConstructor()
     {
-        $this->assertEquals(Wsdl::WSDL_NS_URI, $this->dom->lookupNamespaceUri(null));
-        $this->assertEquals(Wsdl::SOAP_11_NS_URI, $this->dom->lookupNamespaceUri('soap'));
-        $this->assertEquals(Wsdl::SOAP_12_NS_URI, $this->dom->lookupNamespaceUri('soap12'));
-        $this->assertEquals($this->defaultServiceUri, $this->dom->lookupNamespaceUri('tns'));
-        $this->assertEquals(Wsdl::SOAP_11_NS_URI, $this->dom->lookupNamespaceUri('soap'));
-        $this->assertEquals(Wsdl::XSD_NS_URI, $this->dom->lookupNamespaceUri('xsd'));
-        $this->assertEquals(Wsdl::SOAP_ENC_URI, $this->dom->lookupNamespaceUri('soap-enc'));
-        $this->assertEquals(Wsdl::WSDL_NS_URI, $this->dom->lookupNamespaceUri('wsdl'));
+        $this->assertEquals(Wsdl::WSDL_NS_URI,              $this->dom->lookupNamespaceUri(null));
+        $this->assertEquals(Wsdl::SOAP_11_NS_URI,              $this->dom->lookupNamespaceUri('soap'));
+        $this->assertEquals(Wsdl::SOAP_12_NS_URI,            $this->dom->lookupNamespaceUri('soap12'));
+        $this->assertEquals($this->defaultServiceUri,   $this->dom->lookupNamespaceUri('tns'));
+        $this->assertEquals(Wsdl::SOAP_11_NS_URI,              $this->dom->lookupNamespaceUri('soap'));
+        $this->assertEquals(Wsdl::XSD_NS_URI,            $this->dom->lookupNamespaceUri('xsd'));
+        $this->assertEquals(Wsdl::SOAP_ENC_URI,             $this->dom->lookupNamespaceUri('soap-enc'));
+        $this->assertEquals(Wsdl::WSDL_NS_URI,              $this->dom->lookupNamespaceUri('wsdl'));
 
-        $this->assertEquals(Wsdl::WSDL_NS_URI, $this->dom->documentElement->namespaceURI);
+        $this->assertEquals(Wsdl::WSDL_NS_URI,              $this->dom->documentElement->namespaceURI);
 
-        $this->assertEquals($this->defaultServiceName, $this->dom->documentElement->getAttribute('name'));
-        $this->assertEquals($this->defaultServiceUri, $this->dom->documentElement->getAttribute('targetNamespace'));
+        $this->assertEquals($this->defaultServiceName,  $this->dom->documentElement->getAttribute('name'));
+        $this->assertEquals($this->defaultServiceUri,   $this->dom->documentElement->getAttribute('targetNamespace'));
 
         $this->testDocumentNodes();
     }
@@ -97,18 +96,18 @@ class WsdlTest extends WsdlTestHelper
     public function dataProviderForURITesting()
     {
         return array(
-            array('http://localhost/MyService.php', 'http://localhost/MyService.php'),
-            array('http://localhost/MyNewService.php', 'http://localhost/MyNewService.php'),
-            array(new Uri('http://localhost/MyService.php'), 'http://localhost/MyService.php'),
+            array('http://localhost/MyService.php',                 'http://localhost/MyService.php'),
+            array('http://localhost/MyNewService.php',              'http://localhost/MyNewService.php'),
+            array(new Uri('http://localhost/MyService.php'),        'http://localhost/MyService.php'),
             /**
              * @bug ZF-5736
              */
-            array('http://localhost/MyService.php?a=b&amp;b=c', 'http://localhost/MyService.php?a=b&amp;b=c'),
+            array('http://localhost/MyService.php?a=b&amp;b=c',     'http://localhost/MyService.php?a=b&amp;b=c'),
 
             /**
              * @bug ZF-5736
              */
-            array('http://localhost/MyService.php?a=b&b=c', 'http://localhost/MyService.php?a=b&amp;b=c'),
+            array('http://localhost/MyService.php?a=b&b=c',         'http://localhost/MyService.php?a=b&amp;b=c'),
         );
     }
 
@@ -121,7 +120,7 @@ class WsdlTest extends WsdlTestHelper
     {
         $messageParts = array();
         foreach ($parameters as $i => $parameter) {
-            $messageParts['parameter' . $i] = $this->wsdl->getType($parameter);
+            $messageParts['parameter'.$i] = $this->wsdl->getType($parameter);
         }
 
         $messageName = 'myMessage';
@@ -136,7 +135,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals($messageName, $messageNodes->item(0)->getAttribute('name'));
 
         foreach ($messageParts as $parameterName => $parameterType) {
-            $part = $this->xpath->query('wsdl:part[@name="' . $parameterName . '"]', $messageNodes->item(0));
+            $part = $this->xpath->query('wsdl:part[@name="'.$parameterName.'"]', $messageNodes->item(0));
             $this->assertEquals($parameterType, $part->item(0)->getAttribute('type'));
         }
     }
@@ -150,9 +149,9 @@ class WsdlTest extends WsdlTestHelper
     {
         $messageParts = array();
         foreach ($parameters as $i => $parameter) {
-            $messageParts['parameter' . $i] = array(
-                'type' => $this->wsdl->getType($parameter),
-                'name' => 'parameter' . $i
+            $messageParts['parameter'.$i] = array(
+                'type'      => $this->wsdl->getType($parameter),
+                'name'      => 'parameter'.$i
             );
         }
 
@@ -166,7 +165,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertGreaterThan(0, $messageNodes->length, 'Missing message node in definitions node.');
 
         foreach ($messageParts as $parameterName => $parameterDefinition) {
-            $part = $this->xpath->query('wsdl:part[@name="' . $parameterName . '"]', $messageNodes->item(0));
+            $part = $this->xpath->query('wsdl:part[@name="'.$parameterName.'"]', $messageNodes->item(0));
             $this->assertEquals($parameterDefinition['type'], $part->item(0)->getAttribute('type'));
             $this->assertEquals($parameterDefinition['name'], $part->item(0)->getAttribute('name'));
         }
@@ -215,10 +214,10 @@ class WsdlTest extends WsdlTestHelper
 
         $this->testDocumentNodes();
 
-        $portTypeNodes = $this->xpath->query('//wsdl:definitions/wsdl:portType[@name="' . $portName . '"]');
+        $portTypeNodes = $this->xpath->query('//wsdl:definitions/wsdl:portType[@name="'.$portName.'"]');
         $this->assertGreaterThan(0, $portTypeNodes->length, 'Missing portType node in definitions node.');
 
-        $operationNodes = $this->xpath->query('wsdl:operation[@name="' . $operationName . '"]', $portTypeNodes->item(0));
+        $operationNodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $portTypeNodes->item(0));
         $this->assertGreaterThan(0, $operationNodes->length);
 
         if (empty($inputRequest) AND empty($outputResponse) AND empty($fail)) {
@@ -265,11 +264,11 @@ class WsdlTest extends WsdlTestHelper
         $bindingNodes = $this->xpath->query('//wsdl:definitions/wsdl:binding');
 
         if ($bindingNodes->length === 0) {
-            $this->fail('Missing binding node in definitions node.' . $bindingNodes->length);
+            $this->fail('Missing binding node in definitions node.'.$bindingNodes->length);
         }
 
-        $this->assertEquals('MyServiceBinding', $bindingNodes->item(0)->getAttribute('name'));
-        $this->assertEquals('myPortType', $bindingNodes->item(0)->getAttribute('type'));
+        $this->assertEquals('MyServiceBinding',     $bindingNodes->item(0)->getAttribute('name'));
+        $this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttribute('type'));
     }
 
     /**
@@ -285,15 +284,15 @@ class WsdlTest extends WsdlTestHelper
      * @param null $faultName
      */
     public function testAddBindingOperation($operationName,
-                                            $input = null, $inputEncoding = null,
-                                            $output = null, $outputEncoding = null,
-                                            $fault = null, $faultEncoding = null, $faultName = null)
+        $input = null, $inputEncoding = null,
+        $output = null, $outputEncoding = null,
+        $fault = null, $faultEncoding = null, $faultName = null)
     {
         $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
 
         $inputArray = array();
         if (!empty($input) AND !empty($inputEncoding)) {
-            $inputArray = array('use' => $input, 'encodingStyle' => $inputEncoding);
+            $inputArray = array('use' => $input,     'encodingStyle' => $inputEncoding);
         }
 
         $outputArray = array();
@@ -303,7 +302,7 @@ class WsdlTest extends WsdlTestHelper
 
         $faultArray = array();
         if (!empty($fault) AND !empty($faultEncoding) AND !empty($faultName)) {
-            $faultArray = array('use' => $fault, 'encodingStyle' => $faultEncoding, 'name' => $faultName);
+            $faultArray = array('use' => $fault,     'encodingStyle' => $faultEncoding,     'name'=>$faultName);
         }
 
         $this->wsdl->addBindingOperation($binding,
@@ -319,10 +318,10 @@ class WsdlTest extends WsdlTestHelper
 
         $this->assertGreaterThan(0, $bindingNodes->length, 'Missing binding node in definition.');
 
-        $this->assertEquals('MyServiceBinding', $bindingNodes->item(0)->getAttribute('name'));
-        $this->assertEquals('myPortType', $bindingNodes->item(0)->getAttribute('type'));
+        $this->assertEquals('MyServiceBinding',     $bindingNodes->item(0)->getAttribute('name'));
+        $this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttribute('type'));
 
-        $operationNodes = $this->xpath->query('wsdl:operation[@name="' . $operationName . '"]', $bindingNodes->item(0));
+        $operationNodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $bindingNodes->item(0));
         $this->assertEquals(1, $operationNodes->length, 'Missing operation node in definition.');
 
         if (empty($inputArray) AND empty($outputArray) AND empty($faultArray)) {
@@ -330,9 +329,9 @@ class WsdlTest extends WsdlTestHelper
         }
 
         foreach (array(
-                     '//wsdl:input/soap:body' => $inputArray,
-                     '//wsdl:output/soap:body' => $outputArray,
-                     '//wsdl:fault' => $faultArray
+            '//wsdl:input/soap:body'    => $inputArray,
+            '//wsdl:output/soap:body'   => $outputArray,
+            '//wsdl:fault'              => $faultArray
                  ) as $query => $ar) {
             if (!empty($ar)) {
                 $nodes = $this->xpath->query($query);
@@ -341,7 +340,7 @@ class WsdlTest extends WsdlTestHelper
 
                 foreach ($ar as $key => $val) {
                     $this->assertEquals($ar[$key], $nodes->item(0)->getAttribute($key),
-                        'Bad attribute in operation definition: ' . $key);
+                        'Bad attribute in operation definition: '.$key);
                 }
             }
         }
@@ -358,7 +357,7 @@ class WsdlTest extends WsdlTestHelper
             array('operation', null, null, 'encoded', $enc, 'encoded'),
             array('operation', 'encoded', $enc),
             array('operation', null, null, null, null, 'encoded', $enc, 'myFaultName'),
-            array('operation', 'encoded1', $enc . '1', 'encoded2', $enc . '2', 'encoded3', $enc . '3', 'myFaultName'),
+            array('operation', 'encoded1', $enc.'1', 'encoded2', $enc.'2', 'encoded3', $enc.'3', 'myFaultName'),
 
         );
     }
@@ -456,7 +455,7 @@ class WsdlTest extends WsdlTestHelper
             'operation1',
             array('use' => 'encoded', 'encodingStyle' => $actualUrl),
             array('use' => 'encoded', 'encodingStyle' => $actualUrl),
-            array('name' => 'MyFault', 'use' => 'encoded', 'encodingStyle' => $actualUrl)
+            array('name' => 'MyFault','use' => 'encoded', 'encodingStyle' => $actualUrl)
         );
 
         $nodes = $this->xpath->query('//wsdl:binding[@type="myPortType" and @name="MyServiceBinding"]/wsdl:operation[@name="operation1"]/wsdl:input/soap:body');
@@ -595,7 +594,7 @@ class WsdlTest extends WsdlTestHelper
         $xml->loadXML($content);
 
         $errors = libxml_get_errors();
-        $this->assertEmpty($errors, 'Libxml parsing errors: ' . print_r($errors, 1));
+        $this->assertEmpty($errors, 'Libxml parsing errors: '.print_r($errors, 1));
 
         $this->dom = $this->registerNamespaces($xml);
 
@@ -606,18 +605,18 @@ class WsdlTest extends WsdlTestHelper
 
     public function testGetType()
     {
-        $this->assertEquals('xsd:string', $this->wsdl->getType('string'), 'xsd:string detection failed.');
-        $this->assertEquals('xsd:string', $this->wsdl->getType('str'), 'xsd:string detection failed.');
-        $this->assertEquals('xsd:int', $this->wsdl->getType('int'), 'xsd:int detection failed.');
-        $this->assertEquals('xsd:int', $this->wsdl->getType('integer'), 'xsd:int detection failed.');
-        $this->assertEquals('xsd:float', $this->wsdl->getType('float'), 'xsd:float detection failed.');
-        $this->assertEquals('xsd:double', $this->wsdl->getType('double'), 'xsd:double detection failed.');
-        $this->assertEquals('xsd:boolean', $this->wsdl->getType('boolean'), 'xsd:boolean detection failed.');
-        $this->assertEquals('xsd:boolean', $this->wsdl->getType('bool'), 'xsd:boolean detection failed.');
-        $this->assertEquals('soap-enc:Array', $this->wsdl->getType('array'), 'soap-enc:Array detection failed.');
-        $this->assertEquals('xsd:struct', $this->wsdl->getType('object'), 'xsd:struct detection failed.');
-        $this->assertEquals('xsd:anyType', $this->wsdl->getType('mixed'), 'xsd:anyType detection failed.');
-        $this->assertEquals('', $this->wsdl->getType('void'), 'void  detection failed.');
+        $this->assertEquals('xsd:string',       $this->wsdl->getType('string'),  'xsd:string detection failed.');
+        $this->assertEquals('xsd:string',       $this->wsdl->getType('str'),     'xsd:string detection failed.');
+        $this->assertEquals('xsd:int',          $this->wsdl->getType('int'),     'xsd:int detection failed.');
+        $this->assertEquals('xsd:int',          $this->wsdl->getType('integer'), 'xsd:int detection failed.');
+        $this->assertEquals('xsd:float',        $this->wsdl->getType('float'),   'xsd:float detection failed.');
+        $this->assertEquals('xsd:double',       $this->wsdl->getType('double'),  'xsd:double detection failed.');
+        $this->assertEquals('xsd:boolean',      $this->wsdl->getType('boolean'), 'xsd:boolean detection failed.');
+        $this->assertEquals('xsd:boolean',      $this->wsdl->getType('bool'),    'xsd:boolean detection failed.');
+        $this->assertEquals('soap-enc:Array',   $this->wsdl->getType('array'),   'soap-enc:Array detection failed.');
+        $this->assertEquals('xsd:struct',       $this->wsdl->getType('object'),  'xsd:struct detection failed.');
+        $this->assertEquals('xsd:anyType',      $this->wsdl->getType('mixed'),   'xsd:anyType detection failed.');
+        $this->assertEquals('',                 $this->wsdl->getType('void'),    'void  detection failed.');
     }
 
     public function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
@@ -721,7 +720,7 @@ class WsdlTest extends WsdlTestHelper
     public function testTranslateTypeFromClassMap()
     {
         $this->wsdl->setClassMap(array(
-            'SomeType' => 'SomeOtherType'
+            'SomeType'=>'SomeOtherType'
         ));
 
         $this->assertEquals('SomeOtherType', $this->wsdl->translateType('SomeType'));
@@ -741,12 +740,12 @@ class WsdlTest extends WsdlTestHelper
     public function dataProviderForTranslateType()
     {
         return array(
-            array('\\SomeType', 'SomeType'),
-            array('SomeType\\', 'SomeType'),
-            array('\\SomeType\\', 'SomeType'),
-            array('\\SomeNamespace\SomeType\\', 'SomeType'),
-            array('\\SomeNamespace\SomeType\\SomeOtherType', 'SomeOtherType'),
-            array('\\SomeNamespace\SomeType\\SomeOtherType\\YetAnotherType', 'YetAnotherType'),
+            array('\\SomeType','SomeType'),
+            array('SomeType\\','SomeType'),
+            array('\\SomeType\\','SomeType'),
+            array('\\SomeNamespace\SomeType\\','SomeType'),
+            array('\\SomeNamespace\SomeType\\SomeOtherType','SomeOtherType'),
+            array('\\SomeNamespace\SomeType\\SomeOtherType\\YetAnotherType','YetAnotherType'),
         );
     }
 
@@ -757,14 +756,14 @@ class WsdlTest extends WsdlTestHelper
      */
     public function testCaseOfDocBlockParamsDosNotMatterForSoapTypeDetectionZf3910()
     {
-        $this->assertEquals("xsd:string", $this->wsdl->getType("StrIng"));
-        $this->assertEquals("xsd:string", $this->wsdl->getType("sTr"));
-        $this->assertEquals("xsd:int", $this->wsdl->getType("iNt"));
-        $this->assertEquals("xsd:int", $this->wsdl->getType("INTEGER"));
-        $this->assertEquals("xsd:float", $this->wsdl->getType("FLOAT"));
-        $this->assertEquals("xsd:double", $this->wsdl->getType("douBLE"));
+        $this->assertEquals("xsd:string",   $this->wsdl->getType("StrIng"));
+        $this->assertEquals("xsd:string",   $this->wsdl->getType("sTr"));
+        $this->assertEquals("xsd:int",      $this->wsdl->getType("iNt"));
+        $this->assertEquals("xsd:int",      $this->wsdl->getType("INTEGER"));
+        $this->assertEquals("xsd:float",    $this->wsdl->getType("FLOAT"));
+        $this->assertEquals("xsd:double",   $this->wsdl->getType("douBLE"));
 
-        $this->assertEquals("xsd:long", $this->wsdl->getType("long"));
+        $this->assertEquals("xsd:long",     $this->wsdl->getType("long"));
     }
 
     /**
@@ -782,15 +781,15 @@ class WsdlTest extends WsdlTestHelper
         $this->testDocumentNodes();
 
         $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="ArrayOfString"]');
-        $this->assertEquals(1, $nodes->length, "ArrayOfString should appear only once.");
+        $this->assertEquals(1, $nodes->length,  "ArrayOfString should appear only once.");
 
         $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="ArrayOfInt"]');
-        $this->assertEquals(1, $nodes->length, "ArrayOfInt should appear only once.");
+        $this->assertEquals(1, $nodes->length,  "ArrayOfInt should appear only once.");
     }
 
     public function testClassMap()
     {
-        $this->wsdl->setClassMap(array('foo' => 'bar'));
+        $this->wsdl->setClassMap(array('foo'=>'bar'));
 
         $this->assertArrayHasKey('foo', $this->wsdl->getClassMap());
     }
@@ -806,10 +805,10 @@ class WsdlTest extends WsdlTestHelper
     public function testAddElement()
     {
         $element = array(
-            'name' => 'MyElement',
-            'sequence' => array(
+            'name'      => 'MyElement',
+            'sequence'  => array(
                 array('name' => 'myString', 'type' => 'string'),
-                array('name' => 'myInt', 'type' => 'int')
+                array('name' => 'myInt',    'type' => 'int')
             )
         );
 
@@ -817,9 +816,9 @@ class WsdlTest extends WsdlTestHelper
 
         $this->testDocumentNodes();
 
-        $this->assertEquals('tns:' . $element['name'], $newElementName);
+        $this->assertEquals('tns:'.$element['name'], $newElementName);
 
-        $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:element[@name="' . $element['name'] . '"]/xsd:complexType');
+        $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:element[@name="'.$element['name'].'"]/xsd:complexType');
 
         $this->assertEquals(1, $nodes->length);
 
@@ -828,7 +827,7 @@ class WsdlTest extends WsdlTestHelper
         $n = 0;
         foreach ($element['sequence'] as $elementDefinition) {
             $n++;
-            $elementNode = $this->xpath->query('xsd:element[@name="' . $elementDefinition['name'] . '"]', $nodes->item(0)->firstChild);
+            $elementNode = $this->xpath->query('xsd:element[@name="'.$elementDefinition['name'].'"]', $nodes->item(0)->firstChild);
             $this->assertEquals($elementDefinition['type'], $elementNode->item(0)->getAttribute('type'));
         }
 

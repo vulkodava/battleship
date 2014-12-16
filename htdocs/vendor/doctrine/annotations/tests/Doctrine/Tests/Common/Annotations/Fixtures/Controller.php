@@ -167,7 +167,7 @@ class Controller
         $classIds = new \SplObjectStorage();
         $currentIds = array();
         foreach ($changes[1] as $field => $new) {
-            for ($i = 0, $c = count($new); $i < $c; $i++) {
+            for ($i=0,$c=count($new); $i<$c; $i++) {
                 $ace = $new[$i];
 
                 if (null === $ace->getId()) {
@@ -200,7 +200,7 @@ class Controller
         }
 
         foreach ($changes[0] as $old) {
-            for ($i = 0, $c = count($old); $i < $c; $i++) {
+            for ($i=0,$c=count($old); $i<$c; $i++) {
                 $ace = $old[$i];
 
                 if (!isset($currentIds[$ace->getId()])) {
@@ -225,7 +225,7 @@ class Controller
         $sids = new \SplObjectStorage();
         $classIds = new \SplObjectStorage();
         $currentIds = array();
-        for ($i = 0, $c = count($new); $i < $c; $i++) {
+        for ($i=0,$c=count($new); $i<$c; $i++) {
             $ace = $new[$i];
 
             if (null === $ace->getId()) {
@@ -256,7 +256,7 @@ class Controller
             }
         }
 
-        for ($i = 0, $c = count($old); $i < $c; $i++) {
+        for ($i=0,$c=count($old); $i<$c; $i++) {
             $ace = $old[$i];
 
             if (!isset($currentIds[$ace->getId()])) {

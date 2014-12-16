@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -36,7 +36,7 @@ class AuthenticationIdentityProviderTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->authService = $this->getMock('Zend\Authentication\AuthenticationService');
-        $this->provider = new AuthenticationIdentityProvider($this->authService);
+        $this->provider    = new AuthenticationIdentityProvider($this->authService);
     }
 
     /**
@@ -100,7 +100,7 @@ class AuthenticationIdentityProviderTest extends PHPUnit_Framework_TestCase
     {
         $role1 = $this->getMock('Zend\Permissions\Acl\Role\RoleInterface');
         $role2 = $this->getMock('Zend\Permissions\Acl\Role\RoleInterface');
-        $user = $this->getMock('BjyAuthorize\Provider\Role\ProviderInterface');
+        $user  = $this->getMock('BjyAuthorize\Provider\Role\ProviderInterface');
 
         $user->expects($this->once())
             ->method('getRoles')

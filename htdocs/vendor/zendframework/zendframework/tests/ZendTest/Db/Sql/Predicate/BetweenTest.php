@@ -70,6 +70,7 @@ class BetweenTest extends TestCase
     }
 
 
+
     /**
      * @covers Zend\Db\Sql\Predicate\Between::setIdentifier
      * @covers Zend\Db\Sql\Predicate\Between::getIdentifier
@@ -116,8 +117,8 @@ class BetweenTest extends TestCase
     public function testRetrievingWherePartsReturnsSpecificationArrayOfIdentifierAndValuesAndArrayOfTypes()
     {
         $this->between->setIdentifier('foo.bar')
-            ->setMinValue(10)
-            ->setMaxValue(19);
+                      ->setMinValue(10)
+                      ->setMaxValue(19);
         $expected = array(array(
             $this->between->getSpecification(),
             array('foo.bar', 10, 19),

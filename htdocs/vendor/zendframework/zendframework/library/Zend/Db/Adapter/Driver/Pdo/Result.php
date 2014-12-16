@@ -17,7 +17,7 @@ use Zend\Db\Adapter\Exception;
 class Result implements Iterator, ResultInterface
 {
     const STATEMENT_MODE_SCROLLABLE = 'scrollable';
-    const STATEMENT_MODE_FORWARD = 'forward';
+    const STATEMENT_MODE_FORWARD    = 'forward';
 
     /**
      *
@@ -37,21 +37,18 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Is the current complete?
-     *
      * @var bool
      */
     protected $currentComplete = false;
 
     /**
      * Track current item in recordset
-     *
      * @var mixed
      */
     protected $currentData = null;
 
     /**
      * Current position of scrollable statement
-     *
      * @var int
      */
     protected $position = -1;
@@ -71,7 +68,7 @@ class Result implements Iterator, ResultInterface
      *
      * @param  PDOStatement $resource
      * @param               $generatedValue
-     * @param  int $rowCount
+     * @param  int          $rowCount
      * @return Result
      */
     public function initialize(PDOStatement $resource, $generatedValue, $rowCount = null)
@@ -111,7 +108,6 @@ class Result implements Iterator, ResultInterface
 
     /**
      * Get the data
-     *
      * @return array
      */
     public function current()
@@ -122,7 +118,6 @@ class Result implements Iterator, ResultInterface
 
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         $this->currentComplete = true;
-
         return $this->currentData;
     }
 
@@ -136,7 +131,6 @@ class Result implements Iterator, ResultInterface
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         $this->currentComplete = true;
         $this->position++;
-
         return $this->currentData;
     }
 
@@ -187,11 +181,10 @@ class Result implements Iterator, ResultInterface
             return $this->rowCount;
         }
         if ($this->rowCount instanceof \Closure) {
-            $this->rowCount = (int)call_user_func($this->rowCount);
+            $this->rowCount = (int) call_user_func($this->rowCount);
         } else {
-            $this->rowCount = (int)$this->resource->rowCount();
+            $this->rowCount = (int) $this->resource->rowCount();
         }
-
         return $this->rowCount;
     }
 

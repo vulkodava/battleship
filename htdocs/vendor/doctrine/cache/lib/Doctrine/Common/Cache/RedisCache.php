@@ -108,13 +108,12 @@ class RedisCache extends CacheProvider
     protected function doGetStats()
     {
         $info = $this->redis->info();
-
         return array(
-            Cache::STATS_HITS => false,
+            Cache::STATS_HITS   => false,
             Cache::STATS_MISSES => false,
             Cache::STATS_UPTIME => $info['uptime_in_seconds'],
-            Cache::STATS_MEMORY_USAGE => $info['used_memory'],
-            Cache::STATS_MEMORY_AVAILABLE => false
+            Cache::STATS_MEMORY_USAGE      => $info['used_memory'],
+            Cache::STATS_MEMORY_AVAILABLE  => false
         );
     }
 

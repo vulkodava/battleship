@@ -20,8 +20,8 @@ class SeparatorToSeparatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesWordsByDefault()
     {
-        $string = 'dash separated words';
-        $filter = new SeparatorToSeparatorFilter();
+        $string   = 'dash separated words';
+        $filter   = new SeparatorToSeparatorFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -30,7 +30,7 @@ class SeparatorToSeparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSupportArray()
     {
-        $filter = new SeparatorToSeparatorFilter();
+        $filter   = new SeparatorToSeparatorFilter();
 
         $input = array(
             'dash separated words',
@@ -47,8 +47,8 @@ class SeparatorToSeparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSeparatesWordsWithSearchSpecified()
     {
-        $string = 'dash=separated=words';
-        $filter = new SeparatorToSeparatorFilter('=');
+        $string   = 'dash=separated=words';
+        $filter   = new SeparatorToSeparatorFilter('=');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -57,8 +57,8 @@ class SeparatorToSeparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSeparatesWordsWithSearchAndReplacementSpecified()
     {
-        $string = 'dash=separated=words';
-        $filter = new SeparatorToSeparatorFilter('=', '?');
+        $string   = 'dash=separated=words';
+        $filter   = new SeparatorToSeparatorFilter('=', '?');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

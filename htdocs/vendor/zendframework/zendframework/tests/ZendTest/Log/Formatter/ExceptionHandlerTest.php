@@ -22,29 +22,29 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         $date = new DateTime();
 
         $event = array(
-            'timestamp' => $date,
-            'message' => 'test',
-            'priority' => 1,
+            'timestamp'    => $date,
+            'message'      => 'test',
+            'priority'     => 1,
             'priorityName' => 'CRIT',
             'extra' => array(
-                'file' => 'test.php',
-                'line' => 1,
+                'file'  => 'test.php',
+                'line'  => 1,
                 'trace' => array(
                     array(
-                        'file' => 'test.php',
-                        'line' => 1,
+                        'file'     => 'test.php',
+                        'line'     => 1,
                         'function' => 'test',
-                        'class' => 'Test',
-                        'type' => '::',
-                        'args' => array(1)
+                        'class'    => 'Test',
+                        'type'     => '::',
+                        'args'     => array(1)
                     ),
                     array(
-                        'file' => 'test.php',
-                        'line' => 2,
+                        'file'     => 'test.php',
+                        'line'     => 2,
                         'function' => 'test',
-                        'class' => 'Test',
-                        'type' => '::',
-                        'args' => array(1)
+                        'class'    => 'Test',
+                        'type'     => '::',
+                        'args'     => array(1)
                     )
                 )
             )
@@ -87,13 +87,13 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         $date = new DateTime();
 
         $event = array(
-            'timestamp' => $date,
-            'message' => 'test',
-            'priority' => 1,
+            'timestamp'    => $date,
+            'message'      => 'test',
+            'priority'     => 1,
             'priorityName' => 'CRIT',
             'extra' => array(
-                'file' => 'test.php',
-                'line' => 1,
+                'file'  => 'test.php',
+                'line'  => 1,
             ),
         );
 

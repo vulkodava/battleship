@@ -24,21 +24,21 @@ class FilesystemCacheTest extends BaseFileCacheTest
         $this->assertEquals('testing this out', $cache->fetch('test_key'));
 
         // access private methods
-        $getFilename = new \ReflectionMethod($cache, 'getFilename');
-        $getNamespacedId = new \ReflectionMethod($cache, 'getNamespacedId');
+        $getFilename        = new \ReflectionMethod($cache, 'getFilename');
+        $getNamespacedId    = new \ReflectionMethod($cache, 'getNamespacedId');
 
         $getFilename->setAccessible(true);
         $getNamespacedId->setAccessible(true);
 
-        $id = $getNamespacedId->invoke($cache, 'test_key');
-        $filename = $getFilename->invoke($cache, $id);
+        $id         = $getNamespacedId->invoke($cache, 'test_key');
+        $filename   = $getFilename->invoke($cache, $id);
 
-        $data = '';
-        $lifetime = 0;
-        $resource = fopen($filename, "r");
+        $data       = '';
+        $lifetime   = 0;
+        $resource   = fopen($filename, "r");
 
         if (false !== ($line = fgets($resource))) {
-            $lifetime = (integer)$line;
+            $lifetime = (integer) $line;
         }
 
         while (false !== ($line = fgets($resource))) {

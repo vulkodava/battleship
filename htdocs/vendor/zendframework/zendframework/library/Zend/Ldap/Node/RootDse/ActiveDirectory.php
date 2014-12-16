@@ -219,7 +219,6 @@ class ActiveDirectory extends Node\RootDse
     public function getSchemaDn()
     {
         $schemaDn = $this->getSchemaNamingContext();
-
         return Ldap\Dn::fromString($schemaDn);
     }
 }

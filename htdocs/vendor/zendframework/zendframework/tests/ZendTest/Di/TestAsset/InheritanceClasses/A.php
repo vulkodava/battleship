@@ -16,7 +16,6 @@ class A
     public function setTest($test)
     {
         $this->test = $test;
-
         return $this;
     }
 }

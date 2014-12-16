@@ -22,7 +22,7 @@ class ToTest extends \PHPUnit_Framework_TestCase
     public function testHeaderFoldingOccursProperly()
     {
         $header = new Header\To();
-        $list = $header->getAddressList();
+        $list   = $header->getAddressList();
         for ($i = 0; $i < 10; $i++) {
             $list->add($i . '@zend.com');
         }

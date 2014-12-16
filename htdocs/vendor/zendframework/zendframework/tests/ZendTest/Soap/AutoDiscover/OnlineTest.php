@@ -30,7 +30,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
     public function testNestedObjectArrayResponse()
     {
-        $wsdl = $this->baseuri . "/server1.php?wsdl";
+        $wsdl = $this->baseuri."/server1.php?wsdl";
 
         $b = new \ZendTest_Soap_TestAsset_ComplexTypeB();
         $b->bar = "test";
@@ -39,28 +39,28 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $client = new Client($wsdl);
         $ret = $client->request($b);
 
-        $this->assertTrue(is_array($ret));
-        $this->assertEquals(1, count($ret));
-        $this->assertTrue(is_array($ret[0]->baz));
-        $this->assertEquals(3, count($ret[0]->baz));
+        $this->assertTrue( is_array($ret) );
+        $this->assertEquals(1, count($ret) );
+        $this->assertTrue( is_array($ret[0]->baz) );
+        $this->assertEquals(3, count($ret[0]->baz) );
 
         $baz = $ret[0]->baz;
-        $this->assertEquals("bar", $baz[0]->bar);
-        $this->assertEquals("bar", $baz[0]->foo);
-        $this->assertEquals("foo", $baz[1]->bar);
-        $this->assertEquals("foo", $baz[1]->foo);
+        $this->assertEquals("bar",  $baz[0]->bar);
+        $this->assertEquals("bar",  $baz[0]->foo);
+        $this->assertEquals("foo",  $baz[1]->bar);
+        $this->assertEquals("foo",  $baz[1]->foo);
         $this->assertEquals("test", $baz[2]->bar);
         $this->assertEquals("test", $baz[2]->foo);
     }
 
     public function testObjectResponse()
     {
-        $wsdl = $this->baseuri . "/server2.php?wsdl";
+        $wsdl = $this->baseuri."/server2.php?wsdl";
 
         $client = new Client($wsdl);
         $ret = $client->request("test", "test");
 
-        $this->assertTrue(($ret instanceof \stdClass));
+        $this->assertTrue( ($ret instanceof \stdClass) );
         $this->assertEquals("test", $ret->foo);
         $this->assertEquals("test", $ret->bar);
     }

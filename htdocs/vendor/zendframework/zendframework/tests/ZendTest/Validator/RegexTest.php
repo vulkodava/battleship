@@ -32,7 +32,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array('/[a-z]/', true, array('abc123', 'foo', 'a', 'z')),
             array('/[a-z]/', false, array('123', 'A'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             $validator = new Regex($element[0]);
             foreach ($element[2] as $input) {
@@ -91,7 +91,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Regex('/^[[:alpha:]\']+$/iu');
         $this->assertEquals($expected, $validator->isValid($input),
-            'Reason: ' . implode('', $validator->getMessages()));
+                            'Reason: ' . implode('', $validator->getMessages()));
     }
 
     /**
@@ -116,13 +116,13 @@ class RegexTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Regex('//');
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-            'messageTemplates', $validator);
+                                     'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = new Regex('//');
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
-            'messageVariables', $validator);
+                                     'messageVariables', $validator);
     }
 }

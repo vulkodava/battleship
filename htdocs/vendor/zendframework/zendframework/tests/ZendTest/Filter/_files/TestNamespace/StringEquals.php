@@ -41,11 +41,10 @@ class StringEquals extends AbstractValidator
     {
         $this->setValue($value);
 
-        $initial = (string)current((array)$value);
-        foreach ((array)$value as $element) {
-            if ((string)$element !== $initial) {
+        $initial = (string) current((array) $value);
+        foreach ((array) $value as $element) {
+            if ((string) $element !== $initial) {
                 $this->error(self::NOT_EQUALS);
-
                 return false;
             }
         }

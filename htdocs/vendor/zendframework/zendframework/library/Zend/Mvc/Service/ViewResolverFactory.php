@@ -29,7 +29,6 @@ class ViewResolverFactory implements FactoryInterface
         $resolver = new ViewResolver\AggregateResolver();
         $resolver->attach($serviceLocator->get('ViewTemplateMapResolver'));
         $resolver->attach($serviceLocator->get('ViewTemplatePathStack'));
-
         return $resolver;
     }
 }

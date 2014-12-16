@@ -64,9 +64,8 @@ class FingersCrossed extends AbstractWriter
      * Constructor
      *
      * @param WriterInterface|string|array|Traversable $writer Wrapped writer or array of configuration options
-     * @param FilterInterface|int $filterOrPriority            Filter or log priority which determines buffering of
-     *                                                         events
-     * @param int $bufferSize                                  Maximum buffer size
+     * @param FilterInterface|int $filterOrPriority Filter or log priority which determines buffering of events
+     * @param int $bufferSize Maximum buffer size
      */
     public function __construct($writer, $filterOrPriority = null, $bufferSize = 0)
     {
@@ -78,8 +77,8 @@ class FingersCrossed extends AbstractWriter
 
         if (is_array($writer)) {
             $filterOrPriority = isset($writer['priority']) ? $writer['priority'] : null;
-            $bufferSize = isset($writer['bufferSize']) ? $writer['bufferSize'] : null;
-            $writer = isset($writer['writer']) ? $writer['writer'] : null;
+            $bufferSize       = isset($writer['bufferSize']) ? $writer['bufferSize'] : null;
+            $writer           = isset($writer['writer']) ? $writer['writer'] : null;
         }
 
         if (null === $filterOrPriority) {
@@ -120,7 +119,6 @@ class FingersCrossed extends AbstractWriter
         }
 
         $this->writer = $writer;
-
         return $this;
     }
 
@@ -134,7 +132,6 @@ class FingersCrossed extends AbstractWriter
         if (null === $this->writerPlugins) {
             $this->setWriterPluginManager(new WriterPluginManager());
         }
-
         return $this->writerPlugins;
     }
 
@@ -159,7 +156,6 @@ class FingersCrossed extends AbstractWriter
         }
 
         $this->writerPlugins = $plugins;
-
         return $this;
     }
 
@@ -199,7 +195,6 @@ class FingersCrossed extends AbstractWriter
                 return false;
             }
         }
-
         return true;
     }
 
@@ -213,7 +208,6 @@ class FingersCrossed extends AbstractWriter
     {
         if (!$this->buffering) {
             $this->writer->write($event);
-
             return;
         }
 

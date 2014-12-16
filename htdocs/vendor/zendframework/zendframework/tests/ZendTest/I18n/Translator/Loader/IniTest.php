@@ -49,7 +49,7 @@ class IniTest extends TestCase
     {
         $loader = new IniLoader();
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
-            'Each INI row must be an array with message and translation');
+                                    'Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed.ini');
     }
 
@@ -57,7 +57,7 @@ class IniTest extends TestCase
     {
         $loader = new IniLoader();
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
-            'Each INI row must be an array with message and translation');
+                                    'Each INI row must be an array with message and translation');
         $loader->load('en_EN', $this->testFilesDir . '/failed_syntax.ini');
     }
 
@@ -90,7 +90,7 @@ class IniTest extends TestCase
 
     public function testLoaderLoadsPluralRules()
     {
-        $loader = new IniLoader();
+        $loader     = new IniLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.ini');
 
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));

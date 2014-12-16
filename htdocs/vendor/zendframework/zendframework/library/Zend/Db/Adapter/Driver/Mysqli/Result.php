@@ -29,21 +29,18 @@ class Result implements
 
     /**
      * Cursor position
-     *
      * @var int
      */
     protected $position = 0;
 
     /**
      * Number of known rows
-     *
      * @var int
      */
     protected $numberOfRows = -1;
 
     /**
      * Is the current() operation already complete for this pointer position?
-     *
      * @var bool
      */
     protected $currentComplete = false;
@@ -88,15 +85,13 @@ class Result implements
             $this->isBuffered = $isBuffered;
         } else {
             if ($resource instanceof \mysqli || $resource instanceof \mysqli_result
-                || $resource instanceof \mysqli_stmt && $resource->num_rows != 0
-            ) {
+                || $resource instanceof \mysqli_stmt && $resource->num_rows != 0) {
                 $this->isBuffered = true;
             }
         }
 
         $this->resource = $resource;
         $this->generatedValue = $generatedValue;
-
         return $this;
     }
 
@@ -173,11 +168,9 @@ class Result implements
 
         if ($this->resource instanceof \mysqli_stmt) {
             $this->loadDataFromMysqliStatement();
-
             return $this->currentData;
         } else {
             $this->loadFromMysqliResult();
-
             return $this->currentData;
         }
     }
@@ -187,7 +180,6 @@ class Result implements
      *
      * Mysqli requires you to bind variables to the extension in order to
      * get data out.  These values have to be references:
-     *
      * @see http://php.net/manual/en/mysqli-stmt.bind-result.php
      *
      * @throws Exception\RuntimeException
@@ -215,7 +207,6 @@ class Result implements
             if (!$this->isBuffered) {
                 $this->resource->close();
             }
-
             return false;
         } elseif ($r === false) {
             throw new Exception\RuntimeException($this->resource->error);
@@ -228,7 +219,6 @@ class Result implements
         $this->currentComplete = true;
         $this->nextComplete = true;
         $this->position++;
-
         return true;
     }
 
@@ -250,7 +240,6 @@ class Result implements
         $this->currentComplete = true;
         $this->nextComplete = true;
         $this->position++;
-
         return true;
     }
 
@@ -327,7 +316,6 @@ class Result implements
         if ($this->isBuffered === false) {
             throw new Exception\RuntimeException('Row count is not available in unbuffered result sets.');
         }
-
         return $this->resource->num_rows;
     }
 

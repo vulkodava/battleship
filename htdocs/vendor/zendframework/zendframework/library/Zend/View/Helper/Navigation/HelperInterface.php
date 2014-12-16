@@ -29,10 +29,10 @@ interface HelperInterface extends BaseHelperInterface
      * Renders helper
      *
      * @param  string|Navigation\AbstractContainer $container [optional] container to render.
-     *                                                        Default is null, which indicates
-     *                                                        that the helper should render
-     *                                                        the container returned by {@link
-     *                                                        getContainer()}.
+     *                                         Default is null, which indicates
+     *                                         that the helper should render
+     *                                         the container returned by {@link
+     *                                         getContainer()}.
      * @return string helper output
      * @throws \Zend\View\Exception\ExceptionInterface
      */
@@ -65,9 +65,9 @@ interface HelperInterface extends BaseHelperInterface
      * Sets navigation container the helper should operate on by default
      *
      * @param  string|Navigation\AbstractContainer $container [optional] container to operate
-     *                                                        on. Default is null, which
-     *                                                        indicates that the container
-     *                                                        should be reset.
+     *                                         on. Default is null, which
+     *                                         indicates that the container
+     *                                         should be reset.
      * @return HelperInterface
      */
     public function setContainer($container = null);

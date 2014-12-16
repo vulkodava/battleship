@@ -80,7 +80,7 @@ class FileResolver implements ResolverInterface
      * @param  string $username Username
      * @param  string $realm    Authentication Realm
      * @return string|false User's shared secret, if the user is found in the
-     *                          realm, false otherwise.
+     *         realm, false otherwise.
      * @throws Exception\ExceptionInterface
      */
     public function resolve($username, $realm, $password = null)
@@ -102,7 +102,7 @@ class FileResolver implements ResolverInterface
 
         // Open file, read through looking for matching credentials
         ErrorHandler::start(E_WARNING);
-        $fp = fopen($this->file, 'r');
+        $fp     = fopen($this->file, 'r');
         $error = ErrorHandler::stop();
         if (!$fp) {
             throw new Exception\RuntimeException('Unable to open password file: ' . $this->file, 0, $error);
@@ -114,13 +114,11 @@ class FileResolver implements ResolverInterface
             if ($line[0] == $username && $line[1] == $realm) {
                 $password = $line[2];
                 fclose($fp);
-
                 return $password;
             }
         }
 
         fclose($fp);
-
         return false;
     }
 }

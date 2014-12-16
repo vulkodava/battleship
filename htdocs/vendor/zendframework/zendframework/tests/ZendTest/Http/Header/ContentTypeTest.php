@@ -36,7 +36,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     {
         $header = new ContentType();
         $header->setMediaType('application/atom+xml')
-            ->setCharset('ISO-8859-1');
+               ->setCharset('ISO-8859-1');
 
         $this->assertEquals('Content-Type: application/atom+xml; charset=ISO-8859-1', $header->toString());
     }
@@ -102,7 +102,6 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
             'application/vendor.foobar+xml',
             '*/vnd.foobar+json',
         );
-
         return array(
             'array' => array($criteria),
             'string' => array(implode(',', $criteria)),

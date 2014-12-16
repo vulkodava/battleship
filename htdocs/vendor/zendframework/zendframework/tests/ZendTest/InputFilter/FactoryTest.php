@@ -34,7 +34,7 @@ class FactoryTest extends TestCase
 
     public function testFactoryAllowsInjectingFilterChain()
     {
-        $factory = new Factory();
+        $factory     = new Factory();
         $filterChain = new Filter\FilterChain();
         $factory->setDefaultFilterChain($filterChain);
         $this->assertSame($filterChain, $factory->getDefaultFilterChain());
@@ -42,7 +42,7 @@ class FactoryTest extends TestCase
 
     public function testFactoryAllowsInjectingValidatorChain()
     {
-        $factory = new Factory();
+        $factory        = new Factory();
         $validatorChain = new Validator\ValidatorChain();
         $factory->setDefaultValidatorChain($validatorChain);
         $this->assertSame($validatorChain, $factory->getDefaultValidatorChain());
@@ -50,8 +50,8 @@ class FactoryTest extends TestCase
 
     public function testFactoryUsesComposedFilterChainWhenCreatingNewInputObjects()
     {
-        $factory = new Factory();
-        $filterChain = new Filter\FilterChain();
+        $factory       = new Factory();
+        $filterChain   = new Filter\FilterChain();
         $pluginManager = new Filter\FilterPluginManager();
         $filterChain->setPluginManager($pluginManager);
         $factory->setDefaultFilterChain($filterChain);
@@ -66,8 +66,8 @@ class FactoryTest extends TestCase
 
     public function testFactoryUsesComposedValidatorChainWhenCreatingNewInputObjects()
     {
-        $factory = new Factory();
-        $validatorChain = new Validator\ValidatorChain();
+        $factory          = new Factory();
+        $validatorChain   = new Validator\ValidatorChain();
         $validatorPlugins = new Validator\ValidatorPluginManager();
         $validatorChain->setPluginManager($validatorPlugins);
         $factory->setDefaultValidatorChain($validatorChain);
@@ -82,11 +82,11 @@ class FactoryTest extends TestCase
 
     public function testFactoryInjectsComposedFilterAndValidatorChainsIntoInputObjectsWhenCreatingNewInputFilterObjects()
     {
-        $factory = new Factory();
-        $filterPlugins = new Filter\FilterPluginManager();
+        $factory          = new Factory();
+        $filterPlugins    = new Filter\FilterPluginManager();
         $validatorPlugins = new Validator\ValidatorPluginManager();
-        $filterChain = new Filter\FilterChain();
-        $validatorChain = new Validator\ValidatorChain();
+        $filterChain      = new Filter\FilterChain();
+        $validatorChain   = new Validator\ValidatorChain();
         $filterChain->setPluginManager($filterPlugins);
         $validatorChain->setPluginManager($validatorPlugins);
         $factory->setDefaultFilterChain($filterChain);
@@ -101,7 +101,7 @@ class FactoryTest extends TestCase
         $this->assertEquals(1, count($inputFilter));
         $input = $inputFilter->get('foo');
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
-        $inputFilterChain = $input->getFilterChain();
+        $inputFilterChain    = $input->getFilterChain();
         $inputValidatorChain = $input->getValidatorChain();
         $this->assertSame($filterPlugins, $inputFilterChain->getPluginManager());
         $this->assertSame($validatorPlugins, $inputValidatorChain->getPluginManager());
@@ -109,10 +109,10 @@ class FactoryTest extends TestCase
 
     public function testFactoryWillCreateInputWithSuggestedFilters()
     {
-        $factory = new Factory();
+        $factory      = new Factory();
         $htmlEntities = new Filter\HtmlEntities();
         $input = $factory->createInput(array(
-            'name' => 'foo',
+            'name'    => 'foo',
             'filters' => array(
                 array(
                     'name' => 'string_trim',
@@ -152,9 +152,9 @@ class FactoryTest extends TestCase
     public function testFactoryWillCreateInputWithSuggestedValidators()
     {
         $factory = new Factory();
-        $digits = new Validator\Digits();
+        $digits  = new Validator\Digits();
         $input = $factory->createInput(array(
-            'name' => 'foo',
+            'name'       => 'foo',
             'validators' => array(
                 array(
                     'name' => 'not_empty',
@@ -196,8 +196,8 @@ class FactoryTest extends TestCase
     public function testFactoryWillCreateInputWithSuggestedRequiredFlagAndImpliesAllowEmptyFlag()
     {
         $factory = new Factory();
-        $input = $factory->createInput(array(
-            'name' => 'foo',
+        $input   = $factory->createInput(array(
+            'name'     => 'foo',
             'required' => false,
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
@@ -208,8 +208,8 @@ class FactoryTest extends TestCase
     public function testFactoryWillCreateInputWithSuggestedRequiredFlagAndAlternativeAllowEmptyFlag()
     {
         $factory = new Factory();
-        $input = $factory->createInput(array(
-            'name' => 'foo',
+        $input   = $factory->createInput(array(
+            'name'     => 'foo',
             'required' => false,
             'allow_empty' => false,
         ));
@@ -221,8 +221,8 @@ class FactoryTest extends TestCase
     public function testFactoryWillCreateInputWithSuggestedAllowEmptyFlagAndImpliesRequiredFlag()
     {
         $factory = new Factory();
-        $input = $factory->createInput(array(
-            'name' => 'foo',
+        $input   = $factory->createInput(array(
+            'name'        => 'foo',
             'allow_empty' => true,
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
@@ -233,8 +233,8 @@ class FactoryTest extends TestCase
     public function testFactoryWillCreateInputWithSuggestedName()
     {
         $factory = new Factory();
-        $input = $factory->createInput(array(
-            'name' => 'foo',
+        $input   = $factory->createInput(array(
+            'name'        => 'foo',
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $this->assertEquals('foo', $input->getName());
@@ -244,7 +244,7 @@ class FactoryTest extends TestCase
     {
         $factory = new Factory();
         $input = $factory->createInput(array(
-            'name' => 'foo',
+            'name'              => 'foo',
             'continue_if_empty' => true,
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
@@ -281,11 +281,11 @@ class FactoryTest extends TestCase
 
     public function testFactoryWillCreateInputFilterAndAllInputObjectsFromGivenConfiguration()
     {
-        $factory = new Factory();
+        $factory     = new Factory();
         $inputFilter = $factory->createInputFilter(array(
             'foo' => array(
-                'name' => 'foo',
-                'required' => false,
+                'name'       => 'foo',
+                'required'   => false,
                 'validators' => array(
                     array(
                         'name' => 'not_empty',
@@ -301,7 +301,7 @@ class FactoryTest extends TestCase
             ),
             'bar' => array(
                 'allow_empty' => true,
-                'filters' => array(
+                'filters'     => array(
                     array(
                         'name' => 'string_trim',
                     ),
@@ -314,10 +314,10 @@ class FactoryTest extends TestCase
                 ),
             ),
             'baz' => array(
-                'type' => 'Zend\InputFilter\InputFilter',
+                'type'   => 'Zend\InputFilter\InputFilter',
                 'foo' => array(
-                    'name' => 'foo',
-                    'required' => false,
+                    'name'       => 'foo',
+                    'required'   => false,
                     'validators' => array(
                         array(
                             'name' => 'not_empty',
@@ -333,7 +333,7 @@ class FactoryTest extends TestCase
                 ),
                 'bar' => array(
                     'allow_empty' => true,
-                    'filters' => array(
+                    'filters'     => array(
                         array(
                             'name' => 'string_trim',
                         ),
@@ -397,7 +397,7 @@ class FactoryTest extends TestCase
 
     public function testFactoryWillCreateInputFilterMatchingInputNameWhenNotSpecified()
     {
-        $factory = new Factory();
+        $factory     = new Factory();
         $inputFilter = $factory->createInputFilter(array(
             array('name' => 'foo')
         ));
@@ -409,9 +409,9 @@ class FactoryTest extends TestCase
     public function testFactoryAllowsPassingValidatorChainsInInputSpec()
     {
         $factory = new Factory();
-        $chain = new Validator\ValidatorChain();
-        $input = $factory->createInput(array(
-            'name' => 'foo',
+        $chain   = new Validator\ValidatorChain();
+        $input   = $factory->createInput(array(
+            'name'       => 'foo',
             'validators' => $chain,
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
@@ -422,9 +422,9 @@ class FactoryTest extends TestCase
     public function testFactoryAllowsPassingFilterChainsInInputSpec()
     {
         $factory = new Factory();
-        $chain = new Filter\FilterChain();
-        $input = $factory->createInput(array(
-            'name' => 'foo',
+        $chain   = new Filter\FilterChain();
+        $input   = $factory->createInput(array(
+            'name'    => 'foo',
             'filters' => $chain,
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
@@ -437,10 +437,10 @@ class FactoryTest extends TestCase
         $factory = new Factory();
 
         $inputFilter = $factory->createInputFilter(array(
-            'type' => 'Zend\InputFilter\CollectionInputFilter',
-            'required' => true,
+            'type'        => 'Zend\InputFilter\CollectionInputFilter',
+            'required'    => true,
             'inputfilter' => new InputFilter(),
-            'count' => 3,
+            'count'       => 3,
         ));
 
         $this->assertInstanceOf('Zend\InputFilter\CollectionInputFilter', $inputFilter);
@@ -452,8 +452,8 @@ class FactoryTest extends TestCase
     public function testFactoryWillCreateInputWithErrorMessage()
     {
         $factory = new Factory();
-        $input = $factory->createInput(array(
-            'name' => 'foo',
+        $input   = $factory->createInput(array(
+            'name'          => 'foo',
             'error_message' => 'My custom error message',
         ));
         $this->assertEquals('My custom error message', $input->getErrorMessage());
@@ -463,19 +463,19 @@ class FactoryTest extends TestCase
     {
         //Reminder: Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
         $factory = new Factory();
-        $input = $factory->createInput(array(
-            'name' => 'foo',
+        $input   = $factory->createInput(array(
+            'name'    => 'foo',
             'filters' => array(
                 array(
-                    'name' => 'string_trim',
-                    'priority' => \Zend\Filter\FilterChain::DEFAULT_PRIORITY - 1 // 999
+                    'name'      => 'string_trim',
+                    'priority'  => \Zend\Filter\FilterChain::DEFAULT_PRIORITY - 1 // 999
                 ),
                 array(
-                    'name' => 'string_to_upper',
-                    'priority' => \Zend\Filter\FilterChain::DEFAULT_PRIORITY + 1 //1001
+                    'name'      => 'string_to_upper',
+                    'priority'  => \Zend\Filter\FilterChain::DEFAULT_PRIORITY + 1 //1001
                 ),
                 array(
-                    'name' => 'string_to_lower', // default priority 1000
+                    'name'      => 'string_to_lower', // default priority 1000
                 )
             )
         ));
@@ -522,7 +522,7 @@ class FactoryTest extends TestCase
     {
         $factory = new TestAsset\CustomFactory();
         $inputFilter = $factory->createInputFilter(array(
-            'type' => 'collection',
+            'type'        => 'collection',
             'input_filter' => new InputFilter(),
         ));
         $this->assertInstanceOf('ZendTest\InputFilter\TestAsset\CustomFactory', $inputFilter->getFactory());
@@ -534,9 +534,9 @@ class FactoryTest extends TestCase
     public function testCanSetInputErrorMessage()
     {
         $factory = new Factory();
-        $input = $factory->createInput(array(
-            'name' => 'test',
-            'type' => 'Zend\InputFilter\Input',
+        $input   = $factory->createInput(array(
+            'name'          => 'test',
+            'type'          => 'Zend\InputFilter\Input',
             'error_message' => 'Custom error message',
         ));
         $this->assertEquals('Custom error message', $input->getErrorMessage());
@@ -577,7 +577,7 @@ class FactoryTest extends TestCase
     }
 
     /**
-     * @group  5691
+     * @group 5691
      *
      * @covers \Zend\InputFilter\Factory::createInput
      */

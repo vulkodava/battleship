@@ -37,7 +37,6 @@ class SqlServer implements PlatformInterface
             || (($driver instanceof \PDO && in_array($driver->getAttribute(\PDO::ATTR_DRIVER_NAME), array('sqlsrv', 'dblib'))))
         ) {
             $this->resource = $driver;
-
             return $this;
         }
 
@@ -86,7 +85,6 @@ class SqlServer implements PlatformInterface
         if (is_array($identifierChain)) {
             $identifierChain = implode('].[', $identifierChain);
         }
-
         return '[' . $identifierChain . ']';
     }
 
@@ -116,10 +114,9 @@ class SqlServer implements PlatformInterface
         }
         trigger_error(
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-            . 'can introduce security vulnerabilities in a production environment.'
+                . 'can introduce security vulnerabilities in a production environment.'
         );
         $value = addcslashes($value, "\000\032");
-
         return '\'' . str_replace('\'', '\'\'', $value) . '\'';
     }
 
@@ -139,7 +136,6 @@ class SqlServer implements PlatformInterface
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
-
         return '\'' . str_replace('\'', '\'\'', $value) . '\'';
     }
 
@@ -158,7 +154,6 @@ class SqlServer implements PlatformInterface
         do {
             $valueList[key($valueList)] = $this->quoteValue($value);
         } while ($value = next($valueList));
-
         return implode(', ', $valueList);
     }
 
@@ -203,7 +198,6 @@ class SqlServer implements PlatformInterface
                     $parts[$i] = '[' . $part . ']';
             }
         }
-
         return implode('', $parts);
     }
 }

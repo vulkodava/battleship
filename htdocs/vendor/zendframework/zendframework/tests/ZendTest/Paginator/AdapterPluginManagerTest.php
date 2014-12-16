@@ -62,8 +62,8 @@ class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())
-            ->method('createStatement')
-            ->will($this->returnValue($mockStatement));
+                   ->method('createStatement')
+                   ->will($this->returnValue($mockStatement));
         $mockDriver->expects($this->any())
             ->method('formatParameterName')
             ->will($this->returnArgument(0));
@@ -75,9 +75,9 @@ class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
             'Zend\Db\TableGateway\TableGateway',
             array('foobar', $mockAdapter)
         );
-        $where = "foo = bar";
-        $order = "foo";
-        $group = "foo";
+        $where  = "foo = bar";
+        $order  = "foo";
+        $group  = "foo";
         $having = "count(foo)>0";
         $plugin = $this->adapaterPluginManager->get('dbtablegateway', array($mockTableGateway, $where, $order, $group, $having));
         $this->assertInstanceOf('Zend\Paginator\Adapter\DbTableGateway', $plugin);
@@ -98,7 +98,7 @@ class AdapterPluginManagerTest extends \PHPUnit_Framework_TestCase
         $sm = $this->serviceManager = new ServiceManager(
             new ServiceManagerConfig(array(
                 'factories' => array(
-                    'PaginatorPluginManager' => 'Zend\Mvc\Service\PaginatorPluginManagerFactory',
+                    'PaginatorPluginManager'  => 'Zend\Mvc\Service\PaginatorPluginManagerFactory',
                 ),
             ))
         );

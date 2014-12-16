@@ -175,7 +175,7 @@ abstract class AbstractPage extends AbstractContainer
      * - If $options contains the key 'uri', a Zend\Navigation\Page\Uri page
      *   will be created.
      *
-     * @param  array|Traversable $options         options used for creating page
+     * @param  array|Traversable $options  options used for creating page
      * @return AbstractPage  a page instance
      * @throws Exception\InvalidArgumentException if $options is not
      *                                            array/Traversable
@@ -230,7 +230,6 @@ abstract class AbstractPage extends AbstractContainer
                         )
                     );
                 }
-
                 return $page;
             }
         }
@@ -245,7 +244,7 @@ abstract class AbstractPage extends AbstractContainer
 
         $hasUri = isset($options['uri']);
         $hasMvc = isset($options['action']) || isset($options['controller'])
-            || isset($options['route']);
+                || isset($options['route']);
 
         if ($hasMvc) {
             return new Mvc($options);
@@ -336,7 +335,6 @@ abstract class AbstractPage extends AbstractContainer
         }
 
         $this->label = $label;
-
         return $this;
     }
 
@@ -366,7 +364,6 @@ abstract class AbstractPage extends AbstractContainer
         }
 
         $this->fragment = $fragment;
-
         return $this;
     }
 
@@ -396,7 +393,7 @@ abstract class AbstractPage extends AbstractContainer
             );
         }
 
-        $this->id = null === $id ? $id : (string)$id;
+        $this->id = null === $id ? $id : (string) $id;
 
         return $this;
     }
@@ -428,7 +425,6 @@ abstract class AbstractPage extends AbstractContainer
         }
 
         $this->class = $class;
-
         return $this;
     }
 
@@ -459,7 +455,6 @@ abstract class AbstractPage extends AbstractContainer
         }
 
         $this->title = $title;
-
         return $this;
     }
 
@@ -491,7 +486,6 @@ abstract class AbstractPage extends AbstractContainer
         }
 
         $this->target = $target;
-
         return $this;
     }
 
@@ -513,8 +507,8 @@ abstract class AbstractPage extends AbstractContainer
      * prev, next, help, etc), and the value is a mixed value that could somehow
      * be considered a page.
      *
-     * @param  array|Traversable $relations       [optional] an associative array of
-     *                                            forward links to other pages
+     * @param  array|Traversable $relations  [optional] an associative array of
+     *                           forward links to other pages
      * @throws Exception\InvalidArgumentException if $relations is not an array
      *                                            or Traversable object
      * @return AbstractPage fluent interface, returns self
@@ -651,7 +645,7 @@ abstract class AbstractPage extends AbstractContainer
     public function setOrder($order = null)
     {
         if (is_string($order)) {
-            $temp = (int)$order;
+            $temp = (int) $order;
             if ($temp < 0 || $temp > 0 || $order == '0') {
                 $order = $temp;
             }
@@ -732,7 +726,6 @@ abstract class AbstractPage extends AbstractContainer
     public function setPrivilege($privilege = null)
     {
         $this->privilege = is_string($privilege) ? $privilege : null;
-
         return $this;
     }
 
@@ -749,7 +742,7 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Sets permission associated with this page
      *
-     * @param  mixed|null $permission   [optional] permission to associate
+     * @param  mixed|null $permission  [optional] permission to associate
      *                                  with this page. Default is null, which
      *                                  sets no permission.
      *
@@ -758,7 +751,6 @@ abstract class AbstractPage extends AbstractContainer
     public function setPermission($permission = null)
     {
         $this->permission = $permission;
-
         return $this;
     }
 
@@ -786,7 +778,6 @@ abstract class AbstractPage extends AbstractContainer
         if (null !== $textDomain) {
             $this->textDomain = $textDomain;
         }
-
         return $this;
     }
 
@@ -810,8 +801,7 @@ abstract class AbstractPage extends AbstractContainer
      */
     public function setActive($active = true)
     {
-        $this->active = (bool)$active;
-
+        $this->active = (bool) $active;
         return $this;
     }
 
@@ -831,7 +821,6 @@ abstract class AbstractPage extends AbstractContainer
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -864,8 +853,7 @@ abstract class AbstractPage extends AbstractContainer
         if (is_string($visible) && 'false' == strtolower($visible)) {
             $visible = false;
         }
-        $this->visible = (bool)$visible;
-
+        $this->visible = (bool) $visible;
         return $this;
     }
 
@@ -912,7 +900,7 @@ abstract class AbstractPage extends AbstractContainer
      * Sets parent container
      *
      * @param  AbstractContainer $parent [optional] new parent to set.
-     *                                   Default is null which will set no parent.
+     *                           Default is null which will set no parent.
      * @throws Exception\InvalidArgumentException
      * @return AbstractPage fluent interface, returns self
      */
@@ -962,7 +950,7 @@ abstract class AbstractPage extends AbstractContainer
      * set method will be used. Otherwise, it will be set as a custom property.
      *
      * @param  string $property property name
-     * @param  mixed $value     value to set
+     * @param  mixed  $value    value to set
      * @return AbstractPage fluent interface, returns self
      * @throws Exception\InvalidArgumentException if property name is invalid
      */
@@ -1023,8 +1011,8 @@ abstract class AbstractPage extends AbstractContainer
      *
      * Magic overload for enabling <code>$page->propname = $value</code>.
      *
-     * @param  string $name property name
-     * @param  mixed $value value to set
+     * @param  string $name  property name
+     * @param  mixed  $value value to set
      * @return void
      * @throws Exception\InvalidArgumentException if property name is invalid
      */
@@ -1114,7 +1102,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @param  string $relation relation name (e.g. alternate, glossary,
      *                          canonical, etc)
-     * @param  mixed $value     value to set for relation
+     * @param  mixed  $value    value to set for relation
      * @return AbstractPage  fluent interface, returns self
      */
     public function addRel($relation, $value)
@@ -1122,7 +1110,6 @@ abstract class AbstractPage extends AbstractContainer
         if (is_string($relation)) {
             $this->rel[$relation] = $value;
         }
-
         return $this;
     }
 
@@ -1131,7 +1118,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @param  string $relation relation name (e.g. alternate, glossary,
      *                          canonical, etc)
-     * @param  mixed $value     value to set for relation
+     * @param  mixed  $value    value to set for relation
      * @return AbstractPage fluent interface, returns self
      */
     public function addRev($relation, $value)
@@ -1139,7 +1126,6 @@ abstract class AbstractPage extends AbstractContainer
         if (is_string($relation)) {
             $this->rev[$relation] = $value;
         }
-
         return $this;
     }
 
@@ -1221,22 +1207,22 @@ abstract class AbstractPage extends AbstractContainer
     public function toArray()
     {
         return array_merge($this->getCustomProperties(), array(
-            'label' => $this->getLabel(),
-            'fragment' => $this->getFragment(),
-            'id' => $this->getId(),
-            'class' => $this->getClass(),
-            'title' => $this->getTitle(),
-            'target' => $this->getTarget(),
-            'rel' => $this->getRel(),
-            'rev' => $this->getRev(),
-            'order' => $this->getOrder(),
-            'resource' => $this->getResource(),
+            'label'     => $this->getLabel(),
+            'fragment'  => $this->getFragment(),
+            'id'        => $this->getId(),
+            'class'     => $this->getClass(),
+            'title'     => $this->getTitle(),
+            'target'    => $this->getTarget(),
+            'rel'       => $this->getRel(),
+            'rev'       => $this->getRev(),
+            'order'     => $this->getOrder(),
+            'resource'  => $this->getResource(),
             'privilege' => $this->getPrivilege(),
             'permission' => $this->getPermission(),
-            'active' => $this->isActive(),
-            'visible' => $this->isVisible(),
-            'type' => get_class($this),
-            'pages' => parent::toArray(),
+            'active'    => $this->isActive(),
+            'visible'   => $this->isVisible(),
+            'type'      => get_class($this),
+            'pages'     => parent::toArray(),
         ));
     }
 
@@ -1245,7 +1231,7 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Normalizes a property name
      *
-     * @param  string $property property name to normalize
+     * @param  string $property  property name to normalize
      * @return string            normalized property name
      */
     protected static function normalizePropertyName($property)

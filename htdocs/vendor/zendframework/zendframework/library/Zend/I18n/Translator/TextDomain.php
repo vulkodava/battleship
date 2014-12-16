@@ -41,7 +41,6 @@ class TextDomain extends ArrayObject
     public function setPluralRule(PluralRule $rule)
     {
         $this->pluralRule = $rule;
-
         return $this;
     }
 

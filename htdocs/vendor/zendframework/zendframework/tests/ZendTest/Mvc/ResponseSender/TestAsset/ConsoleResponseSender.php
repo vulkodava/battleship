@@ -29,9 +29,8 @@ class ConsoleResponseSender extends BaseConsoleResponseSender
         $response = $event->getResponse();
         if ($response instanceof Response) {
             $this->sendContent($event);
-            $errorLevel = (int)$response->getMetadata('errorLevel', 0);
+            $errorLevel = (int) $response->getMetadata('errorLevel',0);
             $event->stopPropagation(true);
-
             return $errorLevel;
         }
     }

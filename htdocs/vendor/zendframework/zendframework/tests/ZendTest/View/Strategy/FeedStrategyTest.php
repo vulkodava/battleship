@@ -27,7 +27,7 @@ class FeedStrategyTest extends TestCase
     {
         $this->renderer = new FeedRenderer;
         $this->strategy = new FeedStrategy($this->renderer);
-        $this->event = new ViewEvent();
+        $this->event    = new ViewEvent();
         $this->response = new HttpResponse();
     }
 
@@ -204,7 +204,7 @@ class FeedStrategyTest extends TestCase
 
     public function testReturnsNullWhenUnableToSelectRenderer()
     {
-        $model = new ViewModel();
+        $model   = new ViewModel();
         $request = new HttpRequest();
         $this->event->setModel($model);
         $this->event->setRequest($request);
@@ -217,10 +217,10 @@ class FeedStrategyTest extends TestCase
         $events->attachAggregate($this->strategy);
 
         foreach (array('renderer' => 'selectRenderer', 'response' => 'injectResponse') as $event => $method) {
-            $listeners = $events->getListeners($event);
+            $listeners        = $events->getListeners($event);
             $expectedCallback = array($this->strategy, $method);
             $expectedPriority = 1;
-            $found = false;
+            $found            = false;
             foreach ($listeners as $listener) {
                 $callback = $listener->getCallback();
                 if ($callback === $expectedCallback) {
@@ -240,10 +240,10 @@ class FeedStrategyTest extends TestCase
         $events->attachAggregate($this->strategy, 100);
 
         foreach (array('renderer' => 'selectRenderer', 'response' => 'injectResponse') as $event => $method) {
-            $listeners = $events->getListeners($event);
+            $listeners        = $events->getListeners($event);
             $expectedCallback = array($this->strategy, $method);
             $expectedPriority = 100;
-            $found = false;
+            $found            = false;
             foreach ($listeners as $listener) {
                 $callback = $listener->getCallback();
                 if ($callback === $expectedCallback) {

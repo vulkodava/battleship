@@ -48,10 +48,10 @@ class Application implements
     EventManagerAwareInterface
 {
     const ERROR_CONTROLLER_CANNOT_DISPATCH = 'error-controller-cannot-dispatch';
-    const ERROR_CONTROLLER_NOT_FOUND = 'error-controller-not-found';
-    const ERROR_CONTROLLER_INVALID = 'error-controller-invalid';
-    const ERROR_EXCEPTION = 'error-exception';
-    const ERROR_ROUTER_NO_MATCH = 'error-router-no-match';
+    const ERROR_CONTROLLER_NOT_FOUND       = 'error-controller-not-found';
+    const ERROR_CONTROLLER_INVALID         = 'error-controller-invalid';
+    const ERROR_EXCEPTION                  = 'error-exception';
+    const ERROR_ROUTER_NO_MATCH            = 'error-router-no-match';
 
     /**
      * @var array
@@ -72,7 +72,6 @@ class Application implements
 
     /**
      * MVC event token
-     *
      * @var MvcEvent
      */
     protected $event;
@@ -105,13 +104,13 @@ class Application implements
      */
     public function __construct($configuration, ServiceManager $serviceManager)
     {
-        $this->configuration = $configuration;
+        $this->configuration  = $configuration;
         $this->serviceManager = $serviceManager;
 
         $this->setEventManager($serviceManager->get('EventManager'));
 
-        $this->request = $serviceManager->get('Request');
-        $this->response = $serviceManager->get('Response');
+        $this->request        = $serviceManager->get('Request');
+        $this->response       = $serviceManager->get('Response');
     }
 
     /**
@@ -137,7 +136,7 @@ class Application implements
     public function bootstrap(array $listeners = array())
     {
         $serviceManager = $this->serviceManager;
-        $events = $this->events;
+        $events         = $this->events;
 
         $listeners = array_unique(array_merge($this->defaultListeners, $listeners));
 
@@ -146,16 +145,15 @@ class Application implements
         }
 
         // Setup MVC Event
-        $this->event = $event = new MvcEvent();
+        $this->event = $event  = new MvcEvent();
         $event->setTarget($this);
         $event->setApplication($this)
-            ->setRequest($this->request)
-            ->setResponse($this->response)
-            ->setRouter($serviceManager->get('Router'));
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setRouter($serviceManager->get('Router'));
 
         // Trigger bootstrap events
         $events->trigger(MvcEvent::EVENT_BOOTSTRAP, $event);
-
         return $this;
     }
 
@@ -212,7 +210,6 @@ class Application implements
             get_class($this),
         ));
         $this->events = $eventManager;
-
         return $this;
     }
 
@@ -254,8 +251,8 @@ class Application implements
         $serviceManager->setService('ApplicationConfig', $configuration);
         $serviceManager->get('ModuleManager')->loadModules();
 
-        $listenersFromAppConfig = isset($configuration['listeners']) ? $configuration['listeners'] : array();
-        $config = $serviceManager->get('Config');
+        $listenersFromAppConfig     = isset($configuration['listeners']) ? $configuration['listeners'] : array();
+        $config                     = $serviceManager->get('Config');
         $listenersFromConfigService = isset($config['listeners']) ? $config['listeners'] : array();
 
         $listeners = array_unique(array_merge($listenersFromConfigService, $listenersFromAppConfig));
@@ -282,7 +279,7 @@ class Application implements
     public function run()
     {
         $events = $this->events;
-        $event = $this->event;
+        $event  = $this->event;
 
         // Define callback used to determine whether or not to short-circuit
         $shortCircuit = function ($r) use ($event) {
@@ -292,7 +289,6 @@ class Application implements
             if ($event->getError()) {
                 return true;
             }
-
             return false;
         };
 
@@ -305,7 +301,6 @@ class Application implements
                 $event->setResponse($response);
                 $events->trigger(MvcEvent::EVENT_FINISH, $event);
                 $this->response = $response;
-
                 return $this;
             }
         }
@@ -324,7 +319,6 @@ class Application implements
             $event->setResponse($response);
             $events->trigger(MvcEvent::EVENT_FINISH, $event);
             $this->response = $response;
-
             return $this;
         }
 
@@ -357,7 +351,6 @@ class Application implements
         $event->setTarget($this);
         $events->trigger(MvcEvent::EVENT_RENDER, $event);
         $events->trigger(MvcEvent::EVENT_FINISH, $event);
-
         return $this;
     }
 }

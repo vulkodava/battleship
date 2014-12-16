@@ -64,9 +64,9 @@ class RangeTest extends TestCase
         $element = new RangeElement();
         $element->setAttributes(array(
             'inclusive' => true,
-            'min' => 2,
-            'max' => 102,
-            'step' => 2,
+            'min'       => 2,
+            'max'       => 102,
+            'step'      => 2,
         ));
 
         $inputSpec = $element->getInputSpecification();

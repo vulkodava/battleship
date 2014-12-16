@@ -95,8 +95,7 @@ abstract class AbstractDecorator implements Decorator
      */
     public function setEncoding($value)
     {
-        $this->encoding = (string)$value;
-
+        $this->encoding = (string) $value;
         return $this;
     }
 
@@ -109,7 +108,6 @@ abstract class AbstractDecorator implements Decorator
     public function setEscaper($escaper)
     {
         $this->escaper = $escaper;
-
         return $this;
     }
 
@@ -125,7 +123,6 @@ abstract class AbstractDecorator implements Decorator
         if (null === $this->escaper) {
             $this->setEscaper(new Escaper($this->getEncoding()));
         }
-
         return $this->escaper;
     }
 
@@ -169,7 +166,7 @@ abstract class AbstractDecorator implements Decorator
         foreach ($this->getHTMLTags() as $key => $data) {
             if (is_array($data)) {
                 $attributes = '';
-                $htmlTag = $key;
+                $htmlTag    = $key;
                 $this->validateElementName($htmlTag);
 
                 foreach ($data as $param => $value) {
@@ -178,13 +175,12 @@ abstract class AbstractDecorator implements Decorator
                 }
             } else {
                 $attributes = '';
-                $htmlTag = $data;
+                $htmlTag    = $data;
                 $this->validateElementName($htmlTag);
             }
 
             $html = sprintf('<%1$s%3$s>%2$s</%1$s>', $htmlTag, $html, $attributes);
         }
-
         return $html;
     }
 }

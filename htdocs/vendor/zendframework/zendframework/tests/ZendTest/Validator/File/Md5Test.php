@@ -53,7 +53,7 @@ class Md5Test extends \PHPUnit_Framework_TestCase
         $testFile = __DIR__ . '/_files/testsize.mo';
         $sizeFileTests = array(
             //    Options, isValid Param, Expected value, message
-            array('ec441f84a2944405baa22873cda22370', $testFile, true, ''),
+            array('ec441f84a2944405baa22873cda22370', $testFile, true,  ''),
             array('7d74c22109fe9f110579f77b053b8bc3', $testFile, false, 'fileMd5DoesNotMatch'),
         );
 
@@ -66,7 +66,6 @@ class Md5Test extends \PHPUnit_Framework_TestCase
             );
             $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
-
         return $testData;
     }
 
@@ -209,11 +208,11 @@ class Md5Test extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(File\Md5::NOT_FOUND, $validator->getMessages());
 
         $filesArray = array(
-            'name' => '',
-            'size' => 0,
-            'tmp_name' => '',
-            'error' => UPLOAD_ERR_NO_FILE,
-            'type' => '',
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

@@ -29,8 +29,8 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         try {
             $cipher = new Mcrypt(array(
                 'algorithm' => 'aes',
-                'mode' => 'cbc',
-                'padding' => 'pkcs7'
+                'mode'      => 'cbc',
+                'padding'   => 'pkcs7'
             ));
             $this->blockCipher = new BlockCipher($cipher);
         } catch (Exception\RuntimeException $e) {
@@ -72,8 +72,8 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         $salt = str_repeat('a', $this->blockCipher->getCipher()->getSaltSize() + 2);
         $result = $this->blockCipher->setSalt($salt);
         $this->assertEquals($result, $this->blockCipher);
-        $this->assertEquals(substr($salt, 0, $this->blockCipher->getCipher()->getSaltSize()),
-            $this->blockCipher->getSalt());
+        $this->assertEquals(substr($salt, 0,  $this->blockCipher->getCipher()->getSaltSize()),
+                            $this->blockCipher->getSalt());
         $this->assertEquals($salt, $this->blockCipher->getOriginalSalt());
     }
 
@@ -87,7 +87,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
     public function testSetAlgorithmFail()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-            'The algorithm unknown is not supported by Zend\Crypt\Symmetric\Mcrypt');
+                                    'The algorithm unknown is not supported by Zend\Crypt\Symmetric\Mcrypt');
         $result = $this->blockCipher->setCipherAlgorithm('unknown');
     }
 
@@ -116,7 +116,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
     {
         $plaintext = '';
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-            'The data to encrypt cannot be empty');
+                                    'The data to encrypt cannot be empty');
         $ciphertext = $this->blockCipher->encrypt($plaintext);
     }
 
@@ -124,7 +124,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
     {
         $plaintext = 'test';
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
-            'No key specified for the encryption');
+                                    'No key specified for the encryption');
         $ciphertext = $this->blockCipher->encrypt($plaintext);
     }
 
@@ -158,9 +158,9 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
     public function zeroValuesProvider()
     {
         return array(
-            '"0"' => array(0),
+            '"0"'   => array(0),
             '"0.0"' => array(0.0),
-            '"0"' => array('0'),
+            '"0"'   => array('0'),
         );
     }
 

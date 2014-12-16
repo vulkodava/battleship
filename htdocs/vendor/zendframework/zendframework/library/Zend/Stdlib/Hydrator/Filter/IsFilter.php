@@ -22,7 +22,6 @@ class IsFilter implements FilterInterface
         if (substr($property, $pos, 2) === 'is') {
             return true;
         }
-
         return false;
     }
 }

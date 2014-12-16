@@ -88,15 +88,15 @@ class Symbol
     /**
      * Create a new symbol.
      *
-     * @param  Parser $parser
-     * @param  string $id
+     * @param  Parser  $parser
+     * @param  string  $id
      * @param  int $leftBindingPower
      */
     public function __construct(Parser $parser, $id, $leftBindingPower)
     {
-        $this->parser = $parser;
-        $this->id = $id;
-        $this->leftBindingPower = $leftBindingPower;
+        $this->parser               = $parser;
+        $this->id                   = $id;
+        $this->leftBindingPower     = $leftBindingPower;
     }
 
     /**
@@ -108,7 +108,6 @@ class Symbol
     public function setNullDenotationGetter(Closure $getter)
     {
         $this->nullDenotationGetter = $getter;
-
         return $this;
     }
 
@@ -121,7 +120,6 @@ class Symbol
     public function setLeftDenotationGetter(Closure $getter)
     {
         $this->leftDenotationGetter = $getter;
-
         return $this;
     }
 
@@ -137,9 +135,8 @@ class Symbol
             throw new Exception\ParseException(sprintf('Syntax error: %s', $this->id));
         }
 
-        /** @var callable $function */
+        /** @var callable $function  */
         $function = $this->nullDenotationGetter;
-
         return $function($this);
     }
 
@@ -156,9 +153,8 @@ class Symbol
             throw new Exception\ParseException(sprintf('Unknown operator: %s', $this->id));
         }
 
-        /** @var callable $function */
+        /** @var callable $function  */
         $function = $this->leftDenotationGetter;
-
         return $function($this, $left);
     }
 }

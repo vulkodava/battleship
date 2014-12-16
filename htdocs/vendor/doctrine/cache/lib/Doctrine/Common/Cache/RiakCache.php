@@ -60,7 +60,7 @@ class RiakCache extends CacheProvider
             $response = $this->bucket->get($id);
 
             // No objects found
-            if (!$response->hasObject()) {
+            if ( ! $response->hasObject()) {
                 return false;
             }
 
@@ -102,7 +102,7 @@ class RiakCache extends CacheProvider
             $response = $this->bucket->get($id, $input);
 
             // No objects found
-            if (!$response->hasObject()) {
+            if ( ! $response->hasObject()) {
                 return false;
             }
 
@@ -134,7 +134,7 @@ class RiakCache extends CacheProvider
             $object->setContent(serialize($data));
 
             if ($lifeTime > 0) {
-                $object->addMetadata(self::EXPIRES_HEADER, (string)(time() + $lifeTime));
+                $object->addMetadata(self::EXPIRES_HEADER, (string) (time() + $lifeTime));
             }
 
             $this->bucket->put($object);
@@ -209,7 +209,7 @@ class RiakCache extends CacheProvider
         $metadataMap = $object->getMetadataMap();
 
         return isset($metadataMap[self::EXPIRES_HEADER])
-        && $metadataMap[self::EXPIRES_HEADER] < time();
+            && $metadataMap[self::EXPIRES_HEADER] < time();
     }
 
     /**
@@ -228,7 +228,7 @@ class RiakCache extends CacheProvider
      *
      * @param string $id
      * @param string $vClock
-     * @param array $objectList
+     * @param array  $objectList
      *
      * @return \Riak\Object
      */

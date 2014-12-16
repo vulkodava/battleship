@@ -61,7 +61,7 @@ class ImageTest extends TestCommon
     public function testBadHeight()
     {
         $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
-        $this->renderer->setHeight(-1);
+        $this->renderer->setHeight(- 1);
     }
 
     public function testGoodWidth()
@@ -76,17 +76,17 @@ class ImageTest extends TestCommon
     public function testBadWidth()
     {
         $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
-        $this->renderer->setWidth(-1);
+        $this->renderer->setWidth(- 1);
     }
 
     public function testAllowedImageType()
     {
-        $types = array('gif' => 'gif', 'jpg' => 'jpeg', 'jpeg' => 'jpeg',
-            'png' => 'png');
+        $types = array('gif' => 'gif' , 'jpg' => 'jpeg' , 'jpeg' => 'jpeg' ,
+                       'png' => 'png');
         foreach ($types as $type => $expectedType) {
             $this->renderer->setImageType($type);
             $this->assertSame($expectedType,
-                $this->renderer->getImageType());
+                    $this->renderer->getImageType());
         }
     }
 

@@ -36,22 +36,22 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $config = array(
-            'modules' => array(),
+            'modules'                 => array(),
             'module_listener_options' => array(
                 'config_cache_enabled' => false,
-                'cache_dir' => 'data/cache',
-                'module_paths' => array(),
-                'extra_config' => array(
+                'cache_dir'            => 'data/cache',
+                'module_paths'         => array(),
+                'extra_config'         => array(
                     'service_manager' => array(
                         'factories' => array(
                             'Config' => function () {
                                 return array(
                                     'navigation' => array(
-                                        'file' => __DIR__ . '/_files/navigation.xml',
+                                        'file'    => __DIR__ . '/_files/navigation.xml',
                                         'default' => array(
                                             array(
                                                 'label' => 'Page 1',
-                                                'uri' => 'page1.html'
+                                                'uri'   => 'page1.html'
                                             ),
                                             array(
                                                 'label' => 'MVC Page',
@@ -65,7 +65,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
                                             ),
                                             array(
                                                 'label' => 'Page 3',
-                                                'uri' => 'page3.html'
+                                                'uri'   => 'page3.html'
                                             )
                                         )
                                     )
@@ -85,8 +85,8 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $app = $this->serviceManager->get('Application');
         $app->getMvcEvent()->setRouteMatch(new RouteMatch(array(
             'controller' => 'post',
-            'action' => 'view',
-            'id' => '1337',
+            'action'     => 'view',
+            'id'         => '1337',
         )));
     }
 
@@ -134,18 +134,18 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $builder = $this->getMockBuilder('\Zend\Navigation\Service\ConstructedNavigationFactory');
         $builder->setConstructorArgs(array(__DIR__ . '/_files/navigation_mvc.xml'))
-            ->setMethods(array('injectComponents'));
+                ->setMethods(array('injectComponents'));
 
         $factory = $builder->getMock();
 
         $factory->expects($this->once())
-            ->method('injectComponents')
-            ->with($this->isType("array"),
-                $this->isInstanceOf("Zend\Mvc\Router\RouteMatch"),
-                $this->isInstanceOf("Zend\Mvc\Router\RouteStackInterface"));
+                ->method('injectComponents')
+                ->with($this->isType("array"),
+                       $this->isInstanceOf("Zend\Mvc\Router\RouteMatch"),
+                       $this->isInstanceOf("Zend\Mvc\Router\RouteStackInterface"));
 
         $this->serviceManager->setFactory('Navigation', function ($serviceLocator) use ($factory) {
-            return $factory->createService($serviceLocator);
+              return $factory->createService($serviceLocator);
         });
 
         $container = $this->serviceManager->get('Navigation');
@@ -157,10 +157,9 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function testMvcPagesGetInjectedWithComponentsInConstructedNavigationFactory()
     {
         $this->serviceManager->setFactory('Navigation', function ($serviceLocator) {
-            $argument = __DIR__ . '/_files/navigation_mvc.xml';
-            $factory = new \Zend\Navigation\Service\ConstructedNavigationFactory($argument);
-
-            return $factory->createService($serviceLocator);
+              $argument = __DIR__ . '/_files/navigation_mvc.xml';
+              $factory = new \Zend\Navigation\Service\ConstructedNavigationFactory($argument);
+              return $factory->createService($serviceLocator);
         });
 
         $container = $this->serviceManager->get('Navigation');
@@ -196,15 +195,15 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $argument = array(
             array(
                 'label' => 'Page 1',
-                'uri' => 'page1.html'
+                'uri'   => 'page1.html'
             ),
             array(
                 'label' => 'Page 2',
-                'uri' => 'page2.html'
+                'uri'   => 'page2.html'
             ),
             array(
                 'label' => 'Page 3',
-                'uri' => 'page3.html'
+                'uri'   => 'page3.html'
             )
         );
 
@@ -221,7 +220,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     public function testConstructedFromFileString()
     {
         $argument = __DIR__ . '/_files/navigation.xml';
-        $factory = new ConstructedNavigationFactory($argument);
+        $factory  = new ConstructedNavigationFactory($argument);
         $this->serviceManager->setFactory('Navigation', $factory);
 
         $container = $this->serviceManager->get('Navigation');
@@ -236,15 +235,15 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $argument = new Config\Config(array(
             array(
                 'label' => 'Page 1',
-                'uri' => 'page1.html'
+                'uri'   => 'page1.html'
             ),
             array(
                 'label' => 'Page 2',
-                'uri' => 'page2.html'
+                'uri'   => 'page2.html'
             ),
             array(
                 'label' => 'Page 3',
-                'uri' => 'page3.html'
+                'uri'   => 'page3.html'
             )
         ));
 

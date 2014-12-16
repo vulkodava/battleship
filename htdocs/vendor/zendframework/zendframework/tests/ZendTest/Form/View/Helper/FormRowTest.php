@@ -26,7 +26,7 @@ class FormRowTest extends TestCase
 
         $this->renderer = new PhpRenderer;
         $helpers = $this->renderer->getHelperPluginManager();
-        $config = new HelperConfig();
+        $config  = new HelperConfig();
         $config->configureServiceManager($helpers);
 
         $this->helper->setView($this->renderer);
@@ -122,7 +122,7 @@ class FormRowTest extends TestCase
 
     public function testCanRenderErrors()
     {
-        $element = new Element('foo');
+        $element  = new Element('foo');
         $element->setMessages(array(
             'First error message',
             'Second error message',
@@ -135,7 +135,7 @@ class FormRowTest extends TestCase
 
     public function testDoesNotRenderErrorsListIfSetToFalse()
     {
-        $element = new Element('foo');
+        $element  = new Element('foo');
         $element->setMessages(array(
             'First error message',
             'Second error message',
@@ -148,7 +148,7 @@ class FormRowTest extends TestCase
 
     public function testCanModifyDefaultErrorClass()
     {
-        $element = new Element('foo');
+        $element  = new Element('foo');
         $element->setMessages(array(
             'Error message'
         ));
@@ -159,7 +159,7 @@ class FormRowTest extends TestCase
 
     public function testDoesNotOverrideClassesIfAlreadyPresentWhenThereAreErrors()
     {
-        $element = new Element('foo');
+        $element  = new Element('foo');
         $element->setMessages(array(
             'Error message'
         ));
@@ -281,8 +281,8 @@ class FormRowTest extends TestCase
         $element = new Element\MultiCheckbox('hobby');
         $element->setLabel("Hobby");
         $element->setValueOptions(array(
-            '0' => 'working',
-            '1' => 'coding'
+            '0'=>'working',
+            '1'=>'coding'
         ));
         $element->setMessages(array(
             'Error message'
@@ -297,8 +297,8 @@ class FormRowTest extends TestCase
         $element = new Element\Radio('direction');
         $element->setLabel("Direction");
         $element->setValueOptions(array(
-            '0' => 'programming',
-            '1' => 'design'
+            '0'=>'programming',
+            '1'=>'design'
         ));
         $element->setMessages(array(
             'Error message'
@@ -319,14 +319,14 @@ class FormRowTest extends TestCase
         $element->setMessages($validator->getMessages());
 
         $markup = $this->helper->__invoke($element);
-        $this->assertEquals(2, count(explode("<ul><li>The input does not appear to be a valid date</li></ul>", $markup)));
+        $this->assertEquals(2,  count(explode("<ul><li>The input does not appear to be a valid date</li></ul>", $markup)));
     }
 
     public function testInvokeWithNoRenderErrors()
     {
         $mock = $this->getMock(get_class($this->helper), array('setRenderErrors'));
         $mock->expects($this->never())
-            ->method('setRenderErrors');
+                ->method('setRenderErrors');
 
         $mock->__invoke(new Element('foo'));
     }
@@ -335,15 +335,15 @@ class FormRowTest extends TestCase
     {
         $mock = $this->getMock(get_class($this->helper), array('setRenderErrors'));
         $mock->expects($this->once())
-            ->method('setRenderErrors')
-            ->with(true);
+                ->method('setRenderErrors')
+                ->with(true);
 
         $mock->__invoke(new Element('foo'), null, true);
     }
 
     public function testAppendLabelEvenIfElementHasId()
     {
-        $element = new Element('foo');
+        $element  = new Element('foo');
         $element->setAttribute('id', 'bar');
         $element->setLabel('Baz');
 

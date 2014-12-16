@@ -34,8 +34,8 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
      * Construct a Zend\Paginator\SerializableLimitIterator
      *
      * @param Iterator $it Iterator to limit (must be serializable by un-/serialize)
-     * @param int $offset  Offset to first element
-     * @param int $count   Maximum number of elements to show or -1 for all
+     * @param int $offset Offset to first element
+     * @param int $count Maximum number of elements to show or -1 for all
      * @see LimitIterator::__construct
      */
     public function __construct(Iterator $it, $offset = 0, $count = -1)
@@ -51,10 +51,10 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
     public function serialize()
     {
         return serialize(array(
-            'it' => $this->getInnerIterator(),
+            'it'     => $this->getInnerIterator(),
             'offset' => $this->offset,
-            'count' => $this->count,
-            'pos' => $this->getPosition(),
+            'count'  => $this->count,
+            'pos'    => $this->getPosition(),
         ));
     }
 
@@ -66,7 +66,7 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
     {
         $dataArr = unserialize($data);
         $this->__construct($dataArr['it'], $dataArr['offset'], $dataArr['count']);
-        $this->seek($dataArr['pos'] + $dataArr['offset']);
+        $this->seek($dataArr['pos']+$dataArr['offset']);
     }
 
     /**
@@ -81,7 +81,6 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
         $this->seek($offset);
         $current = $this->current();
         $this->seek($currentOffset);
-
         return $current;
     }
 
@@ -110,16 +109,13 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
                 $this->seek($offset);
                 $current = $this->current();
                 $this->seek($currentOffset);
-
                 return null !== $current;
             } catch (\OutOfBoundsException $e) {
                 // reset position in case of exception is assigned null
                 $this->seek($currentOffset);
-
                 return false;
             }
         }
-
         return false;
     }
 

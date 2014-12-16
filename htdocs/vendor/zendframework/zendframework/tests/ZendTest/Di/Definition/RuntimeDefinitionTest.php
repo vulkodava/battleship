@@ -73,13 +73,13 @@ class RuntimeDefinitionTest extends TestCase
                     true,
                     null,
                 ),
-                'RecursiveIteratorIterator::__construct:1' => Array(
+                'RecursiveIteratorIterator::__construct:1' => Array (
                     'mode',
                     null,
                     true,
                     null,
                 ),
-                'RecursiveIteratorIterator::__construct:2' => Array(
+                'RecursiveIteratorIterator::__construct:2' => Array (
                     'flags',
                     null,
                     true,
@@ -113,6 +113,6 @@ class RuntimeDefinitionTest extends TestCase
         $definition = new RuntimeDefinition(null, $explicitClasses);
 
         $this->assertTrue($definition->hasClass($className));
-        $this->assertSame(array("__construct" => 3), $definition->getMethods($className));
+        $this->assertSame(array("__construct"=> 3), $definition->getMethods($className));
     }
 }

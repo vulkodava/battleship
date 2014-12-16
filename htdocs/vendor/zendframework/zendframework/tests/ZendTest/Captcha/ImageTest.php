@@ -29,7 +29,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('gd')) {
             $this->markTestSkipped('The GD extension is not available.');
-
             return;
         }
         if (!function_exists("imagepng")) {
@@ -50,8 +49,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
         $this->captcha = new ImageCaptcha(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
-            'imgDir' => $this->testDir,
-            'font' => __DIR__ . '/_files/Vera.ttf',
+            'imgDir'       => $this->testDir,
+            'font'         => __DIR__. '/_files/Vera.ttf',
         ));
     }
 
@@ -82,7 +81,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         if (null === $this->tmpDir) {
             $this->tmpDir = sys_get_temp_dir();
         }
-
         return $this->tmpDir;
     }
 
@@ -181,9 +179,9 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     public function testGenerateIsRandomised()
     {
-        $id1 = $this->captcha->generate();
+        $id1   = $this->captcha->generate();
         $word1 = $this->captcha->getWord();
-        $id2 = $this->captcha->generate();
+        $id2   = $this->captcha->generate();
         $word2 = $this->captcha->getWord();
 
         $this->assertFalse(empty($id1));
@@ -234,7 +232,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Captcha\Exception\ImageNotLoadableException');
         $captcha = new ImageCaptcha(array(
-            'font' => __DIR__ . '/../Pdf/_fonts/Vera.ttf',
+            'font'       => __DIR__. '/../Pdf/_fonts/Vera.ttf',
             'startImage' => 'file_not_found.png',
         ));
         $captcha->generate();

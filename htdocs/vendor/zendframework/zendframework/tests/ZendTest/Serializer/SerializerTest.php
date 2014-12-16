@@ -83,7 +83,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testFactoryPassesAdapterOptions()
     {
         $options = new Adapter\PythonPickleOptions(array('protocol' => 2));
-        /** @var Adapter\PythonPickle $adapter */
+        /** @var Adapter\PythonPickle $adapter  */
         $adapter = Serializer::factory('pythonpickle', $options);
         $this->assertTrue($adapter instanceof Adapter\PythonPickle);
         $this->assertEquals(2, $adapter->getOptions()->getProtocol());

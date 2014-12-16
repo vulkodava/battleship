@@ -22,7 +22,7 @@ class FormFileUploadProgressTest extends CommonTestCase
 
     public function testReturnsNameIdAndValueAttributes()
     {
-        $markup = $this->helper->__invoke();
+        $markup  = $this->helper->__invoke();
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="hidden"', $markup);
         $this->assertContains('id="progress_key"', $markup);

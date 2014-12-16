@@ -87,7 +87,6 @@ class JavaProperties implements ReaderInterface
                 $data = array_replace_recursive($data, $reader->fromFile($this->directory . '/' . $value));
             }
         }
-
         return $data;
     }
 
@@ -109,9 +108,8 @@ class JavaProperties implements ReaderInterface
         foreach ($lines as $i => $line) {
             // Ignore empty lines and commented lines
             if (empty($line)
-                || (!$isWaitingOtherLine && strpos($line, "#") === 0)
-                || (!$isWaitingOtherLine && strpos($line, "!") === 0)
-            ) {
+               || (!$isWaitingOtherLine && strpos($line, "#") === 0)
+               || (!$isWaitingOtherLine && strpos($line, "!") === 0)) {
                 continue;
             }
 

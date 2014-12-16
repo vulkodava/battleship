@@ -20,8 +20,8 @@ class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesCamelCasedWordsWithSpacesByDefault()
     {
-        $string = 'CamelCasedWords';
-        $filter = new CamelCaseToSeparatorFilter();
+        $string   = 'CamelCasedWords';
+        $filter   = new CamelCaseToSeparatorFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -30,8 +30,8 @@ class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSeparatesCamelCasedWordsWithProvidedSeparator()
     {
-        $string = 'CamelCasedWords';
-        $filter = new CamelCaseToSeparatorFilter(':-#');
+        $string   = 'CamelCasedWords';
+        $filter   = new CamelCaseToSeparatorFilter(':-#');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -40,8 +40,8 @@ class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSeperatesMultipleUppercasedLettersAndUnderscores()
     {
-        $string = 'TheseAre_SOME_CamelCASEDWords';
-        $filter = new CamelCaseToSeparatorFilter('_');
+        $string   = 'TheseAre_SOME_CamelCASEDWords';
+        $filter   = new CamelCaseToSeparatorFilter('_');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

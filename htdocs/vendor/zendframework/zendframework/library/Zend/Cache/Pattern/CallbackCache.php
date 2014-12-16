@@ -28,15 +28,14 @@ class CallbackCache extends AbstractPattern
         if (!$options->getStorage()) {
             throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
-
         return $this;
     }
 
     /**
      * Call the specified callback or get the result from cache
      *
-     * @param  callable $callback A valid callback
-     * @param  array $args        Callback arguments
+     * @param  callable   $callback  A valid callback
+     * @param  array      $args      Callback arguments
      * @return mixed Result
      * @throws Exception\RuntimeException if invalid cached data
      * @throws \Exception
@@ -46,15 +45,14 @@ class CallbackCache extends AbstractPattern
         $options = $this->getOptions();
         $storage = $options->getStorage();
         $success = null;
-        $key = $this->generateCallbackKey($callback, $args);
-        $result = $storage->getItem($key, $success);
+        $key     = $this->generateCallbackKey($callback, $args);
+        $result  = $storage->getItem($key, $success);
         if ($success) {
             if (!array_key_exists(0, $result)) {
                 throw new Exception\RuntimeException("Invalid cached data for key '{$key}'");
             }
 
             echo isset($result[1]) ? $result[1] : '';
-
             return $result[0];
         }
 
@@ -93,8 +91,8 @@ class CallbackCache extends AbstractPattern
     /**
      * function call handler
      *
-     * @param  string $function Function name to call
-     * @param  array $args      Function arguments
+     * @param  string $function  Function name to call
+     * @param  array  $args      Function arguments
      * @return mixed
      * @throws Exception\RuntimeException
      * @throws \Exception
@@ -108,8 +106,8 @@ class CallbackCache extends AbstractPattern
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callable $callback A valid callback
-     * @param  array $args        Callback arguments
+     * @param  callable   $callback  A valid callback
+     * @param  array      $args      Callback arguments
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
@@ -123,8 +121,8 @@ class CallbackCache extends AbstractPattern
      * Generate a unique key in base of a key representing the callback part
      * and a key representing the arguments part.
      *
-     * @param  callable $callback A valid callback
-     * @param  array $args        Callback arguments
+     * @param  callable   $callback  A valid callback
+     * @param  array      $args      Callback arguments
      * @throws Exception\RuntimeException if callback not serializable
      * @throws Exception\InvalidArgumentException if invalid callback
      * @return string
@@ -161,7 +159,7 @@ class CallbackCache extends AbstractPattern
                     $error
                 );
             }
-            $callbackKey .= $serializedObject;
+            $callbackKey.= $serializedObject;
         }
 
         return md5($callbackKey) . $this->generateArgumentsKey($args);

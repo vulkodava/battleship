@@ -17,17 +17,17 @@ class ColorTest extends TestCase
     public function colorData()
     {
         return array(
-            array('#012345', true),
-            array('#abcdef', true),
-            array('#012abc', true),
-            array('#012abcd', false),
-            array('#012abcde', false),
-            array('#ABCDEF', true),
-            array('#012ABC', true),
-            array('#bcdefg', false),
-            array('#01a', false),
-            array('01abcd', false),
-            array('blue', false),
+            array('#012345',     true),
+            array('#abcdef',     true),
+            array('#012abc',     true),
+            array('#012abcd',    false),
+            array('#012abcde',   false),
+            array('#ABCDEF',     true),
+            array('#012ABC',     true),
+            array('#bcdefg',     false),
+            array('#01a',        false),
+            array('01abcd',      false),
+            array('blue',        false),
             array('transparent', false),
         );
     }

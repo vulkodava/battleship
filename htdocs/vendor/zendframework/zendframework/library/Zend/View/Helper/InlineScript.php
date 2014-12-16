@@ -31,7 +31,7 @@ class InlineScript extends HeadScript
      * @param  string $mode      Script or file
      * @param  string $spec      Script/url
      * @param  string $placement Append, prepend, or set
-     * @param  array $attrs      Array of script attributes
+     * @param  array  $attrs     Array of script attributes
      * @param  string $type      Script type and/or array of script attributes
      * @return InlineScript
      */
@@ -41,8 +41,7 @@ class InlineScript extends HeadScript
         $placement = 'APPEND',
         array $attrs = array(),
         $type = 'text/javascript'
-    )
-    {
+    ) {
         return parent::__invoke($mode, $spec, $placement, $attrs, $type);
     }
 }

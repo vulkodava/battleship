@@ -28,7 +28,6 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('mhash')) {
             $this->markTestSkipped('The mhash extension is not available');
-
             return;
         }
         $password = SaltedS2k::calc('sha256', 'test', $this->salt, 32);
@@ -40,11 +39,10 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('mhash')) {
             $this->markTestSkipped('The mhash extension is not available');
-
             return;
         }
         $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException',
-            'The hash algorithm wrong is not supported by Zend\Crypt\Key\Derivation\SaltedS2k');
+                                    'The hash algorithm wrong is not supported by Zend\Crypt\Key\Derivation\SaltedS2k');
         $password = SaltedS2k::calc('wrong', 'test', $this->salt, 32);
     }
 
@@ -52,11 +50,10 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
     {
         if (!extension_loaded('mhash')) {
             $this->markTestSkipped('The mhash extension is not available');
-
             return;
         }
         $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException',
-            'The salt size must be at least of 8 bytes');
-        $password = SaltedS2k::calc('sha256', 'test', substr($this->salt, -1), 32);
+                                    'The salt size must be at least of 8 bytes');
+        $password = SaltedS2k::calc('sha256', 'test', substr($this->salt,-1), 32);
     }
 }

@@ -34,7 +34,7 @@ class FormMonthSelectTest extends CommonTestCase
     public function testGeneratesTwoSelectsWithElement()
     {
         $element = new MonthSelect('foo');
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertNotContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);
@@ -44,7 +44,7 @@ class FormMonthSelectTest extends CommonTestCase
     {
         $element = new MonthSelect('foo');
         $element->setShouldCreateEmptyOption(true);
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertNotContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);
@@ -77,7 +77,7 @@ class FormMonthSelectTest extends CommonTestCase
     public function testInvokeProxiesToRender()
     {
         $element = new MonthSelect('foo');
-        $markup = $this->helper->__invoke($element);
+        $markup  = $this->helper->__invoke($element);
         $this->assertNotContains('<select name="day"', $markup);
         $this->assertContains('<select name="month"', $markup);
         $this->assertContains('<select name="year"', $markup);

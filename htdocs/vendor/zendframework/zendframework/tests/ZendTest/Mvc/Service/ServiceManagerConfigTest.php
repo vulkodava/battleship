@@ -150,7 +150,7 @@ class ServiceManagerConfigTest extends TestCase
      */
     public function testCanOverrideServiceManager()
     {
-        $test = $this;
+        $test           = $this;
         $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
             'factories' => array(
                 'ServiceManager' => function () use ($test) {
@@ -186,8 +186,8 @@ class ServiceManagerConfigTest extends TestCase
      */
     public function testServiceManagerInitializerCanBeReplaced()
     {
-        $instance = $this->getMock('Zend\ServiceManager\ServiceManagerAwareInterface');
-        $initializer = $this->getMock('stdClass', array('__invoke'));
+        $instance       = $this->getMock('Zend\ServiceManager\ServiceManagerAwareInterface');
+        $initializer    = $this->getMock('stdClass', array('__invoke'));
         $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
             'initializers' => array(
                 'ServiceManagerAwareInitializer' => $initializer
@@ -229,8 +229,8 @@ class ServiceManagerConfigTest extends TestCase
      */
     public function testServiceLocatorInitializerCanBeReplaced()
     {
-        $instance = $this->getMock('Zend\ServiceManager\ServiceLocatorAwareInterface');
-        $initializer = $this->getMock('stdClass', array('__invoke'));
+        $instance       = $this->getMock('Zend\ServiceManager\ServiceLocatorAwareInterface');
+        $initializer    = $this->getMock('stdClass', array('__invoke'));
         $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
             'initializers' => array(
                 'ServiceLocatorAwareInitializer' => $initializer
@@ -253,8 +253,8 @@ class ServiceManagerConfigTest extends TestCase
      */
     public function testEventManagerInitializerCanBeReplaced()
     {
-        $instance = $this->getMock('Zend\EventManager\EventManagerAwareInterface');
-        $initializer = $this->getMock('stdClass', array('__invoke'));
+        $instance       = $this->getMock('Zend\EventManager\EventManagerAwareInterface');
+        $initializer    = $this->getMock('stdClass', array('__invoke'));
         $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
             'initializers' => array(
                 'EventManagerAwareInitializer' => $initializer

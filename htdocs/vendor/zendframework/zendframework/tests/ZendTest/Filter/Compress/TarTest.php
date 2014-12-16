@@ -100,16 +100,16 @@ class TarTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter = new TarCompression(
+        $filter  = new TarCompression(
             array(
-                'archive' => dirname(__DIR__) . '/_files/compressed.tar',
-                'target' => dirname(__DIR__) . '/_files/zipextracted.txt'
+                'archive'  => dirname(__DIR__) . '/_files/compressed.tar',
+                'target'   => dirname(__DIR__) . '/_files/zipextracted.txt'
             )
         );
 
         $content = $filter->compress('compress me');
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
+                            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
 
         $content = $filter->decompress($content);
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR, $content);
@@ -128,8 +128,8 @@ class TarTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             array(
                 'archive' => null,
-                'target' => '.',
-                'mode' => null),
+                'target'  => '.',
+                'mode'    => null),
             $filter->getOptions()
         );
 
@@ -181,17 +181,17 @@ class TarTest extends \PHPUnit_Framework_TestCase
      */
     public function testTarCompressToFile()
     {
-        $filter = new TarCompression(
+        $filter  = new TarCompression(
             array(
-                'archive' => dirname(__DIR__) . '/_files/compressed.tar',
-                'target' => dirname(__DIR__) . '/_files/zipextracted.txt'
+                'archive'  => dirname(__DIR__) . '/_files/compressed.tar',
+                'target'   => dirname(__DIR__) . '/_files/zipextracted.txt'
             )
         );
         file_put_contents(dirname(__DIR__) . '/_files/zipextracted.txt', 'compress me');
 
         $content = $filter->compress(dirname(__DIR__) . '/_files/zipextracted.txt');
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
+                            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
 
         $content = $filter->decompress($content);
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR, $content);
@@ -206,24 +206,24 @@ class TarTest extends \PHPUnit_Framework_TestCase
      */
     public function testTarCompressDirectory()
     {
-        $filter = new TarCompression(
+        $filter  = new TarCompression(
             array(
-                'archive' => dirname(__DIR__) . '/_files/compressed.tar',
-                'target' => dirname(__DIR__) . '/_files/_compress'
+                'archive'  => dirname(__DIR__) . '/_files/compressed.tar',
+                'target'   => dirname(__DIR__) . '/_files/_compress'
             )
         );
         $content = $filter->compress(dirname(__DIR__) . '/_files/Compress');
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files'
-            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
+                            . DIRECTORY_SEPARATOR . 'compressed.tar', $content);
     }
 
     public function testSetModeShouldWorkWithCaseInsensitive()
     {
         $filter = new TarCompression;
-        $filter->setTarget(dirname(__DIR__) . '/_files/zipextracted.txt');
+        $filter->setTarget(dirname(__DIR__).'/_files/zipextracted.txt');
 
         foreach (array('GZ', 'Bz2') as $mode) {
-            $archive = dirname(__DIR__) . '/_files/compressed.tar.' . strtolower($mode);
+            $archive = dirname(__DIR__).'/_files/compressed.tar.'.strtolower($mode);
             $filter->setArchive($archive);
             $filter->setMode($mode);
             $content = $filter->compress('compress me');

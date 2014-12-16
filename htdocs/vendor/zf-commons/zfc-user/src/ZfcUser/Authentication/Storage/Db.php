@@ -45,7 +45,6 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
         $identity = $this->read();
         if ($identity === null) {
             $this->clear();
-
             return true;
         }
 
@@ -116,7 +115,6 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
         if (null === $this->storage) {
             $this->setStorage(new Storage\Session);
         }
-
         return $this->storage;
     }
 
@@ -130,7 +128,6 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
     public function setStorage(Storage\StorageInterface $storage)
     {
         $this->storage = $storage;
-
         return $this;
     }
 
@@ -144,7 +141,6 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
         if (null === $this->mapper) {
             $this->mapper = $this->getServiceManager()->get('zfcuser_user_mapper');
         }
-
         return $this->mapper;
     }
 
@@ -157,7 +153,6 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
     public function setMapper(UserMapper $mapper)
     {
         $this->mapper = $mapper;
-
         return $this;
     }
 

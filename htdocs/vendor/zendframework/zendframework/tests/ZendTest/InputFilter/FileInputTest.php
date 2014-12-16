@@ -129,9 +129,9 @@ class FileInputTest extends InputTest
     {
         $badValue = array(
             'tmp_name' => ' ' . __FILE__ . ' ',
-            'name' => 'foo',
-            'size' => 1,
-            'error' => 0,
+            'name'     => 'foo',
+            'size'     => 1,
+            'error'    => 0,
         );
         $this->input->setValue($badValue);
 
@@ -159,9 +159,9 @@ class FileInputTest extends InputTest
 
         $goodValue = array(
             'tmp_name' => __FILE__,
-            'name' => 'foo',
-            'size' => 1,
-            'error' => 0,
+            'name'     => 'foo',
+            'size'     => 1,
+            'error'    => 0,
         );
         $this->input->setValue($goodValue);
         $this->assertTrue($this->input->isValid());
@@ -173,9 +173,9 @@ class FileInputTest extends InputTest
         $this->input->setAutoPrependUploadValidator(true);
         $this->input->setValue(array(
             'tmp_name' => __FILE__,
-            'name' => 'foo',
-            'size' => 1,
-            'error' => 0,
+            'name'     => 'foo',
+            'size'     => 1,
+            'error'    => 0,
         ));
         $this->assertFalse($this->input->isValid());
         $messages = $this->input->getMessages();
@@ -187,15 +187,15 @@ class FileInputTest extends InputTest
         $values = array(
             array(
                 'tmp_name' => __FILE__,
-                'name' => 'foo',
+                'name'     => 'foo',
             ),
             array(
                 'tmp_name' => __FILE__,
-                'name' => 'bar',
+                'name'     => 'bar',
             ),
             array(
                 'tmp_name' => __FILE__,
-                'name' => 'baz',
+                'name'     => 'baz',
             ),
         );
         $this->input->setValue($values);
@@ -234,9 +234,9 @@ class FileInputTest extends InputTest
         $this->assertTrue($this->input->isRequired());
         $this->input->setValue(array(
             'tmp_name' => __FILE__,
-            'name' => 'foo',
-            'size' => 1,
-            'error' => 0,
+            'name'     => 'foo',
+            'size'     => 1,
+            'error'    => 0,
         ));
         $validatorChain = $this->input->getValidatorChain();
         $this->assertEquals(0, count($validatorChain->getValidators()));
@@ -268,8 +268,8 @@ class FileInputTest extends InputTest
 
         $uploadMock = $this->getMock('Zend\Validator\File\UploadFile', array('isValid'));
         $uploadMock->expects($this->exactly(1))
-            ->method('isValid')
-            ->will($this->returnValue(true));
+                     ->method('isValid')
+                     ->will($this->returnValue(true));
 
         $validatorChain = $this->input->getValidatorChain();
         $validatorChain->prependValidator($uploadMock);
@@ -313,9 +313,9 @@ class FileInputTest extends InputTest
 
     public function testMerge()
     {
-        $value = array('tmp_name' => 'bar');
+        $value  = array('tmp_name' => 'bar');
 
-        $input = new FileInput('foo');
+        $input  = new FileInput('foo');
         $input->setAutoPrependUploadValidator(false);
         $input->setValue($value);
         $filter = new Filter\StringTrim();
@@ -326,7 +326,7 @@ class FileInputTest extends InputTest
         $input2 = new FileInput('bar');
         $input2->merge($input);
         $validatorChain = $input->getValidatorChain();
-        $filterChain = $input->getFilterChain();
+        $filterChain    = $input->getFilterChain();
 
         $this->assertFalse($input2->getAutoPrependUploadValidator());
         $this->assertEquals($value, $input2->getRawValue());

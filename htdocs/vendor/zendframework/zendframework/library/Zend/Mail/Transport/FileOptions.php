@@ -37,11 +37,10 @@ class FileOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a valid path in which to write mail files; received "%s"',
                 __METHOD__,
-                (string)$path
+                (string) $path
             ));
         }
         $this->path = $path;
-
         return $this;
     }
 
@@ -57,7 +56,6 @@ class FileOptions extends AbstractOptions
         if (null === $this->path) {
             $this->setPath(sys_get_temp_dir());
         }
-
         return $this->path;
     }
 
@@ -78,7 +76,6 @@ class FileOptions extends AbstractOptions
             ));
         }
         $this->callback = $callback;
-
         return $this;
     }
 
@@ -94,7 +91,6 @@ class FileOptions extends AbstractOptions
                 return 'ZendMail_' . time() . '_' . mt_rand() . '.eml';
             });
         }
-
         return $this->callback;
     }
 }

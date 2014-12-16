@@ -157,8 +157,8 @@ class ArrayObjectTest extends TestCase
     public function testExchangeArrayStringArgumentFail()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $ar = new ArrayObject(array('foo' => 'bar'));
-        $old = $ar->exchangeArray('Bacon');
+        $ar     = new ArrayObject(array('foo' => 'bar'));
+        $old    = $ar->exchangeArray('Bacon');
     }
 
     public function testGetArrayCopy()
@@ -355,8 +355,8 @@ class ArrayObjectTest extends TestCase
      */
     public function testSerializationRestoresProperties()
     {
-        $ar = new ArrayObject();
-        $ar->foo = 'bar';
+        $ar        = new ArrayObject();
+        $ar->foo   = 'bar';
         $ar['bar'] = 'foo';
 
         $this->assertEquals($ar, unserialize(serialize($ar)));

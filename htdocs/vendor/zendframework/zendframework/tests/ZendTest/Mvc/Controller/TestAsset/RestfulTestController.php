@@ -14,7 +14,7 @@ use Zend\Mvc\Controller\AbstractRestfulController;
 class RestfulTestController extends AbstractRestfulController
 {
     public $entities = array();
-    public $entity = array();
+    public $entity   = array();
 
     /**
      * Create a new resource
@@ -36,7 +36,6 @@ class RestfulTestController extends AbstractRestfulController
     public function delete($id)
     {
         $this->entity = array();
-
         return array();
     }
 
@@ -50,7 +49,6 @@ class RestfulTestController extends AbstractRestfulController
         $response = $this->getResponse();
         $response->setStatusCode(204);
         $response->getHeaders()->addHeaderLine('X-Deleted', 'true');
-
         return $response;
     }
 
@@ -95,9 +93,8 @@ class RestfulTestController extends AbstractRestfulController
     public function options()
     {
         $response = $this->getResponse();
-        $headers = $response->getHeaders();
+        $headers  = $response->getHeaders();
         $headers->addHeaderLine('Allow', 'GET, POST, PUT, DELETE, PATCH, HEAD, TRACE');
-
         return $response;
     }
 
@@ -110,10 +107,9 @@ class RestfulTestController extends AbstractRestfulController
      */
     public function patch($id, $data)
     {
-        $entity = (array)$this->entity;
+        $entity     = (array) $this->entity;
         $data['id'] = $id;
-        $updated = array_merge($entity, $data);
-
+        $updated    = array_merge($entity, $data);
         return array('entity' => $updated);
     }
 
@@ -140,7 +136,6 @@ class RestfulTestController extends AbstractRestfulController
         if (isset($items['name']) && $items['name'] == 'testDispatchViaPatchWithoutIdentifierReturns405ResponseIfPatchListThrowsException') {
             parent::patchList($items);
         }
-
         return $items;
     }
 
@@ -154,7 +149,6 @@ class RestfulTestController extends AbstractRestfulController
     public function update($id, $data)
     {
         $data['id'] = $id;
-
         return array('entity' => $data);
     }
 

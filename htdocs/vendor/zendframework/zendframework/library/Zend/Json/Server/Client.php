@@ -52,7 +52,7 @@ class Client implements ServerClient
     /**
      * Create a new JSON-RPC client to a remote server.
      *
-     * @param string $server         Full address of the JSON-RPC service.
+     * @param string $server Full address of the JSON-RPC service.
      * @param HttpClient $httpClient HTTP Client to use for requests.
      */
     public function __construct($server, HttpClient $httpClient = null)
@@ -70,7 +70,6 @@ class Client implements ServerClient
     public function setHttpClient(HttpClient $httpClient)
     {
         $this->httpClient = $httpClient;
-
         return $this;
     }
 
@@ -123,7 +122,7 @@ class Client implements ServerClient
         $headers = $httpRequest->getHeaders();
         $headers->addHeaders(array(
             'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
+            'Accept'       => 'application/json',
         ));
 
         if (!$headers->get('User-Agent')) {
@@ -155,7 +154,7 @@ class Client implements ServerClient
      * Send a JSON-RPC request to the service (for a specific method).
      *
      * @param  string $method Name of the method we want to call.
-     * @param  array $params  Array of parameters for the method.
+     * @param  array $params Array of parameters for the method.
      * @return mixed Method call results.
      * @throws Exception\ErrorException When remote call fails.
      */
@@ -180,7 +179,7 @@ class Client implements ServerClient
      * Create request object.
      *
      * @param  string $method Method to call.
-     * @param  array $params  List of arguments.
+     * @param  array $params List of arguments.
      * @return Request Created request.
      */
     protected function createRequest($method, array $params)
@@ -189,7 +188,6 @@ class Client implements ServerClient
         $request->setMethod($method)
             ->setParams($params)
             ->setId(++$this->id);
-
         return $request;
     }
 }

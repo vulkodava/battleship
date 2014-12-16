@@ -50,7 +50,7 @@ class SessionConfigFactoryTest extends \PHPUnit_Framework_TestCase
         $this->services->setService('Config', array(
             'session_config' => array(
                 'config_class' => 'Zend\Session\Config\StandardConfig',
-                'name' => 'zf2',
+                'name'         => 'zf2',
             ),
         ));
         $config = $this->services->get('Zend\Session\Config\ConfigInterface');

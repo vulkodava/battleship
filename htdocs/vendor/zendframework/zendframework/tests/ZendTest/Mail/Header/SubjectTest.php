@@ -18,19 +18,19 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
 {
     public function testHeaderFolding()
     {
-        $string = str_repeat('foobarblahblahblah baz bat', 10);
+        $string  = str_repeat('foobarblahblahblah baz bat', 10);
         $subject = new Header\Subject();
         $subject->setSubject($string);
 
         $expected = wordwrap($string, 78, "\r\n ");
-        $test = $subject->getFieldValue(Header\HeaderInterface::FORMAT_ENCODED);
+        $test     = $subject->getFieldValue(Header\HeaderInterface::FORMAT_ENCODED);
         $this->assertEquals($expected, $test);
     }
 
     public function testAllowsEmptyValueWhenParsing()
     {
         $headerString = 'Subject:';
-        $subject = Header\Subject::fromString($headerString);
+        $subject      = Header\Subject::fromString($headerString);
         $this->assertEquals('', $subject->getFieldValue());
     }
 }

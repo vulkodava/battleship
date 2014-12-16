@@ -19,9 +19,9 @@ class MonthTest extends TestCase
         $element = new MonthElement('foo');
         $element->setAttributes(array(
             'inclusive' => true,
-            'min' => '2000-01',
-            'max' => '2001-01',
-            'step' => '1',
+            'min'       => '2000-01',
+            'max'       => '2001-01',
+            'step'      => '1',
         ));
 
         $inputSpec = $element->getInputSpecification();
@@ -60,13 +60,13 @@ class MonthTest extends TestCase
     {
         return array(
             //    value         expected
-            array('2012-01', true),
-            array('2012-12', true),
-            array('2012-13', false),
+            array('2012-01',    true),
+            array('2012-12',    true),
+            array('2012-13',    false),
             array('2012-12-01', false),
-            array('12-2012', false),
-            array('2012-1', false),
-            array('12-01', false),
+            array('12-2012',    false),
+            array('2012-1',     false),
+            array('12-01',      false),
         );
     }
 

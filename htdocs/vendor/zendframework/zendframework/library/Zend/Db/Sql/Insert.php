@@ -25,7 +25,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     const SPECIFICATION_INSERT = 'insert';
     const SPECIFICATION_SELECT = 'select';
     const VALUES_MERGE = 'merge';
-    const VALUES_SET = 'set';
+    const VALUES_SET   = 'set';
     /**#@-*/
 
     /**
@@ -39,13 +39,13 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * @var string|TableIdentifier
      */
-    protected $table = null;
-    protected $columns = array();
+    protected $table            = null;
+    protected $columns          = array();
 
     /**
      * @var array|Select
      */
-    protected $values = null;
+    protected $values           = null;
 
     /**
      * Constructor
@@ -68,7 +68,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function into($table)
     {
         $this->table = $table;
-
         return $this;
     }
 
@@ -81,7 +80,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function columns(array $columns)
     {
         $this->columns = $columns;
-
         return $this;
     }
 
@@ -106,7 +104,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 );
             }
             $this->values = $values;
-
             return $this;
         }
 
@@ -165,7 +162,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             'columns' => $this->columns,
             'values' => $this->values
         );
-
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
@@ -178,7 +174,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
-        $driver = $adapter->getDriver();
+        $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
         $parameterContainer = $statementContainer->getParameterContainer();
 
@@ -202,7 +198,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $columns = array();
-        $values = array();
+        $values  = array();
 
         if (is_array($this->values)) {
             foreach ($this->columns as $cIndex => $column) {
@@ -282,7 +278,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     $values[] = $adapterPlatform->quoteValue($value);
                 }
             }
-
             return sprintf(
                 $this->specifications[static::SPECIFICATION_INSERT],
                 $table,
@@ -294,7 +289,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             if ($columns) {
                 $columns = "($columns)";
             }
-
             return sprintf(
                 $this->specifications[static::SPECIFICATION_SELECT],
                 $table,
@@ -319,7 +313,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         $values = array($name => $value);
         $this->values($values, self::VALUES_MERGE);
-
         return $this;
     }
 
@@ -374,7 +367,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if (($position = array_search($name, $this->columns)) === false) {
             throw new Exception\InvalidArgumentException('The key ' . $name . ' was not found in this objects column list');
         }
-
         return $this->values[$position];
     }
 }

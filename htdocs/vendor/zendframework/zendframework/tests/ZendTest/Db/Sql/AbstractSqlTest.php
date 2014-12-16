@@ -79,7 +79,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         preg_match('#expr(\d\d\d\d)Param1#', key($parameters), $matches);
         $expressionNumberNext = $matches[1];
 
-        $this->assertEquals(1, (int)$expressionNumberNext - (int)$expressionNumber);
+        $this->assertEquals(1, (int) $expressionNumberNext - (int) $expressionNumber);
     }
 
     /**
@@ -133,7 +133,6 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
     {
         $method = new \ReflectionMethod($this->abstractSql, 'processExpression');
         $method->setAccessible(true);
-
         return $method->invoke($this->abstractSql, $expression, new TrustingSql92Platform, $driver);
     }
 }

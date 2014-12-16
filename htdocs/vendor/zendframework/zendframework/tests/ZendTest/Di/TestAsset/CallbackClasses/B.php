@@ -18,7 +18,6 @@ class B
         $b = new B();
         $b->c = $c;
         $b->params = $params;
-
         return $b;
     }
 

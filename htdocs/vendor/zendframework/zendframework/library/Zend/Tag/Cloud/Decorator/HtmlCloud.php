@@ -39,7 +39,6 @@ class HtmlCloud extends AbstractCloud
     public function setHTMLTags(array $htmlTags)
     {
         $this->htmlTags = $htmlTags;
-
         return $this;
     }
 
@@ -62,7 +61,6 @@ class HtmlCloud extends AbstractCloud
     public function setSeparator($separator)
     {
         $this->separator = $separator;
-
         return $this;
     }
 
@@ -93,7 +91,6 @@ class HtmlCloud extends AbstractCloud
         }
         $cloudHTML = implode($this->getSeparator(), $tags);
         $cloudHTML = $this->wrapTag($cloudHTML);
-
         return $cloudHTML;
     }
 }

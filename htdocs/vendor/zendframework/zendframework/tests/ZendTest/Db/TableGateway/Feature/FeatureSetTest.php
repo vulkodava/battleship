@@ -8,7 +8,6 @@
  */
 
 namespace ZendTest\Db\TableGateway\Feature;
-
 use Zend\Db\TableGateway\Feature\FeatureSet;
 use Zend\Db\TableGateway\Feature\MasterSlaveFeature;
 use Zend\Db\TableGateway\Feature\MetadataFeature;

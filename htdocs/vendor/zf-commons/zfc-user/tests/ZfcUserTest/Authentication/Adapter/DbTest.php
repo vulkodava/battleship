@@ -78,9 +78,9 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testLogout()
     {
         $this->storage->expects($this->once())
-            ->method('clear');
+                      ->method('clear');
 
-        $this->db->logout($this->authEvent);
+         $this->db->logout($this->authEvent);
     }
 
     /**
@@ -89,17 +89,17 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testAuthenticateWhenSatisfies()
     {
         $this->authEvent->expects($this->once())
-            ->method('setIdentity')
-            ->with('ZfcUser')
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setIdentity')
+                        ->with('ZfcUser')
+                        ->will($this->returnValue($this->authEvent));
         $this->authEvent->expects($this->once())
-            ->method('setCode')
-            ->with(\Zend\Authentication\Result::SUCCESS)
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setCode')
+                        ->with(\Zend\Authentication\Result::SUCCESS)
+                        ->will($this->returnValue($this->authEvent));
         $this->authEvent->expects($this->once())
-            ->method('setMessages')
-            ->with(array('Authentication successful.'))
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setMessages')
+                        ->with(array('Authentication successful.'))
+                        ->will($this->returnValue($this->authEvent));
 
         $this->storage->expects($this->at(0))
             ->method('read')
@@ -231,25 +231,25 @@ class DbTest extends \PHPUnit_Framework_TestCase
             ->method('getPassword')
             ->will($this->returnValue('$2a$04$5kq1mnYWbww8X.rIj7eOVOHXtvGw/peefjIcm0lDGxRTEjm9LnOae'));
         $this->user->expects($this->once())
-            ->method('getId')
-            ->will($this->returnValue(1));
+                   ->method('getId')
+                   ->will($this->returnValue(1));
 
         $this->storage->expects($this->any())
-            ->method('getNameSpace')
-            ->will($this->returnValue('test'));
+                      ->method('getNameSpace')
+                      ->will($this->returnValue('test'));
 
         $this->authEvent->expects($this->once())
-            ->method('setIdentity')
-            ->with(1)
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setIdentity')
+                        ->with(1)
+                        ->will($this->returnValue($this->authEvent));
         $this->authEvent->expects($this->once())
-            ->method('setCode')
-            ->with(\Zend\Authentication\Result::SUCCESS)
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setCode')
+                        ->with(\Zend\Authentication\Result::SUCCESS)
+                        ->will($this->returnValue($this->authEvent));
         $this->authEvent->expects($this->once())
-            ->method('setMessages')
-            ->with(array('Authentication successful.'))
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setMessages')
+                        ->with(array('Authentication successful.'))
+                        ->will($this->returnValue($this->authEvent));
 
         $this->db->setMapper($this->mapper);
         $this->db->setOptions($this->options);
@@ -266,43 +266,43 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->setAuthenticationUser();
 
         $this->options->expects($this->once())
-            ->method('getEnableUserState')
-            ->will($this->returnValue(true));
+             ->method('getEnableUserState')
+             ->will($this->returnValue(true));
 
         $this->options->expects($this->once())
-            ->method('getAllowedLoginStates')
-            ->will($this->returnValue(array(1, 2, 3)));
+             ->method('getAllowedLoginStates')
+             ->will($this->returnValue(array(1, 2, 3)));
 
         $this->options->expects($this->once())
             ->method('getPasswordCost')
             ->will($this->returnValue(4));
 
         $this->user->expects($this->exactly(2))
-            ->method('getPassword')
-            ->will($this->returnValue('$2a$04$5kq1mnYWbww8X.rIj7eOVOHXtvGw/peefjIcm0lDGxRTEjm9LnOae'));
+                   ->method('getPassword')
+                   ->will($this->returnValue('$2a$04$5kq1mnYWbww8X.rIj7eOVOHXtvGw/peefjIcm0lDGxRTEjm9LnOae'));
         $this->user->expects($this->once())
-            ->method('getId')
-            ->will($this->returnValue(1));
+                   ->method('getId')
+                   ->will($this->returnValue(1));
         $this->user->expects($this->once())
-            ->method('getState')
-            ->will($this->returnValue(1));
+                   ->method('getState')
+                   ->will($this->returnValue(1));
 
         $this->storage->expects($this->any())
-            ->method('getNameSpace')
-            ->will($this->returnValue('test'));
+                      ->method('getNameSpace')
+                      ->will($this->returnValue('test'));
 
         $this->authEvent->expects($this->once())
-            ->method('setIdentity')
-            ->with(1)
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setIdentity')
+                        ->with(1)
+                        ->will($this->returnValue($this->authEvent));
         $this->authEvent->expects($this->once())
-            ->method('setCode')
-            ->with(\Zend\Authentication\Result::SUCCESS)
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setCode')
+                        ->with(\Zend\Authentication\Result::SUCCESS)
+                        ->will($this->returnValue($this->authEvent));
         $this->authEvent->expects($this->once())
-            ->method('setMessages')
-            ->with(array('Authentication successful.'))
-            ->will($this->returnValue($this->authEvent));
+                        ->method('setMessages')
+                        ->with(array('Authentication successful.'))
+                        ->will($this->returnValue($this->authEvent));
 
         $this->db->setMapper($this->mapper);
         $this->db->setOptions($this->options);

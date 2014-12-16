@@ -16,36 +16,36 @@ use Zend\Http as ZendHttp;
 use Zend\Stdlib\ErrorHandler;
 
 /**
- */
+*/
 class Reader
 {
     /**
      * Namespace constants
      */
-    const NAMESPACE_ATOM_03 = 'http://purl.org/atom/ns#';
-    const NAMESPACE_ATOM_10 = 'http://www.w3.org/2005/Atom';
-    const NAMESPACE_RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
-    const NAMESPACE_RSS_090 = 'http://my.netscape.com/rdf/simple/0.9/';
-    const NAMESPACE_RSS_10 = 'http://purl.org/rss/1.0/';
+    const NAMESPACE_ATOM_03  = 'http://purl.org/atom/ns#';
+    const NAMESPACE_ATOM_10  = 'http://www.w3.org/2005/Atom';
+    const NAMESPACE_RDF      = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+    const NAMESPACE_RSS_090  = 'http://my.netscape.com/rdf/simple/0.9/';
+    const NAMESPACE_RSS_10   = 'http://purl.org/rss/1.0/';
 
     /**
      * Feed type constants
      */
-    const TYPE_ANY = 'any';
-    const TYPE_ATOM_03 = 'atom-03';
-    const TYPE_ATOM_10 = 'atom-10';
-    const TYPE_ATOM_10_ENTRY = 'atom-10-entry';
-    const TYPE_ATOM_ANY = 'atom';
-    const TYPE_RSS_090 = 'rss-090';
-    const TYPE_RSS_091 = 'rss-091';
+    const TYPE_ANY              = 'any';
+    const TYPE_ATOM_03          = 'atom-03';
+    const TYPE_ATOM_10          = 'atom-10';
+    const TYPE_ATOM_10_ENTRY    = 'atom-10-entry';
+    const TYPE_ATOM_ANY         = 'atom';
+    const TYPE_RSS_090          = 'rss-090';
+    const TYPE_RSS_091          = 'rss-091';
     const TYPE_RSS_091_NETSCAPE = 'rss-091n';
     const TYPE_RSS_091_USERLAND = 'rss-091u';
-    const TYPE_RSS_092 = 'rss-092';
-    const TYPE_RSS_093 = 'rss-093';
-    const TYPE_RSS_094 = 'rss-094';
-    const TYPE_RSS_10 = 'rss-10';
-    const TYPE_RSS_20 = 'rss-20';
-    const TYPE_RSS_ANY = 'rss';
+    const TYPE_RSS_092          = 'rss-092';
+    const TYPE_RSS_093          = 'rss-093';
+    const TYPE_RSS_094          = 'rss-094';
+    const TYPE_RSS_10           = 'rss-10';
+    const TYPE_RSS_20           = 'rss-20';
+    const TYPE_RSS_ANY          = 'rss';
 
     /**
      * Cache instance
@@ -181,17 +181,17 @@ class Reader
     /**
      * Import a feed by providing a URI
      *
-     * @param  string $uri          The URI to the feed
-     * @param  string $etag         OPTIONAL Last received ETag for this resource
+     * @param  string $uri The URI to the feed
+     * @param  string $etag OPTIONAL Last received ETag for this resource
      * @param  string $lastModified OPTIONAL Last-Modified value for this resource
      * @return Feed\FeedInterface
      * @throws Exception\RuntimeException
      */
     public static function import($uri, $etag = null, $lastModified = null)
     {
-        $cache = self::getCache();
-        $feed = null;
-        $client = self::getHttpClient();
+        $cache       = self::getCache();
+        $feed        = null;
+        $client      = self::getHttpClient();
         $client->resetParameters();
         $headers = new ZendHttp\Headers();
         $client->setHeaders($headers);
@@ -230,7 +230,6 @@ class Reader
                     $cache->setItem($cacheId . '_lastmodified', $response->getHeaders()->get('Last-Modified')->getFieldValue());
                 }
             }
-
             return static::importString($responseXml);
         } elseif ($cache) {
             $data = $cache->getItem($cacheId);
@@ -238,21 +237,19 @@ class Reader
                 return static::importString($data);
             }
             $response = $client->send();
-            if ((int)$response->getStatusCode() !== 200) {
+            if ((int) $response->getStatusCode() !== 200) {
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $responseXml = $response->getBody();
             $cache->setItem($cacheId, $responseXml);
-
             return static::importString($responseXml);
         } else {
             $response = $client->send();
-            if ((int)$response->getStatusCode() !== 200) {
+            if ((int) $response->getStatusCode() !== 200) {
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $reader = static::importString($response->getBody());
             $reader->setOriginalSourceUri($uri);
-
             return $reader;
         }
     }
@@ -282,12 +279,11 @@ class Reader
             ));
         }
 
-        if ((int)$response->getStatusCode() !== 200) {
+        if ((int) $response->getStatusCode() !== 200) {
             throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
         }
         $reader = static::importString($response->getBody());
         $reader->setOriginalSourceUri($uri);
-
         return $reader;
     }
 
@@ -344,9 +340,8 @@ class Reader
             $reader = new Feed\Atom($dom, $type);
         } else {
             throw new Exception\RuntimeException('The URI used does not point to a '
-                . 'valid Atom, RSS or RDF feed that Zend\Feed\Reader can parse.');
+            . 'valid Atom, RSS or RDF feed that Zend\Feed\Reader can parse.');
         }
-
         return $reader;
     }
 
@@ -361,11 +356,10 @@ class Reader
     {
         ErrorHandler::start();
         $feed = file_get_contents($filename);
-        $err = ErrorHandler::stop();
+        $err  = ErrorHandler::stop();
         if ($feed === false) {
             throw new Exception\RuntimeException("File '{$filename}' could not be loaded", 0, $err);
         }
-
         return static::importString($feed);
     }
 
@@ -405,7 +399,6 @@ class Reader
         $feedSet = new FeedSet;
         $links = $dom->getElementsByTagName('link');
         $feedSet->addLinks($links, $uri);
-
         return $feedSet;
     }
 
@@ -425,7 +418,7 @@ class Reader
         } elseif ($feed instanceof DOMDocument) {
             $dom = $feed;
         } elseif (is_string($feed) && !empty($feed)) {
-            ErrorHandler::start(E_NOTICE | E_WARNING);
+            ErrorHandler::start(E_NOTICE|E_WARNING);
             ini_set('track_errors', 1);
             $oldValue = libxml_disable_entity_loader(true);
             $dom = new DOMDocument;
@@ -452,7 +445,7 @@ class Reader
             }
         } else {
             throw new Exception\InvalidArgumentException('Invalid object/scalar provided: must'
-                . ' be of type Zend\Feed\Reader\Feed, DomDocument or string');
+            . ' be of type Zend\Feed\Reader\Feed, DomDocument or string');
         }
         $xpath = new DOMXPath($dom);
 
@@ -554,7 +547,6 @@ class Reader
         if (!isset(static::$extensionManager)) {
             static::setExtensionManager(new ExtensionManager());
         }
-
         return static::$extensionManager;
     }
 
@@ -567,9 +559,9 @@ class Reader
      */
     public static function registerExtension($name)
     {
-        $feedName = $name . '\Feed';
+        $feedName  = $name . '\Feed';
         $entryName = $name . '\Entry';
-        $manager = static::getExtensionManager();
+        $manager   = static::getExtensionManager();
         if (static::isRegistered($name)) {
             if ($manager->has($feedName) || $manager->has($entryName)) {
                 return;
@@ -596,14 +588,13 @@ class Reader
      */
     public static function isRegistered($extensionName)
     {
-        $feedName = $extensionName . '\Feed';
+        $feedName  = $extensionName . '\Feed';
         $entryName = $extensionName . '\Entry';
         if (in_array($feedName, static::$extensions['feed'])
             || in_array($entryName, static::$extensions['entry'])
         ) {
             return true;
         }
-
         return false;
     }
 
@@ -624,12 +615,12 @@ class Reader
      */
     public static function reset()
     {
-        static::$cache = null;
-        static::$httpClient = null;
+        static::$cache              = null;
+        static::$httpClient         = null;
         static::$httpMethodOverride = false;
         static::$httpConditionalGet = false;
-        static::$extensionManager = null;
-        static::$extensions = array(
+        static::$extensionManager   = null;
+        static::$extensions         = array(
             'feed' => array(
                 'DublinCore\Feed',
                 'Atom\Feed'
@@ -681,7 +672,6 @@ class Reader
         foreach ($array as &$value) {
             $value = unserialize($value);
         }
-
         return $array;
     }
 }

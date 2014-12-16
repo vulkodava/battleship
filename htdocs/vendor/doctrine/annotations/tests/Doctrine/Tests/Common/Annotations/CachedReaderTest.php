@@ -13,30 +13,34 @@ class CachedReaderTest extends AbstractReaderTest
 
     public function testIgnoresStaleCache()
     {
-        $file = __DIR__ . '/Fixtures/Controller.php';
+        $file = __DIR__.'/Fixtures/Controller.php';
         touch($file);
         $name = 'Doctrine\Tests\Common\Annotations\Fixtures\Controller';
-        $cacheKey = $name . '@[Annot]';
+        $cacheKey = $name.'@[Annot]';
 
         $cache = $this->getMock('Doctrine\Common\Cache\Cache');
         $cache
             ->expects($this->at(0))
             ->method('fetch')
             ->with($this->equalTo($cacheKey))
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue(array()))
+        ;
         $cache
             ->expects($this->at(1))
             ->method('fetch')
-            ->with($this->equalTo('[C]' . $cacheKey))
-            ->will($this->returnValue(time() - 10));
+            ->with($this->equalTo('[C]'.$cacheKey))
+            ->will($this->returnValue(time() - 10))
+        ;
         $cache
             ->expects($this->at(2))
             ->method('save')
-            ->with($this->equalTo($cacheKey));
+            ->with($this->equalTo($cacheKey))
+        ;
         $cache
             ->expects($this->at(3))
             ->method('save')
-            ->with($this->equalTo('[C]' . $cacheKey));
+            ->with($this->equalTo('[C]'.$cacheKey))
+        ;
 
         $reader = new CachedReader(new AnnotationReader(), $cache, true);
         $route = new Route();
@@ -47,7 +51,6 @@ class CachedReaderTest extends AbstractReaderTest
     protected function getReader()
     {
         $this->cache = new ArrayCache();
-
         return new CachedReader(new AnnotationReader(), $this->cache);
     }
 }

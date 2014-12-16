@@ -23,7 +23,7 @@ class FileCacheTest extends \Doctrine\Tests\DoctrineTestCase
 
     public function getProviderFileName()
     {
-        return array(
+         return array(
             //The characters :\/<>"*?| are not valid in Windows filenames.
             array('key:1', 'key1'),
             array('key\2', 'key2'),
@@ -34,7 +34,7 @@ class FileCacheTest extends \Doctrine\Tests\DoctrineTestCase
             array('key*7', 'key7'),
             array('key?8', 'key8'),
             array('key|9', 'key9'),
-            array('key[0]', 'key[0]'),
+            array('key[0]','key[0]'),
         );
     }
 
@@ -43,12 +43,12 @@ class FileCacheTest extends \Doctrine\Tests\DoctrineTestCase
      */
     public function testInvalidFilename($key, $expected)
     {
-        $cache = $this->driver;
+        $cache  = $this->driver;
         $method = new \ReflectionMethod($cache, 'getFilename');
 
         $method->setAccessible(true);
 
-        $value = $method->invoke($cache, $key);
+        $value  = $method->invoke($cache, $key);
         $actual = pathinfo($value, PATHINFO_FILENAME);
 
         $this->assertEquals($expected, $actual);
@@ -56,24 +56,24 @@ class FileCacheTest extends \Doctrine\Tests\DoctrineTestCase
 
     public function testFilenameCollision()
     {
-        $data['key:0'] = 'key0';
-        $data['key\0'] = 'key0';
-        $data['key/0'] = 'key0';
-        $data['key<0'] = 'key0';
-        $data['key>0'] = 'key0';
-        $data['key"0'] = 'key0';
-        $data['key*0'] = 'key0';
-        $data['key?0'] = 'key0';
-        $data['key|0'] = 'key0';
+        $data['key:0']  = 'key0';
+        $data['key\0']  = 'key0';
+        $data['key/0']  = 'key0';
+        $data['key<0']  = 'key0';
+        $data['key>0']  = 'key0';
+        $data['key"0']  = 'key0';
+        $data['key*0']  = 'key0';
+        $data['key?0']  = 'key0';
+        $data['key|0']  = 'key0';
 
-        $paths = array();
-        $cache = $this->driver;
+        $paths  = array();
+        $cache  = $this->driver;
         $method = new \ReflectionMethod($cache, 'getFilename');
 
         $method->setAccessible(true);
 
         foreach ($data as $key => $expected) {
-            $path = $method->invoke($cache, $key);
+            $path   = $method->invoke($cache, $key);
             $actual = pathinfo($path, PATHINFO_FILENAME);
 
             $this->assertNotContains($path, $paths);
@@ -85,20 +85,20 @@ class FileCacheTest extends \Doctrine\Tests\DoctrineTestCase
 
     public function testFilenameShouldCreateThePathWithFourSubDirectories()
     {
-        $cache = $this->driver;
-        $method = new \ReflectionMethod($cache, 'getFilename');
-        $key = 'item-key';
-        $expectedDir[] = '84e0e2e893febb73';
-        $expectedDir[] = '7a0fee0c89d53f4b';
-        $expectedDir[] = 'b7fcb44c57cdf3d3';
-        $expectedDir[] = '2ce7363f5d597760';
-        $expectedDir = implode(DIRECTORY_SEPARATOR, $expectedDir);
+        $cache          = $this->driver;
+        $method         = new \ReflectionMethod($cache, 'getFilename');
+        $key            = 'item-key';
+        $expectedDir[]  = '84e0e2e893febb73';
+        $expectedDir[]  = '7a0fee0c89d53f4b';
+        $expectedDir[]  = 'b7fcb44c57cdf3d3';
+        $expectedDir[]  = '2ce7363f5d597760';
+        $expectedDir    = implode(DIRECTORY_SEPARATOR, $expectedDir);
 
         $method->setAccessible(true);
 
-        $path = $method->invoke($cache, $key);
-        $filename = pathinfo($path, PATHINFO_FILENAME);
-        $dirname = pathinfo($path, PATHINFO_DIRNAME);
+        $path       = $method->invoke($cache, $key);
+        $filename   = pathinfo($path, PATHINFO_FILENAME);
+        $dirname    = pathinfo($path, PATHINFO_DIRNAME);
 
         $this->assertEquals('item-key', $filename);
         $this->assertEquals(DIRECTORY_SEPARATOR . $expectedDir, $dirname);

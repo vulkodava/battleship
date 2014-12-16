@@ -38,7 +38,6 @@ class SeparatorToSeparator extends AbstractFilter
     public function setSearchSeparator($separator)
     {
         $this->searchSeparator = $separator;
-
         return $this;
     }
 
@@ -61,7 +60,6 @@ class SeparatorToSeparator extends AbstractFilter
     public function setReplacementSeparator($separator)
     {
         $this->replacementSeparator = $separator;
-
         return $this;
     }
 
@@ -94,7 +92,6 @@ class SeparatorToSeparator extends AbstractFilter
         }
 
         $pattern = '#' . preg_quote($this->searchSeparator, '#') . '#';
-
         return preg_replace($pattern, $this->replacementSeparator, $value);
     }
 }

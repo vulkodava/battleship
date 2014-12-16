@@ -89,7 +89,7 @@ class ConfigListenerTest extends TestCase
     public function testCanCacheMergedConfig()
     {
         $options = new ListenerOptions(array(
-            'cache_dir' => $this->tmpdir,
+            'cache_dir'            => $this->tmpdir,
             'config_cache_enabled' => true,
         ));
         $configListener = new ConfigListener($options);
@@ -207,7 +207,7 @@ class ConfigListenerTest extends TestCase
                 __DIR__ . '/_files/good/config.ini',
                 __DIR__ . '/_files/good/config.php',
                 __DIR__ . '/_files/good/config.xml')
-        );
+                );
 
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
@@ -233,7 +233,7 @@ class ConfigListenerTest extends TestCase
     public function testCanCacheMergedConfigFromGlob()
     {
         $options = new ListenerOptions(array(
-            'cache_dir' => $this->tmpdir,
+            'cache_dir'            => $this->tmpdir,
             'config_cache_enabled' => true,
         ));
         $configListener = new ConfigListener($options);
@@ -269,7 +269,7 @@ class ConfigListenerTest extends TestCase
     public function testCanCacheMergedConfigFromStatic()
     {
         $options = new ListenerOptions(array(
-            'cache_dir' => $this->tmpdir,
+            'cache_dir'            => $this->tmpdir,
             'config_cache_enabled' => true,
         ));
         $configListener = new ConfigListener($options);
@@ -277,7 +277,7 @@ class ConfigListenerTest extends TestCase
                 __DIR__ . '/_files/good/config.ini',
                 __DIR__ . '/_files/good/config.php',
                 __DIR__ . '/_files/good/config.xml')
-        );
+                );
 
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));

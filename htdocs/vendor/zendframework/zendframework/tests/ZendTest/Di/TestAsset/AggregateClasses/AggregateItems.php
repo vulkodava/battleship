@@ -16,7 +16,6 @@ class AggregateItems implements ItemInterface
     public function addItem(ItemInterface $item)
     {
         $this->items[] = $item;
-
         return $this;
     }
 }

@@ -67,7 +67,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Sqlsrv $driver)
     {
         $this->driver = $driver;
-
         return $this;
     }
 
@@ -78,7 +77,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
-
         return $this;
     }
 
@@ -99,7 +97,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
-
         return $this;
     }
 
@@ -126,7 +123,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 
         $result = sqlsrv_query($this->resource, 'SELECT SCHEMA_NAME()');
         $r = sqlsrv_fetch_array($result);
-
         return $r[0];
     }
 
@@ -143,7 +139,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidArgumentException('Resource provided was not of type SQL Server Connection');
         }
         $this->resource = $resource;
-
         return $this;
     }
 
@@ -155,7 +150,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if (!$this->isConnected()) {
             $this->connect();
         }
-
         return $this->resource;
     }
 
@@ -179,26 +173,26 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             switch (strtolower($key)) {
                 case 'hostname':
                 case 'servername':
-                    $serverName = (string)$value;
+                    $serverName = (string) $value;
                     break;
                 case 'username':
                 case 'uid':
-                    $params['UID'] = (string)$value;
+                    $params['UID'] = (string) $value;
                     break;
                 case 'password':
                 case 'pwd':
-                    $params['PWD'] = (string)$value;
+                    $params['PWD'] = (string) $value;
                     break;
                 case 'database':
                 case 'dbname':
-                    $params['Database'] = (string)$value;
+                    $params['Database'] = (string) $value;
                     break;
                 case 'charset':
-                    $params['CharacterSet'] = (string)$value;
+                    $params['CharacterSet'] = (string) $value;
                     break;
                 case 'driver_options':
                 case 'options':
-                    $params = array_merge($params, (array)$value);
+                    $params = array_merge($params, (array) $value);
                     break;
 
             }
@@ -219,7 +213,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 
     /**
      * Is connected
-     *
      * @return bool
      */
     public function isConnected()
@@ -336,7 +329,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($returnValue);
-
         return $result;
     }
 
@@ -353,7 +345,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $statement = $this->driver->createStatement($sql);
-
         return $statement;
     }
 
@@ -371,7 +362,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);
         $row = sqlsrv_fetch_array($result);
-
         return $row['Current_Identity'];
     }
 }

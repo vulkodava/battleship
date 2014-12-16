@@ -32,8 +32,8 @@ class ZfcUserDisplayNameTest extends \PHPUnit_Framework_TestCase
     public function testInvokeWithoutUserAndNotLoggedIn()
     {
         $this->authService->expects($this->once())
-            ->method('hasIdentity')
-            ->will($this->returnValue(false));
+                          ->method('hasIdentity')
+                          ->will($this->returnValue(false));
 
         $result = $this->helper->__invoke(null);
 
@@ -47,11 +47,11 @@ class ZfcUserDisplayNameTest extends \PHPUnit_Framework_TestCase
     public function testInvokeWithoutUserButLoggedInWithWrongUserObject()
     {
         $this->authService->expects($this->once())
-            ->method('hasIdentity')
-            ->will($this->returnValue(true));
+                          ->method('hasIdentity')
+                          ->will($this->returnValue(true));
         $this->authService->expects($this->once())
-            ->method('getIdentity')
-            ->will($this->returnValue(new \StdClass));
+                          ->method('getIdentity')
+                          ->will($this->returnValue(new \StdClass));
 
         $this->helper->__invoke(null);
     }
@@ -62,15 +62,15 @@ class ZfcUserDisplayNameTest extends \PHPUnit_Framework_TestCase
     public function testInvokeWithoutUserButLoggedInWithDisplayName()
     {
         $this->user->expects($this->once())
-            ->method('getDisplayName')
-            ->will($this->returnValue('zfcUser'));
+                   ->method('getDisplayName')
+                   ->will($this->returnValue('zfcUser'));
 
         $this->authService->expects($this->once())
-            ->method('hasIdentity')
-            ->will($this->returnValue(true));
+                          ->method('hasIdentity')
+                          ->will($this->returnValue(true));
         $this->authService->expects($this->once())
-            ->method('getIdentity')
-            ->will($this->returnValue($this->user));
+                          ->method('getIdentity')
+                          ->will($this->returnValue($this->user));
 
         $result = $this->helper->__invoke(null);
 
@@ -83,18 +83,18 @@ class ZfcUserDisplayNameTest extends \PHPUnit_Framework_TestCase
     public function testInvokeWithoutUserButLoggedInWithoutDisplayNameButWithUsername()
     {
         $this->user->expects($this->once())
-            ->method('getDisplayName')
-            ->will($this->returnValue(null));
+                   ->method('getDisplayName')
+                   ->will($this->returnValue(null));
         $this->user->expects($this->once())
-            ->method('getUsername')
-            ->will($this->returnValue('zfcUser'));
+                   ->method('getUsername')
+                   ->will($this->returnValue('zfcUser'));
 
         $this->authService->expects($this->once())
-            ->method('hasIdentity')
-            ->will($this->returnValue(true));
+                          ->method('hasIdentity')
+                          ->will($this->returnValue(true));
         $this->authService->expects($this->once())
-            ->method('getIdentity')
-            ->will($this->returnValue($this->user));
+                          ->method('getIdentity')
+                          ->will($this->returnValue($this->user));
 
         $result = $this->helper->__invoke(null);
 
@@ -107,21 +107,21 @@ class ZfcUserDisplayNameTest extends \PHPUnit_Framework_TestCase
     public function testInvokeWithoutUserButLoggedInWithoutDisplayNameAndWithOutUsernameButWithEmail()
     {
         $this->user->expects($this->once())
-            ->method('getDisplayName')
-            ->will($this->returnValue(null));
+                   ->method('getDisplayName')
+                   ->will($this->returnValue(null));
         $this->user->expects($this->once())
-            ->method('getUsername')
-            ->will($this->returnValue(null));
+                   ->method('getUsername')
+                   ->will($this->returnValue(null));
         $this->user->expects($this->once())
-            ->method('getEmail')
-            ->will($this->returnValue('zfcUser@zfcUser.com'));
+                   ->method('getEmail')
+                   ->will($this->returnValue('zfcUser@zfcUser.com'));
 
         $this->authService->expects($this->once())
-            ->method('hasIdentity')
-            ->will($this->returnValue(true));
+                          ->method('hasIdentity')
+                          ->will($this->returnValue(true));
         $this->authService->expects($this->once())
-            ->method('getIdentity')
-            ->will($this->returnValue($this->user));
+                          ->method('getIdentity')
+                          ->will($this->returnValue($this->user));
 
         $result = $this->helper->__invoke(null);
 

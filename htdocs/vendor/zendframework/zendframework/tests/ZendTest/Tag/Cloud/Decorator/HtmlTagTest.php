@@ -22,9 +22,9 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
     public function testDefaultOutput()
     {
         $decorator = new Decorator\HtmlTag();
-        $expected = array('<li><a href="http://first" style="font-size: 10px;">foo</a></li>',
-            '<li><a href="http://second" style="font-size: 13px;">bar</a></li>',
-            '<li><a href="http://third" style="font-size: 20px;">baz</a></li>');
+        $expected  = array('<li><a href="http://first" style="font-size: 10px;">foo</a></li>',
+                           '<li><a href="http://second" style="font-size: 13px;">bar</a></li>',
+                           '<li><a href="http://third" style="font-size: 20px;">baz</a></li>');
 
         $this->assertEquals($decorator->render($this->_getTagList()), $expected);
     }
@@ -33,9 +33,9 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
     {
         $decorator = new Decorator\HtmlTag();
         $decorator->setHtmlTags(array('span' => array('class' => 'tag'), 'li'));
-        $expected = array('<li><span class="tag"><a href="http://first" style="font-size: 10px;">foo</a></span></li>',
-            '<li><span class="tag"><a href="http://second" style="font-size: 13px;">bar</a></span></li>',
-            '<li><span class="tag"><a href="http://third" style="font-size: 20px;">baz</a></span></li>');
+        $expected  = array('<li><span class="tag"><a href="http://first" style="font-size: 10px;">foo</a></span></li>',
+                           '<li><span class="tag"><a href="http://second" style="font-size: 13px;">bar</a></span></li>',
+                           '<li><span class="tag"><a href="http://third" style="font-size: 20px;">baz</a></span></li>');
 
         $this->assertEquals($decorator->render($this->_getTagList()), $expected);
     }
@@ -44,12 +44,12 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
     {
         $decorator = new Decorator\HtmlTag();
         $decorator->setFontSizeUnit('pt')
-            ->setMinFontSize(5)
-            ->setMaxFontSize(50);
+                  ->setMinFontSize(5)
+                  ->setMaxFontSize(50);
 
-        $expected = array('<li><a href="http://first" style="font-size: 5pt;">foo</a></li>',
-            '<li><a href="http://second" style="font-size: 15pt;">bar</a></li>',
-            '<li><a href="http://third" style="font-size: 50pt;">baz</a></li>');
+        $expected  = array('<li><a href="http://first" style="font-size: 5pt;">foo</a></li>',
+                           '<li><a href="http://second" style="font-size: 15pt;">bar</a></li>',
+                           '<li><a href="http://third" style="font-size: 50pt;">baz</a></li>');
 
         $this->assertEquals($decorator->render($this->_getTagList()), $expected);
     }
@@ -59,9 +59,9 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
         $decorator = new Decorator\HtmlTag();
         $decorator->setClassList(array('small', 'medium', 'large'));
 
-        $expected = array('<li><a href="http://first" class="small">foo</a></li>',
-            '<li><a href="http://second" class="medium">bar</a></li>',
-            '<li><a href="http://third" class="large">baz</a></li>');
+        $expected  = array('<li><a href="http://first" class="small">foo</a></li>',
+                           '<li><a href="http://second" class="medium">bar</a></li>',
+                           '<li><a href="http://third" class="large">baz</a></li>');
 
         $this->assertEquals($decorator->render($this->_getTagList()), $expected);
     }
@@ -142,7 +142,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
 
     protected function _getTagList()
     {
-        $list = new Tag\ItemList();
+        $list   = new Tag\ItemList();
         $list[] = new Tag\Item(array('title' => 'foo', 'weight' => 1, 'params' => array('url' => 'http://first')));
         $list[] = new Tag\Item(array('title' => 'bar', 'weight' => 3, 'params' => array('url' => 'http://second')));
         $list[] = new Tag\Item(array('title' => 'baz', 'weight' => 10, 'params' => array('url' => 'http://third')));
@@ -160,7 +160,6 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
                 'url' => 'http://testing',
             ),
         ));
-
         return $tags;
     }
 

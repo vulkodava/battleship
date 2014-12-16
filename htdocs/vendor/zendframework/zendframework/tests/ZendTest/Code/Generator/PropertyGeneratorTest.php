@@ -216,16 +216,16 @@ EOS;
     public function testCreateFromArray()
     {
         $propertyGenerator = PropertyGenerator::fromArray(array(
-            'name' => 'SampleProperty',
-            'const' => true,
+            'name'         => 'SampleProperty',
+            'const'        => true,
             'defaultvalue' => 'foo',
-            'docblock' => array(
+            'docblock'     => array(
                 'shortdescription' => 'foo',
             ),
-            'abstract' => true,
-            'final' => true,
-            'static' => true,
-            'visibility' => PropertyGenerator::VISIBILITY_PROTECTED,
+            'abstract'     => true,
+            'final'        => true,
+            'static'       => true,
+            'visibility'   => PropertyGenerator::VISIBILITY_PROTECTED,
         ));
 
         $this->assertEquals('SampleProperty', $propertyGenerator->getName());
@@ -246,13 +246,13 @@ EOS;
         $reflectionClass = new \Zend\Code\Reflection\ClassReflection('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
 
         $reflProp = $reflectionClass->getProperty('fooProperty');
-        $cgProp = PropertyGenerator::fromReflection($reflProp);
+        $cgProp   = PropertyGenerator::fromReflection($reflProp);
 
         $this->assertEquals('fooProperty', $cgProp->getName());
 
         $docBlock = $cgProp->getDocBlock();
         $this->assertInstanceOf('Zend\Code\Generator\DocBlockGenerator', $docBlock);
-        $tags = $docBlock->getTags();
+        $tags     = $docBlock->getTags();
         $this->assertInternalType('array', $tags);
         $this->assertEquals(1, count($tags));
         $tag = array_shift($tags);

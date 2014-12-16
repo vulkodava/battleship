@@ -30,7 +30,7 @@ class PluginManagerTest extends TestCase
 
     public function testPluginManagerInjectsControllerInPlugin()
     {
-        $controller = new SampleController;
+        $controller    = new SampleController;
         $pluginManager = new PluginManager;
         $pluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
         $pluginManager->setController($controller);
@@ -41,7 +41,7 @@ class PluginManagerTest extends TestCase
 
     public function testPluginManagerInjectsControllerForExistingPlugin()
     {
-        $controller1 = new SampleController;
+        $controller1   = new SampleController;
         $pluginManager = new PluginManager;
         $pluginManager->setInvokableClass('samplePlugin', 'ZendTest\Mvc\Controller\Plugin\TestAsset\SamplePlugin');
         $pluginManager->setController($controller1);
@@ -49,7 +49,7 @@ class PluginManagerTest extends TestCase
         // Plugin manager registers now instance of SamplePlugin
         $pluginManager->get('samplePlugin');
 
-        $controller2 = new SampleController;
+        $controller2   = new SampleController;
         $pluginManager->setController($controller2);
 
         $plugin = $pluginManager->get('samplePlugin');

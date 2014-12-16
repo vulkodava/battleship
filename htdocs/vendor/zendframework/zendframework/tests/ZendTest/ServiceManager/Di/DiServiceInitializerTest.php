@@ -29,7 +29,6 @@ class DiServiceInitializerTest extends \PHPUnit_Framework_TestCase
     protected $mockServiceLocator = null;
     protected $mockDiInstanceManagerProxy = null;
     protected $mockDiInstanceManager = null;
-
     /**@#-*/
 
     public function setup()
@@ -62,7 +61,7 @@ class DiServiceInitializerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\ServiceManager\Di\DiServiceInitializer::initialize
-     * @todo   this needs to be moved into its own class
+     * @todo this needs to be moved into its own class
      */
     public function testProxyInstanceManagersStayInSync()
     {

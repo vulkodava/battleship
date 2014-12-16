@@ -58,7 +58,7 @@ class ComplexTypeA
 if (isset($_GET['wsdl'])) {
     $server = new \Zend\Soap\AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex());
 } else {
-    $uri = "http://" . $_SERVER['HTTP_HOST'] . "/" . $_SERVER['PHP_SELF'] . "?wsdl";
+    $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
     $server = new \Zend\Soap\Server($uri);
 }
 $server->setClass('\ZendTest\Soap\TestAsset\fulltests\Server1');

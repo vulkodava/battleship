@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -48,7 +48,7 @@ class AuthenticationIdentityProvider implements ProviderInterface
      */
     public function getIdentityRoles()
     {
-        if (!$identity = $this->authService->getIdentity()) {
+        if (! $identity = $this->authService->getIdentity()) {
             return array($this->defaultRole);
         }
 
@@ -82,7 +82,7 @@ class AuthenticationIdentityProvider implements ProviderInterface
      */
     public function setDefaultRole($defaultRole)
     {
-        if (!($defaultRole instanceof RoleInterface || is_string($defaultRole))) {
+        if (! ($defaultRole instanceof RoleInterface || is_string($defaultRole))) {
             throw InvalidRoleException::invalidRoleInstance($defaultRole);
         }
 
@@ -109,7 +109,7 @@ class AuthenticationIdentityProvider implements ProviderInterface
      */
     public function setAuthenticatedRole($authenticatedRole)
     {
-        if (!($authenticatedRole instanceof RoleInterface || is_string($authenticatedRole))) {
+        if (! ($authenticatedRole instanceof RoleInterface || is_string($authenticatedRole))) {
             throw InvalidRoleException::invalidRoleInstance($authenticatedRole);
         }
 

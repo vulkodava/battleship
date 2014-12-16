@@ -57,7 +57,6 @@ class CachingFileScannerTest extends \PHPUnit_Framework_TestCase
         $r = new \ReflectionObject($cfs);
         $cacheProp = $r->getProperty('cache');
         $cacheProp->setAccessible(true);
-
         return count($cacheProp->getValue($cfs));
     }
 

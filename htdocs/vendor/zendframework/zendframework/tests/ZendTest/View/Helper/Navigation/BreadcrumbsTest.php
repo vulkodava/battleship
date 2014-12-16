@@ -135,14 +135,14 @@ class BreadcrumbsTest extends AbstractTest
         $rendered2 = 'Site 2';
 
         $expected = array(
-            'registered' => $rendered1,
-            'supplied' => $rendered2,
+            'registered'       => $rendered1,
+            'supplied'         => $rendered2,
             'registered_again' => $rendered1
         );
 
         $actual = array(
-            'registered' => $this->_helper->render(),
-            'supplied' => $this->_helper->render($this->_nav2),
+            'registered'       => $this->_helper->render(),
+            'supplied'         => $this->_helper->render($this->_nav2),
             'registered_again' => $this->_helper->render()
         );
 
@@ -176,7 +176,7 @@ class BreadcrumbsTest extends AbstractTest
         $this->_helper->setTranslator($this->_getTranslatorWithTextDomain());
 
         $expected = $this->_getExpected('bc/textdomain.html');
-        $test = $this->_helper->render($this->_nav3);
+        $test     = $this->_helper->render($this->_nav3);
 
         $this->assertEquals(trim($expected), trim($test));
     }
@@ -244,8 +244,8 @@ class BreadcrumbsTest extends AbstractTest
     {
         $container = new Navigation(array(
             array(
-                'label' => 'Live & Learn',
-                'uri' => '#',
+                'label'  => 'Live & Learn',
+                'uri'    => '#',
                 'active' => true
             )
         ));

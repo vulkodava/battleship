@@ -38,17 +38,17 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
     public function postCodesDataProvider()
     {
         return array(
-            array('2292', true),
-            array('1000', true),
-            array('0000', true),
-            array('12345', false),
-            array(1234, true),
-            array(9821, true),
-            array('21A4', false),
-            array('ABCD', false),
-            array(true, false),
+            array('2292',    true),
+            array('1000',    true),
+            array('0000',    true),
+            array('12345',   false),
+            array(1234,      true),
+            array(9821,      true),
+            array('21A4',    false),
+            array('ABCD',    false),
+            array(true,      false),
             array('AT-2292', false),
-            array(1.56, false),
+            array(1.56,      false),
         );
     }
 
@@ -130,7 +130,7 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('not appear to be a postal code', $message['postcodeNoMatch']);
     }
 
-    /**
+     /**
      * Test service class with invalid validation
      *
      * @group ZF2-44
@@ -138,19 +138,17 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
     public function testServiceClass()
     {
         $params = (object)array(
-            'serviceTrue' => null,
-            'serviceFalse' => null,
+            'serviceTrue'   => null,
+            'serviceFalse'  => null,
         );
 
-        $serviceTrue = function ($value) use ($params) {
+        $serviceTrue  = function ($value) use ($params) {
             $params->serviceTrue = $value;
-
             return true;
         };
 
         $serviceFalse = function ($value) use ($params) {
             $params->serviceFalse = $value;
-
             return false;
         };
 
@@ -176,6 +174,6 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
     {
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-            'messageTemplates', $validator);
+                                     'messageTemplates', $validator);
     }
 }

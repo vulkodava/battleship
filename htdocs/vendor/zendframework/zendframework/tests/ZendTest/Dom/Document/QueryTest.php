@@ -79,7 +79,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         $test = Query::cssToXpath('div#foo span.bar, #bar li.baz a');
         $this->assertTrue(is_string($test));
         $this->assertContains('|', $test);
-        $actual = explode('|', $test);
+        $actual   = explode('|', $test);
         $expected = array(
             "//div[@id='foo']//span[contains(concat(' ', normalize-space(@class), ' '), ' bar ')]",
             "//*[@id='bar']//li[contains(concat(' ', normalize-space(@class), ' '), ' baz ')]//a",

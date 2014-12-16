@@ -53,7 +53,6 @@ class UriNormalize extends AbstractFilter
     public function setDefaultScheme($defaultScheme)
     {
         $this->defaultScheme = $defaultScheme;
-
         return $this;
     }
 
@@ -74,7 +73,6 @@ class UriNormalize extends AbstractFilter
     public function setEnforcedScheme($enforcedScheme)
     {
         $this->enforcedScheme = $enforcedScheme;
-
         return $this;
     }
 
@@ -89,7 +87,7 @@ class UriNormalize extends AbstractFilter
         if (!is_scalar($value)) {
             return $value;
         }
-        $value = (string)$value;
+        $value = (string) $value;
 
         $defaultScheme = $this->defaultScheme ?: $this->enforcedScheme;
 

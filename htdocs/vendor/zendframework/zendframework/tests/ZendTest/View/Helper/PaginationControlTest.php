@@ -56,7 +56,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsAndSetsView()
     {
-        $view = new View();
+        $view   = new View();
         $helper = new Helper\PaginationControl();
         $this->assertNull($helper->getView());
         $helper->setView($view);
@@ -155,7 +155,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsesPaginatorFromViewOnlyIfNoneSupplied()
     {
-        $this->_viewHelper->getView()->vars()->paginator = $this->_paginator;
+        $this->_viewHelper->getView()->vars()->paginator  = $this->_paginator;
         $paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter(range(1, 30)));
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
 

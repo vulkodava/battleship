@@ -44,21 +44,21 @@ abstract class FileCache extends CacheProvider
     /**
      * Constructor.
      *
-     * @param string $directory      The cache directory.
+     * @param string      $directory The cache directory.
      * @param string|null $extension The cache file extension.
      *
      * @throws \InvalidArgumentException
      */
     public function __construct($directory, $extension = null)
     {
-        if (!is_dir($directory) && !@mkdir($directory, 0777, true)) {
+        if ( ! is_dir($directory) && ! @mkdir($directory, 0777, true)) {
             throw new \InvalidArgumentException(sprintf(
                 'The directory "%s" does not exist and could not be created.',
                 $directory
             ));
         }
 
-        if (!is_writable($directory)) {
+        if ( ! is_writable($directory)) {
             throw new \InvalidArgumentException(sprintf(
                 'The directory "%s" is not writable.',
                 $directory
@@ -99,7 +99,7 @@ abstract class FileCache extends CacheProvider
         $hash = hash('sha256', $id);
         $path = implode(str_split($hash, 16), DIRECTORY_SEPARATOR);
         $path = $this->directory . DIRECTORY_SEPARATOR . $path;
-        $id = preg_replace('@[\\\/:"*?<>|]+@', '', $id);
+        $id   = preg_replace('@[\\\/:"*?<>|]+@', '', $id);
 
         return $path . DIRECTORY_SEPARATOR . $id . $this->extension;
     }
@@ -137,11 +137,11 @@ abstract class FileCache extends CacheProvider
         $free = disk_free_space($this->directory);
 
         return array(
-            Cache::STATS_HITS => null,
-            Cache::STATS_MISSES => null,
-            Cache::STATS_UPTIME => null,
-            Cache::STATS_MEMORY_USAGE => $usage,
-            Cache::STATS_MEMORY_AVAILABLE => $free,
+            Cache::STATS_HITS               => null,
+            Cache::STATS_MISSES             => null,
+            Cache::STATS_UPTIME             => null,
+            Cache::STATS_MEMORY_USAGE       => $usage,
+            Cache::STATS_MEMORY_AVAILABLE   => $free,
         );
     }
 
@@ -153,7 +153,6 @@ abstract class FileCache extends CacheProvider
         $pattern = '/^.+\\' . $this->extension . '$/i';
         $iterator = new \RecursiveDirectoryIterator($this->directory);
         $iterator = new \RecursiveIteratorIterator($iterator);
-
         return new \RegexIterator($iterator, $pattern);
     }
 }

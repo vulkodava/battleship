@@ -19,9 +19,9 @@ class WeekTest extends TestCase
         $element = new WeekElement('foo');
         $element->setAttributes(array(
             'inclusive' => true,
-            'min' => '1970-W01',
-            'max' => '1970-W03',
-            'step' => '1',
+            'min'       => '1970-W01',
+            'max'       => '1970-W03',
+            'step'      => '1',
         ));
 
         $inputSpec = $element->getInputSpecification();
@@ -59,13 +59,13 @@ class WeekTest extends TestCase
     public function weekValuesDataProvider()
     {
         return array(
-            //    value        expected
-            array('2012-W01', true),
-            array('2012-W52', true),
-            array('2012-01', false),
-            array('W12-2012', false),
-            array('2012-W1', false),
-            array('12-W01', false),
+                //    value        expected
+                array('2012-W01',  true),
+                array('2012-W52',  true),
+                array('2012-01',   false),
+                array('W12-2012',  false),
+                array('2012-W1',   false),
+                array('12-W01',    false),
         );
     }
 

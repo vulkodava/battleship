@@ -74,7 +74,7 @@ class Smtp extends AbstractProtocol
      *
      * @param  string|array $host
      * @param  null|int $port
-     * @param  null|array $config
+     * @param  null|array   $config
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($host = '127.0.0.1', $port = null, array $config = null)
@@ -296,8 +296,7 @@ class Smtp extends AbstractProtocol
     /**
      * Issues the RSET command end validates answer
      *
-     * Can be used to restore a clean smtp communication state when a transaction has been cancelled or commencing a
-     * new transaction.
+     * Can be used to restore a clean smtp communication state when a transaction has been cancelled or commencing a new transaction.
      *
      */
     public function rset()

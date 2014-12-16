@@ -27,7 +27,6 @@ class SplQueue extends \SplQueue implements Serializable
         foreach ($this as $item) {
             $array[] = $item;
         }
-
         return $array;
     }
 

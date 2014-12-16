@@ -73,8 +73,8 @@ class FilterChain extends AbstractFilter implements Countable
                     break;
                 case 'filters':
                     foreach ($value as $spec) {
-                        $name = isset($spec['name']) ? $spec['name'] : false;
-                        $options = isset($spec['options']) ? $spec['options'] : array();
+                        $name     = isset($spec['name'])     ? $spec['name']     : false;
+                        $options  = isset($spec['options'])  ? $spec['options']  : array();
                         $priority = isset($spec['priority']) ? $spec['priority'] : static::DEFAULT_PRIORITY;
                         if ($name) {
                             $this->attachByName($name, $options, $priority);
@@ -110,7 +110,6 @@ class FilterChain extends AbstractFilter implements Countable
         if (!$this->plugins) {
             $this->setPluginManager(new FilterPluginManager());
         }
-
         return $this->plugins;
     }
 
@@ -123,7 +122,6 @@ class FilterChain extends AbstractFilter implements Countable
     public function setPluginManager(FilterPluginManager $plugins)
     {
         $this->plugins = $plugins;
-
         return $this;
     }
 
@@ -137,7 +135,6 @@ class FilterChain extends AbstractFilter implements Countable
     public function plugin($name, array $options = array())
     {
         $plugins = $this->getPluginManager();
-
         return $plugins->get($name, $options);
     }
 
@@ -145,8 +142,7 @@ class FilterChain extends AbstractFilter implements Countable
      * Attach a filter to the chain
      *
      * @param  callable|FilterInterface $callback A Filter implementation or valid PHP callback
-     * @param  int $priority                      Priority at which to enqueue filter; defaults to 1000 (higher
-     *                                            executes earlier)
+     * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -162,7 +158,6 @@ class FilterChain extends AbstractFilter implements Countable
             $callback = array($callback, 'filter');
         }
         $this->filters->insert($callback, $priority);
-
         return $this;
     }
 
@@ -180,12 +175,11 @@ class FilterChain extends AbstractFilter implements Countable
     public function attachByName($name, $options = array(), $priority = self::DEFAULT_PRIORITY)
     {
         if (!is_array($options)) {
-            $options = (array)$options;
+            $options = (array) $options;
         } elseif (empty($options)) {
             $options = null;
         }
         $filter = $this->getPluginManager()->get($name, $options);
-
         return $this->attach($filter, $priority);
     }
 

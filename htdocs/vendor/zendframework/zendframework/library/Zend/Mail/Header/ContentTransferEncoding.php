@@ -14,7 +14,6 @@ class ContentTransferEncoding implements HeaderInterface
     /**
      * Allowed Content-Transfer-Encoding parameters specified by RFC 1521
      * (reduced set)
-     *
      * @var array
      */
     protected static $allowedTransferEncodings = array(
@@ -95,13 +94,12 @@ class ContentTransferEncoding implements HeaderInterface
 
         if (!in_array($transferEncoding, static::$allowedTransferEncodings)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects one of "' . implode(', ', static::$allowedTransferEncodings) . '"; received "%s"',
+                '%s expects one of "'. implode(', ', static::$allowedTransferEncodings) . '"; received "%s"',
                 __METHOD__,
-                (string)$transferEncoding
+                (string) $transferEncoding
             ));
         }
         $this->transferEncoding = $transferEncoding;
-
         return $this;
     }
 

@@ -2,7 +2,7 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link       http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -40,11 +40,11 @@ class SelectTest extends TestCase
     {
         $element = new SelectElement();
         $element->setValueOptions(array(
-            array('label' => 'group 1', 'options' => array(
-                'Option 1' => 'Label 1',
-                'Option 2' => 'Label 2',
-                'Option 3' => 'Label 2',
-            ))));
+          array('label' => 'group 1', 'options' => array(
+            'Option 1' => 'Label 1',
+            'Option 2' => 'Label 2',
+            'Option 3' => 'Label 2',
+          ))));
 
         $inputSpec = $element->getInputSpecification();
         $inArrayValidator = $inputSpec['validators'][0];
@@ -57,11 +57,11 @@ class SelectTest extends TestCase
     {
         $element = new SelectElement();
         $element->setValueOptions(array(
-            array('label' => 'group 1', 'options' => array(
-                array('value' => 'Option 1', 'label' => 'Label 1'),
-                array('value' => 'Option 2', 'label' => 'Label 2'),
-                array('value' => 'Option 3', 'label' => 'Label 3'),
-            ))));
+          array('label' => 'group 1', 'options' => array(
+            array('value' => 'Option 1', 'label'=> 'Label 1'),
+            array('value' => 'Option 2', 'label'=> 'Label 2'),
+            array('value' => 'Option 3', 'label'=> 'Label 3'),
+          ))));
 
         $inputSpec = $element->getInputSpecification();
         $inArrayValidator = $inputSpec['validators'][0];
@@ -71,7 +71,6 @@ class SelectTest extends TestCase
         $this->assertTrue($inArrayValidator->isValid('Option 3'));
         $this->assertFalse($inArrayValidator->isValid('Option 5'));
     }
-
     public function testProvidesInputSpecificationForMultipleSelect()
     {
         $element = new SelectElement();
@@ -155,7 +154,7 @@ class SelectTest extends TestCase
         $this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
 
         $element->setValueOptions($options);
-        $haystack = $inArrayValidator->getHaystack();
+        $haystack=$inArrayValidator->getHaystack();
         $this->assertCount(count($options), $haystack);
     }
 
@@ -176,7 +175,7 @@ class SelectTest extends TestCase
         );
         $element->setAttributes(array(
             'multiple' => true,
-            'options' => $valueOptions,
+            'options'  => $valueOptions,
         ));
         $this->assertEquals($valueOptions, $element->getValueOptions());
     }
@@ -185,10 +184,10 @@ class SelectTest extends TestCase
     {
         $element = new SelectElement();
         $element->setOptions(array(
-            'value_options' => array('bar' => 'baz'),
-            'options' => array('foo' => 'bar'),
-            'empty_option' => array('baz' => 'foo'),
-        ));
+                                  'value_options' => array('bar' => 'baz'),
+                                  'options' => array('foo' => 'bar'),
+                                  'empty_option' => array('baz' => 'foo'),
+                             ));
         $this->assertEquals(array('bar' => 'baz'), $element->getOption('value_options'));
         $this->assertEquals(array('foo' => 'bar'), $element->getOption('options'));
         $this->assertEquals(array('baz' => 'foo'), $element->getOption('empty_option'));

@@ -170,7 +170,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
      * Handle file not found errors
      *
      * @group  ZF-2724
-     * @param  int $errnum
+     * @param  int    $errnum
      * @param  string $errstr
      * @return void
      */
@@ -185,10 +185,10 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno
-     * @param  string $errstr
-     * @param  string $errfile
+     * @param  string  $errstr
+     * @param  string  $errfile
      * @param  integer $errline
-     * @param  array $errcontext
+     * @param  array   $errcontext
      * @return void
      */
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
@@ -205,7 +205,6 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $validator->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(true));
-
         return $validator;
     }
 
@@ -221,7 +220,6 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $validator->expects($this->any())
             ->method('getMessages')
             ->will($this->returnValue(array('error' => 'validation failed')));
-
         return $validator;
     }
 
@@ -257,8 +255,8 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->validator->isValid('foo'));
         $messages = $this->validator->getMessages();
-        $found = false;
-        $test = 'Second callback trapped';
+        $found    = false;
+        $test     = 'Second callback trapped';
         foreach ($messages as $messageSet) {
             if (is_string($messageSet) && $messageSet === $test) {
                 $found = true;
@@ -293,7 +291,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group        zfcampus_zf-apigility-admin_89
+     * @group zfcampus_zf-apigility-admin_89
      * @dataProvider breakChainFlags
      */
     public function testAttachByNameAllowsSpecifyingBreakChainOnFailureFlagViaOptions($option)
@@ -304,7 +302,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertEquals(1, count($this->validator));
         $validators = $this->validator->getValidators();
-        $spec = array_shift($validators);
+        $spec       = array_shift($validators);
 
         $this->assertInternalType('array', $spec);
         $this->assertArrayHasKey('instance', $spec);

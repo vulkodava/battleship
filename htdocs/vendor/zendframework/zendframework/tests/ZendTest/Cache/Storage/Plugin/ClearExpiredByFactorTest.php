@@ -29,7 +29,7 @@ class ClearExpiredByFactorTest extends CommonPluginTest
         $this->_options = new Cache\Storage\Plugin\PluginOptions(array(
             'clearing_factor' => 1,
         ));
-        $this->_plugin = new Cache\Storage\Plugin\ClearExpiredByFactor();
+        $this->_plugin  = new Cache\Storage\Plugin\ClearExpiredByFactor();
         $this->_plugin->setOptions($this->_options);
 
         parent::setUp();
@@ -41,9 +41,9 @@ class ClearExpiredByFactorTest extends CommonPluginTest
 
         // check attached callbacks
         $expectedListeners = array(
-            'setItem.post' => 'clearExpiredByFactor',
+            'setItem.post'  => 'clearExpiredByFactor',
             'setItems.post' => 'clearExpiredByFactor',
-            'addItem.post' => 'clearExpiredByFactor',
+            'addItem.post'  => 'clearExpiredByFactor',
             'addItems.post' => 'clearExpiredByFactor',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {

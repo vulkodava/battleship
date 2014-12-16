@@ -191,7 +191,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
     public function testAddsParameter()
     {
         $this->publisher->setParameter('foo', 'bar');
-        $this->assertEquals(array('foo' => 'bar'), $this->publisher->getParameters());
+        $this->assertEquals(array('foo'=> 'bar'), $this->publisher->getParameters());
     }
 
     public function testAddsParametersFromArray()
@@ -255,7 +255,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         $this->publisher->setParameter('foo', 'bar');
         $this->publisher->notifyAll();
         $this->assertEquals('hub.mode=publish&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic&foo=bar',
-            $client->getRequest()->getContent());
+                            $client->getRequest()->getContent());
     }
 
     public function testNotifiesHubWithCorrectParametersAndMultipleTopics()
@@ -267,7 +267,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         $this->publisher->addUpdatedTopicUrl('http://www.example.com/topic2');
         $this->publisher->notifyAll();
         $this->assertEquals('hub.mode=publish&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic2',
-            $client->getRequest()->getContent());
+                            $client->getRequest()->getContent());
     }
 
     public function testNotifiesHubAndReportsSuccess()

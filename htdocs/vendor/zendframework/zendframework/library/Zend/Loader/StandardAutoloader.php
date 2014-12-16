@@ -21,12 +21,12 @@ require_once __DIR__ . '/SplAutoloader.php';
  */
 class StandardAutoloader implements SplAutoloader
 {
-    const NS_SEPARATOR = '\\';
+    const NS_SEPARATOR     = '\\';
     const PREFIX_SEPARATOR = '_';
-    const LOAD_NS = 'namespaces';
-    const LOAD_PREFIX = 'prefixes';
-    const ACT_AS_FALLBACK = 'fallback_autoloader';
-    const AUTOREGISTER_ZF = 'autoregister_zf';
+    const LOAD_NS          = 'namespaces';
+    const LOAD_PREFIX      = 'prefixes';
+    const ACT_AS_FALLBACK  = 'fallback_autoloader';
+    const AUTOREGISTER_ZF  = 'autoregister_zf';
 
     /**
      * @var array Namespace/directory pairs to search; ZF library added by default
@@ -109,7 +109,6 @@ class StandardAutoloader implements SplAutoloader
                     // ignore
             }
         }
-
         return $this;
     }
 
@@ -121,8 +120,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function setFallbackAutoloader($flag)
     {
-        $this->fallbackAutoloaderFlag = (bool)$flag;
-
+        $this->fallbackAutoloaderFlag = (bool) $flag;
         return $this;
     }
 
@@ -147,7 +145,6 @@ class StandardAutoloader implements SplAutoloader
     {
         $namespace = rtrim($namespace, self::NS_SEPARATOR) . self::NS_SEPARATOR;
         $this->namespaces[$namespace] = $this->normalizeDirectory($directory);
-
         return $this;
     }
 
@@ -168,7 +165,6 @@ class StandardAutoloader implements SplAutoloader
         foreach ($namespaces as $namespace => $directory) {
             $this->registerNamespace($namespace, $directory);
         }
-
         return $this;
     }
 
@@ -181,9 +177,8 @@ class StandardAutoloader implements SplAutoloader
      */
     public function registerPrefix($prefix, $directory)
     {
-        $prefix = rtrim($prefix, self::PREFIX_SEPARATOR) . self::PREFIX_SEPARATOR;
+        $prefix = rtrim($prefix, self::PREFIX_SEPARATOR). self::PREFIX_SEPARATOR;
         $this->prefixes[$prefix] = $this->normalizeDirectory($directory);
-
         return $this;
     }
 
@@ -204,7 +199,6 @@ class StandardAutoloader implements SplAutoloader
         foreach ($prefixes as $prefix => $directory) {
             $this->registerPrefix($prefix, $directory);
         }
-
         return $this;
     }
 
@@ -223,7 +217,6 @@ class StandardAutoloader implements SplAutoloader
             } elseif ($isFallback) {
                 return $this->loadClass($class, self::ACT_AS_FALLBACK);
             }
-
             return false;
         }
         if (false !== strpos($class, self::PREFIX_SEPARATOR)) {
@@ -232,13 +225,11 @@ class StandardAutoloader implements SplAutoloader
             } elseif ($isFallback) {
                 return $this->loadClass($class, self::ACT_AS_FALLBACK);
             }
-
             return false;
         }
         if ($isFallback) {
             return $this->loadClass($class, self::ACT_AS_FALLBACK);
         }
-
         return false;
     }
 
@@ -266,13 +257,13 @@ class StandardAutoloader implements SplAutoloader
         $matches = array();
         preg_match('/(?P<namespace>.+\\\)?(?P<class>[^\\\]+$)/', $class, $matches);
 
-        $class = (isset($matches['class'])) ? $matches['class'] : '';
+        $class     = (isset($matches['class'])) ? $matches['class'] : '';
         $namespace = (isset($matches['namespace'])) ? $matches['namespace'] : '';
 
         return $directory
-        . str_replace(self::NS_SEPARATOR, '/', $namespace)
-        . str_replace(self::PREFIX_SEPARATOR, '/', $class)
-        . '.php';
+             . str_replace(self::NS_SEPARATOR, '/', $namespace)
+             . str_replace(self::PREFIX_SEPARATOR, '/', $class)
+             . '.php';
     }
 
     /**
@@ -293,12 +284,11 @@ class StandardAutoloader implements SplAutoloader
         // Fallback autoloading
         if ($type === self::ACT_AS_FALLBACK) {
             // create filename
-            $filename = $this->transformClassNameToFilename($class, '');
+            $filename     = $this->transformClassNameToFilename($class, '');
             $resolvedName = stream_resolve_include_path($filename);
             if ($resolvedName !== false) {
                 return include $resolvedName;
             }
-
             return false;
         }
 
@@ -315,7 +305,6 @@ class StandardAutoloader implements SplAutoloader
                 }
             }
         }
-
         return false;
     }
 
@@ -330,11 +319,9 @@ class StandardAutoloader implements SplAutoloader
         $last = $directory[strlen($directory) - 1];
         if (in_array($last, array('/', '\\'))) {
             $directory[strlen($directory) - 1] = DIRECTORY_SEPARATOR;
-
             return $directory;
         }
         $directory .= DIRECTORY_SEPARATOR;
-
         return $directory;
     }
 }

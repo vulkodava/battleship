@@ -23,7 +23,6 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     /**
      * Stores the original set timezone
-     *
      * @var string
      */
     private $originaltimezone;
@@ -85,10 +84,10 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testGoodHorizontalPosition()
     {
-        foreach (array('left', 'center', 'right') as $position) {
+        foreach (array('left' , 'center' , 'right') as $position) {
             $this->renderer->setHorizontalPosition($position);
             $this->assertSame($position,
-                $this->renderer->getHorizontalPosition());
+                    $this->renderer->getHorizontalPosition());
         }
     }
 
@@ -100,10 +99,10 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testGoodVerticalPosition()
     {
-        foreach (array('top', 'middle', 'bottom') as $position) {
+        foreach (array('top' , 'middle' , 'bottom') as $position) {
             $this->renderer->setVerticalPosition($position);
             $this->assertSame($position,
-                $this->renderer->getVerticalPosition());
+                    $this->renderer->getVerticalPosition());
         }
     }
 
@@ -125,7 +124,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testBadLeftOffset()
     {
         $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
-        $this->renderer->setLeftOffset(-1);
+        $this->renderer->setLeftOffset(- 1);
     }
 
     public function testGoodTopOffset()
@@ -140,22 +139,22 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testBadTopOffset()
     {
         $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
-        $this->renderer->setTopOffset(-1);
+        $this->renderer->setTopOffset(- 1);
     }
 
     public function testConstructorWithArray()
     {
         $renderer = $this->getRendererObject(
-            array('automaticRenderError' => true,
-                'unkownProperty' => 'aValue'));
+                array('automaticRenderError' => true ,
+                        'unkownProperty' => 'aValue'));
         $this->assertEquals(true, $renderer->getAutomaticRenderError());
     }
 
     public function testConstructorWithZendConfig()
     {
         $config = new Config\Config(
-            array('automaticRenderError' => true,
-                'unkownProperty' => 'aValue'));
+                array('automaticRenderError' => true ,
+                        'unkownProperty' => 'aValue'));
         $renderer = $this->getRendererObject($config);
         $this->assertEquals(true, $renderer->getAutomaticRenderError());
     }
@@ -164,8 +163,8 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(false, $this->renderer->getAutomaticRenderError());
         $this->renderer->setOptions(
-            array('automaticRenderError' => true,
-                'unkownProperty' => 'aValue'));
+                array('automaticRenderError' => true ,
+                        'unkownProperty' => 'aValue'));
         $this->assertEquals(true, $this->renderer->getAutomaticRenderError());
     }
 

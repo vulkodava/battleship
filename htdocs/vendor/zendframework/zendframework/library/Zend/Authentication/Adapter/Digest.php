@@ -71,8 +71,7 @@ class Digest extends AbstractAdapter
      */
     public function setFilename($filename)
     {
-        $this->filename = (string)$filename;
-
+        $this->filename = (string) $filename;
         return $this;
     }
 
@@ -94,8 +93,7 @@ class Digest extends AbstractAdapter
      */
     public function setRealm($realm)
     {
-        $this->realm = (string)$realm;
-
+        $this->realm = (string) $realm;
         return $this;
     }
 
@@ -158,18 +156,18 @@ class Digest extends AbstractAdapter
 
         ErrorHandler::start(E_WARNING);
         $fileHandle = fopen($this->filename, 'r');
-        $error = ErrorHandler::stop();
+        $error      = ErrorHandler::stop();
         if (false === $fileHandle) {
             throw new Exception\UnexpectedValueException("Cannot open '$this->filename' for reading", 0, $error);
         }
 
-        $id = "$this->identity:$this->realm";
+        $id       = "$this->identity:$this->realm";
         $idLength = strlen($id);
 
         $result = array(
-            'code' => AuthenticationResult::FAILURE,
+            'code'  => AuthenticationResult::FAILURE,
             'identity' => array(
-                'realm' => $this->realm,
+                'realm'    => $this->realm,
                 'username' => $this->identity,
             ),
             'messages' => array()
@@ -185,13 +183,11 @@ class Digest extends AbstractAdapter
                     return new AuthenticationResult(AuthenticationResult::SUCCESS, $result['identity'], $result['messages']);
                 }
                 $result['messages'][] = 'Password incorrect';
-
                 return new AuthenticationResult(AuthenticationResult::FAILURE_CREDENTIAL_INVALID, $result['identity'], $result['messages']);
             }
         }
 
         $result['messages'][] = "Username '$this->identity' and realm '$this->realm' combination not found";
-
         return new AuthenticationResult(AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND, $result['identity'], $result['messages']);
     }
 }

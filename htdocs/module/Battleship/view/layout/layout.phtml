@@ -23,6 +23,33 @@
         ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
         ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',)); ?>
 
+    <!-- CSS SCRIPTS -->
+    <?php
+    echo $this->headLink(array(
+        'rel' => 'shortcut icon',
+        'type' => 'image/vnd.microsoft.icon',
+        'href' => $this->basePath() . '/img/favicon.ico'
+    ))
+
+        ->prependStylesheet($this->basePath() . '/css/bootstrap-3.0.0/bootstrap.min.css')
+        ->prependStylesheet($this->basePath() . '/css/style.css')
+        ->prependStylesheet($this->basePath() . '/css/zf-table/zf-table.css')
+
+    //->prependStylesheet($this->basePath() . '/css/bootstrap-2.2.2/DT_bootstrap.css')
+    //->prependStylesheet($this->basePath() . '/css/bootstrap-2.2.2/bootstrap-responsive.min.css')
+    //->prependStylesheet($this->basePath() . '/css/bootstrap-2.2.2/bootstrap.min.css')
+    ?>
+
+    <!-- JS SCRIPTS -->
+    <?php
+    echo $this->headScript()->appendFile($this->basePath() . '/js/jquery.min.js')
+        ->appendFile($this->basePath() . '/js/jquery.dataTables.min.js')
+        ->appendFile($this->basePath() . '/js/zf-table.js')
+        ->appendFile($this->basePath() . '/js/DT_bootstrap_3.js')
+    //->appendFile($this->basePath() . '/js/DT_bootstrap_2.js')
+
+    ?>
+
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

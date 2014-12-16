@@ -16,7 +16,7 @@ interface StrategyEnabledInterface
     /**
      * Adds the given strategy under the given name.
      *
-     * @param string $name                The name of the strategy to register.
+     * @param string $name The name of the strategy to register.
      * @param StrategyInterface $strategy The strategy to register.
      * @return StrategyEnabledInterface
      */

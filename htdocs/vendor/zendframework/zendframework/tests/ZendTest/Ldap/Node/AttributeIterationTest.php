@@ -20,7 +20,7 @@ class AttributeIterationTest extends TestLdap\AbstractTestCase
     public function testSimpleIteration()
     {
         $node = $this->createTestNode();
-        $i = 0;
+        $i    = 0;
         $data = array();
         foreach ($node->getAttributes() as $k => $v) {
             $this->assertNotNull($k);
@@ -32,11 +32,11 @@ class AttributeIterationTest extends TestLdap\AbstractTestCase
         $this->assertEquals(5, $i);
         $this->assertEquals($i, count($node));
         $this->assertEquals(array(
-                'boolean' => array(true, false),
-                'cn' => array('name'),
-                'empty' => array(),
-                'host' => array('a', 'b', 'c'),
-                'objectclass' => array('account', 'top')), $data
+                                 'boolean'     => array(true, false),
+                                 'cn'          => array('name'),
+                                 'empty'       => array(),
+                                 'host'        => array('a', 'b', 'c'),
+                                 'objectclass' => array('account', 'top')), $data
         );
     }
 }

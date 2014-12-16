@@ -39,7 +39,6 @@ class Color extends Element implements InputProviderInterface
         if (null === $this->validator) {
             $this->validator = new RegexValidator('/^#[0-9a-fA-F]{6}$/');
         }
-
         return $this->validator;
     }
 

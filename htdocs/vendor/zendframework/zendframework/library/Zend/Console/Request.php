@@ -34,7 +34,7 @@ class Request extends Message implements RequestInterface
      * Create a new CLI request
      *
      * @param array|null $args Console arguments. If not supplied, $_SERVER['argv'] will be used
-     * @param array|null $env  Environment data. If not supplied, $_ENV will be used
+     * @param array|null $env Environment data. If not supplied, $_ENV will be used
      * @throws Exception\RuntimeException
      */
     public function __construct(array $args = null, array $env = null)
@@ -82,7 +82,6 @@ class Request extends Message implements RequestInterface
     {
         $this->params = $params;
         $this->setContent($params);
-
         return $this;
     }
 
@@ -104,8 +103,8 @@ class Request extends Message implements RequestInterface
      * Return a single parameter.
      * Shortcut for $request->params()->get()
      *
-     * @param string $name    Parameter name
-     * @param string $default (optional) default value in case the parameter does not exist
+     * @param string    $name       Parameter name
+     * @param string    $default    (optional) default value in case the parameter does not exist
      * @return mixed
      */
     public function getParam($name, $default = null)
@@ -133,15 +132,14 @@ class Request extends Message implements RequestInterface
     public function setEnv(Parameters $env)
     {
         $this->envParams = $env;
-
         return $this;
     }
 
     /**
      * Return a single parameter container responsible for env parameters
      *
-     * @param string $name    Parameter name
-     * @param string $default (optional) default value in case the parameter does not exist
+     * @param string    $name       Parameter name
+     * @param string    $default    (optional) default value in case the parameter does not exist
      * @return \Zend\Stdlib\Parameters
      */
     public function getEnv($name, $default = null)

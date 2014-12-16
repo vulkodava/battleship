@@ -43,7 +43,6 @@ class Encrypt extends Filter\Encrypt
     public function setFilename($filename = null)
     {
         $this->filename = $filename;
-
         return $this;
     }
 
@@ -72,7 +71,7 @@ class Encrypt extends Filter\Encrypt
 
             $isFileUpload = true;
             $uploadData = $value;
-            $value = $value['tmp_name'];
+            $value      = $value['tmp_name'];
         }
 
         if (!file_exists($value)) {
@@ -93,7 +92,7 @@ class Encrypt extends Filter\Encrypt
         }
 
         $encrypted = parent::filter($content);
-        $result = file_put_contents($this->filename, $encrypted);
+        $result    = file_put_contents($this->filename, $encrypted);
 
         if (!$result) {
             throw new Exception\RuntimeException("Problem while writing file '{$this->filename}'");
@@ -101,10 +100,8 @@ class Encrypt extends Filter\Encrypt
 
         if ($isFileUpload) {
             $uploadData['tmp_name'] = $this->filename;
-
             return $uploadData;
         }
-
         return $this->filename;
     }
 }

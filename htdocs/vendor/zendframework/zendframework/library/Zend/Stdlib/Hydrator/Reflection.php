@@ -16,7 +16,6 @@ class Reflection extends AbstractHydrator
 {
     /**
      * Simple in-memory array cache of ReflectionProperties used.
-     *
      * @var \ReflectionProperty[]
      */
     protected static $reflProperties = array();
@@ -59,7 +58,6 @@ class Reflection extends AbstractHydrator
                 $reflProperties[$name]->setValue($object, $this->hydrateValue($name, $value, $data));
             }
         }
-
         return $object;
     }
 
@@ -84,8 +82,8 @@ class Reflection extends AbstractHydrator
         }
 
         static::$reflProperties[$input] = array();
-        $reflClass = new ReflectionClass($input);
-        $reflProperties = $reflClass->getProperties();
+        $reflClass                      = new ReflectionClass($input);
+        $reflProperties                 = $reflClass->getProperties();
 
         foreach ($reflProperties as $property) {
             $property->setAccessible(true);

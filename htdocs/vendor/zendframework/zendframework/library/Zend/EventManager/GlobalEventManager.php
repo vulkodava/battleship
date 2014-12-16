@@ -46,7 +46,6 @@ class GlobalEventManager
         if (null === static::$events) {
             static::setEventCollection(new EventManager());
         }
-
         return static::$events;
     }
 

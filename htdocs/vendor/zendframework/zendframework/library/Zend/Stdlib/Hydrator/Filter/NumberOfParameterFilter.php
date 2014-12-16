@@ -17,7 +17,6 @@ class NumberOfParameterFilter implements FilterInterface
 {
     /**
      * The number of parameters beeing accepted
-     *
      * @var int
      */
     protected $numberOfParameters = null;
@@ -27,7 +26,7 @@ class NumberOfParameterFilter implements FilterInterface
      */
     public function __construct($numberOfParameters = 0)
     {
-        $this->numberOfParameters = (int)$numberOfParameters;
+        $this->numberOfParameters = (int) $numberOfParameters;
     }
 
     /**

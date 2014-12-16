@@ -131,31 +131,31 @@ class ParameterTest extends \PHPUnit_Framework_TestCase
 
     public function testParameterShouldSerializeToArray()
     {
-        $type = 'string';
-        $name = 'foo';
-        $optional = true;
+        $type         = 'string';
+        $name         = 'foo';
+        $optional     = true;
         $defaultValue = 'bar';
-        $description = 'Foo bar!';
-        $parameter = compact('type', 'name', 'optional', 'defaultValue', 'description');
+        $description  = 'Foo bar!';
+        $parameter    = compact('type', 'name', 'optional', 'defaultValue', 'description');
         $this->parameter->setType($type)
-            ->setName($name)
-            ->setOptional($optional)
-            ->setDefaultValue($defaultValue)
-            ->setDescription($description);
+                        ->setName($name)
+                        ->setOptional($optional)
+                        ->setDefaultValue($defaultValue)
+                        ->setDescription($description);
         $test = $this->parameter->toArray();
         $this->assertEquals($parameter, $test);
     }
 
     public function testConstructorShouldSetObjectStateFromPassedOptions()
     {
-        $type = 'string';
-        $name = 'foo';
-        $optional = true;
+        $type         = 'string';
+        $name         = 'foo';
+        $optional     = true;
         $defaultValue = 'bar';
-        $description = 'Foo bar!';
-        $options = compact('type', 'name', 'optional', 'defaultValue', 'description');
-        $parameter = new Method\Parameter($options);
-        $test = $parameter->toArray();
+        $description  = 'Foo bar!';
+        $options      = compact('type', 'name', 'optional', 'defaultValue', 'description');
+        $parameter    = new Method\Parameter($options);
+        $test         = $parameter->toArray();
         $this->assertEquals($options, $test);
     }
 }

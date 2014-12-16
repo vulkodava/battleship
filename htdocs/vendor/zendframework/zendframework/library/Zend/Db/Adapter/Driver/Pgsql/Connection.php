@@ -67,7 +67,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
-
         return $this;
     }
 
@@ -80,7 +79,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Pgsql $driver)
     {
         $this->driver = $driver;
-
         return $this;
     }
 
@@ -91,7 +89,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
-
         return $this;
     }
 
@@ -112,7 +109,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setResource($resource)
     {
         $this->resource = $resource;
-
         return;
     }
 
@@ -131,7 +127,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if ($result == false) {
             return null;
         }
-
         return pg_fetch_result($result, 0, 'currentschema');
     }
 
@@ -145,7 +140,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if (!$this->isConnected()) {
             $this->connect();
         }
-
         return $this->resource;
     }
 
@@ -171,17 +165,16 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                     return $p[$name];
                 }
             }
-
             return null;
         };
 
-        $connection = array();
-        $connection['host'] = $findParameterValue(array('hostname', 'host'));
-        $connection['user'] = $findParameterValue(array('username', 'user'));
+        $connection             = array();
+        $connection['host']     = $findParameterValue(array('hostname', 'host'));
+        $connection['user']     = $findParameterValue(array('username', 'user'));
         $connection['password'] = $findParameterValue(array('password', 'passwd', 'pw'));
-        $connection['dbname'] = $findParameterValue(array('database', 'dbname', 'db', 'schema'));
-        $connection['port'] = (isset($p['port'])) ? (int)$p['port'] : null;
-        $connection['socket'] = (isset($p['socket'])) ? $p['socket'] : null;
+        $connection['dbname']   = $findParameterValue(array('database', 'dbname', 'db', 'schema'));
+        $connection['port']     = (isset($p['port'])) ? (int) $p['port'] : null;
+        $connection['socket']   = (isset($p['socket'])) ? $p['socket'] : null;
 
         $connection = array_filter($connection); // remove nulls
         $connection = http_build_query($connection, null, ' '); // @link http://php.net/pg_connect
@@ -300,7 +293,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $resultPrototype = $this->driver->createResult(($resultResource === true) ? $this->resource : $resultResource);
-
         return $resultPrototype;
     }
 
@@ -314,7 +306,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             return null;
         }
         $result = pg_query($this->resource, 'SELECT CURRVAL(\'' . str_replace('\'', '\\\'', $name) . '\') as "currval"');
-
         return pg_fetch_result($result, 0, 'currval');
     }
 }

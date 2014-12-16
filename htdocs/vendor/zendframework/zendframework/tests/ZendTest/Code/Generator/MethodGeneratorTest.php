@@ -33,7 +33,7 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
         $params = $methodGenerator->getParameters();
         $param = array_shift($params);
         $this->assertTrue($param instanceof \Zend\Code\Generator\ParameterGenerator,
-            'Failed because $param was not instance of Zend\Code\Generator\ParameterGenerator');
+                          'Failed because $param was not instance of Zend\Code\Generator\ParameterGenerator');
     }
 
     public function testMethodBodyGetterAndSetter()
@@ -70,7 +70,7 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
 EOS;
-        $this->assertEquals($target, (string)$methodGenerator);
+        $this->assertEquals($target, (string) $methodGenerator);
     }
 
     /**
@@ -163,7 +163,7 @@ EOS;
         $default = new ValueGenerator();
         $default->setValue(array());
 
-        $param = new ParameterGenerator('options', 'array');
+        $param   = new ParameterGenerator('options', 'array');
         $param->setDefaultValue($default);
 
         $method->setParameter($param);
@@ -174,14 +174,14 @@ EOS;
     public function testCreateFromArray()
     {
         $methodGenerator = MethodGenerator::fromArray(array(
-            'name' => 'SampleMethod',
-            'body' => 'foo',
-            'docblock' => array(
+            'name'       => 'SampleMethod',
+            'body'       => 'foo',
+            'docblock'   => array(
                 'shortdescription' => 'foo',
             ),
-            'abstract' => true,
-            'final' => true,
-            'static' => true,
+            'abstract'   => true,
+            'final'      => true,
+            'static'     => true,
             'visibility' => MethodGenerator::VISIBILITY_PROTECTED,
         ));
 

@@ -34,9 +34,9 @@ class DumbStrategy implements Renderer
     public function render($nameOrModel, $values = null)
     {
         $options = array();
-        $values = (array)$values;
+        $values  = (array) $values;
         if ($nameOrModel instanceof Model) {
-            $options = $nameOrModel->getOptions();
+            $options   = $nameOrModel->getOptions();
             $variables = $nameOrModel->getVariables();
             if ($variables instanceof ArrayObject) {
                 $variables = $variables->getArrayCopy();

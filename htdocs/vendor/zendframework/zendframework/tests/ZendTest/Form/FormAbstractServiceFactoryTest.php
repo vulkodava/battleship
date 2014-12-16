@@ -22,12 +22,12 @@ class FormAbstractServiceFactoryTest extends TestCase
 {
     public function setUp()
     {
-        $services = $this->services = new ServiceManager;
-        $elements = new FormElementManager;
-        $filters = new FilterPluginManager;
-        $hydrators = new HydratorPluginManager;
+        $services     = $this->services = new ServiceManager;
+        $elements     = new FormElementManager;
+        $filters      = new FilterPluginManager;
+        $hydrators    = new HydratorPluginManager;
         $inputFilters = new InputFilterPluginManager;
-        $validators = new ValidatorPluginManager;
+        $validators   = new ValidatorPluginManager;
 
         $elements->setServiceLocator($services);
         $filters->setServiceLocator($services);
@@ -111,7 +111,7 @@ class FormAbstractServiceFactoryTest extends TestCase
         $this->services->setService('Config', array(
             'forms' => array(
                 'Foo' => array(
-                    'type' => 'Zend\Form\Form',
+                    'type'     => 'Zend\Form\Form',
                     'elements' => array(),
                 ),
             ),
@@ -123,7 +123,7 @@ class FormAbstractServiceFactoryTest extends TestCase
     {
         $formConfig = array(
             'hydrator' => 'ObjectProperty',
-            'type' => 'Zend\Form\Form',
+            'type'     => 'Zend\Form\Form',
             'elements' => array(
                 array(
                     'spec' => array(
@@ -150,8 +150,8 @@ class FormAbstractServiceFactoryTest extends TestCase
 
         $inputFactory = $inputFilter->getFactory();
         $this->assertInstanceOf('Zend\InputFilter\Factory', $inputFactory);
-        $filters = $this->services->get('FilterManager');
-        $validators = $this->services->get('ValidatorManager');
+        $filters      = $this->services->get('FilterManager');
+        $validators   = $this->services->get('ValidatorManager');
         $this->assertSame($filters, $inputFactory->getDefaultFilterChain()->getPluginManager());
         $this->assertSame($validators, $inputFactory->getDefaultValidatorChain()->getPluginManager());
     }
@@ -160,7 +160,7 @@ class FormAbstractServiceFactoryTest extends TestCase
     {
         $formConfig = array(
             'hydrator' => 'ObjectProperty',
-            'type' => 'Zend\Form\Form',
+            'type'     => 'Zend\Form\Form',
             'elements' => array(
                 array(
                     'spec' => array(
@@ -174,8 +174,8 @@ class FormAbstractServiceFactoryTest extends TestCase
             ),
             'input_filter' => array(
                 'email' => array(
-                    'required' => true,
-                    'filters' => array(
+                    'required'   => true,
+                    'filters'    => array(
                         array(
                             'name' => 'string_trim',
                         ),
@@ -200,8 +200,8 @@ class FormAbstractServiceFactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
 
         $inputFactory = $inputFilter->getFactory();
-        $filters = $this->services->get('FilterManager');
-        $validators = $this->services->get('ValidatorManager');
+        $filters      = $this->services->get('FilterManager');
+        $validators   = $this->services->get('ValidatorManager');
         $this->assertSame($filters, $inputFactory->getDefaultFilterChain()->getPluginManager());
         $this->assertSame($validators, $inputFactory->getDefaultValidatorChain()->getPluginManager());
     }

@@ -33,9 +33,9 @@ class ContentType implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string');
         }
 
-        $value = str_replace(Headers::FOLDING, " ", $value);
+        $value  = str_replace(Headers::FOLDING, " ", $value);
         $values = preg_split('#\s*;\s*#', $value);
-        $type = array_shift($values);
+        $type   = array_shift($values);
 
         //Remove empty values
         $values = array_filter($values);
@@ -103,11 +103,10 @@ class ContentType implements HeaderInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a value in the format "type/subtype"; received "%s"',
                 __METHOD__,
-                (string)$type
+                (string) $type
             ));
         }
         $this->type = $type;
-
         return $this;
     }
 
@@ -131,8 +130,7 @@ class ContentType implements HeaderInterface
     public function addParameter($name, $value)
     {
         $name = strtolower($name);
-        $this->parameters[$name] = (string)$value;
-
+        $this->parameters[$name] = (string) $value;
         return $this;
     }
 
@@ -158,7 +156,6 @@ class ContentType implements HeaderInterface
         if (isset($this->parameters[$name])) {
             return $this->parameters[$name];
         }
-
         return null;
     }
 
@@ -173,10 +170,8 @@ class ContentType implements HeaderInterface
         $name = strtolower($name);
         if (isset($this->parameters[$name])) {
             unset($this->parameters[$name]);
-
             return true;
         }
-
         return false;
     }
 }

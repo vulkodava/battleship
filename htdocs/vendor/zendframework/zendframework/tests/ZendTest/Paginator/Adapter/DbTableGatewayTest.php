@@ -32,8 +32,8 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())
-            ->method('createStatement')
-            ->will($this->returnValue($mockStatement));
+                   ->method('createStatement')
+                   ->will($this->returnValue($mockStatement));
         $mockDriver->expects($this->any())
             ->method('formatParameterName')
             ->will($this->returnArgument(0));
@@ -59,9 +59,9 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $this->mockStatement
-            ->expects($this->any())
-            ->method('execute')
-            ->will($this->returnValue($mockResult));
+             ->expects($this->any())
+             ->method('execute')
+             ->will($this->returnValue($mockResult));
 
         $items = $this->dbTableGateway->getItems(2, 10);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
@@ -73,12 +73,12 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockResult->expects($this->any())
-            ->method('current')
-            ->will($this->returnValue(array('c' => 10)));
+                   ->method('current')
+                   ->will($this->returnValue(array('c' => 10)));
 
         $this->mockStatement->expects($this->any())
-            ->method('execute')
-            ->will($this->returnValue($mockResult));
+             ->method('execute')
+             ->will($this->returnValue($mockResult));
 
         $count = $this->dbTableGateway->count();
         $this->assertEquals(10, $count);
@@ -92,9 +92,9 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $this->mockStatement
-            ->expects($this->any())
-            ->method('execute')
-            ->will($this->returnValue($mockResult));
+             ->expects($this->any())
+             ->method('execute')
+             ->will($this->returnValue($mockResult));
 
         $items = $this->dbTableGateway->getItems(2, 10);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
@@ -113,9 +113,9 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
             ->method('setSql')
             ->with($this->equalTo('SELECT "foobar".* FROM "foobar" WHERE foo = bar GROUP BY "foo" ORDER BY "foo" ASC LIMIT limit OFFSET offset'));
         $this->mockStatement
-            ->expects($this->any())
-            ->method('execute')
-            ->will($this->returnValue($mockResult));
+             ->expects($this->any())
+             ->method('execute')
+             ->will($this->returnValue($mockResult));
 
         $items = $this->dbTableGateway->getItems(2, 10);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
@@ -123,9 +123,9 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
     public function testGetItemsWithWhereAndOrderAndGroupAndHaving()
     {
-        $where = "foo = bar";
-        $order = "foo";
-        $group = "foo";
+        $where  = "foo = bar";
+        $order  = "foo";
+        $group  = "foo";
         $having = "count(foo)>0";
         $this->dbTableGateway = new DbTableGateway($this->mockTableGateway, $where, $order, $group, $having);
 

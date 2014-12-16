@@ -28,9 +28,9 @@ class RouteNotFoundStrategyTest extends TestCase
     {
         return array(
             array('bar', 'assertEquals'),
-            array(null, 'assertTrue'),
+            array(null,  'assertTrue'),
             array(new ViewModel(array('message' => 'bar')), 'assertEquals'),
-            array(new ViewModel(), 'assertTrue'),
+            array(new ViewModel(),  'assertTrue'),
         );
     }
 
@@ -40,7 +40,7 @@ class RouteNotFoundStrategyTest extends TestCase
     public function testLeavesReturnedMessageIntact($result, $assertion)
     {
         $response = new Response();
-        $event = new MvcEvent();
+        $event    = new MvcEvent();
         $response->setStatusCode(404);
         $event->setResponse($response);
 
@@ -67,11 +67,11 @@ class RouteNotFoundStrategyTest extends TestCase
     public function test404ErrorsInject404ResponseStatusCode()
     {
         $response = new Response();
-        $event = new MvcEvent();
-        $errors = array(
+        $event    = new MvcEvent();
+        $errors   = array(
             'error-controller-not-found' => Application::ERROR_CONTROLLER_NOT_FOUND,
-            'error-controller-invalid' => Application::ERROR_CONTROLLER_INVALID,
-            'error-router-no-match' => Application::ERROR_ROUTER_NO_MATCH,
+            'error-controller-invalid'   => Application::ERROR_CONTROLLER_INVALID,
+            'error-router-no-match'      => Application::ERROR_ROUTER_NO_MATCH,
         );
         $event->setResponse($response);
         foreach ($errors as $key => $error) {
@@ -85,11 +85,11 @@ class RouteNotFoundStrategyTest extends TestCase
     public function testRouterAndDispatchErrorsInjectReasonInViewModelWhenAllowed()
     {
         $response = new Response();
-        $event = new MvcEvent();
-        $errors = array(
+        $event    = new MvcEvent();
+        $errors   = array(
             'error-controller-not-found' => Application::ERROR_CONTROLLER_NOT_FOUND,
-            'error-controller-invalid' => Application::ERROR_CONTROLLER_INVALID,
-            'error-router-no-match' => Application::ERROR_ROUTER_NO_MATCH,
+            'error-controller-invalid'   => Application::ERROR_CONTROLLER_INVALID,
+            'error-router-no-match'      => Application::ERROR_ROUTER_NO_MATCH,
         );
         $event->setResponse($response);
         foreach (array(true, false) as $allow) {
@@ -116,8 +116,8 @@ class RouteNotFoundStrategyTest extends TestCase
     public function testNon404ErrorsInjectNoStatusCode()
     {
         $response = new Response();
-        $event = new MvcEvent();
-        $errors = array(
+        $event    = new MvcEvent();
+        $errors   = array(
             Application::ERROR_EXCEPTION,
             'custom-error',
             null,
@@ -133,9 +133,9 @@ class RouteNotFoundStrategyTest extends TestCase
     public function testResponseAsResultDoesNotPrepare404ViewModel()
     {
         $response = new Response();
-        $event = new MvcEvent();
+        $event    = new MvcEvent();
         $event->setResponse($response)
-            ->setResult($response);
+              ->setResult($response);
 
         $this->strategy->prepareNotFoundViewModel($event);
         $model = $event->getResult();
@@ -149,7 +149,7 @@ class RouteNotFoundStrategyTest extends TestCase
     public function testNon404ResponseDoesNotPrepare404ViewModel()
     {
         $response = new Response();
-        $event = new MvcEvent();
+        $event    = new MvcEvent();
         $response->setStatusCode(200);
         $event->setResponse($response);
 
@@ -165,7 +165,7 @@ class RouteNotFoundStrategyTest extends TestCase
     public function test404ResponsePrepares404ViewModelWithTemplateFromStrategy()
     {
         $response = new Response();
-        $event = new MvcEvent();
+        $event    = new MvcEvent();
         $response->setStatusCode(404);
         $event->setResponse($response);
 
@@ -180,7 +180,7 @@ class RouteNotFoundStrategyTest extends TestCase
     public function test404ResponsePrepares404ViewModelWithReasonWhenAllowed()
     {
         $response = new Response();
-        $event = new MvcEvent();
+        $event    = new MvcEvent();
 
         foreach (array(true, false) as $allow) {
             $this->strategy->setDisplayNotFoundReason($allow);
@@ -202,8 +202,8 @@ class RouteNotFoundStrategyTest extends TestCase
 
     public function test404ResponsePrepares404ViewModelWithExceptionWhenAllowed()
     {
-        $response = new Response();
-        $event = new MvcEvent();
+        $response  = new Response();
+        $event     = new MvcEvent();
         $exception = new \Exception();
         $event->setParam('exception', $exception);
 
@@ -228,9 +228,9 @@ class RouteNotFoundStrategyTest extends TestCase
 
     public function test404ResponsePrepares404ViewModelWithControllerWhenAllowed()
     {
-        $response = new Response();
-        $event = new MvcEvent();
-        $controller = 'some-or-other';
+        $response        = new Response();
+        $event           = new MvcEvent();
+        $controller      = 'some-or-other';
         $controllerClass = 'Some\Controller\OrOtherController';
         $event->setController($controller);
         $event->setControllerClass($controllerClass);
@@ -260,10 +260,10 @@ class RouteNotFoundStrategyTest extends TestCase
 
     public function testInjectsHttpResponseIntoEventIfNoneAlreadyPresent()
     {
-        $event = new MvcEvent();
-        $errors = array(
+        $event    = new MvcEvent();
+        $errors   = array(
             'not-found' => Application::ERROR_CONTROLLER_NOT_FOUND,
-            'invalid' => Application::ERROR_CONTROLLER_INVALID,
+            'invalid'   => Application::ERROR_CONTROLLER_INVALID,
         );
         foreach ($errors as $key => $error) {
             $event->setError($error);
@@ -291,9 +291,9 @@ class RouteNotFoundStrategyTest extends TestCase
         $events->attachAggregate($this->strategy);
 
         foreach (array(MvcEvent::EVENT_DISPATCH => -90, MvcEvent::EVENT_DISPATCH_ERROR => 1) as $event => $expectedPriority) {
-            $listeners = $events->getListeners($event);
+            $listeners        = $events->getListeners($event);
             $expectedCallback = array($this->strategy, 'prepareNotFoundViewModel');
-            $found = false;
+            $found            = false;
             foreach ($listeners as $listener) {
                 $callback = $listener->getCallback();
                 if ($callback === $expectedCallback) {
@@ -306,10 +306,10 @@ class RouteNotFoundStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
 
-        $listeners = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
+        $listeners        = $events->getListeners(MvcEvent::EVENT_DISPATCH_ERROR);
         $expectedCallback = array($this->strategy, 'detectNotFoundError');
         $expectedPriority = 1;
-        $found = false;
+        $found            = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
             if ($callback === $expectedCallback) {

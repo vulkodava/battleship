@@ -19,9 +19,9 @@ $server = new Client('http://www.upcdatabase.com/xmlrpc');
 $client = $server->getProxy();
 
 print_r($client->lookup(
-        array(
-            'rpc_key' => '0000...0000',    // Set your rpc_key here
-            'upc' => '123456789012',
+            array(
+                 'rpc_key' => '0000...0000',	// Set your rpc_key here
+                 'upc' => '123456789012',
+            )
         )
-    )
 );

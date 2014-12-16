@@ -101,10 +101,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZIP compression tests are currently disabled');
         }
 
-        $filter = new ZipCompression(
+        $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
-                'target' => $this->tmp . '/zipextracted.txt'
+                'target'  => $this->tmp . '/zipextracted.txt'
             )
         );
 
@@ -179,10 +179,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZIP compression tests are currently disabled');
         }
 
-        $filter = new ZipCompression(
+        $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
-                'target' => $this->tmp . '/zipextracted.txt'
+                'target'  => $this->tmp . '/zipextracted.txt'
             )
         );
         file_put_contents($this->tmp . '/zipextracted.txt', 'compress me');
@@ -207,10 +207,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZIP compression tests are currently disabled');
         }
 
-        $filter = new ZipCompression(
+        $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
-                'target' => $this->tmp
+                'target'  => $this->tmp
             )
         );
 
@@ -234,10 +234,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZIP compression tests are currently disabled');
         }
 
-        $filter = new ZipCompression(
+        $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
-                'target' => $this->tmp . '/_compress'
+                'target'  => $this->tmp . '/_compress'
             )
         );
         $content = $filter->compress($this->tmp . '/Compress');
@@ -246,14 +246,14 @@ class ZipTest extends \PHPUnit_Framework_TestCase
         mkdir($this->tmp . DIRECTORY_SEPARATOR . '_compress');
         $content = $filter->decompress($content);
         $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . '_compress'
-            . DIRECTORY_SEPARATOR, $content);
+                            . DIRECTORY_SEPARATOR, $content);
 
         $base = $this->tmp . DIRECTORY_SEPARATOR . '_compress' . DIRECTORY_SEPARATOR . 'Compress' . DIRECTORY_SEPARATOR;
         $this->assertTrue(file_exists($base));
         $this->assertTrue(file_exists($base . 'zipextracted.txt'));
         $this->assertTrue(file_exists($base . 'First' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
         $this->assertTrue(file_exists($base . 'First' . DIRECTORY_SEPARATOR .
-            'Second' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
+                          'Second' . DIRECTORY_SEPARATOR . 'zipextracted.txt'));
         $content = file_get_contents($this->tmp . '/Compress/zipextracted.txt');
         $this->assertEquals('compress me', $content);
     }
@@ -275,20 +275,20 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZIP compression tests are currently disabled');
         }
 
-        $filter = new ZipCompression(
+        $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
-                'target' => $this->tmp . '/_compress'
+                'target'  => $this->tmp . '/_compress'
             )
         );
 
         $content = $filter->compress('compress me');
         $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
 
-        $filter = new ZipCompression(
+        $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
-                'target' => $this->tmp . '/_compress'
+                'target'  => $this->tmp . '/_compress'
             )
         );
         $content = $filter->decompress($content);
@@ -298,7 +298,7 @@ class ZipTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group  6026
+     * @group 6026
      *
      * @covers \Zend\Filter\Compress\Zip::decompress
      */
@@ -308,19 +308,19 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('ZIP compression tests are currently disabled');
         }
 
-        $filter = new ZipCompression(
+        $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
-                'target' => $this->tmp . '/_compress'
+                'target'  => $this->tmp . '/_compress'
             )
         );
 
         $content = $filter->compress('compress me');
         $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
 
-        $filter = new ZipCompression(
+        $filter  = new ZipCompression(
             array(
-                'target' => $this->tmp . '/_compress'
+                'target'  => $this->tmp . '/_compress'
             )
         );
         $content = $filter->decompress($content);

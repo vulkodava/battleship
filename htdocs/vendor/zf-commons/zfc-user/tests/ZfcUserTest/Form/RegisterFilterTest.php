@@ -13,11 +13,11 @@ class RegisterFilterTest extends \PHPUnit_Framework_TestCase
     {
         $options = $this->getMock('ZfcUser\Options\ModuleOptions');
         $options->expects($this->once())
-            ->method('getEnableUsername')
-            ->will($this->returnValue(true));
+                ->method('getEnableUsername')
+                ->will($this->returnValue(true));
         $options->expects($this->once())
-            ->method('getEnableDisplayName')
-            ->will($this->returnValue(true));
+                ->method('getEnableDisplayName')
+                ->will($this->returnValue(true));
 
         $emailValidator = $this->getMockBuilder('ZfcUser\Validator\NoRecordExists')->disableOriginalConstructor()->getMock();
         $usernameValidator = $this->getMockBuilder('ZfcUser\Validator\NoRecordExists')->disableOriginalConstructor()->getMock();

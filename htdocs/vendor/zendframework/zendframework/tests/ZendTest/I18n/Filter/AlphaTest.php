@@ -58,10 +58,10 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
 
         $this->filter = new AlphaFilter();
 
-        $this->locale = Locale::getDefault();
-        $language = Locale::getPrimaryLanguage($this->locale);
+        $this->locale               = Locale::getDefault();
+        $language                   = Locale::getPrimaryLanguage($this->locale);
         self::$meansEnglishAlphabet = in_array($language, array('ja'));
-        self::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        self::$unicodeEnabled       = (@preg_match('/\pL/u', 'a')) ? true : false;
     }
 
     /**
@@ -74,10 +74,10 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
         if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
-                'abc123' => 'abc',
-                'abc 123' => 'abc',
-                'abcxyz' => 'abcxyz',
-                '' => ''
+                'abc123'        => 'abc',
+                'abc 123'       => 'abc',
+                'abcxyz'        => 'abcxyz',
+                ''              => ''
             );
         } elseif (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
@@ -90,23 +90,23 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
              * The last contains only singlebyte alphabets.
              */
             $valuesExpected = array(
-                'aＡBｂc' => 'aBc',
-                'z Ｙ　x' => 'zx',
-                'Ｗ1v３Ｕ4t' => 'vt',
+                'aＡBｂc'       => 'aBc',
+                'z Ｙ　x'       => 'zx',
+                'Ｗ1v３Ｕ4t'    => 'vt',
                 '，sй.rλ:qν＿p' => 'srqp',
-                'onml' => 'onml'
+                'onml'          => 'onml'
             );
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = array(
-                'abc123' => 'abc',
-                'abc 123' => 'abc',
-                'abcxyz' => 'abcxyz',
-                'četně' => 'četně',
-                'لعربية' => 'لعربية',
-                'grzegżółka' => 'grzegżółka',
-                'België' => 'België',
-                '' => ''
+                'abc123'        => 'abc',
+                'abc 123'       => 'abc',
+                'abcxyz'        => 'abcxyz',
+                'četně'         => 'četně',
+                'لعربية'        => 'لعربية',
+                'grzegżółka'    => 'grzegżółka',
+                'België'        => 'België',
+                ''              => ''
             );
         }
 
@@ -128,34 +128,34 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
         if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
-                'abc123' => 'abc',
-                'abc 123' => 'abc ',
-                'abcxyz' => 'abcxyz',
-                '' => '',
-                "\n" => "\n",
-                " \t " => " \t "
+                'abc123'   => 'abc',
+                'abc 123'  => 'abc ',
+                'abcxyz'   => 'abcxyz',
+                ''         => '',
+                "\n"       => "\n",
+                " \t "     => " \t "
             );
         }
         if (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
-                'a B' => 'a B',
+                'a B'    => 'a B',
                 'zＹ　x' => 'zx'
             );
         } else {
             //The Alphabet means each language's alphabet.
             $valuesExpected = array(
-                'abc123' => 'abc',
-                'abc 123' => 'abc ',
-                'abcxyz' => 'abcxyz',
-                'četně' => 'četně',
-                'لعربية' => 'لعربية',
-                'grzegżółka' => 'grzegżółka',
-                'België' => 'België',
-                '' => '',
-                "\n" => "\n",
-                " \t " => " \t "
-            );
+                'abc123'        => 'abc',
+                'abc 123'       => 'abc ',
+                'abcxyz'        => 'abcxyz',
+                'četně'         => 'četně',
+                'لعربية'        => 'لعربية',
+                'grzegżółka'    => 'grzegżółka',
+                'België'        => 'België',
+                ''              => '',
+                "\n"            => "\n",
+                " \t "          => " \t "
+                );
         }
 
         foreach ($valuesExpected as $input => $expected) {
@@ -169,10 +169,10 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
         $filter = new AlphaFilter();
 
         $values = array(
-            'abc123' => 'abc',
-            'abc 123' => 'abc',
-            'abcxyz' => 'abcxyz',
-            '' => ''
+            'abc123'        => 'abc',
+            'abc 123'       => 'abc',
+            'abcxyz'        => 'abcxyz',
+            ''              => ''
         );
 
         $actual = $filter->filter(array_keys($values));
@@ -196,6 +196,6 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new AlphaFilter();
 
-        $this->assertEquals($input, $filter->filter($input));
+        $this->assertEquals($input,  $filter->filter($input));
     }
 }

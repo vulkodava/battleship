@@ -21,7 +21,6 @@ class ForwardController extends AbstractActionController
     public function testMatchesAction()
     {
         $e = $this->getEvent();
-
         return $e->getRouteMatch()->getParams();
     }
 

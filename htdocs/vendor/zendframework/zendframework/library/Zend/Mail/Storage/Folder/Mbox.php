@@ -17,21 +17,18 @@ class Mbox extends Storage\Mbox implements FolderInterface
 {
     /**
      * \Zend\Mail\Storage\Folder root folder for folder structure
-     *
      * @var \Zend\Mail\Storage\Folder
      */
     protected $rootFolder;
 
     /**
      * rootdir of folder structure
-     *
      * @var string
      */
     protected $rootdir;
 
     /**
      * name of current folder
-     *
      * @var string
      */
     protected $currentFolder;
@@ -51,7 +48,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         if (isset($params->filename)) {
@@ -66,7 +63,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
 
         $this->_buildFolderTree($this->rootdir);
         $this->selectFolder(!empty($params->folder) ? $params->folder : 'INBOX');
-        $this->has['top'] = true;
+        $this->has['top']      = true;
         $this->has['uniqueid'] = false;
     }
 
@@ -76,9 +73,9 @@ class Mbox extends Storage\Mbox implements FolderInterface
      * Result is save in \Zend\Mail\Storage\Folder instances with the root in $this->rootFolder.
      * $parentFolder and $parentGlobalName are only used internally for recursion.
      *
-     * @param string $currentDir                           call with root dir, also used for recursion.
+     * @param string $currentDir call with root dir, also used for recursion.
      * @param \Zend\Mail\Storage\Folder|null $parentFolder used for recursion
-     * @param string $parentGlobalName                     used for recursion
+     * @param string $parentGlobalName used for recursion
      * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      */
     protected function _buildFolderTree($currentDir, $parentFolder = null, $parentGlobalName = '')
@@ -144,7 +141,6 @@ class Mbox extends Storage\Mbox implements FolderInterface
         if ($currentFolder->getGlobalName() != DIRECTORY_SEPARATOR . trim($rootFolder, DIRECTORY_SEPARATOR)) {
             throw new Exception\InvalidArgumentException("folder $rootFolder not found");
         }
-
         return $currentFolder;
     }
 
@@ -158,7 +154,7 @@ class Mbox extends Storage\Mbox implements FolderInterface
      */
     public function selectFolder($globalName)
     {
-        $this->currentFolder = (string)$globalName;
+        $this->currentFolder = (string) $globalName;
 
         // getting folder from folder tree for validation
         $folder = $this->getFolders($this->currentFolder);

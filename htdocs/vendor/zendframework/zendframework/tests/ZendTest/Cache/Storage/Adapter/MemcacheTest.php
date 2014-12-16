@@ -31,7 +31,7 @@ class MemcacheTest extends CommonAdapterTest
             }
         }
 
-        $this->_options = new Cache\Storage\Adapter\MemcacheOptions(array(
+        $this->_options  = new Cache\Storage\Adapter\MemcacheOptions(array(
             'resource_id' => __CLASS__
         ));
 

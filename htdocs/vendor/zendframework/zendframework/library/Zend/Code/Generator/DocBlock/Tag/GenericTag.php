@@ -46,7 +46,6 @@ class GenericTag extends AbstractGenerator implements TagInterface, PrototypeGen
     public function setName($name)
     {
         $this->name = ltrim($name, '@');
-
         return $this;
     }
 
@@ -65,7 +64,6 @@ class GenericTag extends AbstractGenerator implements TagInterface, PrototypeGen
     public function setContent($content)
     {
         $this->content = $content;
-
         return $this;
     }
 

@@ -13,7 +13,7 @@ use DateTime;
 use Zend\Feed\Uri;
 
 /**
- */
+*/
 class Entry
 {
     /**
@@ -135,7 +135,6 @@ class Entry
         if (!array_key_exists('encoding', $this->data)) {
             return 'UTF-8';
         }
-
         return $this->data['encoding'];
     }
 
@@ -275,10 +274,10 @@ class Entry
      */
     public function setCommentCount($count)
     {
-        if (!is_numeric($count) || (int)$count != $count || (int)$count < 0) {
+        if (!is_numeric($count) || (int) $count != $count || (int) $count < 0) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "count" must be a positive integer number or zero');
         }
-        $this->data['commentCount'] = (int)$count;
+        $this->data['commentCount'] = (int) $count;
 
         return $this;
     }
@@ -314,7 +313,7 @@ class Entry
         }
         if (!isset($link['type']) || !in_array($link['type'], array('atom', 'rss', 'rdf'))) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "type" must be one'
-                . ' of "atom", "rss" or "rdf"');
+            . ' of "atom", "rss" or "rdf"');
         }
         if (!isset($this->data['commentFeedLinks'])) {
             $this->data['commentFeedLinks'] = array();
@@ -368,7 +367,6 @@ class Entry
         if (!array_key_exists('authors', $this->data)) {
             return null;
         }
-
         return $this->data['authors'];
     }
 
@@ -382,7 +380,6 @@ class Entry
         if (!array_key_exists('content', $this->data)) {
             return null;
         }
-
         return $this->data['content'];
     }
 
@@ -396,7 +393,6 @@ class Entry
         if (!array_key_exists('copyright', $this->data)) {
             return null;
         }
-
         return $this->data['copyright'];
     }
 
@@ -410,7 +406,6 @@ class Entry
         if (!array_key_exists('dateCreated', $this->data)) {
             return null;
         }
-
         return $this->data['dateCreated'];
     }
 
@@ -424,7 +419,6 @@ class Entry
         if (!array_key_exists('dateModified', $this->data)) {
             return null;
         }
-
         return $this->data['dateModified'];
     }
 
@@ -438,7 +432,6 @@ class Entry
         if (!array_key_exists('description', $this->data)) {
             return null;
         }
-
         return $this->data['description'];
     }
 
@@ -452,7 +445,6 @@ class Entry
         if (!array_key_exists('id', $this->data)) {
             return null;
         }
-
         return $this->data['id'];
     }
 
@@ -466,7 +458,6 @@ class Entry
         if (!array_key_exists('link', $this->data)) {
             return null;
         }
-
         return $this->data['link'];
     }
 
@@ -481,7 +472,6 @@ class Entry
         if (!array_key_exists('links', $this->data)) {
             return null;
         }
-
         return $this->data['links'];
     }
 
@@ -495,7 +485,6 @@ class Entry
         if (!array_key_exists('title', $this->data)) {
             return null;
         }
-
         return $this->data['title'];
     }
 
@@ -509,7 +498,6 @@ class Entry
         if (!array_key_exists('commentCount', $this->data)) {
             return null;
         }
-
         return $this->data['commentCount'];
     }
 
@@ -523,7 +511,6 @@ class Entry
         if (!array_key_exists('commentLink', $this->data)) {
             return null;
         }
-
         return $this->data['commentLink'];
     }
 
@@ -538,7 +525,6 @@ class Entry
         if (!array_key_exists('commentFeedLinks', $this->data)) {
             return null;
         }
-
         return $this->data['commentFeedLinks'];
     }
 
@@ -553,8 +539,8 @@ class Entry
     {
         if (!isset($category['term'])) {
             throw new Exception\InvalidArgumentException('Each category must be an array and '
-                . 'contain at least a "term" element containing the machine '
-                . ' readable category name');
+            . 'contain at least a "term" element containing the machine '
+            . ' readable category name');
         }
         if (isset($category['scheme'])) {
             if (empty($category['scheme'])
@@ -562,7 +548,7 @@ class Entry
                 || !Uri::factory($category['scheme'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('The Atom scheme or RSS domain of'
-                    . ' a category must be a valid URI');
+                . ' a category must be a valid URI');
             }
         }
         if (!isset($this->data['categories'])) {
@@ -598,7 +584,6 @@ class Entry
         if (!array_key_exists('categories', $this->data)) {
             return null;
         }
-
         return $this->data['categories'];
     }
 
@@ -635,7 +620,6 @@ class Entry
         if (!array_key_exists('enclosure', $this->data)) {
             return null;
         }
-
         return $this->data['enclosure'];
     }
 
@@ -675,7 +659,6 @@ class Entry
         if (array_key_exists($name . '\\Entry', $this->extensions)) {
             return $this->extensions[$name . '\\Entry'];
         }
-
         return null;
     }
 
@@ -690,7 +673,6 @@ class Entry
     public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -738,7 +720,6 @@ class Entry
             $source->setEncoding($this->getEncoding());
         }
         $source->setType($this->getType());
-
         return $source;
     }
 
@@ -752,7 +733,6 @@ class Entry
     public function setSource(Source $source)
     {
         $this->data['source'] = $source;
-
         return $this;
     }
 
@@ -764,7 +744,6 @@ class Entry
         if (isset($this->data['source'])) {
             return $this->data['source'];
         }
-
         return null;
     }
 
@@ -775,9 +754,9 @@ class Entry
      */
     protected function _loadExtensions()
     {
-        $all = Writer::getExtensions();
+        $all     = Writer::getExtensions();
         $manager = Writer::getExtensionManager();
-        $exts = $all['entry'];
+        $exts    = $all['entry'];
         foreach ($exts as $ext) {
             $this->extensions[$ext] = $manager->get($ext);
             $this->extensions[$ext]->setEncoding($this->getEncoding());

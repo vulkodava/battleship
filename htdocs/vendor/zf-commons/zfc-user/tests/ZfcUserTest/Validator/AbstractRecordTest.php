@@ -11,12 +11,12 @@ class AbstractRecordTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $options = array('key' => 'value');
+        $options = array('key'=>'value');
         new AbstractRecordExtension($options);
     }
 
     /**
-     * @covers                   ZfcUser\Validator\AbstractRecord::__construct
+     * @covers ZfcUser\Validator\AbstractRecord::__construct
      * @expectedException ZfcUser\Validator\Exception\InvalidArgumentException
      * @expectedExceptionMessage No key provided
      */
@@ -58,7 +58,7 @@ class AbstractRecordTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers                   ZfcUser\Validator\AbstractRecord::query
+     * @covers ZfcUser\Validator\AbstractRecord::query
      * @expectedException \Exception
      * @expectedExceptionMessage Invalid key used in ZfcUser validator
      */
@@ -83,9 +83,9 @@ class AbstractRecordTest extends \PHPUnit_Framework_TestCase
 
         $mapper = $this->getMock('ZfcUser\Mapper\UserInterface');
         $mapper->expects($this->once())
-            ->method('findByUsername')
-            ->with('test')
-            ->will($this->returnValue('ZfcUser'));
+               ->method('findByUsername')
+               ->with('test')
+               ->will($this->returnValue('ZfcUser'));
 
         $validator->setMapper($mapper);
 

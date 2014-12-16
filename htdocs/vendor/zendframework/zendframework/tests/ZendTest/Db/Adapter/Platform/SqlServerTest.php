@@ -59,7 +59,7 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('[identifier]', $this->platform->quoteIdentifierChain('identifier'));
         $this->assertEquals('[identifier]', $this->platform->quoteIdentifierChain(array('identifier')));
-        $this->assertEquals('[schema].[identifier]', $this->platform->quoteIdentifierChain(array('schema', 'identifier')));
+        $this->assertEquals('[schema].[identifier]', $this->platform->quoteIdentifierChain(array('schema','identifier')));
     }
 
     /**
@@ -142,8 +142,7 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
 
     public function testPlatformQuotesNullByteCharacter()
     {
-        $err = set_error_handler(function () {
-            });
+        $err = set_error_handler(function () {} );
         $string = "1\0";
         $value = $this->platform->quoteValue($string);
         set_error_handler($err);

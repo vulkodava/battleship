@@ -1,11 +1,11 @@
 <?php
 /**
  * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
+*
+* @link      http://github.com/zendframework/zf2 for the canonical source repository
+* @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+* @license   http://framework.zend.com/license/new-bsd New BSD License
+*/
 
 namespace Zend\Log\Processor;
 
@@ -35,7 +35,6 @@ class RequestId implements ProcessorInterface
         }
 
         $event['extra']['requestId'] = $this->getIdentifier();
-
         return $event;
     }
 
@@ -51,23 +50,20 @@ class RequestId implements ProcessorInterface
         }
 
         $requestTime = (PHP_VERSION_ID >= 50400)
-            ? $_SERVER['REQUEST_TIME_FLOAT']
-            : $_SERVER['REQUEST_TIME'];
+                     ? $_SERVER['REQUEST_TIME_FLOAT']
+                     : $_SERVER['REQUEST_TIME'];
 
         if (Console::isConsole()) {
             $this->identifier = md5($requestTime);
-
             return $this->identifier;
         }
 
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $this->identifier = md5($requestTime . $_SERVER['HTTP_X_FORWARDED_FOR']);
-
             return $this->identifier;
         }
 
         $this->identifier = md5($requestTime . $_SERVER['REMOTE_ADDR']);
-
         return $this->identifier;
     }
 }

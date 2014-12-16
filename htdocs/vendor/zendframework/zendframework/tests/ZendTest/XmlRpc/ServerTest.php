@@ -24,7 +24,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Server object
-     *
      * @var Server
      */
     protected $_server;
@@ -399,7 +398,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($returns), var_export($returns, 1));
         $this->assertTrue(is_array($returns[0]), var_export($returns[0], 1));
         $this->assertSame(array(
-                'faultCode' => 620, 'faultString' => 'Method "undefined" does not exist'),
+            'faultCode' => 620, 'faultString' => 'Method "undefined" does not exist'),
             $returns[1], var_export($returns[1], 1));
     }
 
@@ -421,7 +420,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testRequestResponseEncoding()
     {
         $response = $this->_server->handle();
-        $request = $this->_server->getRequest();
+        $request  = $this->_server->getRequest();
 
         $this->assertEquals('UTF-8', $request->getEncoding());
         $this->assertEquals('UTF-8', $response->getEncoding());
@@ -434,7 +433,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->_server->setEncoding('ISO-8859-1');
         $response = $this->_server->handle();
-        $request = $this->_server->getRequest();
+        $request  = $this->_server->getRequest();
 
         $this->assertEquals('ISO-8859-1', $request->getEncoding());
         $this->assertEquals('ISO-8859-1', $response->getEncoding());
@@ -482,8 +481,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             false);
         $mockedDefinition = $this->getMock('Zend\\Server\\Definition', array(), array(), '', false, false);
         $mockedDefinition->expects($this->once())
-            ->method('getMethods')
-            ->will($this->returnValue(array('bar' => $mockedMethod)));
+                         ->method('getMethods')
+                         ->will($this->returnValue(array('bar' => $mockedMethod)));
         $this->_server->loadFunctions($mockedDefinition);
     }
 
@@ -561,11 +560,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'methodName' => 'system.listMethods',
-                'params' => ''
+                'params'     => ''
             ),
             array(
                 'methodName' => 'system.multicall',
-                'params' => array()
+                'params'     => array()
             )
         );
         $returned = $this->_server->multicall($try);
@@ -604,8 +603,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testCanMarshalBase64Requests()
     {
         $this->_server->setClass('ZendTest\\XmlRpc\\TestClass', 'test');
-        $data = base64_encode('this is the payload');
-        $param = array('type' => 'base64', 'value' => $data);
+        $data    = base64_encode('this is the payload');
+        $param   = array('type' => 'base64', 'value' => $data);
         $request = new Request('test.base64', array($param));
 
         $response = $this->_server->handle($request);
@@ -671,7 +670,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
  */
 function testFunction($var1, $var2 = 'optional')
 {
-    return $var2 . ': ' . implode(',', (array)$var1);
+    return $var2 . ': ' . implode(',', (array) $var1);
 }
 
 /**
@@ -712,7 +711,7 @@ class TestClass
      */
     public function test1($string)
     {
-        return 'String: ' . (string)$string;
+        return 'String: ' . (string) $string;
     }
 
     /**
@@ -725,7 +724,7 @@ class TestClass
      */
     public static function test2($array)
     {
-        return implode('; ', (array)$array);
+        return implode('; ', (array) $array);
     }
 
     /**

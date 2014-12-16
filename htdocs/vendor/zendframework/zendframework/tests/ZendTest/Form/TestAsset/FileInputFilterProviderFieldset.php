@@ -32,12 +32,12 @@ class FileInputFilterProviderFieldset extends Fieldset implements InputFilterPro
     {
         return array(
             'file_field' => array(
-                'type' => 'Zend\InputFilter\FileInput',
-                'filters' => array(
+                'type'     => 'Zend\InputFilter\FileInput',
+                'filters'  => array(
                     array(
                         'name' => 'filerenameupload',
                         'options' => array(
-                            'target' => __FILE__,
+                            'target'    => __FILE__,
                             'randomize' => true,
                         ),
                     ),

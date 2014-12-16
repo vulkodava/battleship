@@ -49,7 +49,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testAddRegexFilterWithParamsByName()
     {
-        $instance = $this->_writer->addFilter('regex', array('regex' => '/mess/'));
+        $instance = $this->_writer->addFilter('regex', array( 'regex' => '/mess/' ));
         $this->assertTrue($instance instanceof ConcreteWriter);
     }
 
@@ -59,7 +59,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testFluentInterface()
     {
         $instance = $this->_writer->addFilter(1)
-            ->setFormatter(new SimpleFormatter());
+                                  ->setFormatter(new SimpleFormatter());
 
         $this->assertTrue($instance instanceof ConcreteWriter);
     }
@@ -78,20 +78,20 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithOptions()
     {
         $options = array('filters' => array(
-            array(
-                'name' => 'mock',
-            ),
-            array(
-                'name' => 'priority',
-                'options' => array(
-                    'priority' => 3,
-                ),
-            ),
-        ),
-            'formatter' => array(
-                'name' => 'base',
-            ),
-        );
+                             array(
+                                 'name' => 'mock',
+                             ),
+                             array(
+                                 'name' => 'priority',
+                                 'options' => array(
+                                     'priority' => 3,
+                                 ),
+                             ),
+                         ),
+                        'formatter' => array(
+                             'name' => 'base',
+                         ),
+                    );
 
         $writer = new ConcreteWriter($options);
 

@@ -88,8 +88,8 @@ class FormTest extends TestCase
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'foo' => array(
-                'name' => 'foo',
-                'required' => false,
+                'name'       => 'foo',
+                'required'   => false,
                 'validators' => array(
                     array(
                         'name' => 'not_empty',
@@ -105,7 +105,7 @@ class FormTest extends TestCase
             ),
             'bar' => array(
                 'allow_empty' => true,
-                'filters' => array(
+                'filters'     => array(
                     array(
                         'name' => 'string_trim',
                     ),
@@ -118,10 +118,10 @@ class FormTest extends TestCase
                 ),
             ),
             'foobar' => array(
-                'type' => 'Zend\InputFilter\InputFilter',
+                'type'   => 'Zend\InputFilter\InputFilter',
                 'foo' => array(
-                    'name' => 'foo',
-                    'required' => true,
+                    'name'       => 'foo',
+                    'required'   => true,
                     'validators' => array(
                         array(
                             'name' => 'not_empty',
@@ -137,7 +137,7 @@ class FormTest extends TestCase
                 ),
                 'bar' => array(
                     'allow_empty' => true,
-                    'filters' => array(
+                    'filters'     => array(
                         array(
                             'name' => 'string_trim',
                         ),
@@ -377,10 +377,10 @@ class FormTest extends TestCase
 
         $fileCollection = new Element\Collection('collection');
         $fileCollection->setOptions(array(
-            'count' => 2,
-            'allow_add' => false,
-            'allow_remove' => false,
-            'target_element' => $file,
+             'count' => 2,
+             'allow_add' => false,
+             'allow_remove' => false,
+             'target_element' => $file,
         ));
         $this->form->add($fileCollection);
 
@@ -641,9 +641,9 @@ class FormTest extends TestCase
     public function testUsesBoundObjectAsDataSourceWhenNoDataSet()
     {
         $this->populateForm();
-        $object = new stdClass();
-        $object->foo = 'foos';
-        $object->bar = 'bar';
+        $object         = new stdClass();
+        $object->foo    = 'foos';
+        $object->bar    = 'bar';
         $object->foobar = array(
             'foo' => 'foos',
             'bar' => 'bar',
@@ -730,10 +730,10 @@ class FormTest extends TestCase
     public function testCanAddElementsUsingSpecs()
     {
         $this->form->add(array(
-            'name' => 'foo',
+            'name'       => 'foo',
             'attributes' => array(
-                'type' => 'text',
-                'class' => 'foo-class',
+                'type'         => 'text',
+                'class'        => 'foo-class',
                 'data-js-type' => 'my.form.text',
             ),
         ));
@@ -749,11 +749,11 @@ class FormTest extends TestCase
     public function testCanAddFieldsetsUsingSpecs()
     {
         $this->form->add(array(
-            'type' => 'Zend\Form\Fieldset',
-            'name' => 'foo',
+            'type'       => 'Zend\Form\Fieldset',
+            'name'       => 'foo',
             'attributes' => array(
-                'type' => 'fieldset',
-                'class' => 'foo-class',
+                'type'         => 'fieldset',
+                'class'        => 'foo-class',
                 'data-js-type' => 'my.form.fieldset',
             ),
         ));
@@ -768,14 +768,14 @@ class FormTest extends TestCase
 
     public function testFormAsFieldsetWillBindValuesToObject()
     {
-        $parentForm = new Form('parent');
-        $parentFormObject = new \ArrayObject(array('parentId' => null));
+        $parentForm        = new Form('parent');
+        $parentFormObject  = new \ArrayObject(array('parentId' => null));
         $parentFormElement = new Element('parentId');
         $parentForm->setObject($parentFormObject);
         $parentForm->add($parentFormElement);
 
-        $childForm = new Form('child');
-        $childFormObject = new \ArrayObject(array('childId' => null));
+        $childForm        = new Form('child');
+        $childFormObject  = new \ArrayObject(array('childId' => null));
         $childFormElement = new Element('childId');
         $childForm->setObject($childFormObject);
         $childForm->add($childFormElement);
@@ -798,7 +798,7 @@ class FormTest extends TestCase
     public function testWillUseInputSpecificationFromElementInInputFilterIfNoMatchingInputFound()
     {
         $element = new TestAsset\ElementWithFilter('foo');
-        $filter = new InputFilter();
+        $filter  = new InputFilter();
         $this->form->setInputFilter($filter);
         $this->form->add($element);
 
@@ -817,7 +817,7 @@ class FormTest extends TestCase
     public function testWillUseInputFilterSpecificationFromFieldsetInInputFilterIfNoMatchingInputFilterFound()
     {
         $fieldset = new TestAsset\FieldsetWithInputFilter('set');
-        $filter = new InputFilter();
+        $filter   = new InputFilter();
         $this->form->setInputFilter($filter);
         $this->form->add($fieldset);
 
@@ -833,9 +833,9 @@ class FormTest extends TestCase
 
     public function testWillPopulateSubInputFilterFromInputSpecificationsOnFieldsetElements()
     {
-        $element = new TestAsset\ElementWithFilter('foo');
-        $fieldset = new Fieldset('set');
-        $filter = new InputFilter();
+        $element        = new TestAsset\ElementWithFilter('foo');
+        $fieldset       = new Fieldset('set');
+        $filter         = new InputFilter();
         $fieldsetFilter = new InputFilter();
         $fieldset->add($element);
         $filter->add($fieldsetFilter, 'set');
@@ -863,12 +863,12 @@ class FormTest extends TestCase
     public function testWillUseFormInputFilterOverrideOverInputSpecificationFromElement()
     {
         $element = new TestAsset\ElementWithFilter('foo');
-        $filter = new InputFilter();
+        $filter  = new InputFilter();
         $filterFactory = new InputFilterFactory();
         $filter = $filterFactory->createInputFilter(array(
             'foo' => array(
-                'name' => 'foo',
-                'required' => false,
+                'name'       => 'foo',
+                'required'   => false,
             ),
         ));
         $this->form->setPreferFormInputFilter(true);
@@ -889,9 +889,9 @@ class FormTest extends TestCase
 
     public function testDisablingUseInputFilterDefaultsFlagDisablesInputFilterScanning()
     {
-        $element = new TestAsset\ElementWithFilter('foo');
-        $fieldset = new Fieldset('set');
-        $filter = new InputFilter();
+        $element        = new TestAsset\ElementWithFilter('foo');
+        $fieldset       = new Fieldset('set');
+        $filter         = new InputFilter();
         $fieldsetFilter = new InputFilter();
         $fieldset->add($element);
         $filter->add($fieldsetFilter, 'set');
@@ -908,7 +908,7 @@ class FormTest extends TestCase
     public function testCallingPrepareEnsuresInputFilterRetrievesDefaults()
     {
         $element = new TestAsset\ElementWithFilter('foo');
-        $filter = new InputFilter();
+        $filter  = new InputFilter();
         $this->form->setInputFilter($filter);
         $this->form->add($element);
         $this->form->prepare();
@@ -936,9 +936,9 @@ class FormTest extends TestCase
     public function testCanProperlyPrepareNestedFieldsets()
     {
         $this->form->add(array(
-            'name' => 'foo',
+            'name'       => 'foo',
             'attributes' => array(
-                'type' => 'text'
+                'type'         => 'text'
             )
         ));
 
@@ -1204,7 +1204,7 @@ class FormTest extends TestCase
         $fieldset->setUseAsBaseFieldset(true);
         $this->form->add($fieldset);
         $this->form->setValidationGroup(array(
-            'foobar' => array(
+            'foobar'=> array(
                 'foo',
             )
         ));
@@ -1212,8 +1212,8 @@ class FormTest extends TestCase
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'foo' => array(
-                'name' => 'foo',
-                'required' => true,
+                'name'       => 'foo',
+                'required'   => true,
             ),
         ));
         $model = new TestAsset\ValidatingModel();
@@ -1245,7 +1245,7 @@ class FormTest extends TestCase
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'items' => array(
-                'type' => 'Zend\InputFilter\CollectionInputFilter',
+                'type'         => 'Zend\InputFilter\CollectionInputFilter',
                 'input_filter' => new InputFilter(),
             ),
         ));
@@ -1298,8 +1298,8 @@ class FormTest extends TestCase
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'foo' => array(
-                'name' => 'foo',
-                'required' => true,
+                'name'       => 'foo',
+                'required'   => true,
             ),
         ));
         $model = new TestAsset\ValidatingModel();
@@ -1400,7 +1400,7 @@ class FormTest extends TestCase
     public function testResetPasswordValueIfFormIsNotValid()
     {
         $this->form->add(array(
-            'type' => 'Zend\Form\Element\Password',
+            'type' => 'Zend\Form\Element\Password' ,
             'name' => 'password'
         ));
 
@@ -1411,7 +1411,7 @@ class FormTest extends TestCase
 
         $this->form->setData(array(
             'password' => 'azerty',
-            'email' => 'wrongEmail'
+            'email'    => 'wrongEmail'
         ));
 
         $this->assertFalse($this->form->isValid());
@@ -1590,7 +1590,7 @@ class FormTest extends TestCase
         $this->form->setPreferFormInputFilter(true);
         $this->form->add(array(
             'name' => 'importance',
-            'type' => 'Zend\Form\Element\Select',
+            'type'  => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Importance',
                 'empty_option' => '',
@@ -1602,9 +1602,9 @@ class FormTest extends TestCase
         ));
 
         $inputFilter = new \Zend\InputFilter\BaseInputFilter();
-        $factory = new \Zend\InputFilter\Factory();
+        $factory     = new \Zend\InputFilter\Factory();
         $inputFilter->add($factory->createInput(array(
-            'name' => 'importance',
+            'name'     => 'importance',
             'required' => false,
         )));
 
@@ -1670,7 +1670,7 @@ class FormTest extends TestCase
      */
     public function testCanSetPreferFormInputFilterFlagViaSetOptions()
     {
-        $flag = !$this->form->getPreferFormInputFilter();
+        $flag = ! $this->form->getPreferFormInputFilter();
         $this->form->setOptions(array(
             'prefer_form_input_filter' => $flag,
         ));
@@ -1685,7 +1685,7 @@ class FormTest extends TestCase
         $factory = new Factory();
         foreach (array(true, false) as $flag) {
             $form = $factory->createForm(array(
-                'name' => 'form',
+                'name'    => 'form',
                 'options' => array(
                     'prefer_form_input_filter' => $flag,
                 ),
@@ -1709,9 +1709,9 @@ class FormTest extends TestCase
     {
         $form = new TestAsset\FileInputFilterProviderForm();
 
-        $formInputFilter = $form->getInputFilter();
+        $formInputFilter     = $form->getInputFilter();
         $fieldsetInputFilter = $formInputFilter->get('file_fieldset');
-        $fileInput = $fieldsetInputFilter->get('file_field');
+        $fileInput           = $fieldsetInputFilter->get('file_field');
 
         $this->assertInstanceOf('Zend\InputFilter\FileInput', $fileInput);
 
@@ -1874,7 +1874,7 @@ class FormTest extends TestCase
     {
         $this->form->add(array(
             'name' => 'importance',
-            'type' => 'Zend\Form\Element\Select',
+            'type'  => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Importance',
                 'empty_option' => '',
@@ -1886,9 +1886,9 @@ class FormTest extends TestCase
         ));
 
         $inputFilter = new BaseInputFilter();
-        $factory = new InputFilterFactory();
+        $factory     = new InputFilterFactory();
         $inputFilter->add($factory->createInput(array(
-            'name' => 'importance',
+            'name'     => 'importance',
             'required' => false,
         )));
 
@@ -1920,11 +1920,10 @@ class FormTest extends TestCase
         array $data,
         $unselectedValue,
         $useHiddenElement
-    )
-    {
+    ) {
         $this->form->add(array(
             'name' => 'multipleSelect',
-            'type' => 'Zend\Form\Element\Select',
+            'type'  => 'Zend\Form\Element\Select',
             'attributes' => array('multiple' => 'multiple'),
             'options' => array(
                 'label' => 'Importance',
@@ -2008,6 +2007,7 @@ class FormTest extends TestCase
         $this->form = $factory->createForm($spec);
         $this->assertFalse($this->form->useInputFilterDefaults());
     }
+
 
 
     /**

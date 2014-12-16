@@ -64,8 +64,7 @@ abstract class AbstractRestfulController extends AbstractController
      */
     public function setIdentifierName($name)
     {
-        $this->identifierName = (string)$name;
-
+        $this->identifierName = (string) $name;
         return $this;
     }
 
@@ -292,9 +291,9 @@ abstract class AbstractRestfulController extends AbstractController
      */
     public function dispatch(Request $request, Response $response = null)
     {
-        if (!$request instanceof HttpRequest) {
+        if (! $request instanceof HttpRequest) {
             throw new Exception\InvalidArgumentException(
-                'Expected an HTTP request');
+                    'Expected an HTTP request');
         }
 
         return parent::dispatch($request, $response);
@@ -311,28 +310,27 @@ abstract class AbstractRestfulController extends AbstractController
     public function onDispatch(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
-        if (!$routeMatch) {
+        if (! $routeMatch) {
             /**
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
             throw new Exception\DomainException(
-                'Missing route matches; unsure how to retrieve action');
+                    'Missing route matches; unsure how to retrieve action');
         }
 
         $request = $e->getRequest();
 
         // Was an "action" requested?
-        $action = $routeMatch->getParam('action', false);
+        $action  = $routeMatch->getParam('action', false);
         if ($action) {
             // Handle arbitrary methods, ending in Action
             $method = static::getMethodFromAction($action);
-            if (!method_exists($this, $method)) {
+            if (! method_exists($this, $method)) {
                 $method = 'notFoundAction';
             }
             $return = $this->$method();
             $e->setResult($return);
-
             return $return;
         }
 
@@ -406,7 +404,6 @@ abstract class AbstractRestfulController extends AbstractController
                 } catch (Exception\RuntimeException $ex) {
                     $response = $e->getResponse();
                     $response->setStatusCode(405);
-
                     return $response;
                 }
                 break;
@@ -417,7 +414,7 @@ abstract class AbstractRestfulController extends AbstractController
                 break;
             // PUT
             case 'put':
-                $id = $this->getIdentifier($routeMatch, $request);
+                $id   = $this->getIdentifier($routeMatch, $request);
                 $data = $this->processBodyContent($request);
 
                 if ($id !== false) {
@@ -433,13 +430,11 @@ abstract class AbstractRestfulController extends AbstractController
             default:
                 $response = $e->getResponse();
                 $response->setStatusCode(405);
-
                 return $response;
         }
 
         $routeMatch->setParam('action', $action);
         $e->setResult($return);
-
         return $return;
     }
 
@@ -518,8 +513,7 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  Callable $handler
      * @return AbstractRestfulController
      */
-    public function addHttpMethodHandler($method, /* Callable */
-                                         $handler)
+    public function addHttpMethodHandler($method, /* Callable */ $handler)
     {
         if (!is_callable($handler)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -529,7 +523,6 @@ abstract class AbstractRestfulController extends AbstractController
         }
         $method = strtolower($method);
         $this->customHttpMethodsMap[$method] = $handler;
-
         return $this;
     }
 

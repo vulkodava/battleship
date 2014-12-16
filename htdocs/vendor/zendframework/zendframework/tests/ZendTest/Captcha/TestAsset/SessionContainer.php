@@ -33,7 +33,7 @@ class SessionContainer
 
     public function __isset($name)
     {
-        if (('word' == $name) && (null !== static::$_word)) {
+        if (('word' == $name) && (null !== static::$_word))  {
             return true;
         }
 

@@ -22,7 +22,6 @@ class ProvidesEventsInputFilter extends InputFilter
     public function setEventManager(EventManagerInterface $events)
     {
         $this->events = $events;
-
         return $this;
     }
 
@@ -42,7 +41,7 @@ class ProvidesEventsInputFilter extends InputFilter
                     || (is_array($this->eventIdentifier))
                     || ($this->eventIdentifier instanceof Traversable)
                 ) {
-                    $identifiers = array_unique($identifiers + (array)$this->eventIdentifier);
+                    $identifiers = array_unique($identifiers + (array) $this->eventIdentifier);
                 } elseif (is_object($this->eventIdentifier)) {
                     $identifiers[] = $this->eventIdentifier;
                 }
@@ -50,7 +49,6 @@ class ProvidesEventsInputFilter extends InputFilter
             }
             $this->setEventManager(new EventManager($identifiers));
         }
-
         return $this->events;
     }
 }

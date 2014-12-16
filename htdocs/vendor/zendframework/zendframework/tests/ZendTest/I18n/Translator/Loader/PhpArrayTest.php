@@ -53,7 +53,7 @@ class PhpArrayTest extends TestCase
     {
         $loader = new PhpArrayLoader();
         $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException',
-            'Expected an array, but received');
+                                    'Expected an array, but received');
         $loader->load('en_EN', $this->testFilesDir . '/failed.php');
     }
 
@@ -75,7 +75,7 @@ class PhpArrayTest extends TestCase
 
     public function testLoaderLoadsPluralRules()
     {
-        $loader = new PhpArrayLoader();
+        $loader     = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.php');
 
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(0));

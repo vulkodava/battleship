@@ -25,10 +25,10 @@ class ZfcUserZendDbIdentityProviderServiceFactoryTest extends PHPUnit_Framework_
      */
     public function testCreateService()
     {
-        $factory = new ZfcUserZendDbIdentityProviderServiceFactory();
-        $serviceLocator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
-        $adapter = $this->getMock('Zend\\Db\\Adapter\\Adapter', array(), array(), '', false);
-        $userService = $this->getMock('ZfcUser\\Service\\User');
+        $factory          = new ZfcUserZendDbIdentityProviderServiceFactory();
+        $serviceLocator   = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
+        $adapter          = $this->getMock('Zend\\Db\\Adapter\\Adapter', array(), array(), '', false);
+        $userService      = $this->getMock('ZfcUser\\Service\\User');
 
         $serviceLocator
             ->expects($this->any())

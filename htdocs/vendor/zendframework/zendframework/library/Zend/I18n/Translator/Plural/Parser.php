@@ -66,11 +66,10 @@ class Parser
         // Ternary operators
         $this->registerSymbol('?', 20)->setLeftDenotationGetter(
             function (Symbol $self, Symbol $left) {
-                $self->first = $left;
+                $self->first  = $left;
                 $self->second = $self->parser->expression();
                 $self->parser->advance(':');
-                $self->third = $self->parser->expression();
-
+                $self->third  = $self->parser->expression();
                 return $self;
             }
         );
@@ -119,7 +118,6 @@ class Parser
             function (Symbol $self) {
                 $expression = $self->parser->expression();
                 $self->parser->advance(')');
-
                 return $expression;
             }
         );
@@ -132,7 +130,7 @@ class Parser
     /**
      * Register a left infix symbol.
      *
-     * @param  string $id
+     * @param  string  $id
      * @param  int $leftBindingPower
      * @return void
      */
@@ -140,9 +138,8 @@ class Parser
     {
         $this->registerSymbol($id, $leftBindingPower)->setLeftDenotationGetter(
             function (Symbol $self, Symbol $left) use ($leftBindingPower) {
-                $self->first = $left;
+                $self->first  = $left;
                 $self->second = $self->parser->expression($leftBindingPower);
-
                 return $self;
             }
         );
@@ -151,7 +148,7 @@ class Parser
     /**
      * Register a right infix symbol.
      *
-     * @param  string $id
+     * @param  string  $id
      * @param  int $leftBindingPower
      * @return void
      */
@@ -159,9 +156,8 @@ class Parser
     {
         $this->registerSymbol($id, $leftBindingPower)->setLeftDenotationGetter(
             function (Symbol $self, Symbol $left) use ($leftBindingPower) {
-                $self->first = $left;
+                $self->first  = $left;
                 $self->second = $self->parser->expression($leftBindingPower - 1);
-
                 return $self;
             }
         );
@@ -170,7 +166,7 @@ class Parser
     /**
      * Register a prefix symbol.
      *
-     * @param  string $id
+     * @param  string  $id
      * @param  int $leftBindingPower
      * @return void
      */
@@ -178,9 +174,8 @@ class Parser
     {
         $this->registerSymbol($id, $leftBindingPower)->setNullDenotationGetter(
             function (Symbol $self) use ($leftBindingPower) {
-                $self->first = $self->parser->expression($leftBindingPower);
+                $self->first  = $self->parser->expression($leftBindingPower);
                 $self->second = null;
-
                 return $self;
             }
         );
@@ -189,7 +184,7 @@ class Parser
     /**
      * Register a symbol.
      *
-     * @param  string $id
+     * @param  string  $id
      * @param  int $leftBindingPower
      * @return Symbol
      */
@@ -231,8 +226,8 @@ class Parser
      */
     public function parse($string)
     {
-        $this->string = $string . "\0";
-        $this->currentPos = 0;
+        $this->string       = $string . "\0";
+        $this->currentPos   = 0;
         $this->currentToken = $this->getNextToken();
 
         return $this->expression();
@@ -246,14 +241,14 @@ class Parser
      */
     public function expression($rightBindingPower = 0)
     {
-        $token = $this->currentToken;
+        $token              = $this->currentToken;
         $this->currentToken = $this->getNextToken();
-        $left = $token->getNullDenotation();
+        $left               = $token->getNullDenotation();
 
         while ($rightBindingPower < $this->currentToken->leftBindingPower) {
-            $token = $this->currentToken;
+            $token              = $this->currentToken;
             $this->currentToken = $this->getNextToken();
-            $left = $token->getLeftDenotation($left);
+            $left               = $token->getLeftDenotation($left);
         }
 
         return $left;
@@ -290,7 +285,7 @@ class Parser
         }
 
         $result = $this->string[$this->currentPos++];
-        $value = null;
+        $value  = null;
 
         switch ($result) {
             case '0':
@@ -307,8 +302,8 @@ class Parser
                     $result .= $this->string[$this->currentPos++];
                 }
 
-                $id = 'number';
-                $value = (int)$result;
+                $id    = 'number';
+                $value = (int) $result;
                 break;
 
             case '=':

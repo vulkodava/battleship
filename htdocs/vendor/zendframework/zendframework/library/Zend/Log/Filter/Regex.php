@@ -39,7 +39,7 @@ class Regex implements FilterInterface
         }
         ErrorHandler::start(E_WARNING);
         $result = preg_match($regex, '');
-        $error = ErrorHandler::stop();
+        $error  = ErrorHandler::stop();
         if ($result === false) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid regular expression "%s"',
@@ -61,7 +61,6 @@ class Regex implements FilterInterface
         if (is_array($event['message'])) {
             $message = var_export($message, true);
         }
-
         return preg_match($this->regex, $message) > 0;
     }
 }

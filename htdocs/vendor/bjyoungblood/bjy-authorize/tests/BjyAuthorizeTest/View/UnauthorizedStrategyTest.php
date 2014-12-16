@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -78,7 +78,7 @@ class UnauthorizedStrategyTest extends PHPUnit_Framework_TestCase
     {
         $exception = $this->getMock('BjyAuthorize\\Exception\\UnAuthorizedException');
         $viewModel = $this->getMock('Zend\\View\\Model\\ModelInterface');
-        $mvcEvent = $this->getMock('Zend\\Mvc\\MvcEvent');
+        $mvcEvent  = $this->getMock('Zend\\Mvc\\MvcEvent');
 
         $mvcEvent->expects($this->any())->method('getError')->will($this->returnValue(Application::ERROR_EXCEPTION));
         $mvcEvent->expects($this->any())->method('getViewModel')->will($this->returnValue($viewModel));
@@ -126,7 +126,7 @@ class UnauthorizedStrategyTest extends PHPUnit_Framework_TestCase
     {
         $exception = $this->getMock('Exception');
         $viewModel = $this->getMock('Zend\\View\\Model\\ModelInterface');
-        $mvcEvent = $this->getMock('Zend\\Mvc\\MvcEvent');
+        $mvcEvent  = $this->getMock('Zend\\Mvc\\MvcEvent');
 
         $mvcEvent->expects($this->any())->method('getError')->will($this->returnValue(Application::ERROR_EXCEPTION));
         $mvcEvent->expects($this->any())->method('getViewModel')->will($this->returnValue($viewModel));
@@ -153,7 +153,7 @@ class UnauthorizedStrategyTest extends PHPUnit_Framework_TestCase
     public function testIgnoresUnknownErrors()
     {
         $viewModel = $this->getMock('Zend\\View\\Model\\ModelInterface');
-        $mvcEvent = $this->getMock('Zend\\Mvc\\MvcEvent');
+        $mvcEvent  = $this->getMock('Zend\\Mvc\\MvcEvent');
 
         $mvcEvent->expects($this->any())->method('getError')->will($this->returnValue('unknown'));
         $mvcEvent->expects($this->any())->method('getViewModel')->will($this->returnValue($viewModel));
@@ -171,7 +171,7 @@ class UnauthorizedStrategyTest extends PHPUnit_Framework_TestCase
     {
         $response = $this->getMock('Zend\\Stdlib\\ResponseInterface');
         $viewModel = $this->getMock('Zend\\View\\Model\\ModelInterface');
-        $mvcEvent = $this->getMock('Zend\\Mvc\\MvcEvent');
+        $mvcEvent  = $this->getMock('Zend\\Mvc\\MvcEvent');
 
         $mvcEvent->expects($this->any())->method('getResult')->will($this->returnValue($response));
         $mvcEvent->expects($this->any())->method('getViewModel')->will($this->returnValue($viewModel));

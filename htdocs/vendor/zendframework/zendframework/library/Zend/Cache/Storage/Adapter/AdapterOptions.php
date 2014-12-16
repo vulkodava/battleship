@@ -73,7 +73,6 @@ class AdapterOptions extends AbstractOptions
     public function setAdapter(StorageInterface $adapter = null)
     {
         $this->adapter = $adapter;
-
         return $this;
     }
 
@@ -86,7 +85,7 @@ class AdapterOptions extends AbstractOptions
      */
     public function setKeyPattern($keyPattern)
     {
-        $keyPattern = (string)$keyPattern;
+        $keyPattern = (string) $keyPattern;
         if ($this->keyPattern !== $keyPattern) {
             // validate pattern
             if ($keyPattern !== '') {
@@ -127,7 +126,7 @@ class AdapterOptions extends AbstractOptions
      */
     public function setNamespace($namespace)
     {
-        $namespace = (string)$namespace;
+        $namespace = (string) $namespace;
         if ($this->namespace !== $namespace) {
             $this->triggerOptionEvent('namespace', $namespace);
             $this->namespace = $namespace;
@@ -154,12 +153,11 @@ class AdapterOptions extends AbstractOptions
      */
     public function setReadable($readable)
     {
-        $readable = (bool)$readable;
+        $readable = (bool) $readable;
         if ($this->readable !== $readable) {
             $this->triggerOptionEvent('readable', $readable);
             $this->readable = $readable;
         }
-
         return $this;
     }
 
@@ -186,7 +184,6 @@ class AdapterOptions extends AbstractOptions
             $this->triggerOptionEvent('ttl', $ttl);
             $this->ttl = $ttl;
         }
-
         return $this;
     }
 
@@ -208,12 +205,11 @@ class AdapterOptions extends AbstractOptions
      */
     public function setWritable($writable)
     {
-        $writable = (bool)$writable;
+        $writable = (bool) $writable;
         if ($this->writable !== $writable) {
             $this->triggerOptionEvent('writable', $writable);
             $this->writable = $writable;
         }
-
         return $this;
     }
 
@@ -232,7 +228,7 @@ class AdapterOptions extends AbstractOptions
      * an adapter implements EventsCapableInterface.
      *
      * @param string $optionName
-     * @param mixed $optionValue
+     * @param mixed  $optionValue
      * @return void
      */
     protected function triggerOptionEvent($optionName, $optionValue)
@@ -253,11 +249,11 @@ class AdapterOptions extends AbstractOptions
     protected function normalizeTtl(&$ttl)
     {
         if (!is_int($ttl)) {
-            $ttl = (float)$ttl;
+            $ttl = (float) $ttl;
 
             // convert to int if possible
-            if ($ttl === (float)(int)$ttl) {
-                $ttl = (int)$ttl;
+            if ($ttl === (float) (int) $ttl) {
+                $ttl = (int) $ttl;
             }
         }
 

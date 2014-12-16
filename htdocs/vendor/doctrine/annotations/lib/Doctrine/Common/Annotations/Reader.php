@@ -41,7 +41,7 @@ interface Reader
      *
      * @param \ReflectionClass $class          The ReflectionClass of the class from which
      *                                         the class annotations should be read.
-     * @param string $annotationName           The name of the annotation.
+     * @param string           $annotationName The name of the annotation.
      *
      * @return object|null The Annotation or NULL, if the requested annotation does not exist.
      */
@@ -60,8 +60,8 @@ interface Reader
     /**
      * Gets a method annotation.
      *
-     * @param \ReflectionMethod $method The ReflectionMethod to read the annotations from.
-     * @param string $annotationName    The name of the annotation.
+     * @param \ReflectionMethod $method         The ReflectionMethod to read the annotations from.
+     * @param string            $annotationName The name of the annotation.
      *
      * @return object|null The Annotation or NULL, if the requested annotation does not exist.
      */
@@ -80,8 +80,8 @@ interface Reader
     /**
      * Gets a property annotation.
      *
-     * @param \ReflectionProperty $property The ReflectionProperty to read the annotations from.
-     * @param string $annotationName        The name of the annotation.
+     * @param \ReflectionProperty $property       The ReflectionProperty to read the annotations from.
+     * @param string              $annotationName The name of the annotation.
      *
      * @return object|null The Annotation or NULL, if the requested annotation does not exist.
      */

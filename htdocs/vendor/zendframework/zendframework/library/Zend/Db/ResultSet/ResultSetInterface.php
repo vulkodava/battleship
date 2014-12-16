@@ -16,7 +16,6 @@ interface ResultSetInterface extends Traversable, Countable
 {
     /**
      * Can be anything traversable|array
-     *
      * @abstract
      * @param $dataSource
      * @return mixed
@@ -27,7 +26,6 @@ interface ResultSetInterface extends Traversable, Countable
      * Field terminology is more correct as information coming back
      * from the database might be a column, and/or the result of an
      * operation or intersection of some data
-     *
      * @abstract
      * @return mixed
      */

@@ -52,14 +52,14 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultInvokeArguments()
     {
-        $input = 'input';
+        $input    = 'input';
         $expected = 'translated';
 
         $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
         $translatorMock->expects($this->once())
-            ->method('translate')
-            ->with($this->equalTo($input), $this->equalTo('default'), $this->equalTo(null))
-            ->will($this->returnValue($expected));
+                       ->method('translate')
+                       ->with($this->equalTo($input), $this->equalTo('default'), $this->equalTo(null))
+                       ->will($this->returnValue($expected));
 
         $this->helper->setTranslator($translatorMock);
 
@@ -68,16 +68,16 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomInvokeArguments()
     {
-        $input = 'input';
-        $expected = 'translated';
+        $input      = 'input';
+        $expected   = 'translated';
         $textDomain = 'textDomain';
-        $locale = 'en_US';
+        $locale     = 'en_US';
 
         $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
         $translatorMock->expects($this->once())
-            ->method('translate')
-            ->with($this->equalTo($input), $this->equalTo($textDomain), $this->equalTo($locale))
-            ->will($this->returnValue($expected));
+                       ->method('translate')
+                       ->with($this->equalTo($input), $this->equalTo($textDomain), $this->equalTo($locale))
+                       ->will($this->returnValue($expected));
 
         $this->helper->setTranslator($translatorMock);
 

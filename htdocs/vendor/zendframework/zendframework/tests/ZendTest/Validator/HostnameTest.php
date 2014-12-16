@@ -79,7 +79,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
             array(Hostname::ALLOW_DNS | Hostname::ALLOW_LOCAL, false, array('1.2.3.4', '255.255.255.255')),
             array(Hostname::ALLOW_DNS | Hostname::ALLOW_IP, true, array('1.2.3.4', '255.255.255.255')),
             array(Hostname::ALLOW_DNS | Hostname::ALLOW_IP, false, array('localhost', 'local.localhost'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
@@ -97,7 +97,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array(Hostname::ALLOW_DNS, true, array('domain.com', 'doma-in.com')),
             array(Hostname::ALLOW_DNS, false, array('-domain.com', 'domain-.com', 'do--main.com'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             $validator = new Hostname($element[0]);
             foreach ($element[2] as $input) {
@@ -129,7 +129,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
             array(true, array('bürger.de', 'hãllo.de', 'hållo.se')),
             array(true, array('bÜrger.de', 'hÃllo.de', 'hÅllo.se')),
             array(false, array('hãllo.se', 'bürger.lt', 'hãllo.uk'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -140,7 +140,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $validator->useIdnCheck(false);
         $valuesExpected = array(
             array(false, array('bürger.de', 'hãllo.de', 'hållo.se'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -152,7 +152,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $validator = new Hostname(Hostname::ALLOW_DNS, false);
         $valuesExpected = array(
             array(false, array('bürger.de', 'hãllo.de', 'hållo.se'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -173,7 +173,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
             array(true, array('bürger.com', 'hãllo.com', 'hållo.com')),
             array(true, array('bÜrger.com', 'hÃllo.com', 'hÅllo.com')),
             array(false, array('hãllo.lt', 'bürger.lt', 'hãllo.lt'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -184,7 +184,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $validator->useIdnCheck(false);
         $valuesExpected = array(
             array(false, array('bürger.com', 'hãllo.com', 'hållo.com'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -196,7 +196,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $validator = new Hostname(Hostname::ALLOW_DNS, false);
         $valuesExpected = array(
             array(false, array('bürger.com', 'hãllo.com', 'hållo.com'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -216,7 +216,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array(true, array('domain.co.uk', 'domain.uk.com', 'domain.tl', 'domain.zw')),
             array(false, array('domain.xx', 'domain.zz', 'domain.madeup'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -227,7 +227,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $validator->useTldCheck(false);
         $valuesExpected = array(
             array(true, array('domain.xx', 'domain.zz', 'domain.madeup'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -239,7 +239,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $validator = new Hostname(Hostname::ALLOW_DNS, true, false);
         $valuesExpected = array(
             array(true, array('domain.xx', 'domain.zz', 'domain.madeup'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -304,7 +304,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array(true, array('www.danger1.com', 'danger.com', 'www.danger.com')),
             array(false, array('www.danger1com', 'dangercom', 'www.dangercom'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -323,7 +323,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array(true, array('xn--brger-kva.com', 'xn--eckwd4c7cu47r2wf.jp')),
             array(false, array('xn--brger-x45d2va.com', 'xn--bürger.com', 'xn--'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -366,7 +366,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
             array(true, array('bürger.com', 'hãllo.com', 'hållo.com')),
             array(true, array('bÜrger.com', 'hÃllo.com', 'hÅllo.com')),
             array(false, array('hãllo.lt', 'bürger.lt', 'hãllo.lt'))
-        );
+            );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()) . $input);
@@ -480,7 +480,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
                 $this->assertEquals(
                     $element[0],
                     $validator->isValid($input),
-                    implode("\n", $validator->getMessages()) . ' - ' . $input
+                    implode("\n", $validator->getMessages()) .' - '. $input
                 );
             }
         }
@@ -500,7 +500,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
                 $this->assertEquals(
                     $element[0],
                     $validator->isValid($input),
-                    implode("\n", $validator->getMessages()) . ' - ' . $input
+                    implode("\n", $validator->getMessages()) .' - '. $input
                 );
             }
         }

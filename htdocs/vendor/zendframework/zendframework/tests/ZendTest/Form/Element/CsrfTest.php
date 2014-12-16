@@ -63,7 +63,7 @@ class CsrfTest extends TestCase
             'csrf_options' => array(
                 'timeout' => 777,
                 'salt' => 'MySalt')
-        ));
+            ));
         $validator = $element->getCsrfValidator();
         $this->assertEquals('foo', $validator->getName());
         $this->assertEquals(777, $validator->getTimeOut());

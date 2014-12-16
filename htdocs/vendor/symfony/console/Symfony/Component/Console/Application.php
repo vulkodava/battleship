@@ -101,7 +101,7 @@ class Application
     /**
      * Runs the current application.
      *
-     * @param InputInterface $input   An Input instance
+     * @param InputInterface  $input  An Input instance
      * @param OutputInterface $output An Output instance
      *
      * @return int 0 if everything went fine, or an error code
@@ -137,7 +137,7 @@ class Application
 
             $exitCode = $e->getCode();
             if (is_numeric($exitCode)) {
-                $exitCode = (int)$exitCode;
+                $exitCode = (int) $exitCode;
                 if (0 === $exitCode) {
                     $exitCode = 1;
                 }
@@ -160,7 +160,7 @@ class Application
     /**
      * Runs the current application.
      *
-     * @param InputInterface $input   An Input instance
+     * @param InputInterface  $input  An Input instance
      * @param OutputInterface $output An Output instance
      *
      * @return int 0 if everything went fine, or an error code
@@ -263,7 +263,7 @@ class Application
      */
     public function setCatchExceptions($boolean)
     {
-        $this->catchExceptions = (bool)$boolean;
+        $this->catchExceptions = (bool) $boolean;
     }
 
     /**
@@ -275,7 +275,7 @@ class Application
      */
     public function setAutoExit($boolean)
     {
-        $this->autoExit = (bool)$boolean;
+        $this->autoExit = (bool) $boolean;
     }
 
     /**
@@ -482,10 +482,8 @@ class Application
     public function findNamespace($namespace)
     {
         $allNamespaces = $this->getNamespaces();
-        $expr = preg_replace_callback('{([^:]+|)}', function ($matches) {
-                return preg_quote($matches[1]) . '[^:]*';
-            }, $namespace);
-        $namespaces = preg_grep('{^' . $expr . '}', $allNamespaces);
+        $expr = preg_replace_callback('{([^:]+|)}', function ($matches) { return preg_quote($matches[1]).'[^:]*'; }, $namespace);
+        $namespaces = preg_grep('{^'.$expr.'}', $allNamespaces);
 
         if (empty($namespaces)) {
             $message = sprintf('There are no commands defined in the "%s" namespace.', $namespace);
@@ -528,12 +526,10 @@ class Application
     public function find($name)
     {
         $allCommands = array_keys($this->commands);
-        $expr = preg_replace_callback('{([^:]+|)}', function ($matches) {
-                return preg_quote($matches[1]) . '[^:]*';
-            }, $name);
-        $commands = preg_grep('{^' . $expr . '}', $allCommands);
+        $expr = preg_replace_callback('{([^:]+|)}', function ($matches) { return preg_quote($matches[1]).'[^:]*'; }, $name);
+        $commands = preg_grep('{^'.$expr.'}', $allCommands);
 
-        if (empty($commands) || count(preg_grep('{^' . $expr . '$}', $commands)) < 1) {
+        if (empty($commands) || count(preg_grep('{^'.$expr.'$}', $commands)) < 1) {
             if (false !== $pos = strrpos($name, ':')) {
                 // check if a namespace exists and contains commands
                 $this->findNamespace(substr($name, 0, $pos));
@@ -624,7 +620,7 @@ class Application
      * Returns a text representation of the Application.
      *
      * @param string $namespace An optional namespace name
-     * @param bool $raw         Whether to return raw command list
+     * @param bool   $raw       Whether to return raw command list
      *
      * @return string A string representing the Application
      *
@@ -643,7 +639,7 @@ class Application
      * Returns an XML representation of the Application.
      *
      * @param string $namespace An optional namespace name
-     * @param bool $asDom       Whether to return a DOM or an XML string
+     * @param bool   $asDom     Whether to return a DOM or an XML string
      *
      * @return string|\DOMDocument An XML string representing the Application
      *
@@ -666,7 +662,7 @@ class Application
     /**
      * Renders a caught exception.
      *
-     * @param \Exception $e           An exception instance
+     * @param \Exception      $e      An exception instance
      * @param OutputInterface $output An OutputInterface instance
      */
     public function renderException($e, $output)
@@ -777,22 +773,22 @@ class Application
         if (defined('PHP_WINDOWS_VERSION_BUILD')) {
             // extract [w, H] from "wxh (WxH)"
             if (preg_match('/^(\d+)x\d+ \(\d+x(\d+)\)$/', trim(getenv('ANSICON')), $matches)) {
-                return array((int)$matches[1], (int)$matches[2]);
+                return array((int) $matches[1], (int) $matches[2]);
             }
             // extract [w, h] from "wxh"
             if (preg_match('/^(\d+)x(\d+)$/', $this->getConsoleMode(), $matches)) {
-                return array((int)$matches[1], (int)$matches[2]);
+                return array((int) $matches[1], (int) $matches[2]);
             }
         }
 
         if ($sttyString = $this->getSttyColumns()) {
             // extract [w, h] from "rows h; columns w;"
             if (preg_match('/rows.(\d+);.columns.(\d+);/i', $sttyString, $matches)) {
-                return array((int)$matches[2], (int)$matches[1]);
+                return array((int) $matches[2], (int) $matches[1]);
             }
             // extract [w, h] from "; h rows; w columns"
             if (preg_match('/;.(\d+).rows;.(\d+).columns/i', $sttyString, $matches)) {
-                return array((int)$matches[2], (int)$matches[1]);
+                return array((int) $matches[2], (int) $matches[1]);
             }
         }
 
@@ -819,7 +815,7 @@ class Application
     /**
      * Configures the input and output instances based on the user arguments and options.
      *
-     * @param InputInterface $input   An InputInterface instance
+     * @param InputInterface  $input  An InputInterface instance
      * @param OutputInterface $output An OutputInterface instance
      */
     protected function configureIO(InputInterface $input, OutputInterface $output)
@@ -858,9 +854,9 @@ class Application
      * If an event dispatcher has been attached to the application,
      * events are also dispatched during the life-cycle of the command.
      *
-     * @param Command $command        A Command instance
-     * @param InputInterface $input   An Input instance
-     * @param OutputInterface $output An Output instance
+     * @param Command         $command A Command instance
+     * @param InputInterface  $input   An Input instance
+     * @param OutputInterface $output  An Output instance
      *
      * @return int 0 if everything went fine, or an error code
      *
@@ -925,12 +921,12 @@ class Application
         return new InputDefinition(array(
             new InputArgument('command', InputArgument::REQUIRED, 'The command to execute'),
 
-            new InputOption('--help', '-h', InputOption::VALUE_NONE, 'Display this help message.'),
-            new InputOption('--quiet', '-q', InputOption::VALUE_NONE, 'Do not output any message.'),
-            new InputOption('--verbose', '-v|vv|vvv', InputOption::VALUE_NONE, 'Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.'),
-            new InputOption('--version', '-V', InputOption::VALUE_NONE, 'Display this application version.'),
-            new InputOption('--ansi', '', InputOption::VALUE_NONE, 'Force ANSI output.'),
-            new InputOption('--no-ansi', '', InputOption::VALUE_NONE, 'Disable ANSI output.'),
+            new InputOption('--help',           '-h', InputOption::VALUE_NONE, 'Display this help message.'),
+            new InputOption('--quiet',          '-q', InputOption::VALUE_NONE, 'Do not output any message.'),
+            new InputOption('--verbose',        '-v|vv|vvv', InputOption::VALUE_NONE, 'Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.'),
+            new InputOption('--version',        '-V', InputOption::VALUE_NONE, 'Display this application version.'),
+            new InputOption('--ansi',           '',   InputOption::VALUE_NONE, 'Force ANSI output.'),
+            new InputOption('--no-ansi',        '',   InputOption::VALUE_NONE, 'Disable ANSI output.'),
             new InputOption('--no-interaction', '-n', InputOption::VALUE_NONE, 'Do not ask any interactive question.'),
         ));
     }
@@ -1006,7 +1002,7 @@ class Application
             proc_close($process);
 
             if (preg_match('/--------+\r?\n.+?(\d+)\r?\n.+?(\d+)\r?\n/', $info, $matches)) {
-                return $matches[2] . 'x' . $matches[1];
+                return $matches[2].'x'.$matches[1];
             }
         }
     }
@@ -1045,7 +1041,7 @@ class Application
      * Finds alternative of $name among $collection,
      * if nothing is found in $collection, try in $abbrevs
      *
-     * @param string $name                   The string
+     * @param string             $name       The string
      * @param array|\Traversable $collection The collection
      *
      * @return array A sorted array of similar string
@@ -1086,9 +1082,7 @@ class Application
             }
         }
 
-        $alternatives = array_filter($alternatives, function ($lev) use ($threshold) {
-                return $lev < 2 * $threshold;
-            });
+        $alternatives = array_filter($alternatives, function ($lev) use ($threshold) { return $lev < 2*$threshold; });
         asort($alternatives);
 
         return array_keys($alternatives);
@@ -1136,7 +1130,7 @@ class Application
         $line = '';
         foreach (preg_split('//u', $utf8String) as $char) {
             // test if $char could be appended to current line
-            if (mb_strwidth($line . $char, 'utf8') <= $width) {
+            if (mb_strwidth($line.$char, 'utf8') <= $width) {
                 $line .= $char;
                 continue;
             }

@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -48,7 +48,7 @@ class Controller implements GuardInterface, RuleProviderInterface, ResourceProvi
     protected $listeners = array();
 
     /**
-     * @param array $rules
+     * @param array                   $rules
      * @param ServiceLocatorInterface $serviceLocator
      */
     public function __construct(array $rules, ServiceLocatorInterface $serviceLocator)
@@ -60,9 +60,9 @@ class Controller implements GuardInterface, RuleProviderInterface, ResourceProvi
                 $rule['roles'] = array($rule['roles']);
             }
 
-            $rule['action'] = isset($rule['action']) ? (array)$rule['action'] : array(null);
+            $rule['action'] = isset($rule['action']) ? (array) $rule['action'] : array(null);
 
-            foreach ((array)$rule['controller'] as $controller) {
+            foreach ((array) $rule['controller'] as $controller) {
                 foreach ($rule['action'] as $action) {
                     $this->rules[$this->getResourceName($controller, $action)] = $rule['roles'];
                 }
@@ -145,12 +145,12 @@ class Controller implements GuardInterface, RuleProviderInterface, ResourceProvi
     public function onDispatch(MvcEvent $event)
     {
         /* @var $service \BjyAuthorize\Service\Authorize */
-        $service = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
-        $match = $event->getRouteMatch();
+        $service    = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
+        $match      = $event->getRouteMatch();
         $controller = $match->getParam('controller');
-        $action = $match->getParam('action');
-        $request = $event->getRequest();
-        $method = $request instanceof HttpRequest ? strtolower($request->getMethod()) : null;
+        $action     = $match->getParam('action');
+        $request    = $event->getRequest();
+        $method     = $request instanceof HttpRequest ? strtolower($request->getMethod()) : null;
 
         $authorized = $service->isAllowed($this->getResourceName($controller))
             || $service->isAllowed($this->getResourceName($controller, $action))

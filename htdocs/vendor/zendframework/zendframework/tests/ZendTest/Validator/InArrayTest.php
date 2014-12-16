@@ -23,7 +23,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator = new InArray(
             array(
-                'haystack' => array(1, 2, 3),
+                 'haystack' => array(1, 2, 3),
             )
         );
     }
@@ -72,7 +72,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array(1, 'a', 2.3)
+                 'haystack' => array(1, 'a', 2.3)
             )
         );
         $this->assertTrue($validator->isValid(1));
@@ -97,7 +97,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array('test', 0, 'A', 0.0),
+                 'haystack' => array('test', 0, 'A', 0.0),
             )
         );
 
@@ -116,7 +116,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array('test', 0, 'A', 1, 0.0),
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
             )
         );
 
@@ -133,7 +133,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array('test', 0, 'A', 1, 0.0),
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
             )
         );
 
@@ -153,7 +153,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array('test', 0, 'A', 1, 0.0),
+                 'haystack' => array('test', 0, 'A', 1, 0.0),
             )
         );
 
@@ -173,10 +173,10 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array(
-                    array('test', 0, 'A', 0.0),
-                    array('foo', 1, 'a', 'c'),
-                )
+                 'haystack' => array(
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
+                 )
             )
         );
 
@@ -195,10 +195,10 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array(
-                    array('test', 0, 'A', 0.0),
-                    array('foo', 1, 'a', 'c'),
-                )
+                 'haystack' => array(
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
+                 )
             )
         );
 
@@ -219,10 +219,10 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array(
-                    array('test', 0, 'A', 0.0),
-                    array('foo', 1, 'a', 'c'),
-                )
+                 'haystack' => array(
+                     array('test', 0, 'A', 0.0),
+                     array('foo', 1, 'a', 'c'),
+                 )
             )
         );
 
@@ -243,7 +243,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array('test', 1, 2),
+                 'haystack' => array('test', 1, 2),
             )
         );
 
@@ -261,7 +261,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array('test', 1, 2),
+                 'haystack' => array('test', 1, 2),
             )
         );
 
@@ -279,7 +279,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array(1, 2),
+                 'haystack' => array(1, 2),
             )
         );
 
@@ -297,7 +297,7 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array(1.5, 2.4),
+                 'haystack' => array(1.5, 2.4),
             )
         );
 
@@ -315,8 +315,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array('test', 0, 'A'),
-                'strict' => true,
+                 'haystack' => array('test', 0, 'A'),
+                 'strict'   => true,
             )
         );
         $this->assertTrue($validator->getStrict());
@@ -334,8 +334,8 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' => array('test', 0, 'A'),
-                'recursive' => true,
+                 'haystack'  => array('test', 0, 'A'),
+                 'recursive' => true,
             )
         );
         $this->assertTrue($validator->getRecursive());
@@ -345,12 +345,12 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new InArray(
             array(
-                'haystack' =>
-                    array(
-                        'firstDimension' => array('test', 0, 'A'),
-                        'secondDimension' => array('value', 2, 'a'),
-                    ),
-                'recursive' => false,
+                 'haystack'  =>
+                 array(
+                     'firstDimension'  => array('test', 0, 'A'),
+                     'secondDimension' => array('value', 2, 'a'),
+                 ),
+                 'recursive' => false,
             )
         );
         $this->assertFalse($validator->isValid('A'));
@@ -362,6 +362,6 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $this->assertAttributeEquals($this->validator->getOption('messageTemplates'),
-            'messageTemplates', $this->validator);
+                                     'messageTemplates', $this->validator);
     }
 }

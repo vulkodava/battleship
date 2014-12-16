@@ -87,8 +87,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
      *
      * Note: this code is inspired by the random number generator test
      * included in the PHP-CryptLib project of Anthony Ferrara
-     *
-     * @see          https://github.com/ircmaxell/PHP-CryptLib
+     * @see https://github.com/ircmaxell/PHP-CryptLib
      *
      * @dataProvider provideRandInt
      */
@@ -100,10 +99,10 @@ class RandTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped($e->getMessage());
         }
 
-        $i = 0;
+        $i     = 0;
         $count = 0;
         do {
-            $up = 0;
+            $up   = 0;
             $down = 0;
             for ($i = 0; $i < $cycles; $i++) {
                 $x = Rand::getInteger(0, $tot, $strong);
@@ -177,7 +176,7 @@ class RandTest extends \PHPUnit_Framework_TestCase
 
     public function testHashTimingSourceStrengthIsVeryLow()
     {
-        $this->assertEquals(1, (string)Math\Source\HashTiming::getStrength());
+        $this->assertEquals(1, (string) Math\Source\HashTiming::getStrength());
     }
 
     public function testHashTimingSourceStrengthIsRandomWithCorrectLength()

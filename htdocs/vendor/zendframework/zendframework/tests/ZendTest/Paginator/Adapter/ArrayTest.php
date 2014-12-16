@@ -29,7 +29,6 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->adapter = new Adapter\ArrayAdapter(range(1, 101));
     }
-
     /**
      * Cleans up the environment after running a test.
      */

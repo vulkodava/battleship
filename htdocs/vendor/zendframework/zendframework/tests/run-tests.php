@@ -31,17 +31,17 @@
 // PHPUnit doesn't understand relative paths well when they are in the config file.
 chdir(__DIR__);
 
-$phpunit_bin = __DIR__ . '/../vendor/bin/phpunit';
-$phpunit_bin = file_exists($phpunit_bin) ? $phpunit_bin : 'phpunit';
-$phpunit_conf = (file_exists('phpunit.xml') ? 'phpunit.xml' : 'phpunit.xml.dist');
-$phpunit_opts = "-c $phpunit_conf";
+$phpunit_bin      = __DIR__ . '/../vendor/bin/phpunit';
+$phpunit_bin      = file_exists($phpunit_bin) ? $phpunit_bin : 'phpunit';
+$phpunit_conf     = (file_exists('phpunit.xml') ? 'phpunit.xml' : 'phpunit.xml.dist');
+$phpunit_opts     = "-c $phpunit_conf";
 $phpunit_coverage = '';
 
 if (getenv('PHPUNIT_OPTS') !== false) {
     $phpunit_opts .= ' ' . getenv('PHPUNIT_OPTS');
 }
 
-$run_as = 'paths';
+$run_as     = 'paths';
 $components = array();
 
 if ($argc == 1) {
@@ -85,7 +85,7 @@ if ($run_as == 'groups') {
     echo "\n\n";
 } else {
     foreach ($components as $component) {
-        $component = 'ZendTest/' . basename(str_replace('_', '/', $component));
+        $component =   'ZendTest/' . basename(str_replace('_', '/', $component));
         echo "$component:\n";
         system("$phpunit_bin $phpunit_opts $phpunit_coverage " . escapeshellarg(__DIR__ . '/' . $component), $c_result);
         echo "\n\n";
@@ -115,6 +115,5 @@ function getAll($phpunit_conf)
         closedir($handle);
     }
     sort($components);
-
     return $components;
 }

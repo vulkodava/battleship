@@ -398,11 +398,11 @@ class InputDefinition
         $elements = array();
         foreach ($this->getOptions() as $option) {
             $shortcut = $option->getShortcut() ? sprintf('-%s|', $option->getShortcut()) : '';
-            $elements[] = sprintf('[' . ($option->isValueRequired() ? '%s--%s="..."' : ($option->isValueOptional() ? '%s--%s[="..."]' : '%s--%s')) . ']', $shortcut, $option->getName());
+            $elements[] = sprintf('['.($option->isValueRequired() ? '%s--%s="..."' : ($option->isValueOptional() ? '%s--%s[="..."]' : '%s--%s')).']', $shortcut, $option->getName());
         }
 
         foreach ($this->getArguments() as $argument) {
-            $elements[] = sprintf($argument->isRequired() ? '%s' : '[%s]', $argument->getName() . ($argument->isArray() ? '1' : ''));
+            $elements[] = sprintf($argument->isRequired() ? '%s' : '[%s]', $argument->getName().($argument->isArray() ? '1' : ''));
 
             if ($argument->isArray()) {
                 $elements[] = sprintf('... [%sN]', $argument->getName());

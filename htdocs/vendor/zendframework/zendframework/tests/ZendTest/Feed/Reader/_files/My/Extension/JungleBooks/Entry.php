@@ -24,7 +24,6 @@ class Entry extends Extension\AbstractEntry
             $isbn = null;
         }
         $this->data['isbn'] = $title;
-
         return $this->data['isbn'];
     }
 

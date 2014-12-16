@@ -25,10 +25,10 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         $testFile = __DIR__ . '/_files/wordcount.txt';
         $testData = array(
             //    Options, isValid Param, Expected value
-            array(15, $testFile, true),
-            array(4, $testFile, false),
-            array(array('min' => 0, 'max' => 10), $testFile, true),
-            array(array('min' => 10, 'max' => 15), $testFile, false),
+            array(15,      $testFile,     true),
+            array(4,       $testFile,     false),
+            array(array('min' => 0,  'max' => 10), $testFile,   true),
+            array(array('min' => 10, 'max' => 15), $testFile,   false),
         );
 
         // Dupe data in File Upload format
@@ -39,7 +39,6 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
             );
             $testData[] = array($data[0], $fileUpload, $data[2]);
         }
-
         return $testData;
     }
 
@@ -146,11 +145,11 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey(File\WordCount::NOT_FOUND, $validator->getMessages());
 
         $filesArray = array(
-            'name' => '',
-            'size' => 0,
-            'tmp_name' => '',
-            'error' => UPLOAD_ERR_NO_FILE,
-            'type' => '',
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
         );
 
         $this->assertFalse($validator->isValid($filesArray));

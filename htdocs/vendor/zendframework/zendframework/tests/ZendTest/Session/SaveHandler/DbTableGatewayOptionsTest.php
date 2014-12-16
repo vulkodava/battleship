@@ -49,10 +49,10 @@ class DbTableGatewayOptionsTest extends \PHPUnit_Framework_TestCase
     {
         $options = new DbTableGatewayOptions();
         $options->setIdColumn('testId')
-            ->setNameColumn('testName')
-            ->setModifiedColumn('testModified')
-            ->setLifetimeColumn('testLifetime')
-            ->setDataColumn('testData');
+                ->setNameColumn('testName')
+                ->setModifiedColumn('testModified')
+                ->setLifetimeColumn('testLifetime')
+                ->setDataColumn('testData');
 
         $this->assertEquals('testId', $options->getIdColumn());
         $this->assertEquals('testName', $options->getNameColumn());

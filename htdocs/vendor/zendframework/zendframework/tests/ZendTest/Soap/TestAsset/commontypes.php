@@ -9,7 +9,7 @@
 
 namespace ZendTest\Soap\TestAsset;
 
-    /* Test Functions */
+/* Test Functions */
 
 /**
  * Test Function
@@ -87,8 +87,7 @@ function TestFunc7()
  */
 function TestFunc8()
 {
-    $return = (object)array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
-
+    $return = (object) array('foo' => 'bar', 'baz' => true, 'bat' => 123, 'qux' => false);
     return $return;
 }
 
@@ -114,7 +113,7 @@ class TestFixingMultiplePrototypes
      * @param integer $d
      * @return integer
      */
-    public function testFunc($a = 100, $b = 200, $d = 300)
+    public function testFunc($a=100, $b=200, $d=300)
     {
 
     }
@@ -147,7 +146,7 @@ class Test
      * Test Function 3
      *
      * @param string $who Some Arg
-     * @param int $when   Some
+     * @param int $when Some
      * @return string
      */
     public function testFunc3($who, $when)
@@ -273,24 +272,23 @@ class ComplexObjectWithObjectStructure
 class MyService
 {
     /**
-     * @param string $foo
-     * @return \ZendTest\Soap\TestAsset\MyResponse[]
+     *    @param string $foo
+     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
     public function foo($foo)
     {
     }
-
     /**
-     * @param string $bar
-     * @return \ZendTest\Soap\TestAsset\MyResponse[]
+     *    @param string $bar
+     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
     public function bar($bar)
     {
     }
 
     /**
-     * @param string $baz
-     * @return \ZendTest\Soap\TestAsset\MyResponse[]
+     *    @param string $baz
+     *    @return \ZendTest\Soap\TestAsset\MyResponse[]
      */
     public function baz($baz)
     {
@@ -300,32 +298,31 @@ class MyService
 class MyServiceSequence
 {
     /**
-     * @param string $foo
-     * @return string[]
+     *    @param string $foo
+     *    @return string[]
      */
     public function foo($foo)
     {
     }
-
     /**
-     * @param string $bar
-     * @return string[]
+     *    @param string $bar
+     *    @return string[]
      */
     public function bar($bar)
     {
     }
 
     /**
-     * @param string $baz
-     * @return string[]
+     *    @param string $baz
+     *    @return string[]
      */
     public function baz($baz)
     {
     }
 
     /**
-     * @param string $baz
-     * @return string[][][]
+     *    @param string $baz
+     *    @return string[][][]
      */
     public function bazNested($baz)
     {
@@ -350,9 +347,7 @@ class Recursion
     /**
      * @return \ZendTest\Soap\TestAsset\Recursion
      */
-    public function create()
-    {
-    }
+    public function create() {}
 }
 
 /**
@@ -376,7 +371,6 @@ class NoReturnType
 }
 
 /* Client test classes */
-
 /** Test Class */
 class TestClass
 {
@@ -405,7 +399,7 @@ class TestClass
      * Test Function 3
      *
      * @param string $who Some Arg
-     * @param int $when   Some
+     * @param int $when Some
      * @return string
      */
     public function testFunc3($who, $when)
@@ -432,14 +426,14 @@ class TestData1
      *
      * @var string
      */
-    public $property1;
+     public $property1;
 
     /**
      * Property2
      *
      * @var float
      */
-    public $property2;
+     public $property2;
 }
 
 /** Test class 2 */
@@ -450,38 +444,32 @@ class TestData2
      *
      * @var integer
      */
-    public $property1;
+     public $property1;
 
     /**
      * Property1
      *
      * @var float
      */
-    public $property2;
+     public $property2;
 }
 
 class MockSoapServer
 {
     public $handle = null;
-
     public function handle()
     {
         $this->handle = func_get_args();
     }
-
-    public function __call($name, $args)
-    {
-    }
+    public function __call($name, $args) {}
 }
 
 class MockServer extends \Zend\Soap\Server
 {
     public $mockSoapServer = null;
-
     public function getSoap()
     {
         $this->mockSoapServer = new MockSoapServer();
-
         return $this->mockSoapServer;
     }
 }
@@ -515,7 +503,7 @@ class ServerTestClass
      * Test Function 3
      *
      * @param string $who Some Arg
-     * @param int $when   Some
+     * @param int $when Some
      * @return string
      */
     public function testFunc3($who, $when)
@@ -546,38 +534,38 @@ class ServerTestClass
 
 if (extension_loaded('soap')) {
 
-    /** Local SOAP client */
-    class TestLocalSoapClient extends \SoapClient
+/** Local SOAP client */
+class TestLocalSoapClient extends \SoapClient
+{
+    /**
+     * Server object
+     *
+     * @var \Zend\Soap\Server
+     */
+    public $server;
+
+    /**
+     * Local client constructor
+     *
+     * @param Zend_Soap_Server $server
+     * @param string $wsdl
+     * @param array $options
+     */
+    public function __construct(\Zend\Soap\Server $server, $wsdl, $options)
     {
-        /**
-         * Server object
-         *
-         * @var \Zend\Soap\Server
-         */
-        public $server;
-
-        /**
-         * Local client constructor
-         *
-         * @param Zend_Soap_Server $server
-         * @param string $wsdl
-         * @param array $options
-         */
-        public function __construct(\Zend\Soap\Server $server, $wsdl, $options)
-        {
-            $this->server = $server;
-            parent::__construct($wsdl, $options);
-        }
-
-        public function __doRequest($request, $location, $action, $version, $one_way = 0)
-        {
-            ob_start();
-            $this->server->handle($request);
-            $response = ob_get_clean();
-
-            return $response;
-        }
+        $this->server = $server;
+        parent::__construct($wsdl, $options);
     }
+
+    public function __doRequest($request, $location, $action, $version, $one_way = 0)
+    {
+        ob_start();
+        $this->server->handle($request);
+        $response = ob_get_clean();
+
+        return $response;
+    }
+}
 
 }
 
@@ -590,6 +578,7 @@ class SequenceTest
 }
 
 
+
 class Book
 {
     /**
@@ -597,7 +586,6 @@ class Book
      */
     public $somevar;
 }
-
 class Cookie
 {
     /**
@@ -605,10 +593,10 @@ class Cookie
      */
     public $othervar;
 }
-
 class Anything
 {
 }
+
 
 
 class PublicPrivateProtected

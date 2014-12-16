@@ -2,7 +2,7 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link       http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -102,12 +102,12 @@ class MultiCheckboxTest extends TestCase
     {
         $element = new MultiCheckboxElement('my-checkbox');
         $inputSpec = $element->getInputSpecification();
-        $inArrayValidator = $inputSpec['validators'][0]->getValidator();
+        $inArrayValidator=$inputSpec['validators'][0]->getValidator();
 
         $element->setAttributes(array(
             'options' => $options,
         ));
-        $haystack = $inArrayValidator->getHaystack();
+        $haystack=$inArrayValidator->getHaystack();
         $this->assertCount(count($options), $haystack);
     }
 
@@ -125,9 +125,9 @@ class MultiCheckboxTest extends TestCase
     {
         $element = new MultiCheckboxElement();
         $element->setOptions(array(
-            'value_options' => array('bar' => 'baz'),
-            'options' => array('foo' => 'bar'),
-        ));
+                                  'value_options' => array('bar' => 'baz'),
+                                  'options' => array('foo' => 'bar'),
+                             ));
         $this->assertEquals(array('bar' => 'baz'), $element->getOption('value_options'));
         $this->assertEquals(array('foo' => 'bar'), $element->getOption('options'));
     }

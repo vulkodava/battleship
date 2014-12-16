@@ -86,8 +86,7 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function setAllowEmpty($allowEmpty)
     {
-        $this->allowEmpty = (bool)$allowEmpty;
-
+        $this->allowEmpty = (bool) $allowEmpty;
         return $this;
     }
 
@@ -97,8 +96,7 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function setBreakOnFailure($breakOnFailure)
     {
-        $this->breakOnFailure = (bool)$breakOnFailure;
-
+        $this->breakOnFailure = (bool) $breakOnFailure;
         return $this;
     }
 
@@ -108,8 +106,7 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function setContinueIfEmpty($continueIfEmpty)
     {
-        $this->continueIfEmpty = (bool)$continueIfEmpty;
-
+        $this->continueIfEmpty = (bool) $continueIfEmpty;
         return $this;
     }
 
@@ -119,8 +116,7 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function setErrorMessage($errorMessage)
     {
-        $this->errorMessage = (null === $errorMessage) ? null : (string)$errorMessage;
-
+        $this->errorMessage = (null === $errorMessage) ? null : (string) $errorMessage;
         return $this;
     }
 
@@ -131,7 +127,6 @@ class Input implements InputInterface, EmptyContextInterface
     public function setFilterChain(FilterChain $filterChain)
     {
         $this->filterChain = $filterChain;
-
         return $this;
     }
 
@@ -141,8 +136,7 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function setName($name)
     {
-        $this->name = (string)$name;
-
+        $this->name = (string) $name;
         return $this;
     }
 
@@ -152,9 +146,8 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function setRequired($required)
     {
-        $this->required = (bool)$required;
+        $this->required = (bool) $required;
         $this->setAllowEmpty(!$required);
-
         return $this;
     }
 
@@ -165,7 +158,6 @@ class Input implements InputInterface, EmptyContextInterface
     public function setValidatorChain(ValidatorChain $validatorChain)
     {
         $this->validatorChain = $validatorChain;
-
         return $this;
     }
 
@@ -176,7 +168,6 @@ class Input implements InputInterface, EmptyContextInterface
     public function setValue($value)
     {
         $this->value = $value;
-
         return $this;
     }
 
@@ -188,7 +179,6 @@ class Input implements InputInterface, EmptyContextInterface
     {
         $this->fallbackValue = $value;
         $this->hasFallback = true;
-
         return $this;
     }
 
@@ -232,7 +222,6 @@ class Input implements InputInterface, EmptyContextInterface
         if (!$this->filterChain) {
             $this->setFilterChain(new FilterChain());
         }
-
         return $this->filterChain;
     }
 
@@ -268,7 +257,6 @@ class Input implements InputInterface, EmptyContextInterface
         if (!$this->validatorChain) {
             $this->setValidatorChain(new ValidatorChain());
         }
-
         return $this->validatorChain;
     }
 
@@ -278,7 +266,6 @@ class Input implements InputInterface, EmptyContextInterface
     public function getValue()
     {
         $filter = $this->getFilterChain();
-
         return $filter->filter($this->value);
     }
 
@@ -323,7 +310,6 @@ class Input implements InputInterface, EmptyContextInterface
 
         $validatorChain = $input->getValidatorChain();
         $this->getValidatorChain()->merge($validatorChain);
-
         return $this;
     }
 
@@ -340,8 +326,8 @@ class Input implements InputInterface, EmptyContextInterface
             $this->injectNotEmptyValidator();
         }
         $validator = $this->getValidatorChain();
-        $value = $this->getValue();
-        $result = $validator->isValid($value, $context);
+        $value     = $this->getValue();
+        $result    = $validator->isValid($value, $context);
         if (!$result && $this->hasFallback()) {
             $this->setValue($this->getFallbackValue());
             $result = true;
@@ -356,7 +342,7 @@ class Input implements InputInterface, EmptyContextInterface
     public function getMessages()
     {
         if (null !== $this->errorMessage) {
-            return (array)$this->errorMessage;
+            return (array) $this->errorMessage;
         }
 
         if ($this->hasFallback()) {
@@ -364,7 +350,6 @@ class Input implements InputInterface, EmptyContextInterface
         }
 
         $validator = $this->getValidatorChain();
-
         return $validator->getMessages();
     }
 
@@ -383,7 +368,6 @@ class Input implements InputInterface, EmptyContextInterface
         foreach ($validators as $validator) {
             if ($validator['instance'] instanceof NotEmpty) {
                 $this->notEmptyValidator = true;
-
                 return;
             }
         }

@@ -66,8 +66,8 @@ abstract class AbstractEntry
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
-        $this->entry = $entry;
-        $this->entryKey = $entryKey;
+        $this->entry       = $entry;
+        $this->entryKey    = $entryKey;
         $this->domDocument = $entry->ownerDocument;
         if ($type !== null) {
             $this->data['type'] = $type;
@@ -108,7 +108,6 @@ abstract class AbstractEntry
         if (empty($assumed)) {
             $assumed = 'UTF-8';
         }
-
         return $assumed;
     }
 
@@ -122,7 +121,6 @@ abstract class AbstractEntry
         $dom = new DOMDocument('1.0', $this->getEncoding());
         $entry = $dom->importNode($this->getElement(), true);
         $dom->appendChild($entry);
-
         return $dom->saveXml();
     }
 
@@ -146,7 +144,6 @@ abstract class AbstractEntry
         if (!$this->xpath) {
             $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
-
         return $this->xpath;
     }
 
@@ -159,7 +156,6 @@ abstract class AbstractEntry
     public function setXpath(DOMXPath $xpath)
     {
         $this->xpath = $xpath;
-
         return $this;
     }
 
@@ -184,7 +180,6 @@ abstract class AbstractEntry
         if (array_key_exists($name . '\Entry', $this->extensions)) {
             return $this->extensions[$name . '\Entry'];
         }
-
         return null;
     }
 

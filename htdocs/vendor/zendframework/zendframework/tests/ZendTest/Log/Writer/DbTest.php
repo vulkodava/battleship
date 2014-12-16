@@ -23,7 +23,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     {
         $this->tableName = 'db-table-name';
 
-        $this->db = new MockDbAdapter();
+        $this->db     = new MockDbAdapter();
         $this->writer = new DbWriter($this->db, $this->tableName);
     }
 
@@ -42,7 +42,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testPassingTableNameAsArgIsOK()
     {
         $options = array(
-            'db' => $this->db,
+            'db'    => $this->db,
             'table' => $this->tableName,
         );
         $writer = new DbWriter($options);
@@ -54,7 +54,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     {
         // log to the mock db adapter
         $fields = array(
-            'message' => 'foo',
+            'message'  => 'foo',
             'priority' => 42
         );
 
@@ -71,16 +71,16 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteWithDefaultsUsingArray()
     {
         // log to the mock db adapter
-        $message = 'message-to-log';
+        $message  = 'message-to-log';
         $priority = 2;
         $events = array(
             'file' => 'test',
             'line' => 1
         );
         $this->writer->write(array(
-            'message' => $message,
+            'message'  => $message,
             'priority' => $priority,
-            'events' => $events
+            'events'   => $events
         ));
         $this->assertContains('query', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['query']));
@@ -99,16 +99,16 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->writer = new DbWriter($this->db, $this->tableName, null, '-');
 
         // log to the mock db adapter
-        $message = 'message-to-log';
+        $message  = 'message-to-log';
         $priority = 2;
         $events = array(
             'file' => 'test',
             'line' => 1
         );
         $this->writer->write(array(
-            'message' => $message,
+            'message'  => $message,
             'priority' => $priority,
-            'events' => $events
+            'events'   => $events
         ));
         $this->assertContains('query', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['query']));
@@ -125,12 +125,12 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteUsesOptionalCustomColumnNames()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
-            'message' => 'new-message-field',
+            'message' => 'new-message-field' ,
             'priority' => 'new-priority-field'
         ));
 
         // log to the mock db adapter
-        $message = 'message-to-log';
+        $message  = 'message-to-log';
         $priority = 2;
         $this->writer->write(array(
             'message' => $message,
@@ -152,7 +152,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteUsesParamsWithArray()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
-            'message' => 'new-message-field',
+            'message' => 'new-message-field' ,
             'priority' => 'new-priority-field',
             'events' => array(
                 'line' => 'new-line',
@@ -161,16 +161,16 @@ class DbTest extends \PHPUnit_Framework_TestCase
         ));
 
         // log to the mock db adapter
-        $message = 'message-to-log';
+        $message  = 'message-to-log';
         $priority = 2;
         $events = array(
             'file' => 'test',
             'line' => 1
         );
         $this->writer->write(array(
-            'message' => $message,
+            'message'  => $message,
             'priority' => $priority,
-            'events' => $events
+            'events'   => $events
         ));
         $this->assertContains('query', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['query']));
@@ -196,7 +196,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteDateTimeAsTimestamp()
     {
         $date = new DateTime();
-        $event = array('timestamp' => $date);
+        $event = array('timestamp'=> $date);
         $this->writer->write($event);
 
         $this->assertContains('query', array_keys($this->db->calls));
@@ -211,7 +211,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     {
         $date = new DateTime();
         $event = array(
-            'extra' => array(
+            'extra'=> array(
                 'request_time' => $date
             )
         );
@@ -228,12 +228,12 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testConstructWithOptions()
     {
         $formatter = new \Zend\Log\Formatter\Simple();
-        $filter = new \Zend\Log\Filter\Mock();
+        $filter    = new \Zend\Log\Filter\Mock();
         $writer = new DbWriter(array(
-            'filters' => $filter,
+            'filters'   => $filter,
             'formatter' => $formatter,
-            'table' => $this->tableName,
-            'db' => $this->db,
+            'table'     => $this->tableName,
+            'db'        => $this->db,
 
         ));
         $this->assertInstanceOf('Zend\Log\Writer\Db', $writer);

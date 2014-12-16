@@ -45,13 +45,12 @@ class SocketTest extends CommonHttpTests
 
     /**
      * Test that we can set a valid configuration array with some options
-     *
      * @group ZHC001
      */
     public function testConfigSetAsArray()
     {
         $config = array(
-            'timeout' => 500,
+            'timeout'    => 500,
             'someoption' => 'hasvalue'
         );
 
@@ -66,8 +65,8 @@ class SocketTest extends CommonHttpTests
     public function testDefaultConfig()
     {
         $config = $this->_adapter->getConfig();
-        $this->assertEquals(true, $config['sslverifypeer']);
-        $this->assertEquals(false, $config['sslallowselfsigned']);
+        $this->assertEquals(TRUE, $config['sslverifypeer']);
+        $this->assertEquals(FALSE, $config['sslallowselfsigned']);
     }
 
     public function testConnectingViaSslEnforcesDefaultSslOptionsOnContext()
@@ -95,8 +94,8 @@ class SocketTest extends CommonHttpTests
     public function testConnectingViaSslUsesCertificateFileContext()
     {
         $config = array(
-            'timeout' => 30,
-            'sslcafile' => __DIR__ . '/_files/ca-bundle.crt',
+          'timeout' => 30,
+          'sslcafile' => __DIR__ . '/_files/ca-bundle.crt',
         );
         $this->_adapter->setOptions($config);
         try {
@@ -118,8 +117,8 @@ class SocketTest extends CommonHttpTests
     public function testConfigSetAsZendConfig()
     {
         $config = new \Zend\Config\Config(array(
-            'timeout' => 400,
-            'nested' => array(
+            'timeout'  => 400,
+            'nested'   => array(
                 'item' => 'value',
             )
         ));
@@ -178,8 +177,8 @@ class SocketTest extends CommonHttpTests
                 'bindto' => '1.2.3.4:0'
             ),
             'ssl' => array(
-                'capath' => null,
-                'verify_peer' => true,
+                'capath'            => null,
+                'verify_peer'       => true,
                 'allow_self_signed' => false
             )
         );

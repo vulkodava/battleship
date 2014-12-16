@@ -21,11 +21,11 @@ class BacktraceTest extends \PHPUnit_Framework_TestCase
         $processor = new Backtrace();
 
         $event = array(
-            'timestamp' => '',
-            'priority' => 1,
-            'priorityName' => 'ALERT',
-            'message' => 'foo',
-            'extra' => array()
+                'timestamp'    => '',
+                'priority'     => 1,
+                'priorityName' => 'ALERT',
+                'message'      => 'foo',
+                'extra'        => array()
         );
 
         $event = $processor->process($event);

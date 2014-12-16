@@ -29,8 +29,7 @@ class JsonOptions extends AdapterOptions
      */
     public function setCycleCheck($flag)
     {
-        $this->cycleCheck = (bool)$flag;
-
+        $this->cycleCheck = (bool) $flag;
         return $this;
     }
 
@@ -48,8 +47,7 @@ class JsonOptions extends AdapterOptions
      */
     public function setEnableJsonExprFinder($flag)
     {
-        $this->enableJsonExprFinder = (bool)$flag;
-
+        $this->enableJsonExprFinder = (bool) $flag;
         return $this;
     }
 
@@ -74,7 +72,7 @@ class JsonOptions extends AdapterOptions
             );
         }
 
-        $this->objectDecodeType = (int)$type;
+        $this->objectDecodeType = (int) $type;
 
         return $this;
     }

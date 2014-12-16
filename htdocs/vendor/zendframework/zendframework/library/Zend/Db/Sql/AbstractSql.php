@@ -108,7 +108,6 @@ abstract class AbstractSql
         }
 
         $statementContainer->setSql($sql);
-
         return $statementContainer;
     }
 
@@ -160,7 +159,6 @@ abstract class AbstractSql
                 $topParameters[] = $paramsForPosition;
             }
         }
-
         return vsprintf($specificationString, $topParameters);
     }
 
@@ -198,7 +196,6 @@ abstract class AbstractSql
                 $sql = $subselect->getSqlString($platform);
             }
         }
-
         return $sql;
     }
 }

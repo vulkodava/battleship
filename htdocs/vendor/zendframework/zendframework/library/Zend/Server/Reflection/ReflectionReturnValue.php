@@ -18,14 +18,12 @@ class ReflectionReturnValue
 {
     /**
      * Return value type
-     *
      * @var string
      */
     protected $type;
 
     /**
      * Return value description
-     *
      * @var string
      */
     protected $description;
@@ -33,7 +31,7 @@ class ReflectionReturnValue
     /**
      * Constructor
      *
-     * @param string $type        Return value type
+     * @param string $type Return value type
      * @param string $description Return value type
      */
     public function __construct($type = 'mixed', $description = '')

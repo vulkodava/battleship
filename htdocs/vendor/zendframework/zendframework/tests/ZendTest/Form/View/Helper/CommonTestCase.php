@@ -35,7 +35,7 @@ abstract class CommonTestCase extends TestCase
 
         $this->renderer = new PhpRenderer;
         $helpers = $this->renderer->getHelperPluginManager();
-        $config = new HelperConfig();
+        $config  = new HelperConfig();
         $config->configureServiceManager($helpers);
 
         $this->helper->setView($this->renderer);

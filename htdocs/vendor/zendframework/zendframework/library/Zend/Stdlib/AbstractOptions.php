@@ -75,7 +75,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
         $array = array();
         $transform = function ($letters) {
             $letter = array_shift($letters);
-
             return '_' . strtolower($letter);
         };
         foreach ($this as $key => $value) {
@@ -85,7 +84,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
             $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
             $array[$normalizedKey] = $value;
         }
-
         return $array;
     }
 
@@ -142,7 +140,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
 
     /**
      * Test if a configuration property is null
-     *
      * @see ParameterObject::__isset()
      * @param string $key
      * @return bool

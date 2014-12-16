@@ -54,7 +54,7 @@ class Inflector extends AbstractFilter
         }
         if (!is_array($options)) {
             $options = func_get_args();
-            $temp = array();
+            $temp    = array();
 
             if (!empty($options)) {
                 $temp['target'] = array_shift($options);
@@ -101,7 +101,6 @@ class Inflector extends AbstractFilter
     public function setPluginManager(FilterPluginManager $manager)
     {
         $this->pluginManager = $manager;
-
         return $this;
     }
 
@@ -154,7 +153,6 @@ class Inflector extends AbstractFilter
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
     {
         $this->throwTargetExceptionsOn = ($throwTargetExceptionsOn == true) ? true : false;
-
         return $this;
     }
 
@@ -177,7 +175,7 @@ class Inflector extends AbstractFilter
     public function setTargetReplacementIdentifier($targetReplacementIdentifier)
     {
         if ($targetReplacementIdentifier) {
-            $this->targetReplacementIdentifier = (string)$targetReplacementIdentifier;
+            $this->targetReplacementIdentifier = (string) $targetReplacementIdentifier;
         }
 
         return $this;
@@ -202,8 +200,7 @@ class Inflector extends AbstractFilter
      */
     public function setTarget($target)
     {
-        $this->target = (string)$target;
-
+        $this->target = (string) $target;
         return $this;
     }
 
@@ -226,7 +223,6 @@ class Inflector extends AbstractFilter
     public function setTargetReference(&$target)
     {
         $this->target =& $target;
-
         return $this;
     }
 
@@ -241,7 +237,6 @@ class Inflector extends AbstractFilter
     {
         $this->clearRules();
         $this->addRules($rules);
-
         return $this;
     }
 
@@ -291,7 +286,6 @@ class Inflector extends AbstractFilter
             if (isset($this->rules[$spec])) {
                 return $this->rules[$spec];
             }
-
             return false;
         }
 
@@ -313,7 +307,6 @@ class Inflector extends AbstractFilter
                 return $this->rules[$spec][$index];
             }
         }
-
         return false;
     }
 
@@ -325,7 +318,6 @@ class Inflector extends AbstractFilter
     public function clearRules()
     {
         $this->rules = array();
-
         return $this;
     }
 
@@ -341,7 +333,6 @@ class Inflector extends AbstractFilter
     {
         $spec = $this->_normalizeSpec($spec);
         $this->rules[$spec] = array();
-
         return $this->addFilterRule($spec, $ruleSet);
     }
 
@@ -386,8 +377,7 @@ class Inflector extends AbstractFilter
     public function setStaticRule($name, $value)
     {
         $name = $this->_normalizeSpec($name);
-        $this->rules[$name] = (string)$value;
-
+        $this->rules[$name] = (string) $value;
         return $this;
     }
 
@@ -406,7 +396,6 @@ class Inflector extends AbstractFilter
     {
         $name = $this->_normalizeSpec($name);
         $this->rules[$name] =& $reference;
-
         return $this;
     }
 
@@ -420,7 +409,7 @@ class Inflector extends AbstractFilter
     public function filter($source)
     {
         // clean source
-        foreach ((array)$source as $sourceName => $sourceValue) {
+        foreach ((array) $source as $sourceName => $sourceValue) {
             $source[ltrim($sourceName, ':')] = $sourceValue;
         }
 
@@ -447,7 +436,7 @@ class Inflector extends AbstractFilter
         // all of the values of processedParts would have been str_replace('\\', '\\\\', ..)'d to disable preg_replace backreferences
         $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->target);
 
-        if ($this->throwTargetExceptionsOn && (preg_match('#(?=' . $pregQuotedTargetReplacementIdentifier . '[A-Za-z]{1})#', $inflectedTarget) == true)) {
+        if ($this->throwTargetExceptionsOn && (preg_match('#(?=' . $pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
             throw new Exception\RuntimeException('A replacement identifier ' . $this->targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
         }
 
@@ -462,7 +451,7 @@ class Inflector extends AbstractFilter
      */
     protected function _normalizeSpec($spec)
     {
-        return ltrim((string)$spec, ':&');
+        return ltrim((string) $spec, ':&');
     }
 
     /**
@@ -477,8 +466,7 @@ class Inflector extends AbstractFilter
             return $rule;
         }
 
-        $rule = (string)$rule;
-
+        $rule = (string) $rule;
         return $this->getPluginManager()->get($rule);
     }
 }

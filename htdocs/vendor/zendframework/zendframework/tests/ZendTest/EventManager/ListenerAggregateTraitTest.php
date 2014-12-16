@@ -21,11 +21,11 @@ class ListenerAggregateTraitTest extends \PHPUnit_Framework_TestCase
      */
     public function testDetach()
     {
-        $listener = new MockListenerAggregateTrait();
-        $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
+        $listener              = new MockListenerAggregateTrait();
+        $eventManager          = $this->getMock('Zend\\EventManager\\EventManagerInterface');
         $unrelatedEventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
-        $callbackHandlers = array();
-        $test = $this;
+        $callbackHandlers      = array();
+        $test                  = $this;
 
         $eventManager
             ->expects($this->exactly(2))

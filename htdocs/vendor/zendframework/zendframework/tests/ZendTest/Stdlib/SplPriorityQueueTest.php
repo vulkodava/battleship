@@ -34,7 +34,7 @@ class SplPriorityQueueTest extends \PHPUnit_Framework_TestCase
         $queue->insert('bat', 1000);
 
         $expected = array('foo', 'bar', 'baz', 'bat');
-        $test = array();
+        $test     = array();
         foreach ($queue as $datum) {
             $test[] = $datum;
         }
@@ -67,7 +67,7 @@ class SplPriorityQueueTest extends \PHPUnit_Framework_TestCase
             'baz',
             'bat',
         );
-        $test = $this->queue->toArray();
+        $test     = $this->queue->toArray();
         $this->assertSame($expected, $test, var_export($test, 1));
     }
 }

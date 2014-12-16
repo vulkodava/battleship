@@ -71,7 +71,6 @@ class MessageId implements HeaderInterface
 
         $id = sprintf('<%s>', $id);
         $this->messageId = $id;
-
         return $this;
     }
 

@@ -49,8 +49,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      */
     public function setSourceDirty($isSourceDirty = true)
     {
-        $this->isSourceDirty = (bool)$isSourceDirty;
-
+        $this->isSourceDirty = (bool) $isSourceDirty;
         return $this;
     }
 
@@ -68,8 +67,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      */
     public function setIndentation($indentation)
     {
-        $this->indentation = (string)$indentation;
-
+        $this->indentation = (string) $indentation;
         return $this;
     }
 
@@ -87,8 +85,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      */
     public function setSourceContent($sourceContent)
     {
-        $this->sourceContent = (string)$sourceContent;
-
+        $this->sourceContent = (string) $sourceContent;
         return $this;
     }
 

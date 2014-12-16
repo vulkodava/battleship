@@ -143,7 +143,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_storage->addPlugin($plugin);
 
         $params = new \ArrayObject(array(
-            'key' => 'key1',
+            'key'   => 'key1',
             'value' => 'value1'
         ));
 
@@ -172,7 +172,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->_storage->addPlugin($plugin);
 
         $params = new \ArrayObject(array(
-            'key' => 'key1',
+            'key'   => 'key1',
             'value' => 'value1'
         ));
         $result = true;
@@ -206,7 +206,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         $result = null;
         $params = new \ArrayObject(array(
-            'key' => 'key1',
+            'key'   => 'key1',
             'value' => 'value1'
         ));
 
@@ -222,7 +222,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
 
-        $key = 'key1';
+        $key    = 'key1';
         $result = 'value1';
 
         $this->_storage
@@ -239,7 +239,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItems'));
 
-        $keys = array('key1', 'key2');
+        $keys   = array('key1', 'key2');
         $result = array('key2' => 'value2');
 
         $this->_storage
@@ -261,7 +261,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
 
-        $items = array('key1' => 'value1', 'notFound' => false, 'key2' => 'value2');
+        $items  = array('key1' => 'value1', 'notFound' => false, 'key2' => 'value2');
         $result = array('key1' => 'value1', 'key2' => 'value2');
 
         $i = 0; // method call counter
@@ -276,11 +276,9 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnCallback(function ($k, & $success, & $casToken) use ($items) {
                     if ($items[$k]) {
                         $success = true;
-
                         return $items[$k];
                     } else {
                         $success = false;
-
                         return null;
                     }
                 }));
@@ -294,7 +292,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_storage = $this->getMockForAbstractAdapter(array('internalHasItem'));
 
-        $key = 'key1';
+        $key    = 'key1';
         $result = true;
 
         $this->_storage
@@ -311,7 +309,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_storage = $this->getMockForAbstractAdapter(array('internalHasItems'));
 
-        $keys = array('key1', 'key2');
+        $keys   = array('key1', 'key2');
         $result = array('key2');
 
         $this->_storage
@@ -328,7 +326,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_storage = $this->getMockForAbstractAdapter(array('internalHasItem'));
 
-        $items = array('key1' => true);
+        $items  = array('key1' => true);
 
         $this->_storage
             ->expects($this->atLeastOnce())
@@ -344,7 +342,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_storage = $this->getMockForAbstractAdapter(array('internalGetMetadata'));
 
-        $key = 'key1';
+        $key    = 'key1';
         $result = array();
 
         $this->_storage
@@ -357,192 +355,192 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($result, $rs);
     }
 
-    /*
-        public function testGetMetadatas()
-        {
-            $options    = array('ttl' => 123);
-            $items      = array(
-                'key1'  => array('meta1' => 1),
-                'dKey1' => false,
-                'key2'  => array('meta2' => 2),
-            );
+/*
+    public function testGetMetadatas()
+    {
+        $options    = array('ttl' => 123);
+        $items      = array(
+            'key1'  => array('meta1' => 1),
+            'dKey1' => false,
+            'key2'  => array('meta2' => 2),
+        );
 
-            $i = 0;
-            foreach ($items as $k => $v) {
-                $this->storage->expects($this->at($i++))
-                    ->method('getMetadata')
-                    ->with($this->equalTo($k), $this->equalTo($options))
-                    ->will($this->returnValue($v));
+        $i = 0;
+        foreach ($items as $k => $v) {
+            $this->storage->expects($this->at($i++))
+                ->method('getMetadata')
+                ->with($this->equalTo($k), $this->equalTo($options))
+                ->will($this->returnValue($v));
+        }
+
+        $rs = $this->storage->getMetadatas(array_keys($items), $options);
+
+        // remove missing items from array to test
+        $expected = $items;
+        foreach ($expected as $key => $value) {
+            if (false === $value) {
+                unset($expected[$key]);
             }
-
-            $rs = $this->storage->getMetadatas(array_keys($items), $options);
-
-            // remove missing items from array to test
-            $expected = $items;
-            foreach ($expected as $key => $value) {
-                if (false === $value) {
-                    unset($expected[$key]);
-                }
-            }
-
-            $this->assertEquals($expected, $rs);
         }
 
-        public function testSetItems()
-        {
-            $options = array('ttl' => 123);
-            $items   = array(
-                'key1' => 'value1',
-                'key2' => 'value2'
-            );
+        $this->assertEquals($expected, $rs);
+    }
 
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('setItem')
-                ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
-                ->will($this->returnValue(true));
+    public function testSetItems()
+    {
+        $options = array('ttl' => 123);
+        $items   = array(
+            'key1' => 'value1',
+            'key2' => 'value2'
+        );
 
-            $this->assertTrue($this->storage->setItems($items, $options));
-        }
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('setItem')
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
+            ->will($this->returnValue(true));
 
-        public function testSetItemsFail()
-        {
-            $options = array('ttl' => 123);
-            $items   = array(
-                'key1' => 'value1',
-                'key2' => 'value2',
-                'key3' => 'value3',
-            );
+        $this->assertTrue($this->storage->setItems($items, $options));
+    }
 
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('setItem')
-                ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
-                ->will($this->returnValue(false));
+    public function testSetItemsFail()
+    {
+        $options = array('ttl' => 123);
+        $items   = array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => 'value3',
+        );
 
-            $this->assertFalse($this->storage->setItems($items, $options));
-        }
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('setItem')
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
+            ->will($this->returnValue(false));
 
-        public function testAddItems()
-        {
-            $options = array('ttl' => 123);
-            $items   = array(
-                'key1' => 'value1',
-                'key2' => 'value2'
-            );
+        $this->assertFalse($this->storage->setItems($items, $options));
+    }
 
-            // add -> has -> get -> set
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('getItem')
-                ->with($this->stringContains('key'), $this->equalTo($options))
-                ->will($this->returnValue(false));
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('setItem')
-                ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
-                ->will($this->returnValue(true));
+    public function testAddItems()
+    {
+        $options = array('ttl' => 123);
+        $items   = array(
+            'key1' => 'value1',
+            'key2' => 'value2'
+        );
 
-            $this->assertTrue($this->storage->addItems($items, $options));
-        }
+        // add -> has -> get -> set
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('getItem')
+            ->with($this->stringContains('key'), $this->equalTo($options))
+            ->will($this->returnValue(false));
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('setItem')
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
+            ->will($this->returnValue(true));
 
-        public function testAddItemsFail()
-        {
-            $options = array('ttl' => 123);
-            $items   = array(
-                'key1' => 'value1',
-                'key2' => 'value2',
-                'key3' => 'value3',
-            );
+        $this->assertTrue($this->storage->addItems($items, $options));
+    }
 
-            // add -> has -> get -> set
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('getItem')
-                ->with($this->stringContains('key'), $this->equalTo($options))
-                ->will($this->returnValue(false));
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('setItem')
-                ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
-                ->will($this->returnValue(false));
+    public function testAddItemsFail()
+    {
+        $options = array('ttl' => 123);
+        $items   = array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => 'value3',
+        );
 
-            $this->assertFalse($this->storage->addItems($items, $options));
-        }
+        // add -> has -> get -> set
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('getItem')
+            ->with($this->stringContains('key'), $this->equalTo($options))
+            ->will($this->returnValue(false));
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('setItem')
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
+            ->will($this->returnValue(false));
 
-        public function testReplaceItems()
-        {
-            $options = array('ttl' => 123);
-            $items   = array(
-                'key1' => 'value1',
-                'key2' => 'value2'
-            );
+        $this->assertFalse($this->storage->addItems($items, $options));
+    }
 
-            // replace -> has -> get -> set
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('getItem')
-                ->with($this->stringContains('key'), $this->equalTo($options))
-                ->will($this->returnValue(true));
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('setItem')
-                ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
-                ->will($this->returnValue(true));
+    public function testReplaceItems()
+    {
+        $options = array('ttl' => 123);
+        $items   = array(
+            'key1' => 'value1',
+            'key2' => 'value2'
+        );
 
-            $this->assertTrue($this->storage->replaceItems($items, $options));
-        }
+        // replace -> has -> get -> set
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('getItem')
+            ->with($this->stringContains('key'), $this->equalTo($options))
+            ->will($this->returnValue(true));
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('setItem')
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
+            ->will($this->returnValue(true));
 
-        public function testReplaceItemsFail()
-        {
-            $options = array('ttl' => 123);
-            $items   = array(
-                'key1' => 'value1',
-                'key2' => 'value2',
-                'key3' => 'value3',
-            );
+        $this->assertTrue($this->storage->replaceItems($items, $options));
+    }
 
-            // replace -> has -> get -> set
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('getItem')
-                ->with($this->stringContains('key'), $this->equalTo($options))
-                ->will($this->returnValue(true));
-            $this->storage->expects($this->exactly(count($items)))
-                ->method('setItem')
-                ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
-                ->will($this->returnValue(false));
+    public function testReplaceItemsFail()
+    {
+        $options = array('ttl' => 123);
+        $items   = array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+            'key3' => 'value3',
+        );
 
-            $this->assertFalse($this->storage->replaceItems($items, $options));
-        }
+        // replace -> has -> get -> set
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('getItem')
+            ->with($this->stringContains('key'), $this->equalTo($options))
+            ->will($this->returnValue(true));
+        $this->storage->expects($this->exactly(count($items)))
+            ->method('setItem')
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
+            ->will($this->returnValue(false));
 
-        public function testRemoveItems()
-        {
-            $options = array('ttl' => 123);
-            $keys    = array('key1', 'key2');
+        $this->assertFalse($this->storage->replaceItems($items, $options));
+    }
 
-            foreach ($keys as $i => $key) {
-                $this->storage->expects($this->at($i))
-                               ->method('removeItem')
-                               ->with($this->equalTo($key), $this->equalTo($options))
-                               ->will($this->returnValue(true));
-            }
+    public function testRemoveItems()
+    {
+        $options = array('ttl' => 123);
+        $keys    = array('key1', 'key2');
 
-            $this->assertTrue($this->storage->removeItems($keys, $options));
-        }
-
-        public function testRemoveItemsFail()
-        {
-            $options = array('ttl' => 123);
-            $items   = array('key1', 'key2', 'key3');
-
-            $this->storage->expects($this->at(0))
+        foreach ($keys as $i => $key) {
+            $this->storage->expects($this->at($i))
                            ->method('removeItem')
-                           ->with($this->equalTo('key1'), $this->equalTo($options))
+                           ->with($this->equalTo($key), $this->equalTo($options))
                            ->will($this->returnValue(true));
-            $this->storage->expects($this->at(1))
-                           ->method('removeItem')
-                           ->with($this->equalTo('key2'), $this->equalTo($options))
-                           ->will($this->returnValue(false)); // -> fail
-            $this->storage->expects($this->at(2))
-                           ->method('removeItem')
-                           ->with($this->equalTo('key3'), $this->equalTo($options))
-                           ->will($this->returnValue(true));
-
-            $this->assertFalse($this->storage->removeItems($items, $options));
         }
-    */
+
+        $this->assertTrue($this->storage->removeItems($keys, $options));
+    }
+
+    public function testRemoveItemsFail()
+    {
+        $options = array('ttl' => 123);
+        $items   = array('key1', 'key2', 'key3');
+
+        $this->storage->expects($this->at(0))
+                       ->method('removeItem')
+                       ->with($this->equalTo('key1'), $this->equalTo($options))
+                       ->will($this->returnValue(true));
+        $this->storage->expects($this->at(1))
+                       ->method('removeItem')
+                       ->with($this->equalTo('key2'), $this->equalTo($options))
+                       ->will($this->returnValue(false)); // -> fail
+        $this->storage->expects($this->at(2))
+                       ->method('removeItem')
+                       ->with($this->equalTo('key3'), $this->equalTo($options))
+                       ->will($this->returnValue(true));
+
+        $this->assertFalse($this->storage->removeItems($items, $options));
+    }
+*/
     // TODO: incrementItem[s] + decrementItem[s]
     // TODO: touchItem[s]
 
@@ -589,10 +587,10 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // setItem(s)
         $this->checkPreEventCanChangeArguments('setItem', array(
-            'key' => 'key',
+            'key'   => 'key',
             'value' => 'value',
         ), array(
-            'key' => 'changedKey',
+            'key'   => 'changedKey',
             'value' => 'changedValue',
         ));
 
@@ -604,10 +602,10 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // addItem(s)
         $this->checkPreEventCanChangeArguments('addItem', array(
-            'key' => 'key',
+            'key'   => 'key',
             'value' => 'value',
         ), array(
-            'key' => 'changedKey',
+            'key'   => 'changedKey',
             'value' => 'changedValue',
         ));
 
@@ -619,10 +617,10 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // replaceItem(s)
         $this->checkPreEventCanChangeArguments('replaceItem', array(
-            'key' => 'key',
+            'key'   => 'key',
             'value' => 'value',
         ), array(
-            'key' => 'changedKey',
+            'key'   => 'changedKey',
             'value' => 'changedValue',
         ));
 
@@ -635,11 +633,11 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         // CAS
         $this->checkPreEventCanChangeArguments('checkAndSetItem', array(
             'token' => 'token',
-            'key' => 'key',
+            'key'   => 'key',
             'value' => 'value',
         ), array(
             'token' => 'changedToken',
-            'key' => 'changedKey',
+            'key'   => 'changedKey',
             'value' => 'changedValue',
         ));
 
@@ -671,10 +669,10 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // incrementItem(s)
         $this->checkPreEventCanChangeArguments('incrementItem', array(
-            'key' => 'key',
+            'key'   => 'key',
             'value' => 1
         ), array(
-            'key' => 'changedKey',
+            'key'   => 'changedKey',
             'value' => 2,
         ));
 
@@ -686,10 +684,10 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // decrementItem(s)
         $this->checkPreEventCanChangeArguments('decrementItem', array(
-            'key' => 'key',
+            'key'   => 'key',
             'value' => 1
         ), array(
-            'key' => 'changedKey',
+            'key'   => 'changedKey',
             'value' => 2,
         ));
 
@@ -703,7 +701,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     protected function checkPreEventCanChangeArguments($method, array $args, array $expectedArgs)
     {
         $internalMethod = 'internal' . ucfirst($method);
-        $eventName = $method . '.pre';
+        $eventName      = $method . '.pre';
 
         // init mock
         $this->_storage = $this->getMockForAbstractAdapter(array($internalMethod));
@@ -750,7 +748,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         }
 
         $adapter->setOptions($this->_options);
-
         return $adapter;
     }
 }

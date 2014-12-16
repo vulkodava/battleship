@@ -145,13 +145,13 @@ class MailtoTest extends TestCase
     {
         $uri = new MailtoUri($uri);
         $parts = array(
-            'scheme' => $uri->getScheme(),
+            'scheme'    => $uri->getScheme(),
             'user_info' => $uri->getUserInfo(),
-            'host' => $uri->getHost(),
-            'port' => $uri->getPort(),
-            'path' => $uri->getPath(),
-            'query' => $uri->getQueryAsArray(),
-            'fragment' => $uri->getFragment(),
+            'host'      => $uri->getHost(),
+            'port'      => $uri->getPort(),
+            'path'      => $uri->getPath(),
+            'query'     => $uri->getQueryAsArray(),
+            'fragment'  => $uri->getFragment(),
         );
         $this->assertFalse($uri->isValid(), var_export($parts, 1));
     }

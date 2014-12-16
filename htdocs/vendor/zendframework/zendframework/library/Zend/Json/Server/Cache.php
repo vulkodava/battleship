@@ -79,7 +79,6 @@ class Cache extends ServerCache
     {
         if (is_string($filename) && file_exists($filename)) {
             unlink($filename);
-
             return true;
         }
 

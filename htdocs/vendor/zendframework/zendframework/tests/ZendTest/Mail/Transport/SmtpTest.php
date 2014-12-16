@@ -27,7 +27,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->transport = new Smtp();
+        $this->transport  = new Smtp();
         $this->connection = new SmtpProtocolSpy();
         $this->transport->setConnection($this->connection);
     }
@@ -36,19 +36,18 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message();
         $message->addTo('zf-devteam@zend.com', 'ZF DevTeam')
-            ->addCc('matthew@zend.com')
-            ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
-            ->addFrom(array(
-                'zf-devteam@zend.com',
-                'matthew@zend.com' => 'Matthew',
-            ))
-            ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
-            ->setSubject('Testing Zend\Mail\Transport\Sendmail')
-            ->setBody('This is only a test.');
+                ->addCc('matthew@zend.com')
+                ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
+                ->addFrom(array(
+                    'zf-devteam@zend.com',
+                    'matthew@zend.com' => 'Matthew',
+                ))
+                ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
+                ->setSubject('Testing Zend\Mail\Transport\Sendmail')
+                ->setBody('This is only a test.');
         $message->getHeaders()->addHeaders(array(
             'X-Foo-Bar' => 'Matthew',
         ));
-
         return $message;
     }
 
@@ -89,12 +88,13 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
             ->setHeaders($headers)
             ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
             ->setBody('testSendMailWithoutMinimalHeaders')
-            ->addTo('zf-devteam@zend.com', 'ZF DevTeam');
+            ->addTo('zf-devteam@zend.com', 'ZF DevTeam')
+        ;
         $expectedMessage = "Date: Sun, 10 Jun 2012 20:07:24 +0200\r\n"
-            . "Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
-            . "To: ZF DevTeam <zf-devteam@zend.com>\r\n"
-            . "\r\n"
-            . "testSendMailWithoutMinimalHeaders";
+                           . "Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
+                           . "To: ZF DevTeam <zf-devteam@zend.com>\r\n"
+                           . "\r\n"
+                           . "testSendMailWithoutMinimalHeaders";
 
         $this->transport->send($message);
 
@@ -124,14 +124,14 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
 
     public function testCanUseAuthenticationExtensionsViaPluginManager()
     {
-        $options = new SmtpOptions(array(
+        $options    = new SmtpOptions(array(
             'connection_class' => 'login',
         ));
-        $transport = new Smtp($options);
+        $transport  = new Smtp($options);
         $connection = $transport->plugin($options->getConnectionClass(), array(
             'username' => 'matthew',
             'password' => 'password',
-            'host' => 'localhost',
+            'host'     => 'localhost',
         ));
         $this->assertInstanceOf('Zend\Mail\Protocol\Smtp\Auth\Login', $connection);
         $this->assertEquals('matthew', $connection->getUsername());

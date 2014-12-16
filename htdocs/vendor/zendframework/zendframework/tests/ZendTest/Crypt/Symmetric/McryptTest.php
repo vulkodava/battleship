@@ -43,12 +43,12 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     {
         $options = array(
             'algorithm' => 'blowfish',
-            'mode' => 'cfb',
-            'key' => $this->key,
-            'salt' => $this->salt,
-            'padding' => 'pkcs7'
+            'mode'      => 'cfb',
+            'key'       => $this->key,
+            'salt'      => $this->salt,
+            'padding'   => 'pkcs7'
         );
-        $mcrypt = new Mcrypt($options);
+        $mcrypt  = new Mcrypt($options);
         $this->assertTrue($mcrypt instanceof Mcrypt);
         $this->assertEquals($mcrypt->getAlgorithm(), MCRYPT_BLOWFISH);
         $this->assertEquals($mcrypt->getMode(), MCRYPT_MODE_CFB);
@@ -61,13 +61,13 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     {
         $options = array(
             'algorithm' => 'blowfish',
-            'mode' => 'cfb',
-            'key' => $this->key,
-            'salt' => $this->salt,
-            'padding' => 'pkcs7'
+            'mode'      => 'cfb',
+            'key'       => $this->key,
+            'salt'      => $this->salt,
+            'padding'   => 'pkcs7'
         );
-        $config = new Config($options);
-        $mcrypt = new Mcrypt($config);
+        $config  = new Config($options);
+        $mcrypt  = new Mcrypt($config);
         $this->assertTrue($mcrypt instanceof Mcrypt);
         $this->assertEquals($mcrypt->getAlgorithm(), MCRYPT_BLOWFISH);
         $this->assertEquals($mcrypt->getMode(), MCRYPT_MODE_CFB);
@@ -80,7 +80,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     {
         $options = 'test';
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-            'The options parameter must be an array, a Zend\Config\Config object or a Traversable');
+                                    'The options parameter must be an array, a Zend\Config\Config object or a Traversable');
         $mcrypt = new Mcrypt($options);
     }
 
@@ -93,7 +93,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     public function testSetWrongAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-            'The algorithm test is not supported by Zend\Crypt\Symmetric\Mcrypt');
+                                    'The algorithm test is not supported by Zend\Crypt\Symmetric\Mcrypt');
         $this->mcrypt->setAlgorithm('test');
     }
 
@@ -107,7 +107,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     public function testSetEmptyKey()
     {
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-            'The key cannot be empty');
+                                    'The key cannot be empty');
         $result = $this->mcrypt->setKey('');
     }
 
@@ -133,7 +133,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     {
         $this->mcrypt->setSalt($this->salt);
         $this->assertEquals(substr($this->salt, 0, $this->mcrypt->getSaltSize()),
-            $this->mcrypt->getSalt());
+                            $this->mcrypt->getSalt());
         $this->assertEquals($this->salt, $this->mcrypt->getOriginalSalt());
     }
 
@@ -154,7 +154,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     public function testSetWrongMode()
     {
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-            'The mode xxx is not supported by Zend\Crypt\Symmetric\Mcrypt');
+                                    'The mode xxx is not supported by Zend\Crypt\Symmetric\Mcrypt');
         $this->mcrypt->setMode('xxx');
     }
 
@@ -185,7 +185,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     public function testEncryptEmptyData()
     {
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-            'The data to encrypt cannot be empty');
+                                    'The data to encrypt cannot be empty');
         $ciphertext = $this->mcrypt->encrypt('');
     }
 
@@ -193,14 +193,14 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     {
         $this->mcrypt->setKey($this->key);
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-            'The salt (IV) cannot be empty');
+                                    'The salt (IV) cannot be empty');
         $ciphertext = $this->mcrypt->encrypt($this->plaintext);
     }
 
     public function testDecryptEmptyData()
     {
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
-            'The data to decrypt cannot be empty');
+                                    'The data to decrypt cannot be empty');
         $ciphertext = $this->mcrypt->decrypt('');
     }
 

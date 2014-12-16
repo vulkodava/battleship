@@ -32,7 +32,7 @@ class Address implements Address\AddressInterface
         }
 
         $this->email = $email;
-        $this->name = $name;
+        $this->name  = $name;
     }
 
     /**
@@ -63,13 +63,12 @@ class Address implements Address\AddressInterface
     public function toString()
     {
         $string = '<' . $this->getEmail() . '>';
-        $name = $this->getName();
+        $name   = $this->getName();
         if (null === $name) {
             return $string;
         }
 
         $string = $name . ' ' . $string;
-
         return $string;
     }
 }

@@ -2,7 +2,6 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *;
- *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
@@ -15,10 +14,10 @@ interface TranslatorAwareInterface
     /**
      * Sets translator to use in helper
      *
-     * @param  TranslatorInterface $translator [optional] translator.
-     *                                         Default is null, which sets no translator.
-     * @param  string $textDomain              [optional] text domain
-     *                                         Default is null, which skips setTranslatorTextDomain
+     * @param  TranslatorInterface $translator  [optional] translator.
+     *             Default is null, which sets no translator.
+     * @param  string $textDomain  [optional] text domain
+     *             Default is null, which skips setTranslatorTextDomain
      * @return self
      */
     public function setTranslator(TranslatorInterface $translator = null, $textDomain = null);
@@ -41,7 +40,7 @@ interface TranslatorAwareInterface
      * Sets whether translator is enabled and should be used
      *
      * @param  bool $enabled [optional] whether translator should be used.
-     *                       Default is true.
+     *                  Default is true.
      * @return self
      */
     public function setTranslatorEnabled($enabled = true);

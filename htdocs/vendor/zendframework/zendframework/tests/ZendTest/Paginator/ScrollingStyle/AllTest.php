@@ -37,7 +37,6 @@ class AllTest extends \PHPUnit_Framework_TestCase
         $this->paginator = new Paginator(new ArrayAdapter(range(1, 101)));
         $this->paginator->setItemCountPerPage(10);
     }
-
     /**
      * Cleans up the environment after running a test.
      */

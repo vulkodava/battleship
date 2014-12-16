@@ -19,8 +19,8 @@ class TranslatorServiceFactoryTest extends TestCase
         $slContents = array(array('Configuration', array()));
         $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
         $serviceLocator->expects($this->once())
-            ->method('get')
-            ->will($this->returnValueMap($slContents));
+                       ->method('get')
+                       ->will($this->returnValueMap($slContents));
 
         $factory = new TranslatorServiceFactory();
         $translator = $factory->createService($serviceLocator);

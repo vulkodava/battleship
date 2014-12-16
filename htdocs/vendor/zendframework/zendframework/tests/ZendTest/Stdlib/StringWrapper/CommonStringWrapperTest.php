@@ -21,7 +21,7 @@ abstract class CommonStringWrapperTest extends TestCase
         return array(
             array('ascii', 'abcdefghijklmnopqrstuvwxyz', 26),
             array('utf-8', 'abcdefghijklmnopqrstuvwxyz', 26),
-            array('utf-8', 'äöüß', 4),
+            array('utf-8', 'äöüß',                       4),
         );
     }
 
@@ -29,7 +29,7 @@ abstract class CommonStringWrapperTest extends TestCase
      * @dataProvider strlenProvider
      * @param string $encoding
      * @param string $string
-     * @param mixed $expected
+     * @param mixed  $expected
      */
     public function testStrlen($encoding, $str, $expected)
     {
@@ -47,17 +47,17 @@ abstract class CommonStringWrapperTest extends TestCase
         return array(
             array('ascii', 'abcdefghijkl', 1, 5, 'bcdef'),
             array('utf-8', 'abcdefghijkl', 1, 5, 'bcdef'),
-            array('utf-8', 'äöüß', 1, 2, 'öü'),
+            array('utf-8', 'äöüß',         1, 2, 'öü'),
         );
     }
 
     /**
      * @dataProvider substrProvider
-     * @param string $encoding
-     * @param string $str
-     * @param int $offset
+     * @param string   $encoding
+     * @param string   $str
+     * @param int      $offset
      * @param int|null $length
-     * @param mixed $expected
+     * @param mixed    $expected
      */
     public function testSubstr($encoding, $str, $offset, $length, $expected)
     {
@@ -75,7 +75,7 @@ abstract class CommonStringWrapperTest extends TestCase
         return array(
             array('ascii', 'abcdefghijkl', 'g', 3, 6),
             array('utf-8', 'abcdefghijkl', 'g', 3, 6),
-            array('utf-8', 'äöüß', 'ü', 1, 2),
+            array('utf-8', 'äöüß',         'ü', 1, 2),
         );
     }
 
@@ -84,8 +84,8 @@ abstract class CommonStringWrapperTest extends TestCase
      * @param string $encoding
      * @param string $haystack
      * @param string $needle
-     * @param int $offset
-     * @param mixed $expected
+     * @param int    $offset
+     * @param mixed  $expected
      */
     public function testStrpos($encoding, $haystack, $needle, $offset, $expected)
     {
@@ -104,8 +104,8 @@ abstract class CommonStringWrapperTest extends TestCase
             array('ascii', 'ascii', 'abc', 'abc'),
             array('ascii', 'utf-8', 'abc', 'abc'),
             array('utf-8', 'ascii', 'abc', 'abc'),
-            array('utf-8', 'iso-8859-15', '€', "\xA4"),
-            array('utf-8', 'iso-8859-16', '€', "\xA4"), // ISO-8859-16 is wrong @ mbstring
+            array('utf-8', 'iso-8859-15', '€',   "\xA4"),
+            array('utf-8', 'iso-8859-16', '€',   "\xA4"), // ISO-8859-16 is wrong @ mbstring
         );
     }
 
@@ -114,7 +114,7 @@ abstract class CommonStringWrapperTest extends TestCase
      * @param string $str
      * @param string $encoding
      * @param string $convertEncoding
-     * @param mixed $expected
+     * @param mixed  $expected
      */
     public function testConvert($encoding, $convertEncoding, $str, $expected)
     {
@@ -141,13 +141,13 @@ abstract class CommonStringWrapperTest extends TestCase
                 array('utf-8', 'äbüöc ß äbüöcß', 2, ' ', true, 'äb üö c ß äb üö cß'),
             'cut-multi-line-short-words' =>
                 array('utf-8', 'Ä very long wöööööööööööörd.', 8, "\n", true,
-                    "Ä very\nlong\nwööööööö\nööööörd."),
+                      "Ä very\nlong\nwööööööö\nööööörd."),
             'cut-multi-line-with-previous-new-lines' =>
                 array('utf-8', "Ä very\nlong wöööööööööööörd.", 8, "\n", false,
-                    "Ä very\nlong\nwöööööööööööörd."),
+                      "Ä very\nlong\nwöööööööööööörd."),
             'long-break' =>
                 array('utf-8', "Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false,
-                    "Ä very<br>long wöö<br>öööööööö<br>öörd."),
+                      "Ä very<br>long wöö<br>öööööööö<br>öörd."),
 
             // Alternative cut tests
             'cut-beginning-single-space' =>
@@ -209,12 +209,12 @@ abstract class CommonStringWrapperTest extends TestCase
 
     /**
      * @dataProvider wordWrapProvider
-     * @param string $encoding
-     * @param string $str
+     * @param string  $encoding
+     * @param string  $str
      * @param integer $width
-     * @param string $break
+     * @param string  $break
      * @param bool $cut
-     * @param mixed $expected
+     * @param mixed   $expected
      */
     public function testWordWrap($encoding, $string, $width, $break, $cut, $expected)
     {
@@ -272,14 +272,14 @@ abstract class CommonStringWrapperTest extends TestCase
 
     /**
      * @dataProvider strPadProvider
-     * @param  string $encoding
-     * @param  string $input
+     * @param  string  $encoding
+     * @param  string  $input
      * @param  integer $padLength
-     * @param  string $padString
+     * @param  string  $padString
      * @param  integer $padType
-     * @param mixed $expected
+     * @param mixed   $expected
      *
-     * @group        ZF-12186
+     * @group ZF-12186
      */
     public function testStrPad($encoding, $input, $padLength, $padString, $padType, $expected)
     {

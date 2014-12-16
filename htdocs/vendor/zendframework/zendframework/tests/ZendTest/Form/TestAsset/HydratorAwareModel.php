@@ -1,11 +1,11 @@
 <?php
 /**
  * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
+*
+* @link      http://github.com/zendframework/zf2 for the canonical source repository
+* @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+* @license   http://framework.zend.com/license/new-bsd New BSD License
+*/
 
 namespace ZendTest\Form\TestAsset;
 
@@ -30,22 +30,19 @@ class HydratorAwareModel implements HydratorAwareInterface
         if (!$this->hydrator) {
             $this->hydrator = new ClassMethods();
         }
-
         return $this->hydrator;
     }
 
     public function setFoo($value)
     {
         $this->foo = $value;
-
         return $this;
     }
 
     public function setBar($value)
     {
-        $this->bar = $value;
-
-        return $this;
+       $this->bar = $value;
+       return $this;
     }
 
     public function getFoo()

@@ -40,7 +40,6 @@ class JumpingTest extends \PHPUnit_Framework_TestCase
         $this->paginator->setPageRange(10);
         $this->expectedRange = array_combine(range(1, 10), range(1, 10));
     }
-
     /**
      * Cleans up the environment after running a test.
      */

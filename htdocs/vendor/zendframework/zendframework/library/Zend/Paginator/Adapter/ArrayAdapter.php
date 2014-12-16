@@ -39,7 +39,7 @@ class ArrayAdapter implements AdapterInterface
     /**
      * Returns an array of items for a page.
      *
-     * @param  int $offset           Page offset
+     * @param  int $offset Page offset
      * @param  int $itemCountPerPage Number of items per page
      * @return array
      */

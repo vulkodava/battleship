@@ -36,8 +36,8 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreation()
     {
-        $memoryManager = new Memory\MemoryManager($this->_cache);
-        $memObject = $memoryManager->create('012345678');
+        $memoryManager  = new Memory\MemoryManager($this->_cache);
+        $memObject      = $memoryManager->create('012345678');
 
         $this->assertTrue($memObject instanceof \Zend\Memory\Container\AccessController);
     }
@@ -47,8 +47,8 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueAccess()
     {
-        $memoryManager = new Memory\MemoryManager($this->_cache);
-        $memObject = $memoryManager->create('0123456789');
+        $memoryManager  = new Memory\MemoryManager($this->_cache);
+        $memObject      = $memoryManager->create('0123456789');
 
         // getRef() method
         $this->assertEquals($memObject->getRef(), '0123456789');
@@ -58,14 +58,14 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($memObject->getRef(), '012_456789');
 
         // value property
-        $this->assertEquals((string)$memObject->value, '012_456789');
+        $this->assertEquals((string) $memObject->value, '012_456789');
 
         $memObject->value[7] = '_';
-        $this->assertEquals((string)$memObject->value, '012_456_89');
+        $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
         $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
-        $this->assertEquals((string)$memObject->value, 'another value');
+        $this->assertEquals((string) $memObject->value, 'another value');
     }
 
     /**
@@ -73,15 +73,15 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testLock()
     {
-        $memoryManager = new Memory\MemoryManager($this->_cache);
-        $memObject = $memoryManager->create('012345678');
+        $memoryManager  = new Memory\MemoryManager($this->_cache);
+        $memObject      = $memoryManager->create('012345678');
 
-        $this->assertFalse((bool)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
 
         $memObject->lock();
-        $this->assertTrue((bool)$memObject->isLocked());
+        $this->assertTrue((bool) $memObject->isLocked());
 
         $memObject->unlock();
-        $this->assertFalse((bool)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
     }
 }

@@ -22,7 +22,6 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
     {
         $method = new \ReflectionMethod('\Zend\Server\Reflection\ReflectionParameter', 'setType');
         $parameters = $method->getParameters();
-
         return $parameters[0];
     }
 

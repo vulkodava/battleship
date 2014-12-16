@@ -23,7 +23,6 @@ class TranslatorServiceFactory implements FactoryInterface
         $config = $serviceLocator->get('Config');
         $trConfig = isset($config['translator']) ? $config['translator'] : array();
         $translator = Translator::factory($trConfig);
-
         return $translator;
     }
 }

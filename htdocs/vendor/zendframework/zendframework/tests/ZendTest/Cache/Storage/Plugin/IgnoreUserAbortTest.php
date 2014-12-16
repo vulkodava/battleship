@@ -28,7 +28,7 @@ class IgnoreUserAbortTest extends CommonPluginTest
     {
         $this->_adapter = $this->getMockForAbstractClass('Zend\Cache\Storage\Adapter\AbstractAdapter');
         $this->_options = new Cache\Storage\Plugin\PluginOptions();
-        $this->_plugin = new Cache\Storage\Plugin\IgnoreUserAbort();
+        $this->_plugin  = new Cache\Storage\Plugin\IgnoreUserAbort();
         $this->_plugin->setOptions($this->_options);
     }
 
@@ -38,48 +38,48 @@ class IgnoreUserAbortTest extends CommonPluginTest
 
         // check attached callbacks
         $expectedListeners = array(
-            'setItem.pre' => 'onBefore',
-            'setItem.post' => 'onAfter',
+            'setItem.pre'       => 'onBefore',
+            'setItem.post'      => 'onAfter',
             'setItem.exception' => 'onAfter',
 
-            'setItems.pre' => 'onBefore',
-            'setItems.post' => 'onAfter',
+            'setItems.pre'       => 'onBefore',
+            'setItems.post'      => 'onAfter',
             'setItems.exception' => 'onAfter',
 
-            'addItem.pre' => 'onBefore',
-            'addItem.post' => 'onAfter',
+            'addItem.pre'       => 'onBefore',
+            'addItem.post'      => 'onAfter',
             'addItem.exception' => 'onAfter',
 
-            'addItems.pre' => 'onBefore',
-            'addItems.post' => 'onAfter',
+            'addItems.pre'       => 'onBefore',
+            'addItems.post'      => 'onAfter',
             'addItems.exception' => 'onAfter',
 
-            'replaceItem.pre' => 'onBefore',
-            'replaceItem.post' => 'onAfter',
+            'replaceItem.pre'       => 'onBefore',
+            'replaceItem.post'      => 'onAfter',
             'replaceItem.exception' => 'onAfter',
 
-            'replaceItems.pre' => 'onBefore',
-            'replaceItems.post' => 'onAfter',
+            'replaceItems.pre'       => 'onBefore',
+            'replaceItems.post'      => 'onAfter',
             'replaceItems.exception' => 'onAfter',
 
-            'checkAndSetItem.pre' => 'onBefore',
-            'checkAndSetItem.post' => 'onAfter',
+            'checkAndSetItem.pre'       => 'onBefore',
+            'checkAndSetItem.post'      => 'onAfter',
             'checkAndSetItem.exception' => 'onAfter',
 
-            'incrementItem.pre' => 'onBefore',
-            'incrementItem.post' => 'onAfter',
+            'incrementItem.pre'       => 'onBefore',
+            'incrementItem.post'      => 'onAfter',
             'incrementItem.exception' => 'onAfter',
 
-            'incrementItems.pre' => 'onBefore',
-            'incrementItems.post' => 'onAfter',
+            'incrementItems.pre'       => 'onBefore',
+            'incrementItems.post'      => 'onAfter',
             'incrementItems.exception' => 'onAfter',
 
-            'decrementItem.pre' => 'onBefore',
-            'decrementItem.post' => 'onAfter',
+            'decrementItem.pre'       => 'onBefore',
+            'decrementItem.post'      => 'onAfter',
             'decrementItem.exception' => 'onAfter',
 
-            'decrementItems.pre' => 'onBefore',
-            'decrementItems.post' => 'onAfter',
+            'decrementItems.pre'       => 'onBefore',
+            'decrementItems.post'      => 'onAfter',
             'decrementItems.exception' => 'onAfter',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {

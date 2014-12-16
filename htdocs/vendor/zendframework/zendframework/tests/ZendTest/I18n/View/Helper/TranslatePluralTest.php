@@ -53,21 +53,21 @@ class TranslatePluralTest extends \PHPUnit_Framework_TestCase
     public function testDefaultInvokeArguments()
     {
         $singularInput = 'singular';
-        $pluralInput = 'plural';
-        $numberInput = 1;
-        $expected = 'translated';
+        $pluralInput   = 'plural';
+        $numberInput   = 1;
+        $expected      = 'translated';
 
         $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
         $translatorMock->expects($this->once())
-            ->method('translatePlural')
-            ->with(
-                $this->equalTo($singularInput),
-                $this->equalTo($pluralInput),
-                $this->equalTo($numberInput),
-                $this->equalTo('default'),
-                $this->equalTo(null)
-            )
-            ->will($this->returnValue($expected));
+                       ->method('translatePlural')
+                       ->with(
+                           $this->equalTo($singularInput),
+                           $this->equalTo($pluralInput),
+                           $this->equalTo($numberInput),
+                           $this->equalTo('default'),
+                           $this->equalTo(null)
+                       )
+                       ->will($this->returnValue($expected));
 
         $this->helper->setTranslator($translatorMock);
 
@@ -77,23 +77,23 @@ class TranslatePluralTest extends \PHPUnit_Framework_TestCase
     public function testCustomInvokeArguments()
     {
         $singularInput = 'singular';
-        $pluralInput = 'plural';
-        $numberInput = 1;
-        $expected = 'translated';
-        $textDomain = 'textDomain';
-        $locale = 'en_US';
+        $pluralInput   = 'plural';
+        $numberInput   = 1;
+        $expected      = 'translated';
+        $textDomain    = 'textDomain';
+        $locale        = 'en_US';
 
         $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
         $translatorMock->expects($this->once())
-            ->method('translatePlural')
-            ->with(
-                $this->equalTo($singularInput),
-                $this->equalTo($pluralInput),
-                $this->equalTo($numberInput),
-                $this->equalTo($textDomain),
-                $this->equalTo($locale)
-            )
-            ->will($this->returnValue($expected));
+                       ->method('translatePlural')
+                       ->with(
+                           $this->equalTo($singularInput),
+                           $this->equalTo($pluralInput),
+                           $this->equalTo($numberInput),
+                           $this->equalTo($textDomain),
+                           $this->equalTo($locale)
+                       )
+                       ->will($this->returnValue($expected));
 
         $this->helper->setTranslator($translatorMock);
 

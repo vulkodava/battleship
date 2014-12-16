@@ -56,7 +56,7 @@ class LiteralTest extends TestCase
     /**
      * @dataProvider routeProvider
      * @param        Literal $route
-     * @param        string $path
+     * @param        string  $path
      * @param        integer $offset
      * @param        bool $shouldMatch
      */
@@ -80,7 +80,7 @@ class LiteralTest extends TestCase
     /**
      * @dataProvider routeProvider
      * @param        Literal $route
-     * @param        string $path
+     * @param        string  $path
      * @param        integer $offset
      * @param        bool $shouldMatch
      */
@@ -102,7 +102,7 @@ class LiteralTest extends TestCase
 
     public function testNoMatchWithoutUriMethod()
     {
-        $route = new Literal('/foo');
+        $route   = new Literal('/foo');
         $request = new BaseRequest();
 
         $this->assertNull($route->match($request));

@@ -165,7 +165,6 @@ class ConstraintObject
     public function setTableName($tableName)
     {
         $this->tableName = $tableName;
-
         return $this;
     }
 
@@ -213,7 +212,6 @@ class ConstraintObject
     public function setColumns(array $columns)
     {
         $this->columns = $columns;
-
         return $this;
     }
 
@@ -236,7 +234,6 @@ class ConstraintObject
     public function setReferencedTableSchema($referencedTableSchema)
     {
         $this->referencedTableSchema = $referencedTableSchema;
-
         return $this;
     }
 
@@ -259,7 +256,6 @@ class ConstraintObject
     public function setReferencedTableName($referencedTableName)
     {
         $this->referencedTableName = $referencedTableName;
-
         return $this;
     }
 
@@ -282,7 +278,6 @@ class ConstraintObject
     public function setReferencedColumns(array $referencedColumns)
     {
         $this->referencedColumns = $referencedColumns;
-
         return $this;
     }
 
@@ -305,7 +300,6 @@ class ConstraintObject
     public function setMatchOption($matchOption)
     {
         $this->matchOption = $matchOption;
-
         return $this;
     }
 
@@ -328,7 +322,6 @@ class ConstraintObject
     public function setUpdateRule($updateRule)
     {
         $this->updateRule = $updateRule;
-
         return $this;
     }
 
@@ -351,7 +344,6 @@ class ConstraintObject
     public function setDeleteRule($deleteRule)
     {
         $this->deleteRule = $deleteRule;
-
         return $this;
     }
 
@@ -374,7 +366,6 @@ class ConstraintObject
     public function setCheckClause($checkClause)
     {
         $this->checkClause = $checkClause;
-
         return $this;
     }
 

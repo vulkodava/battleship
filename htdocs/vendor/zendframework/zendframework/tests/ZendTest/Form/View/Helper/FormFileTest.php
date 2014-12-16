@@ -39,7 +39,7 @@ class FormFileTest extends CommonTestCase
     public function testGeneratesFileInputTagWithElement()
     {
         $element = new Element\File('foo');
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="file"', $markup);
     }
@@ -51,7 +51,7 @@ class FormFileTest extends CommonTestCase
     {
         $element = new Element\File('foo');
         $element->setAttribute('type', 'email');
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="file"', $markup);
     }
@@ -64,12 +64,12 @@ class FormFileTest extends CommonTestCase
         $element = new Element\File('foo');
         $element->setValue(array(
             'tmp_name' => '/tmp/foofile',
-            'name' => 'foofile',
-            'type' => 'text',
-            'size' => 200,
-            'error' => 2,
+            'name'     => 'foofile',
+            'type'     => 'text',
+            'size'     => 200,
+            'error'    => 2,
         ));
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="file"', $markup);
         $this->assertNotContains('value="', $markup);
@@ -119,38 +119,37 @@ class FormFileTest extends CommonTestCase
     {
         $element = new Element\File('foo');
         $element->setAttributes(array(
-            'accept' => 'value',
-            'alt' => 'value',
-            'autocomplete' => 'on',
-            'autofocus' => 'autofocus',
-            'checked' => 'checked',
-            'dirname' => 'value',
-            'disabled' => 'disabled',
-            'form' => 'value',
-            'formaction' => 'value',
-            'formenctype' => 'value',
-            'formmethod' => 'value',
-            'formnovalidate' => 'value',
-            'formtarget' => 'value',
-            'height' => 'value',
-            'id' => 'value',
-            'list' => 'value',
-            'max' => 'value',
-            'maxlength' => 'value',
-            'min' => 'value',
-            'multiple' => false,
-            'name' => 'value',
-            'pattern' => 'value',
-            'placeholder' => 'value',
-            'readonly' => 'readonly',
-            'required' => 'required',
-            'size' => 'value',
-            'src' => 'value',
-            'step' => 'value',
-            'width' => 'value',
+            'accept'             => 'value',
+            'alt'                => 'value',
+            'autocomplete'       => 'on',
+            'autofocus'          => 'autofocus',
+            'checked'            => 'checked',
+            'dirname'            => 'value',
+            'disabled'           => 'disabled',
+            'form'               => 'value',
+            'formaction'         => 'value',
+            'formenctype'        => 'value',
+            'formmethod'         => 'value',
+            'formnovalidate'     => 'value',
+            'formtarget'         => 'value',
+            'height'             => 'value',
+            'id'                 => 'value',
+            'list'               => 'value',
+            'max'                => 'value',
+            'maxlength'          => 'value',
+            'min'                => 'value',
+            'multiple'           => false,
+            'name'               => 'value',
+            'pattern'            => 'value',
+            'placeholder'        => 'value',
+            'readonly'           => 'readonly',
+            'required'           => 'required',
+            'size'               => 'value',
+            'src'                => 'value',
+            'step'               => 'value',
+            'width'              => 'value',
         ));
         $element->setValue('value');
-
         return $element;
     }
 
@@ -160,13 +159,13 @@ class FormFileTest extends CommonTestCase
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
     {
         $element = $this->getCompleteElement();
-        $markup = $this->helper->render($element);
+        $markup  = $this->helper->render($element);
         switch ($attribute) {
             case 'value':
-                $expect = sprintf('%s="%s"', $attribute, $element->getValue());
+                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
                 break;
             default:
-                $expect = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
                 break;
         }
         $this->$assertion($expect, $markup);
@@ -189,7 +188,7 @@ class FormFileTest extends CommonTestCase
     public function testInvokeProxiesToRender()
     {
         $element = new Element\File('foo');
-        $markup = $this->helper->__invoke($element);
+        $markup  = $this->helper->__invoke($element);
         $this->assertContains('<input', $markup);
         $this->assertContains('name="foo"', $markup);
         $this->assertContains('type="file"', $markup);

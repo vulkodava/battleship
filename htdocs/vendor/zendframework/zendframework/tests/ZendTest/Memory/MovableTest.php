@@ -44,14 +44,14 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($memObject->getRef(), '012_456789');
 
         // value property
-        $this->assertEquals((string)$memObject->value, '012_456789');
+        $this->assertEquals((string) $memObject->value, '012_456789');
 
         $memObject->value[7] = '_';
-        $this->assertEquals((string)$memObject->value, '012_456_89');
+        $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
         $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
-        $this->assertEquals((string)$memObject->value, 'another value');
+        $this->assertEquals((string) $memObject->value, 'another value');
     }
 
     /**
@@ -62,13 +62,13 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
-        $this->assertFalse((bool)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
 
         $memObject->lock();
-        $this->assertTrue((bool)$memObject->isLocked());
+        $this->assertTrue((bool) $memObject->isLocked());
 
         $memObject->unlock();
-        $this->assertFalse((bool)$memObject->isLocked());
+        $this->assertFalse((bool) $memObject->isLocked());
     }
 
     /**
@@ -154,7 +154,7 @@ class DummyMemoryManager extends Memory\MemoryManager
     public function processUpdate(Container\Movable $container, $id)
     {
         $this->processUpdatePassed = true;
-        $this->processedId = $id;
-        $this->processedObject = $container;
+        $this->processedId         = $id;
+        $this->processedObject     = $container;
     }
 }

@@ -25,7 +25,6 @@ class EventManager implements EventManagerInterface
 {
     /**
      * Subscribed events and their listeners
-     *
      * @var array Array of PriorityQueue objects
      */
     protected $events = array();
@@ -37,14 +36,12 @@ class EventManager implements EventManagerInterface
 
     /**
      * Identifiers, used to pull shared signals from SharedEventManagerInterface instance
-     *
      * @var array
      */
     protected $identifiers = array();
 
     /**
      * Shared event manager
-     *
      * @var false|null|SharedEventManagerInterface
      */
     protected $sharedManager = null;
@@ -71,7 +68,6 @@ class EventManager implements EventManagerInterface
     public function setEventClass($class)
     {
         $this->eventClass = $class;
-
         return $this;
     }
 
@@ -85,7 +81,6 @@ class EventManager implements EventManagerInterface
     {
         $this->sharedManager = $sharedEventManager;
         StaticEventManager::setInstance($sharedEventManager);
-
         return $this;
     }
 
@@ -124,7 +119,6 @@ class EventManager implements EventManagerInterface
         }
 
         $this->sharedManager = StaticEventManager::getInstance();
-
         return $this->sharedManager;
     }
 
@@ -147,11 +141,10 @@ class EventManager implements EventManagerInterface
     public function setIdentifiers($identifiers)
     {
         if (is_array($identifiers) || $identifiers instanceof Traversable) {
-            $this->identifiers = array_unique((array)$identifiers);
+            $this->identifiers = array_unique((array) $identifiers);
         } elseif ($identifiers !== null) {
             $this->identifiers = array($identifiers);
         }
-
         return $this;
     }
 
@@ -164,11 +157,10 @@ class EventManager implements EventManagerInterface
     public function addIdentifiers($identifiers)
     {
         if (is_array($identifiers) || $identifiers instanceof Traversable) {
-            $this->identifiers = array_unique(array_merge($this->identifiers, (array)$identifiers));
+            $this->identifiers = array_unique(array_merge($this->identifiers, (array) $identifiers));
         } elseif ($identifiers !== null) {
             $this->identifiers = array_unique(array_merge($this->identifiers, array($identifiers)));
         }
-
         return $this;
     }
 
@@ -178,7 +170,7 @@ class EventManager implements EventManagerInterface
      * Can emulate triggerUntil() if the last argument provided is a callback.
      *
      * @param  string $event
-     * @param  string|object $target   Object calling emit, or symbol describing target (such as static method name)
+     * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  null|callable $callback
      * @return ResponseCollection All listener return values
@@ -187,8 +179,8 @@ class EventManager implements EventManagerInterface
     public function trigger($event, $target = null, $argv = array(), $callback = null)
     {
         if ($event instanceof EventInterface) {
-            $e = $event;
-            $event = $e->getName();
+            $e        = $event;
+            $event    = $e->getName();
             $callback = $target;
         } elseif ($target instanceof EventInterface) {
             $e = $target;
@@ -223,7 +215,7 @@ class EventManager implements EventManagerInterface
      * value of one as true, or until all listeners have been executed.
      *
      * @param  string $event
-     * @param  string|object $target   Object calling emit, or symbol describing target (such as static method name)
+     * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  callable $callback
      * @return ResponseCollection
@@ -232,8 +224,8 @@ class EventManager implements EventManagerInterface
     public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
         if ($event instanceof EventInterface) {
-            $e = $event;
-            $event = $e->getName();
+            $e        = $event;
+            $event    = $e->getName();
             $callback = $target;
         } elseif ($target instanceof EventInterface) {
             $e = $target;
@@ -274,16 +266,10 @@ class EventManager implements EventManagerInterface
      * You can specify "*" for the event name. In such cases, the listener will
      * be triggered for every event.
      *
-     * @param  string|array|ListenerAggregateInterface $event An event or array of event names. If a
-     *                                                        ListenerAggregateInterface, proxies to {@link
-     *                                                        attachAggregate()}.
-     * @param  callable|int $callback                         If string $event provided, expects PHP callback; for a
-     *                                                        ListenerAggregateInterface $event, this will be the
-     *                                                        priority
-     * @param  int $priority                                  If provided, the priority at which to register the
-     *                                                        callable
-     * @return CallbackHandler|mixed CallbackHandler if attaching callable (to allow later unsubscribe); mixed if
-     *                               attaching aggregate
+     * @param  string|array|ListenerAggregateInterface $event An event or array of event names. If a ListenerAggregateInterface, proxies to {@link attachAggregate()}.
+     * @param  callable|int $callback If string $event provided, expects PHP callback; for a ListenerAggregateInterface $event, this will be the priority
+     * @param  int $priority If provided, the priority at which to register the callable
+     * @return CallbackHandler|mixed CallbackHandler if attaching callable (to allow later unsubscribe); mixed if attaching aggregate
      * @throws Exception\InvalidArgumentException
      */
     public function attach($event, $callback = null, $priority = 1)
@@ -307,7 +293,6 @@ class EventManager implements EventManagerInterface
             foreach ($event as $name) {
                 $listeners[] = $this->attach($name, $callback, $priority);
             }
-
             return $listeners;
         }
 
@@ -321,7 +306,6 @@ class EventManager implements EventManagerInterface
 
         // Inject the callback handler into the queue
         $this->events[$event]->insert($listener, $priority);
-
         return $listener;
     }
 
@@ -345,8 +329,7 @@ class EventManager implements EventManagerInterface
      * Unsubscribe a listener from an event
      *
      * @param  CallbackHandler|ListenerAggregateInterface $listener
-     * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or
-     *              listener not found
+     * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
      * @throws Exception\InvalidArgumentException if invalid listener provided
      */
     public function detach($listener)
@@ -374,7 +357,6 @@ class EventManager implements EventManagerInterface
         if (!count($this->events[$event])) {
             unset($this->events[$event]);
         }
-
         return true;
     }
 
@@ -413,7 +395,6 @@ class EventManager implements EventManagerInterface
         if (!array_key_exists($event, $this->events)) {
             return new PriorityQueue();
         }
-
         return $this->events[$event];
     }
 
@@ -451,9 +432,9 @@ class EventManager implements EventManagerInterface
      * Actual functionality for triggering listeners, to which both trigger() and triggerUntil()
      * delegate.
      *
-     * @param  string $event Event name
+     * @param  string           $event Event name
      * @param  EventInterface $e
-     * @param  null|callable $callback
+     * @param  null|callable    $callback
      * @return ResponseCollection
      */
     protected function triggerListeners($event, EventInterface $e, $callback = null)
@@ -463,9 +444,9 @@ class EventManager implements EventManagerInterface
 
         // Add shared/wildcard listeners to the list of listeners,
         // but don't modify the listeners object
-        $sharedListeners = $this->getSharedListeners($event);
+        $sharedListeners         = $this->getSharedListeners($event);
         $sharedWildcardListeners = $this->getSharedListeners('*');
-        $wildcardListeners = $this->getListeners('*');
+        $wildcardListeners       = $this->getListeners('*');
         if (count($sharedListeners) || count($sharedWildcardListeners) || count($wildcardListeners)) {
             $listeners = clone $listeners;
 
@@ -516,7 +497,7 @@ class EventManager implements EventManagerInterface
             return array();
         }
 
-        $identifiers = $this->getIdentifiers();
+        $identifiers     = $this->getIdentifiers();
         //Add wildcard id to the search, if not already added
         if (!in_array('*', $identifiers)) {
             $identifiers[] = '*';

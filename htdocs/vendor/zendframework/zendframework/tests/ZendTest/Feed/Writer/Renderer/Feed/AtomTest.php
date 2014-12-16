@@ -30,8 +30,8 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setLink('http://www.example.com');
         $this->validWriter->setFeedLink('http://www.example.com/atom', 'atom');
         $this->validWriter->addAuthor(array('name' => 'Joe',
-            'email' => 'joe@example.com',
-            'uri' => 'http://www.example.com/joe'));
+                                             'email'=> 'joe@example.com',
+                                             'uri'  => 'http://www.example.com/joe'));
 
         $this->validWriter->setType('atom');
     }
@@ -44,7 +44,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testSetsWriterInConstructor()
     {
         $writer = new Writer\Feed;
-        $feed = new Renderer\Feed\Atom($writer);
+        $feed   = new Renderer\Feed\Atom($writer);
         $this->assertTrue($feed->getDataContainer() instanceof Writer\Feed);
     }
 
@@ -269,12 +269,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed   = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals(array(
-            'email' => 'joe@example.com',
-            'name' => 'Joe',
-            'uri' => 'http://www.example.com/joe'), $feed->getAuthor());
+                                 'email'=> 'joe@example.com',
+                                 'name' => 'Joe',
+                                 'uri'  => 'http://www.example.com/joe'), $feed->getAuthor());
     }
 
     /**
@@ -285,16 +285,16 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('authors');
         $this->validWriter->addAuthor(array(
-            'email' => '<>&\'"áéíóú',
-            'name' => '<>&\'"áéíóú',
-            'uri' => 'http://www.example.com/joe'));
+                                            'email'=> '<>&\'"áéíóú',
+                                            'name' => '<>&\'"áéíóú',
+                                            'uri'  => 'http://www.example.com/joe'));
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed   = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals(array(
-            'email' => '<>&\'"áéíóú',
-            'name' => '<>&\'"áéíóú',
-            'uri' => 'http://www.example.com/joe'), $feed->getAuthor());
+                                 'email'=> '<>&\'"áéíóú',
+                                 'name' => '<>&\'"áéíóú',
+                                 'uri'  => 'http://www.example.com/joe'), $feed->getAuthor());
     }
 
     public function testFeedAuthorIfNotSetThrowsExceptionIfAnyEntriesAlsoAreMissingAuthors()
@@ -354,45 +354,45 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testCategoriesCanBeSet()
     {
         $this->validWriter->addCategories(array(
-            array('term' => 'cat_dog',
-                'label' => 'Cats & Dogs',
-                'scheme' => 'http://example.com/schema1'),
-            array('term' => 'cat_dog2')
-        ));
+                                                array('term'   => 'cat_dog',
+                                                      'label'  => 'Cats & Dogs',
+                                                      'scheme' => 'http://example.com/schema1'),
+                                                array('term'=> 'cat_dog2')
+                                           ));
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed     = Reader\Reader::importString($atomFeed->saveXml());
         $expected = array(
-            array('term' => 'cat_dog',
-                'label' => 'Cats & Dogs',
-                'scheme' => 'http://example.com/schema1'),
-            array('term' => 'cat_dog2',
-                'label' => 'cat_dog2',
-                'scheme' => null)
+            array('term'   => 'cat_dog',
+                  'label'  => 'Cats & Dogs',
+                  'scheme' => 'http://example.com/schema1'),
+            array('term'   => 'cat_dog2',
+                  'label'  => 'cat_dog2',
+                  'scheme' => null)
         );
-        $this->assertEquals($expected, (array)$feed->getCategories());
+        $this->assertEquals($expected, (array) $feed->getCategories());
     }
 
     public function testCategoriesCharDataEncoding()
     {
         $this->validWriter->addCategories(array(
-            array('term' => 'cat_dog',
-                'label' => '<>&\'"áéíóú',
-                'scheme' => 'http://example.com/schema1'),
-            array('term' => 'cat_dog2')
-        ));
+                                                array('term'   => 'cat_dog',
+                                                      'label'  => '<>&\'"áéíóú',
+                                                      'scheme' => 'http://example.com/schema1'),
+                                                array('term'=> 'cat_dog2')
+                                           ));
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed     = Reader\Reader::importString($atomFeed->saveXml());
         $expected = array(
-            array('term' => 'cat_dog',
-                'label' => '<>&\'"áéíóú',
-                'scheme' => 'http://example.com/schema1'),
-            array('term' => 'cat_dog2',
-                'label' => 'cat_dog2',
-                'scheme' => null)
+            array('term'   => 'cat_dog',
+                  'label'  => '<>&\'"áéíóú',
+                  'scheme' => 'http://example.com/schema1'),
+            array('term'   => 'cat_dog2',
+                  'label'  => 'cat_dog2',
+                  'scheme' => null)
         );
-        $this->assertEquals($expected, (array)$feed->getCategories());
+        $this->assertEquals($expected, (array) $feed->getCategories());
     }
 
     public function testHubsCanBeSet()
@@ -402,21 +402,21 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed     = Reader\Reader::importString($atomFeed->saveXml());
         $expected = array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         );
-        $this->assertEquals($expected, (array)$feed->getHubs());
+        $this->assertEquals($expected, (array) $feed->getHubs());
     }
 
     public function testImageCanBeSet()
     {
         $this->validWriter->setImage(
-            array('uri' => 'http://www.example.com/logo.gif')
+            array('uri'=> 'http://www.example.com/logo.gif')
         );
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed     = Reader\Reader::importString($atomFeed->saveXml());
         $expected = array(
             'uri' => 'http://www.example.com/logo.gif'
         );

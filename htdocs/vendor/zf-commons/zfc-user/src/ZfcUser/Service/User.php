@@ -65,8 +65,8 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     public function register(array $data)
     {
         $class = $this->getOptions()->getUserEntityClass();
-        $user = new $class;
-        $form = $this->getRegisterForm();
+        $user  = new $class;
+        $form  = $this->getRegisterForm();
         $form->setHydrator($this->getFormHydrator());
         $form->bind($user);
         $form->setData($data);
@@ -94,8 +94,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         }
         $this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $user, 'form' => $form));
         $this->getUserMapper()->insert($user);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('user' => $user, 'form' => $form));
-
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('user' => $user, 'form' => $form));
         return $user;
     }
 
@@ -124,7 +123,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
 
         $this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $currentUser, 'data' => $data));
         $this->getUserMapper()->update($currentUser);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('user' => $currentUser, 'data' => $data));
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('user' => $currentUser, 'data' => $data));
 
         return true;
     }
@@ -144,7 +143,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
 
         $this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $currentUser, 'data' => $data));
         $this->getUserMapper()->update($currentUser);
-        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('user' => $currentUser, 'data' => $data));
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('user' => $currentUser, 'data' => $data));
 
         return true;
     }
@@ -159,7 +158,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         if (null === $this->userMapper) {
             $this->userMapper = $this->getServiceManager()->get('zfcuser_user_mapper');
         }
-
         return $this->userMapper;
     }
 
@@ -172,7 +170,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     public function setUserMapper(UserMapperInterface $userMapper)
     {
         $this->userMapper = $userMapper;
-
         return $this;
     }
 
@@ -186,7 +183,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         if (null === $this->authService) {
             $this->authService = $this->getServiceManager()->get('zfcuser_auth_service');
         }
-
         return $this->authService;
     }
 
@@ -199,7 +195,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     public function setAuthService(AuthenticationService $authService)
     {
         $this->authService = $authService;
-
         return $this;
     }
 
@@ -211,7 +206,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         if (null === $this->registerForm) {
             $this->registerForm = $this->getServiceManager()->get('zfcuser_register_form');
         }
-
         return $this->registerForm;
     }
 
@@ -222,7 +216,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     public function setRegisterForm(Form $registerForm)
     {
         $this->registerForm = $registerForm;
-
         return $this;
     }
 
@@ -234,7 +227,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         if (null === $this->changePasswordForm) {
             $this->changePasswordForm = $this->getServiceManager()->get('zfcuser_change_password_form');
         }
-
         return $this->changePasswordForm;
     }
 
@@ -245,7 +237,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     public function setChangePasswordForm(Form $changePasswordForm)
     {
         $this->changePasswordForm = $changePasswordForm;
-
         return $this;
     }
 
@@ -259,7 +250,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         if (!$this->options instanceof UserServiceOptionsInterface) {
             $this->setOptions($this->getServiceManager()->get('zfcuser_module_options'));
         }
-
         return $this->options;
     }
 
@@ -292,7 +282,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     public function setServiceManager(ServiceManager $serviceManager)
     {
         $this->serviceManager = $serviceManager;
-
         return $this;
     }
 
@@ -319,7 +308,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     public function setFormHydrator(Hydrator\HydratorInterface $formHydrator)
     {
         $this->formHydrator = $formHydrator;
-
         return $this;
     }
 }

@@ -42,9 +42,9 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
         $filter = $this->_filter;
         $valuesExpected = array(
             'string' => 'string',
-            ' str ' => 'str',
-            "\ns\t" => 's'
-        );
+            ' str '  => 'str',
+            "\ns\t"  => 's'
+            );
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
         }

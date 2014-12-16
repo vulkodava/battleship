@@ -150,8 +150,7 @@ class ParameterGenerator extends AbstractGenerator
         $defaultValue = null,
         $position = null,
         $passByReference = false
-    )
-    {
+    ) {
         if (null !== $name) {
             $this->setName($name);
         }
@@ -175,8 +174,7 @@ class ParameterGenerator extends AbstractGenerator
      */
     public function setType($type)
     {
-        $this->type = (string)$type;
-
+        $this->type = (string) $type;
         return $this;
     }
 
@@ -194,8 +192,7 @@ class ParameterGenerator extends AbstractGenerator
      */
     public function setName($name)
     {
-        $this->name = (string)$name;
-
+        $this->name = (string) $name;
         return $this;
     }
 
@@ -239,8 +236,7 @@ class ParameterGenerator extends AbstractGenerator
      */
     public function setPosition($position)
     {
-        $this->position = (int)$position;
-
+        $this->position = (int) $position;
         return $this;
     }
 
@@ -266,8 +262,7 @@ class ParameterGenerator extends AbstractGenerator
      */
     public function setPassedByReference($passedByReference)
     {
-        $this->passedByReference = (bool)$passedByReference;
-
+        $this->passedByReference = (bool) $passedByReference;
         return $this;
     }
 

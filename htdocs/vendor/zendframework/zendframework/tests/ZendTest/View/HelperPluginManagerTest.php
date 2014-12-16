@@ -82,7 +82,7 @@ class HelperPluginManagerTest extends \PHPUnit_Framework_TestCase
     public function testIfHelperIsTranslatorAwareAndMvcTranslatorIsAvailableItWillInjectTheMvcTranslator()
     {
         $translator = new MvcTranslator($this->getMock('Zend\I18n\Translator\TranslatorInterface'));
-        $services = new ServiceManager();
+        $services   = new ServiceManager();
         $services->setService('MvcTranslator', $translator);
         $this->helpers->setServiceLocator($services);
 
@@ -93,7 +93,7 @@ class HelperPluginManagerTest extends \PHPUnit_Framework_TestCase
     public function testIfHelperIsTranslatorAwareAndMvcTranslatorIsUnavailableAndTranslatorIsAvailableItWillInjectTheTranslator()
     {
         $translator = new Translator();
-        $services = new ServiceManager();
+        $services   = new ServiceManager();
         $services->setService('Translator', $translator);
         $this->helpers->setServiceLocator($services);
 
@@ -104,7 +104,7 @@ class HelperPluginManagerTest extends \PHPUnit_Framework_TestCase
     public function testIfHelperIsTranslatorAwareAndBothMvcTranslatorAndTranslatorAreUnavailableAndTranslatorInterfaceIsAvailableItWillInjectTheTranslator()
     {
         $translator = new Translator();
-        $services = new ServiceManager();
+        $services   = new ServiceManager();
         $services->setService('Zend\I18n\Translator\TranslatorInterface', $translator);
         $this->helpers->setServiceLocator($services);
 

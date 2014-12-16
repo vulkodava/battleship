@@ -55,7 +55,6 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
         foreach (clone $this as $item) {
             $array[] = $item;
         }
-
         return $array;
     }
 

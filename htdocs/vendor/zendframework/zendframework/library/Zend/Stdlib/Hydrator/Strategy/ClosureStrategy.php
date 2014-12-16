@@ -16,7 +16,6 @@ class ClosureStrategy implements StrategyInterface
      * function ($value) {
      *     return $value;
      * };
-     *
      * @var callable
      */
     protected $extractFunc = null;
@@ -26,7 +25,6 @@ class ClosureStrategy implements StrategyInterface
      * function ($value) {
      *     return $value;
      * };
-     *
      * @var callable
      */
     protected $hydrateFunc = null;
@@ -43,9 +41,9 @@ class ClosureStrategy implements StrategyInterface
      * ));
      *
      * @param callable $extractFunc - anonymous function, that extract values
-     *                              from object
+     * from object
      * @param callable $hydrateFunc - anonymous function, that hydrate values
-     *                              into object
+     * into object
      */
     public function __construct($extractFunc = null, $hydrateFunc = null)
     {

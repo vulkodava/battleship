@@ -60,9 +60,9 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
      * Ensures that the validator follows expected behavior
      *
      * @dataProvider basicProvider name of method that provides parameters
-     * @param string $value     that will be tested
+     * @param string  $value    that will be tested
      * @param boolean $expected expected result of assertion
-     * @param array $options    fed into the validator before validation
+     * @param array   $options  fed into the validator before validation
      */
     public function testBasic($value, $expected, $options = array())
     {
@@ -72,13 +72,13 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
             $expected,
             $this->validator->isValid($value),
             sprintf('Failed expecting %s being %s', $value, ($expected ? 'true' : 'false'))
-            . sprintf(
-                ' (locale:%s, dateType: %s, timeType: %s, pattern:%s)',
-                $this->validator->getLocale(),
-                $this->validator->getDateType(),
-                $this->validator->getTimeType(),
-                $this->validator->getPattern()
-            )
+                . sprintf(
+                    ' (locale:%s, dateType: %s, timeType: %s, pattern:%s)',
+                    $this->validator->getLocale(),
+                    $this->validator->getDateType(),
+                    $this->validator->getTimeType(),
+                    $this->validator->getPattern()
+                )
         );
     }
 
@@ -94,8 +94,8 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
             }
         }
 
-        $trueArray = array();
-        $testingDate = new DateTime();
+        $trueArray      = array();
+        $testingDate    = new DateTime();
         $testingLocales = array('en', 'de', 'zh-TW', 'ja', 'ar', 'ru', 'si', 'ml-IN', 'hi');
         $testingFormats = array(
             IntlDateFormatter::FULL,
@@ -196,7 +196,7 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testOptionPattern()
     {
-        $this->validator->setOptions(array('pattern' => 'hh:mm'));
+        $this->validator->setOptions(array('pattern'=>'hh:mm'));
 
         $this->assertTrue($this->validator->isValid('02:00'));
         $this->assertEquals('hh:mm', $this->validator->getPattern());

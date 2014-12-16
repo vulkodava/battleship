@@ -33,7 +33,7 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
             $this->setMethodName($methodName);
         }
 
-        $this->setIsStatic((bool)$isStatic);
+        $this->setIsStatic((bool) $isStatic);
 
         parent::__construct($types, $description);
     }
@@ -53,7 +53,6 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
     public function setIsStatic($isStatic)
     {
         $this->isStatic = $isStatic;
-
         return $this;
     }
 
@@ -72,7 +71,6 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
     public function setMethodName($methodName)
     {
         $this->methodName = rtrim($methodName, ')(');
-
         return $this;
     }
 

@@ -45,14 +45,13 @@ class Result implements Iterator, ResultInterface
      * Initialize
      *
      * @param  resource $resource
-     * @param  mixed $generatedValue
+     * @param  mixed    $generatedValue
      * @return Result
      */
     public function initialize($resource, $generatedValue = null)
     {
         $this->resource = $resource;
         $this->generatedValue = $generatedValue;
-
         return $this;
     }
 
@@ -94,7 +93,6 @@ class Result implements Iterator, ResultInterface
         }
 
         $this->load();
-
         return $this->currentData;
     }
 
@@ -106,7 +104,6 @@ class Result implements Iterator, ResultInterface
     public function next()
     {
         $this->load();
-
         return true;
     }
 
@@ -121,7 +118,6 @@ class Result implements Iterator, ResultInterface
         $this->currentData = sqlsrv_fetch_array($this->resource, SQLSRV_FETCH_ASSOC, $row);
         $this->currentComplete = true;
         $this->position++;
-
         return $this->currentData;
     }
 
@@ -144,7 +140,6 @@ class Result implements Iterator, ResultInterface
     {
         $this->position = 0;
         $this->load(SQLSRV_SCROLL_FIRST);
-
         return true;
     }
 
@@ -190,7 +185,6 @@ class Result implements Iterator, ResultInterface
         if (is_bool($this->resource)) {
             return false;
         }
-
         return (sqlsrv_num_fields($this->resource) > 0);
     }
 

@@ -17,7 +17,7 @@ use Zend\Stdlib\ArrayUtils;
 
 class DateStep extends Date
 {
-    const NOT_STEP = 'dateStepNotStep';
+    const NOT_STEP       = 'dateStepNotStep';
 
     const FORMAT_DEFAULT = DateTime::ISO8601;
 
@@ -25,10 +25,10 @@ class DateStep extends Date
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID => "Invalid type given. String, integer, array or DateTime expected",
+        self::INVALID      => "Invalid type given. String, integer, array or DateTime expected",
         self::INVALID_DATE => "The input does not appear to be a valid date",
-        self::FALSEFORMAT => "The input does not fit the date format '%format%'",
-        self::NOT_STEP => "The input is not a valid step",
+        self::FALSEFORMAT  => "The input does not fit the date format '%format%'",
+        self::NOT_STEP     => "The input is not a valid step",
     );
 
     /**
@@ -98,7 +98,6 @@ class DateStep extends Date
     public function setBaseValue($baseValue)
     {
         $this->baseValue = $baseValue;
-
         return $this;
     }
 
@@ -121,7 +120,6 @@ class DateStep extends Date
     public function setStep(DateInterval $step)
     {
         $this->step = $step;
-
         return $this;
     }
 
@@ -154,7 +152,6 @@ class DateStep extends Date
     public function setTimezone(DateTimeZone $timezone)
     {
         $this->timezone = $timezone;
-
         return $this;
     }
 
@@ -182,7 +179,6 @@ class DateStep extends Date
             if ($addErrors) {
                 $this->error(self::FALSEFORMAT);
             }
-
             return false;
         }
 
@@ -203,8 +199,8 @@ class DateStep extends Date
         }
 
         $valueDate = $this->convertToDateTime($value, false); // avoid duplicate errors
-        $baseDate = $this->convertToDateTime($this->baseValue, false);
-        $step = $this->getStep();
+        $baseDate  = $this->convertToDateTime($this->baseValue, false);
+        $step      = $this->getStep();
 
         // Same date?
         if ($valueDate == $baseDate) {
@@ -214,24 +210,24 @@ class DateStep extends Date
         // Optimization for simple intervals.
         // Handle intervals of just one date or time unit.
         $intervalParts = explode('|', $step->format('%y|%m|%d|%h|%i|%s'));
-        $partCounts = array_count_values($intervalParts);
+        $partCounts    = array_count_values($intervalParts);
         if (5 === $partCounts["0"]) {
             // Find the unit with the non-zero interval
             $unitKeys = array('years', 'months', 'days', 'hours', 'minutes', 'seconds');
             $intervalParts = array_combine($unitKeys, $intervalParts);
 
             $intervalUnit = null;
-            $stepValue = null;
+            $stepValue    = null;
             foreach ($intervalParts as $key => $value) {
                 if (0 != $value) {
                     $intervalUnit = $key;
-                    $stepValue = (int)$value;
+                    $stepValue    = (int) $value;
                     break;
                 }
             }
 
             // Get absolute time difference
-            $timeDiff = $valueDate->diff($baseDate, true);
+            $timeDiff  = $valueDate->diff($baseDate, true);
             $diffParts = explode('|', $timeDiff->format('%y|%m|%d|%h|%i|%s'));
             $diffParts = array_combine($unitKeys, $diffParts);
 
@@ -270,7 +266,6 @@ class DateStep extends Date
                         break;
                 }
                 $this->error(self::NOT_STEP);
-
                 return false;
             }
 
@@ -311,15 +306,14 @@ class DateStep extends Date
                             break;
                         case 'seconds':
                             $seconds = ($diffParts['hours'] * 60)
-                                + ($diffParts['minutes'] * 60)
-                                + $diffParts['seconds'];
+                                       + ($diffParts['minutes'] * 60)
+                                       + $diffParts['seconds'];
                             if (($seconds % $stepValue) === 0) {
                                 return true;
                             }
                             break;
                     }
                     $this->error(self::NOT_STEP);
-
                     return false;
                 }
             }
@@ -345,7 +339,6 @@ class DateStep extends Date
         }
 
         $this->error(self::NOT_STEP);
-
         return false;
     }
 }

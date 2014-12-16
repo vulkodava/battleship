@@ -27,13 +27,13 @@ class IntTest extends \PHPUnit_Framework_TestCase
 
         $valuesExpected = array(
             'string' => 0,
-            '1' => 1,
-            '-1' => -1,
-            '1.1' => 1,
-            '-1.1' => -1,
-            '0.9' => 0,
-            '-0.9' => 0
-        );
+            '1'      => 1,
+            '-1'     => -1,
+            '1.1'    => 1,
+            '-1.1'   => -1,
+            '0.9'    => 0,
+            '-0.9'   => 0
+            );
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
         }

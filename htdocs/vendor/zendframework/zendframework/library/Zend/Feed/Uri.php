@@ -73,17 +73,16 @@ class Uri
         $parsed = parse_url($uri);
         if (false === $parsed) {
             $this->valid = false;
-
             return;
         }
 
-        $this->scheme = isset($parsed['scheme']) ? $parsed['scheme'] : null;
-        $this->host = isset($parsed['host']) ? $parsed['host'] : null;
-        $this->port = isset($parsed['port']) ? $parsed['port'] : null;
-        $this->user = isset($parsed['user']) ? $parsed['user'] : null;
-        $this->pass = isset($parsed['pass']) ? $parsed['pass'] : null;
-        $this->path = isset($parsed['path']) ? $parsed['path'] : null;
-        $this->query = isset($parsed['query']) ? $parsed['query'] : null;
+        $this->scheme   = isset($parsed['scheme'])   ? $parsed['scheme']   : null;
+        $this->host     = isset($parsed['host'])     ? $parsed['host']     : null;
+        $this->port     = isset($parsed['port'])     ? $parsed['port']     : null;
+        $this->user     = isset($parsed['user'])     ? $parsed['user']     : null;
+        $this->pass     = isset($parsed['pass'])     ? $parsed['pass']     : null;
+        $this->path     = isset($parsed['path'])     ? $parsed['path']     : null;
+        $this->query    = isset($parsed['query'])    ? $parsed['query']    : null;
         $this->fragment = isset($parsed['fragment']) ? $parsed['fragment'] : null;
     }
 
@@ -149,7 +148,6 @@ class Uri
             if ($this->path && substr($this->path, 0, 1) != '/') {
                 return false;
             }
-
             return true;
         }
 
@@ -163,11 +161,10 @@ class Uri
             if (substr($this->path, 0, 2) == '//') {
                 return false;
             }
-
             return true;
         }
 
-        if (!($this->query || $this->fragment)) {
+        if (! ($this->query || $this->fragment)) {
             // No host, path, query or fragment - this is not a valid URI
             return false;
         }

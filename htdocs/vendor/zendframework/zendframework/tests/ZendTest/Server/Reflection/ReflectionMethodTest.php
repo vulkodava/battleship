@@ -25,8 +25,8 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_classRaw = new \ReflectionClass('\Zend\Server\Reflection');
-        $this->_method = $this->_classRaw->getMethod('reflectClass');
-        $this->_class = new Reflection\ReflectionClass($this->_classRaw);
+        $this->_method   = $this->_classRaw->getMethod('reflectClass');
+        $this->_class    = new Reflection\ReflectionClass($this->_classRaw);
     }
 
     /**

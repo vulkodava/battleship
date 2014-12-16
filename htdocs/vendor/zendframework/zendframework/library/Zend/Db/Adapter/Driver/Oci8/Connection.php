@@ -68,7 +68,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Oci8 $driver)
     {
         $this->driver = $driver;
-
         return $this;
     }
 
@@ -79,7 +78,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
-
         return $this;
     }
 
@@ -100,7 +98,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
-
         return $this;
     }
 
@@ -129,7 +126,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $stmt = oci_parse($this->resource, $query);
         oci_execute($stmt);
         $dbNameArray = oci_fetch_array($stmt, OCI_ASSOC);
-
         return $dbNameArray['current_schema'];
     }
 
@@ -145,7 +141,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidArgumentException('A resource of type "oci8 connection" was expected');
         }
         $this->resource = $resource;
-
         return $this;
     }
 
@@ -157,7 +152,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function getResource()
     {
         $this->connect();
-
         return $this->resource;
     }
 
@@ -182,7 +176,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                     return $p[$name];
                 }
             }
-
             return null;
         };
 
@@ -336,7 +329,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $resultPrototype = $this->driver->createResult($ociStmt);
-
         return $resultPrototype;
     }
 

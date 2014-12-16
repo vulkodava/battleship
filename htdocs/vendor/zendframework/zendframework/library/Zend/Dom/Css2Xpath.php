@@ -28,7 +28,6 @@ class Css2Xpath
     public static function transform($path)
     {
         trigger_error(sprintf('%s is deprecated; please use %s\Document\Query::cssToXpath instead', __METHOD__, __NAMESPACE__), E_USER_DEPRECATED);
-
         return Document\Query::cssToXpath($path);
     }
 }

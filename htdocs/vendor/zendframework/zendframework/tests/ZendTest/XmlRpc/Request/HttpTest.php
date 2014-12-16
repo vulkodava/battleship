@@ -22,7 +22,7 @@ class HTTPTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->xml = <<<EOX
+        $this->xml =<<<EOX
 <?xml version="1.0" encoding="UTF-8"?>
 <methodCall>
     <methodName>test.userUpdate</methodName>
@@ -62,9 +62,9 @@ EOX;
                 unset($_SERVER[$key]);
             }
         }
-        $_SERVER['HTTP_USER_AGENT'] = 'Zend_XmlRpc_Client';
-        $_SERVER['HTTP_HOST'] = 'localhost';
-        $_SERVER['HTTP_CONTENT_TYPE'] = 'text/xml';
+        $_SERVER['HTTP_USER_AGENT']     = 'Zend_XmlRpc_Client';
+        $_SERVER['HTTP_HOST']           = 'localhost';
+        $_SERVER['HTTP_CONTENT_TYPE']   = 'text/xml';
         $_SERVER['HTTP_CONTENT_LENGTH'] = strlen($this->xml) + 1;
         PHPInput::mockInput($this->xml);
     }
@@ -87,9 +87,9 @@ EOX;
     public function testGetHeaders()
     {
         $expected = array(
-            'User-Agent' => 'Zend_XmlRpc_Client',
-            'Host' => 'localhost',
-            'Content-Type' => 'text/xml',
+            'User-Agent'     => 'Zend_XmlRpc_Client',
+            'Host'           => 'localhost',
+            'Content-Type'   => 'text/xml',
             'Content-Length' => 958
         );
         $this->assertEquals($expected, $this->request->getHeaders());
@@ -97,7 +97,7 @@ EOX;
 
     public function testGetFullRequest()
     {
-        $expected = <<<EOT
+        $expected =<<<EOT
 User-Agent: Zend_XmlRpc_Client
 Host: localhost
 Content-Type: text/xml
@@ -145,6 +145,6 @@ class HTTPTestExtension extends Request\Http
     public function __construct($method = null, $params = null)
     {
         $this->method = $method;
-        $this->params = (array)$params;
+        $this->params = (array) $params;
     }
 }

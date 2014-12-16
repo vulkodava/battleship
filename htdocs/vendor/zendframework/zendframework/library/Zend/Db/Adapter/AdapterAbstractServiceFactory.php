@@ -57,7 +57,6 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
         $config = $this->getConfig($services);
-
         return new Adapter($config[$requestedName]);
     }
 
@@ -75,7 +74,6 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
 
         if (!$services->has('Config')) {
             $this->config = array();
-
             return $this->config;
         }
 
@@ -84,7 +82,6 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
             || !is_array($config['db'])
         ) {
             $this->config = array();
-
             return $this->config;
         }
 
@@ -93,12 +90,10 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
             || !is_array($config['adapters'])
         ) {
             $this->config = array();
-
             return $this->config;
         }
 
         $this->config = $config['adapters'];
-
         return $this->config;
     }
 }

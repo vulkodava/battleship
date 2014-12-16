@@ -74,7 +74,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         if ($this->primaryKeyColumn == null) {
             throw new Exception\RuntimeException('This row object does not have a primary key column set.');
         } elseif (is_string($this->primaryKeyColumn)) {
-            $this->primaryKeyColumn = (array)$this->primaryKeyColumn;
+            $this->primaryKeyColumn = (array) $this->primaryKeyColumn;
         }
 
         if (!$this->sql instanceof Sql) {
@@ -90,7 +90,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
      * Populate Data
      *
      * @param  array $rowData
-     * @param  bool $rowExistsInDatabase
+     * @param  bool  $rowExistsInDatabase
      * @return AbstractRowGateway
      */
     public function populate(array $rowData, $rowExistsInDatabase = false)
@@ -253,7 +253,6 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     public function offsetSet($offset, $value)
     {
         $this->data[$offset] = $value;
-
         return $this;
     }
 
@@ -266,7 +265,6 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     public function offsetUnset($offset)
     {
         $this->data[$offset] = null;
-
         return $this;
     }
 

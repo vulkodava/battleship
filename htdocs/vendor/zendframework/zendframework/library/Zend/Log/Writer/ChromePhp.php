@@ -29,7 +29,7 @@ class ChromePhp extends AbstractWriter
      * Initializes a new instance of this class.
      *
      * @param null|ChromePhpInterface|array|Traversable $instance An instance of ChromePhpInterface
-     *                                                            that should be used for logging
+     *        that should be used for logging
      */
     public function __construct($instance = null)
     {
@@ -97,7 +97,6 @@ class ChromePhp extends AbstractWriter
         ) {
             $this->setChromePhp(new ChromePhpBridge());
         }
-
         return $this->chromephp;
     }
 
@@ -110,7 +109,6 @@ class ChromePhp extends AbstractWriter
     public function setChromePhp(ChromePhpInterface $instance)
     {
         $this->chromephp = $instance;
-
         return $this;
     }
 }

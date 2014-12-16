@@ -57,26 +57,26 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
         $serviceConfig = array(
             'invokables' => array(
                 'SharedEventManager' => 'Zend\EventManager\SharedEventManager',
-                'DispatchListener' => 'Zend\Mvc\DispatchListener',
-                'RouteListener' => 'Zend\Mvc\RouteListener',
+                'DispatchListener'   => 'Zend\Mvc\DispatchListener',
+                'RouteListener'      => 'Zend\Mvc\RouteListener',
                 'SendResponseListener' => 'Zend\Mvc\SendResponseListener'
             ),
             'factories' => array(
-                'Application' => 'Zend\Mvc\Service\ApplicationFactory',
-                'ConsoleViewManager' => 'Zend\Mvc\Service\ConsoleViewManagerFactory',
-                'EventManager' => 'Zend\Mvc\Service\EventManagerFactory',
-                'ViewHelperManager' => 'Zend\Mvc\Service\ViewHelperManagerFactory',
-                'Request' => 'Zend\Mvc\Service\RequestFactory',
-                'Response' => 'Zend\Mvc\Service\ResponseFactory',
-                'Router' => 'Zend\Mvc\Service\RouterFactory',
-                'ConsoleRouter' => 'Zend\Mvc\Service\RouterFactory',
-                'HttpRouter' => 'Zend\Mvc\Service\RouterFactory',
-                'HttpViewManager' => 'Zend\Mvc\Service\HttpViewManagerFactory',
-                'RoutePluginManager' => 'Zend\Mvc\Service\RoutePluginManagerFactory',
-                'ViewManager' => 'Zend\Mvc\Service\ViewManagerFactory',
-                'ViewResolver' => 'Zend\Mvc\Service\ViewResolverFactory',
+                'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
+                'ConsoleViewManager'      => 'Zend\Mvc\Service\ConsoleViewManagerFactory',
+                'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
+                'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
+                'Request'                 => 'Zend\Mvc\Service\RequestFactory',
+                'Response'                => 'Zend\Mvc\Service\ResponseFactory',
+                'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+                'ConsoleRouter'           => 'Zend\Mvc\Service\RouterFactory',
+                'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
+                'HttpViewManager'         => 'Zend\Mvc\Service\HttpViewManagerFactory',
+                'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
+                'ViewManager'             => 'Zend\Mvc\Service\ViewManagerFactory',
+                'ViewResolver'            => 'Zend\Mvc\Service\ViewResolverFactory',
                 'ViewTemplateMapResolver' => 'Zend\Mvc\Service\ViewTemplateMapResolverFactory',
-                'ViewTemplatePathStack' => 'Zend\Mvc\Service\ViewTemplatePathStackFactory',
+                'ViewTemplatePathStack'   => 'Zend\Mvc\Service\ViewTemplatePathStackFactory',
             ),
             'shared' => array(
                 'EventManager' => false,
@@ -96,8 +96,8 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
         $request = $this->serviceManager->get('Request');
         $this->assertInstanceOf('Zend\Http\Request', $request);
         $viewHelpers = $this->serviceManager->get('ViewHelperManager');
-        $urlHelper = $viewHelpers->get('url');
-        $test = $urlHelper('test');
+        $urlHelper   = $viewHelpers->get('url');
+        $test        = $urlHelper('test');
         $this->assertEquals('/test', $test);
     }
 
@@ -111,8 +111,8 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
         $router->setRequestUri($request->getUri());
         $request->setUri('http://example.com/test');
         $viewHelpers = $this->serviceManager->get('ViewHelperManager');
-        $urlHelper = $viewHelpers->get('url');
-        $test = $urlHelper('test', array(), array('force_canonical' => true));
+        $urlHelper   = $viewHelpers->get('url');
+        $test        = $urlHelper('test', array(), array('force_canonical' => true));
         $this->assertContains('/test', $test);
     }
 
@@ -123,8 +123,8 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
         $request = $this->serviceManager->get('Request');
         $this->assertInstanceOf('Zend\Console\Request', $request);
         $viewHelpers = $this->serviceManager->get('ViewHelperManager');
-        $urlHelper = $viewHelpers->get('url');
-        $test = $urlHelper('test');
+        $urlHelper   = $viewHelpers->get('url');
+        $test        = $urlHelper('test');
         $this->assertEquals('/test', $test);
     }
 }

@@ -20,7 +20,7 @@ class SimpleRouteStackTest extends TestCase
     public function testSetRoutePluginManager()
     {
         $routes = new RoutePluginManager();
-        $stack = new SimpleRouteStack();
+        $stack  = new SimpleRouteStack();
         $stack->setRoutePluginManager($routes);
 
         $this->assertEquals($routes, $stack->getRoutePluginManager());
@@ -120,7 +120,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $stack = new SimpleRouteStack();
         $stack->addRoute('foo', array(
-            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
+            'type'    => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
             'options' => array()
         ));
 
@@ -139,10 +139,10 @@ class SimpleRouteStackTest extends TestCase
         $stack = new SimpleRouteStack();
 
         $stack->addRoute('foo', array(
-            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRouteWithParam',
+            'type'     => '\ZendTest\Mvc\Router\TestAsset\DummyRouteWithParam',
             'priority' => 2
         ))->addRoute('bar', array(
-            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
+            'type'     => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
             'priority' => 1
         ));
 
@@ -158,7 +158,7 @@ class SimpleRouteStackTest extends TestCase
         $stack->addRoute('baz', $route);
 
         $stack->addRoute('foo', array(
-            'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
+            'type'     => '\ZendTest\Mvc\Router\TestAsset\DummyRoute',
             'priority' => 1
         ));
 
@@ -239,8 +239,8 @@ class SimpleRouteStackTest extends TestCase
             'Zend\Mvc\Router\SimpleRouteStack',
             array(),
             array(
-                'route_plugins' => new RoutePluginManager(),
-                'routes' => array(),
+                'route_plugins'  => new RoutePluginManager(),
+                'routes'         => array(),
                 'default_params' => array()
             )
         );

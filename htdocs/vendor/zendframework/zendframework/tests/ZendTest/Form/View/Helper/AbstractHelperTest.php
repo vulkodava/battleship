@@ -8,7 +8,6 @@
  */
 
 namespace ZendTest\Form\View\Helper;
-
 use Zend\Escaper\Escaper;
 
 /**

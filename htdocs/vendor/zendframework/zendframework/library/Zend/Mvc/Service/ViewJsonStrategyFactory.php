@@ -30,7 +30,6 @@ class ViewJsonStrategyFactory implements FactoryInterface
     {
         $jsonRenderer = $serviceLocator->get('ViewJsonRenderer');
         $jsonStrategy = new JsonStrategy($jsonRenderer);
-
         return $jsonStrategy;
     }
 }

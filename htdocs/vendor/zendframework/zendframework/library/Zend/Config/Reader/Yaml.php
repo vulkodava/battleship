@@ -61,7 +61,6 @@ class Yaml implements ReaderInterface
             );
         }
         $this->yamlDecoder = $yamlDecoder;
-
         return $this;
     }
 
@@ -155,7 +154,6 @@ class Yaml implements ReaderInterface
                 $data = array_replace_recursive($data, $reader->fromFile($this->directory . '/' . $value));
             }
         }
-
         return $data;
     }
 }

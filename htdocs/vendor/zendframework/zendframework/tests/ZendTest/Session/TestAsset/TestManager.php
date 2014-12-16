@@ -30,8 +30,7 @@ class TestManager extends AbstractManager
     }
 
     public function stop()
-    {
-    }
+    {}
 
     public function writeClose()
     {
@@ -39,52 +38,40 @@ class TestManager extends AbstractManager
     }
 
     public function getName()
-    {
-    }
+    {}
 
     public function setName($name)
-    {
-    }
+    {}
 
     public function getId()
-    {
-    }
+    {}
 
     public function setId($id)
-    {
-    }
+    {}
 
     public function regenerateId()
-    {
-    }
+    {}
 
     public function rememberMe($ttl = null)
-    {
-    }
+    {}
 
     public function forgetMe()
-    {
-    }
+    {}
 
 
     public function setValidatorChain(EventManagerInterface $chain)
-    {
-    }
+    {}
 
     public function getValidatorChain()
-    {
-    }
+    {}
 
     public function isValid()
-    {
-    }
+    {}
 
 
     public function sessionExists()
-    {
-    }
+    {}
 
     public function expireSessionCookie()
-    {
-    }
+    {}
 }

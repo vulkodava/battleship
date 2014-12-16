@@ -64,7 +64,6 @@ class Variables extends ArrayObject
                     break;
             }
         }
-
         return $this;
     }
 
@@ -76,8 +75,7 @@ class Variables extends ArrayObject
      */
     public function setStrictVars($flag)
     {
-        $this->strictVars = (bool)$flag;
-
+        $this->strictVars = (bool) $flag;
         return $this;
     }
 
@@ -104,7 +102,7 @@ class Variables extends ArrayObject
             if (method_exists($spec, 'toArray')) {
                 $spec = $spec->toArray();
             } else {
-                $spec = (array)$spec;
+                $spec = (array) $spec;
             }
         }
         if (!is_array($spec)) {
@@ -140,7 +138,6 @@ class Variables extends ArrayObject
                     $key
                 ), E_USER_NOTICE);
             }
-
             return null;
         }
 

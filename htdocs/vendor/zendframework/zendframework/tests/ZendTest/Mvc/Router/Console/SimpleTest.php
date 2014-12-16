@@ -22,17 +22,17 @@ class SimpleTest extends TestCase
             // -- mandatory long flags
             'mandatory-long-flag-no-match' => array(
                 '--foo --bar',
-                array('a', 'b', '--baz'),
+                array('a','b','--baz'),
                 null
             ),
             'mandatory-long-flag-no-partial-match' => array(
                 '--foo --bar',
-                array('--foo', '--baz'),
+                array('--foo','--baz'),
                 null
             ),
             'mandatory-long-flag-match' => array(
                 '--foo --bar',
-                array('--foo', '--bar'),
+                array('--foo','--bar'),
                 array('foo' => true, 'bar' => true)
             ),
             'mandatory-long-flag-match-with-zero-value' => array(
@@ -42,12 +42,12 @@ class SimpleTest extends TestCase
             ),
             'mandatory-long-flag-mixed-order-match' => array(
                 '--foo --bar',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array('foo' => true, 'bar' => true)
             ),
             'mandatory-long-flag-whitespace-in-definition' => array(
                 '      --foo   --bar ',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -81,27 +81,27 @@ class SimpleTest extends TestCase
             // -- mandatory short flags
             'mandatory-short-flag-no-match' => array(
                 '-f -b',
-                array('a', 'b', '-f'),
+                array('a','b','-f'),
                 null
             ),
             'mandatory-short-flag-no-partial-match' => array(
                 '-f -b',
-                array('-f', '-z'),
+                array('-f','-z'),
                 null
             ),
             'mandatory-short-flag-match' => array(
                 '-f -b',
-                array('-f', '-b'),
+                array('-f','-b'),
                 array('f' => true, 'b' => true)
             ),
             'mandatory-short-flag-mixed-order-match' => array(
                 '-f -b',
-                array('-b', '-f'),
+                array('-b','-f'),
                 array('f' => true, 'b' => true)
             ),
             'mandatory-short-flag-whitespace-in-definition' => array(
                 '      -f   -b ',
-                array('-b', '-f'),
+                array('-b','-f'),
                 array(
                     'f' => true,
                     'b' => true,
@@ -157,7 +157,7 @@ class SimpleTest extends TestCase
             ),
             'optional-long-flag-match' => array(
                 '--foo [--bar]',
-                array('--foo', '--bar'),
+                array('--foo','--bar'),
                 array(
                     'foo' => true,
                     'bar' => true
@@ -188,7 +188,7 @@ class SimpleTest extends TestCase
                 '--foo [--barBaz=]',
                 array('--foo', '--barBaz=4'),
                 array(
-                    'foo' => true,
+                    'foo'    => true,
                     'barBaz' => 4
                 )
             ),
@@ -210,12 +210,12 @@ class SimpleTest extends TestCase
             ),
             'optional-long-flag-mixed-order-match' => array(
                 '--foo --bar',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array('foo' => true, 'bar' => true)
             ),
             'optional-long-flag-whitespace-in-definition' => array(
                 '      --foo   [--bar] ',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -224,7 +224,7 @@ class SimpleTest extends TestCase
             ),
             'optional-long-flag-whitespace-in-definition2' => array(
                 '      --foo     [--bar      ] ',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -233,7 +233,7 @@ class SimpleTest extends TestCase
             ),
             'optional-long-flag-whitespace-in-definition3' => array(
                 '      --foo   [   --bar     ] ',
-                array('--bar', '--foo'),
+                array('--bar','--foo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -245,7 +245,7 @@ class SimpleTest extends TestCase
             // -- value flags
             'mandatory-value-flag-syntax-1' => array(
                 '--foo=s',
-                array('--foo', 'bar'),
+                array('--foo','bar'),
                 array(
                     'foo' => 'bar',
                     'bar' => null
@@ -253,7 +253,7 @@ class SimpleTest extends TestCase
             ),
             'mandatory-value-flag-syntax-2' => array(
                 '--foo=',
-                array('--foo', 'bar'),
+                array('--foo','bar'),
                 array(
                     'foo' => 'bar',
                     'bar' => null
@@ -261,7 +261,7 @@ class SimpleTest extends TestCase
             ),
             'mandatory-value-flag-syntax-3' => array(
                 '--foo=anystring',
-                array('--foo', 'bar'),
+                array('--foo','bar'),
                 array(
                     'foo' => 'bar',
                     'bar' => null
@@ -286,17 +286,17 @@ class SimpleTest extends TestCase
             ),
             'mandatory-value-flag-space-complex-1' => array(
                 '--foo=',
-                array('--foo', 'SomeComplexValue=='),
+                array('--foo','SomeComplexValue=='),
                 array('foo' => 'SomeComplexValue==')
             ),
             'mandatory-value-flag-space-complex-2' => array(
                 '--foo=',
-                array('--foo', '...,</\/\\//""\'\'\'"\"'),
+                array('--foo','...,</\/\\//""\'\'\'"\"'),
                 array('foo' => '...,</\/\\//""\'\'\'"\"')
             ),
             'mandatory-value-flag-space-complex-3' => array(
                 '--foo=',
-                array('--foo', '===--'),
+                array('--foo','===--'),
                 array('foo' => '===--')
             ),
 
@@ -308,7 +308,7 @@ class SimpleTest extends TestCase
             ),
             'mandatory-literal-match-2' => array(
                 'foo bar baz',
-                array('foo', 'bar', 'baz'),
+                array('foo','bar','baz'),
                 array('foo' => null, 'bar' => null, 'baz' => null, 'bazinga' => null)
             ),
             'mandatory-literal-mismatch' => array(
@@ -318,69 +318,69 @@ class SimpleTest extends TestCase
             ),
             'mandatory-literal-order' => array(
                 'foo bar',
-                array('bar', 'foo'),
+                array('bar','foo'),
                 null
             ),
             'mandatory-literal-partial-mismatch' => array(
                 'foo bar baz',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 null
             ),
             'mandatory-literal-alternative-match-1' => array(
                 'foo ( bar | baz )',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 array('foo' => null, 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-alternative-match-2' => array(
                 'foo (bar|baz)',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 array('foo' => null, 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-alternative-match-3' => array(
                 'foo ( bar    |   baz )',
-                array('foo', 'baz'),
+                array('foo','baz'),
                 array('foo' => null, 'bar' => false, 'baz' => true)
             ),
             'mandatory-literal-alternative-mismatch' => array(
                 'foo ( bar |   baz )',
-                array('foo', 'bazinga'),
+                array('foo','bazinga'),
                 null
             ),
             'mandatory-literal-namedAlternative-match-1' => array(
                 'foo ( bar | baz ):altGroup',
-                array('foo', 'bar'),
-                array('foo' => null, 'altGroup' => 'bar', 'bar' => true, 'baz' => false)
+                array('foo','bar'),
+                array('foo' => null, 'altGroup'=>'bar', 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-namedAlternative-match-2' => array(
                 'foo ( bar |   baz   ):altGroup9',
-                array('foo', 'baz'),
-                array('foo' => null, 'altGroup9' => 'baz', 'bar' => false, 'baz' => true)
+                array('foo','baz'),
+                array('foo' => null, 'altGroup9'=>'baz', 'bar' => false, 'baz' => true)
             ),
             'mandatory-literal-namedAlternative-mismatch' => array(
                 'foo ( bar |   baz   ):altGroup9',
-                array('foo', 'bazinga'),
+                array('foo','bazinga'),
                 null
             ),
 
             // -- optional literal params
             'optional-literal-match' => array(
                 'foo [bar] [baz]',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 array('foo' => null, 'bar' => true, 'baz' => null)
             ),
             'optional-literal-mismatch' => array(
                 'foo [bar] [baz]',
-                array('baz', 'bar'),
+                array('baz','bar'),
                 null
             ),
             'optional-literal-shuffled-mismatch' => array(
                 'foo [bar] [baz]',
-                array('foo', 'baz', 'bar'),
+                array('foo','baz','bar'),
                 null
             ),
             'optional-literal-alternative-match' => array(
                 'foo [bar | baz]',
-                array('foo', 'baz'),
+                array('foo','baz'),
                 array('foo' => null, 'baz' => true, 'bar' => false)
             ),
             'optional-literal-alternative-mismatch' => array(
@@ -390,23 +390,23 @@ class SimpleTest extends TestCase
             ),
             'optional-literal-namedAlternative-match-1' => array(
                 'foo [bar | baz]:altGroup1',
-                array('foo', 'baz'),
+                array('foo','baz'),
                 array('foo' => null, 'altGroup1' => 'baz', 'baz' => true, 'bar' => false)
             ),
             'optional-literal-namedAlternative-match-2' => array(
                 'foo [bar | baz | bazinga]:altGroup100',
-                array('foo', 'bazinga'),
+                array('foo','bazinga'),
                 array('foo' => null, 'altGroup100' => 'bazinga', 'bazinga' => true, 'baz' => false, 'bar' => false)
             ),
             'optional-literal-namedAlternative-match-3' => array(
                 'foo [ bar ]:altGroup100',
-                array('foo', 'bar'),
+                array('foo','bar'),
                 array('foo' => null, 'altGroup100' => 'bar', 'bar' => true, 'baz' => null)
             ),
             'optional-literal-namedAlternative-mismatch' => array(
                 'foo [ bar | baz ]:altGroup9',
                 array('foo'),
-                array('foo' => null, 'altGroup9' => null, 'bar' => false, 'baz' => false)
+                array('foo' => null, 'altGroup9'=> null, 'bar' => false, 'baz' => false)
             ),
 
             // -- value params
@@ -428,7 +428,7 @@ class SimpleTest extends TestCase
             ),
             'mandatory-value-param-mixed-with-literal' => array(
                 'a b <foo> c',
-                array('a', 'b', 'bar', 'c'),
+                array('a','b','bar','c'),
                 array(
                     'a' => null,
                     'b' => null,
@@ -439,27 +439,27 @@ class SimpleTest extends TestCase
             ),
             'optional-value-param-1' => array(
                 'a b [<c>]',
-                array('a', 'b', 'bar'),
+                array('a','b','bar'),
                 array(
-                    'a' => null,
-                    'b' => null,
-                    'c' => 'bar',
+                    'a'   => null,
+                    'b'   => null,
+                    'c'   => 'bar',
                     'bar' => null,
                 ),
             ),
             'optional-value-param-2' => array(
                 'a b [<c>]',
-                array('a', 'b'),
+                array('a','b'),
                 array(
-                    'a' => null,
-                    'b' => null,
-                    'c' => null,
+                    'a'   => null,
+                    'b'   => null,
+                    'c'   => null,
                     'bar' => null,
                 ),
             ),
             'optional-value-param-3' => array(
                 'a b [<c>]',
-                array('a', 'b', '--c'),
+                array('a','b','--c'),
                 null
             ),
 
@@ -469,7 +469,7 @@ class SimpleTest extends TestCase
                 array('--foo'),
                 array(
                     'foo' => true,
-                    'f' => false,
+                    'f'   => false,
                     'baz' => null,
                 )
             ),
@@ -478,40 +478,40 @@ class SimpleTest extends TestCase
                 array('-f'),
                 array(
                     'foo' => false,
-                    'f' => true,
+                    'f'   => true,
                     'baz' => null,
                 )
             ),
             'optional-long-short-alternative-1' => array(
                 'a <b> [ --foo | -f ]',
-                array('a', 'bar'),
+                array('a','bar'),
                 array(
-                    'a' => null,
-                    'b' => 'bar',
+                    'a'   => null,
+                    'b'   => 'bar',
                     'foo' => false,
-                    'f' => false,
+                    'f'   => false,
                     'baz' => null,
                 )
             ),
             'optional-long-short-alternative-2' => array(
                 'a <b> [ --foo | -f ]',
-                array('a', 'bar', '-f'),
+                array('a','bar', '-f'),
                 array(
-                    'a' => null,
-                    'b' => 'bar',
+                    'a'   => null,
+                    'b'   => 'bar',
                     'foo' => false,
-                    'f' => true,
+                    'f'   => true,
                     'baz' => null,
                 )
             ),
             'optional-long-short-alternative-3' => array(
                 'a <b> [ --foo | -f ]',
-                array('a', '--foo', 'bar'),
+                array('a','--foo', 'bar'),
                 array(
-                    'a' => null,
-                    'b' => 'bar',
+                    'a'   => null,
+                    'b'   => 'bar',
                     'foo' => true,
-                    'f' => false,
+                    'f'   => false,
                     'baz' => null,
                 )
             ),
@@ -519,30 +519,30 @@ class SimpleTest extends TestCase
 
             'mandatory-and-optional-value-params-with-flags-1' => array(
                 'a b <c> [<d>] [--eee|-e] [--fff|-f]',
-                array('a', 'b', 'foo', 'bar'),
+                array('a','b','foo','bar'),
                 array(
-                    'a' => null,
-                    'b' => null,
-                    'c' => 'foo',
-                    'd' => 'bar',
-                    'e' => false,
+                    'a'   => null,
+                    'b'   => null,
+                    'c'   => 'foo',
+                    'd'   => 'bar',
+                    'e'   => false,
                     'eee' => false,
                     'fff' => false,
-                    'f' => false,
+                    'f'   => false,
                 ),
             ),
             'mandatory-and-optional-value-params-with-flags-2' => array(
                 'a b <c> [<d>] [--eee|-e] [--fff|-f]',
-                array('a', 'b', '--eee', 'foo', 'bar'),
+                array('a','b','--eee', 'foo','bar'),
                 array(
-                    'a' => null,
-                    'b' => null,
-                    'c' => 'foo',
-                    'd' => 'bar',
-                    'e' => false,
+                    'a'   => null,
+                    'b'   => null,
+                    'c'   => 'foo',
+                    'd'   => 'bar',
+                    'e'   => false,
                     'eee' => true,
                     'fff' => false,
-                    'f' => false,
+                    'f'   => false,
                 ),
             ),
 
@@ -550,22 +550,22 @@ class SimpleTest extends TestCase
             // -- overflows
             'too-many-arguments1' => array(
                 'foo bar',
-                array('foo', 'bar', 'baz'),
+                array('foo','bar','baz'),
                 null
             ),
             'too-many-arguments2' => array(
                 'foo bar [baz]',
-                array('foo', 'bar', 'baz', 'woo'),
+                array('foo','bar','baz','woo'),
                 null,
             ),
             'too-many-arguments3' => array(
                 'foo bar [--baz]',
-                array('foo', 'bar', '--baz', 'woo'),
+                array('foo','bar','--baz','woo'),
                 null,
             ),
             'too-many-arguments4' => array(
                 'foo bar [--baz] woo',
-                array('foo', 'bar', 'woo'),
+                array('foo','bar','woo'),
                 array(
                     'foo' => null,
                     'bar' => null,
@@ -575,7 +575,7 @@ class SimpleTest extends TestCase
             ),
             'too-many-arguments5' => array(
                 '--foo --bar [--baz] woo',
-                array('--bar', '--foo', 'woo'),
+                array('--bar','--foo','woo'),
                 array(
                     'foo' => true,
                     'bar' => true,
@@ -585,7 +585,7 @@ class SimpleTest extends TestCase
             ),
             'too-many-arguments6' => array(
                 '--foo --bar [--baz]',
-                array('--bar', '--foo', 'woo'),
+                array('--bar','--foo','woo'),
                 null
             ),
 
@@ -678,7 +678,7 @@ class SimpleTest extends TestCase
             ),
 
             /**
-             * @bug  ZF2-4315
+             * @bug ZF2-4315
              * @link https://github.com/zendframework/zf2/issues/4315
              */
             'literal-with-dashes' => array(
@@ -686,10 +686,10 @@ class SimpleTest extends TestCase
                 array('foo-bar-baz',),
                 array(
                     'foo-bar-baz' => null,
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
 
@@ -698,10 +698,10 @@ class SimpleTest extends TestCase
                 array('foo-bar-baz'),
                 array(
                     'foo-bar-baz' => true,
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-with-dashes2' => array(
@@ -709,101 +709,101 @@ class SimpleTest extends TestCase
                 array('foo'),
                 array(
                     'foo-bar-baz' => false,
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-alternative-with-dashes' => array(
                 '(foo-bar|foo-baz) [--bar=]',
                 array('foo-bar',),
                 array(
-                    'foo-bar' => true,
-                    'foo-baz' => false,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo-bar'     => true,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-alternative-with-dashes' => array(
                 '[foo-bar|foo-baz] [--bar=]',
                 array('foo-baz',),
                 array(
-                    'foo-bar' => false,
-                    'foo-baz' => true,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo-bar'     => false,
+                    'foo-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-alternative-with-dashes2' => array(
                 'foo [foo-bar|foo-baz] [--bar=]',
                 array('foo',),
                 array(
-                    'foo' => null,
-                    'foo-bar' => false,
-                    'foo-baz' => false,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'foo-bar'     => false,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-flag-with-dashes' => array(
                 'foo --bar-baz',
-                array('foo', '--bar-baz'),
+                array('foo','--bar-baz'),
                 array(
-                    'foo' => null,
-                    'bar-baz' => true,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-flag-with-dashes' => array(
                 'foo [--bar-baz]',
-                array('foo', '--bar-baz'),
+                array('foo','--bar-baz'),
                 array(
-                    'foo' => null,
-                    'bar-baz' => true,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-flag-with-dashes2' => array(
                 'foo [--bar-baz]',
                 array('foo'),
                 array(
-                    'foo' => null,
-                    'bar-baz' => false,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-flag-alternative-with-dashes' => array(
                 'foo [--foo-bar|--foo-baz]',
-                array('foo', '--foo-baz'),
+                array('foo','--foo-baz'),
                 array(
-                    'foo' => null,
-                    'foo-bar' => false,
-                    'foo-baz' => true,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'foo-bar'     => false,
+                    'foo-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'literal-optional-flag-alternative-with-dashes2' => array(
                 'foo [--foo-bar|--foo-baz]',
                 array('foo'),
                 array(
-                    'foo' => null,
-                    'foo-bar' => false,
-                    'foo-baz' => false,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'foo-bar'     => false,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'value-with-dashes' => array(
@@ -811,10 +811,10 @@ class SimpleTest extends TestCase
                 array('abc',),
                 array(
                     'foo-bar-baz' => 'abc',
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
 
@@ -823,21 +823,21 @@ class SimpleTest extends TestCase
                 array('abc'),
                 array(
                     'foo-bar-baz' => 'abc',
-                    'foo' => null,
-                    'bar' => null,
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
             'value-optional-with-dashes2' => array(
                 '[<foo-bar-baz>] [--bar=]',
-                array('--bar', 'abc'),
+                array('--bar','abc'),
                 array(
                     'foo-bar-baz' => null,
-                    'foo' => null,
-                    'bar' => 'abc',
-                    'baz' => null,
-                    'something' => null,
+                    'foo'         => null,
+                    'bar'         => 'abc',
+                    'baz'         => null,
+                    'something'   => null,
                 )
             ),
 
@@ -847,9 +847,9 @@ class SimpleTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        string $routeDefinition
-     * @param        array $arguments
-     * @param        array|null $params
+     * @param        string         $routeDefinition
+     * @param        array          $arguments
+     * @param        array|null     $params
      */
     public function testMatching($routeDefinition, array $arguments = array(), array $params = null)
     {
@@ -886,9 +886,9 @@ class SimpleTest extends TestCase
     /**
      * @dataProvider routeProvider
      * @param        Segment $route
-     * @param        string $path
+     * @param        string  $path
      * @param        integer $offset
-     * @param        array $params
+     * @param        array   $params
      */
     public function __testAssembling(Segment $route, $path, $offset, array $params = null)
     {
@@ -927,7 +927,7 @@ class SimpleTest extends TestCase
                 'route' => 'Missing "route" in options array'
             ),
             array(
-                'route' => '/:foo[/:bar{-}]',
+                'route'       => '/:foo[/:bar{-}]',
                 'constraints' => array('foo' => 'bar')
             )
         );

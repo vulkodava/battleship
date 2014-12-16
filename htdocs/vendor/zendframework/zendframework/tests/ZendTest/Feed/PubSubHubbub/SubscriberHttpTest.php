@@ -72,9 +72,9 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
         $this->subscriber->subscribeAll();
         $this->assertEquals(
             'hub.callback=http%3A%2F%2Fwww.example.com%2Fcallback%3Fxhub.subscription%3D5536df06b5d'
-            . 'cb966edab3a4c4d56213c16a8184b&hub.lease_seconds=2592000&hub.mode='
-            . 'subscribe&hub.topic=http%3A%2F%2Fwww.example.com%2Ftopic&hub.veri'
-            . 'fy=sync&hub.verify=async&hub.verify_token=abc',
+            .'cb966edab3a4c4d56213c16a8184b&hub.lease_seconds=2592000&hub.mode='
+            .'subscribe&hub.topic=http%3A%2F%2Fwww.example.com%2Ftopic&hub.veri'
+            .'fy=sync&hub.verify=async&hub.verify_token=abc',
             $this->client->getResponse()->getBody());
     }
 
@@ -87,9 +87,9 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
         $this->subscriber->unsubscribeAll();
         $this->assertEquals(
             'hub.callback=http%3A%2F%2Fwww.example.com%2Fcallback%3Fxhub.subscription%3D5536df06b5d'
-            . 'cb966edab3a4c4d56213c16a8184b&hub.mode=unsubscribe&hub.topic=http'
-            . '%3A%2F%2Fwww.example.com%2Ftopic&hub.verify=sync&hub.verify=async'
-            . '&hub.verify_token=abc',
+            .'cb966edab3a4c4d56213c16a8184b&hub.mode=unsubscribe&hub.topic=http'
+            .'%3A%2F%2Fwww.example.com%2Ftopic&hub.verify=sync&hub.verify=async'
+            .'&hub.verify_token=abc',
             $this->client->getResponse()->getBody());
 
         $subscriptionRecord = $this->subscriber->getStorage()->getSubscription();
@@ -103,8 +103,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
         $stubMethods = array();
         foreach ($methods as $method) {
             if ($method->isPublic() || ($method->isProtected()
-                    && $method->isAbstract())
-            ) {
+            && $method->isAbstract())) {
                 $stubMethods[] = $method->getName();
             }
         }
@@ -112,7 +111,6 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             $className,
             $stubMethods
         );
-
         return $mocked;
     }
 }

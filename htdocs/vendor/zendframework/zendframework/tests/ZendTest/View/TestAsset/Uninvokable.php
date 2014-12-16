@@ -12,5 +12,4 @@ namespace ZendTest\View\TestAsset;
 use Zend\View\Helper\AbstractHelper as Helper;
 
 class Uninvokable extends Helper
-{
-}
+{ }

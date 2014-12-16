@@ -20,8 +20,8 @@ class DashToSeparatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilterSeparatesDashedWordsWithDefaultSpaces()
     {
-        $string = 'dash-separated-words';
-        $filter = new DashToSeparatorFilter();
+        $string   = 'dash-separated-words';
+        $filter   = new DashToSeparatorFilter();
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);
@@ -30,8 +30,8 @@ class DashToSeparatorTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSeparatesDashedWordsWithSomeString()
     {
-        $string = 'dash-separated-words';
-        $filter = new DashToSeparatorFilter(':-:');
+        $string   = 'dash-separated-words';
+        $filter   = new DashToSeparatorFilter(':-:');
         $filtered = $filter($string);
 
         $this->assertNotEquals($string, $filtered);

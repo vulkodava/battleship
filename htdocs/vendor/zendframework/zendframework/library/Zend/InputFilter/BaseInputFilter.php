@@ -56,7 +56,7 @@ class BaseInputFilter implements
      * Add an input to the input filter
      *
      * @param  InputInterface|InputFilterInterface $input
-     * @param  null|string $name Name used to retrieve this input
+     * @param  null|string                         $name Name used to retrieve this input
      * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
@@ -81,12 +81,10 @@ class BaseInputFilter implements
             // that this merges the new input into the original.
             $original = $this->inputs[$name];
             $original->merge($input);
-
             return $this;
         }
 
         $this->inputs[$name] = $input;
-
         return $this;
     }
 
@@ -94,7 +92,7 @@ class BaseInputFilter implements
      * Replace a named input
      *
      * @param  InputInterface|InputFilterInterface $input
-     * @param  string $name Name of the input to replace
+     * @param  string                              $name Name of the input to replace
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -119,7 +117,6 @@ class BaseInputFilter implements
         }
 
         $this->inputs[$name] = $input;
-
         return $this;
     }
 
@@ -139,7 +136,6 @@ class BaseInputFilter implements
                 $name
             ));
         }
-
         return $this->inputs[$name];
     }
 
@@ -163,7 +159,6 @@ class BaseInputFilter implements
     public function remove($name)
     {
         unset($this->inputs[$name]);
-
         return $this;
     }
 
@@ -188,7 +183,6 @@ class BaseInputFilter implements
         }
         $this->data = $data;
         $this->populate();
-
         return $this;
     }
 
@@ -209,7 +203,6 @@ class BaseInputFilter implements
         }
 
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
-
         return $this->validateInputs($inputs, $data);
     }
 
@@ -227,12 +220,12 @@ class BaseInputFilter implements
             $data = $this->getRawValues();
         }
 
-        $this->validInputs = array();
+        $this->validInputs   = array();
         $this->invalidInputs = array();
-        $valid = true;
+        $valid               = true;
 
         foreach ($inputs as $name) {
-            $input = $this->inputs[$name];
+            $input      = $this->inputs[$name];
             $dataExists = array_key_exists($name, $data);
 
             // key doesn't exist, but input is not required; valid
@@ -388,7 +381,6 @@ class BaseInputFilter implements
                     $input->setValidationGroup(self::VALIDATE_ALL);
                 }
             }
-
             return $this;
         }
 
@@ -500,7 +492,6 @@ class BaseInputFilter implements
             }
             $values[$name] = $input->getValue();
         }
-
         return $values;
     }
 
@@ -521,7 +512,6 @@ class BaseInputFilter implements
             ));
         }
         $input = $this->inputs[$name];
-
         return $input->getRawValue();
     }
 
@@ -543,7 +533,6 @@ class BaseInputFilter implements
             }
             $values[$name] = $input->getRawValue();
         }
-
         return $values;
     }
 
@@ -641,9 +630,9 @@ class BaseInputFilter implements
             ));
         }
 
-        $data = array_keys($this->data);
+        $data   = array_keys($this->data);
         $inputs = array_keys($this->inputs);
-        $diff = array_diff($data, $inputs);
+        $diff   = array_diff($data, $inputs);
         if (!empty($diff)) {
             return count(array_intersect($diff, $inputs)) == 0;
         }
@@ -666,12 +655,12 @@ class BaseInputFilter implements
             ));
         }
 
-        $data = array_keys($this->data);
+        $data   = array_keys($this->data);
         $inputs = array_keys($this->inputs);
-        $diff = array_diff($data, $inputs);
+        $diff   = array_diff($data, $inputs);
 
         $unknownInputs = array();
-        $intersect = array_intersect($diff, $data);
+        $intersect     = array_intersect($diff, $data);
         if (!empty($intersect)) {
             foreach ($intersect as $key) {
                 $unknownInputs[$key] = $this->data[$key];

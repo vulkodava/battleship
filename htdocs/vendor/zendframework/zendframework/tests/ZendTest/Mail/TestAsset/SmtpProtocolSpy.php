@@ -122,7 +122,7 @@ class SmtpProtocolSpy extends Smtp
      */
     public function setAuth($status)
     {
-        $this->auth = (bool)$status;
+        $this->auth = (bool) $status;
 
         return $this;
     }
@@ -145,7 +145,7 @@ class SmtpProtocolSpy extends Smtp
      */
     public function setSessionStatus($status)
     {
-        $this->sess = (bool)$status;
+        $this->sess = (bool) $status;
 
         return $this;
     }

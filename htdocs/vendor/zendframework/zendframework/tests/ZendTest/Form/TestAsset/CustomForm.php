@@ -21,7 +21,7 @@ class CustomForm extends Form
         parent::__construct('test_form');
 
         $this->setAttribute('method', 'post')
-            ->setHydrator(new ClassMethodsHydrator());
+             ->setHydrator(new ClassMethodsHydrator());
 
         $field1 = new Element('name', array('label' => 'Name'));
         $field1->setAttribute('type', 'text');
@@ -34,7 +34,8 @@ class CustomForm extends Form
         $this->add(array(
             'name' => 'csrf',
             'type' => 'Zend\Form\Element\Csrf',
-            'attributes' => array(),
+            'attributes' => array(
+            ),
         ));
 
         $this->add(array(
@@ -50,13 +51,13 @@ class CustomForm extends Form
         return array(
             'name' => array(
                 'required' => true,
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'Zend\Filter\StringTrim'),
                 ),
             ),
             'email' => array(
                 'required' => true,
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'Zend\Filter\StringTrim'),
                 ),
                 'validators' => array(

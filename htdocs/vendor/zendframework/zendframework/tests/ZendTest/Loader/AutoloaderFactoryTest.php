@@ -178,7 +178,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $loader = array_shift($loaders);
         $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $loader);
 
-        $test = array($loader, 'autoload');
+        $test  = array($loader, 'autoload');
         $found = false;
         foreach (spl_autoload_functions() as $function) {
             if ($function === $test) {

@@ -18,7 +18,7 @@ use ZendTest\Stdlib\TestAsset\ObjectProperty as ObjectPropertyTestAsset;
  * Unit tests for {@see \Zend\Stdlib\Hydrator\ObjectProperty}
  *
  * @covers \Zend\Stdlib\Hydrator\ObjectProperty
- * @group  Zend_Stdlib
+ * @group Zend_Stdlib
  */
 class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
 {

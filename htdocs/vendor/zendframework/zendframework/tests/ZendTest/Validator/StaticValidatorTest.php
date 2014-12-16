@@ -52,10 +52,10 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno
-     * @param  string $errstr
-     * @param  string $errfile
+     * @param  string  $errstr
+     * @param  string  $errfile
      * @param  integer $errline
-     * @param  array $errcontext
+     * @param  array   $errcontext
      * @return void
      */
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)

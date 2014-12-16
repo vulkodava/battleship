@@ -36,7 +36,7 @@ class CurlTest extends CommonHttpTests
      * @var array
      */
     protected $config = array(
-        'adapter' => 'Zend\Http\Client\Adapter\Curl',
+        'adapter'     => 'Zend\Http\Client\Adapter\Curl',
         'curloptions' => array(
             CURLOPT_INFILESIZE => 102400000,
         ),
@@ -61,7 +61,7 @@ class CurlTest extends CommonHttpTests
     public function testConfigSetAsArray()
     {
         $config = array(
-            'timeout' => 500,
+            'timeout'    => 500,
             'someoption' => 'hasvalue'
         );
 
@@ -81,8 +81,8 @@ class CurlTest extends CommonHttpTests
     public function testConfigSetAsZendConfig()
     {
         $config = new Config(array(
-            'timeout' => 400,
-            'nested' => array(
+            'timeout'  => 400,
+            'nested'   => array(
                 'item' => 'value',
             )
         ));
@@ -110,7 +110,6 @@ class CurlTest extends CommonHttpTests
 
     /**
      * CURLOPT_CLOSEPOLICY never worked and returns false on setopt always:
-     *
      * @link http://de2.php.net/manual/en/function.curl-setopt.php#84277
      *
      * This should throw an exception.
@@ -118,7 +117,7 @@ class CurlTest extends CommonHttpTests
     public function testSettingInvalidCurlOption()
     {
         $config = array(
-            'adapter' => 'Zend\Http\Client\Adapter\Curl',
+            'adapter'     => 'Zend\Http\Client\Adapter\Curl',
             'curloptions' => array(CURLOPT_CLOSEPOLICY => true),
         );
         $this->client = new \Zend\Http\Client($this->client->getUri(true), $config);
@@ -126,7 +125,7 @@ class CurlTest extends CommonHttpTests
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\RuntimeException',
             'Unknown or erroreous cURL option'
-        );
+            );
         $this->client->send();
     }
 
@@ -161,17 +160,17 @@ class CurlTest extends CommonHttpTests
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
         $adapter->setOptions(array(
-                'curloptions' => array(
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_TIMEOUT => 1,
-                ))
+            'curloptions' => array(
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_TIMEOUT => 1,
+            ))
         );
 
         $this->client->setUri($this->baseuri . 'testRedirections.php');
 
         //  Set some parameters
-        $this->client->setParameterGet(array('swallow' => 'african'));
-        $this->client->setParameterPost(array('Camelot' => 'A silly place'));
+        $this->client->setParameterGet(array ('swallow' => 'african'));
+        $this->client->setParameterPost(array ('Camelot' => 'A silly place'));
         $this->client->setMethod('POST');
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\RuntimeException',
@@ -181,7 +180,7 @@ class CurlTest extends CommonHttpTests
 
     /**
      * @group ZF-3758
-     * @link  http://framework.zend.com/issues/browse/ZF-3758
+     * @link http://framework.zend.com/issues/browse/ZF-3758
      */
     public function testPutFileContentWithHttpClient()
     {
@@ -198,7 +197,7 @@ class CurlTest extends CommonHttpTests
 
     /**
      * @group ZF-3758
-     * @link  http://framework.zend.com/issues/browse/ZF-3758
+     * @link http://framework.zend.com/issues/browse/ZF-3758
      */
     public function testPutFileHandleWithHttpClient()
     {
@@ -226,7 +225,7 @@ class CurlTest extends CommonHttpTests
     {
         $adapter = new Adapter\Curl();
         $this->setExpectedException('Zend\Http\Client\Adapter\Exception\RuntimeException',
-            'Trying to write but we are not connected');
+                                    'Trying to write but we are not connected');
         $adapter->write("GET", "someUri");
     }
 
@@ -242,7 +241,7 @@ class CurlTest extends CommonHttpTests
         $adapter = new Adapter\Curl();
 
         $adapter->setCurlOption('foo', 'bar')
-            ->setCurlOption('bar', 'baz');
+                ->setCurlOption('bar', 'baz');
 
         $this->assertEquals(
             array('curloptions' => array('foo' => 'bar', 'bar' => 'baz')),
@@ -325,14 +324,14 @@ class CurlTest extends CommonHttpTests
     public function testAuthorizeHeader()
     {
         // We just need someone to talk to
-        $this->client->setUri($this->baseuri . 'testHttpAuth.php');
+        $this->client->setUri($this->baseuri. 'testHttpAuth.php');
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
 
         $uid = 'alice';
         $pwd = 'secret';
 
-        $hash = base64_encode($uid . ':' . $pwd);
+        $hash   = base64_encode($uid . ':' . $pwd);
         $header = 'Authorization: Basic ' . $hash;
 
         $this->client->setAuth($uid, $pwd);

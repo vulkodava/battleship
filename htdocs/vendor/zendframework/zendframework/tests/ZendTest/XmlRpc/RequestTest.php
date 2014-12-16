@@ -20,7 +20,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * \Zend\XmlRpc\Request object
-     *
      * @var \Zend\XmlRpc\Request
      */
     protected $_request;
@@ -107,9 +106,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $xml = $this->_request->saveXml();
         $sxl = new \SimpleXMLElement($xml);
         $param = $sxl->params->param->value;
-        $type = 'dateTime.iso8601';
+        $type  = 'dateTime.iso8601';
         $this->assertTrue(isset($param->{$type}), var_export($param, 1));
-        $this->assertEquals($time, strtotime((string)$param->{$type}));
+        $this->assertEquals($time, strtotime((string) $param->{$type}));
     }
 
     /**
@@ -201,9 +200,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_request->loadXml(
             '<methodCall>'
-            . '<methodName>foo</methodName>'
-            . '<params><param/><param/><param><foo/></param></params>'
-            . '</methodCall>'));
+          . '<methodName>foo</methodName>'
+          . '<params><param/><param/><param><foo/></param></params>'
+          . '</methodCall>'));
         $this->assertTrue($this->_request->isFault());
         $this->assertSame(633, $this->_request->getFault()->getCode());
         $this->assertSame(
@@ -215,9 +214,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_request->loadXml(
             '<methodCall>'
-            . '<methodName>foo</methodName>'
-            . '<params><param><value><foo/></value></param></params>'
-            . '</methodCall>'));
+          . '<methodName>foo</methodName>'
+          . '<params><param><value><foo/></value></param></params>'
+          . '</methodCall>'));
         $this->assertTrue($this->_request->isFault());
         $this->assertSame(636, $this->_request->getFault()->getCode());
         $this->assertSame(
@@ -259,22 +258,22 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $result = $sx->xpath('//methodName');
         $count = 0;
-        while (list(, $node) = each($result)) {
+        while (list( , $node) = each($result)) {
             ++$count;
         }
         $this->assertEquals(1, $count, $xml);
 
         $result = $sx->xpath('//params');
         $count = 0;
-        while (list(, $node) = each($result)) {
+        while (list( , $node) = each($result)) {
             ++$count;
         }
         $this->assertEquals(1, $count, $xml);
 
-        $methodName = (string)$sx->methodName;
+        $methodName = (string) $sx->methodName;
         $params = array(
-            (string)$sx->params->param[0]->value->string,
-            (bool)$sx->params->param[1]->value->boolean
+            (string) $sx->params->param[0]->value->string,
+            (bool) $sx->params->param[1]->value->boolean
         );
 
         $this->assertEquals('do.Something', $methodName);

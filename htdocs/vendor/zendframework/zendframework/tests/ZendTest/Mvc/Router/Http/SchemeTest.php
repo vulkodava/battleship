@@ -42,9 +42,9 @@ class SchemeTest extends TestCase
 
     public function testAssembling()
     {
-        $uri = new HttpUri();
+        $uri   = new HttpUri();
         $route = new Scheme('https');
-        $path = $route->assemble(array(), array('uri' => $uri));
+        $path  = $route->assemble(array(), array('uri' => $uri));
 
         $this->assertEquals('', $path);
         $this->assertEquals('https', $uri->getScheme());
@@ -52,7 +52,7 @@ class SchemeTest extends TestCase
 
     public function testNoMatchWithoutUriMethod()
     {
-        $route = new Scheme('https');
+        $route   = new Scheme('https');
         $request = new BaseRequest();
 
         $this->assertNull($route->match($request));

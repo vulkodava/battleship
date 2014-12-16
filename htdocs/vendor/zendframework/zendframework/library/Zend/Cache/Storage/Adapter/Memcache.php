@@ -66,7 +66,7 @@ class Memcache extends AbstractAdapter implements
         parent::__construct($options);
 
         // reset initialized flag on update option(s)
-        $initialized = &$this->initialized;
+        $initialized = & $this->initialized;
         $this->getEventManager()->attach('option', function ($event) use (& $initialized) {
             $initialized = false;
         });
@@ -87,7 +87,7 @@ class Memcache extends AbstractAdapter implements
 
         // get resource manager and resource id
         $this->resourceManager = $options->getResourceManager();
-        $this->resourceId = $options->getResourceId();
+        $this->resourceId      = $options->getResourceId();
 
         // init namespace prefix
         $this->namespacePrefix = '';
@@ -131,7 +131,6 @@ class Memcache extends AbstractAdapter implements
         if (!$this->options) {
             $this->setOptions(new MemcacheOptions());
         }
-
         return $this->options;
     }
 
@@ -144,7 +143,6 @@ class Memcache extends AbstractAdapter implements
         if (!$this->getOptions()->getCompression()) {
             return 0;
         }
-
         // Don't compress numeric or boolean types
         return (is_bool($value) || is_int($value) || is_float($value)) ? 0 : MEMCACHE_COMPRESSED;
     }
@@ -162,7 +160,6 @@ class Memcache extends AbstractAdapter implements
         if (!$memc->flush()) {
             return new Exception\RuntimeException("Memcache flush failed");
         }
-
         return true;
     }
 
@@ -175,14 +172,13 @@ class Memcache extends AbstractAdapter implements
      */
     public function getTotalSpace()
     {
-        $memc = $this->getMemcacheResource();
+        $memc  = $this->getMemcacheResource();
         $stats = $memc->getExtendedStats();
         if ($stats === false) {
             return new Exception\RuntimeException("Memcache getStats failed");
         }
 
         $mem = array_pop($stats);
-
         return $mem['limit_maxbytes'];
     }
 
@@ -195,14 +191,13 @@ class Memcache extends AbstractAdapter implements
      */
     public function getAvailableSpace()
     {
-        $memc = $this->getMemcacheResource();
+        $memc  = $this->getMemcacheResource();
         $stats = $memc->getExtendedStats();
         if ($stats === false) {
             throw new Exception\RuntimeException('Memcache getStats failed');
         }
 
         $mem = array_pop($stats);
-
         return $mem['limit_maxbytes'] - $mem['bytes'];
     }
 
@@ -211,15 +206,15 @@ class Memcache extends AbstractAdapter implements
     /**
      * Internal method to get an item.
      *
-     * @param  string $normalizedKey
-     * @param  bool $success
-     * @param  mixed $casToken
+     * @param  string  $normalizedKey
+     * @param  bool    $success
+     * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $memc = $this->getMemcacheResource();
+        $memc        = $this->getMemcacheResource();
         $internalKey = $this->namespacePrefix . $normalizedKey;
 
         $result = $memc->get($internalKey);
@@ -229,7 +224,6 @@ class Memcache extends AbstractAdapter implements
         }
 
         $casToken = $result;
-
         return $result;
     }
 
@@ -255,10 +249,10 @@ class Memcache extends AbstractAdapter implements
 
         // remove namespace prefix from result
         if ($this->namespacePrefix !== '') {
-            $tmp = array();
+            $tmp            = array();
             $nsPrefixLength = strlen($this->namespacePrefix);
             foreach ($result as $internalKey => & $value) {
-                $tmp[substr($internalKey, $nsPrefixLength)] = &$value;
+                $tmp[substr($internalKey, $nsPrefixLength)] = & $value;
             }
             $result = $tmp;
         }
@@ -275,9 +269,8 @@ class Memcache extends AbstractAdapter implements
      */
     protected function internalHasItem(& $normalizedKey)
     {
-        $memc = $this->getMemcacheResource();
+        $memc  = $this->getMemcacheResource();
         $value = $memc->get($this->namespacePrefix . $normalizedKey);
-
         return ($value !== false);
     }
 
@@ -340,16 +333,14 @@ class Memcache extends AbstractAdapter implements
             foreach ($result as & $value) {
                 $value = array();
             }
-
             return $result;
         }
 
-        $final = array();
+        $final          = array();
         $nsPrefixLength = strlen($this->namespacePrefix);
         foreach (array_keys($result) as $internalKey) {
             $final[substr($internalKey, $nsPrefixLength)] = array();
         }
-
         return $final;
     }
 
@@ -359,15 +350,15 @@ class Memcache extends AbstractAdapter implements
      * Internal method to store an item.
      *
      * @param  string $normalizedKey
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $memc = $this->getMemcacheResource();
+        $memc       = $this->getMemcacheResource();
         $expiration = $this->expirationTime();
-        $flag = $this->getWriteFlag($value);
+        $flag       = $this->getWriteFlag($value);
 
         if (!$memc->set($this->namespacePrefix . $normalizedKey, $value, $flag, $expiration)) {
             throw new Exception\RuntimeException('Memcache set value failed');
@@ -380,15 +371,15 @@ class Memcache extends AbstractAdapter implements
      * Add an item.
      *
      * @param  string $normalizedKey
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value)
     {
-        $memc = $this->getMemcacheResource();
+        $memc       = $this->getMemcacheResource();
         $expiration = $this->expirationTime();
-        $flag = $this->getWriteFlag($value);
+        $flag       = $this->getWriteFlag($value);
 
         return $memc->add($this->namespacePrefix . $normalizedKey, $value, $flag, $expiration);
     }
@@ -397,15 +388,15 @@ class Memcache extends AbstractAdapter implements
      * Internal method to replace an existing item.
      *
      * @param  string $normalizedKey
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return bool
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value)
     {
-        $memc = $this->getMemcacheResource();
+        $memc       = $this->getMemcacheResource();
         $expiration = $this->expirationTime();
-        $flag = $this->getWriteFlag($value);
+        $flag       = $this->getWriteFlag($value);
 
         return $memc->replace($this->namespacePrefix . $normalizedKey, $value, $flag, $expiration);
     }
@@ -419,7 +410,7 @@ class Memcache extends AbstractAdapter implements
      */
     protected function internalRemoveItem(& $normalizedKey)
     {
-        $memc = $this->getMemcacheResource();
+        $memc   = $this->getMemcacheResource();
         // Delete's second parameter (timeout) is deprecated and not supported.
         // Values other than 0 may cause delete to fail.
         // http://www.php.net/manual/memcache.delete.php
@@ -430,16 +421,16 @@ class Memcache extends AbstractAdapter implements
      * Internal method to increment an item.
      *
      * @param  string $normalizedKey
-     * @param  int $value
+     * @param  int    $value
      * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value)
     {
-        $memc = $this->getMemcacheResource();
+        $memc        = $this->getMemcacheResource();
         $internalKey = $this->namespacePrefix . $normalizedKey;
-        $value = (int)$value;
-        $newValue = $memc->increment($internalKey, $value);
+        $value       = (int) $value;
+        $newValue    = $memc->increment($internalKey, $value);
 
         if ($newValue !== false) {
             return $newValue;
@@ -459,16 +450,16 @@ class Memcache extends AbstractAdapter implements
      * Internal method to decrement an item.
      *
      * @param  string $normalizedKey
-     * @param  int $value
+     * @param  int    $value
      * @return int|bool The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value)
     {
-        $memc = $this->getMemcacheResource();
+        $memc        = $this->getMemcacheResource();
         $internalKey = $this->namespacePrefix . $normalizedKey;
-        $value = (int)$value;
-        $newValue = $memc->decrement($internalKey, $value);
+        $value       = (int) $value;
+        $newValue    = $memc->decrement($internalKey, $value);
 
         if ($newValue !== false) {
             return $newValue;
@@ -505,13 +496,13 @@ class Memcache extends AbstractAdapter implements
             // This effectively removes support for `boolean` types since
             // "not found" return values are === false.
             $supportedDatatypes = array(
-                'NULL' => true,
-                'boolean' => false,
-                'integer' => true,
-                'double' => true,
-                'string' => true,
-                'array' => true,
-                'object' => 'object',
+                'NULL'     => true,
+                'boolean'  => false,
+                'integer'  => true,
+                'double'   => true,
+                'string'   => true,
+                'array'    => true,
+                'object'   => 'object',
                 'resource' => false,
             );
         } else {
@@ -524,32 +515,32 @@ class Memcache extends AbstractAdapter implements
             // Similarly, the saved value: (string)""
             // might have previously been: (bool)false or (string)""
             $supportedDatatypes = array(
-                'NULL' => true,
-                'boolean' => 'boolean',
-                'integer' => 'integer',
-                'double' => 'double',
-                'string' => true,
-                'array' => true,
-                'object' => 'object',
+                'NULL'     => true,
+                'boolean'  => 'boolean',
+                'integer'  => 'integer',
+                'double'   => 'double',
+                'string'   => true,
+                'array'    => true,
+                'object'   => 'object',
                 'resource' => false,
             );
         }
 
         $this->capabilityMarker = new stdClass();
-        $this->capabilities = new Capabilities(
+        $this->capabilities     = new Capabilities(
             $this,
             $this->capabilityMarker,
             array(
                 'supportedDatatypes' => $supportedDatatypes,
-                'supportedMetadata' => array(),
-                'minTtl' => 1,
-                'maxTtl' => 0,
-                'staticTtl' => true,
-                'ttlPrecision' => 1,
-                'useRequestTime' => false,
-                'expiredRead' => false,
-                'maxKeyLength' => 255,
-                'namespaceIsPrefix' => true,
+                'supportedMetadata'  => array(),
+                'minTtl'             => 1,
+                'maxTtl'             => 0,
+                'staticTtl'          => true,
+                'ttlPrecision'       => 1,
+                'useRequestTime'     => false,
+                'expiredRead'        => false,
+                'maxKeyLength'       => 255,
+                'namespaceIsPrefix'  => true,
             )
         );
 
@@ -578,7 +569,6 @@ class Memcache extends AbstractAdapter implements
         if ($ttl > 2592000) {
             return time() + $ttl;
         }
-
         return $ttl;
     }
 }

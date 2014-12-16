@@ -39,10 +39,10 @@ class DefaultComplexTypeTest extends WsdlTestHelper
     {
         $this->strategy->addComplexType('ZendTest\Soap\TestAsset\PublicPrivateProtected');
 
-        $nodes = $this->xpath->query('//xsd:element[@name="' . (PublicPrivateProtected::PROTECTED_VAR_NAME) . '"]');
+        $nodes = $this->xpath->query('//xsd:element[@name="'.(PublicPrivateProtected::PROTECTED_VAR_NAME).'"]');
         $this->assertEquals(0, $nodes->length, 'Document should not contain protected fields');
 
-        $nodes = $this->xpath->query('//xsd:element[@name="' . (PublicPrivateProtected::PRIVATE_VAR_NAME) . '"]');
+        $nodes = $this->xpath->query('//xsd:element[@name="'.(PublicPrivateProtected::PRIVATE_VAR_NAME).'"]');
         $this->assertEquals(0, $nodes->length, 'Document should not contain private fields');
 
         $this->testDocumentNodes();

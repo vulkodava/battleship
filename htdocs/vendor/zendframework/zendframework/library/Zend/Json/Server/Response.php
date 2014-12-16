@@ -15,35 +15,30 @@ class Response
 {
     /**
      * Response error
-     *
      * @var null|Error
      */
     protected $error;
 
     /**
      * Request ID
-     *
      * @var mixed
      */
     protected $id;
 
     /**
      * Result
-     *
      * @var mixed
      */
     protected $result;
 
     /**
      * Service map
-     *
      * @var Smd
      */
     protected $serviceMap;
 
     /**
      * JSON-RPC version
-     *
      * @var string
      */
     protected $version;
@@ -76,7 +71,6 @@ class Response
                 $this->setVersion($value);
             }
         }
-
         return $this;
     }
 
@@ -107,7 +101,6 @@ class Response
     public function setResult($value)
     {
         $this->result = $value;
-
         return $this;
     }
 
@@ -131,7 +124,6 @@ class Response
     public function setError(Error $error = null)
     {
         $this->error = $error;
-
         return $this;
     }
 
@@ -164,7 +156,6 @@ class Response
     public function setId($name)
     {
         $this->id = $name;
-
         return $this;
     }
 
@@ -186,7 +177,7 @@ class Response
      */
     public function setVersion($version)
     {
-        $version = (string)$version;
+        $version = (string) $version;
         if ('2.0' == $version) {
             $this->version = '2.0';
         } else {
@@ -215,13 +206,13 @@ class Response
     {
         if ($this->isError()) {
             $response = array(
-                'error' => $this->getError()->toArray(),
-                'id' => $this->getId(),
+                'error'  => $this->getError()->toArray(),
+                'id'     => $this->getId(),
             );
         } else {
             $response = array(
                 'result' => $this->getResult(),
-                'id' => $this->getId(),
+                'id'     => $this->getId(),
             );
         }
 
@@ -251,7 +242,6 @@ class Response
     public function setArgs($args)
     {
         $this->args = $args;
-
         return $this;
     }
 
@@ -264,7 +254,6 @@ class Response
     public function setServiceMap($serviceMap)
     {
         $this->serviceMap = $serviceMap;
-
         return $this;
     }
 

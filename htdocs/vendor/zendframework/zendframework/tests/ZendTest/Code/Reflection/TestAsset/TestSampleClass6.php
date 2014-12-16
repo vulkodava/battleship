@@ -33,7 +33,7 @@ class TestSampleClass6
      *
      * @emptyTag
      * @descriptionTag           A tag with just a description
-     * @param   int $var Description of $var
+     * @param   int     $var     Description of $var
      * @return  string           Description of return value
      */
     public function doSomething($var)
@@ -41,7 +41,6 @@ class TestSampleClass6
         //we need a multi-line method body.
         $assigned = 1;
         $alsoAssigined = 2;
-
         return 'mixedValue';
     }
 }

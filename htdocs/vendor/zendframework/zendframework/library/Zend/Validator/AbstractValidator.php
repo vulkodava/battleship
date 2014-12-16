@@ -25,14 +25,12 @@ abstract class AbstractValidator implements
 
     /**
      * Default translation object for all validate objects
-     *
      * @var Translator\TranslatorInterface
      */
     protected static $defaultTranslator;
 
     /**
      * Default text domain to be used with translator
-     *
      * @var string
      */
     protected static $defaultTranslatorTextDomain = 'default';
@@ -45,14 +43,14 @@ abstract class AbstractValidator implements
     protected static $messageLength = -1;
 
     protected $abstractOptions = array(
-        'messages' => array(), // Array of validation failure messages
-        'messageTemplates' => array(), // Array of validation failure message templates
-        'messageVariables' => array(), // Array of additional variables available for validation failure messages
-        'translator' => null,    // Translation object to used -> Translator\TranslatorInterface
+        'messages'             => array(), // Array of validation failure messages
+        'messageTemplates'     => array(), // Array of validation failure message templates
+        'messageVariables'     => array(), // Array of additional variables available for validation failure messages
+        'translator'           => null,    // Translation object to used -> Translator\TranslatorInterface
         'translatorTextDomain' => null,    // Translation text domain
-        'translatorEnabled' => true,    // Is translation enabled?
-        'valueObscured' => false,   // Flag indicating whether or not value should be obfuscated
-        // in error messages
+        'translatorEnabled'    => true,    // Is translation enabled?
+        'valueObscured'        => false,   // Flag indicating whether or not value should be obfuscated
+                                           // in error messages
     );
 
     /**
@@ -116,7 +114,6 @@ abstract class AbstractValidator implements
         if (isset($this->options)) {
             $result += $this->options;
         }
-
         return $result;
     }
 
@@ -197,7 +194,7 @@ abstract class AbstractValidator implements
      * Sets the validation failure message template for a particular key
      *
      * @param  string $messageString
-     * @param  string $messageKey OPTIONAL
+     * @param  string $messageKey     OPTIONAL
      * @return AbstractValidator Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
@@ -208,7 +205,6 @@ abstract class AbstractValidator implements
             foreach ($keys as $key) {
                 $this->setMessage($messageString, $key);
             }
-
             return $this;
         }
 
@@ -217,7 +213,6 @@ abstract class AbstractValidator implements
         }
 
         $this->abstractOptions['messageTemplates'][$messageKey] = $messageString;
-
         return $this;
     }
 
@@ -233,7 +228,6 @@ abstract class AbstractValidator implements
         foreach ($messages as $key => $message) {
             $this->setMessage($message, $key);
         }
-
         return $this;
     }
 
@@ -256,7 +250,6 @@ abstract class AbstractValidator implements
             if (is_array($result)) {
                 return $this->{key($result)}[current($result)];
             }
-
             return $this->{$result};
         }
 
@@ -265,7 +258,6 @@ abstract class AbstractValidator implements
             if (is_array($result)) {
                 return $this->{key($result)}[current($result)];
             }
-
             return $this->{$result};
         }
 
@@ -280,7 +272,7 @@ abstract class AbstractValidator implements
      * If a translator is available and a translation exists for $messageKey,
      * the translation will be used.
      *
-     * @param  string $messageKey
+     * @param  string              $messageKey
      * @param  string|array|object $value
      * @return string
      */
@@ -301,14 +293,14 @@ abstract class AbstractValidator implements
         } elseif (is_array($value)) {
             $value = var_export($value, 1);
         } else {
-            $value = (string)$value;
+            $value = (string) $value;
         }
 
         if ($this->isValueObscured()) {
             $value = str_repeat('*', strlen($value));
         }
 
-        $message = str_replace('%value%', (string)$value, $message);
+        $message = str_replace('%value%', (string) $value, $message);
         foreach ($this->abstractOptions['messageVariables'] as $ident => $property) {
             if (is_array($property)) {
                 $value = $this->{key($property)}[current($property)];
@@ -318,7 +310,7 @@ abstract class AbstractValidator implements
             } else {
                 $value = $this->$property;
             }
-            $message = str_replace("%$ident%", (string)$value, $message);
+            $message = str_replace("%$ident%", (string) $value, $message);
         }
 
         $length = self::getMessageLength();
@@ -331,7 +323,7 @@ abstract class AbstractValidator implements
 
     /**
      * @param  string $messageKey
-     * @param  string $value OPTIONAL
+     * @param  string $value      OPTIONAL
      * @return void
      */
     protected function error($messageKey, $value = null)
@@ -366,7 +358,7 @@ abstract class AbstractValidator implements
      */
     protected function setValue($value)
     {
-        $this->value = $value;
+        $this->value               = $value;
         $this->abstractOptions['messages'] = array();
     }
 
@@ -378,8 +370,7 @@ abstract class AbstractValidator implements
      */
     public function setValueObscured($flag)
     {
-        $this->abstractOptions['valueObscured'] = (bool)$flag;
-
+        $this->abstractOptions['valueObscured'] = (bool) $flag;
         return $this;
     }
 
@@ -398,7 +389,7 @@ abstract class AbstractValidator implements
      * Set translation object
      *
      * @param  Translator\TranslatorInterface|null $translator
-     * @param  string $textDomain (optional)
+     * @param  string          $textDomain (optional)
      * @return AbstractValidator
      * @throws Exception\InvalidArgumentException
      */
@@ -408,7 +399,6 @@ abstract class AbstractValidator implements
         if (null !== $textDomain) {
             $this->setTranslatorTextDomain($textDomain);
         }
-
         return $this;
     }
 
@@ -419,7 +409,7 @@ abstract class AbstractValidator implements
      */
     public function getTranslator()
     {
-        if (!$this->isTranslatorEnabled()) {
+        if (! $this->isTranslatorEnabled()) {
             return null;
         }
 
@@ -437,7 +427,7 @@ abstract class AbstractValidator implements
      */
     public function hasTranslator()
     {
-        return (bool)$this->abstractOptions['translator'];
+        return (bool) $this->abstractOptions['translator'];
     }
 
     /**
@@ -449,7 +439,6 @@ abstract class AbstractValidator implements
     public function setTranslatorTextDomain($textDomain = 'default')
     {
         $this->abstractOptions['translatorTextDomain'] = $textDomain;
-
         return $this;
     }
 
@@ -464,7 +453,6 @@ abstract class AbstractValidator implements
             $this->abstractOptions['translatorTextDomain'] =
                 self::getDefaultTranslatorTextDomain();
         }
-
         return $this->abstractOptions['translatorTextDomain'];
     }
 
@@ -472,7 +460,7 @@ abstract class AbstractValidator implements
      * Set default translation object for all validate objects
      *
      * @param  Translator\TranslatorInterface|null $translator
-     * @param  string $textDomain (optional)
+     * @param  string          $textDomain (optional)
      * @return void
      * @throws Exception\InvalidArgumentException
      */
@@ -501,7 +489,7 @@ abstract class AbstractValidator implements
      */
     public static function hasDefaultTranslator()
     {
-        return (bool)static::$defaultTranslator;
+        return (bool) static::$defaultTranslator;
     }
 
     /**
@@ -533,8 +521,7 @@ abstract class AbstractValidator implements
      */
     public function setTranslatorEnabled($flag = true)
     {
-        $this->abstractOptions['translatorEnabled'] = (bool)$flag;
-
+        $this->abstractOptions['translatorEnabled'] = (bool) $flag;
         return $this;
     }
 

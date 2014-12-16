@@ -59,7 +59,6 @@ class Yaml extends AbstractWriter
             throw new Exception\InvalidArgumentException('Invalid parameter to setYamlEncoder() - must be callable');
         }
         $this->yamlEncoder = $yamlEncoder;
-
         return $this;
     }
 

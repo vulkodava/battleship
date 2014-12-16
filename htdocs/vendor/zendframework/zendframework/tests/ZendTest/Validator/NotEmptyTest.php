@@ -33,10 +33,10 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      * ZF-6708 introduces a change for validating integer 0; it is a valid
      * integer value. '0' is also valid.
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
-     * @group        ZF-6708
+     * @group ZF-6708
      * @return void
      * @dataProvider basicProvider
      */
@@ -74,7 +74,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -114,7 +114,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -154,7 +154,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -194,7 +194,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -230,11 +230,10 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array(null, true),
         );
     }
-
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -274,7 +273,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -314,7 +313,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -354,7 +353,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -394,7 +393,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -434,7 +433,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -474,7 +473,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -523,7 +522,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -572,7 +571,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -591,7 +590,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -630,11 +629,10 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array(null, true),
         );
     }
-
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -681,7 +679,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      * Ensures that the validator follows expected behavior so if a string is specified more than once, it doesn't
      * cause different validations to run
      *
-     * @param string $string    Array of string type values
+     * @param string  $string   Array of string type values
      * @param integer $expected Expected type setting value
      *
      * @return void
@@ -705,26 +703,26 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     public function duplicateStringSettingProvider()
     {
         return array(
-            array('boolean', NotEmpty::BOOLEAN),
-            array('integer', NotEmpty::INTEGER),
-            array('float', NotEmpty::FLOAT),
-            array('string', NotEmpty::STRING),
-            array('zero', NotEmpty::ZERO),
-            array('array', NotEmpty::EMPTY_ARRAY),
-            array('null', NotEmpty::NULL),
-            array('php', NotEmpty::PHP),
-            array('space', NotEmpty::SPACE),
-            array('object', NotEmpty::OBJECT),
+            array('boolean',      NotEmpty::BOOLEAN),
+            array('integer',      NotEmpty::INTEGER),
+            array('float',        NotEmpty::FLOAT),
+            array('string',       NotEmpty::STRING),
+            array('zero',         NotEmpty::ZERO),
+            array('array',        NotEmpty::EMPTY_ARRAY),
+            array('null',         NotEmpty::NULL),
+            array('php',          NotEmpty::PHP),
+            array('space',        NotEmpty::SPACE),
+            array('object',       NotEmpty::OBJECT),
             array('objectstring', NotEmpty::OBJECT_STRING),
-            array('objectcount', NotEmpty::OBJECT_COUNT),
-            array('all', NotEmpty::ALL),
+            array('objectcount',  NotEmpty::OBJECT_COUNT),
+            array('all',          NotEmpty::ALL),
         );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -766,7 +764,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @return void
@@ -776,7 +774,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     public function testConfigObject($value, $valid)
     {
         $options = array('type' => 'all');
-        $config = new \Zend\Config\Config($options);
+        $config  = new \Zend\Config\Config($options);
 
         $this->validator = new NotEmpty(
             $config
@@ -917,9 +915,9 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group        ZF-11566
+     * @group ZF-11566
      *
-     * @param mixed $value   Value to test
+     * @param mixed $value Value to test
      * @param boolean $valid Expected validity of value
      *
      * @dataProvider arrayConfigNotationWithoutKeyProvider
@@ -977,12 +975,12 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             NotEmpty::BOOLEAN
-            | NotEmpty::FLOAT
-            | NotEmpty::STRING
-            | NotEmpty::EMPTY_ARRAY
-            | NotEmpty::NULL
-            | NotEmpty::SPACE
-            | NotEmpty::OBJECT,
+                | NotEmpty::FLOAT
+                | NotEmpty::STRING
+                | NotEmpty::EMPTY_ARRAY
+                | NotEmpty::NULL
+                | NotEmpty::SPACE
+                | NotEmpty::OBJECT,
             $this->validator->getDefaultType()
         );
     }
@@ -991,7 +989,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      * Checks that the validation value matches the expected validity
      *
      * @param mixed $value Value to validate
-     * @param bool $valid  Expected validity
+     * @param bool  $valid Expected validity
      *
      * @return void
      */

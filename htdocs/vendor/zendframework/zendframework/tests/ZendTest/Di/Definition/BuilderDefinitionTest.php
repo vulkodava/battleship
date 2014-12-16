@@ -117,7 +117,7 @@ class BuilderDefinitionTest extends TestCase
     public function testCanCreateInjectionMethodsAndPopulateFromFluentInterface()
     {
         $builder = new BuilderDefinition();
-        $foo = $builder->createClass('Foo');
+        $foo     = $builder->createClass('Foo');
         $foo->setName('Foo');
         $foo->createInjectionMethod('setBar')
             ->addParameter('bar', 'Bar');
@@ -150,7 +150,7 @@ class BuilderDefinitionTest extends TestCase
     public function testClassBuilderCanSpecifyClassToUseWhenCreatingInjectionMethods()
     {
         $builder = new BuilderDefinition();
-        $class = $builder->createClass('Foo');
+        $class   = $builder->createClass('Foo');
 
         $this->assertEquals('Zend\Di\Definition\Builder\InjectionMethod', $class->getMethodBuilder());
 

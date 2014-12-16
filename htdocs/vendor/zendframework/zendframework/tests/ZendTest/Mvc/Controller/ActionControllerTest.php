@@ -30,10 +30,10 @@ class ActionControllerTest extends TestCase
     {
         StaticEventManager::resetInstance();
         $this->controller = new TestAsset\SampleController();
-        $this->request = new Request();
-        $this->response = null;
+        $this->request    = new Request();
+        $this->response   = null;
         $this->routeMatch = new RouteMatch(array('controller' => 'controller-sample'));
-        $this->event = new MvcEvent();
+        $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
     }
@@ -171,7 +171,7 @@ class ActionControllerTest extends TestCase
 
     public function testPluginManagerComposesController()
     {
-        $plugins = $this->controller->getPluginManager();
+        $plugins    = $this->controller->getPluginManager();
         $controller = $plugins->getController();
         $this->assertSame($this->controller, $controller);
     }
@@ -203,8 +203,8 @@ class ActionControllerTest extends TestCase
      */
     public function testNotFoundActionReturnsSuccessfullyForConsoleResponse()
     {
-        $response = new ConsoleResponse();
-        $result = $this->controller->dispatch($this->request, $response);
+        $response     = new ConsoleResponse();
+        $result       = $this->controller->dispatch($this->request, $response);
         $testResponse = $this->controller->getResponse();
         $this->assertSame($response, $testResponse);
         $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);

@@ -54,7 +54,6 @@ class Identity extends AbstractPlugin
         if (!$this->authenticationService->hasIdentity()) {
             return null;
         }
-
         return $this->authenticationService->getIdentity();
     }
 }

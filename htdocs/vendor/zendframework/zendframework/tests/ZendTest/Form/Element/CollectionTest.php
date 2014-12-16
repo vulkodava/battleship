@@ -548,7 +548,7 @@ class CollectionTest extends TestCase
                 ))
         );
 
-        $phone = new Phone();
+        $phone  = new Phone();
         $phone->setNumber($data['addresses'][0]['phones'][0]['number']);
 
         $address = new Address();
@@ -752,6 +752,7 @@ class CollectionTest extends TestCase
         $shop1->product->setMadeInCountry($country);
 
 
+
         $shop2 = new stdClass();
         $shop2->product = new Product();
         $shop2->product->setPrice($prices[1]);
@@ -763,6 +764,7 @@ class CollectionTest extends TestCase
         $country = new  \ZendTest\Form\TestAsset\Entity\Country();
         $country->setName($productCountries[1]);
         $shop2->product->setMadeInCountry($country);
+
 
 
         $market->collection = array($shop1, $shop2);
@@ -995,10 +997,10 @@ class CollectionTest extends TestCase
             foreach ($_fieldset->getFieldsets() as $_nestedfieldset) {
                 // Each shop is represented by a single fieldset
                 $this->assertCount(1, $_nestedfieldset->getFieldsets());
-                foreach ($_nestedfieldset->getFieldsets() as $_productfieldset) {
+                foreach ( $_nestedfieldset->getFieldsets() as $_productfieldset) {
                     // Each shop fieldset contain a collection with two products in it
                     $this->assertCount(2, $_productfieldset->getFieldsets());
-                    foreach ($_productfieldset->getFieldsets() as $_product) {
+                    foreach ( $_productfieldset->getFieldsets() as $_product) {
                         $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_product->getObject());
                     }
                 }
@@ -1138,7 +1140,7 @@ class CollectionTest extends TestCase
         $collection->setObject($arrayCollection);
         $this->assertEquals(3, $collection->getCount());
     }
-
+    
     /**
      * @group zf6263
      * @group zf6518
@@ -1157,7 +1159,7 @@ class CollectionTest extends TestCase
         $object = new \ArrayObject(array('text' => array('Foo', 'Bar')));
         $form->bind($object);
         $this->assertTrue($form->isValid());
-
+        
         $result = $form->getData();
         $this->assertInstanceOf('ArrayAccess', $result);
         $this->assertArrayHasKey('text', $result);
@@ -1167,7 +1169,7 @@ class CollectionTest extends TestCase
         $this->assertArrayHasKey(1, $result['text']);
         $this->assertEquals('Bar', $result['text'][1]);
     }
-
+    
     /**
      * Unit test to ensure behavior of extract() method is unaffected by refactor
      *
@@ -1192,13 +1194,13 @@ class CollectionTest extends TestCase
                 'count' => 2
             ),
         ));
-
+        
         $model = new \stdClass();
         $model->collection = array(new \ArrayObject(array('test' => 'bar')), new \stdClass());
-
+        
         $form->bind($model);
         $this->assertTrue($form->isValid());
-
+        
         $result = $form->getData();
         $this->assertInstanceOf('stdClass', $result);
         $this->assertObjectHasAttribute('collection', $result);

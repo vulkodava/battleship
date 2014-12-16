@@ -82,7 +82,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setDriver(Sqlsrv $driver)
     {
         $this->driver = $driver;
-
         return $this;
     }
 
@@ -93,7 +92,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
-
         return $this;
     }
 
@@ -141,7 +139,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
-
         return $this;
     }
 
@@ -160,7 +157,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setResource($resource)
     {
         $this->resource = $resource;
-
         return $this;
     }
 
@@ -181,7 +177,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
-
         return $this;
     }
 
@@ -284,7 +279,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($this->resource);
-
         return $result;
     }
 

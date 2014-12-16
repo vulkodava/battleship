@@ -51,7 +51,6 @@ class CreateUser extends Register
     public function setCreateOptions(UserCreateOptionsInterface $createOptionsOptions)
     {
         $this->createOptions = $createOptionsOptions;
-
         return $this;
     }
 

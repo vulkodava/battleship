@@ -38,8 +38,8 @@ class DefaultListenerAggregate extends AbstractListener implements
      */
     public function attach(EventManagerInterface $events)
     {
-        $options = $this->getOptions();
-        $configListener = $this->getConfigListener();
+        $options                     = $this->getOptions();
+        $configListener              = $this->getConfigListener();
         $locatorRegistrationListener = new LocatorRegistrationListener($options);
 
         // High priority, we assume module autoloading (for FooNamespace\Module classes) should be available before anything else
@@ -56,7 +56,6 @@ class DefaultListenerAggregate extends AbstractListener implements
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener($options));
         $this->listeners[] = $events->attach($locatorRegistrationListener);
         $this->listeners[] = $events->attach($configListener);
-
         return $this;
     }
 
@@ -95,7 +94,6 @@ class DefaultListenerAggregate extends AbstractListener implements
         if (!$this->configListener instanceof ConfigMergerInterface) {
             $this->setConfigListener(new ConfigListener($this->getOptions()));
         }
-
         return $this->configListener;
     }
 
@@ -108,7 +106,6 @@ class DefaultListenerAggregate extends AbstractListener implements
     public function setConfigListener(ConfigMergerInterface $configListener)
     {
         $this->configListener = $configListener;
-
         return $this;
     }
 }

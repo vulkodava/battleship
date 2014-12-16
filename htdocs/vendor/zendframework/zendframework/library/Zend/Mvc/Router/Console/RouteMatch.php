@@ -2,7 +2,7 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link       http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -32,7 +32,7 @@ class RouteMatch extends BaseRouteMatch
     /**
      * Create a part RouteMatch with given parameters and length.
      *
-     * @param  array $params
+     * @param  array   $params
      * @param  int $length
      */
     public function __construct(array $params, $length = 0)
@@ -68,7 +68,7 @@ class RouteMatch extends BaseRouteMatch
      */
     public function merge(RouteMatch $match)
     {
-        $this->params = array_merge($this->params, $match->getParams());
+        $this->params  = array_merge($this->params, $match->getParams());
         $this->length += $match->getLength();
 
         $this->matchedRouteName = $match->getMatchedRouteName();

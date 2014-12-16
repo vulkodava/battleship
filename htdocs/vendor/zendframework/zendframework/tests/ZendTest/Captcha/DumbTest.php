@@ -42,7 +42,7 @@ class DumbTest extends CommonWordTest
 
     public function testGeneratePopulatesId()
     {
-        $id = $this->captcha->generate();
+        $id   = $this->captcha->generate();
         $test = $this->captcha->getId();
         $this->assertEquals($id, $test);
     }
@@ -50,7 +50,7 @@ class DumbTest extends CommonWordTest
     public function testGeneratePopulatesSessionWithWord()
     {
         $this->captcha->generate();
-        $word = $this->captcha->getWord();
+        $word    = $this->captcha->getWord();
         $session = $this->captcha->getSession();
         $this->assertEquals($word, $session->word);
     }

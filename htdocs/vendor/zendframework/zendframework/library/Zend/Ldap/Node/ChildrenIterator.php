@@ -190,7 +190,6 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
         foreach ($this as $rdn => $node) {
             $data[$rdn] = $node;
         }
-
         return $data;
     }
 }

@@ -47,7 +47,7 @@ class Token implements ProcessorInterface
      * Token Processor walks through a Config structure and replaces all
      * occurrences of tokens with supplied values.
      *
-     * @param  array|Config|Traversable $tokens    Associative array of TOKEN => value
+     * @param  array|Config|Traversable   $tokens  Associative array of TOKEN => value
      *                                             to replace it with
      * @param    string $prefix
      * @param    string $suffix
@@ -70,7 +70,6 @@ class Token implements ProcessorInterface
         // reset map
         $this->map = null;
         $this->prefix = $prefix;
-
         return $this;
     }
 
@@ -106,7 +105,7 @@ class Token implements ProcessorInterface
     /**
      * Set token registry.
      *
-     * @param  array|Config|Traversable $tokens   Associative array of TOKEN => value
+     * @param  array|Config|Traversable  $tokens  Associative array of TOKEN => value
      *                                            to replace it with
      * @return Token
      * @throws Exception\InvalidArgumentException
@@ -259,7 +258,7 @@ class Token implements ProcessorInterface
         }
 
         if (!is_string($value) && (is_bool($value) || is_numeric($value))) {
-            $stringVal = (string)$value;
+            $stringVal  = (string) $value;
             $changedVal = strtr($value, $this->map);
 
             // replace the value only if a string replacement occurred
@@ -270,6 +269,6 @@ class Token implements ProcessorInterface
             return $value;
         }
 
-        return strtr((string)$value, $this->map);
+        return strtr((string) $value, $this->map);
     }
 }

@@ -20,8 +20,8 @@ class TestPluginMap implements \IteratorAggregate
      * @var array
      */
     public $map = array(
-        'map' => __CLASS__,
-        'test' => 'ZendTest\Loader\PluginClassLoaderTest',
+        'map'    => __CLASS__,
+        'test'   => 'ZendTest\Loader\PluginClassLoaderTest',
         'loader' => 'Zend\Loader\PluginClassLoader',
     );
 

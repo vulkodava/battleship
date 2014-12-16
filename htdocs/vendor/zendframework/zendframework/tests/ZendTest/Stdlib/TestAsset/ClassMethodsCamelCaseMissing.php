@@ -23,7 +23,6 @@ class ClassMethodsCamelCaseMissing
     public function setFooBar($value)
     {
         $this->fooBar = $value;
-
         return $this;
     }
 

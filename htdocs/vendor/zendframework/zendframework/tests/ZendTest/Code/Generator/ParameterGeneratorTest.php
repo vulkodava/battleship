@@ -39,7 +39,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $value = new ValueGenerator('Foo', ValueGenerator::TYPE_CONSTANT);
         $parameterGenerator->setDefaultValue($value);
-        $this->assertEquals('Foo', (string)$parameterGenerator->getDefaultValue());
+        $this->assertEquals('Foo', (string) $parameterGenerator->getDefaultValue());
     }
 
     public function testPositionGetterAndSetterPersistValue()
@@ -91,7 +91,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
         $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
         $defaultValue = $codeGenParam->getDefaultValue();
-        $this->assertEquals('\'foo\'', (string)$defaultValue);
+        $this->assertEquals('\'foo\'', (string) $defaultValue);
     }
 
     public function testFromReflectionGetArrayHint()
@@ -159,7 +159,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param  string $method
+     * @param  string                               $method
      * @return \Zend\Code\Reflection\ParameterReflection
      */
     protected function getFirstReflectionParameter($method)
@@ -177,14 +177,14 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testCreateFromArray()
     {
         $parameterGenerator = ParameterGenerator::fromArray(array(
-            'name' => 'SampleParameter',
-            'type' => 'int',
-            'defaultvalue' => 'foo',
+            'name'              => 'SampleParameter',
+            'type'              => 'int',
+            'defaultvalue'      => 'foo',
             'passedbyreference' => false,
-            'position' => 1,
-            'sourcedirty' => false,
-            'sourcecontent' => 'foo',
-            'indentation' => '-',
+            'position'          => 1,
+            'sourcedirty'       => false,
+            'sourcecontent'     => 'foo',
+            'indentation'       => '-',
         ));
 
         $this->assertEquals('SampleParameter', $parameterGenerator->getName());

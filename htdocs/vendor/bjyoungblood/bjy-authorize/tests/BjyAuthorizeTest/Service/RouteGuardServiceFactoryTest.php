@@ -25,9 +25,9 @@ class RouteGuardServiceFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateService()
     {
-        $factory = new RouteGuardServiceFactory();
-        $serviceLocator = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
-        $config = array(
+        $factory          = new RouteGuardServiceFactory();
+        $serviceLocator   = $this->getMock('Zend\\ServiceManager\\ServiceLocatorInterface');
+        $config           = array(
             'guards' => array(
                 'BjyAuthorize\\Guard\\Route' => array(),
             ),

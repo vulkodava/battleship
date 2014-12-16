@@ -37,7 +37,7 @@ class Bz2Test extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter = new Bz2Compression();
+        $filter  = new Bz2Compression();
 
         $content = $filter->compress('compress me');
         $this->assertNotEquals('compress me', $content);
@@ -77,7 +77,7 @@ class Bz2Test extends \PHPUnit_Framework_TestCase
      */
     public function testBz2GetSetOptionsInConstructor()
     {
-        $filter2 = new Bz2Compression(array('blocksize' => 8));
+        $filter2= new Bz2Compression(array('blocksize' => 8));
         $this->assertEquals(array('blocksize' => 8, 'archive' => null), $filter2->getOptions());
     }
 
@@ -118,14 +118,14 @@ class Bz2Test extends \PHPUnit_Framework_TestCase
      */
     public function testBz2CompressToFile()
     {
-        $filter = new Bz2Compression();
+        $filter   = new Bz2Compression();
         $archive = __DIR__ . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');
         $this->assertTrue($content);
 
-        $filter2 = new Bz2Compression();
+        $filter2  = new Bz2Compression();
         $content2 = $filter2->decompress($archive);
         $this->assertEquals('compress me', $content2);
 
@@ -153,14 +153,14 @@ class Bz2Test extends \PHPUnit_Framework_TestCase
      */
     public function testBz2DecompressArchive()
     {
-        $filter = new Bz2Compression();
+        $filter   = new Bz2Compression();
         $archive = __DIR__ . '/../_files/compressed.bz2';
         $filter->setArchive($archive);
 
         $content = $filter->compress('compress me');
         $this->assertTrue($content);
 
-        $filter2 = new Bz2Compression();
+        $filter2  = new Bz2Compression();
         $content2 = $filter2->decompress($archive);
         $this->assertEquals('compress me', $content2);
     }

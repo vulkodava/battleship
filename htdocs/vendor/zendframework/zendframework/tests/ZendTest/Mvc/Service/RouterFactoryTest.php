@@ -20,7 +20,7 @@ class RouterFactoryTest extends TestCase
     {
         $this->services = new ServiceManager();
         $this->services->setService('RoutePluginManager', new RoutePluginManager());
-        $this->factory = new RouterFactory();
+        $this->factory  = new RouterFactory();
     }
 
     public function testFactoryCanCreateRouterBasedOnConfiguredName()

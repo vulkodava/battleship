@@ -67,64 +67,64 @@ class CycleTest extends \PHPUnit_Framework_TestCase
     public function testToString()
     {
         $this->helper->__invoke(array('a', 1, 'asd'));
-        $this->assertEquals('a', (string)$this->helper->toString());
+        $this->assertEquals('a', (string) $this->helper->toString());
     }
 
     public function testNextValue()
     {
         $this->helper->assign(array('a', 1, 3));
-        $this->assertEquals('a', (string)$this->helper->next());
-        $this->assertEquals(1, (string)$this->helper->next());
-        $this->assertEquals(3, (string)$this->helper->next());
-        $this->assertEquals('a', (string)$this->helper->next());
-        $this->assertEquals(1, (string)$this->helper->next());
+        $this->assertEquals('a', (string) $this->helper->next());
+        $this->assertEquals(1, (string) $this->helper->next());
+        $this->assertEquals(3, (string) $this->helper->next());
+        $this->assertEquals('a', (string) $this->helper->next());
+        $this->assertEquals(1, (string) $this->helper->next());
     }
 
     public function testPrevValue()
     {
         $this->helper->assign(array(4, 1, 3));
-        $this->assertEquals(3, (string)$this->helper->prev());
-        $this->assertEquals(1, (string)$this->helper->prev());
-        $this->assertEquals(4, (string)$this->helper->prev());
-        $this->assertEquals(3, (string)$this->helper->prev());
-        $this->assertEquals(1, (string)$this->helper->prev());
+        $this->assertEquals(3, (string) $this->helper->prev());
+        $this->assertEquals(1, (string) $this->helper->prev());
+        $this->assertEquals(4, (string) $this->helper->prev());
+        $this->assertEquals(3, (string) $this->helper->prev());
+        $this->assertEquals(1, (string) $this->helper->prev());
     }
 
     public function testRewind()
     {
         $this->helper->assign(array(5, 8, 3));
-        $this->assertEquals(5, (string)$this->helper->next());
-        $this->assertEquals(8, (string)$this->helper->next());
+        $this->assertEquals(5, (string) $this->helper->next());
+        $this->assertEquals(8, (string) $this->helper->next());
         $this->helper->rewind();
-        $this->assertEquals(5, (string)$this->helper->next());
-        $this->assertEquals(8, (string)$this->helper->next());
+        $this->assertEquals(5, (string) $this->helper->next());
+        $this->assertEquals(8, (string) $this->helper->next());
     }
 
     public function testMixedMethods()
     {
         $this->helper->assign(array(5, 8, 3));
-        $this->assertEquals(5, (string)$this->helper->next());
-        $this->assertEquals(5, (string)$this->helper->current());
-        $this->assertEquals(8, (string)$this->helper->next());
-        $this->assertEquals(5, (string)$this->helper->prev());
+        $this->assertEquals(5, (string) $this->helper->next());
+        $this->assertEquals(5, (string) $this->helper->current());
+        $this->assertEquals(8, (string) $this->helper->next());
+        $this->assertEquals(5, (string) $this->helper->prev());
     }
 
     public function testTwoCycles()
     {
         $this->helper->assign(array(5, 8, 3));
-        $this->assertEquals(5, (string)$this->helper->next());
-        $this->assertEquals(2, (string)$this->helper->__invoke(array(2, 38, 1), 'cycle2')->next());
-        $this->assertEquals(8, (string)$this->helper->__invoke()->next());
-        $this->assertEquals(38, (string)$this->helper->setName('cycle2')->next());
+        $this->assertEquals(5, (string) $this->helper->next());
+        $this->assertEquals(2, (string) $this->helper->__invoke(array(2,38,1),'cycle2')->next());
+        $this->assertEquals(8, (string) $this->helper->__invoke()->next());
+        $this->assertEquals(38, (string) $this->helper->setName('cycle2')->next());
     }
 
     public function testTwoCyclesInLoop()
     {
-        $expected = array(5, 4, 2, 3);
-        $expected2 = array(7, 34, 8, 6);
-        for ($i = 0; $i < 4; $i++) {
-            $this->assertEquals($expected[$i], (string)$this->helper->__invoke($expected)->next());
-            $this->assertEquals($expected2[$i], (string)$this->helper->__invoke($expected2, 'cycle2')->next());
+        $expected = array(5,4,2,3);
+        $expected2 = array(7,34,8,6);
+        for ($i=0;$i<4;$i++) {
+            $this->assertEquals($expected[$i], (string) $this->helper->__invoke($expected)->next());
+            $this->assertEquals($expected2[$i], (string) $this->helper->__invoke($expected2,'cycle2')->next());
         }
     }
 }

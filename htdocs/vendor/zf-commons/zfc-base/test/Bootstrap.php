@@ -31,7 +31,7 @@ class Bootstrap
             $zf2ModulePaths[] = $path;
         }
 
-        $zf2ModulePaths = implode(PATH_SEPARATOR, $zf2ModulePaths) . PATH_SEPARATOR;
+        $zf2ModulePaths  = implode(PATH_SEPARATOR, $zf2ModulePaths) . PATH_SEPARATOR;
         $zf2ModulePaths .= getenv('ZF2_MODULES_TEST_PATHS') ?: (defined('ZF2_MODULES_TEST_PATHS') ? ZF2_MODULES_TEST_PATHS : '');
 
         static::initAutoloader();
@@ -94,7 +94,6 @@ class Bootstrap
             if ($previousDir === $dir) return false;
             $previousDir = $dir;
         }
-
         return $dir . '/' . $path;
     }
 }

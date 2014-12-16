@@ -54,7 +54,6 @@ class ValidatorChain implements
         if (!$this->plugins) {
             $this->setPluginManager(new ValidatorPluginManager());
         }
-
         return $this->plugins;
     }
 
@@ -67,21 +66,19 @@ class ValidatorChain implements
     public function setPluginManager(ValidatorPluginManager $plugins)
     {
         $this->plugins = $plugins;
-
         return $this;
     }
 
     /**
      * Retrieve a validator by name
      *
-     * @param  string $name        Name of validator to return
+     * @param  string     $name    Name of validator to return
      * @param  null|array $options Options to pass to validator constructor (if not already instantiated)
      * @return ValidatorInterface
      */
     public function plugin($name, array $options = null)
     {
         $plugins = $this->getPluginManager();
-
         return $plugins->get($name, $options);
     }
 
@@ -91,17 +88,16 @@ class ValidatorChain implements
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  ValidatorInterface $validator
-     * @param  bool $breakChainOnFailure
+     * @param  ValidatorInterface      $validator
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function attach(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
         $this->validators[] = array(
-            'instance' => $validator,
-            'breakChainOnFailure' => (bool)$breakChainOnFailure,
+            'instance'            => $validator,
+            'breakChainOnFailure' => (bool) $breakChainOnFailure,
         );
-
         return $this;
     }
 
@@ -109,8 +105,8 @@ class ValidatorChain implements
      * Proxy to attach() to keep BC
      *
      * @deprecated Please use attach()
-     * @param  ValidatorInterface $validator
-     * @param  bool $breakChainOnFailure
+     * @param  ValidatorInterface      $validator
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
@@ -124,8 +120,8 @@ class ValidatorChain implements
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  ValidatorInterface $validator
-     * @param  bool $breakChainOnFailure
+     * @param  ValidatorInterface      $validator
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
@@ -133,11 +129,10 @@ class ValidatorChain implements
         array_unshift(
             $this->validators,
             array(
-                'instance' => $validator,
-                'breakChainOnFailure' => (bool)$breakChainOnFailure,
+               'instance'            => $validator,
+               'breakChainOnFailure' => (bool) $breakChainOnFailure,
             )
         );
-
         return $this;
     }
 
@@ -145,23 +140,22 @@ class ValidatorChain implements
      * Use the plugin manager to add a validator by name
      *
      * @param  string $name
-     * @param  array $options
-     * @param  bool $breakChainOnFailure
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
     public function attachByName($name, $options = array(), $breakChainOnFailure = false)
     {
         if (isset($options['break_chain_on_failure'])) {
-            $breakChainOnFailure = (bool)$options['break_chain_on_failure'];
+            $breakChainOnFailure = (bool) $options['break_chain_on_failure'];
         }
 
         if (isset($options['breakchainonfailure'])) {
-            $breakChainOnFailure = (bool)$options['breakchainonfailure'];
+            $breakChainOnFailure = (bool) $options['breakchainonfailure'];
         }
 
         $validator = $this->plugin($name, $options);
         $this->attach($validator, $breakChainOnFailure);
-
         return $this;
     }
 
@@ -170,8 +164,8 @@ class ValidatorChain implements
      *
      * @deprecated Please use attachByName()
      * @param  string $name
-     * @param  array $options
-     * @param  bool $breakChainOnFailure
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
     public function addByName($name, $options = array(), $breakChainOnFailure = false)
@@ -183,15 +177,14 @@ class ValidatorChain implements
      * Use the plugin manager to prepend a validator by name
      *
      * @param  string $name
-     * @param  array $options
-     * @param  bool $breakChainOnFailure
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
     public function prependByName($name, $options = array(), $breakChainOnFailure = false)
     {
         $validator = $this->plugin($name, $options);
         $this->prependValidator($validator, $breakChainOnFailure);
-
         return $this;
     }
 
@@ -207,20 +200,19 @@ class ValidatorChain implements
     public function isValid($value, $context = null)
     {
         $this->messages = array();
-        $result = true;
+        $result         = true;
         foreach ($this->validators as $element) {
             $validator = $element['instance'];
             if ($validator->isValid($value, $context)) {
                 continue;
             }
-            $result = false;
-            $messages = $validator->getMessages();
+            $result         = false;
+            $messages       = $validator->getMessages();
             $this->messages = array_replace_recursive($this->messages, $messages);
             if ($element['breakChainOnFailure']) {
                 break;
             }
         }
-
         return $result;
     }
 

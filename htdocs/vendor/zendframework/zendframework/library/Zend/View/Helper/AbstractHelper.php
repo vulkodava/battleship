@@ -29,7 +29,6 @@ abstract class AbstractHelper implements HelperInterface
     public function setView(Renderer $view)
     {
         $this->view = $view;
-
         return $this;
     }
 

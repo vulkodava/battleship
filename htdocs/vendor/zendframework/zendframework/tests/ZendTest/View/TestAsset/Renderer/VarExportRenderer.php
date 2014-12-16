@@ -32,7 +32,6 @@ class VarExportRenderer implements Renderer
         }
 
         $values = $nameOrModel->getVariables();
-
         return var_export($values, true);
     }
 }

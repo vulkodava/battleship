@@ -33,9 +33,9 @@ class Login extends Smtp
     /**
      * Constructor.
      *
-     * @param  string $host  (Default: 127.0.0.1)
-     * @param  int $port     (Default: null)
-     * @param  array $config Auth-specific parameters
+     * @param  string $host   (Default: 127.0.0.1)
+     * @param  int    $port   (Default: null)
+     * @param  array  $config Auth-specific parameters
      */
     public function __construct($host = '127.0.0.1', $port = null, $config = null)
     {
@@ -90,7 +90,6 @@ class Login extends Smtp
     public function setUsername($username)
     {
         $this->username = $username;
-
         return $this;
     }
 
@@ -113,7 +112,6 @@ class Login extends Smtp
     public function setPassword($password)
     {
         $this->password = $password;
-
         return $this;
     }
 

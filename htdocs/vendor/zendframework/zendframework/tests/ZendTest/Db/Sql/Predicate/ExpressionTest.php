@@ -47,7 +47,7 @@ class ExpressionTest extends TestCase
     {
         $expression = new Expression();
         $expression->setExpression('foo.bar = ? AND id != ?')
-            ->setParameters(array('foo', 'bar'));
+                        ->setParameters(array('foo', 'bar'));
         $expected = array(array(
             'foo.bar = %s AND id != %s',
             array('foo', 'bar'),

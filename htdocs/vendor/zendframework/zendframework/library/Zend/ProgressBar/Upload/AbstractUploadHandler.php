@@ -77,7 +77,6 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     public function setSessionNamespace($sessionNamespace)
     {
         $this->sessionNamespace = $sessionNamespace;
-
         return $this;
     }
 
@@ -96,7 +95,6 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     public function setProgressAdapter($progressAdapter)
     {
         $this->progressAdapter = $progressAdapter;
-
         return $this;
     }
 
@@ -114,12 +112,12 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
      */
     public function getProgress($id)
     {
-        $status = array(
-            'total' => 0,
-            'current' => 0,
-            'rate' => 0,
-            'message' => 'No upload in progress',
-            'done' => true
+        $status  = array(
+            'total'    => 0,
+            'current'  => 0,
+            'rate'     => 0,
+            'message'  => 'No upload in progress',
+            'done'     => true
         );
         if (empty($id)) {
             return $status;
@@ -172,7 +170,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     protected function toByteString($size)
     {
         $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-        for ($i = 0; $size >= 1024 && $i < 9; $i++) {
+        for ($i=0; $size >= 1024 && $i < 9; $i++) {
             $size /= 1024;
         }
 

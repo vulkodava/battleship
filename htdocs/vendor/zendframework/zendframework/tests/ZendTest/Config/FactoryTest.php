@@ -22,9 +22,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     protected function getTestAssetFileName($ext)
     {
         if (empty($this->tmpfiles[$ext])) {
-            $this->tmpfiles[$ext] = tempnam(sys_get_temp_dir(), 'zend-config-writer') . '.' . $ext;
+            $this->tmpfiles[$ext] = tempnam(sys_get_temp_dir(), 'zend-config-writer').'.'.$ext;
         }
-
         return $this->tmpfiles[$ext];
     }
 
@@ -64,7 +63,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFromIniFiles()
     {
-        $files = array(
+        $files = array (
             __DIR__ . '/TestAssets/Ini/include-base.ini',
             __DIR__ . '/TestAssets/Ini/include-base2.ini'
         );
@@ -76,7 +75,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFromXmlFiles()
     {
-        $files = array(
+        $files = array (
             __DIR__ . '/TestAssets/Xml/include-base.xml',
             __DIR__ . '/TestAssets/Xml/include-base2.xml'
         );
@@ -88,7 +87,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFromPhpFiles()
     {
-        $files = array(
+        $files = array (
             __DIR__ . '/TestAssets/Php/include-base.php',
             __DIR__ . '/TestAssets/Php/include-base2.php'
         );
@@ -100,7 +99,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFromIniAndXmlAndPhpFiles()
     {
-        $files = array(
+        $files = array (
             __DIR__ . '/TestAssets/Ini/include-base.ini',
             __DIR__ . '/TestAssets/Xml/include-base2.xml',
             __DIR__ . '/TestAssets/Php/include-base3.php',
@@ -114,7 +113,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFromIniAndXmlAndPhpFilesFromIncludePath()
     {
-        $files = array(
+        $files = array (
             'Ini/include-base.ini',
             'Xml/include-base2.xml',
             'Php/include-base3.php',
@@ -128,7 +127,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnsConfigObjectIfRequestedAndArrayOtherwise()
     {
-        $files = array(
+        $files = array (
             __DIR__ . '/TestAssets/Ini/include-base.ini',
         );
 
@@ -183,13 +182,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryToFileInvalidFileExtension()
     {
         $this->setExpectedException('RuntimeException');
-        $result = Factory::toFile(__DIR__ . '/TestAssets/bad.ext', array());
+        $result = Factory::toFile(__DIR__.'/TestAssets/bad.ext', array());
     }
 
     public function testFactoryToFileNoDirInHere()
     {
         $this->setExpectedException('RuntimeException');
-        $result = Factory::toFile(__DIR__ . '/TestAssets/NoDirInHere/nonExisiting/dummy.php', array());
+        $result = Factory::toFile(__DIR__.'/TestAssets/NoDirInHere/nonExisiting/dummy.php', array());
     }
 
     public function testFactoryWriteToFile()

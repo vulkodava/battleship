@@ -34,7 +34,7 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->eventManager = $this->getMock('Zend\EventManager\EventManagerInterface');
-        $this->hydrator = new AggregateHydrator();
+        $this->hydrator     = new AggregateHydrator();
 
         $this->hydrator->setEventManager($this->eventManager);
     }
@@ -93,7 +93,7 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSetManager()
     {
-        $hydrator = new AggregateHydrator();
+        $hydrator     = new AggregateHydrator();
         $eventManager = $this->getMock('Zend\EventManager\EventManagerInterface');
 
         $this->assertInstanceOf('Zend\EventManager\EventManagerInterface', $hydrator->getEventManager());
@@ -103,8 +103,8 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
             ->method('setIdentifiers')
             ->with(
                 array(
-                    'Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator',
-                    'Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator',
+                     'Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator',
+                     'Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator',
                 )
             );
 

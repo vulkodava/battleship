@@ -50,9 +50,9 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
 
         $sm = $this->serviceManager = new ServiceManager\ServiceManager(
             new ServiceManagerConfig(array(
-                'abstract_factories' => array(
-                    'Zend\Config\AbstractConfigFactory',
-                )
+            'abstract_factories' => array(
+                'Zend\Config\AbstractConfigFactory',
+            )
             ))
         );
 

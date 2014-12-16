@@ -15,7 +15,6 @@ class RedisOptions extends AdapterOptions
 {
     /**
      * The namespace separator
-     *
      * @var string
      */
     protected $namespaceSeparator = ':';
@@ -48,7 +47,7 @@ class RedisOptions extends AdapterOptions
      */
     public function setNamespace($namespace)
     {
-        $namespace = (string)$namespace;
+        $namespace = (string) $namespace;
 
         if (128 < strlen($namespace)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -68,12 +67,11 @@ class RedisOptions extends AdapterOptions
      */
     public function setNamespaceSeparator($namespaceSeparator)
     {
-        $namespaceSeparator = (string)$namespaceSeparator;
+        $namespaceSeparator = (string) $namespaceSeparator;
         if ($this->namespaceSeparator !== $namespaceSeparator) {
             $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
             $this->namespaceSeparator = $namespaceSeparator;
         }
-
         return $this;
     }
 
@@ -99,7 +97,6 @@ class RedisOptions extends AdapterOptions
             $this->triggerOptionEvent('resource_manager', $resourceManager);
             $this->resourceManager = $resourceManager;
         }
-
         return $this;
     }
 
@@ -113,7 +110,6 @@ class RedisOptions extends AdapterOptions
         if (!$this->resourceManager) {
             $this->resourceManager = new RedisResourceManager();
         }
-
         return $this->resourceManager;
     }
 
@@ -135,12 +131,11 @@ class RedisOptions extends AdapterOptions
      */
     public function setResourceId($resourceId)
     {
-        $resourceId = (string)$resourceId;
+        $resourceId = (string) $resourceId;
         if ($this->resourceId !== $resourceId) {
             $this->triggerOptionEvent('resource_id', $resourceId);
             $this->resourceId = $resourceId;
         }
-
         return $this;
     }
 
@@ -164,22 +159,20 @@ class RedisOptions extends AdapterOptions
     {
         $this->triggerOptionEvent('persistent_id', $persistentId);
         $this->getResourceManager()->setPersistentId($this->getResourceId(), $persistentId);
-
         return $this;
     }
 
-    /**
-     * Set redis options
-     *
-     * @param array $libOptions
-     * @return RedisOptions
-     * @link http://github.com/nicolasff/phpredis#setoption
-     */
+     /**
+    * Set redis options
+    *
+    * @param array $libOptions
+    * @return RedisOptions
+    * @link http://github.com/nicolasff/phpredis#setoption
+    */
     public function setLibOptions(array $libOptions)
     {
         $this->triggerOptionEvent('lib_option', $libOptions);
         $this->getResourceManager()->setLibOptions($this->getResourceId(), $libOptions);
-
         return $this;
     }
 
@@ -209,7 +202,6 @@ class RedisOptions extends AdapterOptions
     public function setServer($server)
     {
         $this->getResourceManager()->setServer($this->getResourceId(), $server);
-
         return $this;
     }
 
@@ -233,7 +225,6 @@ class RedisOptions extends AdapterOptions
     public function setDatabase($database)
     {
         $this->getResourceManager()->setDatabase($this->getResourceId(), $database);
-
         return $this;
     }
 
@@ -257,7 +248,6 @@ class RedisOptions extends AdapterOptions
     public function setPassword($password)
     {
         $this->getResourceManager()->setPassword($this->getResourceId(), $password);
-
         return $this;
     }
 

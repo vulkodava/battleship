@@ -162,7 +162,7 @@ EOS;
 
         $targetLength = strlen('require_once \'SampleClass.php\';');
         $this->assertEquals($targetLength, strlen($lines[2]));
-        $this->assertEquals(';', $lines[2]{$targetLength - 1});
+        $this->assertEquals(';', $lines[2]{$targetLength-1});
     }
 
     /**
@@ -172,9 +172,9 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUse('My\Baz')
-            ->setUses(array(
-                array('use' => 'Your\Bar', 'as' => 'bar'),
-            ));
+             ->setUses(array(
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
+             ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz;', $generated);
         $this->assertContains('use Your\\Bar as bar;', $generated);
@@ -192,7 +192,7 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUse('My\Baz')
-            ->setUse('My\Baz');
+             ->setUse('My\Baz');
         $generated = $file->generate();
         $this->assertSame(strpos($generated, 'use My\\Baz'), strrpos($generated, 'use My\\Baz'));
     }
@@ -201,8 +201,8 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-            array('use' => 'Your\Bar', 'as' => 'bar'),
-            array('use' => 'Your\Bar', 'as' => 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
         ));
         $generated = $file->generate();
         $this->assertSame(strpos($generated, 'use Your\\Bar as bar;'), strrpos($generated, 'use Your\\Bar as bar;'));
@@ -212,8 +212,8 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-            array('use' => 'Your\Bar', 'as' => 'bar'),
-            array('use' => 'Your\Bar', 'as' => 'bar2'),
+                 array('use' => 'Your\Bar', 'as' => 'bar'),
+                 array('use' => 'Your\Bar', 'as' => 'bar2'),
         ));
         $generated = $file->generate();
         $this->assertContains('use Your\\Bar as bar;', $generated);
@@ -224,9 +224,9 @@ EOS;
     {
         $file = new FileGenerator();
         $file->setUses(array(
-            array('use' => 'Your\\Bar', 'as' => 'bar'),
-            array('use' => 'My\\Baz', 'as' => 'FooBaz')
-        ));
+                 array('use' => 'Your\\Bar', 'as' => 'bar'),
+                 array('use' => 'My\\Baz', 'as' => 'FooBaz')
+             ));
         $generated = $file->generate();
         $this->assertContains('use My\\Baz as FooBaz;', $generated);
         $this->assertContains('use Your\\Bar as bar;', $generated);
@@ -265,8 +265,8 @@ EOS;
     public function testCreateFromArrayWithClassInstance()
     {
         $fileGenerator = FileGenerator::fromArray(array(
-            'filename' => 'foo.php',
-            'class' => new ClassGenerator('bar'),
+            'filename'  => 'foo.php',
+            'class'     => new ClassGenerator('bar'),
         ));
         $class = $fileGenerator->getClass('bar');
         $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
@@ -275,8 +275,8 @@ EOS;
     public function testCreateFromArrayWithClassFromArray()
     {
         $fileGenerator = FileGenerator::fromArray(array(
-            'filename' => 'foo.php',
-            'class' => array(
+            'filename'  => 'foo.php',
+            'class'     => array(
                 'name' => 'bar',
             ),
         ));

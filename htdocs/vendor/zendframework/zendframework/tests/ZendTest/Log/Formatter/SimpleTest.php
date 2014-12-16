@@ -40,11 +40,11 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
     {
         $date = new DateTime('2012-08-28T18:15:00Z');
         $fields = array(
-            'timestamp' => $date,
-            'message' => 'foo',
-            'priority' => 42,
+            'timestamp'    => $date,
+            'message'      => 'foo',
+            'priority'     => 42,
             'priorityName' => 'bar',
-            'extra' => array()
+            'extra'        => array()
         );
 
         $outputExpected = '2012-08-28T18:15:00+00:00 bar (42): foo';
@@ -95,11 +95,11 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $message = 'custom message';
         $exception = new RuntimeException($message);
         $event = array(
-            'timestamp' => new DateTime(),
-            'message' => 'Application error',
-            'priority' => 2,
+            'timestamp'    => new DateTime(),
+            'message'      => 'Application error',
+            'priority'     => 2,
             'priorityName' => 'CRIT',
-            'extra' => array($exception),
+            'extra'        => array($exception),
         );
 
         $formatter = new Simple();

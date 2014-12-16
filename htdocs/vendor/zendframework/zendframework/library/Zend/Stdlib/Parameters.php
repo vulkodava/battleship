@@ -86,7 +86,6 @@ class Parameters extends PhpArrayObject implements ParametersInterface
         if ($this->offsetExists($name)) {
             return parent::offsetGet($name);
         }
-
         return null;
     }
 
@@ -100,7 +99,6 @@ class Parameters extends PhpArrayObject implements ParametersInterface
         if ($this->offsetExists($name)) {
             return parent::offsetGet($name);
         }
-
         return $default;
     }
 
@@ -112,7 +110,6 @@ class Parameters extends PhpArrayObject implements ParametersInterface
     public function set($name, $value)
     {
         $this[$name] = $value;
-
         return $this;
     }
 }

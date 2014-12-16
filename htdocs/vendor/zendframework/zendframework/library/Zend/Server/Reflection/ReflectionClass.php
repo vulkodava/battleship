@@ -22,28 +22,24 @@ class ReflectionClass
     /**
      * Optional configuration parameters; accessible via {@link __get} and
      * {@link __set()}
-     *
      * @var array
      */
     protected $config = array();
 
     /**
      * Array of {@link \Zend\Server\Reflection\Method}s
-     *
      * @var array
      */
     protected $methods = array();
 
     /**
      * Namespace
-     *
      * @var string
      */
     protected $namespace = null;
 
     /**
      * ReflectionClass object
-     *
      * @var PhpReflectionClass
      */
     protected $reflection;
@@ -157,7 +153,6 @@ class ReflectionClass
     {
         if (empty($namespace)) {
             $this->namespace = '';
-
             return;
         }
 

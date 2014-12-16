@@ -45,7 +45,7 @@ class DbSelect implements AdapterInterface
     /**
      * Constructor.
      *
-     * @param Select $select                  The select query
+     * @param Select $select The select query
      * @param Adapter|Sql $adapterOrSqlObject DB adapter or Sql object
      * @param null|ResultSetInterface $resultSetPrototype
      * @throws Exception\InvalidArgumentException
@@ -64,7 +64,7 @@ class DbSelect implements AdapterInterface
             );
         }
 
-        $this->sql = $adapterOrSqlObject;
+        $this->sql                = $adapterOrSqlObject;
         $this->resultSetPrototype = ($resultSetPrototype) ?: new ResultSet;
     }
 
@@ -82,7 +82,7 @@ class DbSelect implements AdapterInterface
         $select->limit($itemCountPerPage);
 
         $statement = $this->sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
+        $result    = $statement->execute();
 
         $resultSet = clone $this->resultSetPrototype;
         $resultSet->initialize($result);
@@ -111,8 +111,8 @@ class DbSelect implements AdapterInterface
         $countSelect->from(array('original_select' => $select));
 
         $statement = $this->sql->prepareStatementForSqlObject($countSelect);
-        $result = $statement->execute();
-        $row = $result->current();
+        $result    = $statement->execute();
+        $row       = $result->current();
 
         $this->rowCount = $row['c'];
 

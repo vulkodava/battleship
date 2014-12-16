@@ -213,7 +213,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         $this->storage->bar = 'baz';
         $this->storage->markImmutable();
         $this->setExpectedException('Zend\Session\Exception\RuntimeException',
-            'Cannot clear storage as it is marked immutable');
+                                    'Cannot clear storage as it is marked immutable');
         $this->storage->clear();
     }
 

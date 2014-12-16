@@ -40,7 +40,6 @@ class StatementContainer implements StatementContainerInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
-
         return $this;
     }
 
@@ -59,7 +58,6 @@ class StatementContainer implements StatementContainerInterface
     public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
-
         return $this;
     }
 

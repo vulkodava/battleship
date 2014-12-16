@@ -23,7 +23,6 @@ class Entry extends Extension\AbstractEntry
         } else {
             $content = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/content:encoded)');
         }
-
         return $content;
     }
 

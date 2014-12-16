@@ -21,21 +21,18 @@ class Pdf extends AbstractRenderer
 {
     /**
      * PDF resource
-     *
      * @var PdfDocument
      */
     protected $resource = null;
 
     /**
      * Page number in PDF resource
-     *
      * @var int
      */
     protected $page = 0;
 
     /**
      * Module size rendering
-     *
      * @var float
      */
     protected $moduleSize = 0.5;
@@ -44,13 +41,13 @@ class Pdf extends AbstractRenderer
      * Set a PDF resource to draw the barcode inside
      *
      * @param PdfDocument $pdf
-     * @param int $page
+     * @param int     $page
      * @return Pdf
      */
     public function setResource(PdfDocument $pdf, $page = 0)
     {
         $this->resource = $pdf;
-        $this->page = intval($page);
+        $this->page     = intval($page);
 
         if (!count($this->resource->pages)) {
             $this->page = 0;
@@ -58,7 +55,6 @@ class Pdf extends AbstractRenderer
                 Page::SIZE_A4
             );
         }
-
         return $this;
     }
 
@@ -73,7 +69,6 @@ class Pdf extends AbstractRenderer
 
     /**
      * Draw the barcode in the PDF, send headers and the PDF
-     *
      * @return mixed
      */
     public function render()
@@ -85,7 +80,6 @@ class Pdf extends AbstractRenderer
 
     /**
      * Initialize the PDF resource
-     *
      * @return void
      */
     protected function initRenderer()
@@ -103,7 +97,6 @@ class Pdf extends AbstractRenderer
 
     /**
      * Draw a polygon in the rendering resource
-     *
      * @param array $points
      * @param int $color
      * @param  bool $filled
@@ -139,22 +132,21 @@ class Pdf extends AbstractRenderer
         $page->setLineWidth($this->moduleSize);
 
         $fillType = ($filled)
-            ? Page::SHAPE_DRAW_FILL_AND_STROKE
-            : Page::SHAPE_DRAW_STROKE;
+                  ? Page::SHAPE_DRAW_FILL_AND_STROKE
+                  : Page::SHAPE_DRAW_STROKE;
 
         $page->drawPolygon($x, $y, $fillType);
     }
 
     /**
      * Draw a polygon in the rendering resource
-     *
-     * @param string $text
-     * @param float $size
-     * @param array $position
-     * @param string $font
-     * @param int $color
-     * @param string $alignment
-     * @param float $orientation
+     * @param string  $text
+     * @param float   $size
+     * @param array   $position
+     * @param string  $font
+     * @param int     $color
+     * @param string  $alignment
+     * @param float   $orientation
      */
     protected function drawText(
         $text,
@@ -164,9 +156,8 @@ class Pdf extends AbstractRenderer
         $color,
         $alignment = 'center',
         $orientation = 0
-    )
-    {
-        $page = $this->resource->pages[$this->page];
+    ) {
+        $page  = $this->resource->pages[$this->page];
         $color = new Color\Rgb(
             (($color & 0xFF0000) >> 16) / 255.0,
             (($color & 0x00FF00) >> 8) / 255.0,
@@ -185,12 +176,12 @@ class Pdf extends AbstractRenderer
 
         $angle = pi() * $orientation / 180;
         $left = $position[0] * $this->moduleSize + $this->leftOffset;
-        $top = $page->getHeight() - $position[1] * $this->moduleSize - $this->topOffset;
+        $top  = $page->getHeight() - $position[1] * $this->moduleSize - $this->topOffset;
 
         switch ($alignment) {
             case 'center':
                 $left -= ($width / 2) * cos($angle);
-                $top -= ($width / 2) * sin($angle);
+                $top  -= ($width / 2) * sin($angle);
                 break;
             case 'right':
                 $left -= $width;
@@ -198,13 +189,12 @@ class Pdf extends AbstractRenderer
         }
         $page->rotate($left, $top, $angle);
         $page->drawText($text, $left, $top);
-        $page->rotate($left, $top, -$angle);
+        $page->rotate($left, $top, - $angle);
     }
 
     /**
      * Calculate the width of a string:
      * in case of using alignment parameter in drawText
-     *
      * @param string $text
      * @param Font $font
      * @param float $fontSize
@@ -213,14 +203,13 @@ class Pdf extends AbstractRenderer
     public function widthForStringUsingFontSize($text, $font, $fontSize)
     {
         $drawingString = iconv('UTF-8', 'UTF-16BE//IGNORE', $text);
-        $characters = array();
+        $characters    = array();
         for ($i = 0, $len = strlen($drawingString); $i < $len; $i++) {
-            $characters[] = (ord($drawingString[$i++]) << 8) | ord($drawingString[$i]);
+            $characters[] = (ord($drawingString[$i ++]) << 8) | ord($drawingString[$i]);
         }
         $glyphs = $font->glyphNumbersForCharacters($characters);
         $widths = $font->widthsForGlyphs($glyphs);
         $stringWidth = (array_sum($widths) / $font->getUnitsPerEm()) * $fontSize;
-
         return $stringWidth;
     }
 }

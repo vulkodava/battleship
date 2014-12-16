@@ -39,7 +39,7 @@ class Factory
      */
     public function __construct(InputFilterPluginManager $inputFilterManager = null)
     {
-        $this->defaultFilterChain = new FilterChain();
+        $this->defaultFilterChain    = new FilterChain();
         $this->defaultValidatorChain = new ValidatorChain();
 
         if ($inputFilterManager) {
@@ -56,7 +56,6 @@ class Factory
     public function setDefaultFilterChain(FilterChain $filterChain)
     {
         $this->defaultFilterChain = $filterChain;
-
         return $this;
     }
 
@@ -89,7 +88,6 @@ class Factory
     public function setDefaultValidatorChain(ValidatorChain $validatorChain)
     {
         $this->defaultValidatorChain = $validatorChain;
-
         return $this;
     }
 
@@ -129,7 +127,6 @@ class Factory
                 $this->getDefaultFilterChain()->setPluginManager($serviceLocator->get('FilterManager'));
             }
         }
-
         return $this;
     }
 
@@ -310,7 +307,6 @@ class Factory
             if (isset($inputFilterSpecification['required'])) {
                 $inputFilter->setIsRequired($inputFilterSpecification['required']);
             }
-
             return $inputFilter;
         }
 
@@ -334,7 +330,7 @@ class Factory
     }
 
     /**
-     * @param  FilterChain $chain
+     * @param  FilterChain       $chain
      * @param  array|Traversable $filters
      * @throws Exception\RuntimeException
      * @return void
@@ -370,7 +366,7 @@ class Factory
     }
 
     /**
-     * @param  ValidatorChain $chain
+     * @param  ValidatorChain    $chain
      * @param  array|Traversable $validators
      * @throws Exception\RuntimeException
      * @return void
@@ -389,7 +385,7 @@ class Factory
                         'Invalid validator specification provided; does not include "name" key'
                     );
                 }
-                $name = $validator['name'];
+                $name    = $validator['name'];
                 $options = array();
                 if (isset($validator['options'])) {
                     $options = $validator['options'];

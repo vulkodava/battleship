@@ -26,8 +26,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
         $this->_originalMaildir = __DIR__ . '/../_files/test.maildir/';
         if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                . 'directory before enabling the maildir tests');
-
+                                 . 'directory before enabling the maildir tests');
             return;
         }
 
@@ -48,7 +47,6 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
             closedir($dh);
             if ($count != 2) {
                 $this->markTestSkipped('Are you sure your tmp dir is a valid empty dir?');
-
                 return;
             }
         }
@@ -172,15 +170,15 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Simple Message', $subject);
     }
 
-    /*
-        public function testFetchTopBody()
-        {
-            $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
+/*
+    public function testFetchTopBody()
+    {
+        $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
-            $content = $mail->getHeader(3, 1)->getContent();
-            $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
-        }
-    */
+        $content = $mail->getHeader(3, 1)->getContent();
+        $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
+    }
+*/
     public function testFetchMessageHeader()
     {
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
@@ -194,7 +192,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Maildir(array('dirname' => $this->_maildir));
 
         $content = $mail->getMessage(3)->getContent();
-        list($content,) = explode("\n", $content, 2);
+        list($content, ) = explode("\n", $content, 2);
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
 
@@ -250,7 +248,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
         $ids = $mail->getUniqueId();
         $should_ids = array(1 => '1000000000.P1.example.org', '1000000001.P1.example.org', '1000000002.P1.example.org',
-            '1000000003.P1.example.org', '1000000004.P1.example.org');
+                            '1000000003.P1.example.org', '1000000004.P1.example.org');
         foreach ($ids as $num => $id) {
             $this->assertEquals($id, $should_ids[$num]);
 

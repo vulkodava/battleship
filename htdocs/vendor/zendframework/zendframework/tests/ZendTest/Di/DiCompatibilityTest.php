@@ -52,7 +52,6 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
     /**
      *
      * error: Missing argument 1 for $class::__construct()
-     *
      * @dataProvider providesClassWithConstructionParameters
      * @expectedException PHPUnit_Framework_Error
      * @param string $class

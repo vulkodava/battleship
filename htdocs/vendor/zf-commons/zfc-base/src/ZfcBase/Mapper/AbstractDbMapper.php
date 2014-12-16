@@ -67,7 +67,6 @@ abstract class AbstractDbMapper extends EventProvider
 
     /**
      * Performs some basic initialization setup and checks before running a query
-     *
      * @return null
      */
     protected function initialize()
@@ -98,7 +97,6 @@ abstract class AbstractDbMapper extends EventProvider
     protected function getSelect($table = null)
     {
         $this->initialize();
-
         return $this->getSlaveSql()->select($table ?: $this->getTableName());
     }
 
@@ -118,7 +116,6 @@ abstract class AbstractDbMapper extends EventProvider
             $entityPrototype ?: $this->getEntityPrototype());
 
         $resultSet->initialize($stmt->execute());
-
         return $resultSet;
     }
 
@@ -211,7 +208,6 @@ abstract class AbstractDbMapper extends EventProvider
     {
         $this->entityPrototype = $entityPrototype;
         $this->resultSetPrototype = null;
-
         return $this;
     }
 
@@ -233,7 +229,6 @@ abstract class AbstractDbMapper extends EventProvider
         if ($dbAdapter instanceof MasterSlaveAdapterInterface) {
             $this->setDbSlaveAdapter($dbAdapter->getSlaveAdapter());
         }
-
         return $this;
     }
 
@@ -252,7 +247,6 @@ abstract class AbstractDbMapper extends EventProvider
     public function setDbSlaveAdapter(Adapter $dbSlaveAdapter)
     {
         $this->dbSlaveAdapter = $dbSlaveAdapter;
-
         return $this;
     }
 
@@ -264,7 +258,6 @@ abstract class AbstractDbMapper extends EventProvider
         if (!$this->hydrator) {
             $this->hydrator = new ClassMethods(false);
         }
-
         return $this->hydrator;
     }
 
@@ -276,7 +269,6 @@ abstract class AbstractDbMapper extends EventProvider
     {
         $this->hydrator = $hydrator;
         $this->resultSetPrototype = null;
-
         return $this;
     }
 
@@ -299,7 +291,6 @@ abstract class AbstractDbMapper extends EventProvider
     protected function setSql(Sql $sql)
     {
         $this->sql = $sql;
-
         return $this;
     }
 
@@ -322,7 +313,6 @@ abstract class AbstractDbMapper extends EventProvider
     protected function setSlaveSql(Sql $sql)
     {
         $this->slaveSql = $sql;
-
         return $this;
     }
 
@@ -342,7 +332,6 @@ abstract class AbstractDbMapper extends EventProvider
             if (!$hydrator) {
                 $hydrator = $this->getHydrator();
             }
-
             return $hydrator->extract($entity);
         }
         throw new Exception\InvalidArgumentException('Entity passed to db mapper should be an array or object.');

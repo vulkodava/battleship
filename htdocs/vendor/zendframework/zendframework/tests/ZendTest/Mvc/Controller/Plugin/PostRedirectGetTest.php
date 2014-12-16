@@ -35,7 +35,7 @@ class PostRedirectGetTest extends TestCase
     {
         $router = new TreeRouteStack;
         $router->addRoute('home', LiteralRoute::factory(array(
-            'route' => '/',
+            'route'    => '/',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             )
@@ -57,8 +57,8 @@ class PostRedirectGetTest extends TestCase
         )));
 
         $this->controller = new SampleController();
-        $this->request = new Request();
-        $this->event = new MvcEvent();
+        $this->request    = new Request();
+        $this->event      = new MvcEvent();
         $this->routeMatch = new RouteMatch(array('controller' => 'controller-sample', 'action' => 'postPage'));
 
         $this->event->setRequest($this->request);
@@ -75,7 +75,7 @@ class PostRedirectGetTest extends TestCase
 
     public function testReturnsFalseOnIntialGet()
     {
-        $result = $this->controller->dispatch($this->request, $this->response);
+        $result    = $this->controller->dispatch($this->request, $this->response);
         $prgResult = $this->controller->prg('home');
 
         $this->assertFalse($prgResult);
@@ -88,8 +88,8 @@ class PostRedirectGetTest extends TestCase
             'postval1' => 'value'
         )));
 
-        $result = $this->controller->dispatch($this->request, $this->response);
-        $prgResultUrl = $this->controller->prg('/test/getPage', true);
+        $result         = $this->controller->dispatch($this->request, $this->response);
+        $prgResultUrl   = $this->controller->prg('/test/getPage', true);
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultUrl);
         $this->assertTrue($prgResultUrl->getHeaders()->has('Location'));
@@ -104,7 +104,7 @@ class PostRedirectGetTest extends TestCase
             'postval1' => 'value1'
         )));
 
-        $result = $this->controller->dispatch($this->request, $this->response);
+        $result         = $this->controller->dispatch($this->request, $this->response);
         $prgResultRoute = $this->controller->prg('home');
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
@@ -121,7 +121,7 @@ class PostRedirectGetTest extends TestCase
         $this->request->setMethod('POST');
         $this->request->setPost(new Parameters($params));
 
-        $result = $this->controller->dispatch($this->request, $this->response);
+        $result         = $this->controller->dispatch($this->request, $this->response);
         $prgResultRoute = $this->controller->prg('home');
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
@@ -170,7 +170,7 @@ class PostRedirectGetTest extends TestCase
             'postval1' => 'value1'
         )));
 
-        $result = $this->controller->dispatch($this->request, $this->response);
+        $result         = $this->controller->dispatch($this->request, $this->response);
         $prgResultRoute = $this->controller->prg();
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
@@ -217,7 +217,7 @@ class PostRedirectGetTest extends TestCase
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
-        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri(), 'expects to redirect for the same url');
+        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri() , 'expects to redirect for the same url');
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
 
@@ -241,7 +241,7 @@ class PostRedirectGetTest extends TestCase
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
-        $this->assertEquals($expects . '?id=123', $prgResultRoute->getHeaders()->get('Location')->getUri(), 'expects to redirect for the same url');
+        $this->assertEquals($expects . '?id=123', $prgResultRoute->getHeaders()->get('Location')->getUri() , 'expects to redirect for the same url');
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
 }

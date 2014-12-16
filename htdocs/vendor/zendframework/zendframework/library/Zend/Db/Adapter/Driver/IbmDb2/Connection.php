@@ -16,7 +16,7 @@ use Zend\Db\Adapter\Profiler;
 class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 {
     /**
-     * @var IbmDb2
+     *  @var IbmDb2
      */
     protected $driver = null;
 
@@ -59,7 +59,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Constructor
      *
-     * @param  array|resource|null $connectionParameters (ibm_db2 connection resource)
+     * @param  array|resource|null                $connectionParameters (ibm_db2 connection resource)
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($connectionParameters = null)
@@ -78,13 +78,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Set driver
      *
-     * @param  IbmDb2 $driver
+     * @param  IbmDb2     $driver
      * @return Connection
      */
     public function setDriver(IbmDb2 $driver)
     {
         $this->driver = $driver;
-
         return $this;
     }
 
@@ -95,7 +94,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
-
         return $this;
     }
 
@@ -108,13 +106,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param  array $connectionParameters
+     * @param  array      $connectionParameters
      * @return Connection
      */
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
-
         return $this;
     }
 
@@ -127,7 +124,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param  resource $resource DB2 resource
+     * @param  resource   $resource DB2 resource
      * @return Connection
      */
     public function setResource($resource)
@@ -136,7 +133,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidArgumentException('The resource provided must be of type "DB2 Connection"');
         }
         $this->resource = $resource;
-
         return $this;
     }
 
@@ -152,7 +148,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $info = db2_server_info($this->resource);
-
         return (isset($info->DB_NAME) ? $info->DB_NAME : '');
     }
 
@@ -191,12 +186,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             return null;
         };
 
-        $database = $findParameterValue(array('database', 'db'));
-        $username = $findParameterValue(array('username', 'uid', 'UID'));
-        $password = $findParameterValue(array('password', 'pwd', 'PWD'));
+        $database     = $findParameterValue(array('database', 'db'));
+        $username     = $findParameterValue(array('username', 'uid', 'UID'));
+        $password     = $findParameterValue(array('password', 'pwd', 'PWD'));
         $isPersistent = $findParameterValue(array('persistent', 'PERSISTENT', 'Persistent'));
-        $options = (isset($p['driver_options']) ? $p['driver_options'] : array());
-        $connect = ((bool)$isPersistent) ? 'db2_pconnect' : 'db2_connect';
+        $options      = (isset($p['driver_options']) ? $p['driver_options'] : array());
+        $connect      = ((bool) $isPersistent) ? 'db2_pconnect' : 'db2_connect';
 
         $this->resource = $connect($database, $username, $password, $options);
 
@@ -255,7 +250,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $this->prevAutocommit = db2_autocommit($this->resource);
         db2_autocommit($this->resource, DB2_AUTOCOMMIT_OFF);
         $this->inTransaction = true;
-
         return $this;
     }
 
@@ -289,7 +283,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->inTransaction = false;
-
         return $this;
     }
 
@@ -317,7 +310,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->inTransaction = false;
-
         return $this;
     }
 
@@ -337,8 +329,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             $this->profiler->profilerStart($sql);
         }
 
-        set_error_handler(function () {
-            }, E_WARNING); // suppress warnings
+        set_error_handler(function () {}, E_WARNING); // suppress warnings
         $resultResource = db2_exec($this->resource, $sql);
         restore_error_handler();
 
@@ -377,7 +368,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->i5 = php_uname('s') == 'OS400' ? true : false;
-
         return $this->i5;
     }
 }

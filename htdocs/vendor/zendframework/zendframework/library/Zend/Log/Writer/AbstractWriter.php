@@ -137,7 +137,6 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $this->filters[] = $filter;
-
         return $this;
     }
 
@@ -151,7 +150,6 @@ abstract class AbstractWriter implements WriterInterface
         if (null === $this->filterPlugins) {
             $this->setFilterPluginManager(new FilterPluginManager());
         }
-
         return $this->filterPlugins;
     }
 
@@ -176,7 +174,6 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $this->filterPlugins = $plugins;
-
         return $this;
     }
 
@@ -202,7 +199,6 @@ abstract class AbstractWriter implements WriterInterface
         if (null === $this->formatterPlugins) {
             $this->setFormatterPluginManager(new FormatterPluginManager());
         }
-
         return $this->formatterPlugins;
     }
 
@@ -229,7 +225,6 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $this->formatterPlugins = $plugins;
-
         return $this;
     }
 
@@ -308,7 +303,6 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         $this->formatter = $formatter;
-
         return $this;
     }
 

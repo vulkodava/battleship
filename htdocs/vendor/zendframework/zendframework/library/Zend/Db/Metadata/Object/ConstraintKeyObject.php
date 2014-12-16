@@ -94,7 +94,6 @@ class ConstraintKeyObject
     public function setColumnName($columnName)
     {
         $this->columnName = $columnName;
-
         return $this;
     }
 
@@ -117,7 +116,6 @@ class ConstraintKeyObject
     public function setOrdinalPosition($ordinalPosition)
     {
         $this->ordinalPosition = $ordinalPosition;
-
         return $this;
     }
 
@@ -140,7 +138,6 @@ class ConstraintKeyObject
     public function setPositionInUniqueConstraint($positionInUniqueConstraint)
     {
         $this->positionInUniqueConstraint = $positionInUniqueConstraint;
-
         return $this;
     }
 
@@ -163,7 +160,6 @@ class ConstraintKeyObject
     public function setReferencedTableSchema($referencedTableSchema)
     {
         $this->referencedTableSchema = $referencedTableSchema;
-
         return $this;
     }
 
@@ -186,7 +182,6 @@ class ConstraintKeyObject
     public function setReferencedTableName($referencedTableName)
     {
         $this->referencedTableName = $referencedTableName;
-
         return $this;
     }
 
@@ -209,7 +204,6 @@ class ConstraintKeyObject
     public function setReferencedColumnName($referencedColumnName)
     {
         $this->referencedColumnName = $referencedColumnName;
-
         return $this;
     }
 

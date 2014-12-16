@@ -87,7 +87,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
  *
  * @param  bool $arg1
  * @param string|array $arg2
- * @param string $arg3              Optional argument
+ * @param string $arg3 Optional argument
  * @param string|struct|false $arg4 Optional argument
  * @return bool|array
  */

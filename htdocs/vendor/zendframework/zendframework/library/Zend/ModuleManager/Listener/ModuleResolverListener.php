@@ -23,14 +23,13 @@ class ModuleResolverListener extends AbstractListener
     public function __invoke(ModuleEvent $e)
     {
         $moduleName = $e->getModuleName();
-        $class = $moduleName . '\Module';
+        $class      = $moduleName . '\Module';
 
         if (!class_exists($class)) {
             return false;
         }
 
         $module = new $class;
-
         return $module;
     }
 }

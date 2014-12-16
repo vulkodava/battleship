@@ -34,9 +34,9 @@ class BlockCipher implements EncryptionAlgorithmInterface
      * )
      */
     protected $encryption = array(
-        'key_iteration' => 5000,
-        'algorithm' => 'aes',
-        'hash' => 'sha256',
+        'key_iteration'       => 5000,
+        'algorithm'           => 'aes',
+        'hash'                => 'sha256',
     );
 
     /**
@@ -106,7 +106,6 @@ class BlockCipher implements EncryptionAlgorithmInterface
         if (is_string($options)) {
             $this->blockCipher->setKey($options);
             $this->encryption['key'] = $options;
-
             return $this;
         }
 
@@ -174,7 +173,6 @@ class BlockCipher implements EncryptionAlgorithmInterface
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
         $this->encryption['vector'] = $vector;
-
         return $this;
     }
 
@@ -193,7 +191,6 @@ class BlockCipher implements EncryptionAlgorithmInterface
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
         $this->encryption['key'] = $key;
-
         return $this;
     }
 
@@ -230,7 +227,6 @@ class BlockCipher implements EncryptionAlgorithmInterface
         }
 
         $this->compression = $compression;
-
         return $this;
     }
 
@@ -248,7 +244,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         // compress prior to encryption
         if (!empty($this->compression)) {
             $compress = new Compress($this->compression);
-            $value = $compress($value);
+            $value    = $compress($value);
         }
 
         try {
@@ -256,7 +252,6 @@ class BlockCipher implements EncryptionAlgorithmInterface
         } catch (CryptException\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
-
         return $encrypted;
     }
 
@@ -275,7 +270,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
         // decompress after decryption
         if (!empty($this->compression)) {
             $decompress = new Decompress($this->compression);
-            $decrypted = $decompress($decrypted);
+            $decrypted  = $decompress($decrypted);
         }
 
         return $decrypted;

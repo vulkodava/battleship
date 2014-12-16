@@ -55,7 +55,7 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group  6021
+     * @group 6021
      *
      * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::createServiceWithName
      * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::get

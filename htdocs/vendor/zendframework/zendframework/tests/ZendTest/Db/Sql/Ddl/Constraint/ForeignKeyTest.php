@@ -20,12 +20,11 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setName('xxxx'));
-
         return $fk;
     }
 
     /**
-     * @covers  Zend\Db\Sql\Ddl\Constraint\ForeignKey::getName
+     * @covers Zend\Db\Sql\Ddl\Constraint\ForeignKey::getName
      * @depends testSetName
      */
     public function testGetName(ForeignKey $fk)
@@ -40,12 +39,11 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setReferenceTable('xxxx'));
-
         return $fk;
     }
 
     /**
-     * @covers  Zend\Db\Sql\Ddl\Constraint\ForeignKey::getReferenceTable
+     * @covers Zend\Db\Sql\Ddl\Constraint\ForeignKey::getReferenceTable
      * @depends testSetReferenceTable
      */
     public function testGetReferenceTable(ForeignKey $fk)
@@ -60,12 +58,11 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setReferenceColumn('xxxx'));
-
         return $fk;
     }
 
     /**
-     * @covers  Zend\Db\Sql\Ddl\Constraint\ForeignKey::getReferenceColumn
+     * @covers Zend\Db\Sql\Ddl\Constraint\ForeignKey::getReferenceColumn
      * @depends testSetReferenceColumn
      */
     public function testGetReferenceColumn(ForeignKey $fk)
@@ -80,12 +77,11 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setOnDeleteRule('CASCADE'));
-
         return $fk;
     }
 
     /**
-     * @covers  Zend\Db\Sql\Ddl\Constraint\ForeignKey::getOnDeleteRule
+     * @covers Zend\Db\Sql\Ddl\Constraint\ForeignKey::getOnDeleteRule
      * @depends testSetOnDeleteRule
      */
     public function testGetOnDeleteRule(ForeignKey $fk)
@@ -100,12 +96,11 @@ class ForeignKeyTest extends \PHPUnit_Framework_TestCase
     {
         $fk = new ForeignKey('foo', 'bar', 'baz', 'bam');
         $this->assertSame($fk, $fk->setOnUpdateRule('CASCADE'));
-
         return $fk;
     }
 
     /**
-     * @covers  Zend\Db\Sql\Ddl\Constraint\ForeignKey::getOnUpdateRule
+     * @covers Zend\Db\Sql\Ddl\Constraint\ForeignKey::getOnUpdateRule
      * @depends testSetOnUpdateRule
      */
     public function testGetOnUpdateRule(ForeignKey $fk)

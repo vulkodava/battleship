@@ -28,7 +28,6 @@ class NodeList implements Iterator, Countable, ArrayAccess
 
     /**
      * Current iterator position
-     *
      * @var int
      */
     protected $position = 0;
@@ -36,7 +35,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * Constructor
      *
-     * @param DOMNodeList $list
+     * @param DOMNodeList  $list
      */
     public function __construct(DOMNodeList $list)
     {
@@ -122,7 +121,6 @@ class NodeList implements Iterator, Countable, ArrayAccess
         if (in_array($key, range(0, $this->list->length - 1)) && $this->list->length > 0) {
             return true;
         }
-
         return false;
     }
 

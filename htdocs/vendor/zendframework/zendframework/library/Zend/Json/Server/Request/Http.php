@@ -15,7 +15,6 @@ class Http extends JsonRequest
 {
     /**
      * Raw JSON pulled from POST body
-     *
      * @var string
      */
     protected $rawJson;

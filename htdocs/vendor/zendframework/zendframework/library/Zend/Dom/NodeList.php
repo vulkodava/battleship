@@ -18,7 +18,6 @@ use Iterator;
 
 /**
  * Nodelist for DOM XPath query
- *
  * @deprecated
  * @see \Zend\Dom\Document\NodeList
  */
@@ -26,7 +25,6 @@ class NodeList implements Iterator, Countable, ArrayAccess
 {
     /**
      * CSS Selector query
-     *
      * @var string
      */
     protected $cssQuery;
@@ -43,14 +41,12 @@ class NodeList implements Iterator, Countable, ArrayAccess
 
     /**
      * Current iterator position
-     *
      * @var int
      */
     protected $position = 0;
 
     /**
      * XPath query
-     *
      * @var string
      */
     protected $xpathQuery;
@@ -58,17 +54,17 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * Constructor
      *
-     * @param string $cssQuery
+     * @param string       $cssQuery
      * @param string|array $xpathQuery
-     * @param DOMDocument $document
-     * @param DOMNodeList $nodeList
+     * @param DOMDocument  $document
+     * @param DOMNodeList  $nodeList
      */
     public function __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
     {
-        $this->cssQuery = $cssQuery;
+        $this->cssQuery   = $cssQuery;
         $this->xpathQuery = $xpathQuery;
-        $this->document = $document;
-        $this->nodeList = $nodeList;
+        $this->document   = $document;
+        $this->nodeList   = $nodeList;
     }
 
     /**
@@ -180,7 +176,6 @@ class NodeList implements Iterator, Countable, ArrayAccess
         if (in_array($key, range(0, $this->nodeList->length - 1)) && $this->nodeList->length > 0) {
             return true;
         }
-
         return false;
     }
 

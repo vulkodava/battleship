@@ -1,11 +1,10 @@
 <?php if (!isset($this->vars()->foo)): ?>
-    No object model passed
-<?php
-else:
+No object model passed
+<?php else: 
     $vars = get_object_vars($this->vars()->foo);
     foreach ($vars as $key => $value): ?>
-        <?php echo $key ?>: <?php echo $value ?>
-    <?php endforeach;
+<?php echo $key ?>: <?php echo $value ?>
+<?php endforeach;
 endif ?>
 
 

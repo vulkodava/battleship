@@ -23,7 +23,7 @@ class Oracle implements PlatformInterface
     {
         if (isset($options['quote_identifiers'])
             && ($options['quote_identifiers'] == false
-                || $options['quote_identifiers'] === 'false')
+            || $options['quote_identifiers'] === 'false')
         ) {
             $this->quoteIdentifiers = false;
         }
@@ -60,7 +60,6 @@ class Oracle implements PlatformInterface
         if ($this->quoteIdentifiers === false) {
             return $identifier;
         }
-
         return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
     }
 
@@ -79,7 +78,6 @@ class Oracle implements PlatformInterface
         if (is_array($identifierChain)) {
             $identifierChain = implode('"."', $identifierChain);
         }
-
         return '"' . $identifierChain . '"';
     }
 
@@ -103,9 +101,8 @@ class Oracle implements PlatformInterface
     {
         trigger_error(
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-            . 'can introduce security vulnerabilities in a production environment.'
+                . 'can introduce security vulnerabilities in a production environment.'
         );
-
         return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
@@ -138,7 +135,6 @@ class Oracle implements PlatformInterface
         do {
             $valueList[key($valueList)] = $this->quoteValue($value);
         } while ($value = next($valueList));
-
         return implode(', ', $valueList);
     }
 
@@ -186,7 +182,6 @@ class Oracle implements PlatformInterface
                     $parts[$i] = '"' . str_replace('"', '\\' . '"', $part) . '"';
             }
         }
-
         return implode('', $parts);
     }
 }

@@ -42,7 +42,7 @@ class RuntimeDefinition implements DefinitionInterface
      * Constructor
      *
      * @param null|IntrospectionStrategy $introspectionStrategy
-     * @param array|null $explicitClasses
+     * @param array|null                 $explicitClasses
      */
     public function __construct(IntrospectionStrategy $introspectionStrategy = null, array $explicitClasses = null)
     {
@@ -117,7 +117,6 @@ class RuntimeDefinition implements DefinitionInterface
     public function getClassSupertypes($class)
     {
         $this->processClass($class);
-
         return $this->classes[$class]['supertypes'];
     }
 
@@ -127,7 +126,6 @@ class RuntimeDefinition implements DefinitionInterface
     public function getInstantiator($class)
     {
         $this->processClass($class);
-
         return $this->classes[$class]['instantiator'];
     }
 
@@ -137,7 +135,6 @@ class RuntimeDefinition implements DefinitionInterface
     public function hasMethods($class)
     {
         $this->processClass($class);
-
         return (count($this->classes[$class]['methods']) > 0);
     }
 
@@ -147,7 +144,6 @@ class RuntimeDefinition implements DefinitionInterface
     public function hasMethod($class, $method)
     {
         $this->processClass($class);
-
         return isset($this->classes[$class]['methods'][$method]);
     }
 
@@ -157,7 +153,6 @@ class RuntimeDefinition implements DefinitionInterface
     public function getMethods($class)
     {
         $this->processClass($class);
-
         return $this->classes[$class]['methods'];
     }
 
@@ -167,7 +162,6 @@ class RuntimeDefinition implements DefinitionInterface
     public function hasMethodParameters($class, $method)
     {
         $this->processClass($class);
-
         return (array_key_exists($method, $this->classes[$class]['parameters']));
     }
 
@@ -177,7 +171,6 @@ class RuntimeDefinition implements DefinitionInterface
     public function getMethodParameters($class, $method)
     {
         $this->processClass($class);
-
         return $this->classes[$class]['parameters'][$method];
     }
 
@@ -209,10 +202,10 @@ class RuntimeDefinition implements DefinitionInterface
 
         // setup the key in classes
         $this->classes[$className] = array(
-            'supertypes' => array(),
+            'supertypes'   => array(),
             'instantiator' => null,
-            'methods' => array(),
-            'parameters' => array()
+            'methods'      => array(),
+            'parameters'   => array()
         );
 
         $def = &$this->classes[$className]; // localize for brevity
@@ -222,8 +215,7 @@ class RuntimeDefinition implements DefinitionInterface
             $annotations = $rClass->getAnnotations($strategy->getAnnotationManager());
 
             if (($annotations instanceof AnnotationCollection)
-                && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')
-            ) {
+                && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')) {
                 // @todo Instantiator support in annotations
             }
         }
@@ -263,8 +255,7 @@ class RuntimeDefinition implements DefinitionInterface
                 $annotations = $rMethod->getAnnotations($strategy->getAnnotationManager());
 
                 if (($annotations instanceof AnnotationCollection)
-                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')
-                ) {
+                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')) {
                     // use '@inject' and search for parameters
                     $def['methods'][$methodName] = Di::METHOD_IS_EAGER;
                     $this->processParams($def, $rClass, $rMethod);
@@ -314,8 +305,8 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * @param array $def
-     * @param \Zend\Code\Reflection\ClassReflection $rClass
+     * @param array                                  $def
+     * @param \Zend\Code\Reflection\ClassReflection  $rClass
      * @param \Zend\Code\Reflection\MethodReflection $rMethod
      */
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)
@@ -331,7 +322,7 @@ class RuntimeDefinition implements DefinitionInterface
         $def['parameters'][$methodName] = array();
 
         foreach ($rMethod->getParameters() as $p) {
-            /** @var $p \ReflectionParameter */
+            /** @var $p \ReflectionParameter  */
             $actualParamName = $p->getName();
 
             $fqName = $rClass->getName() . '::' . $rMethod->getName() . ':' . $p->getPosition();

@@ -30,9 +30,9 @@ class LzfTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        $filter = new LzfCompression();
+        $filter  = new LzfCompression();
 
-        $text = 'compress me';
+        $text       = 'compress me';
         $compressed = $filter->compress($text);
         $this->assertNotEquals($text, $compressed);
 

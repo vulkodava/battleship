@@ -56,7 +56,7 @@ class XmlTest extends AbstractReaderTestCase
 
 ECS;
 
-        $arrayXml = $this->reader->fromString($xml);
+        $arrayXml= $this->reader->fromString($xml);
         $this->assertEquals($arrayXml['test'], 'foo');
         $this->assertEquals($arrayXml['bar'][0], 'baz');
         $this->assertEquals($arrayXml['bar'][1], 'foo');
@@ -106,11 +106,11 @@ ECS;
         $arrayXml = $this->reader->fromFile($this->getTestAssetPath('attributes'));
         $this->assertArrayHasKey('one', $arrayXml);
         $this->assertInternalType('array', $arrayXml['one']);
-
+        
         // No attribute + text value == string
         $this->assertArrayHasKey(0, $arrayXml['one']);
         $this->assertEquals('bazbat', $arrayXml['one'][0]);
-
+        
         // Attribute(s) + text value == array
         $this->assertArrayHasKey(1, $arrayXml['one']);
         $this->assertInternalType('array', $arrayXml['one'][1]);

@@ -24,7 +24,6 @@ class ViewFeedRendererFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $feedRenderer = new FeedRenderer();
-
         return $feedRenderer;
     }
 }

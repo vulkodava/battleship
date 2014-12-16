@@ -22,7 +22,6 @@ class GetFilter implements FilterInterface
         if (substr($property, $pos, 3) === 'get') {
             return true;
         }
-
         return false;
     }
 }

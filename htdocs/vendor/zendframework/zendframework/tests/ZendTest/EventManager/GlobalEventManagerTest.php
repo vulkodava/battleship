@@ -40,12 +40,11 @@ class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testProxiesAllStaticOperationsToEventCollectionInstance()
     {
-        $test = new \stdClass();
+        $test    = new \stdClass();
         $listener = GlobalEventManager::attach('foo.bar', function ($e) use ($test) {
-            $test->event = $e->getName();
+            $test->event  = $e->getName();
             $test->target = $e->getTarget();
             $test->params = $e->getParams();
-
             return $test->params;
         });
         $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $listener);
@@ -74,7 +73,7 @@ class GlobalEventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $events);
 
         $listener = GlobalEventManager::attach('foo.bar', function ($e) use ($test) {
-            $test->event = $e->getEvent();
+            $test->event  = $e->getEvent();
             $test->target = $e->getTarget();
             $test->params = $e->getParams();
         });

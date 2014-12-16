@@ -20,7 +20,7 @@ class ProductFieldset extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('product');
         $this->setHydrator(new ClassMethodsHydrator())
-            ->setObject(new Product());
+             ->setObject(new Product());
 
         $this->add(array(
             'name' => 'name',

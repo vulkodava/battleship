@@ -33,7 +33,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public static function rmdir($dir)
     {
-        $files = array_diff(scandir($dir), array('.', '..'));
+        $files = array_diff(scandir($dir), array('.','..'));
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
         }
@@ -78,7 +78,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     public function testUseOfRouter()
     {
         // default value
-        $this->assertEquals(false, $this->useConsoleRequest);
+       $this->assertEquals(false, $this->useConsoleRequest);
     }
 
     public function testApplicationClass()

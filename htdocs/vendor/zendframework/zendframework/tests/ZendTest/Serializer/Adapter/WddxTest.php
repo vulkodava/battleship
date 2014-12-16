@@ -42,9 +42,9 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeString()
     {
-        $value = 'test';
+        $value    = 'test';
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><string>test</string></data></wddxPacket>';
+                  . '<data><string>test</string></data></wddxPacket>';
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -52,9 +52,9 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeStringWithComment()
     {
-        $value = 'test';
+        $value    = 'test';
         $expected = '<wddxPacket version=\'1.0\'><header><comment>a test comment</comment></header>'
-            . '<data><string>test</string></data></wddxPacket>';
+                  . '<data><string>test</string></data></wddxPacket>';
 
         $this->adapter->getOptions()->setComment('a test comment');
         $data = $this->adapter->serialize($value);
@@ -63,9 +63,9 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeFalse()
     {
-        $value = false;
+        $value    = false;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><boolean value=\'false\'/></data></wddxPacket>';
+                  . '<data><boolean value=\'false\'/></data></wddxPacket>';
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -73,9 +73,9 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeTrue()
     {
-        $value = true;
+        $value    = true;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><boolean value=\'true\'/></data></wddxPacket>';
+                  . '<data><boolean value=\'true\'/></data></wddxPacket>';
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -83,9 +83,9 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNull()
     {
-        $value = null;
+        $value    = null;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><null/></data></wddxPacket>';
+                  . '<data><null/></data></wddxPacket>';
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -93,9 +93,9 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testSerializeNumeric()
     {
-        $value = 100;
+        $value    = 100;
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><number>100</number></data></wddxPacket>';
+                  . '<data><number>100</number></data></wddxPacket>';
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -106,10 +106,10 @@ class WddxTest extends \PHPUnit_Framework_TestCase
         $value = new \stdClass();
         $value->test = "test";
         $expected = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><struct>'
-            . '<var name=\'php_class_name\'><string>stdClass</string></var>'
-            . '<var name=\'test\'><string>test</string></var>'
-            . '</struct></data></wddxPacket>';
+                  . '<data><struct>'
+                  . '<var name=\'php_class_name\'><string>stdClass</string></var>'
+                  . '<var name=\'test\'><string>test</string></var>'
+                  . '</struct></data></wddxPacket>';
 
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
@@ -117,8 +117,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeString()
     {
-        $value = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><string>test</string></data></wddxPacket>';
+        $value    = '<wddxPacket version=\'1.0\'><header/>'
+                  . '<data><string>test</string></data></wddxPacket>';
         $expected = 'test';
 
         $data = $this->adapter->unserialize($value);
@@ -127,8 +127,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeFalse()
     {
-        $value = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><boolean value=\'false\'/></data></wddxPacket>';
+        $value    = '<wddxPacket version=\'1.0\'><header/>'
+                  . '<data><boolean value=\'false\'/></data></wddxPacket>';
         $expected = false;
 
         $data = $this->adapter->unserialize($value);
@@ -137,8 +137,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeTrue()
     {
-        $value = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><boolean value=\'true\'/></data></wddxPacket>';
+        $value    = '<wddxPacket version=\'1.0\'><header/>'
+                  . '<data><boolean value=\'true\'/></data></wddxPacket>';
         $expected = true;
 
         $data = $this->adapter->unserialize($value);
@@ -147,8 +147,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeNull1()
     {
-        $value = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><null/></data></wddxPacket>';
+        $value    = '<wddxPacket version=\'1.0\'><header/>'
+                  . '<data><null/></data></wddxPacket>';
         $expected = null;
 
         $data = $this->adapter->unserialize($value);
@@ -162,8 +162,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnserializeNull2()
     {
-        $value = '<wddxPacket version=\'1.0\'><header/>' . "\n"
-            . '<data><null/></data></wddxPacket>';
+        $value    = '<wddxPacket version=\'1.0\'><header/>' . "\n"
+                  . '<data><null/></data></wddxPacket>';
         $expected = null;
 
         $data = $this->adapter->unserialize($value);
@@ -172,8 +172,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeNumeric()
     {
-        $value = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><number>100</number></data></wddxPacket>';
+        $value    = '<wddxPacket version=\'1.0\'><header/>'
+                  . '<data><number>100</number></data></wddxPacket>';
         $expected = 100;
 
         $data = $this->adapter->unserialize($value);
@@ -182,11 +182,11 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testUnserializeObject()
     {
-        $value = '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><struct>'
-            . '<var name=\'php_class_name\'><string>stdClass</string></var>'
-            . '<var name=\'test\'><string>test</string></var>'
-            . '</struct></data></wddxPacket>';
+        $value    = '<wddxPacket version=\'1.0\'><header/>'
+                  . '<data><struct>'
+                  . '<var name=\'php_class_name\'><string>stdClass</string></var>'
+                  . '<var name=\'test\'><string>test</string></var>'
+                  . '</struct></data></wddxPacket>';
         $expected = new \stdClass();
         $expected->test = 'test';
 
@@ -224,9 +224,9 @@ class WddxTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldThrowExceptionIfXmlToUnserializeFromContainsADoctype()
     {
-        $value = '<!DOCTYPE>'
-            . '<wddxPacket version=\'1.0\'><header/>'
-            . '<data><string>test</string></data></wddxPacket>';
+        $value    = '<!DOCTYPE>'
+                  . '<wddxPacket version=\'1.0\'><header/>'
+                  . '<data><string>test</string></data></wddxPacket>';
         $this->setExpectedException("Zend\Serializer\Exception\RuntimeException");
         $data = $this->adapter->unserialize($value);
     }

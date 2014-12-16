@@ -23,11 +23,11 @@ class HydrateEventTest extends PHPUnit_Framework_TestCase
      */
     public function testEvent()
     {
-        $target = new stdClass();
+        $target    = new stdClass();
         $hydrated1 = new stdClass();
-        $data1 = array('president' => 'Zaphod');
-        $event = new HydrateEvent($target, $hydrated1, $data1);
-        $data2 = array('maintainer' => 'Marvin');
+        $data1     = array('president' => 'Zaphod');
+        $event     = new HydrateEvent($target, $hydrated1, $data1);
+        $data2     = array('maintainer' => 'Marvin');
         $hydrated2 = new stdClass();
 
         $this->assertSame(HydrateEvent::EVENT_HYDRATE, $event->getName());

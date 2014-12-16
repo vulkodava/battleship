@@ -78,7 +78,6 @@ class InArray extends AbstractValidator
         if ($this->haystack === null) {
             throw new Exception\RuntimeException('haystack option is mandatory');
         }
-
         return $this->haystack;
     }
 
@@ -91,7 +90,6 @@ class InArray extends AbstractValidator
     public function setHaystack(array $haystack)
     {
         $this->haystack = $haystack;
-
         return $this;
     }
 
@@ -106,16 +104,14 @@ class InArray extends AbstractValidator
         if ($this->strict == self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY
             || $this->strict == self::COMPARE_STRICT
         ) {
-            return (bool)$this->strict;
+            return (bool) $this->strict;
         }
-
         return $this->strict;
     }
 
     /**
      * Sets the strict option mode
-     * InArray::CHECK_STRICT | InArray::CHECK_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY |
-     * InArray::CHECK_NOT_STRICT
+     * InArray::CHECK_STRICT | InArray::CHECK_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY | InArray::CHECK_NOT_STRICT
      *
      * @param  int $strict
      * @return InArray Provides a fluent interface
@@ -135,7 +131,6 @@ class InArray extends AbstractValidator
         }
 
         $this->strict = $strict;
-
         return $this;
     }
 
@@ -157,8 +152,7 @@ class InArray extends AbstractValidator
      */
     public function setRecursive($recursive)
     {
-        $this->recursive = (bool)$recursive;
-
+        $this->recursive = (bool) $recursive;
         return $this;
     }
 
@@ -178,9 +172,8 @@ class InArray extends AbstractValidator
         // if the input is a string or float, and vulnerability protection is on
         // we type cast the input to a string
         if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
-            && (is_int($value) || is_float($value))
-        ) {
-            $value = (string)$value;
+            && (is_int($value) || is_float($value))) {
+            $value = (string) $value;
         }
 
         $this->setValue($value);
@@ -198,7 +191,7 @@ class InArray extends AbstractValidator
                     if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
                         && is_string($value) && (is_int($el) || is_float($el))
                     ) {
-                        $el = (string)$el;
+                        $el = (string) $el;
                     }
 
                     if ($el == $value) {
@@ -220,7 +213,7 @@ class InArray extends AbstractValidator
             ) {
                 foreach ($haystack as &$h) {
                     if (is_int($h) || is_float($h)) {
-                        $h = (string)$h;
+                        $h = (string) $h;
                     }
                 }
             }
@@ -231,7 +224,6 @@ class InArray extends AbstractValidator
         }
 
         $this->error(self::NOT_IN_ARRAY);
-
         return false;
     }
 }

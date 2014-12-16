@@ -11,7 +11,7 @@
 /**
  * Set error reporting to the level to which Zend Framework code must comply.
  */
-error_reporting(E_ALL | E_STRICT);
+error_reporting( E_ALL | E_STRICT );
 
 if (class_exists('PHPUnit_Runner_Version', true)) {
     $phpUnitVersion = PHPUnit_Runner_Version::id();
@@ -19,7 +19,8 @@ if (class_exists('PHPUnit_Runner_Version', true)) {
         echo 'This version of PHPUnit (' .
             PHPUnit_Runner_Version::id() .
             ') is not supported for ZendXml unit tests - use v 3.7.0 or higher.'
-            . PHP_EOL;
+            . PHP_EOL
+        ;
         exit(1);
     }
     unset($phpUnitVersion);
@@ -31,12 +32,13 @@ if (class_exists('PHPUnit_Runner_Version', true)) {
 // Try to use Composer autoloader
 if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     include_once __DIR__ . '/../vendor/autoload.php';
-} // ... or use a simple SPL autoloader
-else {
+}
+// ... or use a simple SPL autoloader
+else{
 
     // update include path
     set_include_path(implode(PATH_SEPARATOR, array(
-        __DIR__ . '/../src',
+        __DIR__.'/../src',
         __DIR__,
         get_include_path()
     )));
@@ -46,12 +48,12 @@ else {
      */
     spl_autoload_register(function ($className) {
         $className = ltrim($className, '\\');
-        $fileName = '';
+        $fileName  = '';
         $namespace = '';
         if ($lastNsPos = strrpos($className, '\\')) {
             $namespace = substr($className, 0, $lastNsPos);
             $className = substr($className, $lastNsPos + 1);
-            $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+            $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
         }
         $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
         require $fileName;

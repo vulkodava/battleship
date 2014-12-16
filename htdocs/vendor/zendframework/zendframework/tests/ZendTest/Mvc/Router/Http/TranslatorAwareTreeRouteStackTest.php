@@ -96,16 +96,16 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
     public function testTranslatorIsPassedThroughMatchMethod()
     {
         $translator = new Translator();
-        $request = new Request();
+        $request    = new Request();
 
         $route = $this->getMock('Zend\Mvc\Router\Http\RouteInterface');
         $route->expects($this->once())
-            ->method('match')
-            ->with(
-                $this->equalTo($request),
-                $this->isNull(),
-                $this->equalTo(array('translator' => $translator, 'text_domain' => 'default'))
-            );
+              ->method('match')
+              ->with(
+                  $this->equalTo($request),
+                  $this->isNull(),
+                  $this->equalTo(array('translator' => $translator, 'text_domain' => 'default'))
+              );
 
         $stack = new TranslatorAwareTreeRouteStack();
         $stack->addRoute('test', $route);
@@ -116,15 +116,15 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
     public function testTranslatorIsPassedThroughAssembleMethod()
     {
         $translator = new Translator();
-        $uri = new HttpUri();
+        $uri        = new HttpUri();
 
         $route = $this->getMock('Zend\Mvc\Router\Http\RouteInterface');
         $route->expects($this->once())
-            ->method('assemble')
-            ->with(
-                $this->equalTo(array()),
-                $this->equalTo(array('translator' => $translator, 'text_domain' => 'default', 'uri' => $uri))
-            );
+              ->method('assemble')
+              ->with(
+                  $this->equalTo(array()),
+                  $this->equalTo(array('translator' => $translator, 'text_domain' => 'default', 'uri' => $uri))
+              );
 
         $stack = new TranslatorAwareTreeRouteStack();
         $stack->addRoute('test', $route);
@@ -142,7 +142,7 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
         );
 
         $this->assertEquals('/de/hauptseite', $stack->assemble(array('locale' => 'de'), array('name' => 'foo/index')));
-        $this->assertEquals('/en/homepage', $stack->assemble(array('locale' => 'en'), array('name' => 'foo/index')));
+        $this->assertEquals('/en/homepage',   $stack->assemble(array('locale' => 'en'), array('name' => 'foo/index')));
     }
 
     public function testMatchRouteWithParameterLocale()

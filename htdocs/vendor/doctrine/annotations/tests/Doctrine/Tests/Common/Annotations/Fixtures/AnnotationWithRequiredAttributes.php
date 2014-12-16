@@ -6,10 +6,9 @@ namespace Doctrine\Tests\Common\Annotations\Fixtures;
  * @Annotation
  * @Target("ALL")
  * @Attributes({
-@Attribute("value",   required = true ,   type = "string"),
-@Attribute("annot",   required = true ,   type =
-                      "Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAnnotation"),
-})
+      @Attribute("value",   required = true ,   type = "string"),
+      @Attribute("annot",   required = true ,   type = "Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAnnotation"),
+   })
  */
 final class AnnotationWithRequiredAttributes
 {

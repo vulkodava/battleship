@@ -38,7 +38,7 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_filesPath = __DIR__ . DIRECTORY_SEPARATOR . '_files';
-        $this->_filter = new RealPathFilter();
+        $this->_filter    = new RealPathFilter();
     }
 
     /**
@@ -48,7 +48,7 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
      */
     public function testFileExists()
     {
-        $filter = $this->_filter;
+        $filter   = $this->_filter;
         $filename = 'file.1';
         $this->assertContains($filename, $filter($this->_filesPath . DIRECTORY_SEPARATOR . $filename));
     }
@@ -61,7 +61,7 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
     public function testFileNonexistent()
     {
         $filter = $this->_filter;
-        $path = '/path/to/nonexistent';
+        $path   = '/path/to/nonexistent';
         if (false !== strpos(PHP_OS, 'BSD')) {
             $this->assertEquals($path, $filter($path));
         } else {
@@ -94,12 +94,12 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($path, $filter($path));
 
         $path2 = __DIR__ . DIRECTORY_SEPARATOR . '_files'
-            . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files';
+               . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files';
         $this->assertEquals($path, $filter($path2));
 
         $path3 = __DIR__ . DIRECTORY_SEPARATOR . '_files'
-            . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.'
-            . DIRECTORY_SEPARATOR . '_files';
+               . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.'
+               . DIRECTORY_SEPARATOR . '_files';
         $this->assertEquals($path, $filter($path3));
     }
 

@@ -79,7 +79,6 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
     public function setFilterChain(FilterChain $filters)
     {
         $this->__filterChain = $filters;
-
         return $this;
     }
 
@@ -93,14 +92,13 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
         if (null === $this->__filterChain) {
             $this->setFilterChain(new FilterChain());
         }
-
         return $this->__filterChain;
     }
 
     /**
      * Recursively processes all ViewModels and returns output.
      *
-     * @param  string|ModelInterface $model          A ViewModel instance.
+     * @param  string|ModelInterface   $model        A ViewModel instance.
      * @param  null|array|\Traversable $values       Values to use when rendering. If none
      *                                               provided, uses those in the composed
      *                                               variables container.

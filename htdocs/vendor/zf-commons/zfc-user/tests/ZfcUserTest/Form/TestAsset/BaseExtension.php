@@ -27,7 +27,6 @@ class BaseExtension extends Base
     public function setRegistrationOptions(RegistrationOptionsInterface $registrationOptions)
     {
         $this->registrationOptions = $registrationOptions;
-
         return $this;
     }
 

@@ -37,9 +37,8 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     public function getHtml()
     {
         if (null === $this->html) {
-            $this->html = file_get_contents(__DIR__ . '/_files/sample.xhtml');
+            $this->html  = file_get_contents(__DIR__ . '/_files/sample.xhtml');
         }
-
         return $this->html;
     }
 
@@ -60,7 +59,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorShouldAcceptDocumentString()
     {
-        $html = $this->getHtml();
+        $html  = $this->getHtml();
         $document = new Document($html);
         $this->assertSame($html, $document->getStringDocument());
     }
@@ -132,7 +131,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     public function testgetDomMethodShouldReturnDomDocumentWithStringDocumentInConstructor()
     {
-        $html = $this->getHtml();
+        $html  = $this->getHtml();
         $document = new Document($html);
         $this->assertTrue($document->getDomDocument() instanceof \DOMDocument);
     }

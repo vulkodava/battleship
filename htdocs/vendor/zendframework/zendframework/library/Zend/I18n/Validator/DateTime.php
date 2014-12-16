@@ -18,7 +18,7 @@ use Zend\Validator\Exception as ValidatorException;
 
 class DateTime extends AbstractValidator
 {
-    const INVALID = 'datetimeInvalid';
+    const INVALID          = 'datetimeInvalid';
     const INVALID_DATETIME = 'datetimeInvalidDateTime';
 
     /**
@@ -26,7 +26,7 @@ class DateTime extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID => "Invalid type given. String expected",
+        self::INVALID          => "Invalid type given. String expected",
         self::INVALID_DATETIME => "The input does not appear to be a valid datetime",
     );
 
@@ -137,7 +137,7 @@ class DateTime extends AbstractValidator
      */
     public function setDateType($dateType)
     {
-        $this->dateType = $dateType;
+        $this->dateType            = $dateType;
         $this->invalidateFormatter = true;
 
         return $this;
@@ -184,7 +184,7 @@ class DateTime extends AbstractValidator
      */
     public function setTimeType($timeType)
     {
-        $this->timeType = $timeType;
+        $this->timeType            = $timeType;
         $this->invalidateFormatter = true;
 
         return $this;
@@ -231,7 +231,7 @@ class DateTime extends AbstractValidator
      */
     public function setLocale($locale)
     {
-        $this->locale = $locale;
+        $this->locale              = $locale;
         $this->invalidateFormatter = true;
 
         return $this;
@@ -273,7 +273,6 @@ class DateTime extends AbstractValidator
 
         if (intl_is_failure($formatter->getErrorCode()) || $timestamp === false) {
             $this->error(self::INVALID_DATETIME);
-
             return false;
         }
 

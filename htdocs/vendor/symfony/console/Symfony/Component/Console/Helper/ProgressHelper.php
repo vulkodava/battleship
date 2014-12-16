@@ -17,8 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * The Progress class provides helpers to display progress output.
  *
- * @author     Chris Jones <leeked@gmail.com>
- * @author     Fabien Potencier <fabien@symfony.com>
+ * @author Chris Jones <leeked@gmail.com>
+ * @author Fabien Potencier <fabien@symfony.com>
  *
  * @deprecated Deprecated since 2.5, to be removed in 3.0; use ProgressBar instead.
  */
@@ -131,7 +131,7 @@ class ProgressHelper extends Helper
      */
     public function setBarWidth($size)
     {
-        $this->barWidth = (int)$size;
+        $this->barWidth = (int) $size;
     }
 
     /**
@@ -181,20 +181,20 @@ class ProgressHelper extends Helper
      */
     public function setRedrawFrequency($freq)
     {
-        $this->redrawFreq = (int)$freq;
+        $this->redrawFreq = (int) $freq;
     }
 
     /**
      * Starts the progress output.
      *
      * @param OutputInterface $output An Output instance
-     * @param int|null $max           Maximum steps
+     * @param int|null        $max    Maximum steps
      */
     public function start(OutputInterface $output, $max = null)
     {
         $this->startTime = time();
         $this->current = 0;
-        $this->max = (int)$max;
+        $this->max = (int) $max;
 
         // Disabling output when it does not support ANSI codes as it would result in a broken display anyway.
         $this->output = $output->isDecorated() ? $output : new NullOutput();
@@ -232,7 +232,7 @@ class ProgressHelper extends Helper
     /**
      * Advances the progress output X steps.
      *
-     * @param int $step    Number of steps to advance
+     * @param int  $step   Number of steps to advance
      * @param bool $redraw Whether to redraw or not
      *
      * @throws \LogicException
@@ -245,8 +245,8 @@ class ProgressHelper extends Helper
     /**
      * Sets the current progress.
      *
-     * @param int $current The current progress
-     * @param bool $redraw Whether to redraw or not
+     * @param int  $current The current progress
+     * @param bool $redraw  Whether to redraw or not
      *
      * @throws \LogicException
      */
@@ -256,7 +256,7 @@ class ProgressHelper extends Helper
             throw new \LogicException('You must start the progress bar before calling setCurrent().');
         }
 
-        $current = (int)$current;
+        $current = (int) $current;
 
         if ($current < $this->current) {
             throw new \LogicException('You can\'t regress the progress bar');
@@ -361,7 +361,7 @@ class ProgressHelper extends Helper
         $vars = array();
         $percent = 0;
         if ($this->max > 0) {
-            $percent = (float)$this->current / $this->max;
+            $percent = (float) $this->current / $this->max;
         }
 
         if (isset($this->formatVars['bar'])) {
@@ -423,7 +423,7 @@ class ProgressHelper extends Helper
                     $text = $format[1];
                     break;
                 } else {
-                    $text = ceil($secs / $format[2]) . ' ' . $format[1];
+                    $text = ceil($secs / $format[2]).' '.$format[1];
                     break;
                 }
             }
@@ -435,8 +435,8 @@ class ProgressHelper extends Helper
     /**
      * Overwrites a previous message to the output.
      *
-     * @param OutputInterface $output An Output instance
-     * @param string $message         The message
+     * @param OutputInterface $output  An Output instance
+     * @param string          $message The message
      */
     private function overwrite(OutputInterface $output, $message)
     {

@@ -8,7 +8,6 @@
  */
 
 namespace Zend\Soap;
-
 use ZendTest\Soap\TestAsset\MockCallUserFunc;
 
 /**

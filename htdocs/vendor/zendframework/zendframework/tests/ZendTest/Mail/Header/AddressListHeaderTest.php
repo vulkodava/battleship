@@ -68,7 +68,7 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
     public function testFieldValueIsCreatedFromAddressList()
     {
         $header = new To();
-        $list = $header->getAddressList();
+        $list   = $header->getAddressList();
         $this->populateAddressList($list);
         $expected = $this->getExpectedFieldValue();
         $this->assertEquals($expected, $header->getFieldValue());
@@ -100,13 +100,12 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
     public function getStringHeaders()
     {
         $value = $this->getExpectedFieldValue();
-
         return array(
-            'cc' => array('Cc: ' . $value, 'Zend\Mail\Header\Cc'),
-            'bcc' => array('Bcc: ' . $value, 'Zend\Mail\Header\Bcc'),
-            'from' => array('From: ' . $value, 'Zend\Mail\Header\From'),
+            'cc'       => array('Cc: ' . $value, 'Zend\Mail\Header\Cc'),
+            'bcc'      => array('Bcc: ' . $value, 'Zend\Mail\Header\Bcc'),
+            'from'     => array('From: ' . $value, 'Zend\Mail\Header\From'),
             'reply-to' => array('Reply-To: ' . $value, 'Zend\Mail\Header\ReplyTo'),
-            'to' => array('To: ' . $value, 'Zend\Mail\Header\To'),
+            'to'       => array('To: ' . $value, 'Zend\Mail\Header\To'),
         );
     }
 
@@ -116,7 +115,7 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
     public function testDeserializationFromString($headerLine, $class)
     {
         $callback = sprintf('%s::fromString', $class);
-        $header = call_user_func($callback, $headerLine);
+        $header   = call_user_func($callback, $headerLine);
         $this->assertInstanceOf($class, $header);
         $list = $header->getAddressList();
         $this->assertEquals(3, count($list));
@@ -134,24 +133,23 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
     public function getStringHeadersWithNoWhitespaceSeparator()
     {
         $value = $this->getExpectedFieldValue();
-
         return array(
-            'cc' => array('Cc:' . $value, 'Zend\Mail\Header\Cc'),
-            'bcc' => array('Bcc:' . $value, 'Zend\Mail\Header\Bcc'),
-            'from' => array('From:' . $value, 'Zend\Mail\Header\From'),
+            'cc'       => array('Cc:' . $value, 'Zend\Mail\Header\Cc'),
+            'bcc'      => array('Bcc:' . $value, 'Zend\Mail\Header\Bcc'),
+            'from'     => array('From:' . $value, 'Zend\Mail\Header\From'),
             'reply-to' => array('Reply-To:' . $value, 'Zend\Mail\Header\ReplyTo'),
-            'to' => array('To:' . $value, 'Zend\Mail\Header\To'),
+            'to'       => array('To:' . $value, 'Zend\Mail\Header\To'),
         );
     }
 
     /**
-     * @group        3789
+     * @group 3789
      * @dataProvider getStringHeadersWithNoWhitespaceSeparator
      */
     public function testAllowsNoWhitespaceBetweenHeaderAndValue($headerLine, $class)
     {
         $callback = sprintf('%s::fromString', $class);
-        $header = call_user_func($callback, $headerLine);
+        $header   = call_user_func($callback, $headerLine);
         $this->assertInstanceOf($class, $header);
         $list = $header->getAddressList();
         $this->assertEquals(3, count($list));

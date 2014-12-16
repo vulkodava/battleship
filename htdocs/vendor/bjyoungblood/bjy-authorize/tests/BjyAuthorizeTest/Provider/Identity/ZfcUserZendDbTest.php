@@ -2,7 +2,7 @@
 /**
  * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
  *
- * @link    https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
+ * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -47,7 +47,7 @@ class ZfcUserZendDbTest extends PHPUnit_Framework_TestCase
     {
         $this->authService = $this->getMock('Zend\Authentication\AuthenticationService');
         $this->userService = $this->getMock('ZfcUser\Service\User');
-        $this->adapter = $this->getMock('Zend\Db\Adapter\Adapter', array(), array(), '', false);
+        $this->adapter     = $this->getMock('Zend\Db\Adapter\Adapter', array(), array(), '', false);
 
         $this
             ->userService

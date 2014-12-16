@@ -36,8 +36,7 @@ class FormCaptcha extends AbstractHelper
      * Render a form captcha for an element
      *
      * @param  ElementInterface $element
-     * @throws Exception\DomainException if the element does not compose a captcha, or the renderer does not implement
-     *                                   plugin()
+     * @throws Exception\DomainException if the element does not compose a captcha, or the renderer does not implement plugin()
      * @return string
      */
     public function render(ElementInterface $element)
@@ -51,7 +50,7 @@ class FormCaptcha extends AbstractHelper
             ));
         }
 
-        $helper = $captcha->getHelperName();
+        $helper  = $captcha->getHelperName();
 
         $renderer = $this->getView();
         if (!method_exists($renderer, 'plugin')) {
@@ -62,7 +61,6 @@ class FormCaptcha extends AbstractHelper
         }
 
         $helper = $renderer->plugin($helper);
-
         return $helper($element);
     }
 }

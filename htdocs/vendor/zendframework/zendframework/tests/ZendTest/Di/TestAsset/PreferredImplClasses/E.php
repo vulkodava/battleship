@@ -12,7 +12,6 @@ namespace ZendTest\Di\TestAsset\PreferredImplClasses;
 class E implements AAwareInterface
 {
     public $a = null;
-
     public function foo(A $a)
     {
         $this->a = $a;

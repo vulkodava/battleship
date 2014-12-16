@@ -33,7 +33,7 @@ class ChangefreqTest extends \PHPUnit_Framework_TestCase
     public function testValidChangefreqs()
     {
         $values = array(
-            'always', 'hourly', 'daily', 'weekly',
+            'always',  'hourly', 'daily', 'weekly',
             'monthly', 'yearly', 'never'
         );
 
@@ -49,7 +49,7 @@ class ChangefreqTest extends \PHPUnit_Framework_TestCase
     public function testInvalidStrings()
     {
         $values = array(
-            'alwayz', '_hourly', 'Daily', 'wEekly',
+            'alwayz',  '_hourly', 'Daily', 'wEekly',
             'mönthly ', ' yearly ', 'never ', 'rofl',
             'yesterday',
         );

@@ -36,14 +36,14 @@ class DefaultRendereringStrategyTest extends TestCase
 
     public function setUp()
     {
-        $this->view = new View();
-        $this->request = new Request();
+        $this->view     = new View();
+        $this->request  = new Request();
         $this->response = new Response();
-        $this->event = new MvcEvent();
+        $this->event    = new MvcEvent();
         $this->renderer = new PhpRenderer();
 
         $this->event->setRequest($this->request)
-            ->setResponse($this->response);
+                    ->setResponse($this->response);
 
         $this->strategy = new DefaultRenderingStrategy($this->view);
     }
@@ -59,7 +59,7 @@ class DefaultRendereringStrategyTest extends TestCase
 
             $expectedCallback = array($this->strategy, 'render');
             $expectedPriority = -10000;
-            $found = false;
+            $found            = false;
             foreach ($listeners as $listener) {
                 $callback = $listener->getCallback();
                 if ($callback === $expectedCallback) {
@@ -146,17 +146,16 @@ class DefaultRendereringStrategyTest extends TestCase
             $sharedEvents = $services->get('SharedEventManager');
             $events = new EventManager();
             $events->setSharedManager($sharedEvents);
-
             return $events;
         }, false);
 
         $application = new Application(array(), $services);
         $this->event->setApplication($application);
 
-        $test = (object)array('flag' => false);
+        $test = (object) array('flag' => false);
         $application->getEventManager()->attach(MvcEvent::EVENT_RENDER_ERROR, function ($e) use ($test) {
-            $test->flag = true;
-            $test->error = $e->getError();
+            $test->flag      = true;
+            $test->error     = $e->getError();
             $test->exception = $e->getParam('exception');
         });
 

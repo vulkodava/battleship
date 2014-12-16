@@ -20,7 +20,7 @@ class CategoryFieldset extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('category');
         $this->setHydrator(new ClassMethodsHydrator())
-            ->setObject(new Category());
+             ->setObject(new Category());
 
         $this->add(array(
             'name' => 'name',

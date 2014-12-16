@@ -21,17 +21,17 @@ return array(
                             'route' => '/user',
                             'defaults' => array(
                                 'controller' => 'zfcuseradmin',
-                                'action' => 'index',
+                                'action'     => 'index',
                             ),
                         ),
-                        'child_routes' => array(
+                        'child_routes' =>array(
                             'list' => array(
                                 'type' => 'Segment',
                                 'options' => array(
                                     'route' => '/list[/:p]',
                                     'defaults' => array(
                                         'controller' => 'zfcuseradmin',
-                                        'action' => 'list',
+                                        'action'     => 'list',
                                     ),
                                 ),
                             ),
@@ -41,7 +41,7 @@ return array(
                                     'route' => '/create',
                                     'defaults' => array(
                                         'controller' => 'zfcuseradmin',
-                                        'action' => 'create'
+                                        'action'     => 'create'
                                     ),
                                 ),
                             ),
@@ -51,8 +51,8 @@ return array(
                                     'route' => '/edit/:userId',
                                     'defaults' => array(
                                         'controller' => 'zfcuseradmin',
-                                        'action' => 'edit',
-                                        'userId' => 0
+                                        'action'     => 'edit',
+                                        'userId'     => 0
                                     ),
                                 ),
                             ),
@@ -62,8 +62,8 @@ return array(
                                     'route' => '/remove/:userId',
                                     'defaults' => array(
                                         'controller' => 'zfcuseradmin',
-                                        'action' => 'remove',
-                                        'userId' => 0
+                                        'action'     => 'remove',
+                                        'userId'     => 0
                                     ),
                                 ),
                             ),

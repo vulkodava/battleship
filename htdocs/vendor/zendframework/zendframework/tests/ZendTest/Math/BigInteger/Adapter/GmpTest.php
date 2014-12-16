@@ -20,7 +20,6 @@ class GmpTest extends AbstractTestCase
     {
         if (!extension_loaded('gmp')) {
             $this->markTestSkipped('Missing ext/gmp');
-
             return;
         }
 

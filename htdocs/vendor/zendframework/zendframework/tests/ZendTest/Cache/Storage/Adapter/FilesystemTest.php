@@ -89,9 +89,9 @@ class FilesystemTest extends CommonAdapterTest
 
         $firstSlash = strpos($cacheDir, '/');
         $cacheDir = substr($cacheDir, 0, $firstSlash + 1)
-            . '..//../'
-            . substr($cacheDir, $firstSlash)
-            . '///';
+                  . '..//../'
+                  . substr($cacheDir, $firstSlash)
+                  . '///';
 
         $this->_options->setCacheDir($cacheDir);
         $cacheDir = $this->_options->getCacheDir();
@@ -322,7 +322,7 @@ class FilesystemTest extends CommonAdapterTest
         $this->_storage->setItem('a_key', 'a_value');
         $this->_storage->getOptions()->setDirLevel(1);
         $this->_storage->setItem('b_key', 'b_value');
-        $glob = glob($this->_tmpCacheDir . '/*');
+        $glob = glob($this->_tmpCacheDir.'/*');
         //contrived prefix which will collide with an existing directory
         $prefix = substr(md5('a_key'), 2, 2);
         $this->_storage->clearByPrefix($prefix);

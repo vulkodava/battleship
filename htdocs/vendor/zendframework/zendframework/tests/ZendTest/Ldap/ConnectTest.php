@@ -80,7 +80,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     public function testNetworkTimeoutConnect()
     {
         $networkTimeout = 1;
-        $ldap = new Ldap\Ldap(array_merge($this->options, array('networkTimeout' => $networkTimeout)));
+        $ldap           = new Ldap\Ldap(array_merge($this->options, array('networkTimeout' => $networkTimeout)));
 
         $ldap->connect();
         ldap_get_option($ldap->getResource(), LDAP_OPT_NETWORK_TIMEOUT, $actual);
@@ -132,8 +132,8 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     public function testExplicitNetworkTimeoutConnect()
     {
         $networkTimeout = 1;
-        $host = TESTS_ZEND_LDAP_HOST;
-        $port = 0;
+        $host           = TESTS_ZEND_LDAP_HOST;
+        $port           = 0;
         if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
             $port = TESTS_ZEND_LDAP_PORT;
         }
@@ -150,7 +150,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
 
     public function testBadPortConnect()
     {
-        $options = $this->options;
+        $options         = $this->options;
         $options['port'] = 10;
 
         $ldap = new Ldap\Ldap($options);

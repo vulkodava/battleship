@@ -83,7 +83,6 @@ class ApacheResolver implements ResolverInterface
         if (empty($this->apachePassword)) {
             $this->apachePassword = new ApachePassword();
         }
-
         return $this->apachePassword;
     }
 
@@ -122,7 +121,7 @@ class ApacheResolver implements ResolverInterface
 
         // Open file, read through looking for matching credentials
         ErrorHandler::start(E_WARNING);
-        $fp = fopen($this->file, 'r');
+        $fp    = fopen($this->file, 'r');
         $error = ErrorHandler::stop();
         if (!$fp) {
             throw new Exception\RuntimeException('Unable to open password file: ' . $this->file, 0, $error);

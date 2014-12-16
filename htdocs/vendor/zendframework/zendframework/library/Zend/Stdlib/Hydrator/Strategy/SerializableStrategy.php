@@ -47,7 +47,6 @@ class SerializableStrategy implements StrategyInterface
     public function extract($value)
     {
         $serializer = $this->getSerializer();
-
         return $serializer->serialize($value);
     }
 
@@ -60,7 +59,6 @@ class SerializableStrategy implements StrategyInterface
     public function hydrate($value)
     {
         $serializer = $this->getSerializer();
-
         return $serializer->unserialize($value);
     }
 
@@ -81,7 +79,6 @@ class SerializableStrategy implements StrategyInterface
             ));
         }
         $this->serializer = $serializer;
-
         return $this;
     }
 
@@ -111,7 +108,6 @@ class SerializableStrategy implements StrategyInterface
     public function setSerializerOptions($serializerOptions)
     {
         $this->serializerOptions = $serializerOptions;
-
         return $this;
     }
 

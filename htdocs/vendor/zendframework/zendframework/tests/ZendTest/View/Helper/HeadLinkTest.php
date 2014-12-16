@@ -41,8 +41,8 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
     {
         Helper\Doctype::unsetDoctypeRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
-        $this->view = new View();
-        $this->helper = new Helper\HeadLink();
+        $this->view     = new View();
+        $this->helper   = new Helper\HeadLink();
         $this->helper->setView($this->view);
     }
 
@@ -95,13 +95,13 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
             'link3' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'baz'),
         );
         $this->helper->headLink($links['link1'])
-            ->headLink($links['link2'], 'PREPEND')
-            ->headLink($links['link3']);
+                     ->headLink($links['link2'], 'PREPEND')
+                     ->headLink($links['link3']);
 
         $string = $this->helper->toString();
-        $lines = substr_count($string, PHP_EOL);
+        $lines  = substr_count($string, PHP_EOL);
         $this->assertEquals(2, $lines);
-        $lines = substr_count($string, '<link ');
+        $lines  = substr_count($string, '<link ');
         $this->assertEquals(3, $lines, $string);
 
         foreach ($links as $link) {
@@ -131,13 +131,13 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
             'link3' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'baz'),
         );
         $this->helper->appendStylesheet($links['link1']['href'])
-            ->prependStylesheet($links['link2']['href'])
-            ->appendStylesheet($links['link3']['href']);
+                     ->prependStylesheet($links['link2']['href'])
+                     ->appendStylesheet($links['link3']['href']);
 
         $string = $this->helper->toString();
-        $lines = substr_count($string, PHP_EOL);
+        $lines  = substr_count($string, PHP_EOL);
         $this->assertEquals(2, $lines);
-        $lines = substr_count($string, '<link ');
+        $lines  = substr_count($string, '<link ');
         $this->assertEquals(3, $lines, $string);
 
         foreach ($links as $link) {
@@ -174,11 +174,11 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         }
 
         $string = $this->helper->toString();
-        $lines = substr_count($string, PHP_EOL);
+        $lines  = substr_count($string, PHP_EOL);
         $this->assertEquals(2, $lines);
-        $lines = substr_count($string, '<link ');
+        $lines  = substr_count($string, '<link ');
         $this->assertEquals(3, $lines, $string);
-        $lines = substr_count($string, ' rel="alternate"');
+        $lines  = substr_count($string, ' rel="alternate"');
         $this->assertEquals(3, $lines, $string);
 
         foreach ($links as $link) {
@@ -327,7 +327,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
     {
         $this->view->plugin('doctype')->__invoke('HTML4_STRICT');
         $this->helper->__invoke(array('rel' => 'icon', 'src' => '/foo/bar'))
-            ->__invoke(array('rel' => 'foo', 'href' => '/bar/baz'));
+                     ->__invoke(array('rel' => 'foo', 'href' => '/bar/baz'));
         $test = $this->helper->toString();
         $this->assertNotContains(' />', $test);
     }
@@ -363,7 +363,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @issue ZF-3928
-     * @link  http://framework.zend.com/issues/browse/ZF-3928
+     * @link http://framework.zend.com/issues/browse/ZF-3928
      */
     public function testTurnOffAutoEscapeDoesNotEncodeAmpersand()
     {
@@ -373,7 +373,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAlternateWithExtras()
     {
-        $this->helper->setAlternate('/mydocument.pdf', 'application/pdf', 'foo', array('media' => array('print', 'screen')));
+        $this->helper->setAlternate('/mydocument.pdf', 'application/pdf', 'foo', array('media' => array('print','screen')));
         $test = $this->helper->toString();
         $this->assertContains('media="print,screen"', $test);
     }
@@ -387,7 +387,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testSetStylesheetWithMediaAsArray()
     {
-        $this->helper->appendStylesheet('/bar/baz', array('screen', 'print'));
+        $this->helper->appendStylesheet('/bar/baz', array('screen','print'));
         $test = $this->helper->toString();
         $this->assertContains(' media="screen,print"', $test);
     }
@@ -413,17 +413,17 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function testContainerMaintainsCorrectOrderOfItems()
     {
-        $this->helper->__invoke()->offsetSetStylesheet(1, '/test1.css');
-        $this->helper->__invoke()->offsetSetStylesheet(10, '/test2.css');
-        $this->helper->__invoke()->offsetSetStylesheet(20, '/test3.css');
-        $this->helper->__invoke()->offsetSetStylesheet(5, '/test4.css');
+        $this->helper->__invoke()->offsetSetStylesheet(1,'/test1.css');
+        $this->helper->__invoke()->offsetSetStylesheet(10,'/test2.css');
+        $this->helper->__invoke()->offsetSetStylesheet(20,'/test3.css');
+        $this->helper->__invoke()->offsetSetStylesheet(5,'/test4.css');
 
         $test = $this->helper->toString();
 
         $expected = '<link href="/test1.css" media="screen" rel="stylesheet" type="text/css">' . PHP_EOL
-            . '<link href="/test4.css" media="screen" rel="stylesheet" type="text/css">' . PHP_EOL
-            . '<link href="/test2.css" media="screen" rel="stylesheet" type="text/css">' . PHP_EOL
-            . '<link href="/test3.css" media="screen" rel="stylesheet" type="text/css">';
+                  . '<link href="/test4.css" media="screen" rel="stylesheet" type="text/css">' . PHP_EOL
+                  . '<link href="/test2.css" media="screen" rel="stylesheet" type="text/css">' . PHP_EOL
+                  . '<link href="/test3.css" media="screen" rel="stylesheet" type="text/css">';
 
         $this->assertEquals($expected, $test);
     }

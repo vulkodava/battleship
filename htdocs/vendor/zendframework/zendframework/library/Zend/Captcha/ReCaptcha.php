@@ -23,11 +23,10 @@ class ReCaptcha extends AbstractAdapter
 {
     /**@+
      * ReCaptcha Field names
-     *
      * @var string
      */
     protected $CHALLENGE = 'recaptcha_challenge_field';
-    protected $RESPONSE = 'recaptcha_response_field';
+    protected $RESPONSE  = 'recaptcha_response_field';
     /**@-*/
 
     /**
@@ -55,19 +54,18 @@ class ReCaptcha extends AbstractAdapter
      * Error codes
      */
     const MISSING_VALUE = 'missingValue';
-    const ERR_CAPTCHA = 'errCaptcha';
-    const BAD_CAPTCHA = 'badCaptcha';
+    const ERR_CAPTCHA   = 'errCaptcha';
+    const BAD_CAPTCHA   = 'badCaptcha';
     /**#@-*/
 
     /**
      * Error messages
-     *
      * @var array
      */
     protected $messageTemplates = array(
         self::MISSING_VALUE => 'Missing captcha fields',
-        self::ERR_CAPTCHA => 'Failed to validate captcha',
-        self::BAD_CAPTCHA => 'Captcha value is wrong: %value%',
+        self::ERR_CAPTCHA   => 'Failed to validate captcha',
+        self::BAD_CAPTCHA   => 'Captcha value is wrong: %value%',
     );
 
     /**
@@ -99,7 +97,6 @@ class ReCaptcha extends AbstractAdapter
     public function setPrivkey($privkey)
     {
         $this->getService()->setPrivateKey($privkey);
-
         return $this;
     }
 
@@ -112,7 +109,6 @@ class ReCaptcha extends AbstractAdapter
     public function setPubkey($pubkey)
     {
         $this->getService()->setPublicKey($pubkey);
-
         return $this;
     }
 
@@ -124,7 +120,7 @@ class ReCaptcha extends AbstractAdapter
     public function __construct($options = null)
     {
         $this->setService(new ReCaptchaService());
-        $this->serviceParams = $this->getService()->getParams();
+        $this->serviceParams  = $this->getService()->getParams();
         $this->serviceOptions = $this->getService()->getOptions();
 
         parent::__construct($options);
@@ -149,7 +145,6 @@ class ReCaptcha extends AbstractAdapter
     public function setService(ReCaptchaService $service)
     {
         $this->service = $service;
-
         return $this;
     }
 
@@ -178,15 +173,12 @@ class ReCaptcha extends AbstractAdapter
         $service = $this->getService();
         if (isset($this->serviceParams[$key])) {
             $service->setParam($key, $value);
-
             return $this;
         }
         if (isset($this->serviceOptions[$key])) {
             $service->setOption($key, $value);
-
             return $this;
         }
-
         return parent::setOption($key, $value);
     }
 
@@ -213,7 +205,6 @@ class ReCaptcha extends AbstractAdapter
     {
         if (!is_array($value) && !is_array($context)) {
             $this->error(self::MISSING_VALUE);
-
             return false;
         }
 
@@ -223,7 +214,6 @@ class ReCaptcha extends AbstractAdapter
 
         if (empty($value[$this->CHALLENGE]) || empty($value[$this->RESPONSE])) {
             $this->error(self::MISSING_VALUE);
-
             return false;
         }
 
@@ -233,14 +223,12 @@ class ReCaptcha extends AbstractAdapter
 
         if (!$res) {
             $this->error(self::ERR_CAPTCHA);
-
             return false;
         }
 
         if (!$res->isValid()) {
             $this->error(self::BAD_CAPTCHA, $res->getErrorCode());
             $service->setParam('error', $res->getErrorCode());
-
             return false;
         }
 

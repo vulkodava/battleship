@@ -34,7 +34,6 @@ class FilterIterator extends SplPriorityQueue
                 return true;
             }
         }
-
         return false;
     }
 
@@ -53,7 +52,7 @@ class FilterIterator extends SplPriorityQueue
 
         // Iterate and remove any matches
         $removed = false;
-        $items = array();
+        $items   = array();
         $this->rewind();
         while (!$this->isEmpty()) {
             $item = $this->extract();
@@ -70,7 +69,6 @@ class FilterIterator extends SplPriorityQueue
         }
 
         $this->setExtractFlags(self::EXTR_DATA);
-
         return $removed;
     }
 
@@ -96,7 +94,6 @@ class FilterIterator extends SplPriorityQueue
         }
 
         $return = call_user_func($next->getCallback(), $context, $params, $chain);
-
         return $return;
     }
 }

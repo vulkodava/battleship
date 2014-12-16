@@ -144,7 +144,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $event = array(
             'message' => 'tottakai',
             'priority' => 4,
-            'context' => array('test' => 'one'),
+            'context' => array('test'=>'one'),
             'reference' => new XmlFormatter()
         );
         $expected = '<log><message>tottakai</message><priority>4</priority></log>';
@@ -165,7 +165,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $event = array(
             'message' => 'tottakai',
             'priority' => 4,
-            'context' => array('test' => 'one'),
+            'context' => array('test'=>'one'),
             'reference' => new SerializableObject()
         );
         $expected = '<log><message>tottakai</message><priority>4</priority><reference>ZendTest\Log\TestAsset\SerializableObject</reference></log>';
@@ -183,9 +183,9 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $formatter = new XmlFormatter;
         $d = new DateTime('2001-01-01T12:00:00-06:00');
         $event = array(
-            'timestamp' => $d,
-            'message' => 'test',
-            'priority' => 1,
+            'timestamp'    =>  $d,
+            'message'      => 'test',
+            'priority'     => 1,
             'priorityName' => 'CRIT',
             'extra' => array()
         );

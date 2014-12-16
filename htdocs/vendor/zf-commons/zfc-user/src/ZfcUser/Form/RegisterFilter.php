@@ -24,11 +24,11 @@ class RegisterFilter extends ProvidesEventsInputFilter
 
         if ($this->getOptions()->getEnableUsername()) {
             $this->add(array(
-                'name' => 'username',
-                'required' => true,
+                'name'       => 'username',
+                'required'   => true,
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
                             'min' => 3,
                             'max' => 255,
@@ -40,8 +40,8 @@ class RegisterFilter extends ProvidesEventsInputFilter
         }
 
         $this->add(array(
-            'name' => 'email',
-            'required' => true,
+            'name'       => 'email',
+            'required'   => true,
             'validators' => array(
                 array(
                     'name' => 'EmailAddress'
@@ -52,12 +52,12 @@ class RegisterFilter extends ProvidesEventsInputFilter
 
         if ($this->getOptions()->getEnableDisplayName()) {
             $this->add(array(
-                'name' => 'display_name',
-                'required' => true,
-                'filters' => array(array('name' => 'StringTrim')),
+                'name'       => 'display_name',
+                'required'   => true,
+                'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
                             'min' => 3,
                             'max' => 128,
@@ -68,12 +68,12 @@ class RegisterFilter extends ProvidesEventsInputFilter
         }
 
         $this->add(array(
-            'name' => 'password',
-            'required' => true,
-            'filters' => array(array('name' => 'StringTrim')),
+            'name'       => 'password',
+            'required'   => true,
+            'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
-                    'name' => 'StringLength',
+                    'name'    => 'StringLength',
                     'options' => array(
                         'min' => 6,
                     ),
@@ -82,18 +82,18 @@ class RegisterFilter extends ProvidesEventsInputFilter
         ));
 
         $this->add(array(
-            'name' => 'passwordVerify',
-            'required' => true,
-            'filters' => array(array('name' => 'StringTrim')),
+            'name'       => 'passwordVerify',
+            'required'   => true,
+            'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
-                    'name' => 'StringLength',
+                    'name'    => 'StringLength',
                     'options' => array(
                         'min' => 6,
                     ),
                 ),
                 array(
-                    'name' => 'Identical',
+                    'name'    => 'Identical',
                     'options' => array(
                         'token' => 'password',
                     ),
@@ -112,7 +112,6 @@ class RegisterFilter extends ProvidesEventsInputFilter
     public function setEmailValidator($emailValidator)
     {
         $this->emailValidator = $emailValidator;
-
         return $this;
     }
 
@@ -124,7 +123,6 @@ class RegisterFilter extends ProvidesEventsInputFilter
     public function setUsernameValidator($usernameValidator)
     {
         $this->usernameValidator = $usernameValidator;
-
         return $this;
     }
 

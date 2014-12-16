@@ -2036,7 +2036,7 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
             'patterns' => array(
                 'example' => array(
                     'fixed' => '21234567',
-                    'mobile' => array('81234567', '71234567'),
+                    'mobile' => array('81234567','71234567'),
                     'tollfree' => '18001234',
                     'emergency' => '118',
                 ),
@@ -3035,8 +3035,8 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider constructDataProvider
      *
-     * @param array $args
-     * @param array $options
+     * @param array  $args
+     * @param array  $options
      * @param string $locale
      */
     public function testConstruct(array $args, array $options, $locale = null)
@@ -3118,10 +3118,10 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
                     $this->assertTrue($this->validator->isValid($countryCodePrefixed));
 
                     // check fully qualified E.123/E.164 international variants
-                    $fullyQualifiedDoubleO = '00' . $parameters['code'] . $value;
+                    $fullyQualifiedDoubleO = '00'. $parameters['code'] . $value;
                     $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO), $fullyQualifiedDoubleO);
 
-                    $fullyQualifiedPlus = '+' . $parameters['code'] . $value;
+                    $fullyQualifiedPlus = '+'. $parameters['code'] . $value;
                     $this->assertTrue($this->validator->isValid($fullyQualifiedPlus), $fullyQualifiedPlus);
                 }
             }

@@ -56,13 +56,13 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new Memory\MemoryManager($this->_cache);
 
         // MemoryLimit
-        $memoryManager->setMemoryLimit(2 * 1024 * 1024 /* 2Mb */);
-        $this->assertEquals($memoryManager->getMemoryLimit(), 2 * 1024 * 1024);
+        $memoryManager->setMemoryLimit(2*1024*1024 /* 2Mb */);
+        $this->assertEquals($memoryManager->getMemoryLimit(), 2*1024*1024);
 
         // MinSize
-        $this->assertEquals($memoryManager->getMinSize(), 16 * 1024); // check for default value (16K)
-        $memoryManager->setMinSize(4 * 1024 /* 4Kb */);
-        $this->assertEquals($memoryManager->getMinSize(), 4 * 1024);
+        $this->assertEquals($memoryManager->getMinSize(), 16*1024); // check for default value (16K)
+        $memoryManager->setMinSize(4*1024 /* 4Kb */);
+        $this->assertEquals($memoryManager->getMinSize(), 4*1024);
     }
 
     /**
@@ -97,7 +97,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new Memory\MemoryManager($this->_cache);
 
         $memoryManager->setMinSize(256);
-        $memoryManager->setMemoryLimit(1024 * 32);
+        $memoryManager->setMemoryLimit(1024*32);
 
         $memObjects = array();
         for ($count = 0; $count < 64; $count++) {

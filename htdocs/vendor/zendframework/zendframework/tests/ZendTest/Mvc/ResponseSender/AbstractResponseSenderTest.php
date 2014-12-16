@@ -36,9 +36,9 @@ class AbstractResponseSenderTest extends TestCase
         );
         $mockSendResponseEvent->expects(
             $this->any())
-            ->method('getResponse')
-            ->will($this->returnValue($response)
-            );
+                ->method('getResponse')
+                ->will($this->returnValue($response)
+        );
 
         $responseSender = $this->getMockForAbstractClass(
             'Zend\Mvc\ResponseSender\AbstractResponseSender'

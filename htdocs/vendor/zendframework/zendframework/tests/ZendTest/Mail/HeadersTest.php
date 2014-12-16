@@ -277,7 +277,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $received2 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\nby framework (Postfix) with ESMTP id AAAAAAAAAAA\r\nfor <zend@framework>; Mon, 21 Nov 2011 12:50:29 -0600 (CST)");
         $headers->addHeader($received1);
         $headers->addHeader($received2);
-        $array = $headers->toArray();
+        $array   = $headers->toArray();
         $expected = array(
             'Received' => array(
                 $received1->getFieldValue(),
@@ -294,7 +294,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $received2 = Header\Received::fromString("Received: from framework (localhost [127.0.0.1])\r\nby framework (Postfix) with ESMTP id AAAAAAAAAAA\r\nfor <zend@framework>; Mon, 21 Nov 2011 12:50:29 -0600 (CST)");
         $headers->addHeader($received1);
         $headers->addHeader($received2);
-        $string = $headers->toString();
+        $string  = $headers->toString();
         $expected = array(
             'Received: ' . $received1->getFieldValue(),
             'Received: ' . $received2->getFieldValue(),
@@ -332,8 +332,8 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     public function testDefaultPluginLoaderIsSeededWithHeaders($plugin, $class)
     {
         $headers = new Mail\Headers();
-        $loader = $headers->getPluginClassLoader();
-        $test = $loader->load($plugin);
+        $loader  = $headers->getPluginClassLoader();
+        $test    = $loader->load($plugin);
         $this->assertEquals($class, $test);
     }
 

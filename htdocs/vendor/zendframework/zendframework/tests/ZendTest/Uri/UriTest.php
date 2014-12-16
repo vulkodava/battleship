@@ -38,7 +38,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Also tests casting a URI object to string.
      *
      * @param string $exp
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testComposeNewUriAndCastToString($exp, $parts)
@@ -49,20 +49,20 @@ class UriTest extends \PHPUnit_Framework_TestCase
             $uri->$setMethod($v);
         }
 
-        $this->assertEquals($exp, (string)$uri);
+        $this->assertEquals($exp, (string) $uri);
     }
 
     /**
      * Test the parseScheme static method to extract the scheme part
      *
      * @param string $uriString
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testParseScheme($uriString, $parts)
     {
         $scheme = Uri::parseScheme($uriString);
-        if (!isset($parts['scheme'])) {
+        if (! isset($parts['scheme'])) {
             $parts['scheme'] = null;
         }
 
@@ -71,7 +71,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test that parseScheme throws an exception in case of invalid input
-     *
+
      * @param  mixed $input
      * @dataProvider notStringInputProvider
      */
@@ -88,7 +88,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testMagicToStringEmptyIfInvalid(Uri $uri)
     {
-        $this->assertEquals('', (string)$uri);
+        $this->assertEquals('', (string) $uri);
     }
 
     /**
@@ -124,7 +124,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Test that we can get the scheme out of a parsed URI
      *
      * @param string $uriString
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testGetScheme($uriString, $parts)
@@ -141,7 +141,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Test that we get the correct userInfo
      *
      * @param string $uriString
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testGetUserInfo($uriString, $parts)
@@ -158,7 +158,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Test that we can get the host out of a parsed URI
      *
      * @param string $uriString
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testGetHost($uriString, $parts)
@@ -175,7 +175,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Test that we can get the port out of a parsed Uri
      *
      * @param string $uriString
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testGetPort($uriString, $parts)
@@ -192,7 +192,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Test that we can get the path out of a parsed Uri
      *
      * @param string $uriString
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testGetPath($uriString, $parts)
@@ -209,7 +209,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Test that we can get the query out of a parsed Uri
      *
      * @param string $uriString
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testGetQuery($uriString, $parts)
@@ -232,7 +232,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
         $exp = array(
             'test' => 'a',
-            'var' => array(1, 2),
+            'var'  => array(1, 2),
             'some' => array('thing' => 3)
         );
 
@@ -243,7 +243,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Test that we can get the fragment out of a parsed URI
      *
      * @param string $uriString
-     * @param array $parts
+     * @param array  $parts
      * @dataProvider uriWithPartsProvider
      */
     public function testGetFragment($uriString, $parts)
@@ -339,7 +339,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that we can use an array to set the query parameters
      *
-     * @param array $data
+     * @param array  $data
      * @param string $expqs
      * @dataProvider queryParamsArrayProvider
      */
@@ -708,10 +708,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testMergeTwoObjectsNotModifying()
     {
         $base = new Uri('http://example.com/bar');
-        $ref = new Uri('baz?qwe=1');
+        $ref  = new Uri('baz?qwe=1');
 
         $baseSig = serialize($base);
-        $refSig = serialize($ref);
+        $refSig  = serialize($ref);
 
         $actual = Uri::merge($base, $ref);
 
@@ -798,8 +798,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function invalidUserInfoProvider()
     {
         return array(
-            array('an`di:password', 'an%60di:password'),
-            array('user name', 'user%20name'),
+            array('an`di:password',    'an%60di:password'),
+            array('user name',         'user%20name'),
             array('shahar.e@zend.com', 'shahar.e%40zend.com')
         );
     }
@@ -875,7 +875,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('h2'),
             array('a+b'),
             array('k-'),
-        );
+         );
     }
 
     /**
@@ -1011,21 +1011,21 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('ht-tp://server/path?query', array(
-                'scheme' => 'ht-tp',
-                'host' => 'server',
-                'path' => '/path',
-                'query' => 'query',
+                'scheme'   => 'ht-tp',
+                'host'     => 'server',
+                'path'     => '/path',
+                'query'    => 'query',
             )),
             array('file:///foo/bar', array(
-                'scheme' => 'file',
-                'host' => '',
-                'path' => '/foo/bar',
+                'scheme'   => 'file',
+                'host'     => '',
+                'path'     => '/foo/bar',
             )),
             array('http://dude:lebowski@example.com/#fr/ag?me.nt', array(
-                'scheme' => 'http',
+                'scheme'   => 'http',
                 'userInfo' => 'dude:lebowski',
-                'host' => 'example.com',
-                'path' => '/',
+                'host'     => 'example.com',
+                'path'     => '/',
                 'fragment' => 'fr/ag?me.nt'
             )),
             array('/relative/path', array(
@@ -1033,14 +1033,14 @@ class UriTest extends \PHPUnit_Framework_TestCase
             )),
             array('ftp://example.com:5555', array(
                 'scheme' => 'ftp',
-                'host' => 'example.com',
-                'port' => 5555,
-                'path' => ''
+                'host'   => 'example.com',
+                'port'   => 5555,
+                'path'   => ''
             )),
             array('http://example.com/foo//bar/baz//fob/', array(
                 'scheme' => 'http',
-                'host' => 'example.com',
-                'path' => '/foo//bar/baz//fob/'
+                'host'   => 'example.com',
+                'path'   => '/foo//bar/baz//fob/'
             ))
         );
     }
@@ -1164,16 +1164,16 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function fluentInterfaceMethodProvider()
     {
         return array(
-            array('setScheme', array('file')),
-            array('setUserInfo', array('userInfo')),
-            array('setHost', array('example.com')),
-            array('setPort', array(80)),
-            array('setPath', array('/baz/baz')),
-            array('setQuery', array('foo=bar')),
-            array('setFragment', array('part2')),
+            array('setScheme',    array('file')),
+            array('setUserInfo',  array('userInfo')),
+            array('setHost',      array('example.com')),
+            array('setPort',      array(80)),
+            array('setPath',      array('/baz/baz')),
+            array('setQuery',     array('foo=bar')),
+            array('setFragment',  array('part2')),
             array('makeRelative', array('http://foo.bar/')),
-            array('resolve', array('http://foo.bar/')),
-            array('normalize', array())
+            array('resolve',      array('http://foo.bar/')),
+            array('normalize',    array())
         );
     }
 
@@ -1189,46 +1189,46 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             // Normal examples
-            array('http://a/b/c/d;p?q', 'g:h', 'g:h'),
-            array('http://a/b/c/d;p?q', 'g', 'http://a/b/c/g'),
-            array('http://a/b/c/d;p?q', './g', 'http://a/b/c/g'),
-            array('http://a/b/c/d;p?q', 'g/', 'http://a/b/c/g/'),
-            array('http://a/b/c/d;p?q', '/g', 'http://a/g'),
-            array('http://a/b/c/d;p?q', '//g', 'http://g'),
-            array('http://a/b/c/d;p?q', '?y', 'http://a/b/c/d;p?y'),
-            array('http://a/b/c/d;p?q', 'g?y', 'http://a/b/c/g?y'),
-            array('http://a/b/c/d;p?q', '#s', 'http://a/b/c/d;p?q#s'),
-            array('http://a/b/c/d;p?q', 'g#s', 'http://a/b/c/g#s'),
-            array('http://a/b/c/d;p?q', 'g?y#s', 'http://a/b/c/g?y#s'),
-            array('http://a/b/c/d;p?q', ';x', 'http://a/b/c/;x'),
-            array('http://a/b/c/d;p?q', 'g;x', 'http://a/b/c/g;x'),
+            array('http://a/b/c/d;p?q', 'g:h',     'g:h'),
+            array('http://a/b/c/d;p?q', 'g',       'http://a/b/c/g'),
+            array('http://a/b/c/d;p?q', './g',     'http://a/b/c/g'),
+            array('http://a/b/c/d;p?q', 'g/',      'http://a/b/c/g/'),
+            array('http://a/b/c/d;p?q', '/g',      'http://a/g'),
+            array('http://a/b/c/d;p?q', '//g',     'http://g'),
+            array('http://a/b/c/d;p?q', '?y',      'http://a/b/c/d;p?y'),
+            array('http://a/b/c/d;p?q', 'g?y',     'http://a/b/c/g?y'),
+            array('http://a/b/c/d;p?q', '#s',      'http://a/b/c/d;p?q#s'),
+            array('http://a/b/c/d;p?q', 'g#s',     'http://a/b/c/g#s'),
+            array('http://a/b/c/d;p?q', 'g?y#s',   'http://a/b/c/g?y#s'),
+            array('http://a/b/c/d;p?q', ';x',      'http://a/b/c/;x'),
+            array('http://a/b/c/d;p?q', 'g;x',     'http://a/b/c/g;x'),
             array('http://a/b/c/d;p?q', 'g;x?y#s', 'http://a/b/c/g;x?y#s'),
-            array('http://a/b/c/d;p?q', '', 'http://a/b/c/d;p?q'),
-            array('http://a/b/c/d;p?q', '.', 'http://a/b/c/'),
-            array('http://a/b/c/d;p?q', './', 'http://a/b/c/'),
-            array('http://a/b/c/d;p?q', '..', 'http://a/b/'),
-            array('http://a/b/c/d;p?q', '../', 'http://a/b/'),
-            array('http://a/b/c/d;p?q', '../g', 'http://a/b/g'),
-            array('http://a/b/c/d;p?q', '../..', 'http://a/'),
-            array('http://a/b/c/d;p?q', '../../', 'http://a/'),
+            array('http://a/b/c/d;p?q', '',        'http://a/b/c/d;p?q'),
+            array('http://a/b/c/d;p?q', '.',       'http://a/b/c/'),
+            array('http://a/b/c/d;p?q', './',      'http://a/b/c/'),
+            array('http://a/b/c/d;p?q', '..',      'http://a/b/'),
+            array('http://a/b/c/d;p?q', '../',     'http://a/b/'),
+            array('http://a/b/c/d;p?q', '../g',    'http://a/b/g'),
+            array('http://a/b/c/d;p?q', '../..',   'http://a/'),
+            array('http://a/b/c/d;p?q', '../../',  'http://a/'),
             array('http://a/b/c/d;p?q', '../../g', 'http://a/g'),
 
             // Abnormal examples
-            array('http://a/b/c/d;p?q', '../../../g', 'http://a/g'),
+            array('http://a/b/c/d;p?q', '../../../g',    'http://a/g'),
             array('http://a/b/c/d;p?q', '../../../../g', 'http://a/g'),
-            array('http://a/b/c/d;p?q', '/./g', 'http://a/g'),
-            array('http://a/b/c/d;p?q', '/../g', 'http://a/g'),
-            array('http://a/b/c/d;p?q', 'g.', 'http://a/b/c/g.'),
-            array('http://a/b/c/d;p?q', '.g', 'http://a/b/c/.g'),
-            array('http://a/b/c/d;p?q', 'g..', 'http://a/b/c/g..'),
-            array('http://a/b/c/d;p?q', '..g', 'http://a/b/c/..g'),
-            array('http://a/b/c/d;p?q', './../g', 'http://a/b/g'),
-            array('http://a/b/c/d;p?q', './g/.', 'http://a/b/c/g/'),
-            array('http://a/b/c/d;p?q', 'g/./h', 'http://a/b/c/g/h'),
-            array('http://a/b/c/d;p?q', 'g/../h', 'http://a/b/c/h'),
-            array('http://a/b/c/d;p?q', 'g;x=1/./y', 'http://a/b/c/g;x=1/y'),
-            array('http://a/b/c/d;p?q', 'g;x=1/../y', 'http://a/b/c/y'),
-            array('http://a/b/c/d;p?q', 'http:g', 'http:g'),
+            array('http://a/b/c/d;p?q', '/./g',          'http://a/g'),
+            array('http://a/b/c/d;p?q', '/../g',         'http://a/g'),
+            array('http://a/b/c/d;p?q', 'g.',            'http://a/b/c/g.'),
+            array('http://a/b/c/d;p?q', '.g',            'http://a/b/c/.g'),
+            array('http://a/b/c/d;p?q', 'g..',           'http://a/b/c/g..'),
+            array('http://a/b/c/d;p?q', '..g',           'http://a/b/c/..g'),
+            array('http://a/b/c/d;p?q', './../g',        'http://a/b/g'),
+            array('http://a/b/c/d;p?q', './g/.',         'http://a/b/c/g/'),
+            array('http://a/b/c/d;p?q', 'g/./h',         'http://a/b/c/g/h'),
+            array('http://a/b/c/d;p?q', 'g/../h',        'http://a/b/c/h'),
+            array('http://a/b/c/d;p?q', 'g;x=1/./y',     'http://a/b/c/g;x=1/y'),
+            array('http://a/b/c/d;p?q', 'g;x=1/../y',    'http://a/b/c/y'),
+            array('http://a/b/c/d;p?q', 'http:g',        'http:g'),
         );
     }
 
@@ -1247,10 +1247,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
             ), 'foo=bar&baz=waka'),
             array(array(
                 'some key' => 'some crazy value?!#[]&=%+',
-                '1' => ''
+                '1'        => ''
             ), 'some%20key=some%20crazy%20value%3F%21%23%5B%5D%26%3D%25%2B&1='),
             array(array(
-                'array' => array('foo', 'bar', 'baz'),
+                'array'        => array('foo', 'bar', 'baz'),
                 'otherstuff[]' => 1234
             ), 'array%5B0%5D=foo&array%5B1%5D=bar&array%5B2%5D=baz&otherstuff%5B%5D=1234')
         );
@@ -1264,7 +1264,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function pathWithDotSegmentProvider()
     {
         return array(
-            array('/a/b/c/./../../g', '/a/g'),
+            array('/a/b/c/./../../g',   '/a/g'),
             array('mid/content=5/../6', 'mid/6')
         );
     }
@@ -1293,9 +1293,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function commonBaseUriProvider()
     {
         return array(
-            array('http://example.com/dir/subdir/', 'http://example.com/dir/subdir/more/file1.txt', 'more/file1.txt'),
-            array('http://example.com/dir/subdir/', 'http://example.com/dir/otherdir/file2.txt', '../otherdir/file2.txt'),
-            array('http://example.com/dir/subdir/', 'http://otherhost.com/dir/subdir/file3.txt', 'http://otherhost.com/dir/subdir/file3.txt'),
+             array('http://example.com/dir/subdir/', 'http://example.com/dir/subdir/more/file1.txt', 'more/file1.txt'),
+             array('http://example.com/dir/subdir/', 'http://example.com/dir/otherdir/file2.txt',    '../otherdir/file2.txt'),
+             array('http://example.com/dir/subdir/', 'http://otherhost.com/dir/subdir/file3.txt',    'http://otherhost.com/dir/subdir/file3.txt'),
         );
     }
 
@@ -1336,7 +1336,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     public function testParseTwice()
     {
-        $uri = new Uri();
+        $uri  = new Uri();
         $uri->parse('http://user@example.com:1/absolute/url?query#fragment');
         $uri->parse('/relative/url');
         $this->assertNull($uri->getScheme());

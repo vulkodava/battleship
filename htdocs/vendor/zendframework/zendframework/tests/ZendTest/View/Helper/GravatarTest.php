@@ -35,7 +35,7 @@ class GravatarTest extends TestCase
     protected function setUp()
     {
         $this->helper = new Gravatar();
-        $this->view = new View();
+        $this->view   = new View();
         $this->view->doctype()->setDoctype(strtoupper("XHTML1_STRICT"));
         $this->helper->setView($this->view);
 
@@ -69,7 +69,7 @@ class GravatarTest extends TestCase
     public function testGravatarHtmlDoctype()
     {
         $object = new Gravatar();
-        $view = new View();
+        $view   = new View();
         $view->doctype()->setDoctype(strtoupper("HTML5"));
         $object->setView($view);
 
@@ -86,11 +86,11 @@ class GravatarTest extends TestCase
     {
         $attribs = array('class' => 'gravatar', 'title' => 'avatar', 'id' => 'gravatar-1');
         $this->helper->setDefaultImg('monsterid')
-            ->setImgSize(150)
-            ->setSecure(true)
-            ->setEmail("example@example.com")
-            ->setAttribs($attribs)
-            ->setRating('pg');
+                     ->setImgSize(150)
+                     ->setSecure(true)
+                     ->setEmail("example@example.com")
+                     ->setAttribs($attribs)
+                     ->setRating('pg');
         $this->assertEquals("monsterid", $this->helper->getDefaultImg());
         $this->assertEquals("pg", $this->helper->getRating());
         $this->assertEquals("example@example.com", $this->helper->getEmail());
@@ -126,7 +126,7 @@ class GravatarTest extends TestCase
 
     public function testInvalidRatingParametr()
     {
-        $ratingsWrong = array('a', 'cs', 456);
+        $ratingsWrong = array( 'a', 'cs', 456);
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         foreach ($ratingsWrong as $value) {
             $this->helper->setRating($value);
@@ -135,7 +135,7 @@ class GravatarTest extends TestCase
 
     public function testSetRating()
     {
-        $ratingsRight = array('g', 'pg', 'r', 'x', Gravatar::RATING_R);
+        $ratingsRight = array( 'g', 'pg', 'r', 'x', Gravatar::RATING_R);
         foreach ($ratingsRight as $value) {
             $this->helper->setRating($value);
             $this->assertEquals($value, $this->helper->getRating());
@@ -232,8 +232,8 @@ class GravatarTest extends TestCase
         $this->helper->setEmail($email);
         $this->helper->setAttribs(array(
             'class' => 'gravatar',
-            'src' => 'http://example.com',
-            'id' => 'gravatarID',
+            'src'   => 'http://example.com',
+            'id'    => 'gravatarID',
         ));
 
         $this->assertRegExp(

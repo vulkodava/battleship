@@ -2,7 +2,7 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link       http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -81,8 +81,7 @@ class Checkbox extends Element implements InputProviderInterface
      */
     public function setUseHiddenElement($useHiddenElement)
     {
-        $this->useHiddenElement = (bool)$useHiddenElement;
-
+        $this->useHiddenElement = (bool) $useHiddenElement;
         return $this;
     }
 
@@ -105,7 +104,6 @@ class Checkbox extends Element implements InputProviderInterface
     public function setUncheckedValue($uncheckedValue)
     {
         $this->uncheckedValue = $uncheckedValue;
-
         return $this;
     }
 
@@ -128,7 +126,6 @@ class Checkbox extends Element implements InputProviderInterface
     public function setCheckedValue($checkedValue)
     {
         $this->checkedValue = $checkedValue;
-
         return $this;
     }
 
@@ -152,10 +149,9 @@ class Checkbox extends Element implements InputProviderInterface
         if (null === $this->validator) {
             $this->validator = new InArrayValidator(array(
                 'haystack' => array($this->checkedValue, $this->uncheckedValue),
-                'strict' => false
+                'strict'   => false
             ));
         }
-
         return $this->validator;
     }
 
@@ -201,7 +197,6 @@ class Checkbox extends Element implements InputProviderInterface
     public function setChecked($value)
     {
         $this->value = $value ? $this->getCheckedValue() : $this->getUncheckedValue();
-
         return $this;
     }
 
@@ -214,9 +209,8 @@ class Checkbox extends Element implements InputProviderInterface
     public function setValue($value)
     {
         // Cast to strings because POST data comes in string form
-        $checked = (string)$value === (string)$this->getCheckedValue();
+        $checked = (string) $value === (string) $this->getCheckedValue();
         $this->value = $checked ? $this->getCheckedValue() : $this->getUncheckedValue();
-
         return $this;
     }
 }
