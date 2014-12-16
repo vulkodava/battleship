@@ -9,7 +9,7 @@ return array(
                     'port' => '3306',
                     'user' => 'root',
                     'password' => '',
-                    'dbname' => 'zend-battleship',
+                    'dbname' => 'zend_battleship2',
                     'driverOptions' => array(
                         1002 => 'SET NAMES utf8'
                     )
