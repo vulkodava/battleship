@@ -26,7 +26,16 @@
     "bjyoungblood/bjy-authorize": "1.4.*",
     "mwillbanks/zfc-twitter-bootstrap": "@dev",
     "dudapiotr/zftable": "dev-master",
-    "rwoverdijk/assetmanager": "dev-master"
+    "rwoverdijk/assetmanager": "dev-master",
+    "ircmaxel/random-lib": "dev-master",
+    "ocramius/proxy-manager": "0.5.*",
+    "zendframework/zendpdf": "dev-master",
+    "zendframework/zendservice-recaptcha": "dev-install",
+    "psr/log": "dev-master",
+    "symfony/yaml": "dev-master",
+    "symfony/event-dispatcher": "dev-master",
+    "symfony/process": "dev-master",
+    "doctrine/migrations": "dev-master"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "1.5.*"
