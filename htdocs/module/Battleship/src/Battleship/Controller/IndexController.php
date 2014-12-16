@@ -18,14 +18,15 @@ class IndexController extends AbstractActionController
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
+        ini_set('display_errors', 1);
 
         $table = new \ZfTable\Example\TableExample\Doctrine();
-        $table->setAdapter($this->getDbAdapter())
-            ->setSource($objectManager->fetchAll())
+        $table->setAdapter($objectManager)
+            ->setSource($objectManager->getRepository('Battleship\Entity\Game')->findBy(array('id' => 1)))
             ->setParamAdapter($this->getRequest()->getPost())
         ;
 
-        return $this->htmlResponse($table->render());
+        return $this->getResponse()->setContent($table->render());
     }
 
     public function ajaxBaseAction()
@@ -33,13 +34,6 @@ class IndexController extends AbstractActionController
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
-
-        $sm = $this->getServiceLocator();
-        var_dump($sm); die;
-        $dbAdapter      = $sm->get('Zend\Db\Adapter\Adapter');
-        var_dump($dbAdapter); die;
-        $db = $objectManager->getDbAdapter();
-        var_dump($db); die;
 
         $source = $objectManager->getRepository('Battleship\Entity\Game')->findAll();
 

@@ -7,8 +7,8 @@ return array(
                 'params' => array(
                     'host' => 'localhost',
                     'port' => '3306',
-                    'user' => 'root',
-                    'password' => '',
+                    'user' => 'zend_battleship',
+                    'password' => 'zend_battleship',
                     'dbname' => 'zend_battleship2',
                     'driverOptions' => array(
                         1002 => 'SET NAMES utf8'
