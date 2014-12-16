@@ -27,15 +27,17 @@
     "mwillbanks/zfc-twitter-bootstrap": "@dev",
     "dudapiotr/zftable": "dev-master",
     "rwoverdijk/assetmanager": "dev-master",
-    "ircmaxel/random-lib": "dev-master",
+    "ircmaxell/random-lib": "1.0.x-dev",
+    "ircmaxell/security-lib": "1.0.*@dev",
     "ocramius/proxy-manager": "0.5.*",
     "zendframework/zendpdf": "dev-master",
-    "zendframework/zendservice-recaptcha": "dev-install",
+    "zendframework/zendservice-recaptcha": "2.0.*",
     "psr/log": "dev-master",
     "symfony/yaml": "dev-master",
     "symfony/event-dispatcher": "dev-master",
-    "symfony/process": "dev-master",
-    "doctrine/migrations": "dev-master"
+    "symfony/process": "2.7.x-dev",
+    "doctrine/migrations": "dev-master",
+    "phpunit/phpunit": "3.7.*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "1.5.*"
