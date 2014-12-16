@@ -15,18 +15,13 @@ class IndexController extends AbstractActionController
 
     public function ajaxDoctrineAction()
     {
-        $em = $this->getEntityManager();
-        $queryBuilder = $em->createQueryBuilder();
+        $objectManager = $this
+            ->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
 
-        $queryBuilder->add('select', 'p , q')
-            ->add('from', '\ZfTable\Entity\Customer q')
-            ->leftJoin('q.product', 'p')
-
-        ;
-
-        $table = new TableExample\Doctrine();
+        $table = new \ZfTable\Example\TableExample\Doctrine();
         $table->setAdapter($this->getDbAdapter())
-            ->setSource($queryBuilder)
+            ->setSource($objectManager->fetchAll())
             ->setParamAdapter($this->getRequest()->getPost())
         ;
 
@@ -35,9 +30,22 @@ class IndexController extends AbstractActionController
 
     public function ajaxBaseAction()
     {
-        $table = new TableExample\Base();
-        $table->setAdapter($this->getDbAdapter())
-            ->setSource($this->getSource())
+        $objectManager = $this
+            ->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
+
+        $sm = $this->getServiceLocator();
+        var_dump($sm); die;
+        $dbAdapter      = $sm->get('Zend\Db\Adapter\Adapter');
+        var_dump($dbAdapter); die;
+        $db = $objectManager->getDbAdapter();
+        var_dump($db); die;
+
+        $source = $objectManager->getRepository('Battleship\Entity\Game')->findAll();
+
+        $table = new \ZfTable\Example\TableExample\Base();
+        $table->setAdapter($objectManager)
+            ->setSource($source)
             ->setParamAdapter($this->getRequest()->getPost())
         ;
         return $this->htmlResponse($table->render());
