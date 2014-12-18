@@ -17,11 +17,8 @@ class GameVessel {
      */
     protected $id;
 
-    /** @ORM\ManyToOne(name="game_id", targetEntity="Game") */
-    protected $gameId;
-
-    /** @ORM\ManyToOne(name="player_id", targetEntity="VesselType") */
-    protected $typeId;
+    /** @ORM\ManyToOne(targetEntity="Game") */
+    protected $game;
 
     /** @ORM\Column(name="coordinate_x", type="smallint") */
     protected $coordinateX;
@@ -62,17 +59,17 @@ class GameVessel {
     /**
      * @return mixed
      */
-    public function getGameId()
+    public function getGame()
     {
-        return $this->gameId;
+        return $this->game;
     }
 
     /**
-     * @param mixed $gameId
+     * @param mixed $game
      */
-    public function setGameId($gameId)
+    public function setGame($game)
     {
-        $this->gameId = $gameId;
+        $this->game = $game;
     }
 
     /**
@@ -168,7 +165,7 @@ class GameVessel {
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
     }
 
     /**

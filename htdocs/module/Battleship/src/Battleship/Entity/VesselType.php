@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="vessel_types")
  */
 class VesselType {
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -17,22 +20,25 @@ class VesselType {
      */
     protected $id;
 
-    /** @ORM\Column(type="string") */
+    /** @ORM\Column(name="name", type="string") */
     protected $name;
 
-    /** @ORM\Column(type="smallint") */
+    /** @ORM\Column(name="size", type="smallint") */
     protected $size;
 
-    /** @ORM\Column(type="smallint") */
+    /** @ORM\Column(name="vessels_count", type="integer") */
+    protected $vesselsCount;
+
+    /** @ORM\Column(name="status", type="smallint") */
     protected $status;
 
-    /** @ORM\Column(type="datetime") */
+    /** @ORM\Column(name="created_at", type="datetime") */
     protected $createdAt;
 
-    /** @ORM\Column(type="datetime") */
+    /** @ORM\Column(name="updated_at", type="datetime") */
     protected $updatedAt;
 
-    /** @ORM\Column(type="datetime") */
+    /** @ORM\Column(name="deleted_at", type="datetime") */
     protected $deletedAt;
 
     /******GETTERS AND SETTERS******/
@@ -83,6 +89,22 @@ class VesselType {
     public function setSize($size)
     {
         $this->size = $size;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVesselsCount()
+    {
+        return $this->vesselsCount;
+    }
+
+    /**
+     * @param mixed $vesselsCount
+     */
+    public function setVesselsCount($vesselsCount)
+    {
+        $this->vesselsCount = $vesselsCount;
     }
 
     /**

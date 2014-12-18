@@ -2,6 +2,7 @@
 namespace Battleship\Controller;
 
 use Battleship\Entity\Field;
+use Battleship\Entity\GameVessel;
 use Battleship\Entity\Player;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -18,11 +19,14 @@ class IndexController extends AbstractActionController
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
-        ini_set('display_errors', 1);
+        $gameRepo = $objectManager->getRepository('Battleship\Entity\Game');
+        $gameRepo->setPlayerId();
+
+        $source = $objectManager->getRepository('Battleship\Entity\Game')->findAll();
 
         $table = new \ZfTable\Example\TableExample\Doctrine();
         $table->setAdapter($objectManager)
-            ->setSource($objectManager->getRepository('Battleship\Entity\Game')->findBy(array('id' => 1)))
+            ->setSource($source)
             ->setParamAdapter($this->getRequest()->getPost())
         ;
 
@@ -47,11 +51,6 @@ class IndexController extends AbstractActionController
 
     public function playAction()
     {
-        return new ViewModel();
-    }
-
-    public function createGameAction()
-    {
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
@@ -64,9 +63,9 @@ class IndexController extends AbstractActionController
         $objectManager->flush();
 
         $player = new Player();
-        $player->setUsername('vulkodava');
-        $player->setFirstName('Momchil');
-        $player->setLastName('Milev');
+        $player->setUsername('guest');
+        $player->setFirstName('Guest');
+        $player->setLastName('Guest');
         $player->setCreatedAt(new \DateTime());
         $player->setStatus(Player::STATUS_ACTIVE);
         $objectManager->persist($player);
@@ -76,7 +75,29 @@ class IndexController extends AbstractActionController
         $game->setField($field);
         $game->setPlayer($player);
 
+        $gameVesselTypes = $objectManager->getRepository('Battleship\Entity\VesselType')
+            ->findBy(array('status' => \Battleship\Entity\VesselType::STATUS_ACTIVE));
+        foreach ($gameVesselTypes as $vesselType) {
+            $gameVessel = new GameVessel();
+            $gameVessel->setGame($game);
+            $gameVessel->setVesselId($vesselType->getId());
+            $gameVessel->setCoordinateX(1);
+            $gameVessel->setCoordinateY('A');
+            $objectManager->persist($gameVessel);
+            $objectManager->flush();
+        }
+
+
         $objectManager->persist($game);
         $objectManager->flush();
+    }
+
+    private function addVessels($vesselType)
+    {
+        $objectManager = $this
+            ->getServiceLocator()
+            ->get('Doctrine\ORM\EntityManager');
+        $vessel = $objectManager->getRepository('Battleship\Entity\GameVessel');
+        $vessel->setGameId();
     }
 }

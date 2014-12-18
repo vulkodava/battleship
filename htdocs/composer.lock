@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66fa7891245983fde3227ba693c4b574",
+    "hash": "456fb383120910ffd38b40859144db72",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -633,12 +633,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "8a0b96e65d2399d6f95b75de11134843a2c61feb"
+                "reference": "31df573a9f3797b8fc2fb92e4229a1c582d41598"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/8a0b96e65d2399d6f95b75de11134843a2c61feb",
-                "reference": "8a0b96e65d2399d6f95b75de11134843a2c61feb",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/31df573a9f3797b8fc2fb92e4229a1c582d41598",
+                "reference": "31df573a9f3797b8fc2fb92e4229a1c582d41598",
                 "shasum": ""
             },
             "require": {
@@ -692,7 +692,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2014-10-05 18:49:49"
+            "time": "2014-12-17 14:32:07"
         },
         {
             "name": "doctrine/lexer",
@@ -812,12 +812,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "39f2f0eb91a6aa7797448ad24fccb05c2fdcec8f"
+                "reference": "71f446f23b3e12e23b38656f31ae1bc18072717b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/39f2f0eb91a6aa7797448ad24fccb05c2fdcec8f",
-                "reference": "39f2f0eb91a6aa7797448ad24fccb05c2fdcec8f",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/71f446f23b3e12e23b38656f31ae1bc18072717b",
+                "reference": "71f446f23b3e12e23b38656f31ae1bc18072717b",
                 "shasum": ""
             },
             "require": {
@@ -877,7 +877,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-12-08 00:39:22"
+            "time": "2014-12-16 13:47:17"
         },
         {
             "name": "dudapiotr/zftable",
@@ -1748,12 +1748,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "9dfce71d9f6d71651af9ef337ac3d2693ca0b9e7"
+                "reference": "affcceeeffb8772d5fa6fe28aec45469e6aef8b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/9dfce71d9f6d71651af9ef337ac3d2693ca0b9e7",
-                "reference": "9dfce71d9f6d71651af9ef337ac3d2693ca0b9e7",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/affcceeeffb8772d5fa6fe28aec45469e6aef8b4",
+                "reference": "affcceeeffb8772d5fa6fe28aec45469e6aef8b4",
                 "shasum": ""
             },
             "require": {
@@ -1761,10 +1761,10 @@
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.0",
+                "symfony/config": "~2.0,>=2.0.5",
                 "symfony/dependency-injection": "~2.6",
                 "symfony/expression-language": "~2.6",
-                "symfony/stopwatch": "~2.2"
+                "symfony/stopwatch": "~2.3"
             },
             "suggest": {
                 "symfony/dependency-injection": "",
@@ -1797,7 +1797,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-12 16:24:25"
+            "time": "2014-12-16 20:28:59"
         },
         {
             "name": "symfony/process",
@@ -1963,13 +1963,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "0314c58b7c37ffbb3f3bbd62e3646b0a5ab15ba0"
+                "reference": "27bb93c39607b0cede1b4955747d01dc81a6091c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zendframework-0314c58b7c37ffbb3f3bbd62e3646b0a5ab15ba0-zip-2b7fe5.zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zendframework-27bb93c39607b0cede1b4955747d01dc81a6091c-zip-1f40ec.zip",
                 "reference": "dev-master",
-                "shasum": "eeb0016bd989a3a32d93b3e13fc73a3a6093b831"
+                "shasum": "cc875af52f0f10503f53695439a2784365379880"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2076,7 +2076,7 @@
                 "source": "https://github.com/zendframework/zf2/tree/master",
                 "issues": "https://github.com/zendframework/zf2/issues"
             },
-            "time": "2014-12-16 07:52:42"
+            "time": "2014-12-16 20:57:27"
         },
         {
             "name": "zendframework/zendpdf",
@@ -2558,6 +2558,7 @@
         "doctrine/migrations": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.3"
     },
