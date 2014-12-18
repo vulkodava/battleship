@@ -144,7 +144,7 @@ class Player {
      */
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        $this->updatedAt = new \DateTime();
     }
 
     /**

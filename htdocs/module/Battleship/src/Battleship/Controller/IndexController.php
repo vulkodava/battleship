@@ -75,6 +75,9 @@ class IndexController extends AbstractActionController
         $game->setField($field);
         $game->setPlayer($player);
 
+        $objectManager->persist($game);
+        $objectManager->flush();
+
         $gameVesselTypes = $objectManager->getRepository('Battleship\Entity\VesselType')
             ->findBy(array('status' => \Battleship\Entity\VesselType::STATUS_ACTIVE));
         foreach ($gameVesselTypes as $vesselType) {
@@ -83,13 +86,11 @@ class IndexController extends AbstractActionController
             $gameVessel->setVesselId($vesselType->getId());
             $gameVessel->setCoordinateX(1);
             $gameVessel->setCoordinateY('A');
+            $gameVessel->setUpdatedAt(new \DateTime());
+            $gameVessel->setStatus(\Battleship\Entity\GameVessel::STATUS_INTACT);
             $objectManager->persist($gameVessel);
             $objectManager->flush();
         }
-
-
-        $objectManager->persist($game);
-        $objectManager->flush();
     }
 
     private function addVessels($vesselType)

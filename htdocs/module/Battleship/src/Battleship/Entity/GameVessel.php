@@ -7,9 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
  * GameVessel
  *
  * @ORM\Entity
- * @ORM\Table(name="game_vessel")
+ * @ORM\Table(name="game_vessels")
  */
 class GameVessel {
+    const STATUS_INTACT = 0;
+    const STATUS_HIT = 1;
+    const STATUS_SUNK = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -32,7 +36,7 @@ class GameVessel {
     /** @ORM\Column(name="created_at", type="datetime") */
     protected $createdAt;
 
-    /** @ORM\Column(name="updated_at type="datetime") */
+    /** @ORM\Column(name="updated_at", type="datetime") */
     protected $updatedAt;
 
     /** @ORM\Column(name="deleted_at", type="datetime") */
