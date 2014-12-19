@@ -24,6 +24,9 @@ class GameVessel {
     /** @ORM\ManyToOne(targetEntity="Game") */
     protected $game;
 
+    /** @ORM\ManyToOne(targetEntity="VesselType") */
+    protected $vessel_type;
+
     /** @ORM\Column(name="coordinate_x", type="smallint") */
     protected $coordinateX;
 
@@ -79,17 +82,17 @@ class GameVessel {
     /**
      * @return mixed
      */
-    public function getVesselId()
+    public function getVesselType()
     {
-        return $this->vesselId;
+        return $this->vessel_type;
     }
 
     /**
-     * @param mixed $vesselId
+     * @param mixed $vesselType
      */
-    public function setVesselId($vesselId)
+    public function setVesselType($vesselType)
     {
-        $this->vesselId = $vesselId;
+        $this->vessel_type = $vesselType;
     }
 
     /**

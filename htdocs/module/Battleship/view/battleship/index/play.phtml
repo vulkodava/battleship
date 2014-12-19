@@ -1,0 +1,28 @@
+<?php
+$letters = array(
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'R',
+    'S',
+    'T',
+);
+foreach ($gameGrid as $rowId => $row) {
+    echo '<br />' . $letters[$rowId] . '.';
+    foreach ($row as $colId => $col) {
+        echo '.';
+    }
+}

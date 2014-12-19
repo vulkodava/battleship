@@ -51,6 +51,7 @@ class IndexController extends AbstractActionController
 
     public function playAction()
     {
+        $view = new ViewModel();
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
@@ -78,19 +79,95 @@ class IndexController extends AbstractActionController
         $objectManager->persist($game);
         $objectManager->flush();
 
+        $gameVessels = array();
         $gameVesselTypes = $objectManager->getRepository('Battleship\Entity\VesselType')
             ->findBy(array('status' => \Battleship\Entity\VesselType::STATUS_ACTIVE));
         foreach ($gameVesselTypes as $vesselType) {
-            $gameVessel = new GameVessel();
-            $gameVessel->setGame($game);
-            $gameVessel->setVesselId($vesselType->getId());
-            $gameVessel->setCoordinateX(1);
-            $gameVessel->setCoordinateY('A');
-            $gameVessel->setUpdatedAt(new \DateTime());
-            $gameVessel->setStatus(\Battleship\Entity\GameVessel::STATUS_INTACT);
-            $objectManager->persist($gameVessel);
-            $objectManager->flush();
+            for ($i = 0; $i < (int) $vesselType->getVesselsCount(); $i++) {
+                $gameVessel = new GameVessel();
+                $gameVessel->setGame($game);
+                $gameVessel->setVesselType($vesselType);
+                $gameVessel->setCoordinateX(1);
+                $gameVessel->setCoordinateY('A');
+                $gameVessel->setUpdatedAt(new \DateTime());
+                $gameVessel->setStatus(\Battleship\Entity\GameVessel::STATUS_INTACT);
+                $objectManager->persist($gameVessel);
+                $objectManager->flush();
+                $gameVessels[] = $gameVessel;
+            }
         }
+
+        $gameConfigX = $objectManager->getRepository('Battleship\Entity\GameConfig')
+            ->findOneBy(array('name' => 'x'));
+        $gameConfigY = $objectManager->getRepository('Battleship\Entity\GameConfig')
+            ->findOneBy(array('name' => 'y'));
+        $gameGrid = $this->setupBoard($gameConfigX->getValue(), $gameConfigY->getValue());
+
+        $gameGridWithShips = $this->deployShips($gameGrid, $gameVessels, $gameConfigX->getValue(), $gameConfigY->getValue());
+        $view->setVariable('gameGrid', $gameGridWithShips);
+
+        return $view;
+    }
+
+    private function setupBoard($x, $y)
+    {
+        $gameGrid = array();
+        for ($row = 0; $row < $x; $row++) {
+            $gameGrid[$row] = array();
+            for ($col = 0; $col < $y; $col++) {
+                $gameGrid[$row][$col] = 0;
+            }
+        }
+
+        return $gameGrid;
+    }
+
+    private function deployShips(array $gameGrid, array $gameVessels, $maxX, $maxY)
+    {
+        foreach ($gameVessels as $gameVessel) {
+            $vesselSize = $gameVessel->getVesselType()->getSize();
+            $vesselId = $gameVessel->getId();
+            $vesselDirection = rand(0, 1);
+            $startX = $this->generateFirstPosition($maxX, $vesselSize);
+            $startY = $this->generateFirstPosition($maxY, $vesselSize);
+
+            if ($vesselDirection == 1) {
+                // Deploy horizontally.
+                foreach ($gameGrid as $rowNumber => $row) {
+                    foreach ($row as $colNumber => $col) {
+                        if (
+                            $colNumber >= $startX && $colNumber < ($startX + $vesselSize)
+                            && $rowNumber == $startY
+                        ) {
+                            $gameGrid[$rowNumber][$colNumber] = $vesselId;
+                        }
+                    }
+                }
+            } else {
+                // Deploy vertically.
+                foreach ($gameGrid as $rowNumber => $row) {
+                    foreach ($row as $colNumber => $col) {
+                        if (
+                            $rowNumber >= $startY && $rowNumber < ($startY + $vesselSize)
+                            && $colNumber == $startX
+                        ) {
+                            $gameGrid[$rowNumber][$colNumber] = $vesselId;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $gameGrid;
+    }
+
+    private function generateFirstPosition($max, $vesselSize)
+    {
+        $start = rand(0, ($max - 1));
+        if ($start + $vesselSize > $max) {
+            $start = $this->generateFirstPosition($max, $vesselSize);
+        }
+        return $start;
     }
 
     private function addVessels($vesselType)
