@@ -20,9 +20,12 @@ $letters = array(
     'S',
     'T',
 );
+echo '<pre>';
 foreach ($gameGrid as $rowId => $row) {
-    echo '<br />' . $letters[$rowId] . '.';
+    echo PHP_EOL . $letters[$rowId];
     foreach ($row as $colId => $col) {
-        echo '.';
+        echo $colId;
+        echo ' . ';
     }
 }
+echo '</pre>';
