@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="field_plates")
  */
 class FieldPlate {
+    const STATUS_NEW = 0;
+    const STATUS_MISS = 1;
+    const STATUS_HIT = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -17,13 +21,23 @@ class FieldPlate {
      */
     protected $id;
 
-    /** @ORM\ManyToOne(name="field_id", targetEntity="Field") */
-    protected $fieldId;
+    /**
+     * @ORM\ManyToOne(targetEntity="Field", inversedBy="id")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="id")
+     */
+    protected $field;
+
+//    /**
+//     * @ORM\Column(type="integer")
+//     * @ORM\OneToOne(targetEntity="VesselCoordinate", inversedBy="id")
+//     * @ORM\JoinColumn(name="id", referencedColumnName="plate_coordinate_id")
+//     */
+//    protected $vesselCoordinate;
 
     /** @ORM\Column(name="coordinate_x", type="smallint") */
     protected $coordinateX;
 
-    /** @ORM\Column(name="coordinate_y", type="string") */
+    /** @ORM\Column(name="coordinate_y", type="smallint") */
     protected $coordinateY;
 
     /** @ORM\Column(name="status", type="smallint") */
@@ -39,6 +53,22 @@ class FieldPlate {
     protected $deletedAt;
 
     /******GETTERS AND SETTERS******/
+
+//    /**
+//     * @return mixed
+//     */
+//    public function getVesselCoordinate()
+//    {
+//        return $this->vesselCoordinate;
+//    }
+//
+//    /**
+//     * @param $vesselCoordinate
+//     */
+//    public function setVesselCoordinate($vesselCoordinate)
+//    {
+//        $this->vesselCoordinate = $vesselCoordinate;
+//    }
 
     /**
      * @return mixed
@@ -59,17 +89,17 @@ class FieldPlate {
     /**
      * @return mixed
      */
-    public function getFieldId()
+    public function getField()
     {
-        return $this->fieldId;
+        return $this->field;
     }
 
     /**
-     * @param mixed $fieldId
+     * @param mixed $field
      */
-    public function setFieldId($fieldId)
+    public function setField($field)
     {
-        $this->fieldId = $fieldId;
+        $this->field = $field;
     }
 
     /**

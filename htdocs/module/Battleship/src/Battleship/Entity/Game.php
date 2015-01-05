@@ -2,6 +2,7 @@
 namespace Battleship\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Game
@@ -20,10 +21,21 @@ class Game {
      */
     protected $id;
 
-    /** @ORM\ManyToOne(targetEntity="Field") */
+    /**
+     * @ORM\OneToMany(targetEntity="GameVessel", mappedBy="game")
+     */
+    protected $vessels;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Field", inversedBy="id")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="id")
+     */
     protected $field;
 
-    /** @ORM\ManyToOne(targetEntity="Player") */
+    /**
+     * @ORM\ManyToOne(targetEntity="Player", inversedBy="id")
+     * @ORM\JoinColumn(name="player_id", referencedColumnName="id")
+     */
     protected $player;
 
     /** @ORM\Column(name="moves_cnt", type="smallint", options={"default":0}) */
@@ -46,6 +58,7 @@ class Game {
         $this->setMovesCnt(0);
         $this->setStatus(self::STATUS_NEW);
         $this->setCreatedAt(new \DateTime());
+        $this->vessels = new ArrayCollection();
     }
 
     /******GETTERS AND SETTERS******/
@@ -75,7 +88,7 @@ class Game {
     }
 
     /**
-     * @param mixed $fieldId
+     * @param mixed $field
      */
     public function setField($field)
     {
@@ -91,7 +104,7 @@ class Game {
     }
 
     /**
-     * @param mixed $playerId
+     * @param mixed $player
      */
     public function setPlayer($player)
     {
@@ -128,6 +141,22 @@ class Game {
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getVessels()
+    {
+        return $this->vessels;
+    }
+
+    /**
+     * @param $vessels
+     */
+    public function setVessels($vessels)
+    {
+        $this->vessels = $vessels;
     }
 
     /**

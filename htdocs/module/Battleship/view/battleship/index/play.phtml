@@ -20,12 +20,48 @@ $letters = array(
     'S',
     'T',
 );
-echo '<pre>';
-foreach ($gameGrid as $rowId => $row) {
-    echo PHP_EOL . $letters[$rowId];
-    foreach ($row as $colId => $col) {
-        echo $colId;
-        echo ' . ';
+var_dump($_POST);
+?>
+<style>
+    table td,
+    table th {
+        width: 50px;
+        text-align: center;
     }
+</style>
+<table border="1">
+<?php $colHeaders = $gameGrid[0]; ?>
+    <thead>
+        <tr>
+            <?php
+            echo '<th></th>';
+            foreach ($colHeaders as $colHeaderKey => $colHeaderVal) {
+                echo '<th>' . ($colHeaderKey + 1) . '</th>';
+            }
+            ?>
+        </tr>
+    </thead>
+<?php
+
+foreach ($gameGrid as $rowId => $row) {
+    echo '<tr><td>' . $letters[$rowId] . '</td>';
+    foreach ($row as $colId => $col) {
+        echo '<td><form action="" method="post">';
+
+        if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_NEW) {
+            echo '<input type="hidden" name="field_coordinates" value="' . $letters[$rowId] . $colId . '" readonly="readonly" />';
+            echo '<input type="submit" name="field" value="." class="btn btn-block btn-xs btn-success" />';
+        } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_HIT) {
+            echo '<span class="label label-success">x</span>';
+        } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_MISS) {
+            echo '<span class="label label-danger">-</span>';
+        }
+
+        echo '<br />Cheat: <strong>' . $col['content'] . '</strong>';
+
+        echo '</form></td>';
+    }
+    echo '</tr>';
 }
-echo '</pre>';
+?>
+</table>

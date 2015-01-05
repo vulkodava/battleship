@@ -2,6 +2,7 @@
 namespace Battleship\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * GameVessel
@@ -21,11 +22,22 @@ class GameVessel {
      */
     protected $id;
 
-    /** @ORM\ManyToOne(targetEntity="Game") */
+    /**
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="id")
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     */
     protected $game;
 
-    /** @ORM\ManyToOne(targetEntity="VesselType") */
+    /**
+     * @ORM\ManyToOne(targetEntity="VesselType", inversedBy="id")
+     * @ORM\JoinColumn(name="vessel_type_id", referencedColumnName="id")
+     */
     protected $vessel_type;
+
+    /**
+     * @ORM\OneToMany(targetEntity="VesselCoordinate", mappedBy="vessel")
+     */
+    protected $vessel_coordinates;
 
     /** @ORM\Column(name="coordinate_x", type="smallint") */
     protected $coordinateX;
@@ -44,6 +56,11 @@ class GameVessel {
 
     /** @ORM\Column(name="deleted_at", type="datetime") */
     protected $deletedAt;
+
+    public function __construct()
+    {
+        $this->vessel_coordinates = new ArrayCollection();
+    }
 
     /******GETTERS AND SETTERS******/
 
@@ -93,6 +110,22 @@ class GameVessel {
     public function setVesselType($vesselType)
     {
         $this->vessel_type = $vesselType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVesselCoordinates()
+    {
+        return $this->vessel_coordinates;
+    }
+
+    /**
+     * @param mixed $vesselCoordinates
+     */
+    public function setVesselCoordinates($vesselCoordinates)
+    {
+        $this->vessel_coordinates = $vesselCoordinates;
     }
 
     /**
