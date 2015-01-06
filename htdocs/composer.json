@@ -19,7 +19,6 @@
     "zendframework/zend-http": "2.*",
     "zendframework/zendframework": "2.3.*",
     "doctrine/doctrine-orm-module": "0.7.*",
-    "zendframework/zend-developer-tools": "dev-master",
     "zf-commons/zfc-user-doctrine-orm": "~1.0",
     "zf-commons/zfc-admin": "~0.2",
     "danielss89/zfc-user-admin": "dev-master",
@@ -40,6 +39,10 @@
     "phpunit/phpunit": "3.7.*"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "1.5.*"
+    "zendframework/zend-debug": "dev-master",
+    "squizlabs/php_codesniffer": "1.5.*",
+    "maximebf/debugbar": ">=1.0.0",
+    "snapshotpl/zf-snap-php-debug-bar": "dev-master",
+    "zendframework/zend-developer-tools": "dev-master"
   }
 }

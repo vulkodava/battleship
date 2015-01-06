@@ -27,12 +27,11 @@ class FieldPlate {
      */
     protected $field;
 
-//    /**
-//     * @ORM\Column(type="integer")
-//     * @ORM\OneToOne(targetEntity="VesselCoordinate", inversedBy="id")
-//     * @ORM\JoinColumn(name="id", referencedColumnName="plate_coordinate_id")
-//     */
-//    protected $vesselCoordinate;
+    /**
+     * @ORM\ManyToOne(targetEntity="GameVessel", inversedBy="id")
+     * @ORM\JoinColumn(name="game_vessel_id", referencedColumnName="id")
+     */
+    protected $gameVessel;
 
     /** @ORM\Column(name="coordinate_x", type="smallint") */
     protected $coordinateX;
@@ -53,23 +52,6 @@ class FieldPlate {
     protected $deletedAt;
 
     /******GETTERS AND SETTERS******/
-
-//    /**
-//     * @return mixed
-//     */
-//    public function getVesselCoordinate()
-//    {
-//        return $this->vesselCoordinate;
-//    }
-//
-//    /**
-//     * @param $vesselCoordinate
-//     */
-//    public function setVesselCoordinate($vesselCoordinate)
-//    {
-//        $this->vesselCoordinate = $vesselCoordinate;
-//    }
-
     /**
      * @return mixed
      */
@@ -100,6 +82,22 @@ class FieldPlate {
     public function setField($field)
     {
         $this->field = $field;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGameVessel()
+    {
+        return $this->gameVessel;
+    }
+
+    /**
+     * @param mixed $gameVessel
+     */
+    public function setGameVessel($gameVessel)
+    {
+        $this->gameVessel = $gameVessel;
     }
 
     /**

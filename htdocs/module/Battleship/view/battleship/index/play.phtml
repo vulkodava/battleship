@@ -20,15 +20,71 @@ $letters = array(
     'S',
     'T',
 );
-var_dump($_POST);
 ?>
 <style>
+    table tbody tr {
+        height: 25px;
+        /*height: auto !important;*/
+    }
+
     table td,
     table th {
         width: 50px;
         text-align: center;
     }
 </style>
+
+<h1><?php echo sprintf($this->translate('Game #%d'), $gameId); ?></h1>
+
+<div class="panel panel-primary">
+    <div class="panel-heading"><?php echo $this->translate('Game Info'); ?></div>
+    <div class="panel-body">
+        <table class="table-bordered" width="100%">
+            <thead>
+            <tr class="text-primary">
+                <th><?php echo $this->translate('Vessel Types'); ?></th>
+                <th><?php echo $this->translate('Vessels Count'); ?></th>
+                <th><?php echo $this->translate('Intact Vessels Count'); ?></th>
+                <th><?php echo $this->translate('Hit Vessels Count'); ?></th>
+                <th><?php echo $this->translate('Sunk Vessels Count'); ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($gameVesselTypes as $gameVesselType) : ?>
+                <tr>
+                    <td><?php echo $gameVesselType->getName(); ?></td>
+                    <td><?php echo $gameVesselType->getVesselsCount(); ?></td>
+                    <td><?php echo $vessels[$gameVesselType->getId()]['intactCnt']; ?></td>
+                    <td><?php echo $vessels[$gameVesselType->getId()]['hitCnt']; ?></td>
+                    <td><?php echo $vessels[$gameVesselType->getId()]['sunkCnt']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <hr />
+
+        <table class="table-bordered" width="100%">
+            <thead>
+            <tr class="text-primary">
+                <th><?php echo $this->translate('Game Shots'); ?></th>
+                <th><?php echo $this->translate('Hits'); ?></th>
+                <th><?php echo $this->translate('Missed'); ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?php echo $gameShots; ?></td>
+                <td><?php echo $hits; ?></td>
+                <td><?php echo $missed; ?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<hr />
+
 <table border="1">
 <?php $colHeaders = $gameGrid[0]; ?>
     <thead>
@@ -49,15 +105,20 @@ foreach ($gameGrid as $rowId => $row) {
         echo '<td><form action="" method="post">';
 
         if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_NEW) {
+            $buttonTitle = $letters[$rowId] . ($colId + 1);
+            if (1 == 1) {
+                $buttonTitle .= '<br />' . $col['content'];
+                if (trim($col['content']) != 'empty') {
+                    $buttonTitle .= ' #' . $col['vessel_id'];
+                }
+            }
             echo '<input type="hidden" name="field_coordinates" value="' . $letters[$rowId] . $colId . '" readonly="readonly" />';
-            echo '<input type="submit" name="field" value="." class="btn btn-block btn-xs btn-success" />';
+            echo '<input type="submit" name="field" value="." class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="' . $buttonTitle . '" />';
         } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_HIT) {
             echo '<span class="label label-success">x</span>';
         } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_MISS) {
             echo '<span class="label label-danger">-</span>';
         }
-
-        echo '<br />Cheat: <strong>' . $col['content'] . '</strong>';
 
         echo '</form></td>';
     }
@@ -65,3 +126,14 @@ foreach ($gameGrid as $rowId => $row) {
 }
 ?>
 </table>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('.submit').click(function () {
+            jQuery(this).attr('disabled', 'disabled').val('...');
+        });
+
+        jQuery('[data-toggle="tooltip"]').tooltip({html: true});
+        jQuery('.collapse').collapse();
+    });
+</script>
