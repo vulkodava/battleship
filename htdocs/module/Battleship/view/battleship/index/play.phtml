@@ -11,105 +11,113 @@
     }
 </style>
 
-<h1>
-    <?php echo sprintf(
-        $this->translate('Game #%d. Played by %s #%d'),
-        $game->getGameEntity()->getId(),
-        $game->getGameEntity()->getPlayer()->getFirstName() . ' ' . $game->getGameEntity()->getPlayer()->getLastName(),
-        $game->getGameEntity()->getPlayer()->getId()
-    ); ?>
-</h1>
-
-<div class="panel panel-primary">
-    <div class="panel-heading"><?php echo $this->translate('Game Info'); ?></div>
-    <div class="panel-body">
-        <table class="table-bordered" width="100%">
-            <thead>
-            <tr class="text-primary">
-                <th><?php echo $this->translate('Vessel Types'); ?></th>
-                <th><?php echo $this->translate('Vessels Count'); ?></th>
-                <th><?php echo $this->translate('Intact Vessels Count'); ?></th>
-                <th><?php echo $this->translate('Hit Vessels Count'); ?></th>
-                <th><?php echo $this->translate('Sunk Vessels Count'); ?></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($gameVesselTypes as $gameVesselType) : ?>
-                <tr>
-                    <td><?php echo $gameVesselType->getName(); ?></td>
-                    <td><?php echo $gameVesselType->getVesselsCount(); ?></td>
-                    <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['intactCnt']; ?></td>
-                    <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['hitCnt']; ?></td>
-                    <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['sunkCnt']; ?></td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-
-        <hr />
-
-        <table class="table-bordered" width="100%">
-            <thead>
-            <tr class="text-primary">
-                <th><?php echo $this->translate('Game Shots'); ?></th>
-                <th><?php echo $this->translate('Hits'); ?></th>
-                <th><?php echo $this->translate('Missed'); ?></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><?php echo $gameShots; ?></td>
-                <td><?php echo $hits; ?></td>
-                <td><?php echo $missed; ?></td>
-            </tr>
-            </tbody>
-        </table>
+<div class="row">
+    <div class="col-lg-12">
+        <h1>
+            <?php echo sprintf(
+                $this->translate('Game #%d played by %s #%d'),
+                $game->getGameEntity()->getId(),
+                $game->getGameEntity()->getPlayer()->getFirstName() . ' ' . $game->getGameEntity()->getPlayer()->getLastName(),
+                $game->getGameEntity()->getPlayer()->getId()
+            ); ?>
+        </h1>
     </div>
 </div>
 
-<hr />
+<div class="row">
+    <div class="col-lg-6">
+        <table border="1">
+        <?php $colHeaders = $gameGrid[0]; ?>
+            <thead>
+                <tr>
+                    <?php
+                    echo '<th></th>';
+                    foreach ($colHeaders as $colHeaderKey => $colHeaderVal) {
+                        echo '<th>' . ($colHeaderKey + 1) . '</th>';
+                    }
+                    ?>
+                </tr>
+            </thead>
+        <?php
 
-<table border="1">
-<?php $colHeaders = $gameGrid[0]; ?>
-    <thead>
-        <tr>
-            <?php
-            echo '<th></th>';
-            foreach ($colHeaders as $colHeaderKey => $colHeaderVal) {
-                echo '<th>' . ($colHeaderKey + 1) . '</th>';
-            }
-            ?>
-        </tr>
-    </thead>
-<?php
+        foreach ($gameGrid as $rowId => $row) {
+            echo '<tr><td>' . \Battleship\Repository\Game::$letters[$rowId] . '</td>';
+            foreach ($row as $colId => $col) {
+                echo '<td><form action="" method="post">';
 
-foreach ($gameGrid as $rowId => $row) {
-    echo '<tr><td>' . \Battleship\Repository\Game::$letters[$rowId] . '</td>';
-    foreach ($row as $colId => $col) {
-        echo '<td><form action="" method="post">';
-
-        if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_NEW) {
-            $buttonTitle = \Battleship\Repository\Game::$letters[$rowId] . ($colId + 1);
-            if (1 == 1) {
-                $buttonTitle .= '<br />' . $col['content'];
-                if (trim($col['content']) != 'empty') {
-                    $buttonTitle .= ' #' . $col['vessel_id'];
+                if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_NEW) {
+                    $buttonTitle = \Battleship\Repository\Game::$letters[$rowId] . ($colId + 1);
+                    if (1 == 1) {
+                        $buttonTitle .= '<br />' . $col['content'];
+                        if (trim($col['content']) != 'empty') {
+                            $buttonTitle .= ' #' . $col['vessel_id'];
+                        }
+                    }
+                    echo '<input type="hidden" name="field_coordinates" value="' . \Battleship\Repository\Game::$letters[$rowId] . $colId . '" readonly="readonly" />';
+                    echo '<input type="submit" name="field" value="." class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="' . $buttonTitle . '" />';
+                } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_HIT) {
+                    echo '<span class="label label-success">x</span>';
+                } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_MISS) {
+                    echo '<span class="label label-danger">-</span>';
                 }
-            }
-            echo '<input type="hidden" name="field_coordinates" value="' . \Battleship\Repository\Game::$letters[$rowId] . $colId . '" readonly="readonly" />';
-            echo '<input type="submit" name="field" value="." class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="' . $buttonTitle . '" />';
-        } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_HIT) {
-            echo '<span class="label label-success">x</span>';
-        } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_MISS) {
-            echo '<span class="label label-danger">-</span>';
-        }
 
-        echo '</form></td>';
-    }
-    echo '</tr>';
-}
-?>
-</table>
+                echo '</form></td>';
+            }
+            echo '</tr>';
+        }
+        ?>
+        </table>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><?php echo $this->translate('Game Info'); ?></div>
+            <div class="panel-body">
+                <table class="table-bordered" width="100%">
+                    <thead>
+                    <tr class="text-primary">
+                        <th><?php echo $this->translate('Vessel Types'); ?></th>
+                        <th><?php echo $this->translate('Vessels Count'); ?></th>
+                        <th><?php echo $this->translate('Intact Vessels Count'); ?></th>
+                        <th><?php echo $this->translate('Hit Vessels Count'); ?></th>
+                        <th><?php echo $this->translate('Sunk Vessels Count'); ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($gameVesselTypes as $gameVesselType) : ?>
+                        <tr>
+                            <td><?php echo $gameVesselType->getName(); ?></td>
+                            <td><?php echo $gameVesselType->getVesselsCount(); ?></td>
+                            <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['intactCnt']; ?></td>
+                            <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['hitCnt']; ?></td>
+                            <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['sunkCnt']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+                <hr />
+
+                <table class="table-bordered" width="100%">
+                    <thead>
+                    <tr class="text-primary">
+                        <th><?php echo $this->translate('Game Shots'); ?></th>
+                        <th><?php echo $this->translate('Hits'); ?></th>
+                        <th><?php echo $this->translate('Missed'); ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><?php echo $gameShots; ?></td>
+                        <td><?php echo $hits; ?></td>
+                        <td><?php echo $missed; ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     jQuery(document).ready(function () {

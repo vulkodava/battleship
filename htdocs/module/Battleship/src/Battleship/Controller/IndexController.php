@@ -79,7 +79,14 @@ class IndexController extends AbstractActionController implements EventManagerAw
             try {
                 // Try to actually fire the shot.
                 $game->fireShot($params);
-                $this->flashMessenger()->addSuccessMessage(sprintf('Successful shot on field %s.', $coordinates));
+                $shotInfo = $game->getShotInfo();
+                $displayCoordinates =  \Battleship\Repository\Game::$letters[$params['coordinateX']];
+                $displayCoordinates .= ($params['coordinateY'] + 1);
+                if ($shotInfo['hit'] === true) {
+                    $this->flashMessenger()->addSuccessMessage(sprintf('Successful shot on field %s.', $displayCoordinates));
+                } else {
+                    $this->flashMessenger()->addErrorMessage(sprintf('Miss on field %s.', $displayCoordinates));
+                }
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage($e->getMessage());
             }

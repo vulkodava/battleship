@@ -28,6 +28,7 @@ class Game extends EntityRepository {
     private $missedShots;
     private $hits;
     private $gameVesselsInfo;
+    private $shotInfo;
 
     public static $letters = array(
         'A',
@@ -348,6 +349,7 @@ class Game extends EntityRepository {
         if (empty($fieldPlate)) {
             throw new InvalidArgumentException('No field plate is set.', 104);
         }
+        $shotInfo = $this->getShotInfo();
         if (!is_null($fieldPlate->getGameVessel())) {
             $vessel = $this->getEntityManager()->getRepository('Battleship\Entity\GameVessel')
                 ->find($fieldPlate->getGameVessel()->getId());
@@ -378,7 +380,12 @@ class Game extends EntityRepository {
                 $this->getEntityManager()->persist($vessel);
                 $this->getEntityManager()->flush();
             }
+            $shotInfo['hit'] = true;
+        } else {
+            $shotInfo['hit'] = false;
         }
+
+        $this->setShotInfo($shotInfo);
     }
 
     /**
@@ -507,5 +514,21 @@ class Game extends EntityRepository {
     public function setGameVesselsInfo($gameVesselsInfo)
     {
         $this->gameVesselsInfo = $gameVesselsInfo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShotInfo()
+    {
+        return $this->shotInfo;
+    }
+
+    /**
+     * @param mixed $shotInfo
+     */
+    public function setShotInfo($shotInfo)
+    {
+        $this->shotInfo = $shotInfo;
     }
 }
