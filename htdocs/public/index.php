@@ -2,7 +2,7 @@
 /**
  * Display errors setup.
  */
-if ($_SERVER['REMOTE_PORT'] == '8888') {
+if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
     ini_set('display_errors', 1);
 }
 

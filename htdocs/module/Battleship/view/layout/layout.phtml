@@ -83,6 +83,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'play')); ?>"><?php echo $this->translate('Play'); ?></a></li>
+                        <li><a href="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'play', 'cheat' => 1)); ?>"><?php echo $this->translate('Cheat'); ?></a></li>
                         <li><a href="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'newGame')); ?>"><?php echo $this->translate('New Game'); ?></a></li>
                     </ul>
                 </li>

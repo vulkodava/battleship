@@ -54,6 +54,11 @@ class Game extends EntityRepository {
 
     public function startGame() {
         $this->setBattleshipGameSession(new Container('battleshipGameSession'));
+        $config = $this->getEntityManager()->getRepository('Battleship\Entity\GameConfig')->findAll();
+        foreach ($config as $configElement) {
+            $gameConfig[$configElement->getName()] = $configElement->getValue();
+        }
+        $this->setGameConfig($gameConfig);
 
         $vesselTypes = $this->getEntityManager()->getRepository('Battleship\Entity\VesselType')
             ->findBy(array('status' => \Battleship\Entity\VesselType::STATUS_ACTIVE));
@@ -81,12 +86,6 @@ class Game extends EntityRepository {
     }
 
     private function createGame() {
-        $gameConfig = $this->getEntityManager()->getRepository('Battleship\Entity\GameConfig')->findAll();
-
-        foreach ($gameConfig as $config) {
-            $this->gameConfig[$config->getName()] = $config->getValue();
-        }
-
         $this->createGameField();
 
         $player = new Player();
@@ -350,6 +349,9 @@ class Game extends EntityRepository {
             throw new InvalidArgumentException('No field plate is set.', 104);
         }
         $shotInfo = $this->getShotInfo();
+        $shotInfo['hit'] = false;
+        $shotInfo['sunk_vessel'] = false;
+        $shotInfo['hit_vessel'] = null;
         if (!is_null($fieldPlate->getGameVessel())) {
             $vessel = $this->getEntityManager()->getRepository('Battleship\Entity\GameVessel')
                 ->find($fieldPlate->getGameVessel()->getId());
@@ -372,17 +374,17 @@ class Game extends EntityRepository {
                 $vesselTypes = $this->getGameVesselTypes();
 
                 $vesselType = $vesselTypes[$vessel->getVesselType()->getId()];
-                $status = \Battleship\Entity\GameVessel::STATUS_SUNK;
-                if ($vesselType->getSize() > $hitVesselParts) {
-                    $status = \Battleship\Entity\GameVessel::STATUS_HIT;
+                $status = \Battleship\Entity\GameVessel::STATUS_HIT;
+                if ($vesselType->getSize() <= $hitVesselParts) {
+                    $status = \Battleship\Entity\GameVessel::STATUS_SUNK;
+                    $shotInfo['sunk_vessel'] = true;
                 }
                 $vessel->setStatus($status);
                 $this->getEntityManager()->persist($vessel);
                 $this->getEntityManager()->flush();
+                $shotInfo['hit_vessel'] = $vessel;
             }
             $shotInfo['hit'] = true;
-        } else {
-            $shotInfo['hit'] = false;
         }
 
         $this->setShotInfo($shotInfo);

@@ -1,7 +1,6 @@
 <style>
     table tbody tr {
         height: 25px;
-        /*height: auto !important;*/
     }
 
     table td,
@@ -40,6 +39,7 @@
             </thead>
         <?php
 
+        $gameConfig = $game->getGameConfig();
         foreach ($gameGrid as $rowId => $row) {
             echo '<tr><td>' . \Battleship\Repository\Game::$letters[$rowId] . '</td>';
             foreach ($row as $colId => $col) {
@@ -47,18 +47,19 @@
 
                 if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_NEW) {
                     $buttonTitle = \Battleship\Repository\Game::$letters[$rowId] . ($colId + 1);
-                    if (1 == 1) {
+
+                    if ($cheat === true) {
                         $buttonTitle .= '<br />' . $col['content'];
                         if (trim($col['content']) != 'empty') {
                             $buttonTitle .= ' #' . $col['vessel_id'];
                         }
                     }
                     echo '<input type="hidden" name="field_coordinates" value="' . \Battleship\Repository\Game::$letters[$rowId] . $colId . '" readonly="readonly" />';
-                    echo '<input type="submit" name="field" value="." class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="' . $buttonTitle . '" />';
+                    echo '<input type="submit" name="field" value="' . $gameConfig['no_shot_sign'] . '" class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="' . $buttonTitle . '" />';
                 } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_HIT) {
-                    echo '<span class="label label-success">x</span>';
+                    echo '<span class="label label-success">' . $gameConfig['hit_sign'] . '</span>';
                 } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_MISS) {
-                    echo '<span class="label label-danger">-</span>';
+                    echo '<span class="label label-danger">' . $gameConfig['miss_sign'] . '</span>';
                 }
 
                 echo '</form></td>';

@@ -70,6 +70,12 @@ class IndexController extends AbstractActionController implements EventManagerAw
         $game->startGame();
 
         $view = new ViewModel();
+        $cheat = $this->params('cheat', false);
+        if ($cheat != 0 && $cheat != 1)  {
+            $cheat = false;
+        } else if ($cheat == 1) {
+            $cheat = true;
+        }
 
         // Prepare to fire a Shot.
         if ($this->getRequest()->isPost()) {
@@ -83,6 +89,11 @@ class IndexController extends AbstractActionController implements EventManagerAw
                 $displayCoordinates =  \Battleship\Repository\Game::$letters[$params['coordinateX']];
                 $displayCoordinates .= ($params['coordinateY'] + 1);
                 if ($shotInfo['hit'] === true) {
+                    if ($shotInfo['sunk_vessel'] === true) {
+                        $sunkVessel = $shotInfo['hit_vessel']->getVesselType()->getName();
+                        $sunkVessel .= ' #' . $shotInfo['hit_vessel']->getId();
+                        $this->flashMessenger()->addSuccessMessage(sprintf('Vessel %s is sunk.', $sunkVessel));
+                    }
                     $this->flashMessenger()->addSuccessMessage(sprintf('Successful shot on field %s.', $displayCoordinates));
                 } else {
                     $this->flashMessenger()->addErrorMessage(sprintf('Miss on field %s.', $displayCoordinates));
@@ -106,6 +117,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
         $view->setVariable('gameVesselsInfo', $game->getGameVesselsInfo());
         $view->setVariable('hits', $game->getHits());
         $view->setVariable('missed', $game->getMissedShots());
+        $view->setVariable('cheat', $cheat);
 
         return $view;
     }
