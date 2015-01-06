@@ -4,12 +4,21 @@ namespace Battleship\Controller;
 use Battleship\Entity\Field;
 use Battleship\Entity\GameVessel;
 use Battleship\Entity\Player;
+use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Session\Container; // We need this when using sessions
+use Zend\Session\Container;
+use ZendService\ReCaptcha\Exception; // We need this when using sessions
+use Doctrine\ORM\Query\Expr;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManagerAwareInterface;
 
-class IndexController extends AbstractActionController
+class IndexController extends AbstractActionController implements EventManagerAwareInterface
 {
+    private $field = null;
+    private $gameConfig = array();
+    private $gameVesselTypes = array();
+
     public function indexAction()
     {
         return new ViewModel();
@@ -50,12 +59,25 @@ class IndexController extends AbstractActionController
         return $this->htmlResponse($table->render());
     }
 
+    public function newGameAction()
+    {
+        $battleshipGameSession = new Container('battleshipGameSession');
+        unset($battleshipGameSession->gameId);
+        return $this->redirect()->toRoute('battleship/default', array(
+            'controller' => 'index',
+            'action' => 'play',
+        ));
+    }
+
     public function playAction()
     {
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
         $battleshipGameSession = new Container('battleshipGameSession');
+
+        $this->gameVesselTypes = $objectManager->getRepository('Battleship\Entity\VesselType')
+            ->findBy(array('status' => \Battleship\Entity\VesselType::STATUS_ACTIVE));
 
         $view = new ViewModel();
 
@@ -73,39 +95,94 @@ class IndexController extends AbstractActionController
             $fieldPlate = $objectManager->getRepository('Battleship\Entity\FieldPlate')->findOneBy($params);
 
             $status = \Battleship\Entity\FieldPlate::STATUS_MISS;
-            if ($this->hasVessel($fieldPlate) === true) {
+            if (!is_null($fieldPlate->getGameVessel())) {
                 $status = \Battleship\Entity\FieldPlate::STATUS_HIT;
             }
             $fieldPlate->setStatus($status);
 
             $objectManager->persist($fieldPlate);
+
+            $game->setMovesCnt($game->getMovesCnt() + 1);
+            $objectManager->persist($game);
+
             $objectManager->flush();
+
             return $this->redirect()->toRoute('battleship/default', array(
                 'controller' => 'index',
                 'action' => 'play',
             ));
         }
 
-        $gameGrid = $this->setupBoard($game->getField(), $game->getVessels());
+        $gameGrid = $this->setupBoard($game->getField());
+
+        $qb = $objectManager->createQueryBuilder();
+        $qb->add('select', new Expr\Select(array('COUNT(field_plates.id)')));
+        $qb->add('from', new Expr\From('Battleship\Entity\FieldPlate', 'field_plates'));
+        $qb->add('where', $qb->expr()->andX(
+            $qb->expr()->eq('field_plates.field', '?0'),
+            $qb->expr()->eq('field_plates.status', '?1')
+        ));
+        $qb->setParameters(array(
+            $game->getField()->getId(),
+            \Battleship\Entity\FieldPlate::STATUS_HIT,
+        ));
+        $hitsCount = $qb->getQuery()->getSingleScalarResult();
+
+        $qb->setParameters(array(
+            $game->getField()->getId(),
+            \Battleship\Entity\FieldPlate::STATUS_MISS,
+        ));
+        $missedCount = $qb->getQuery()->getSingleScalarResult();
+
+        $vessels = array();
+        $qb = $objectManager->createQueryBuilder();
+        $qb->add('select', new Expr\Select(array('COUNT(game_vessels.id)')));
+        $qb->add('from', new Expr\From('Battleship\Entity\GameVessel', 'game_vessels'));
+        $qb->add('where', $qb->expr()->andX(
+            $qb->expr()->eq('game_vessels.game', '?0'),
+            $qb->expr()->eq('game_vessels.vessel_type', '?1'),
+            $qb->expr()->eq('game_vessels.status', '?2')
+        ));
+
+        foreach ($this->gameVesselTypes as $vesselType) {
+            $qb->setParameters(array(
+                $game->getId(),
+                $vesselType->getId(),
+                \Battleship\Entity\GameVessel::STATUS_INTACT,
+            ));
+            $intactCount = $qb->getQuery()->getSingleScalarResult();
+
+            $qb->setParameters(array(
+                $game->getId(),
+                $vesselType->getId(),
+                \Battleship\Entity\GameVessel::STATUS_HIT,
+            ));
+            $hitCount = $qb->getQuery()->getSingleScalarResult();
+
+            $qb->setParameters(array(
+                $game->getId(),
+                $vesselType->getId(),
+                \Battleship\Entity\GameVessel::STATUS_SUNK,
+            ));
+            $sunkCount = $qb->getQuery()->getSingleScalarResult();
+
+            $vessels[$vesselType->getId()] = array(
+                'intactCnt' => $intactCount,
+                'hitCnt' => $hitCount,
+                'sunkCnt' => $sunkCount,
+            );
+        }
+
+
         $view->setVariable('gameGrid', $gameGrid);
+        $view->setVariable('gameId', $game->getId());
+        $view->setVariable('gameVesselTypes', $this->gameVesselTypes);
+        $view->setVariable('gameShots', $game->getMovesCnt());
+        $view->setVariable('hits', $hitsCount);
+        $view->setVariable('missed', $missedCount);
+        $view->setVariable('vessels', $vessels);
 
         return $view;
-    }
-
-    private function hasVessel($fieldPlate)
-    {
-        $objectManager = $this
-            ->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-
-        $vesselCoordinate = $objectManager->getRepository('Battleship\Entity\VesselCoordinate')->findOneBy(array('plate_coordinate' => $fieldPlate));
-        if (!empty($vesselCoordinate)) {
-            $vesselCoordinate->setStatus(\Battleship\Entity\VesselCoordinate::STATUS_HIT);
-            $objectManager->persist($vesselCoordinate);
-            $objectManager->flush();
-            return true;
-        }
-        return false;
     }
 
     private function convertCoords($coordsIn)
@@ -146,22 +223,25 @@ class IndexController extends AbstractActionController
             ->get('Doctrine\ORM\EntityManager');
         $gameConfig = $objectManager->getRepository('Battleship\Entity\GameConfig')->findAll();
 
-        $configData = array();
         foreach ($gameConfig as $config) {
-            $configData[$config->getName()] = $config->getValue();
+            $this->gameConfig[$config->getName()] = $config->getValue();
         }
 
-        $field = new Field();
-        $field->setSizeX($configData['x']);
-        $field->setSizeY($configData['y']);
-        $field->setCreatedAt(new \DateTime());
-        $objectManager->persist($field);
-        $objectManager->flush();
+        $this->getEventManager()->trigger('battleship.createNewGameStart', null, $this->gameConfig);
+//        $field = new Field();
+//        $field->setSizeX($this->gameConfig['x']);
+//        $field->setSizeY($this->gameConfig['y']);
+//        $field->setCreatedAt(new \DateTime());
+//        $objectManager->persist($field);
+//        $objectManager->flush();
+//        $this->getEventManager()->trigger('battleship.createField', null, $field);
+
+        $this->field = $field;
 
         // Create Field Plates.
-        for ($row = 0; $row < $configData['x']; $row++) {
+        for ($row = 0; $row < $this->gameConfig['x']; $row++) {
             $gameGrid[$row] = array();
-            for ($col = 0; $col < $configData['y']; $col++) {
+            for ($col = 0; $col < $this->gameConfig['y']; $col++) {
                 $fieldPlate = new \Battleship\Entity\FieldPlate();
                 $fieldPlate->setField($field);
                 $fieldPlate->setStatus(\Battleship\Entity\FieldPlate::STATUS_NEW);
@@ -169,6 +249,7 @@ class IndexController extends AbstractActionController
                 $fieldPlate->setCoordinateY($col);
                 $objectManager->persist($fieldPlate);
                 $objectManager->flush();
+                $this->getEventManager()->trigger('battleship.createFieldPlate', null, $fieldPlate);
             }
         }
 
@@ -180,6 +261,7 @@ class IndexController extends AbstractActionController
         $player->setStatus(Player::STATUS_ACTIVE);
         $objectManager->persist($player);
         $objectManager->flush();
+        $this->getEventManager()->trigger('battleship.createPlayer', null, $player);
 
         $game = new \Battleship\Entity\Game();
         $game->setField($field);
@@ -187,14 +269,13 @@ class IndexController extends AbstractActionController
 
         $objectManager->persist($game);
         $objectManager->flush();
+        $this->getEventManager()->trigger('battleship.createGame', null, $game);
 
         // Set gameId in session.
         $battleshipGameSession->gameId = $game->getId();
 
         $gameVessels = array();
-        $gameVesselTypes = $objectManager->getRepository('Battleship\Entity\VesselType')
-            ->findBy(array('status' => \Battleship\Entity\VesselType::STATUS_ACTIVE));
-        foreach ($gameVesselTypes as $vesselType) {
+        foreach ($this->gameVesselTypes as $vesselType) {
             for ($i = 0; $i < (int) $vesselType->getVesselsCount(); $i++) {
                 $gameVessel = new GameVessel();
                 $gameVessel->setGame($game);
@@ -205,16 +286,18 @@ class IndexController extends AbstractActionController
                 $gameVessel->setStatus(\Battleship\Entity\GameVessel::STATUS_INTACT);
                 $objectManager->persist($gameVessel);
                 $objectManager->flush();
+                $this->getEventManager()->trigger('battleship.createGameVessel', null, $gameVessel);
                 $gameVessels[] = $gameVessel;
             }
         }
+        $this->getEventManager()->trigger('battleship.readyToDeployVessels', null, $gameVessel);
 
-        $this->deployShips($gameVessels, $configData['x'], $configData['y'], $field);
+        $this->deployShips($gameVessels, $this->gameConfig['x'], $this->gameConfig['y'], $field);
 
         return $game;
     }
 
-    private function setupBoard($field, $vessels)
+    private function setupBoard($field)
     {
         $objectManager = $this
             ->getServiceLocator()
@@ -225,38 +308,24 @@ class IndexController extends AbstractActionController
             'field' => $field,
         ));
         foreach ($fieldPlates as $fieldPlate) {
-            $vesselCoordinate = $objectManager->getRepository('Battleship\Entity\VesselCoordinate')->findOneBy(array(
-                'plate_coordinate' => $fieldPlate,
-            ));
             $content = 'empty';
-            if (isset($vesselCoordinate) && !empty($vesselCoordinate)) {
-                $content = $vesselCoordinate->getVessel()->getVesselType()->getName();
+            $vesselId = null;
+            if (!is_null($fieldPlate->getGameVessel())) {
+                $content = $fieldPlate->getGameVessel()->getVesselType()->getName();
+                $vesselId = $fieldPlate->getGameVessel()->getId();
             }
             $gameGrid[$fieldPlate->getCoordinateX()][$fieldPlate->getCoordinateY()] = array(
                 'field_plate_status' => $fieldPlate->getStatus(),
                 'content' => $content,
+                'vessel_id' => $vesselId,
             );
-        }
-
-        foreach ($vessels as $vessel) {
-            $vesselCoordinates = $vessel->getVesselCoordinates();
-            foreach ($vesselCoordinates as $vesselCoordinate) {
-                $x = $vesselCoordinate->getPlateCoordinate()->getCoordinateX();
-                $y = $vesselCoordinate->getPlateCoordinate()->getCoordinateY();
-                $gameGrid[$x][$y]['content'] = $vessel->getVesselType()->getName();
-            }
         }
         return $gameGrid;
     }
 
     private function deployShips(array $gameVessels, $maxX, $maxY, $field)
     {
-        $objectManager = $this
-            ->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-
         foreach ($gameVessels as $gameVessel) {
-            $vesselCoordinates = $gameVessel->getVesselCoordinates();
             $vesselSize = $gameVessel->getVesselType()->getSize();
             $vesselDirection = rand(0, 1);
             $startX = $this->generateFirstPosition($maxX, $vesselSize);
@@ -270,18 +339,7 @@ class IndexController extends AbstractActionController
                             $colNumber >= $startX && $colNumber < ($startX + $vesselSize)
                             && $rowNumber == $startY
                         ) {
-                            $fieldPlate = $objectManager->getRepository('Battleship\Entity\FieldPlate')->findOneBy(array(
-                                'coordinateX' => $rowNumber,
-                                'coordinateY' => $colNumber,
-                                'field' => $field,
-                            ));
-
-                            $gameVesselCoordinate = new \Battleship\Entity\VesselCoordinate();
-                            $gameVesselCoordinate->setVessel($gameVessel);
-                            $gameVesselCoordinate->setPlateCoordinateId($fieldPlate->getId());
-                            $gameVesselCoordinate->setStatus(\Battleship\Entity\VesselCoordinate::STATUS_INTACT);
-                            $objectManager->persist($gameVesselCoordinate);
-                            $objectManager->flush();
+                            $this->addVessel($gameVessel, $rowNumber, $colNumber);
                         }
                     }
                 }
@@ -293,18 +351,7 @@ class IndexController extends AbstractActionController
                             $rowNumber >= $startY && $rowNumber < ($startY + $vesselSize)
                             && $colNumber == $startX
                         ) {
-                            $fieldPlate = $objectManager->getRepository('Battleship\Entity\FieldPlate')->findOneBy(array(
-                                'coordinateX' => $rowNumber,
-                                'coordinateY' => $colNumber,
-                                'field' => $field,
-                            ));
-
-                            $gameVesselCoordinate = new \Battleship\Entity\VesselCoordinate();
-                            $gameVesselCoordinate->setVessel($gameVessel);
-                            $gameVesselCoordinate->setPlateCoordinateId($fieldPlate->getId());
-                            $gameVesselCoordinate->setStatus(\Battleship\Entity\VesselCoordinate::STATUS_INTACT);
-                            $objectManager->persist($gameVesselCoordinate);
-                            $objectManager->flush();
+                            $this->addVessel($gameVessel, $rowNumber, $colNumber);
                         }
                     }
                 }
@@ -321,12 +368,23 @@ class IndexController extends AbstractActionController
         return $start;
     }
 
-    private function addVessels($vesselType)
+    private function addVessel($gameVessel, $rowNumber, $colNumber)
     {
+        if (empty($this->field)) {
+            throw new InvalidArgumentException('Invalid game field.', 101);
+        }
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
-        $vessel = $objectManager->getRepository('Battleship\Entity\GameVessel');
-        $vessel->setGameId();
+
+        $fieldPlate = $objectManager->getRepository('Battleship\Entity\FieldPlate')->findOneBy(array(
+            'coordinateX' => $rowNumber,
+            'coordinateY' => $colNumber,
+            'field' => $this->field,
+        ));
+
+        $fieldPlate->setGameVessel($gameVessel);
+        $objectManager->persist($fieldPlate);
+        $objectManager->flush();
     }
 }

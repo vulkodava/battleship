@@ -35,7 +35,7 @@ class GameVessel {
     protected $vessel_type;
 
     /**
-     * @ORM\OneToMany(targetEntity="VesselCoordinate", mappedBy="vessel")
+     * @ORM\OneToMany(targetEntity="FieldPlate", mappedBy="game_vessel")
      */
     protected $vessel_coordinates;
 

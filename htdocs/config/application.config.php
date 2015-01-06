@@ -8,6 +8,11 @@ return array(
         'Application',
         'Battleship',
         'ZfTable',
+        'ZfSnapPhpDebugBar'
+    ),
+
+    'listeners' => array(
+        'Battleship\Listener\Game',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
