@@ -11,10 +11,6 @@ return array(
         'ZfSnapPhpDebugBar'
     ),
 
-    'listeners' => array(
-        'Battleship\Listener\Game',
-    ),
-
     // These are various options for the listeners attached to the ModuleManager
     'module_listener_options' => array(
         // This should be an array of paths in which modules reside.

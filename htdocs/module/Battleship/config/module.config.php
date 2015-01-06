@@ -37,9 +37,6 @@ return array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
-        'invokables' => array(
-            'Battleship\Listener\Game' => 'Battleship\Listener\Game',
-        ),
     ),
     'translator' => array(
         'locale' => 'en_US',
