@@ -108,7 +108,9 @@
 <!-- /container -->
 <?php echo $this->inlineScript() ?>
 <script type="text/javascript">
-    jQuery('.dropdown-toggle').dropdown()
+    jQuery(document).ready(function() {
+        jQuery('.dropdown-toggle').dropdown();
+    });
 </script>
 </body>
 </html>

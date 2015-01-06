@@ -4,14 +4,11 @@ namespace Battleship\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
-use ZendService\ReCaptcha\Exception; // We need this when using sessions
 use Doctrine\ORM\Query\Expr;
-use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 
 class IndexController extends AbstractActionController implements EventManagerAwareInterface
 {
-    private $gameVesselTypes = array();
 
     public function indexAction()
     {
@@ -67,17 +64,22 @@ class IndexController extends AbstractActionController implements EventManagerAw
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
+
+        /** @var \Battleship\Repository\Game $game */
         $game = $objectManager->getRepository('Battleship\Entity\Game');
         $game->startGame();
 
         $view = new ViewModel();
 
+        // Prepare to fire a Shot.
         if ($this->getRequest()->isPost()) {
             $coordinates = $this->params()->fromPost('field_coordinates');
             $params = \Battleship\Repository\Game::convertCoordinates($coordinates);
 
             try {
+                // Try to actually fire the shot.
                 $game->fireShot($params);
+                $this->flashMessenger()->addSuccessMessage(sprintf('Successful shot on field %s.', $coordinates));
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage($e->getMessage());
             }
@@ -87,74 +89,16 @@ class IndexController extends AbstractActionController implements EventManagerAw
             ));
         }
 
+        // Setup the Game Battle Field.
         $gameGrid = $game->setupBoard();
 
-        $qb = $objectManager->createQueryBuilder();
-        $qb->add('select', new Expr\Select(array('COUNT(field_plates.id)')));
-        $qb->add('from', new Expr\From('Battleship\Entity\FieldPlate', 'field_plates'));
-        $qb->add('where', $qb->expr()->andX(
-            $qb->expr()->eq('field_plates.field', '?0'),
-            $qb->expr()->eq('field_plates.status', '?1')
-        ));
-        $qb->setParameters(array(
-            $game->getField()->getId(),
-            \Battleship\Entity\FieldPlate::STATUS_HIT,
-        ));
-        $hitsCount = $qb->getQuery()->getSingleScalarResult();
-
-        $qb->setParameters(array(
-            $game->getField()->getId(),
-            \Battleship\Entity\FieldPlate::STATUS_MISS,
-        ));
-        $missedCount = $qb->getQuery()->getSingleScalarResult();
-
-        $vessels = array();
-        $qb = $objectManager->createQueryBuilder();
-        $qb->add('select', new Expr\Select(array('COUNT(game_vessels.id)')));
-        $qb->add('from', new Expr\From('Battleship\Entity\GameVessel', 'game_vessels'));
-        $qb->add('where', $qb->expr()->andX(
-            $qb->expr()->eq('game_vessels.game', '?0'),
-            $qb->expr()->eq('game_vessels.vessel_type', '?1'),
-            $qb->expr()->eq('game_vessels.status', '?2')
-        ));
-
-        foreach ($this->gameVesselTypes as $vesselType) {
-            $qb->setParameters(array(
-                $game->getId(),
-                $vesselType->getId(),
-                \Battleship\Entity\GameVessel::STATUS_INTACT,
-            ));
-            $intactCount = $qb->getQuery()->getSingleScalarResult();
-
-            $qb->setParameters(array(
-                $game->getId(),
-                $vesselType->getId(),
-                \Battleship\Entity\GameVessel::STATUS_HIT,
-            ));
-            $hitCount = $qb->getQuery()->getSingleScalarResult();
-
-            $qb->setParameters(array(
-                $game->getId(),
-                $vesselType->getId(),
-                \Battleship\Entity\GameVessel::STATUS_SUNK,
-            ));
-            $sunkCount = $qb->getQuery()->getSingleScalarResult();
-
-            $vessels[$vesselType->getId()] = array(
-                'intactCnt' => $intactCount,
-                'hitCnt' => $hitCount,
-                'sunkCnt' => $sunkCount,
-            );
-        }
-
-
         $view->setVariable('gameGrid', $gameGrid);
-        $view->setVariable('gameId', $game->getGameEntity()->getId());
+        $view->setVariable('game', $game);
         $view->setVariable('gameVesselTypes', $game->getGameVesselTypes());
         $view->setVariable('gameShots', $game->getGameEntity()->getMovesCnt());
-        $view->setVariable('hits', $hitsCount);
-        $view->setVariable('missed', $missedCount);
-        $view->setVariable('vessels', $vessels);
+        $view->setVariable('gameVesselsInfo', $game->getGameVesselsInfo());
+        $view->setVariable('hits', $game->getHits());
+        $view->setVariable('missed', $game->getMissedShots());
 
         return $view;
     }
