@@ -1,9 +1,8 @@
 <?php
-ini_set('display_errors', 1);
 /**
  * Display errors setup.
  */
-if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+if ($_SERVER['REMOTE_PORT'] == '8888') {
     ini_set('display_errors', 1);
 }
 

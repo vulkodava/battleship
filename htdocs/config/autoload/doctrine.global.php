@@ -1,5 +1,4 @@
 <?php
-// d{AbKgf3&^x}
 return array(
     'doctrine' => array(
         'driver' => array(
@@ -26,9 +25,9 @@ return array(
                 'params' => array(
                     'host' => 'localhost',
                     'port' => '3306',
-                    'user' => 'zend_battleship',
-                    'password' => 'zend_battleship',
-                    'dbname' => 'zend_battleship2',
+                    'user' => 'biologyc_battles',
+                    'password' => 'd{AbKgf3&^x}',
+                    'dbname' => 'biologyc_battleship',
                     'driverOptions' => array(
                         1002 => 'SET NAMES utf8'
                     )
