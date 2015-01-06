@@ -31,8 +31,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
         $table = new \ZfTable\Example\TableExample\Doctrine();
         $table->setAdapter($objectManager)
             ->setSource($source)
-            ->setParamAdapter($this->getRequest()->getPost())
-        ;
+            ->setParamAdapter($this->getRequest()->getPost());
 
         return $this->getResponse()->setContent($table->render());
     }
@@ -68,13 +67,14 @@ class IndexController extends AbstractActionController implements EventManagerAw
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
-        $game = new \Battleship\Model\Game($this->getServiceLocator());
+        $game = $objectManager->getRepository('Battleship\Entity\Game');
+        $game->startGame();
 
         $view = new ViewModel();
 
         if ($this->getRequest()->isPost()) {
             $coordinates = $this->params()->fromPost('field_coordinates');
-            $params = \Battleship\Model\Game::convertCoordinates($coordinates);
+            $params = \Battleship\Repository\Game::convertCoordinates($coordinates);
 
             try {
                 $game->fireShot($params);

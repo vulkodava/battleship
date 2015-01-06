@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Game
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Battleship\Repository\Game")
  * @ORM\Table(name="games")
  */
 class Game {

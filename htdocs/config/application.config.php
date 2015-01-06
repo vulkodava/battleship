@@ -7,8 +7,8 @@ return array(
         'DoctrineORMModule',
         'Application',
         'Battleship',
-        'ZfTable',
-        'ZfSnapPhpDebugBar'
+//        'ZfTable',
+//        'ZfSnapPhpDebugBar'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

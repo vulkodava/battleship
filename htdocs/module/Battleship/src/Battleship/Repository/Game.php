@@ -6,7 +6,7 @@
  * Time: 10:53
  */
 
-namespace Battleship\Model;
+namespace Battleship\Repository;
 
 use Battleship\Entity\Field;
 use Battleship\Entity\GameVessel;
@@ -14,14 +14,16 @@ use Battleship\Entity\Player;
 use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use Zend\Session\Container;
 
-class Game {
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\DBAL\Types\Type;
+
+class Game extends EntityRepository {
     private $gameEntity;
     private $field;
     private $gameConfig;
-    private $objectManager;
     private $battleshipGameSession;
     private $gameVesselTypes;
-    private $serviceLocator;
 
     public static $letters = array(
         'A',
@@ -45,17 +47,13 @@ class Game {
         'T',
     );
 
-    public function __construct($serviceLocator)
-    {
-        $this->setServiceLocator($serviceLocator);
-        $this->setObjectManager($this->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
-
+    public function startGame() {
         $this->setBattleshipGameSession(new Container('battleshipGameSession'));
 
-        $this->gameVesselTypes = $this->getObjectManager()->getRepository('Battleship\Entity\VesselType')
+        $this->gameVesselTypes = $this->getEntityManager()->getRepository('Battleship\Entity\VesselType')
             ->findBy(array('status' => \Battleship\Entity\VesselType::STATUS_ACTIVE));
         if (isset($this->getBattleshipGameSession()->gameId)) {
-            $game = $this->getObjectManager()->getRepository('Battleship\Entity\Game')->find($this->getBattleshipGameSession()->gameId);
+            $game = $this->getEntityManager()->getRepository('Battleship\Entity\Game')->find($this->getBattleshipGameSession()->gameId);
             if (!empty($game)) {
                 $this->setGameEntity($game);
                 $this->setField($game->getField());
@@ -68,7 +66,7 @@ class Game {
     }
 
     private function createGame() {
-        $gameConfig = $this->getObjectManager()->getRepository('Battleship\Entity\GameConfig')->findAll();
+        $gameConfig = $this->getEntityManager()->getRepository('Battleship\Entity\GameConfig')->findAll();
 
         foreach ($gameConfig as $config) {
             $this->gameConfig[$config->getName()] = $config->getValue();
@@ -82,15 +80,15 @@ class Game {
         $player->setLastName('Guest');
         $player->setCreatedAt(new \DateTime());
         $player->setStatus(Player::STATUS_ACTIVE);
-        $this->getObjectManager()->persist($player);
-        $this->getObjectManager()->flush();
+        $this->getEntityManager()->persist($player);
+        $this->getEntityManager()->flush();
 
         $game = new \Battleship\Entity\Game();
         $game->setField($this->getField());
         $game->setPlayer($player);
 
-        $this->getObjectManager()->persist($game);
-        $this->getObjectManager()->flush();
+        $this->getEntityManager()->persist($game);
+        $this->getEntityManager()->flush();
 
         // Set gameId in session.
         $this->getBattleshipGameSession()->gameId = $game->getId();
@@ -105,8 +103,8 @@ class Game {
                 $gameVessel->setCoordinateY('A');
                 $gameVessel->setUpdatedAt(new \DateTime());
                 $gameVessel->setStatus(\Battleship\Entity\GameVessel::STATUS_INTACT);
-                $this->getObjectManager()->persist($gameVessel);
-                $this->getObjectManager()->flush();
+                $this->getEntityManager()->persist($gameVessel);
+                $this->getEntityManager()->flush();
                 $gameVessels[] = $gameVessel;
             }
         }
@@ -122,8 +120,8 @@ class Game {
         $field->setSizeX($this->gameConfig['x']);
         $field->setSizeY($this->gameConfig['y']);
         $field->setCreatedAt(new \DateTime());
-        $this->getObjectManager()->persist($field);
-        $this->getObjectManager()->flush();
+        $this->getEntityManager()->persist($field);
+        $this->getEntityManager()->flush();
 
         $this->setField($field);
 
@@ -136,8 +134,8 @@ class Game {
                 $fieldPlate->setStatus(\Battleship\Entity\FieldPlate::STATUS_NEW);
                 $fieldPlate->setCoordinateX($row);
                 $fieldPlate->setCoordinateY($col);
-                $this->getObjectManager()->persist($fieldPlate);
-                $this->getObjectManager()->flush();
+                $this->getEntityManager()->persist($fieldPlate);
+                $this->getEntityManager()->flush();
             }
         }
     }
@@ -150,7 +148,7 @@ class Game {
         }
 
         $gameGrid = array();
-        $fieldPlates = $this->getObjectManager()->getRepository('Battleship\Entity\FieldPlate')->findBy(array(
+        $fieldPlates = $this->getEntityManager()->getRepository('Battleship\Entity\FieldPlate')->findBy(array(
             'field' => $field,
         ));
         foreach ($fieldPlates as $fieldPlate) {
@@ -221,21 +219,21 @@ class Game {
             throw new InvalidArgumentException('Invalid game field.', 101);
         }
 
-        $fieldPlate = $this->getObjectManager()->getRepository('Battleship\Entity\FieldPlate')->findOneBy(array(
+        $fieldPlate = $this->getEntityManager()->getRepository('Battleship\Entity\FieldPlate')->findOneBy(array(
             'coordinateX' => $rowNumber,
             'coordinateY' => $colNumber,
             'field' => $field,
         ));
 
         $fieldPlate->setGameVessel($gameVessel);
-        $this->getObjectManager()->persist($fieldPlate);
-        $this->getObjectManager()->flush();
+        $this->getEntityManager()->persist($fieldPlate);
+        $this->getEntityManager()->flush();
     }
 
     public function fireShot($params)
     {
         $params['field'] = $this->getField();
-        $fieldPlate = $this->getObjectManager()->getRepository('Battleship\Entity\FieldPlate')->findOneBy($params);
+        $fieldPlate = $this->getEntityManager()->getRepository('Battleship\Entity\FieldPlate')->findOneBy($params);
 
         $status = \Battleship\Entity\FieldPlate::STATUS_MISS;
         if (!is_null($fieldPlate->getGameVessel())) {
@@ -243,12 +241,12 @@ class Game {
         }
         $fieldPlate->setStatus($status);
 
-        $this->getObjectManager()->persist($fieldPlate);
+        $this->getEntityManager()->persist($fieldPlate);
 
         $this->getGameEntity()->setMovesCnt($this->getGameEntity()->getMovesCnt() + 1);
-        $this->getObjectManager()->persist($this->getGameEntity());
+        $this->getEntityManager()->persist($this->getGameEntity());
 
-        $this->getObjectManager()->flush();
+        $this->getEntityManager()->flush();
 
         return true;
     }
@@ -299,22 +297,6 @@ class Game {
     /**
      * @return mixed
      */
-    public function getObjectManager()
-    {
-        return $this->objectManager;
-    }
-
-    /**
-     * @param mixed $objectManager
-     */
-    public function setObjectManager($objectManager)
-    {
-        $this->objectManager = $objectManager;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getBattleshipGameSession()
     {
         return $this->battleshipGameSession;
@@ -358,21 +340,5 @@ class Game {
     public function setGameEntity($gameEntity)
     {
         $this->gameEntity = $gameEntity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    /**
-     * @param mixed $serviceLocator
-     */
-    public function setServiceLocator($serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
     }
 }
