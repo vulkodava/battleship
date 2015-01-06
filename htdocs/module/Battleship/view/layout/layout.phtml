@@ -34,10 +34,6 @@
         ->prependStylesheet($this->basePath() . '/css/bootstrap-3.0.0/bootstrap.min.css')
         ->prependStylesheet($this->basePath() . '/css/style.css')
         ->prependStylesheet($this->basePath() . '/css/zf-table/zf-table.css')
-
-    //->prependStylesheet($this->basePath() . '/css/bootstrap-2.2.2/DT_bootstrap.css')
-    //->prependStylesheet($this->basePath() . '/css/bootstrap-2.2.2/bootstrap-responsive.min.css')
-    //->prependStylesheet($this->basePath() . '/css/bootstrap-2.2.2/bootstrap.min.css')
     ?>
 
     <!-- JS SCRIPTS -->
@@ -46,8 +42,6 @@
         ->appendFile($this->basePath() . '/js/jquery.dataTables.min.js')
         ->appendFile($this->basePath() . '/js/zf-table.js')
         ->appendFile($this->basePath() . '/js/DT_bootstrap_3.js')
-    //->appendFile($this->basePath() . '/js/DT_bootstrap_2.js')
-
     ?>
 
 </head>
@@ -70,11 +64,18 @@
                 <li>
                     <a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="<?php echo $this->url('battleship') ?>"><?php echo $this->translate('Battleship Results') ?></a>
                 </li>
-                <li>
-                    <a href="<?php echo $this->url('battleship') ?>"><?php echo $this->translate('Play Battleship') ?></a>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <?php echo $this->translate('Play Battleship') ?>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'play')); ?>"><?php echo $this->translate('Play'); ?></a></li>
+                        <li><a href="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'newGame')); ?>"><?php echo $this->translate('New Game'); ?></a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -82,11 +83,32 @@
     </div>
 </nav>
 <div class="container">
+    <div class="flash-messages">
+        <?php
+        // In any of your .phtml files:
+        $flash = $this->flashMessenger();
+        $flash->setMessageOpenFormat('<div%s>
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                 &times;
+             </button>
+             <ul><li>')
+            ->setMessageSeparatorString('</li><li>')
+            ->setMessageCloseString('</li></ul></div>');
+
+        echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+        echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+        echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+        echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+        ?>
+    </div>
     <?php echo $this->content; ?>
     <hr>
     <footer></footer>
 </div>
 <!-- /container -->
 <?php echo $this->inlineScript() ?>
+<script type="text/javascript">
+    jQuery('.dropdown-toggle').dropdown()
+</script>
 </body>
 </html>

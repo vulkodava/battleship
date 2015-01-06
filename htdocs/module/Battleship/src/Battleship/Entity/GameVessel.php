@@ -2,14 +2,19 @@
 namespace Battleship\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * GameVessel
  *
  * @ORM\Entity
- * @ORM\Table(name="game_vessel")
+ * @ORM\Table(name="game_vessels")
  */
 class GameVessel {
+    const STATUS_INTACT = 0;
+    const STATUS_HIT = 1;
+    const STATUS_SUNK = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -17,11 +22,22 @@ class GameVessel {
      */
     protected $id;
 
-    /** @ORM\ManyToOne(name="game_id", targetEntity="Game") */
-    protected $gameId;
+    /**
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="id")
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     */
+    protected $game;
 
-    /** @ORM\ManyToOne(name="player_id", targetEntity="VesselType") */
-    protected $typeId;
+    /**
+     * @ORM\ManyToOne(targetEntity="VesselType", inversedBy="id")
+     * @ORM\JoinColumn(name="vessel_type_id", referencedColumnName="id")
+     */
+    protected $vessel_type;
+
+    /**
+     * @ORM\OneToMany(targetEntity="FieldPlate", mappedBy="game_vessel")
+     */
+    protected $vessel_coordinates;
 
     /** @ORM\Column(name="coordinate_x", type="smallint") */
     protected $coordinateX;
@@ -35,11 +51,16 @@ class GameVessel {
     /** @ORM\Column(name="created_at", type="datetime") */
     protected $createdAt;
 
-    /** @ORM\Column(name="updated_at type="datetime") */
+    /** @ORM\Column(name="updated_at", type="datetime") */
     protected $updatedAt;
 
     /** @ORM\Column(name="deleted_at", type="datetime") */
     protected $deletedAt;
+
+    public function __construct()
+    {
+        $this->vessel_coordinates = new ArrayCollection();
+    }
 
     /******GETTERS AND SETTERS******/
 
@@ -62,33 +83,49 @@ class GameVessel {
     /**
      * @return mixed
      */
-    public function getGameId()
+    public function getGame()
     {
-        return $this->gameId;
+        return $this->game;
     }
 
     /**
-     * @param mixed $gameId
+     * @param mixed $game
      */
-    public function setGameId($gameId)
+    public function setGame($game)
     {
-        $this->gameId = $gameId;
+        $this->game = $game;
     }
 
     /**
      * @return mixed
      */
-    public function getVesselId()
+    public function getVesselType()
     {
-        return $this->vesselId;
+        return $this->vessel_type;
     }
 
     /**
-     * @param mixed $vesselId
+     * @param mixed $vesselType
      */
-    public function setVesselId($vesselId)
+    public function setVesselType($vesselType)
     {
-        $this->vesselId = $vesselId;
+        $this->vessel_type = $vesselType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVesselCoordinates()
+    {
+        return $this->vessel_coordinates;
+    }
+
+    /**
+     * @param mixed $vesselCoordinates
+     */
+    public function setVesselCoordinates($vesselCoordinates)
+    {
+        $this->vessel_coordinates = $vesselCoordinates;
     }
 
     /**
@@ -168,7 +205,7 @@ class GameVessel {
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
     }
 
     /**
