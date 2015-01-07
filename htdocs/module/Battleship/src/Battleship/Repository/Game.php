@@ -195,10 +195,19 @@ class Game extends EntityRepository {
                 $content = $fieldPlate->getGameVessel()->getVesselType()->getName();
                 $vesselId = $fieldPlate->getGameVessel()->getId();
             }
+
+            $vesselSunk = '';
+            if (!is_null($fieldPlate->getGameVessel())) {
+                $vesselStatus = $fieldPlate->getGameVessel()->getStatus();
+                if ($vesselStatus == \Battleship\Entity\GameVessel::STATUS_SUNK) {
+                    $vesselSunk = 'sunk';
+                }
+            }
             $gameGrid[$fieldPlate->getCoordinateX()][$fieldPlate->getCoordinateY()] = array(
                 'field_plate_status' => $fieldPlate->getStatus(),
                 'content' => $content,
                 'vessel_id' => $vesselId,
+                'vessel_sunk' => $vesselSunk,
             );
         }
         return $gameGrid;

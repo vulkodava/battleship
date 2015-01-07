@@ -79,8 +79,8 @@ class IndexController extends AbstractActionController implements EventManagerAw
         $gameId = $request->getParam('id', false);
 
         // Determines whether this is a new game or an existing one.
+        $battleshipGameSession = new Container('battleshipGameSession');
         if ($gameId !== false) {
-            $battleshipGameSession = new Container('battleshipGameSession');
             $battleshipGameSession->gameId = $gameId;
         }
 
@@ -99,6 +99,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
         } else if ($cheat == 1) {
             $cheat = true;
         }
+        $battleshipGameSession->cheat = $cheat;
 
         // In case of passed coordinates tries to fire a shot.
         if ($coordinates !== false) {
@@ -171,6 +172,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
      */
     public function fireAction()
     {
+        $battleshipGameSession = new Container('battleshipGameSession');
         // Prepare to fire a Shot.
         if ($this->getRequest()->isPost()) {
             $objectManager = $this
@@ -194,7 +196,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
                     if ($shotInfo['sunk_vessel'] === true) {
                         $sunkVessel = $shotInfo['hit_vessel']->getVesselType()->getName();
                         $sunkVessel .= ' #' . $shotInfo['hit_vessel']->getId();
-                        $this->flashMessenger()->addSuccessMessage(sprintf('Vessel %s is sunk.', $sunkVessel));
+                        $this->flashMessenger()->addSuccessMessage(sprintf('<span class="glyphicon glyphicon-ok"></span> Vessel %s is sunk.', $sunkVessel));
                     }
                     $this->flashMessenger()->addSuccessMessage(sprintf('Successful shot on field %s.', $displayCoordinates));
                 } else {
@@ -207,6 +209,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
         return $this->redirect()->toRoute('battleship/default', array(
             'controller' => 'index',
             'action' => 'play',
+            'cheat' => (int) $battleshipGameSession->cheat,
         ));
     }
 }

@@ -30,7 +30,7 @@
                 <tr>
                     <td><?php echo \Battleship\Repository\Game::$letters[$rowId]; ?></td>
                     <?php foreach ($row as $colId => $col) : ?>
-                    <td>
+                    <td class="<?php echo $col['vessel_sunk']; ?>">
                         <?php echo $this->partial('battleship/partials/field_plate_' . $col['field_plate_status'], array(
                             'col' => $col,
                             'colId' => $colId,
