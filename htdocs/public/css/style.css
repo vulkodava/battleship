@@ -98,3 +98,7 @@ table.game-info th {
 .fire-form input[type="submit"] {
     width: auto;
 }
+
+.sunk {
+    background-color: red;
+}
