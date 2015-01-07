@@ -423,8 +423,7 @@ class Game extends EntityRepository {
         $shotInfo['sunk_vessel'] = false;
         $shotInfo['hit_vessel'] = null;
         if (!is_null($fieldPlate->getGameVessel())) {
-            $vessel = $this->getEntityManager()->getRepository('Battleship\Entity\GameVessel')
-                ->find($fieldPlate->getGameVessel()->getId());
+            $vessel = $fieldPlate->getGameVessel();
 
             // Count Hit Parts.
             $qb = $this->getEntityManager()->createQueryBuilder();
