@@ -2,14 +2,11 @@
 namespace Battleship\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\Service\ConsoleViewManagerFactory;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 use Doctrine\ORM\Query\Expr;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\Console\Request as ConsoleRequest;
 use Zend\View\Renderer\PhpRenderer;
-use ZendTest\XmlRpc\Server\Exception;
 
 class IndexController extends AbstractActionController implements EventManagerAwareInterface
 {
@@ -21,40 +18,12 @@ class IndexController extends AbstractActionController implements EventManagerAw
         return new ViewModel();
     }
 
-    public function ajaxDoctrineAction()
-    {
-        $objectManager = $this
-            ->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-        $gameRepo = $objectManager->getRepository('Battleship\Entity\Game');
-        $gameRepo->setPlayerId();
-
-        $source = $objectManager->getRepository('Battleship\Entity\Game')->findAll();
-
-        $table = new \ZfTable\Example\TableExample\Doctrine();
-        $table->setAdapter($objectManager)
-            ->setSource($source)
-            ->setParamAdapter($this->getRequest()->getPost());
-
-        return $this->getResponse()->setContent($table->render());
-    }
-
-    public function ajaxBaseAction()
-    {
-        $objectManager = $this
-            ->getServiceLocator()
-            ->get('Doctrine\ORM\EntityManager');
-
-        $source = $objectManager->getRepository('Battleship\Entity\Game')->findAll();
-
-        $table = new \ZfTable\Example\TableExample\Base();
-        $table->setAdapter($objectManager)
-            ->setSource($source)
-            ->setParamAdapter($this->getRequest()->getPost())
-        ;
-        return $this->htmlResponse($table->render());
-    }
-
+    /**
+     * Create a new game Action
+     *
+     * @return \Zend\Http\Response
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public function newGameAction()
     {
         $battleshipGameSession = new Container('battleshipGameSession');
@@ -65,6 +34,12 @@ class IndexController extends AbstractActionController implements EventManagerAw
         ));
     }
 
+    /**
+     * Play Existing Game Action.
+     *
+     * @return ViewModel
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public function playAction()
     {
         $this->gameCommonLogic();
@@ -76,6 +51,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
             $cheat = true;
         }
 
+        // Generate the Web View.
         $view = new ViewModel();
         $view->setVariable('gameGrid', $this->gameGrid);
         $view->setVariable('game', $this->game);
@@ -89,10 +65,20 @@ class IndexController extends AbstractActionController implements EventManagerAw
         return $view;
     }
 
+    /**
+     * Console Application Main Action
+     *
+     * @return string
+     * @throws \Exception
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public function consoleAction()
     {
+        // Get Console App Request.
         $request = $this->getRequest();
         $gameId = $request->getParam('id', false);
+
+        // Determines whether this is a new game or an existing one.
         if ($gameId !== false) {
             $battleshipGameSession = new Container('battleshipGameSession');
             $battleshipGameSession->gameId = $gameId;
@@ -104,6 +90,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
             return $e->getMessage() . PHP_EOL;
         }
 
+        // Get Request Params.
         $coordinates = $request->getParam('coordinates', false);
         $cheat = $request->getParam('cheat', false);
 
@@ -113,6 +100,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
             $cheat = true;
         }
 
+        // In case of passed coordinates tries to fire a shot.
         if ($coordinates !== false) {
             try {
                 $params = \Battleship\Repository\Game::convertCoordinates($coordinates);
@@ -137,6 +125,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
             }
         }
 
+        // Prepare Console View.
         $basePath = realpath(__DIR__ . '/../../../view/battleship');
         $renderer = new PhpRenderer();
         $renderer->resolver()->addPath($basePath);
@@ -156,6 +145,11 @@ class IndexController extends AbstractActionController implements EventManagerAw
         return $textContent;
     }
 
+    /**
+     * Common controller logic for both - Web and Console Apps.
+     *
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     private function gameCommonLogic()
     {
         $objectManager = $this
@@ -169,6 +163,12 @@ class IndexController extends AbstractActionController implements EventManagerAw
         $this->gameGrid = $this->game->setupBoard();
     }
 
+    /**
+     * Web Fire Shot Application
+     *
+     * @return \Zend\Http\Response
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public function fireAction()
     {
         // Prepare to fire a Shot.
