@@ -12,6 +12,7 @@ use Battleship\Entity\Field;
 use Battleship\Entity\GameVessel;
 use Battleship\Entity\Player;
 use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
+use Zend\Form\Exception\InvalidElementException;
 use Zend\Session\Container;
 use Doctrine\ORM\Query\Expr;
 
@@ -31,6 +32,7 @@ class Game extends EntityRepository {
     private $shotInfo;
 
     public static $letters = array(
+        'skip-zero-index',
         'A',
         'B',
         'C',
@@ -155,9 +157,9 @@ class Game extends EntityRepository {
         $this->setField($field);
 
         // Create Field Plates.
-        for ($row = 0; $row < $this->gameConfig['x']; $row++) {
+        for ($row = 1; $row < ($this->gameConfig['x'] + 1); $row++) {
             $gameGrid[$row] = array();
-            for ($col = 0; $col < $this->gameConfig['y']; $col++) {
+            for ($col = 1; $col < ($this->gameConfig['y'] + 1); $col++) {
                 $fieldPlate = new \Battleship\Entity\FieldPlate();
                 $fieldPlate->setField($field);
                 $fieldPlate->setStatus(\Battleship\Entity\FieldPlate::STATUS_NEW);
@@ -220,8 +222,8 @@ class Game extends EntityRepository {
 
             if ($vesselDirection == 1) {
                 // Deploy horizontally.
-                for($rowNumber = 0; $rowNumber < $maxX; $rowNumber++) {
-                    for($colNumber = 0; $colNumber < $maxY; $colNumber++) {
+                for($rowNumber = 1; $rowNumber < ($maxX + 1); $rowNumber++) {
+                    for($colNumber = 1; $colNumber < ($maxY + 1); $colNumber++) {
                         if (
                             $colNumber >= $startX && $colNumber < ($startX + $vesselSize)
                             && $rowNumber == $startY
@@ -232,8 +234,8 @@ class Game extends EntityRepository {
                 }
             } else {
                 // Deploy vertically.
-                for($rowNumber = 0; $rowNumber < $maxX; $rowNumber++) {
-                    for($colNumber = 0; $colNumber < $maxY; $colNumber++) {
+                for($rowNumber = 1; $rowNumber < ($maxX + 1); $rowNumber++) {
+                    for($colNumber = 1; $colNumber < ($maxY + 1); $colNumber++) {
                         if (
                             $rowNumber >= $startY && $rowNumber < ($startY + $vesselSize)
                             && $colNumber == $startX
@@ -256,7 +258,7 @@ class Game extends EntityRepository {
      */
     private function generateFirstPosition($max, $vesselSize)
     {
-        $start = rand(0, ($max - 1));
+        $start = rand(1, $max);
         if ($start + $vesselSize > $max) {
             $start = $this->generateFirstPosition($max, $vesselSize);
         }
@@ -283,6 +285,9 @@ class Game extends EntityRepository {
             'coordinateY' => $colNumber,
             'field' => $field,
         ));
+        if (empty($fieldPlate)) {
+            throw new InvalidElementException('Invalid game field plate.', 105);
+        }
 
         $fieldPlate->setGameVessel($gameVessel);
         $this->getEntityManager()->persist($fieldPlate);
@@ -300,6 +305,10 @@ class Game extends EntityRepository {
     {
         $params['field'] = $this->getField();
         $fieldPlate = $this->getEntityManager()->getRepository('Battleship\Entity\FieldPlate')->findOneBy($params);
+
+        if (empty($fieldPlate)) {
+            throw new InvalidElementException('Invalid Filed Plate selected.', 104);
+        }
 
         $status = \Battleship\Entity\FieldPlate::STATUS_MISS;
         if (!is_null($fieldPlate->getGameVessel())) {
@@ -328,11 +337,11 @@ class Game extends EntityRepository {
      */
     public static function convertCoordinates($coordinatesIn)
     {
-        self::$letters;
         $x = substr($coordinatesIn, 0, 1);
         $y = substr($coordinatesIn, 1);
 
-        $x = array_search($x, self::$letters);
+        // Use letters as X Coordinate.
+        $x = array_search(strtoupper($x), self::$letters);
 
         return array('coordinateX' => $x, 'coordinateY' => $y);
     }

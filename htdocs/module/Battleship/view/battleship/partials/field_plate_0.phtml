@@ -1,5 +1,5 @@
 <?php
-$buttonTitle = \Battleship\Repository\Game::$letters[$this->rowId] . ($colId + 1);
+$buttonTitle = \Battleship\Repository\Game::$letters[$this->rowId] . $colId;
 
 if ($cheat === true) {
     $buttonTitle .= '<br />' . $this->col['content'];

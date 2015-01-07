@@ -15,13 +15,13 @@
 <div class="row">
     <div class="col-lg-6">
         <table border="1" class="game">
-        <?php $colHeaders = $gameGrid[0]; ?>
+        <?php $colHeaders = $gameGrid[1]; ?>
             <thead>
                 <tr>
                     <?php
                     echo '<th></th>';
                     foreach ($colHeaders as $colHeaderKey => $colHeaderVal) {
-                        echo '<th>' . ($colHeaderKey + 1) . '</th>';
+                        echo '<th>' . $colHeaderKey . '</th>';
                     }
                     ?>
                 </tr>
@@ -44,6 +44,7 @@
                 </tr>
             <?php endforeach; ?>
         </table>
+        <?php echo $this->partial('battleship/partials/fire_shot'); ?>
     </div>
 
     <?php echo $this->partial('battleship/partials/game_info'); ?>
