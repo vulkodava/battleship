@@ -1,0 +1,26 @@
+<div class="jumbotron">
+    <h1><?php echo sprintf($this->translate('Welcome to %sBattleship game%s'), '<span class="zf-green">', '</span>') ?></h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $this->translate('Battleship Results') ?></h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                <div id="tableContainer"></div>
+                <script>
+                    $("#tableContainer").zfTable('/battleship/index/ajaxDoctrine');
+                </script>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <a class="btn btn-success pull-right"
+           href="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'play')); ?>"><?php echo $this->translate('Play some Battleship') ?> &raquo;</a>
+    </div>
+</div>
