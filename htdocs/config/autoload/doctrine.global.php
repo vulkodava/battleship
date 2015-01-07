@@ -5,12 +5,12 @@ return array(
             'application_entities' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/Battleship/Entity')
+                'paths' => array(__DIR__ . '/../../module/Battleship/src/Battleship/Entity')
             ),
             'application_repositories' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/Battleship/Repository')
+                'paths' => array(__DIR__ . '/../../module/Battleship/src/Battleship/Repository')
             ),
             'orm_default' => array(
                 'drivers' => array(

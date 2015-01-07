@@ -93,3 +93,8 @@ table.game-info th {
     height: 20px;
     overflow: auto;
 }
+
+.fire-form input,
+.fire-form input[type="submit"] {
+    width: auto;
+}

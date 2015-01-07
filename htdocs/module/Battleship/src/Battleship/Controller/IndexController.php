@@ -109,7 +109,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
                 $this->game->fireShot($params);
                 $shotInfo = $this->game->getShotInfo();
                 $displayCoordinates =  \Battleship\Repository\Game::$letters[$params['coordinateX']];
-                $displayCoordinates .= ($params['coordinateY'] + 1);
+                $displayCoordinates .= $params['coordinateY'];
                 if ($shotInfo['hit'] === true) {
                     if ($shotInfo['sunk_vessel'] === true) {
                         $sunkVessel = $shotInfo['hit_vessel']->getVesselType()->getName();
@@ -189,7 +189,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
                 $game->fireShot($params);
                 $shotInfo = $game->getShotInfo();
                 $displayCoordinates =  \Battleship\Repository\Game::$letters[$params['coordinateX']];
-                $displayCoordinates .= ($params['coordinateY'] + 1);
+                $displayCoordinates .= $params['coordinateY'];
                 if ($shotInfo['hit'] === true) {
                     if ($shotInfo['sunk_vessel'] === true) {
                         $sunkVessel = $shotInfo['hit_vessel']->getVesselType()->getName();

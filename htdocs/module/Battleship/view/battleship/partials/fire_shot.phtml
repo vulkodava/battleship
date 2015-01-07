@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-6">
+    <form action="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'fire')); ?>" method="post" class="form-inline">
+    <fieldset class="fire-form">
+        <legend><?php echo $this->translate('Fire a Shot'); ?></legend>
+        <label for="field_coordinates"><?php echo $this->translate('Coordinates'); ?></label>
+        <input type="input" name="field_coordinates" id="field_coordinates" value="" class="form-control" autofocus />
+        <input type="submit" name="field" value="<?php echo $this->translate('Fire'); ?>" class="submit btn btn-md btn-success" />
+    </fieldset>
+</form>
+</div>
+</div>
