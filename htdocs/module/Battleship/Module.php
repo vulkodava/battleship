@@ -5,8 +5,16 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use ZendService\ReCaptcha\Exception;
 
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Console\Adapter\AdapterInterface as Console;
 
-class Module
+
+class Module implements
+    AutoloaderProviderInterface,
+    ConfigProviderInterface,
+    ConsoleUsageProviderInterface
 {
     public function onBootstrap(MvcEvent $event)
     {
@@ -28,6 +36,14 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
+        );
+    }
+
+    public function getConsoleUsage(Console $console)
+    {
+        return array(
+            // Describe available commands
+            'game (start|fire)' => 'Play the game.',
         );
     }
 }

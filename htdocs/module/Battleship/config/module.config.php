@@ -17,12 +17,12 @@ return array(
                     'default' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/[:controller[/:action]]',
+                            'route' => '/[:controller][/:action][/][:cheat]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
-                            'defaults' => array(),
+                            'defaults' => array('cheat' => 0),
                         ),
                     ),
                 ),
@@ -50,7 +50,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Battleship\Controller\Index' => 'Battleship\Controller\IndexController'
+            'Battleship\Controller\Index' => 'Battleship\Controller\IndexController',
         ),
     ),
     'view_manager' => array(
@@ -72,7 +72,28 @@ return array(
     // Placeholder for console routes
     'console' => array(
         'router' => array(
-            'routes' => array(),
+            'routes' => array(
+                'battleship' => array(
+                    'options' => array(
+                        'route' => 'game start',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Battleship\Controller',
+                            'controller' => 'Index',
+                            'action' => 'console',
+                        ),
+                    ),
+                ),
+                'battleship-fire' => array(
+                    'options' => array(
+                        'route' => 'game fire <id> <coordinates> <cheat>',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Battleship\Controller',
+                            'controller' => 'Index',
+                            'action' => 'console',
+                        ),
+                    ),
+                ),
+            )
         ),
     ),
     'doctrine' => array(

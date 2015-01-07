@@ -1,0 +1,34 @@
+<?php
+echo PHP_EOL;
+echo sprintf(
+    ('Game #%d played by %s #%d'),
+    $game->getGameEntity()->getId(),
+    $game->getGameEntity()->getPlayer()->getFirstName() . ' ' . $game->getGameEntity()->getPlayer()->getLastName(),
+    $game->getGameEntity()->getPlayer()->getId()
+);
+echo PHP_EOL;
+echo '---------------------------------------------------------------';
+echo PHP_EOL;
+$gameConfig = $game->getGameConfig();
+$colHeaders = $gameGrid[0];
+echo '  ';
+foreach ($colHeaders as $colHeaderKey => $colHeaderVal) {
+    echo '[' . ($colHeaderKey + 1) . '] ';
+}
+foreach ($gameGrid as $rowId => $row) {
+    echo PHP_EOL . \Battleship\Repository\Game::$letters[$rowId] . ' ';
+    foreach ($row as $colId => $col) {
+        echo $this->partial('partials/console/field_plate_' . $col['field_plate_status'], array(
+            'col' => $col,
+            'colId' => $colId,
+            'row' => $row,
+            'rowId' => $rowId,
+            'cheat' => $cheat,
+            'gameConfig' => $gameConfig,
+        )) . ' ';
+    }
+}
+
+echo PHP_EOL;
+echo '---------------------------------------------------------------';
+echo PHP_EOL;

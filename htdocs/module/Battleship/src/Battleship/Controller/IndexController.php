@@ -2,16 +2,19 @@
 namespace Battleship\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Service\ConsoleViewManagerFactory;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
-use ZendService\ReCaptcha\Exception; // We need this when using sessions
 use Doctrine\ORM\Query\Expr;
-use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManagerAwareInterface;
+use Zend\Console\Request as ConsoleRequest;
+use Zend\View\Renderer\PhpRenderer;
+use ZendTest\XmlRpc\Server\Exception;
 
 class IndexController extends AbstractActionController implements EventManagerAwareInterface
 {
-    private $gameVesselTypes = array();
+    private $game;
+    private $gameGrid;
 
     public function indexAction()
     {
@@ -64,98 +67,146 @@ class IndexController extends AbstractActionController implements EventManagerAw
 
     public function playAction()
     {
+        $this->gameCommonLogic();
+
+        $cheat = $this->params('cheat', false);
+        if ($cheat != 0 && $cheat != 1)  {
+            $cheat = false;
+        } else if ($cheat == 1) {
+            $cheat = true;
+        }
+
+        $view = new ViewModel();
+        $view->setVariable('gameGrid', $this->gameGrid);
+        $view->setVariable('game', $this->game);
+        $view->setVariable('gameVesselTypes', $this->game->getGameVesselTypes());
+        $view->setVariable('gameShots', $this->game->getGameEntity()->getMovesCnt());
+        $view->setVariable('gameVesselsInfo', $this->game->getGameVesselsInfo());
+        $view->setVariable('hits', $this->game->getHits());
+        $view->setVariable('missed', $this->game->getMissedShots());
+        $view->setVariable('cheat', $cheat);
+
+        return $view;
+    }
+
+    public function consoleAction()
+    {
+        $request = $this->getRequest();
+        $gameId = $request->getParam('id', false);
+        if ($gameId !== false) {
+            $battleshipGameSession = new Container('battleshipGameSession');
+            $battleshipGameSession->gameId = $gameId;
+        }
+
+        try {
+            $this->gameCommonLogic();
+        } catch (\Exception $e) {
+            return $e->getMessage() . PHP_EOL;
+        }
+
+        $coordinates = $request->getParam('coordinates', false);
+        $cheat = $request->getParam('cheat', false);
+
+        if ($cheat != 0 && $cheat != 1)  {
+            $cheat = false;
+        } else if ($cheat == 1) {
+            $cheat = true;
+        }
+
+        if ($coordinates !== false) {
+            try {
+                $params = \Battleship\Repository\Game::convertCoordinates($coordinates);
+                echo PHP_EOL;
+                // Try to actually fire the shot.
+                $this->game->fireShot($params);
+                $shotInfo = $this->game->getShotInfo();
+                $displayCoordinates =  \Battleship\Repository\Game::$letters[$params['coordinateX']];
+                $displayCoordinates .= ($params['coordinateY'] + 1);
+                if ($shotInfo['hit'] === true) {
+                    if ($shotInfo['sunk_vessel'] === true) {
+                        $sunkVessel = $shotInfo['hit_vessel']->getVesselType()->getName();
+                        $sunkVessel .= ' #' . $shotInfo['hit_vessel']->getId();
+                        echo sprintf('Vessel %s is sunk.', $sunkVessel) . PHP_EOL;
+                    }
+                    echo sprintf('Successful shot on field %s.', $displayCoordinates) . PHP_EOL;
+                } else {
+                    echo sprintf('Miss on field %s.', $displayCoordinates) . PHP_EOL;
+                }
+            } catch (\Exception $e) {
+                echo $e->getMessage() . PHP_EOL;
+            }
+        }
+
+        $basePath = realpath(__DIR__ . '/../../../view/battleship');
+        $renderer = new PhpRenderer();
+        $renderer->resolver()->addPath($basePath);
+
+        $view = new ViewModel();
+        $view->setTemplate('index/console.phtml');
+        $view->setVariable('gameGrid', $this->gameGrid);
+        $view->setVariable('game', $this->game);
+        $view->setVariable('gameVesselTypes', $this->game->getGameVesselTypes());
+        $view->setVariable('gameShots', $this->game->getGameEntity()->getMovesCnt());
+        $view->setVariable('gameVesselsInfo', $this->game->getGameVesselsInfo());
+        $view->setVariable('hits', $this->game->getHits());
+        $view->setVariable('missed', $this->game->getMissedShots());
+        $view->setVariable('cheat', $cheat);
+
+        $textContent = $renderer->render($view);
+        return $textContent;
+    }
+
+    private function gameCommonLogic()
+    {
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
-        $game = $objectManager->getRepository('Battleship\Entity\Game');
-        $game->startGame();
 
-        $view = new ViewModel();
+        $this->game = $objectManager->getRepository('Battleship\Entity\Game');
+        $this->game->startGame();
 
+        // Setup the Game Battle Field.
+        $this->gameGrid = $this->game->setupBoard();
+    }
+
+    public function fireAction()
+    {
+        // Prepare to fire a Shot.
         if ($this->getRequest()->isPost()) {
+            $objectManager = $this
+                ->getServiceLocator()
+                ->get('Doctrine\ORM\EntityManager');
+
+            /** @var \Battleship\Repository\Game $game */
+            $game = $objectManager->getRepository('Battleship\Entity\Game');
+            $game->startGame();
+
             $coordinates = $this->params()->fromPost('field_coordinates');
             $params = \Battleship\Repository\Game::convertCoordinates($coordinates);
 
             try {
+                // Try to actually fire the shot.
                 $game->fireShot($params);
+                $shotInfo = $game->getShotInfo();
+                $displayCoordinates =  \Battleship\Repository\Game::$letters[$params['coordinateX']];
+                $displayCoordinates .= ($params['coordinateY'] + 1);
+                if ($shotInfo['hit'] === true) {
+                    if ($shotInfo['sunk_vessel'] === true) {
+                        $sunkVessel = $shotInfo['hit_vessel']->getVesselType()->getName();
+                        $sunkVessel .= ' #' . $shotInfo['hit_vessel']->getId();
+                        $this->flashMessenger()->addSuccessMessage(sprintf('Vessel %s is sunk.', $sunkVessel));
+                    }
+                    $this->flashMessenger()->addSuccessMessage(sprintf('Successful shot on field %s.', $displayCoordinates));
+                } else {
+                    $this->flashMessenger()->addErrorMessage(sprintf('Miss on field %s.', $displayCoordinates));
+                }
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage($e->getMessage());
             }
-            return $this->redirect()->toRoute('battleship/default', array(
-                'controller' => 'index',
-                'action' => 'play',
-            ));
         }
-
-        $gameGrid = $game->setupBoard();
-
-        $qb = $objectManager->createQueryBuilder();
-        $qb->add('select', new Expr\Select(array('COUNT(field_plates.id)')));
-        $qb->add('from', new Expr\From('Battleship\Entity\FieldPlate', 'field_plates'));
-        $qb->add('where', $qb->expr()->andX(
-            $qb->expr()->eq('field_plates.field', '?0'),
-            $qb->expr()->eq('field_plates.status', '?1')
+        return $this->redirect()->toRoute('battleship/default', array(
+            'controller' => 'index',
+            'action' => 'play',
         ));
-        $qb->setParameters(array(
-            $game->getField()->getId(),
-            \Battleship\Entity\FieldPlate::STATUS_HIT,
-        ));
-        $hitsCount = $qb->getQuery()->getSingleScalarResult();
-
-        $qb->setParameters(array(
-            $game->getField()->getId(),
-            \Battleship\Entity\FieldPlate::STATUS_MISS,
-        ));
-        $missedCount = $qb->getQuery()->getSingleScalarResult();
-
-        $vessels = array();
-        $qb = $objectManager->createQueryBuilder();
-        $qb->add('select', new Expr\Select(array('COUNT(game_vessels.id)')));
-        $qb->add('from', new Expr\From('Battleship\Entity\GameVessel', 'game_vessels'));
-        $qb->add('where', $qb->expr()->andX(
-            $qb->expr()->eq('game_vessels.game', '?0'),
-            $qb->expr()->eq('game_vessels.vessel_type', '?1'),
-            $qb->expr()->eq('game_vessels.status', '?2')
-        ));
-
-        foreach ($this->gameVesselTypes as $vesselType) {
-            $qb->setParameters(array(
-                $game->getId(),
-                $vesselType->getId(),
-                \Battleship\Entity\GameVessel::STATUS_INTACT,
-            ));
-            $intactCount = $qb->getQuery()->getSingleScalarResult();
-
-            $qb->setParameters(array(
-                $game->getId(),
-                $vesselType->getId(),
-                \Battleship\Entity\GameVessel::STATUS_HIT,
-            ));
-            $hitCount = $qb->getQuery()->getSingleScalarResult();
-
-            $qb->setParameters(array(
-                $game->getId(),
-                $vesselType->getId(),
-                \Battleship\Entity\GameVessel::STATUS_SUNK,
-            ));
-            $sunkCount = $qb->getQuery()->getSingleScalarResult();
-
-            $vessels[$vesselType->getId()] = array(
-                'intactCnt' => $intactCount,
-                'hitCnt' => $hitCount,
-                'sunkCnt' => $sunkCount,
-            );
-        }
-
-
-        $view->setVariable('gameGrid', $gameGrid);
-        $view->setVariable('gameId', $game->getGameEntity()->getId());
-        $view->setVariable('gameVesselTypes', $game->getGameVesselTypes());
-        $view->setVariable('gameShots', $game->getGameEntity()->getMovesCnt());
-        $view->setVariable('hits', $hitsCount);
-        $view->setVariable('missed', $missedCount);
-        $view->setVariable('vessels', $vessels);
-
-        return $view;
     }
 }

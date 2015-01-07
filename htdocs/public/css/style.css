@@ -72,3 +72,24 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+table.game tbody tr,
+table.game-info tbody tr {
+    height: 25px;
+}
+
+table.game td,
+table.game th,
+table.game-info td,
+table.game-info th {
+    width: 50px;
+    text-align: center;
+}
+
+.flash-messages {
+    height: 50px;
+}
+.flash-messages .alert ul {
+    height: 20px;
+    overflow: auto;
+}
