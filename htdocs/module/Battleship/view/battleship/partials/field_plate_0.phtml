@@ -1,0 +1,12 @@
+<?php
+$buttonTitle = \Battleship\Repository\Game::$letters[$this->rowId] . ($colId + 1);
+
+if ($cheat === true) {
+    $buttonTitle .= '<br />' . $this->col['content'];
+    if (trim($col['content']) != 'empty') {
+        $buttonTitle .= ' #' . $this->col['vessel_id'];
+    }
+}
+?>
+<input type="hidden" name="field_coordinates" value="<?php echo \Battleship\Repository\Game::$letters[$this->rowId] . $this->colId; ?>" readonly="readonly" />
+<input type="submit" name="field" value="<?php echo $gameConfig['no_shot_sign']; ?>" class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="<?php echo $buttonTitle; ?>" />

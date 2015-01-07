@@ -1,0 +1,48 @@
+<div class="col-lg-6">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><?php echo $this->translate('Game Info'); ?></div>
+        <div class="panel-body">
+            <table class="table-bordered game-info" width="100%">
+                <thead>
+                <tr class="text-primary">
+                    <th><?php echo $this->translate('Vessel Types'); ?></th>
+                    <th><?php echo $this->translate('Vessels Count'); ?></th>
+                    <th><?php echo $this->translate('Intact Vessels Count'); ?></th>
+                    <th><?php echo $this->translate('Hit Vessels Count'); ?></th>
+                    <th><?php echo $this->translate('Sunk Vessels Count'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($gameVesselTypes as $gameVesselType) : ?>
+                    <tr>
+                        <td><?php echo $gameVesselType->getName(); ?></td>
+                        <td><?php echo $gameVesselType->getVesselsCount(); ?></td>
+                        <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['intactCnt']; ?></td>
+                        <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['hitCnt']; ?></td>
+                        <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['sunkCnt']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <hr />
+
+            <table class="table-bordered game-info" width="100%">
+                <thead>
+                <tr class="text-primary">
+                    <th><?php echo $this->translate('Game Shots'); ?></th>
+                    <th><?php echo $this->translate('Hits'); ?></th>
+                    <th><?php echo $this->translate('Missed'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo $gameShots; ?></td>
+                    <td><?php echo $hits; ?></td>
+                    <td><?php echo $missed; ?></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

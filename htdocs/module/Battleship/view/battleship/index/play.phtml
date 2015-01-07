@@ -1,15 +1,3 @@
-<style>
-    table tbody tr {
-        height: 25px;
-    }
-
-    table td,
-    table th {
-        width: 50px;
-        text-align: center;
-    }
-</style>
-
 <div class="row">
     <div class="col-lg-12">
         <h1>
@@ -23,9 +11,10 @@
     </div>
 </div>
 
+<?php $gameConfig = $game->getGameConfig(); ?>
 <div class="row">
     <div class="col-lg-6">
-        <table border="1">
+        <table border="1" class="game">
         <?php $colHeaders = $gameGrid[0]; ?>
             <thead>
                 <tr>
@@ -37,96 +26,27 @@
                     ?>
                 </tr>
             </thead>
-        <?php
-
-        $gameConfig = $game->getGameConfig();
-        foreach ($gameGrid as $rowId => $row) {
-            echo '<tr><td>' . \Battleship\Repository\Game::$letters[$rowId] . '</td>';
-            foreach ($row as $colId => $col) {
-                echo '<td><form action="" method="post">';
-
-                if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_NEW) {
-                    $buttonTitle = \Battleship\Repository\Game::$letters[$rowId] . ($colId + 1);
-
-                    if ($cheat === true) {
-                        $buttonTitle .= '<br />' . $col['content'];
-                        if (trim($col['content']) != 'empty') {
-                            $buttonTitle .= ' #' . $col['vessel_id'];
-                        }
-                    }
-                    echo '<input type="hidden" name="field_coordinates" value="' . \Battleship\Repository\Game::$letters[$rowId] . $colId . '" readonly="readonly" />';
-                    echo '<input type="submit" name="field" value="' . $gameConfig['no_shot_sign'] . '" class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="' . $buttonTitle . '" />';
-                } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_HIT) {
-                    echo '<span class="label label-success">' . $gameConfig['hit_sign'] . '</span>';
-                } else if ($col['field_plate_status'] == \Battleship\Entity\FieldPlate::STATUS_MISS) {
-                    echo '<span class="label label-danger">' . $gameConfig['miss_sign'] . '</span>';
-                }
-
-                echo '</form></td>';
-            }
-            echo '</tr>';
-        }
-        ?>
+            <?php foreach ($gameGrid as $rowId => $row) : ?>
+                <tr>
+                    <td><?php echo \Battleship\Repository\Game::$letters[$rowId]; ?></td>
+                    <?php foreach ($row as $colId => $col) : ?>
+                    <td>
+                        <form action="" method="post">
+                            <?php echo $this->partial('battleship/partials/field_plate_' . $col['field_plate_status'], array(
+                                'col' => $col,
+                                'colId' => $colId,
+                                'row' => $row,
+                                'rowId' => $rowId,
+                                'cheat' => $cheat,
+                                'gameConfig' => $gameConfig,
+                            )); ?>
+                        </form>
+                    </td>
+                    <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
         </table>
     </div>
 
-    <div class="col-lg-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading"><?php echo $this->translate('Game Info'); ?></div>
-            <div class="panel-body">
-                <table class="table-bordered" width="100%">
-                    <thead>
-                    <tr class="text-primary">
-                        <th><?php echo $this->translate('Vessel Types'); ?></th>
-                        <th><?php echo $this->translate('Vessels Count'); ?></th>
-                        <th><?php echo $this->translate('Intact Vessels Count'); ?></th>
-                        <th><?php echo $this->translate('Hit Vessels Count'); ?></th>
-                        <th><?php echo $this->translate('Sunk Vessels Count'); ?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($gameVesselTypes as $gameVesselType) : ?>
-                        <tr>
-                            <td><?php echo $gameVesselType->getName(); ?></td>
-                            <td><?php echo $gameVesselType->getVesselsCount(); ?></td>
-                            <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['intactCnt']; ?></td>
-                            <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['hitCnt']; ?></td>
-                            <td><?php echo $gameVesselsInfo[$gameVesselType->getId()]['sunkCnt']; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-
-                <hr />
-
-                <table class="table-bordered" width="100%">
-                    <thead>
-                    <tr class="text-primary">
-                        <th><?php echo $this->translate('Game Shots'); ?></th>
-                        <th><?php echo $this->translate('Hits'); ?></th>
-                        <th><?php echo $this->translate('Missed'); ?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><?php echo $gameShots; ?></td>
-                        <td><?php echo $hits; ?></td>
-                        <td><?php echo $missed; ?></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    <?php echo $this->partial('battleship/partials/game_info'); ?>
 </div>
-
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        jQuery('.submit').click(function () {
-            jQuery(this).attr('disabled', 'disabled').val('...');
-        });
-
-        jQuery('[data-toggle="tooltip"]').tooltip({html: true});
-        jQuery('.collapse').collapse();
-    });
-</script>
