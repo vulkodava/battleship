@@ -17,6 +17,11 @@ recruitment - Battleships.
             - Setting up the database in order to accept v2 feature of user login, user statistics, game statistics,
               administration of the game configuration.
             - Setting up the code in a way that will provide easy way of adding user functionality.
+        - Creating of Install script that setups the initial minimal needed configuration:
+            - Creates the database;
+            - Inserts records for field size, shot sings.
+            - Inserts records for vessel types.
+            - Installs needed vendor code.
 
     v2 implementation of more sophisticated features like:
         - User login.
