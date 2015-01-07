@@ -9,7 +9,6 @@ $dbParams = array(
 );
 
 return array(
-    'db' => $dbParams,
     'service_manager' => array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter' => function ($sm) use ($dbParams) {
