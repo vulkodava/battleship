@@ -50,7 +50,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Battleship\Controller\Index' => 'Battleship\Controller\IndexController'
+            'Battleship\Controller\Index' => 'Battleship\Controller\IndexController',
         ),
     ),
     'view_manager' => array(
@@ -72,7 +72,28 @@ return array(
     // Placeholder for console routes
     'console' => array(
         'router' => array(
-            'routes' => array(),
+            'routes' => array(
+                'battleship' => array(
+                    'options' => array(
+                        'route' => 'game start',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Battleship\Controller',
+                            'controller' => 'Index',
+                            'action' => 'console',
+                        ),
+                    ),
+                ),
+                'battleship-fire' => array(
+                    'options' => array(
+                        'route' => 'game fire <id> <coordinates> <cheat>',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Battleship\Controller',
+                            'controller' => 'Index',
+                            'action' => 'console',
+                        ),
+                    ),
+                ),
+            )
         ),
     ),
     'doctrine' => array(

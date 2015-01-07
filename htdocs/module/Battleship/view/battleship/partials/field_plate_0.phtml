@@ -8,5 +8,8 @@ if ($cheat === true) {
     }
 }
 ?>
-<input type="hidden" name="field_coordinates" value="<?php echo \Battleship\Repository\Game::$letters[$this->rowId] . $this->colId; ?>" readonly="readonly" />
-<input type="submit" name="field" value="<?php echo $gameConfig['no_shot_sign']; ?>" class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="<?php echo $buttonTitle; ?>" />
+
+<form action="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'fire')); ?>" method="post">
+    <input type="hidden" name="field_coordinates" value="<?php echo \Battleship\Repository\Game::$letters[$this->rowId] . $this->colId; ?>" readonly="readonly" />
+    <input type="submit" name="field" value="<?php echo $gameConfig['no_shot_sign']; ?>" class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="<?php echo $buttonTitle; ?>" />
+</form>

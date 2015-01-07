@@ -76,7 +76,7 @@ class Game extends EntityRepository {
                 $this->setGameEntity($game);
                 $this->setField($game->getField());
             } else {
-                throw new InvalidArgumentException('No Game Id.', 102);
+                throw new InvalidArgumentException('No or Invalid Game Id.', 102);
             }
         } else {
             $this->createGame();

@@ -2,10 +2,9 @@
 /**
  * Display errors setup.
  */
-if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+if (php_sapi_name() != 'cli' && $_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
     ini_set('display_errors', 1);
 }
-
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.

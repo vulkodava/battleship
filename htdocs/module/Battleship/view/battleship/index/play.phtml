@@ -31,16 +31,14 @@
                     <td><?php echo \Battleship\Repository\Game::$letters[$rowId]; ?></td>
                     <?php foreach ($row as $colId => $col) : ?>
                     <td>
-                        <form action="" method="post">
-                            <?php echo $this->partial('battleship/partials/field_plate_' . $col['field_plate_status'], array(
-                                'col' => $col,
-                                'colId' => $colId,
-                                'row' => $row,
-                                'rowId' => $rowId,
-                                'cheat' => $cheat,
-                                'gameConfig' => $gameConfig,
-                            )); ?>
-                        </form>
+                        <?php echo $this->partial('battleship/partials/field_plate_' . $col['field_plate_status'], array(
+                            'col' => $col,
+                            'colId' => $colId,
+                            'row' => $row,
+                            'rowId' => $rowId,
+                            'cheat' => $cheat,
+                            'gameConfig' => $gameConfig,
+                        )); ?>
                     </td>
                     <?php endforeach; ?>
                 </tr>
