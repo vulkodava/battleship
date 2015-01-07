@@ -7,6 +7,7 @@ return array(
         'Application',
         'Battleship',
         'ZendDeveloperTools',
+        'BjyProfiler',
 //        'ZfTable',
 //        'ZfSnapPhpDebugBar'
     ),
