@@ -52,6 +52,11 @@ class Game extends EntityRepository {
         'T',
     );
 
+    /**
+     * Starts a game.
+     *
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public function startGame() {
         $this->setBattleshipGameSession(new Container('battleshipGameSession'));
         $config = $this->getEntityManager()->getRepository('Battleship\Entity\GameConfig')->findAll();
@@ -85,6 +90,11 @@ class Game extends EntityRepository {
         $this->loadVesselsInfo();
     }
 
+    /**
+     * Creates a new game.
+     *
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     private function createGame() {
         $this->createGameField();
 
@@ -128,6 +138,11 @@ class Game extends EntityRepository {
         $this->setGameEntity($game);
     }
 
+    /**
+     * Creates a new Battlefield.
+     *
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     private function createGameField()
     {
         $field = new Field();
@@ -154,6 +169,12 @@ class Game extends EntityRepository {
         }
     }
 
+    /**
+     * Setups a game board.
+     *
+     * @return array
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public function setupBoard()
     {
         $field = $this->getField();
@@ -181,6 +202,14 @@ class Game extends EntityRepository {
         return $gameGrid;
     }
 
+    /**
+     * Deploys the battleships on the game battle field.
+     *
+     * @param array $gameVessels
+     * @param $maxX
+     * @param $maxY
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     private function deployShips(array $gameVessels, $maxX, $maxY)
     {
         foreach ($gameVessels as $gameVessel) {
@@ -217,6 +246,14 @@ class Game extends EntityRepository {
         }
     }
 
+    /**
+     * Recursively determines the first position of every battleship.
+     *
+     * @param $max
+     * @param $vesselSize
+     * @return int
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     private function generateFirstPosition($max, $vesselSize)
     {
         $start = rand(0, ($max - 1));
@@ -226,6 +263,14 @@ class Game extends EntityRepository {
         return $start;
     }
 
+    /**
+     * Adds a new Game Vessel on the Field Plate.
+     *
+     * @param $gameVessel
+     * @param $rowNumber
+     * @param $colNumber
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     private function addVessel($gameVessel, $rowNumber, $colNumber)
     {
         $field = $this->getField();
@@ -244,6 +289,13 @@ class Game extends EntityRepository {
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * Base Fire Shot method used by all apps.
+     *
+     * @param $params
+     * @return bool
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public function fireShot($params)
     {
         $params['field'] = $this->getField();
@@ -267,6 +319,13 @@ class Game extends EntityRepository {
         return true;
     }
 
+    /**
+     * Converts given coordinates.
+     *
+     * @param $coordinatesIn
+     * @return array
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public static function convertCoordinates($coordinatesIn)
     {
         self::$letters;
@@ -278,6 +337,11 @@ class Game extends EntityRepository {
         return array('coordinateX' => $x, 'coordinateY' => $y);
     }
 
+    /**
+     * Loads Game Vessels Info.
+     *
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     private function loadVesselsInfo()
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
@@ -343,6 +407,12 @@ class Game extends EntityRepository {
         $this->setGameVesselsInfo($vessels);
     }
 
+    /**
+     * Checks and marks vessels as hit or sunk on fire if they stand on the given field plate.
+     *
+     * @param $fieldPlate
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     public function checkVessel($fieldPlate)
     {
         if (empty($fieldPlate)) {
@@ -389,6 +459,8 @@ class Game extends EntityRepository {
 
         $this->setShotInfo($shotInfo);
     }
+
+    /**********************Repository's Getters and Setters***********************/
 
     /**
      * @return mixed
