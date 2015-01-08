@@ -28,3 +28,5 @@ recruitment - Battleships.
         - User games statistics.
         - Game statistics.
         - Administration of the game configuration like battle field size, vessels types, vessels sizes, vessels count.
+
+    v3 implementation of Unit Tests.
