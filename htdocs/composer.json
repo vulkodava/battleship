@@ -36,7 +36,8 @@
     "symfony/event-dispatcher": "dev-master",
     "symfony/process": "2.7.x-dev",
     "doctrine/migrations": "dev-master",
-    "phpunit/phpunit": "3.7.*"
+    "phpunit/phpunit": "3.7.*",
+    "skpd/profiler-toolbar": "dev-master"
   },
   "require-dev": {
     "zendframework/zend-debug": "dev-master",

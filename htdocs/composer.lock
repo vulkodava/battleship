@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b893cee8a718a80a98afec3f2b832179",
+    "hash": "c99b5c1c569b37aa005b3513400b7afd",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1685,18 +1685,69 @@
             "time": "2014-09-17 04:18:07"
         },
         {
+            "name": "skpd/profiler-toolbar",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Skpd/profiler-toolbar.git",
+                "reference": "3c5ea4106e876fc5bf1aa0ef80cb246f06ff66fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Skpd/profiler-toolbar/zipball/3c5ea4106e876fc5bf1aa0ef80cb246f06ff66fe",
+                "reference": "3c5ea4106e876fc5bf1aa0ef80cb246f06ff66fe",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xhprof": ">=0.9.2",
+                "php": ">=5.4.0",
+                "zendframework/zend-developer-tools": ">=0.0.2",
+                "zendframework/zendframework": ">=2.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Skpd\\ProfilerToolbar\\": "src/"
+                },
+                "classmap": [
+                    "Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Shabanov",
+                    "email": "dm.skpd@gmail.com"
+                }
+            ],
+            "description": "Profiler toolbar for Zend Developer Tools",
+            "homepage": "https://github.com/Skpd/profiler-toolbar",
+            "keywords": [
+                "Zend Developer Tools",
+                "ZendDeveloperTools",
+                "profiler",
+                "toolbar",
+                "zend framework 2",
+                "zendframework2"
+            ],
+            "time": "2014-03-26 07:08:55"
+        },
+        {
             "name": "symfony/console",
             "version": "2.7.x-dev",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "6c4666e729ae5537eabc7659b9a8a9ea1fc98af9"
+                "reference": "273b8fe99910b6864a863ed6a397938f39847cb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/6c4666e729ae5537eabc7659b9a8a9ea1fc98af9",
-                "reference": "6c4666e729ae5537eabc7659b9a8a9ea1fc98af9",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/273b8fe99910b6864a863ed6a397938f39847cb3",
+                "reference": "273b8fe99910b6864a863ed6a397938f39847cb3",
                 "shasum": ""
             },
             "require": {
@@ -1739,7 +1790,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 20:51:33"
+            "time": "2015-01-06 17:50:09"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1748,12 +1799,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "008a8f34bacbde8834ae8353f0ff20eb671e5a0e"
+                "reference": "e3f882263c84de70fe2ca726a2971fe45c65135e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/008a8f34bacbde8834ae8353f0ff20eb671e5a0e",
-                "reference": "008a8f34bacbde8834ae8353f0ff20eb671e5a0e",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/e3f882263c84de70fe2ca726a2971fe45c65135e",
+                "reference": "e3f882263c84de70fe2ca726a2971fe45c65135e",
                 "shasum": ""
             },
             "require": {
@@ -1797,7 +1848,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 14:34:32"
+            "time": "2015-01-06 10:39:25"
         },
         {
             "name": "symfony/process",
@@ -1806,12 +1857,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "d889cf9c7fc4a408b2b3baebab8d1abc758e6e58"
+                "reference": "0180c01f9a0d4ce8fc0f3c89860345965a2a7e17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/d889cf9c7fc4a408b2b3baebab8d1abc758e6e58",
-                "reference": "d889cf9c7fc4a408b2b3baebab8d1abc758e6e58",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/0180c01f9a0d4ce8fc0f3c89860345965a2a7e17",
+                "reference": "0180c01f9a0d4ce8fc0f3c89860345965a2a7e17",
                 "shasum": ""
             },
             "require": {
@@ -1844,7 +1895,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 21:00:14"
+            "time": "2015-01-07 15:58:19"
         },
         {
             "name": "symfony/yaml",
@@ -1853,12 +1904,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "44d09645715d04db154d8a875610bab1e486f931"
+                "reference": "f0f4dba6acb03d0756fb75e0c8a5829deab17b36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/44d09645715d04db154d8a875610bab1e486f931",
-                "reference": "44d09645715d04db154d8a875610bab1e486f931",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/f0f4dba6acb03d0756fb75e0c8a5829deab17b36",
+                "reference": "f0f4dba6acb03d0756fb75e0c8a5829deab17b36",
                 "shasum": ""
             },
             "require": {
@@ -1891,7 +1942,71 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 15:56:00"
+            "time": "2015-01-06 10:39:25"
+        },
+        {
+            "name": "zendframework/zend-developer-tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZendDeveloperTools.git",
+                "reference": "23fbb79b72e9d6a7090158f47f462faeb512733d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zend-developer-tools-23fbb79b72e9d6a7090158f47f462faeb512733d-zip-267b74.zip",
+                "reference": "dev-master",
+                "shasum": "51adc76de1f377d9df0b1d3f0dc20a58e4364e8b"
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-debug": "2.*",
+                "zendframework/zend-eventmanager": "2.*",
+                "zendframework/zend-mvc": "2.*",
+                "zendframework/zend-servicemanager": "2.*",
+                "zendframework/zend-stdlib": "2.*",
+                "zendframework/zend-version": "2.*"
+            },
+            "suggest": {
+                "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
+                "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application."
+            },
+            "type": "zf-module",
+            "autoload": {
+                "psr-0": {
+                    "ZendDeveloperTools": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evan Coury",
+                    "email": "me@evancoury.com",
+                    "homepage": "http://blog.evan.pro/"
+                },
+                {
+                    "name": "Eric Boh",
+                    "email": "cossish@gmail.com"
+                }
+            ],
+            "description": "Module for developer and debug tools for working with the ZF2 MVC layer.",
+            "homepage": "https://github.com/zendframework/ZendDeveloperTools",
+            "keywords": [
+                "debug",
+                "developer",
+                "module",
+                "zf2"
+            ],
+            "support": {
+                "source": "https://github.com/zendframework/ZendDeveloperTools/tree/master",
+                "issues": "https://github.com/zendframework/ZendDeveloperTools/issues"
+            },
+            "time": "2014-12-21 18:23:56"
         },
         {
             "name": "zendframework/zendframework",
@@ -1899,13 +2014,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "19b8cbafe83b5d86663ed9311809d6fdafa842e4"
+                "reference": "a98e78975c6963862e77621e3f7611d3d29ed290"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zendframework-19b8cbafe83b5d86663ed9311809d6fdafa842e4-zip-7fa577.zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zendframework-a98e78975c6963862e77621e3f7611d3d29ed290-zip-00c8c2.zip",
                 "reference": "dev-master",
-                "shasum": "e75f18caeae6e625fb003694f8f5ed61f92be7a2"
+                "shasum": "c7203c949b4ec41f8ce8f40007718f64d13c60e5"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2012,7 +2127,7 @@
                 "source": "https://github.com/zendframework/zf2/tree/master",
                 "issues": "https://github.com/zendframework/zf2/issues"
             },
-            "time": "2015-01-03 17:33:58"
+            "time": "2015-01-08 02:56:59"
         },
         {
             "name": "zendframework/zendpdf",
@@ -2632,70 +2747,6 @@
                 "dump"
             ],
             "time": "2015-01-03 08:02:46"
-        },
-        {
-            "name": "zendframework/zend-developer-tools",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "23fbb79b72e9d6a7090158f47f462faeb512733d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-developer-tools-23fbb79b72e9d6a7090158f47f462faeb512733d-zip-267b74.zip",
-                "reference": "dev-master",
-                "shasum": "51adc76de1f377d9df0b1d3f0dc20a58e4364e8b"
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "zendframework/zend-debug": "2.*",
-                "zendframework/zend-eventmanager": "2.*",
-                "zendframework/zend-mvc": "2.*",
-                "zendframework/zend-servicemanager": "2.*",
-                "zendframework/zend-stdlib": "2.*",
-                "zendframework/zend-version": "2.*"
-            },
-            "suggest": {
-                "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
-                "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application."
-            },
-            "type": "zf-module",
-            "autoload": {
-                "psr-0": {
-                    "ZendDeveloperTools": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Evan Coury",
-                    "email": "me@evancoury.com",
-                    "homepage": "http://blog.evan.pro/"
-                },
-                {
-                    "name": "Eric Boh",
-                    "email": "cossish@gmail.com"
-                }
-            ],
-            "description": "Module for developer and debug tools for working with the ZF2 MVC layer.",
-            "homepage": "https://github.com/zendframework/ZendDeveloperTools",
-            "keywords": [
-                "debug",
-                "developer",
-                "module",
-                "zf2"
-            ],
-            "support": {
-                "source": "https://github.com/zendframework/ZendDeveloperTools/tree/master",
-                "issues": "https://github.com/zendframework/ZendDeveloperTools/issues"
-            },
-            "time": "2014-12-21 18:23:56"
         }
     ],
     "aliases": [],
@@ -2713,6 +2764,7 @@
         "symfony/event-dispatcher": 20,
         "symfony/process": 20,
         "doctrine/migrations": 20,
+        "skpd/profiler-toolbar": 20,
         "zendframework/zend-debug": 20,
         "snapshotpl/zf-snap-php-debug-bar": 20,
         "zendframework/zend-developer-tools": 20

@@ -9,9 +9,10 @@ $modules = array(
     'Battleship',
 );
 
-if ($env == 'development') {
+if ($env == 'local' ) {
     $modules[] = 'ZendDeveloperTools';
     $modules[] = 'BjyProfiler';
+    $modules[] = 'Skpd\ProfilerToolbar';
 //    $modules[] = 'ZfTable';
 //    $modules[] = 'ZfSnapPhpDebugBar';
 }
