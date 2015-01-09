@@ -319,6 +319,10 @@ class Game extends EntityRepository {
             throw new InvalidElementException('Invalid Filed Plate selected.', 104);
         }
 
+        if ($fieldPlate->getStatus() != \Battleship\Entity\FieldPlate::STATUS_NEW) {
+            throw new InvalidElementException('This field has been already fired upon.', 106);
+        }
+
         $status = \Battleship\Entity\FieldPlate::STATUS_MISS;
         if (!is_null($fieldPlate->getGameVessel())) {
             $status = \Battleship\Entity\FieldPlate::STATUS_HIT;
