@@ -196,7 +196,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
                     if ($shotInfo['sunk_vessel'] === true) {
                         $sunkVessel = $shotInfo['hit_vessel']->getVesselType()->getName();
                         $sunkVessel .= ' #' . $shotInfo['hit_vessel']->getId();
-                        $this->flashMessenger()->addSuccessMessage(sprintf('<span class="glyphicon glyphicon-ok"></span> Vessel %s is sunk.', $sunkVessel));
+                        $this->flashMessenger()->addSuccessMessage(sprintf('Vessel %s is sunk.', $sunkVessel));
                     }
                     $this->flashMessenger()->addSuccessMessage(sprintf('Successful shot on field %s.', $displayCoordinates));
                 } else {

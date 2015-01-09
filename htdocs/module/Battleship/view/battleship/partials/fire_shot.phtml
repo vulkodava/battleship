@@ -1,4 +1,5 @@
 <br />
+<?php echo $this->partial('partials/messages'); ?>
 <form action="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'fire')); ?>" method="post" class="form-inline">
     <fieldset class="fire-form">
         <legend><?php echo $this->translate('Fire a Shot'); ?></legend>
