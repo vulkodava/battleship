@@ -1,14 +1,13 @@
 <br />
-<?php echo $this->partial('partials/messages'); ?>
 <form action="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'fire')); ?>" method="post" class="form-inline">
     <fieldset class="fire-form">
         <legend><?php echo $this->translate('Fire a Shot'); ?></legend>
         <div class="row">
-            <div class="col-lg-6 col-xs-8">
+            <div class="col-lg-4 col-xs-8">
                 <label for="field_coordinates"><?php echo $this->translate('Coordinates'); ?></label>
                 <input type="input" name="field_coordinates" id="field_coordinates" value="" class="form-control" autofocus />
             </div>
-            <div class="col-lg-6 col-xs-4">
+            <div class="col-lg-8 col-xs-4">
                 <label class="control-label">&nbsp;</label>
                 <input type="submit" name="field" value="<?php echo $this->translate('Fire'); ?>" class="submit btn btn-md btn-success" />
             </div>

@@ -22,7 +22,7 @@ recruitment - Battleships.
             - Inserts records for field size, shot sings.
             - Inserts records for vessel types.
             - Installs needed vendor code.
-	- AJAXify the web and mobile apps. (TBD)
+        - AJAX-ify the web and mobile apps. (TBD)
 
     v2 implementation of more sophisticated features like:
         - User login.
