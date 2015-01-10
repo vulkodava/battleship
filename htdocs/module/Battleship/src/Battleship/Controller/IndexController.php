@@ -7,6 +7,7 @@ use Zend\Session\Container;
 use Doctrine\ORM\Query\Expr;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\View\Renderer\PhpRenderer;
+use ZendService\ReCaptcha\Exception;
 
 class IndexController extends AbstractActionController implements EventManagerAwareInterface
 {
@@ -33,6 +34,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
     public function newGameAction()
     {
         unset($this->battleshipGameSession->gameId);
+        unset($this->battleshipGameSession->cheat);
         return $this->redirect()->toRoute('battleship/default', array(
             'controller' => 'index',
             'action' => 'play',
@@ -47,7 +49,13 @@ class IndexController extends AbstractActionController implements EventManagerAw
      */
     public function playAction()
     {
-        $this->gameCommonLogic();
+        try {
+            $this->gameCommonLogic();
+        } catch (Exception $e) {
+            $this->flashMessenger()->addErrorMessage($e->getMessage());
+            return $this->redirect()->toRoute('home');
+        }
+
         $cheat = $this->params('cheat', false);
         if ($cheat != 0 && $cheat != 1)  {
             $cheat = false;

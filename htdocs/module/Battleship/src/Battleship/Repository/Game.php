@@ -24,7 +24,7 @@ use ZendService\ReCaptcha\Exception;
 class Game extends EntityRepository {
     const VESSEL_POSITION_VERTICALLY = 0;
     const VESSEL_POSITION_HORIZONTALLY = 1;
-    const DEPLOYMENT_TRIES_THRESHOLD = 100;
+    const DEPLOYMENT_TRIES_THRESHOLD = 10000;
 
     private $vesselsDeployCounter = 0;
     private $gameEntity;
@@ -210,10 +210,10 @@ class Game extends EntityRepository {
             }
 
             $fieldClass = array();
-            if ($cheat) {
-                $fieldClass[] = 'cheat';
-            }
             if (!is_null($fieldPlate->getGameVessel())) {
+                if ($cheat) {
+                    $fieldClass[] = 'cheat';
+                }
                 $vesselStatus = $fieldPlate->getGameVessel()->getStatus();
                 if ($vesselStatus == \Battleship\Entity\GameVessel::STATUS_SUNK) {
                     $fieldClass[] = 'sunk';
@@ -250,7 +250,7 @@ class Game extends EntityRepository {
     {
         // Prevent infinite loops.
         if ($this->vesselsDeployCounter > self::DEPLOYMENT_TRIES_THRESHOLD) {
-            throw new Exception('Too many tries to deploy ships. Please, try again.', 108);
+            throw new Exception(sprintf('Too many tries to deploy ships. More than %d. Please, try again.', $this->vesselsDeployCounter), 108);
         }
 
         $this->vesselsDeployCounter++;

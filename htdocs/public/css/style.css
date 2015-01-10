@@ -107,3 +107,7 @@ table.game-info th {
     width: 91px;
     display: inline;
 }
+
+.cheat {
+    border: solid 5px #d9cd0f;
+}
