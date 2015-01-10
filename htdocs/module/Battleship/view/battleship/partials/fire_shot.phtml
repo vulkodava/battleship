@@ -1,5 +1,11 @@
+<?php
+$formActionParams = array('controller' => 'index', 'action' => 'fire');
+if ($cheat === true) {
+    $formActionParams['cheat'] = 1;
+}
+?>
 <br />
-<form action="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'fire')); ?>" method="post" class="form-inline">
+<form action="<?php echo $this->url('battleship/default', $formActionParams); ?>" method="post" class="form-inline">
     <fieldset class="fire-form">
         <legend><?php echo $this->translate('Fire a Shot'); ?></legend>
         <div class="row">
