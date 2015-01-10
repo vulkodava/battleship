@@ -15,7 +15,7 @@
             <tr>
                 <td><?php echo \Battleship\Repository\Game::$letters[$rowId]; ?></td>
                 <?php foreach ($row as $colId => $col) : ?>
-                    <td class="<?php echo $col['vessel_sunk']; ?>">
+                    <td class="<?php echo join(' ', $col['field_class']); ?>">
                         <?php echo $this->partial('battleship/partials/field_plate_' . $col['field_plate_status'], array(
                             'col' => $col,
                             'colId' => $colId,

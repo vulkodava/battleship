@@ -179,6 +179,8 @@ class Game extends EntityRepository {
      */
     public function setupBoard()
     {
+        $battleshipGameSession = new Container('battleshipGameSession');
+        $cheat = $battleshipGameSession->cheat;
         $field = $this->getField();
         if (empty($field)) {
             throw new InvalidArgumentException('No Field supplied for the Game.', 103);
@@ -196,18 +198,21 @@ class Game extends EntityRepository {
                 $vesselId = $fieldPlate->getGameVessel()->getId();
             }
 
-            $vesselSunk = '';
+            $fieldClass = array();
+            if ($cheat) {
+                $fieldClass[] = 'cheat';
+            }
             if (!is_null($fieldPlate->getGameVessel())) {
                 $vesselStatus = $fieldPlate->getGameVessel()->getStatus();
                 if ($vesselStatus == \Battleship\Entity\GameVessel::STATUS_SUNK) {
-                    $vesselSunk = 'sunk';
+                    $fieldClass[] = 'sunk';
                 }
             }
             $gameGrid[$fieldPlate->getCoordinateX()][$fieldPlate->getCoordinateY()] = array(
                 'field_plate_status' => $fieldPlate->getStatus(),
                 'content' => $content,
                 'vessel_id' => $vesselId,
-                'vessel_sunk' => $vesselSunk,
+                'field_class' => $fieldClass,
             );
         }
         return $gameGrid;

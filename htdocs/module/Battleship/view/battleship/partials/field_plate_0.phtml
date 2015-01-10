@@ -1,15 +1,19 @@
 <?php
+$formActionParams = array('controller' => 'index', 'action' => 'fire');
+$buttonValue = $gameConfig['no_shot_sign'];
 $buttonTitle = \Battleship\Repository\Game::$letters[$this->rowId] . $colId;
 
 if ($cheat === true) {
+    $formActionParams['cheat'] = 1;
+    $buttonTitle = $gameConfig['miss_sign'];
     $buttonTitle .= '<br />' . $this->col['content'];
     if (trim($col['content']) != 'empty') {
+        $buttonValue = $gameConfig['hit_sign'];
         $buttonTitle .= ' #' . $this->col['vessel_id'];
     }
 }
 ?>
-
-<form action="<?php echo $this->url('battleship/default', array('controller' => 'index', 'action' => 'fire')); ?>" method="post">
+<form action="<?php echo $this->url('battleship/default', $formActionParams); ?>" method="post">
     <input type="hidden" name="field_coordinates" value="<?php echo \Battleship\Repository\Game::$letters[$this->rowId] . $this->colId; ?>" readonly="readonly" />
-    <input type="submit" name="field" value="<?php echo $gameConfig['no_shot_sign']; ?>" class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="<?php echo $buttonTitle; ?>" />
+    <input type="submit" name="field" value="<?php echo $buttonValue; ?>" class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="<?php echo $buttonTitle; ?>" />
 </form>

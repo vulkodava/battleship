@@ -12,6 +12,12 @@ class IndexController extends AbstractActionController implements EventManagerAw
 {
     private $game;
     private $gameGrid;
+    private $battleshipGameSession;
+
+    public function __construct()
+    {
+        $this->battleshipGameSession = new Container('battleshipGameSession');
+    }
 
     public function indexAction()
     {
@@ -26,8 +32,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
      */
     public function newGameAction()
     {
-        $battleshipGameSession = new Container('battleshipGameSession');
-        unset($battleshipGameSession->gameId);
+        unset($this->battleshipGameSession->gameId);
         return $this->redirect()->toRoute('battleship/default', array(
             'controller' => 'index',
             'action' => 'play',
@@ -43,13 +48,14 @@ class IndexController extends AbstractActionController implements EventManagerAw
     public function playAction()
     {
         $this->gameCommonLogic();
-
         $cheat = $this->params('cheat', false);
         if ($cheat != 0 && $cheat != 1)  {
             $cheat = false;
         } else if ($cheat == 1) {
             $cheat = true;
         }
+
+        $this->battleshipGameSession->cheat = $cheat;
 
         // Generate the Web View.
         $view = new ViewModel();
@@ -79,9 +85,8 @@ class IndexController extends AbstractActionController implements EventManagerAw
         $gameId = $request->getParam('id', false);
 
         // Determines whether this is a new game or an existing one.
-        $battleshipGameSession = new Container('battleshipGameSession');
         if ($gameId !== false) {
-            $battleshipGameSession->gameId = $gameId;
+            $this->battleshipGameSession->gameId = $gameId;
         }
 
         try {
@@ -99,7 +104,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
         } else if ($cheat == 1) {
             $cheat = true;
         }
-        $battleshipGameSession->cheat = $cheat;
+        $this->battleshipGameSession->cheat = $cheat;
 
         // In case of passed coordinates tries to fire a shot.
         if ($coordinates !== false) {
@@ -172,7 +177,6 @@ class IndexController extends AbstractActionController implements EventManagerAw
      */
     public function fireAction()
     {
-        $battleshipGameSession = new Container('battleshipGameSession');
         // Prepare to fire a Shot.
         if ($this->getRequest()->isPost()) {
             $objectManager = $this
@@ -209,7 +213,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
         return $this->redirect()->toRoute('battleship/default', array(
             'controller' => 'index',
             'action' => 'play',
-            'cheat' => (int) $battleshipGameSession->cheat,
+            'cheat' => (int) $this->battleshipGameSession->cheat,
         ));
     }
 }

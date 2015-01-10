@@ -17,7 +17,7 @@ $modules = array(
 if ($env == 'local' ) {
     $modules[] = 'ZendDeveloperTools';
     $modules[] = 'BjyProfiler';
-    $modules[] = 'Skpd\ProfilerToolbar';
+//    $modules[] = 'Skpd\ProfilerToolbar';
 //    $modules[] = 'ZfcRbac';
 //    $modules[] = 'ZfTable';
 //    $modules[] = 'ZfSnapPhpDebugBar';
