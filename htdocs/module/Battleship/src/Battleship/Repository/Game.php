@@ -19,8 +19,14 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\DBAL\Types\Type;
+use ZendService\ReCaptcha\Exception;
 
 class Game extends EntityRepository {
+    const VESSEL_POSITION_VERTICALLY = 0;
+    const VESSEL_POSITION_HORIZONTALLY = 1;
+    const DEPLOYMENT_TRIES_THRESHOLD = 100;
+
+    private $vesselsDeployCounter = 0;
     private $gameEntity;
     private $field;
     private $gameConfig;
@@ -30,6 +36,7 @@ class Game extends EntityRepository {
     private $hits;
     private $gameVesselsInfo;
     private $shotInfo;
+    private $gameGrid;
 
     public static $letters = array(
         'skip-zero-index',
@@ -157,9 +164,11 @@ class Game extends EntityRepository {
         $this->setField($field);
 
         // Create Field Plates.
+        $this->gameGrid = array();
         for ($row = 1; $row < ($this->gameConfig['x'] + 1); $row++) {
-            $gameGrid[$row] = array();
+            $this->gameGrid[$row] = array();
             for ($col = 1; $col < ($this->gameConfig['y'] + 1); $col++) {
+                $this->gameGrid[$row][$col] = array();
                 $fieldPlate = new \Battleship\Entity\FieldPlate();
                 $fieldPlate->setField($field);
                 $fieldPlate->setStatus(\Battleship\Entity\FieldPlate::STATUS_NEW);
@@ -167,6 +176,8 @@ class Game extends EntityRepository {
                 $fieldPlate->setCoordinateY($col);
                 $this->getEntityManager()->persist($fieldPlate);
                 $this->getEntityManager()->flush();
+
+                $this->gameGrid[$row][$col] = $fieldPlate;
             }
         }
     }
@@ -179,6 +190,8 @@ class Game extends EntityRepository {
      */
     public function setupBoard()
     {
+        $battleshipGameSession = new Container('battleshipGameSession');
+        $cheat = $battleshipGameSession->cheat;
         $field = $this->getField();
         if (empty($field)) {
             throw new InvalidArgumentException('No Field supplied for the Game.', 103);
@@ -196,18 +209,21 @@ class Game extends EntityRepository {
                 $vesselId = $fieldPlate->getGameVessel()->getId();
             }
 
-            $vesselSunk = '';
+            $fieldClass = array();
+            if ($cheat) {
+                $fieldClass[] = 'cheat';
+            }
             if (!is_null($fieldPlate->getGameVessel())) {
                 $vesselStatus = $fieldPlate->getGameVessel()->getStatus();
                 if ($vesselStatus == \Battleship\Entity\GameVessel::STATUS_SUNK) {
-                    $vesselSunk = 'sunk';
+                    $fieldClass[] = 'sunk';
                 }
             }
             $gameGrid[$fieldPlate->getCoordinateX()][$fieldPlate->getCoordinateY()] = array(
                 'field_plate_status' => $fieldPlate->getStatus(),
                 'content' => $content,
                 'vessel_id' => $vesselId,
-                'vessel_sunk' => $vesselSunk,
+                'field_class' => $fieldClass,
             );
         }
         return $gameGrid;
@@ -226,34 +242,57 @@ class Game extends EntityRepository {
         foreach ($gameVessels as $gameVessel) {
             $vesselSize = $gameVessel->getVesselType()->getSize();
             $vesselDirection = rand(0, 1);
-            $startX = $this->generateFirstPosition($maxX, $vesselSize);
-            $startY = $this->generateFirstPosition($maxY, $vesselSize);
+            $this->deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel);
+        }
+    }
 
-            if ($vesselDirection == 1) {
-                // Deploy horizontally.
-                for($rowNumber = 1; $rowNumber < ($maxX + 1); $rowNumber++) {
-                    for($colNumber = 1; $colNumber < ($maxY + 1); $colNumber++) {
-                        if (
-                            $colNumber >= $startX && $colNumber < ($startX + $vesselSize)
-                            && $rowNumber == $startY
-                        ) {
-                            $this->addVessel($gameVessel, $rowNumber, $colNumber);
+    private function deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel)
+    {
+        // Prevent infinite loops.
+        if ($this->vesselsDeployCounter > self::DEPLOYMENT_TRIES_THRESHOLD) {
+            throw new Exception('Too many tries to deploy ships. Please, try again.', 108);
+        }
+
+        $this->vesselsDeployCounter++;
+        $startX = $this->generateFirstPosition($maxX, $vesselSize, $vesselDirection);
+        $startY = $this->generateFirstPosition($maxY, $vesselSize, $vesselDirection);
+
+        if ($vesselDirection == self::VESSEL_POSITION_HORIZONTALLY) {
+            // Deploy horizontally.
+            $vesselCoordinates = array();
+            for ($rowNumber = 1; $rowNumber < ($maxX + 1); $rowNumber++) {
+                for ($colNumber = 1; $colNumber < ($maxY + 1); $colNumber++) {
+                    if (
+                        $colNumber >= $startX && $colNumber < ($startX + $vesselSize)
+                        && $rowNumber == $startY
+                    ) {
+                        if (!is_null($this->gameGrid[$colNumber][$rowNumber]->getGameVessel())) {
+                            $this->deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel);
                         }
-                    }
-                }
-            } else {
-                // Deploy vertically.
-                for($rowNumber = 1; $rowNumber < ($maxX + 1); $rowNumber++) {
-                    for($colNumber = 1; $colNumber < ($maxY + 1); $colNumber++) {
-                        if (
-                            $rowNumber >= $startY && $rowNumber < ($startY + $vesselSize)
-                            && $colNumber == $startX
-                        ) {
-                            $this->addVessel($gameVessel, $rowNumber, $colNumber);
-                        }
+                        $vesselCoordinates[] = array('x' => $colNumber, 'y' => $rowNumber);
                     }
                 }
             }
+            $this->addVessel($gameVessel, $vesselCoordinates);
+        } else if ($vesselDirection == self::VESSEL_POSITION_VERTICALLY) {
+            // Deploy vertically.
+            $vesselCoordinates = array();
+            for($rowNumber = 1; $rowNumber < ($maxX + 1); $rowNumber++) {
+                for($colNumber = 1; $colNumber < ($maxY + 1); $colNumber++) {
+                    if (
+                        $rowNumber >= $startY && $rowNumber < ($startY + $vesselSize)
+                        && $colNumber == $startX
+                    ) {
+                        if (!is_null($this->gameGrid[$colNumber][$rowNumber]->getGameVessel())) {
+                            $this->deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel);
+                        }
+                        $vesselCoordinates[] = array('x' => $colNumber, 'y' => $rowNumber);
+                    }
+                }
+            }
+            $this->addVessel($gameVessel, $vesselCoordinates);
+        } else {
+            throw new InvalidArgumentException('Invalid Vessel direction detected.', 107);
         }
     }
 
@@ -262,14 +301,16 @@ class Game extends EntityRepository {
      *
      * @param $max
      * @param $vesselSize
+     * @para, $vesselDirection
      * @return int
      * @author Momchil Milev <momchil.milev@gmail.com>
      */
-    private function generateFirstPosition($max, $vesselSize)
+    private function generateFirstPosition($max, $vesselSize, $vesselDirection)
     {
         $start = rand(1, $max);
+
         if ($start + $vesselSize > $max) {
-            $start = $this->generateFirstPosition($max, $vesselSize);
+            $start = $this->generateFirstPosition($max, $vesselSize, $vesselDirection);
         }
         return $start;
     }
@@ -282,25 +323,28 @@ class Game extends EntityRepository {
      * @param $colNumber
      * @author Momchil Milev <momchil.milev@gmail.com>
      */
-    private function addVessel($gameVessel, $rowNumber, $colNumber)
+    private function addVessel($gameVessel, $vesselCoordinates)
     {
         $field = $this->getField();
         if (empty($field)) {
             throw new InvalidArgumentException('Invalid game field.', 101);
         }
 
-        $fieldPlate = $this->getEntityManager()->getRepository('Battleship\Entity\FieldPlate')->findOneBy(array(
-            'coordinateX' => $rowNumber,
-            'coordinateY' => $colNumber,
-            'field' => $field,
-        ));
-        if (empty($fieldPlate)) {
-            throw new InvalidElementException('Invalid game field plate.', 105);
-        }
+        foreach ($vesselCoordinates as $vesselFieldCoordinates) {
 
-        $fieldPlate->setGameVessel($gameVessel);
-        $this->getEntityManager()->persist($fieldPlate);
-        $this->getEntityManager()->flush();
+            $fieldPlate = $this->getEntityManager()->getRepository('Battleship\Entity\FieldPlate')->findOneBy(array(
+                'coordinateX' => $vesselFieldCoordinates['x'],
+                'coordinateY' => $vesselFieldCoordinates['y'],
+                'field' => $field,
+            ));
+            if (empty($fieldPlate)) {
+                throw new InvalidElementException('Invalid game field plate.', 105);
+            }
+
+            $fieldPlate->setGameVessel($gameVessel);
+            $this->getEntityManager()->persist($fieldPlate);
+            $this->getEntityManager()->flush();
+        }
     }
 
     /**
@@ -317,6 +361,10 @@ class Game extends EntityRepository {
 
         if (empty($fieldPlate)) {
             throw new InvalidElementException('Invalid Filed Plate selected.', 104);
+        }
+
+        if ($fieldPlate->getStatus() != \Battleship\Entity\FieldPlate::STATUS_NEW) {
+            throw new InvalidElementException('This field has been already fired upon.', 106);
         }
 
         $status = \Battleship\Entity\FieldPlate::STATUS_MISS;

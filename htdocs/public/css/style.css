@@ -18,9 +18,9 @@ li.topic{
     border-bottom: 1px solid;
     list-style: none;
 }
-body{
+body {
     font-size: 12px;
-    padding-top: 60px;
+    /*padding-top: 60px;*/
     padding-bottom: 40px;
 }
 
@@ -101,4 +101,9 @@ table.game-info th {
 
 .sunk {
     background-color: red;
+}
+
+.fire-form .form-control {
+    width: 91px;
+    display: inline;
 }

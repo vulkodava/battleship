@@ -10,7 +10,7 @@ recruitment - Battleships.
         - Selecting and random positioning of 3 vessels - 1 Battleship of 5 squares and 2 Destroyers of 4 squares.
         - Implementing a web and console versions of the game that share basic game logic behind the scene.
         - Providing a simple click way for firing a shot for web version.
-        - Providing a simple input method for selecting coordinates for the shot for the web version. (TBD)
+        - Providing a simple input method for selecting coordinates for the shot for the web version.
         - Providing a simple parameters based way of firing shots for the console application.
         - Implementing a backdoor cheat path by which the user can spot the computer's vessels.
         - Preparing the field for v2 features.
@@ -22,9 +22,12 @@ recruitment - Battleships.
             - Inserts records for field size, shot sings.
             - Inserts records for vessel types.
             - Installs needed vendor code.
+        - AJAX-ify the web and mobile apps. (TBD)
 
     v2 implementation of more sophisticated features like:
         - User login.
         - User games statistics.
         - Game statistics.
         - Administration of the game configuration like battle field size, vessels types, vessels sizes, vessels count.
+
+    v3 implementation of Unit Tests.

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b893cee8a718a80a98afec3f2b832179",
+    "hash": "e03ef49cf3d159da577f0753d63cb7d8",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -324,16 +324,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "2.4.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "ae92d076442e27b6910dd86a1292a8867cf5cfe4"
+                "reference": "c819359fc0babd36620e4b48d2eb0c6dacbc48a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/ae92d076442e27b6910dd86a1292a8867cf5cfe4",
-                "reference": "ae92d076442e27b6910dd86a1292a8867cf5cfe4",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/c819359fc0babd36620e4b48d2eb0c6dacbc48a2",
+                "reference": "c819359fc0babd36620e4b48d2eb0c6dacbc48a2",
                 "shasum": ""
             },
             "require": {
@@ -350,7 +350,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -364,17 +364,6 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com",
-                    "homepage": "http://www.instaclick.com"
-                },
-                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
@@ -383,10 +372,16 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
                     "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
+                    "email": "schmittjoh@gmail.com"
                 }
             ],
             "description": "Common Library for Doctrine projects",
@@ -398,34 +393,42 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2014-05-21 19:29:23"
+            "time": "2015-01-01 17:37:36"
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.4.x-dev",
+            "version": "2.5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "6a20c28e88f9cef15fae491481a527550585ed7a"
+                "reference": "f7acb8589ed8f6cec50aeea6017699b078a4ade1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/6a20c28e88f9cef15fae491481a527550585ed7a",
-                "reference": "6a20c28e88f9cef15fae491481a527550585ed7a",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/f7acb8589ed8f6cec50aeea6017699b078a4ade1",
+                "reference": "f7acb8589ed8f6cec50aeea6017699b078a4ade1",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "~2.4",
+                "doctrine/common": ">=2.4,<2.6-dev",
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "symfony/console": "~2.0"
+                "phpunit/phpunit": "4.*",
+                "symfony/console": "2.*"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
             },
+            "bin": [
+                "bin/doctrine-dbal"
+            ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Doctrine\\DBAL\\": "lib/"
@@ -461,33 +464,38 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-01-03 22:41:47"
+            "time": "2015-01-03 23:26:29"
         },
         {
             "name": "doctrine/doctrine-module",
-            "version": "0.7.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineModule.git",
-                "reference": "78018ef568c52e65a0b17e7bd5a4c90fe6673e84"
+                "reference": "3928a45babf1b115cc23ceadb7183b88e40ad830"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineModule/zipball/78018ef568c52e65a0b17e7bd5a4c90fe6673e84",
-                "reference": "78018ef568c52e65a0b17e7bd5a4c90fe6673e84",
+                "url": "https://api.github.com/repos/doctrine/DoctrineModule/zipball/3928a45babf1b115cc23ceadb7183b88e40ad830",
+                "reference": "3928a45babf1b115cc23ceadb7183b88e40ad830",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": ">=2.3-dev,<2.5-dev",
-                "php": ">=5.3.3",
-                "symfony/console": ">=2.0.13",
-                "zendframework/zend-authentication": "2.*",
-                "zendframework/zend-cache": "2.*",
-                "zendframework/zend-mvc": "2.*",
-                "zendframework/zend-paginator": "2.*",
-                "zendframework/zend-servicemanager": "2.*",
-                "zendframework/zend-stdlib": "2.*",
-                "zendframework/zend-validator": "2.*"
+                "doctrine/common": ">=2.4,<2.6-dev",
+                "php": ">=5.3.23",
+                "symfony/console": "~2.3",
+                "zendframework/zend-authentication": "~2.3",
+                "zendframework/zend-cache": "~2.3",
+                "zendframework/zend-mvc": "~2.3",
+                "zendframework/zend-paginator": "~2.3",
+                "zendframework/zend-servicemanager": "~2.3",
+                "zendframework/zend-stdlib": "~2.3",
+                "zendframework/zend-validator": "~2.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7",
+                "squizlabs/php_codesniffer": "1.5.*",
+                "zendframework/zendframework": "~2.3"
             },
             "suggest": {
                 "doctrine/data-fixtures": "Data Fixtures if you want to generate test data or bootstrap data for your deployments"
@@ -498,13 +506,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.8.x-dev"
+                    "dev-master": "0.9.x-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
-                    "DoctrineModule\\": "src/",
-                    "DoctrineModuleTest\\": "tests/"
+                    "DoctrineModule\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -518,24 +525,18 @@
                     "homepage": "http://www.spiffyjr.me/"
                 },
                 {
-                    "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com",
-                    "homepage": "http://ocramius.github.com/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Evan Coury",
-                    "email": "me@evancoury.com",
-                    "homepage": "http://blog.evan.pro/"
-                },
-                {
                     "name": "Guilherme Blanco",
                     "email": "guilhermeblanco@hotmail.com"
                 },
                 {
                     "name": "Michaël Gallego",
                     "email": "mic.gallego@gmail.com",
-                    "homepage": "http://michaelgallego.fr"
+                    "homepage": "http://www.michaelgallego.fr"
+                },
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com",
+                    "homepage": "http://marco-pivetta.com/"
                 }
             ],
             "description": "Zend Framework 2 Module that provides Doctrine basic functionality required for ORM and ODM modules",
@@ -545,50 +546,54 @@
                 "module",
                 "zf2"
             ],
-            "time": "2013-05-16 18:27:30"
+            "time": "2015-01-05 21:49:50"
         },
         {
             "name": "doctrine/doctrine-orm-module",
-            "version": "0.7.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineORMModule.git",
-                "reference": "7d8ce6adc9e13edf08fbe3d002f22efbca83e9bc"
+                "reference": "1d5b0fdda6200836b0d1dcf637d36e35ea48ad6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineORMModule/zipball/7d8ce6adc9e13edf08fbe3d002f22efbca83e9bc",
-                "reference": "7d8ce6adc9e13edf08fbe3d002f22efbca83e9bc",
+                "url": "https://api.github.com/repos/doctrine/DoctrineORMModule/zipball/1d5b0fdda6200836b0d1dcf637d36e35ea48ad6c",
+                "reference": "1d5b0fdda6200836b0d1dcf637d36e35ea48ad6c",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": ">=2.3-dev,<2.5-dev",
-                "doctrine/doctrine-module": "0.7.*",
-                "doctrine/orm": ">=2.3-dev,<2.5-dev",
-                "php": ">=5.3.3",
-                "zendframework/zend-form": "2.*",
-                "zendframework/zend-mvc": "2.*",
-                "zendframework/zend-servicemanager": "2.*",
-                "zendframework/zend-stdlib": "2.*"
+                "doctrine/dbal": ">=2.4,<2.6-dev",
+                "doctrine/doctrine-module": "0.9.*",
+                "doctrine/orm": ">=2.4,<2.6-dev",
+                "php": ">=5.3.23",
+                "symfony/console": "~2.5",
+                "zendframework/zend-mvc": "~2.3",
+                "zendframework/zend-servicemanager": "~2.3",
+                "zendframework/zend-stdlib": "~2.3"
             },
             "require-dev": {
+                "doctrine/data-fixtures": "1.0.*",
                 "doctrine/migrations": "1.*",
-                "zendframework/zend-developer-tools": "dev-master"
+                "phpunit/phpunit": "~3.7",
+                "squizlabs/php_codesniffer": "1.5.*",
+                "zendframework/zend-developer-tools": "*",
+                "zendframework/zendframework": "~2.3"
             },
             "suggest": {
                 "doctrine/migrations": "doctrine migrations if you want to keep your schema definitions versioned",
-                "zendframework/zend-developer-tools": "zend-developer-tools if you want to profile operations executed by the ORM during development"
+                "zendframework/zend-developer-tools": "zend-developer-tools if you want to profile operations executed by the ORM during development",
+                "zendframework/zend-form": "if you want to use form elements backed by Doctrine"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.8.x-dev"
+                    "dev-master": "0.9.x-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
-                    "DoctrineORMModule\\": "src/",
-                    "DoctrineORMModuleTest\\": "tests/"
+                    "DoctrineORMModule\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -602,12 +607,6 @@
                     "homepage": "http://www.spiffyjr.me/"
                 },
                 {
-                    "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com",
-                    "homepage": "http://ocramius.github.com/",
-                    "role": "Developer"
-                },
-                {
                     "name": "Evan Coury",
                     "email": "me@evancoury.com",
                     "homepage": "http://blog.evan.pro/"
@@ -615,6 +614,11 @@
                 {
                     "name": "Guilherme Blanco",
                     "email": "guilhermeblanco@hotmail.com"
+                },
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com",
+                    "homepage": "http://marco-pivetta.com/"
                 }
             ],
             "description": "Zend Framework 2 Module that provides Doctrine ORM functionality",
@@ -625,7 +629,7 @@
                 "orm",
                 "zf2"
             ],
-            "time": "2013-01-13 19:47:34"
+            "time": "2015-01-05 21:27:10"
         },
         {
             "name": "doctrine/inflector",
@@ -693,6 +697,60 @@
                 "string"
             ],
             "time": "2015-01-01 18:34:57"
+        },
+        {
+            "name": "doctrine/instantiator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/instantiator.git",
+                "reference": "2a86bb6ae49191bd19976408ff19bbe49dace573"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/2a86bb6ae49191bd19976408ff19bbe49dace573",
+                "reference": "2a86bb6ae49191bd19976408ff19bbe49dace573",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3,<8.0-DEV"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1.8",
+                "ext-pdo": "*",
+                "ext-phar": "*",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Instantiator\\": "src/Doctrine/Instantiator/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com",
+                    "homepage": "http://ocramius.github.com/"
+                }
+            ],
+            "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
+            "homepage": "https://github.com/doctrine/instantiator",
+            "keywords": [
+                "constructor",
+                "instantiate"
+            ],
+            "time": "2015-01-05 02:10:42"
         },
         {
             "name": "doctrine/lexer",
@@ -808,26 +866,28 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.4.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "71f446f23b3e12e23b38656f31ae1bc18072717b"
+                "reference": "ef65270387b591c36efb7695a4e4f6fe0d6abdd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/71f446f23b3e12e23b38656f31ae1bc18072717b",
-                "reference": "71f446f23b3e12e23b38656f31ae1bc18072717b",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/ef65270387b591c36efb7695a4e4f6fe0d6abdd2",
+                "reference": "ef65270387b591c36efb7695a4e4f6fe0d6abdd2",
                 "shasum": ""
             },
             "require": {
-                "doctrine/collections": "~1.1",
-                "doctrine/dbal": "~2.4",
+                "doctrine/collections": "~1.2",
+                "doctrine/dbal": ">=2.5-dev,<2.6-dev",
+                "doctrine/instantiator": "~1.0.1",
                 "ext-pdo": "*",
                 "php": ">=5.3.2",
-                "symfony/console": "~2.0"
+                "symfony/console": "~2.5"
             },
             "require-dev": {
+                "phpunit/phpunit": "~4.0",
                 "satooshi/php-coveralls": "dev-master",
                 "symfony/yaml": "~2.1"
             },
@@ -841,7 +901,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -877,7 +937,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-12-16 13:47:17"
+            "time": "2015-01-07 02:39:11"
         },
         {
             "name": "dudapiotr/zftable",
@@ -1685,18 +1745,69 @@
             "time": "2014-09-17 04:18:07"
         },
         {
+            "name": "skpd/profiler-toolbar",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Skpd/profiler-toolbar.git",
+                "reference": "3c5ea4106e876fc5bf1aa0ef80cb246f06ff66fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Skpd/profiler-toolbar/zipball/3c5ea4106e876fc5bf1aa0ef80cb246f06ff66fe",
+                "reference": "3c5ea4106e876fc5bf1aa0ef80cb246f06ff66fe",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xhprof": ">=0.9.2",
+                "php": ">=5.4.0",
+                "zendframework/zend-developer-tools": ">=0.0.2",
+                "zendframework/zendframework": ">=2.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Skpd\\ProfilerToolbar\\": "src/"
+                },
+                "classmap": [
+                    "Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Shabanov",
+                    "email": "dm.skpd@gmail.com"
+                }
+            ],
+            "description": "Profiler toolbar for Zend Developer Tools",
+            "homepage": "https://github.com/Skpd/profiler-toolbar",
+            "keywords": [
+                "Zend Developer Tools",
+                "ZendDeveloperTools",
+                "profiler",
+                "toolbar",
+                "zend framework 2",
+                "zendframework2"
+            ],
+            "time": "2014-03-26 07:08:55"
+        },
+        {
             "name": "symfony/console",
             "version": "2.7.x-dev",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "6c4666e729ae5537eabc7659b9a8a9ea1fc98af9"
+                "reference": "273b8fe99910b6864a863ed6a397938f39847cb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/6c4666e729ae5537eabc7659b9a8a9ea1fc98af9",
-                "reference": "6c4666e729ae5537eabc7659b9a8a9ea1fc98af9",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/273b8fe99910b6864a863ed6a397938f39847cb3",
+                "reference": "273b8fe99910b6864a863ed6a397938f39847cb3",
                 "shasum": ""
             },
             "require": {
@@ -1739,7 +1850,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 20:51:33"
+            "time": "2015-01-06 17:50:09"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1748,12 +1859,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "008a8f34bacbde8834ae8353f0ff20eb671e5a0e"
+                "reference": "e3f882263c84de70fe2ca726a2971fe45c65135e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/008a8f34bacbde8834ae8353f0ff20eb671e5a0e",
-                "reference": "008a8f34bacbde8834ae8353f0ff20eb671e5a0e",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/e3f882263c84de70fe2ca726a2971fe45c65135e",
+                "reference": "e3f882263c84de70fe2ca726a2971fe45c65135e",
                 "shasum": ""
             },
             "require": {
@@ -1797,7 +1908,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 14:34:32"
+            "time": "2015-01-06 10:39:25"
         },
         {
             "name": "symfony/process",
@@ -1806,12 +1917,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "d889cf9c7fc4a408b2b3baebab8d1abc758e6e58"
+                "reference": "0180c01f9a0d4ce8fc0f3c89860345965a2a7e17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/d889cf9c7fc4a408b2b3baebab8d1abc758e6e58",
-                "reference": "d889cf9c7fc4a408b2b3baebab8d1abc758e6e58",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/0180c01f9a0d4ce8fc0f3c89860345965a2a7e17",
+                "reference": "0180c01f9a0d4ce8fc0f3c89860345965a2a7e17",
                 "shasum": ""
             },
             "require": {
@@ -1844,7 +1955,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 21:00:14"
+            "time": "2015-01-07 15:58:19"
         },
         {
             "name": "symfony/yaml",
@@ -1853,12 +1964,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "44d09645715d04db154d8a875610bab1e486f931"
+                "reference": "f0f4dba6acb03d0756fb75e0c8a5829deab17b36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/44d09645715d04db154d8a875610bab1e486f931",
-                "reference": "44d09645715d04db154d8a875610bab1e486f931",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/f0f4dba6acb03d0756fb75e0c8a5829deab17b36",
+                "reference": "f0f4dba6acb03d0756fb75e0c8a5829deab17b36",
                 "shasum": ""
             },
             "require": {
@@ -1891,7 +2002,71 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-03 15:56:00"
+            "time": "2015-01-06 10:39:25"
+        },
+        {
+            "name": "zendframework/zend-developer-tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZendDeveloperTools.git",
+                "reference": "23fbb79b72e9d6a7090158f47f462faeb512733d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zend-developer-tools-23fbb79b72e9d6a7090158f47f462faeb512733d-zip-267b74.zip",
+                "reference": "dev-master",
+                "shasum": "51adc76de1f377d9df0b1d3f0dc20a58e4364e8b"
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-debug": "2.*",
+                "zendframework/zend-eventmanager": "2.*",
+                "zendframework/zend-mvc": "2.*",
+                "zendframework/zend-servicemanager": "2.*",
+                "zendframework/zend-stdlib": "2.*",
+                "zendframework/zend-version": "2.*"
+            },
+            "suggest": {
+                "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
+                "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application."
+            },
+            "type": "zf-module",
+            "autoload": {
+                "psr-0": {
+                    "ZendDeveloperTools": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evan Coury",
+                    "email": "me@evancoury.com",
+                    "homepage": "http://blog.evan.pro/"
+                },
+                {
+                    "name": "Eric Boh",
+                    "email": "cossish@gmail.com"
+                }
+            ],
+            "description": "Module for developer and debug tools for working with the ZF2 MVC layer.",
+            "homepage": "https://github.com/zendframework/ZendDeveloperTools",
+            "keywords": [
+                "debug",
+                "developer",
+                "module",
+                "zf2"
+            ],
+            "support": {
+                "source": "https://github.com/zendframework/ZendDeveloperTools/tree/master",
+                "issues": "https://github.com/zendframework/ZendDeveloperTools/issues"
+            },
+            "time": "2014-12-21 18:23:56"
         },
         {
             "name": "zendframework/zendframework",
@@ -1899,13 +2074,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "19b8cbafe83b5d86663ed9311809d6fdafa842e4"
+                "reference": "a98e78975c6963862e77621e3f7611d3d29ed290"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zendframework-19b8cbafe83b5d86663ed9311809d6fdafa842e4-zip-7fa577.zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zendframework-a98e78975c6963862e77621e3f7611d3d29ed290-zip-00c8c2.zip",
                 "reference": "dev-master",
-                "shasum": "e75f18caeae6e625fb003694f8f5ed61f92be7a2"
+                "shasum": "c7203c949b4ec41f8ce8f40007718f64d13c60e5"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2012,7 +2187,7 @@
                 "source": "https://github.com/zendframework/zf2/tree/master",
                 "issues": "https://github.com/zendframework/zf2/issues"
             },
-            "time": "2015-01-03 17:33:58"
+            "time": "2015-01-08 02:56:59"
         },
         {
             "name": "zendframework/zendpdf",
@@ -2158,7 +2333,7 @@
         },
         {
             "name": "zf-commons/zfc-admin",
-            "version": "v0.2.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ZF-Commons/ZfcAdmin.git",
@@ -2266,6 +2441,82 @@
             "time": "2013-05-02 12:33:49"
         },
         {
+            "name": "zf-commons/zfc-rbac",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ZF-Commons/zfc-rbac.git",
+                "reference": "fc4fc1df9e0c82c37d030b7cb43d9f7c9c211cee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ZF-Commons/zfc-rbac/zipball/fc4fc1df9e0c82c37d030b7cb43d9f7c9c211cee",
+                "reference": "fc4fc1df9e0c82c37d030b7cb43d9f7c9c211cee",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "zendframework/zend-mvc": "~2.2",
+                "zendframework/zend-servicemanager": "~2.2",
+                "zfr/rbac": "~1.2"
+            },
+            "require-dev": {
+                "doctrine/common": "~2.4",
+                "doctrine/doctrine-module": "~0.8",
+                "doctrine/doctrine-orm-module": "~0.8",
+                "phpunit/phpunit": "~3.7",
+                "satooshi/php-coveralls": "~0.6",
+                "squizlabs/php_codesniffer": "1.4.*",
+                "zendframework/zend-developer-tools": "dev-master",
+                "zendframework/zendframework": "~2.2"
+            },
+            "suggest": {
+                "doctrine/doctrine-module": "if you want to use Doctrine role provider",
+                "zendframework/zend-developer-tools": "if you want to show information about the roles"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev",
+                    "dev-develop": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "ZfcRbac\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Spraggs",
+                    "email": "theman@spiffyjr.me",
+                    "homepage": "http://www.spiffyjr.me/"
+                },
+                {
+                    "name": "Jean-Marie Leroux",
+                    "email": "jmleroux.pro@gmail.com"
+                },
+                {
+                    "name": "Michaël Gallego",
+                    "email": "mic.gallego@gmail.com",
+                    "homepage": "http://www.michaelgallego.fr"
+                }
+            ],
+            "description": "Zend Framework 2 Module that provides a layer of features of Zend\\Permissions\\Rbac",
+            "homepage": "http://www.github.com/ZF-Commons/zfc-rbac",
+            "keywords": [
+                "module",
+                "permissions",
+                "rbac",
+                "zf2"
+            ],
+            "time": "2015-01-03 12:55:04"
+        },
+        {
             "name": "zf-commons/zfc-user",
             "version": "1.x-dev",
             "source": {
@@ -2344,16 +2595,16 @@
         },
         {
             "name": "zf-commons/zfc-user-doctrine-orm",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ZF-Commons/ZfcUserDoctrineORM.git",
-                "reference": "9a2e148c9a5a03ca8592b93ea28a21e37b06e053"
+                "reference": "90442b16ea68af7b340c99f298848aad8ec29cc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ZF-Commons/ZfcUserDoctrineORM/zipball/9a2e148c9a5a03ca8592b93ea28a21e37b06e053",
-                "reference": "9a2e148c9a5a03ca8592b93ea28a21e37b06e053",
+                "url": "https://api.github.com/repos/ZF-Commons/ZfcUserDoctrineORM/zipball/90442b16ea68af7b340c99f298848aad8ec29cc6",
+                "reference": "90442b16ea68af7b340c99f298848aad8ec29cc6",
                 "shasum": ""
             },
             "require": {
@@ -2396,7 +2647,57 @@
             "keywords": [
                 "zf2"
             ],
-            "time": "2014-04-18 10:21:19"
+            "time": "2014-11-29 18:06:10"
+        },
+        {
+            "name": "zfr/rbac",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zf-fr/rbac.git",
+                "reference": "493711bfc2a637fd7c6f23b71b7b55a621c35d9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zf-fr/rbac/zipball/493711bfc2a637fd7c6f23b71b7b55a621c35d9d",
+                "reference": "493711bfc2a637fd7c6f23b71b7b55a621c35d9d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7",
+                "satooshi/php-coveralls": "~0.6",
+                "squizlabs/php_codesniffer": "1.4.*",
+                "zendframework/zend-servicemanager": "~2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Rbac\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michaël Gallego",
+                    "email": "mic.gallego@gmail.com",
+                    "homepage": "http://michaelgallego.fr"
+                }
+            ],
+            "description": "Zend Framework 3 prototype for Zend\\Permissions\\Rbac.",
+            "homepage": "https://github.com/zf-fr/rbac",
+            "keywords": [
+                "rbac",
+                "security",
+                "zf2",
+                "zf3"
+            ],
+            "time": "2014-02-06 14:18:34"
         }
     ],
     "packages-dev": [
@@ -2632,87 +2933,28 @@
                 "dump"
             ],
             "time": "2015-01-03 08:02:46"
-        },
-        {
-            "name": "zendframework/zend-developer-tools",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "23fbb79b72e9d6a7090158f47f462faeb512733d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-developer-tools-23fbb79b72e9d6a7090158f47f462faeb512733d-zip-267b74.zip",
-                "reference": "dev-master",
-                "shasum": "51adc76de1f377d9df0b1d3f0dc20a58e4364e8b"
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "zendframework/zend-debug": "2.*",
-                "zendframework/zend-eventmanager": "2.*",
-                "zendframework/zend-mvc": "2.*",
-                "zendframework/zend-servicemanager": "2.*",
-                "zendframework/zend-stdlib": "2.*",
-                "zendframework/zend-version": "2.*"
-            },
-            "suggest": {
-                "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
-                "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application."
-            },
-            "type": "zf-module",
-            "autoload": {
-                "psr-0": {
-                    "ZendDeveloperTools": "src/"
-                },
-                "classmap": [
-                    "./Module.php"
-                ]
-            },
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Evan Coury",
-                    "email": "me@evancoury.com",
-                    "homepage": "http://blog.evan.pro/"
-                },
-                {
-                    "name": "Eric Boh",
-                    "email": "cossish@gmail.com"
-                }
-            ],
-            "description": "Module for developer and debug tools for working with the ZF2 MVC layer.",
-            "homepage": "https://github.com/zendframework/ZendDeveloperTools",
-            "keywords": [
-                "debug",
-                "developer",
-                "module",
-                "zf2"
-            ],
-            "support": {
-                "source": "https://github.com/zendframework/ZendDeveloperTools/tree/master",
-                "issues": "https://github.com/zendframework/ZendDeveloperTools/issues"
-            },
-            "time": "2014-12-21 18:23:56"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "zendframework/zendpdf": 20,
+        "doctrine/doctrine-orm-module": 20,
+        "zf-commons/zfc-user": 20,
+        "zf-commons/zfc-user-doctrine-orm": 20,
+        "zf-commons/zfc-admin": 20,
         "danielss89/zfc-user-admin": 20,
         "mwillbanks/zfc-twitter-bootstrap": 20,
         "dudapiotr/zftable": 20,
         "rwoverdijk/assetmanager": 20,
         "ircmaxell/random-lib": 20,
         "ircmaxell/security-lib": 20,
-        "zendframework/zendpdf": 20,
         "psr/log": 20,
         "symfony/yaml": 20,
         "symfony/event-dispatcher": 20,
         "symfony/process": 20,
         "doctrine/migrations": 20,
+        "skpd/profiler-toolbar": 20,
         "zendframework/zend-debug": 20,
         "snapshotpl/zf-snap-php-debug-bar": 20,
         "zendframework/zend-developer-tools": 20

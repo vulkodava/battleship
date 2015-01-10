@@ -5,13 +5,20 @@ $env = $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ? 'local' : 'production';
 $modules = array(
     'DoctrineModule',
     'DoctrineORMModule',
+    'ZfcBase',
+    'ZfcUser',
+    'ZfcUserDoctrineORM',
+    'ZfcAdmin',
+    'ZfcUserAdmin',
     'Application',
     'Battleship',
 );
 
-if ($env == 'development') {
+if ($env == 'local' ) {
     $modules[] = 'ZendDeveloperTools';
     $modules[] = 'BjyProfiler';
+//    $modules[] = 'Skpd\ProfilerToolbar';
+//    $modules[] = 'ZfcRbac';
 //    $modules[] = 'ZfTable';
 //    $modules[] = 'ZfSnapPhpDebugBar';
 }

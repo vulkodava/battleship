@@ -15,13 +15,22 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.3.3",
+
     "zendframework/zend-config": "2.*",
     "zendframework/zend-http": "2.*",
     "zendframework/zendframework": "2.3.*",
-    "doctrine/doctrine-orm-module": "0.7.*",
-    "zf-commons/zfc-user-doctrine-orm": "~1.0",
-    "zf-commons/zfc-admin": "~0.2",
+    "zendframework/zendpdf": "dev-master",
+    "zendframework/zendservice-recaptcha": "2.0.*",
+
+    "doctrine/doctrine-orm-module": "dev-master",
+
+    "zf-commons/zfc-user": "1.x-dev",
+    "zf-commons/zfc-user-doctrine-orm": "dev-master",
+    "zf-commons/zfc-admin": "dev-master",
+    "zf-commons/zfc-rbac": "~2.4",
+
     "danielss89/zfc-user-admin": "dev-master",
+
     "bjyoungblood/bjy-authorize": "1.4.*",
     "mwillbanks/zfc-twitter-bootstrap": "@dev",
     "dudapiotr/zftable": "dev-master",
@@ -29,14 +38,13 @@
     "ircmaxell/random-lib": "1.0.x-dev",
     "ircmaxell/security-lib": "1.0.*@dev",
     "ocramius/proxy-manager": "0.5.*",
-    "zendframework/zendpdf": "dev-master",
-    "zendframework/zendservice-recaptcha": "2.0.*",
     "psr/log": "dev-master",
     "symfony/yaml": "dev-master",
     "symfony/event-dispatcher": "dev-master",
     "symfony/process": "2.7.x-dev",
     "doctrine/migrations": "dev-master",
-    "phpunit/phpunit": "3.7.*"
+    "phpunit/phpunit": "3.7.*",
+    "skpd/profiler-toolbar": "dev-master"
   },
   "require-dev": {
     "zendframework/zend-debug": "dev-master",

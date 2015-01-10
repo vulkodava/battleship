@@ -1,0 +1,32 @@
+<div class="col-lg-6">
+    <table border="1" class="game">
+        <?php $colHeaders = $gameGrid[1]; ?>
+        <thead>
+        <tr>
+            <?php
+            echo '<th></th>';
+            foreach ($colHeaders as $colHeaderKey => $colHeaderVal) {
+                echo '<th>' . $colHeaderKey . '</th>';
+            }
+            ?>
+        </tr>
+        </thead>
+        <?php foreach ($gameGrid as $rowId => $row) : ?>
+            <tr>
+                <td><?php echo \Battleship\Repository\Game::$letters[$rowId]; ?></td>
+                <?php foreach ($row as $colId => $col) : ?>
+                    <td class="<?php echo join(' ', $col['field_class']); ?>">
+                        <?php echo $this->partial('battleship/partials/field_plate_' . $col['field_plate_status'], array(
+                            'col' => $col,
+                            'colId' => $colId,
+                            'row' => $row,
+                            'rowId' => $rowId,
+                            'cheat' => $cheat,
+                            'gameConfig' => $gameConfig,
+                        )); ?>
+                    </td>
+                <?php endforeach; ?>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
