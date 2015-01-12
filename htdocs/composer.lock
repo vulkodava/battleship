@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e03ef49cf3d159da577f0753d63cb7d8",
+    "hash": "34cdc3ab06c1126b1cdeb3ccd56d807e",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -192,12 +192,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "803a41469d948bc120a6c913399e8bfc8b5d9650"
+                "reference": "23210e0381057c5976b15dae52ef389fa180e09f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/803a41469d948bc120a6c913399e8bfc8b5d9650",
-                "reference": "803a41469d948bc120a6c913399e8bfc8b5d9650",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/23210e0381057c5976b15dae52ef389fa180e09f",
+                "reference": "23210e0381057c5976b15dae52ef389fa180e09f",
                 "shasum": ""
             },
             "require": {
@@ -254,7 +254,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2014-12-08 23:13:26"
+            "time": "2015-01-11 19:26:38"
         },
         {
             "name": "doctrine/collections",
@@ -401,12 +401,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "f7acb8589ed8f6cec50aeea6017699b078a4ade1"
+                "reference": "28424002f1a893c10d52c0cdf1a1dbbc520370b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/f7acb8589ed8f6cec50aeea6017699b078a4ade1",
-                "reference": "f7acb8589ed8f6cec50aeea6017699b078a4ade1",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/28424002f1a893c10d52c0cdf1a1dbbc520370b7",
+                "reference": "28424002f1a893c10d52c0cdf1a1dbbc520370b7",
                 "shasum": ""
             },
             "require": {
@@ -464,7 +464,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-01-03 23:26:29"
+            "time": "2015-01-11 21:18:30"
         },
         {
             "name": "doctrine/doctrine-module",
@@ -472,12 +472,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineModule.git",
-                "reference": "3928a45babf1b115cc23ceadb7183b88e40ad830"
+                "reference": "3bbbb532d5a467db514a971d667d3852a80909c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineModule/zipball/3928a45babf1b115cc23ceadb7183b88e40ad830",
-                "reference": "3928a45babf1b115cc23ceadb7183b88e40ad830",
+                "url": "https://api.github.com/repos/doctrine/DoctrineModule/zipball/3bbbb532d5a467db514a971d667d3852a80909c6",
+                "reference": "3bbbb532d5a467db514a971d667d3852a80909c6",
                 "shasum": ""
             },
             "require": {
@@ -546,7 +546,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2015-01-05 21:49:50"
+            "time": "2015-01-08 20:44:25"
         },
         {
             "name": "doctrine/doctrine-orm-module",
@@ -870,12 +870,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "ef65270387b591c36efb7695a4e4f6fe0d6abdd2"
+                "reference": "573153669c11a6f69201513831d3b8ce5e111d25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/ef65270387b591c36efb7695a4e4f6fe0d6abdd2",
-                "reference": "ef65270387b591c36efb7695a4e4f6fe0d6abdd2",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/573153669c11a6f69201513831d3b8ce5e111d25",
+                "reference": "573153669c11a6f69201513831d3b8ce5e111d25",
                 "shasum": ""
             },
             "require": {
@@ -937,7 +937,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-01-07 02:39:11"
+            "time": "2015-01-11 17:02:45"
         },
         {
             "name": "dudapiotr/zftable",
@@ -985,6 +985,204 @@
                 "zftable"
             ],
             "time": "2014-12-10 12:29:04"
+        },
+        {
+            "name": "guzzle/common",
+            "version": "dev-master",
+            "target-dir": "Guzzle/Common",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/common.git",
+                "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/common/zipball/2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+                "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/event-dispatcher": ">=2.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Common": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Common libraries used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "collection",
+                "common",
+                "event",
+                "exception"
+            ],
+            "time": "2014-08-11 04:32:36"
+        },
+        {
+            "name": "guzzle/http",
+            "version": "dev-master",
+            "target-dir": "Guzzle/Http",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/http.git",
+                "reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/http/zipball/1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+                "reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/common": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/stream": "self.version",
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Http": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "HTTP libraries used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "client",
+                "curl",
+                "http",
+                "http client"
+            ],
+            "time": "2014-08-11 04:32:36"
+        },
+        {
+            "name": "guzzle/parser",
+            "version": "dev-master",
+            "target-dir": "Guzzle/Parser",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/parser.git",
+                "reference": "6874d171318a8e93eb6d224cf85e4678490b625c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/parser/zipball/6874d171318a8e93eb6d224cf85e4678490b625c",
+                "reference": "6874d171318a8e93eb6d224cf85e4678490b625c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Parser": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Interchangeable parsers used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "URI Template",
+                "cookie",
+                "http",
+                "message",
+                "url"
+            ],
+            "time": "2014-02-05 18:29:46"
+        },
+        {
+            "name": "guzzle/stream",
+            "version": "dev-master",
+            "target-dir": "Guzzle/Stream",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/stream.git",
+                "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/stream/zipball/60c7fed02e98d2c518dae8f97874c8f4622100f0",
+                "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/common": "self.version",
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "guzzle/http": "To convert Guzzle request objects to PHP streams"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Stream": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle stream wrapper component",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "component",
+                "stream"
+            ],
+            "time": "2014-05-01 21:36:02"
         },
         {
             "name": "ircmaxell/random-lib",
@@ -1641,6 +1839,61 @@
             "time": "2014-02-16 12:43:56"
         },
         {
+            "name": "predis/predis",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "b8decc75a884fce1bfc62d5bc6823298a678f890"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/b8decc75a884fce1bfc62d5bc6823298a678f890",
+                "reference": "b8decc75a884fce1bfc62d5bc6823298a678f890",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete PHP client library for Redis",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2015-01-02 13:37:26"
+        },
+        {
             "name": "psr/log",
             "version": "dev-master",
             "source": {
@@ -1745,6 +1998,51 @@
             "time": "2014-09-17 04:18:07"
         },
         {
+            "name": "sensiolabs/security-checker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sensiolabs/security-checker.git",
+                "reference": "5b4eb4743ebe68276c911c84101ecdf4a9ae76ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/5b4eb4743ebe68276c911c84101ecdf4a9ae76ee",
+                "reference": "5b4eb4743ebe68276c911c84101ecdf4a9ae76ee",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "symfony/console": "~2.0"
+            },
+            "bin": [
+                "security-checker"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "SensioLabs\\Security": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien.potencier@gmail.com"
+                }
+            ],
+            "description": "A security checker for your composer.lock",
+            "time": "2014-07-19 10:52:35"
+        },
+        {
             "name": "skpd/profiler-toolbar",
             "version": "dev-master",
             "source": {
@@ -1802,16 +2100,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "273b8fe99910b6864a863ed6a397938f39847cb3"
+                "reference": "fdb3285803e812d97988470722129c28343f1415"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/273b8fe99910b6864a863ed6a397938f39847cb3",
-                "reference": "273b8fe99910b6864a863ed6a397938f39847cb3",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/fdb3285803e812d97988470722129c28343f1415",
+                "reference": "fdb3285803e812d97988470722129c28343f1415",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "psr/log": "~1.0",
@@ -1850,7 +2148,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-06 17:50:09"
+            "time": "2015-01-09 06:51:41"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1859,12 +2157,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "e3f882263c84de70fe2ca726a2971fe45c65135e"
+                "reference": "fc68ffa937eb0cf415c682e3cb1141748b67aba5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/e3f882263c84de70fe2ca726a2971fe45c65135e",
-                "reference": "e3f882263c84de70fe2ca726a2971fe45c65135e",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/fc68ffa937eb0cf415c682e3cb1141748b67aba5",
+                "reference": "fc68ffa937eb0cf415c682e3cb1141748b67aba5",
                 "shasum": ""
             },
             "require": {
@@ -1908,7 +2206,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-06 10:39:25"
+            "time": "2015-01-08 17:12:45"
         },
         {
             "name": "symfony/process",
@@ -1917,16 +2215,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "0180c01f9a0d4ce8fc0f3c89860345965a2a7e17"
+                "reference": "eb512e3b08841f1e0e39960d69109e47c729988b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/0180c01f9a0d4ce8fc0f3c89860345965a2a7e17",
-                "reference": "0180c01f9a0d4ce8fc0f3c89860345965a2a7e17",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/eb512e3b08841f1e0e39960d69109e47c729988b",
+                "reference": "eb512e3b08841f1e0e39960d69109e47c729988b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "type": "library",
             "extra": {
@@ -1955,7 +2253,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-07 15:58:19"
+            "time": "2015-01-09 06:51:41"
         },
         {
             "name": "symfony/yaml",
@@ -1964,12 +2262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "f0f4dba6acb03d0756fb75e0c8a5829deab17b36"
+                "reference": "c0eaf25074a2a8a5b94c54414a600d94b78fb7dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/f0f4dba6acb03d0756fb75e0c8a5829deab17b36",
-                "reference": "f0f4dba6acb03d0756fb75e0c8a5829deab17b36",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/c0eaf25074a2a8a5b94c54414a600d94b78fb7dc",
+                "reference": "c0eaf25074a2a8a5b94c54414a600d94b78fb7dc",
                 "shasum": ""
             },
             "require": {
@@ -2002,7 +2300,61 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-06 10:39:25"
+            "time": "2015-01-09 19:59:30"
+        },
+        {
+            "name": "videlalvaro/php-amqplib",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/videlalvaro/php-amqplib.git",
+                "reference": "581eb37b7eb7f6e55ac591017eeba3be3a39d81b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/581eb37b7eb7f6e55ac591017eeba3be3a39d81b",
+                "reference": "581eb37b7eb7f6e55ac591017eeba3be3a39d81b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-sockets": "Use AMQPSocketConnection"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "PhpAmqpLib": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Alvaro Videla"
+                }
+            ],
+            "description": "This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
+            "homepage": "https://github.com/videlalvaro/php-amqplib/",
+            "keywords": [
+                "message",
+                "queue",
+                "rabbitmq"
+            ],
+            "time": "2015-01-05 20:29:36"
         },
         {
             "name": "zendframework/zend-developer-tools",
@@ -2010,13 +2362,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendDeveloperTools.git",
-                "reference": "23fbb79b72e9d6a7090158f47f462faeb512733d"
+                "reference": "4cb1864711eaa2856d2a0c698faedaaf167af248"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-developer-tools-23fbb79b72e9d6a7090158f47f462faeb512733d-zip-267b74.zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zend-developer-tools-4cb1864711eaa2856d2a0c698faedaaf167af248-zip-f62d45.zip",
                 "reference": "dev-master",
-                "shasum": "51adc76de1f377d9df0b1d3f0dc20a58e4364e8b"
+                "shasum": "3a1991629d134b4b788be7d53aa96dab36bc00e0"
             },
             "require": {
                 "php": ">=5.3.3",
@@ -2066,7 +2418,66 @@
                 "source": "https://github.com/zendframework/ZendDeveloperTools/tree/master",
                 "issues": "https://github.com/zendframework/ZendDeveloperTools/issues"
             },
-            "time": "2014-12-21 18:23:56"
+            "time": "2015-01-08 20:45:35"
+        },
+        {
+            "name": "zendframework/zenddiagnostics",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZendDiagnostics.git",
+                "reference": "b855b48f6539038270a3c0935b6bd2c51fa43f7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/ZendDiagnostics/zipball/b855b48f6539038270a3c0935b6bd2c51fa43f7c",
+                "reference": "b855b48f6539038270a3c0935b6bd2c51fa43f7c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "guzzle/http": "3.*",
+                "guzzle/plugin-mock": "3.*",
+                "predis/predis": "0.8.*",
+                "sensiolabs/security-checker": "1.3.*@dev",
+                "symfony/yaml": "v2.3.11",
+                "videlalvaro/php-amqplib": "2.*",
+                "zendframework/zend-loader": "2.*"
+            },
+            "suggest": {
+                "ext-bcmath": "Required by Check\\CpuPerformance",
+                "guzzle/http": "Required by Check\\GuzzleHttpService",
+                "predis/predis": "Required by Check\\Redis",
+                "sensiolabs/security-checker": "Required by Check\\SecurityAdvisory",
+                "symfony/yaml": "Required by Check\\YamlFile",
+                "videlalvaro/php-amqplib": "Required by Check\\RabbitMQ"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "ZendDiagnostics\\": "src/",
+                    "ZendDiagnosticsTest\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A set of components for performing diagnostic tests in PHP applications",
+            "homepage": "https://github.com/zendframework/ZendDiagnostics",
+            "keywords": [
+                "diagnostics",
+                "php",
+                "test"
+            ],
+            "time": "2014-12-07 18:10:07"
         },
         {
             "name": "zendframework/zendframework",
@@ -2074,13 +2485,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "a98e78975c6963862e77621e3f7611d3d29ed290"
+                "reference": "ae1523a6ed14d96930b763672e0507538431be86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zendframework-a98e78975c6963862e77621e3f7611d3d29ed290-zip-00c8c2.zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zendframework-ae1523a6ed14d96930b763672e0507538431be86-zip-d6b474.zip",
                 "reference": "dev-master",
-                "shasum": "c7203c949b4ec41f8ce8f40007718f64d13c60e5"
+                "shasum": "4b44971e08ee296f7191b6d3a0141bf7af999cf9"
             },
             "require": {
                 "php": ">=5.3.23",
@@ -2187,7 +2598,7 @@
                 "source": "https://github.com/zendframework/zf2/tree/master",
                 "issues": "https://github.com/zendframework/zf2/issues"
             },
-            "time": "2015-01-08 02:56:59"
+            "time": "2015-01-09 10:46:12"
         },
         {
             "name": "zendframework/zendpdf",
@@ -2330,6 +2741,63 @@
                 "issues": "https://github.com/zendframework/ZendXml/issues"
             },
             "time": "2014-11-22 20:27:31"
+        },
+        {
+            "name": "zendframework/zftool",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZFTool.git",
+                "reference": "8bab848834bfc48fef2f4b3e874ddd3760fb9e0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.zendframework.com/composer/zendframework-zftool-8bab848834bfc48fef2f4b3e874ddd3760fb9e0d-zip-9951ef.zip",
+                "reference": "dev-master",
+                "shasum": "32d14f13b107ba27d12fa7e95c2c0cbac39c9af0"
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-code": ">=2.2.2",
+                "zendframework/zend-config": ">=2.2.2",
+                "zendframework/zend-console": ">=2.2.2",
+                "zendframework/zend-file": ">=2.2.2",
+                "zendframework/zend-form": ">=2.2.2",
+                "zendframework/zend-http": ">=2.2.2",
+                "zendframework/zend-loader": ">=2.2.2",
+                "zendframework/zend-modulemanager": ">=2.2.2",
+                "zendframework/zend-mvc": ">=2.2.2",
+                "zendframework/zend-serializer": ">=2.2.2",
+                "zendframework/zend-servicemanager": ">=2.2.2",
+                "zendframework/zend-stdlib": ">=2.2.2",
+                "zendframework/zend-text": ">=2.2.2",
+                "zendframework/zend-version": ">=2.2.2",
+                "zendframework/zend-view": ">=2.2.2",
+                "zendframework/zenddiagnostics": ">=1.0.0"
+            },
+            "bin": [
+                "zf.php"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ZFTool\\": "src/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Utility module for Zend Framework 2 applications.",
+            "homepage": "http://framework.zend.com/",
+            "keywords": [
+                "tool",
+                "zf2"
+            ],
+            "support": {
+                "source": "https://github.com/zendframework/ZFTool/tree/master",
+                "issues": "https://github.com/zendframework/ZFTool/issues"
+            },
+            "time": "2014-04-22 18:35:37"
         },
         {
             "name": "zf-commons/zfc-admin",
@@ -2522,12 +2990,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ZF-Commons/ZfcUser.git",
-                "reference": "18276109ecb05651159384b426dd4e217dc68025"
+                "reference": "baf0e460796ea92f6c902fa9b007190bccff2b8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ZF-Commons/ZfcUser/zipball/18276109ecb05651159384b426dd4e217dc68025",
-                "reference": "18276109ecb05651159384b426dd4e217dc68025",
+                "url": "https://api.github.com/repos/ZF-Commons/ZfcUser/zipball/baf0e460796ea92f6c902fa9b007190bccff2b8f",
+                "reference": "baf0e460796ea92f6c902fa9b007190bccff2b8f",
                 "shasum": ""
             },
             "require": {
@@ -2591,7 +3059,7 @@
             "keywords": [
                 "zf2"
             ],
-            "time": "2014-10-29 20:36:13"
+            "time": "2015-01-08 13:18:45"
         },
         {
             "name": "zf-commons/zfc-user-doctrine-orm",
@@ -2888,16 +3356,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "143865ba662e44470435918f7c39f8b43dfd1fa4"
+                "reference": "1eaac8c735dea83ff00c6f01fbcd11898eb3f51b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/143865ba662e44470435918f7c39f8b43dfd1fa4",
-                "reference": "143865ba662e44470435918f7c39f8b43dfd1fa4",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/1eaac8c735dea83ff00c6f01fbcd11898eb3f51b",
+                "reference": "1eaac8c735dea83ff00c6f01fbcd11898eb3f51b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "suggest": {
                 "ext-symfony_debug": ""
@@ -2932,7 +3400,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2015-01-03 08:02:46"
+            "time": "2015-01-09 06:51:41"
         }
     ],
     "aliases": [],
@@ -2955,6 +3423,11 @@
         "symfony/process": 20,
         "doctrine/migrations": 20,
         "skpd/profiler-toolbar": 20,
+        "zendframework/zftool": 20,
+        "sensiolabs/security-checker": 20,
+        "guzzle/http": 20,
+        "predis/predis": 20,
+        "videlalvaro/php-amqplib": 20,
         "zendframework/zend-debug": 20,
         "snapshotpl/zf-snap-php-debug-bar": 20,
         "zendframework/zend-developer-tools": 20
