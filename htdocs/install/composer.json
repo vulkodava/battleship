@@ -1,0 +1,5 @@
+{
+    "require": {
+        "zendframework/zftool": "dev-master"
+    }
+}

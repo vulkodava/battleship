@@ -44,7 +44,12 @@
     "symfony/process": "2.7.x-dev",
     "doctrine/migrations": "dev-master",
     "phpunit/phpunit": "3.7.*",
-    "skpd/profiler-toolbar": "dev-master"
+    "skpd/profiler-toolbar": "dev-master",
+    "zendframework/zftool": "dev-master",
+    "sensiolabs/security-checker": "dev-master",
+    "guzzle/http": "dev-master",
+    "predis/predis": "dev-master",
+    "videlalvaro/php-amqplib": "dev-master"
   },
   "require-dev": {
     "zendframework/zend-debug": "dev-master",
