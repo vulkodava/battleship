@@ -8,6 +8,7 @@ use Doctrine\ORM\Query\Expr;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\View\Renderer\PhpRenderer;
 use ZendService\ReCaptcha\Exception;
+use Zend\Json\Json;
 
 class IndexController extends AbstractActionController implements EventManagerAwareInterface
 {
@@ -185,6 +186,7 @@ class IndexController extends AbstractActionController implements EventManagerAw
      */
     public function fireAction()
     {
+        $messages = array();
         // Prepare to fire a Shot.
         if ($this->getRequest()->isPost()) {
             $objectManager = $this
@@ -208,20 +210,68 @@ class IndexController extends AbstractActionController implements EventManagerAw
                     if ($shotInfo['sunk_vessel'] === true) {
                         $sunkVessel = $shotInfo['hit_vessel']->getVesselType()->getName();
                         $sunkVessel .= ' #' . $shotInfo['hit_vessel']->getId();
-                        $this->flashMessenger()->addSuccessMessage(sprintf('Vessel %s is sunk.', $sunkVessel));
+
+                        $messages[] = array(
+                            'type' => 'success',
+                            'text' => sprintf('Vessel %s is sunk.', $sunkVessel),
+                        );
                     }
-                    $this->flashMessenger()->addSuccessMessage(sprintf('Successful shot on field %s.', $displayCoordinates));
+                    $messages[] = array(
+                        'type' => 'success',
+                        'text' => sprintf('Successful shot on field %s.', $displayCoordinates),
+                    );
                 } else {
-                    $this->flashMessenger()->addErrorMessage(sprintf('Miss on field %s.', $displayCoordinates));
+                    $messages[] = array(
+                        'type' => 'error',
+                        'text' => sprintf('Miss on field %s.', $displayCoordinates),
+                    );
                 }
             } catch (\Exception $e) {
-                $this->flashMessenger()->addErrorMessage($e->getMessage());
+                $messages[] = array(
+                    'type' => 'error',
+                    'text' => $e->getMessage()
+                );
             }
         }
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            return $this->fireAjax($messages);
+        } else {
+            return $this->fireNonAjax($messages);
+        }
+    }
+
+    private function fireAjax($messages)
+    {
+        $data = array(
+            'success' => true,
+            'messages' => $messages,
+        );
+
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(Json::encode($data));
+
+        $headers = $response->getHeaders();
+        $headers->addHeaderLine('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    private function fireNonAjax($messages)
+    {
+        foreach ($messages as $message) {
+            if ($message['type'] == 'error') {
+                $this->flashMessenger()->addErrorMessage($message['text']);
+            } else if ($message['type'] == 'success') {
+                $this->flashMessenger()->addSuccessMessage($message['text']);
+            }
+        }
+
         return $this->redirect()->toRoute('battleship/default', array(
             'controller' => 'index',
             'action' => 'play',
-            'cheat' => (int) $this->battleshipGameSession->cheat,
+            'cheat' => (int)$this->battleshipGameSession->cheat,
         ));
     }
 }
