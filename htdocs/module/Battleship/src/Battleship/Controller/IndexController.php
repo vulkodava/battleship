@@ -235,26 +235,37 @@ class IndexController extends AbstractActionController implements EventManagerAw
         }
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            return $this->fireAjax($game, $messages);
+            return $this->fireAjax($messages);
         } else {
             return $this->fireNonAjax($messages);
         }
     }
 
-    private function fireAjax($game, $messages)
+    private function fireAjax($messages)
     {
+        try {
+            $this->gameCommonLogic();
+        } catch (Exception $e) {
+            $this->flashMessenger()->addErrorMessage($e->getMessage());
+            return $this->redirect()->toRoute('home');
+        }
         $data = array(
             'success' => true,
             'messages' => $messages,
         );
 
-        $gameConfig = $game->getGameConfig();
-        $shotInfo = $game->getShotInfo();
+        $gameConfig = $this->game->getGameConfig();
+        $shotInfo = $this->game->getShotInfo();
         if ($shotInfo['hit'] === true) {
             $data['statusSign'] = $gameConfig['hit_sign'];
         } else {
             $data['statusSign'] = $gameConfig['miss_sign'];
         }
+        $data['gameInfo'] = array(
+            'gameShots' => $this->game->getGameEntity()->getMovesCnt(),
+            'hitsCount' => $this->game->getHits(),
+            'missedCount' => $this->game->getMissedShots()
+        );
 
         $response = $this->getResponse();
         $response->setStatusCode(200);

@@ -48,6 +48,10 @@ jQuery(document).ready(function () {
                         class: 'label label-' + labelClass,
                         text: response.statusSign
                     }));
+
+                    jQuery('#gameShots').html(response.gameInfo.gameShots);
+                    jQuery('#hitsCount').html(response.gameInfo.hitsCount);
+                    jQuery('#missedCount').html(response.gameInfo.missedCount);
                 }
             }
         });
