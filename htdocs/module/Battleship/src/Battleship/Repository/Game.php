@@ -246,6 +246,17 @@ class Game extends EntityRepository {
         }
     }
 
+    /**
+     * Find a proper position for the ship on the game field.
+     *
+     * @param $maxX
+     * @param $maxY
+     * @param $vesselSize
+     * @param $vesselDirection
+     * @param $gameVessel
+     * @throws Exception
+     * @author Momchil Milev <momchil.milev@gmail.com>
+     */
     private function deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel)
     {
         // Prevent infinite loops.
@@ -256,10 +267,10 @@ class Game extends EntityRepository {
         $this->vesselsDeployCounter++;
         $startX = $this->generateFirstPosition($maxX, $vesselSize, $vesselDirection);
         $startY = $this->generateFirstPosition($maxY, $vesselSize, $vesselDirection);
+        $vesselCoordinates = array();
 
         if ($vesselDirection == self::VESSEL_POSITION_HORIZONTALLY) {
             // Deploy horizontally.
-            $vesselCoordinates = array();
             for ($rowNumber = 1; $rowNumber < ($maxX + 1); $rowNumber++) {
                 for ($colNumber = 1; $colNumber < ($maxY + 1); $colNumber++) {
                     if (
@@ -267,16 +278,14 @@ class Game extends EntityRepository {
                         && $rowNumber == $startY
                     ) {
                         if (!is_null($this->gameGrid[$colNumber][$rowNumber]->getGameVessel())) {
-                            $this->deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel);
+                            return $this->deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel);
                         }
                         $vesselCoordinates[] = array('x' => $colNumber, 'y' => $rowNumber);
                     }
                 }
             }
-            $this->addVessel($gameVessel, $vesselCoordinates);
         } else if ($vesselDirection == self::VESSEL_POSITION_VERTICALLY) {
             // Deploy vertically.
-            $vesselCoordinates = array();
             for($rowNumber = 1; $rowNumber < ($maxX + 1); $rowNumber++) {
                 for($colNumber = 1; $colNumber < ($maxY + 1); $colNumber++) {
                     if (
@@ -284,15 +293,19 @@ class Game extends EntityRepository {
                         && $colNumber == $startX
                     ) {
                         if (!is_null($this->gameGrid[$colNumber][$rowNumber]->getGameVessel())) {
-                            $this->deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel);
+                            return $this->deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel);
                         }
                         $vesselCoordinates[] = array('x' => $colNumber, 'y' => $rowNumber);
                     }
                 }
             }
-            $this->addVessel($gameVessel, $vesselCoordinates);
         } else {
             throw new InvalidArgumentException('Invalid Vessel direction detected.', 107);
+        }
+        if (!empty($vesselCoordinates) && count($vesselCoordinates) == $vesselSize) {
+            $this->addVessel($gameVessel, $vesselCoordinates);
+        } else {
+            return $this->deploy($maxX, $maxY, $vesselSize, $vesselDirection, $gameVessel);
         }
     }
 
@@ -330,7 +343,6 @@ class Game extends EntityRepository {
         }
 
         foreach ($vesselCoordinates as $vesselFieldCoordinates) {
-
             $fieldPlate = $this->getEntityManager()->getRepository('Battleship\Entity\FieldPlate')->findOneBy(array(
                 'coordinateX' => $vesselFieldCoordinates['x'],
                 'coordinateY' => $vesselFieldCoordinates['y'],
@@ -339,6 +351,9 @@ class Game extends EntityRepository {
             if (empty($fieldPlate)) {
                 throw new InvalidElementException('Invalid game field plate.', 105);
             }
+
+            // Fix the Overlapping vessels.
+            $this->gameGrid[$vesselCoordinates['x']][$vesselCoordinates['y']] = $fieldPlate;
 
             $fieldPlate->setGameVessel($gameVessel);
             $this->getEntityManager()->persist($fieldPlate);
