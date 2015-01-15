@@ -10,6 +10,8 @@ jQuery(document).ready(function () {
         var formAction = jQuery(form).attr('action');
         var cssClass = 'alert alert-dismissable';
         var button = jQuery(this);
+        var formData = jQuery(form).serialize();
+        var hitCoordinate = formData.replace('field_coordinates=', '').toUpperCase();
 
         jQuery.ajax({
             url: formAction,
@@ -42,7 +44,7 @@ jQuery(document).ready(function () {
                         'aria-hidden': 'true'
                     }));
 
-                    jQuery(button).parent().html(jQuery('<span/>', {
+                    jQuery('#' + hitCoordinate).parents('td').html(jQuery('<span/>', {
                         class: 'label label-' + labelClass,
                         text: response.statusSign
                     }));

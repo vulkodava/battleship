@@ -12,8 +12,9 @@ if ($cheat === true) {
         $buttonTitle .= ' #' . $this->col['vessel_id'];
     }
 }
+$fieldCoordinates = \Battleship\Repository\Game::$letters[$this->rowId] . $this->colId;
 ?>
-<form action="<?php echo $this->url('battleship/default', $formActionParams); ?>" method="post">
-    <input type="hidden" name="field_coordinates" value="<?php echo \Battleship\Repository\Game::$letters[$this->rowId] . $this->colId; ?>" readonly="readonly" />
+<form action="<?php echo $this->url('battleship/default', $formActionParams); ?>" method="post" id="<?php echo $fieldCoordinates; ?>">
+    <input type="hidden" name="field_coordinates" value="<?php echo $fieldCoordinates; ?>" readonly="readonly" />
     <input type="submit" name="field" value="<?php echo $buttonValue; ?>" class="submit btn btn-block btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="<?php echo $buttonTitle; ?>" />
 </form>
