@@ -301,7 +301,7 @@ class Game extends EntityRepository {
      *
      * @param $max
      * @param $vesselSize
-     * @para, $vesselDirection
+     * @param $vesselDirection
      * @return int
      * @author Momchil Milev <momchil.milev@gmail.com>
      */
@@ -319,8 +319,7 @@ class Game extends EntityRepository {
      * Adds a new Game Vessel on the Field Plate.
      *
      * @param $gameVessel
-     * @param $rowNumber
-     * @param $colNumber
+     * @param $vesselCoordinates
      * @author Momchil Milev <momchil.milev@gmail.com>
      */
     private function addVessel($gameVessel, $vesselCoordinates)

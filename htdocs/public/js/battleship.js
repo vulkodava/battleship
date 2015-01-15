@@ -9,6 +9,7 @@ jQuery(document).ready(function () {
         var form = jQuery(this).parents('form');
         var formAction = jQuery(form).attr('action');
         var cssClass = 'alert alert-dismissable';
+        var button = jQuery(this);
 
         jQuery.ajax({
             url: formAction,
@@ -18,13 +19,16 @@ jQuery(document).ready(function () {
             success: function (response) {
                 if (typeof response.success != 'undefined' && response.success == true) {
                     var message = '';
+                    var labelClass = '';
                     jQuery.each(response.messages, function (index, object) {
                         if (typeof object != 'undefined') {
                             message += object['text'] + "\n";
                         }
                         if (object.type == 'error') {
+                            labelClass = 'danger';
                             cssClass += ' alert-danger';
                         } else if (object.type == 'success') {
+                            labelClass = 'success';
                             cssClass += ' alert-success';
                         }
                     });
@@ -36,6 +40,11 @@ jQuery(document).ready(function () {
                         'class': 'close',
                         'data-dismiss': 'alert',
                         'aria-hidden': 'true'
+                    }));
+
+                    jQuery(button).parent().html(jQuery('<span/>', {
+                        class: 'label label-' + labelClass,
+                        text: response.statusSign
                     }));
                 }
             }
